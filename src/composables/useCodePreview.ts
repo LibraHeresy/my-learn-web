@@ -17,7 +17,7 @@ function buildDocument(code: UserCode): string {
     [/Cannot read propert.* of null|Cannot read propert.* of undefined/i, '选择器没找到元素——请检查 HTML 中的 id 或 class 名称是否一致，或者 JS 代码是否在元素创建之前执行了'],
     [/is not a function/i, '检查函数名拼写和大小写，确认括号是英文的 () 而不是中文的（）'],
     [/is not defined/i, '这个变量或函数还没有声明——检查名字是否拼错了，或者是否在声明之前就使用了它'],
-    [/Unexpected token|Unexpected identifier|missing \\\\)|unterminated/i, '可能漏了括号、引号或花括号——检查符号是否成对出现，中文符号和英文符号不能混用'],
+    [/Unexpected token|Unexpected identifier|missing \\)|unterminated/i, '可能漏了括号、引号或花括号——检查符号是否成对出现，中文符号和英文符号不能混用'],
     [/Cannot set propert.* of null/i, '你想修改一个不存在的元素——先确认 querySelector 找到了目标元素'],
     [/null is not an object/i, '你在试图操作一个不存在的元素——先检查 querySelector 的返回值'],
     [/SyntaxError/i, '语法错误——检查是否有漏掉的括号、引号、分号或逗号。特别注意：模板字符串用反引号而不是普通引号'],

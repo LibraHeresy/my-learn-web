@@ -6,7 +6,8 @@
       "Bash(mkdir -p router stores types data composables views components styles)",
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
-      "WebFetch(domain:localhost)"
+      "WebFetch(domain:localhost)",
+      "Bash(npx vue-tsc *)"
     ]
   }
 }

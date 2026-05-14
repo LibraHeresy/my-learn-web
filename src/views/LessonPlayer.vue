@@ -19,17 +19,24 @@ const lesson = computed(() => lessons.find(l => l.id === lessonId.value))
 
 // 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
+const playerMainRef = ref<HTMLDivElement>()
+
+// 手动预览
+const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
 watch(lessonId, (id) => {
   const l = lessons.find(l => l.id === id)
   if (l) {
     progressStore.currentLessonId = id
     userCode.value = { ...l.starterCode }
+    // 切换课程时预览页面也初始化
+    triggerPreview()
+    // 移动端切换课程时滚动到顶端
+    if (playerMainRef.value) {
+      playerMainRef.value.scrollTop = 0
+    }
   }
 }, { immediate: true })
-
-// 手动预览
-const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
 function onCodeChange(code: UserCode) {
   userCode.value = code
@@ -83,7 +90,6 @@ const MIN_PANEL_PCT = 15
 
 // 拖动状态
 const dragging = ref<'content-editor' | 'editor-preview' | null>(null)
-const playerMainRef = ref<HTMLDivElement>()
 
 function startDrag(which: 'content-editor' | 'editor-preview', e: MouseEvent) {
   e.preventDefault()

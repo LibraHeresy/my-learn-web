@@ -30,16 +30,27 @@ function showTooltip(el: HTMLElement, termKey: string) {
 
 function updateTooltipPosition(el: HTMLElement) {
   const rect = el.getBoundingClientRect()
-  const contentBody = document.querySelector('.content-body')
-  if (!contentBody) return
-  const bodyRect = contentBody.getBoundingClientRect()
-  // tooltip 在上方显示，用 bottom 定位避免估算高度
-  const bodyHeight = bodyRect.height
-  const termTopInBody = rect.top - bodyRect.top
-  tooltipStyle.value = {
-    top: 'auto',
-    bottom: (bodyHeight - termTopInBody + 55) + 'px',
-    left: Math.max(0, rect.left - bodyRect.left + rect.width / 2 - 120) + 'px'
+  const tooltipWidth = 260
+  const gap = 8
+  const vw = window.innerWidth
+  const vh = window.innerHeight
+
+  let left = rect.left + rect.width / 2 - tooltipWidth / 2
+  left = Math.max(gap, Math.min(left, vw - tooltipWidth - gap))
+
+  // 优先显示在术语上方，空间不够则显示在下方
+  if (rect.top > 130) {
+    tooltipStyle.value = {
+      top: 'auto',
+      bottom: (vh - rect.top + gap) + 'px',
+      left: left + 'px'
+    }
+  } else {
+    tooltipStyle.value = {
+      top: (rect.bottom + gap) + 'px',
+      bottom: 'auto',
+      left: left + 'px'
+    }
   }
 }
 
@@ -50,9 +61,10 @@ function hideTooltip() {
 
 function onContentClick(e: MouseEvent) {
   const target = e.target as HTMLElement
-  if (target.classList.contains('term-tip')) {
-    const termKey = target.dataset.term || ''
-    showTooltip(target, termKey)
+  const termEl = target.closest('.term-tip') as HTMLElement | null
+  if (termEl) {
+    const termKey = termEl.dataset.term || ''
+    showTooltip(termEl, termKey)
     e.stopPropagation()
     return
   }
@@ -61,10 +73,11 @@ function onContentClick(e: MouseEvent) {
 
 function onContentMouseover(e: MouseEvent) {
   const target = e.target as HTMLElement
-  if (target.classList.contains('term-tip')) {
-    const termKey = target.dataset.term || ''
-    showTooltip(target, termKey)
-  } else {
+  const termEl = target.closest('.term-tip') as HTMLElement | null
+  if (termEl) {
+    const termKey = termEl.dataset.term || ''
+    showTooltip(termEl, termKey)
+  } else if (activeTermEl) {
     hideTooltip()
   }
 }
@@ -290,6 +303,7 @@ function parseContent(text: string): string {
   flex: 1;
   overflow-y: auto;
   padding: var(--sp-4) var(--sp-5);
+  position: relative;
 }
 
 /* ===== 音乐类比 ===== */
@@ -454,7 +468,7 @@ function parseContent(text: string): string {
 }
 
 .term-tooltip {
-  position: absolute;
+  position: fixed;
   z-index: 300;
   max-width: 260px;
   background: #2D2520;
