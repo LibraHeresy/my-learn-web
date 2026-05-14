@@ -4,7 +4,7 @@ import type { LessonProgress, UserCode } from '../types'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码
-const DATA_VERSION = 3
+const DATA_VERSION = 5
 
 export const useProgressStore = defineStore('progress', () => {
   const lessonProgress = ref<Record<string, LessonProgress>>({})

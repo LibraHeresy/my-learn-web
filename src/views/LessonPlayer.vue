@@ -17,53 +17,38 @@ const progressStore = useProgressStore()
 const lessonId = computed(() => route.params.lessonId as string)
 const lesson = computed(() => lessons.find(l => l.id === lessonId.value))
 
-// 初始化用户代码（从 localStorage 恢复或使用 starterCode）
+// 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
 
 watch(lessonId, (id) => {
   const l = lessons.find(l => l.id === id)
   if (l) {
     progressStore.currentLessonId = id
-    const saved = progressStore.getUserCode(id, l.starterCode)
-    userCode.value = { ...saved }
+    userCode.value = { ...l.starterCode }
   }
 }, { immediate: true })
 
-// 实时预览
-const { previewSrc } = useCodePreview(userCode)
+// 手动预览
+const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
-// 保存代码（防抖）
-let saveTimer: ReturnType<typeof setTimeout> | null = null
 function onCodeChange(code: UserCode) {
   userCode.value = code
-  if (saveTimer) clearTimeout(saveTimer)
-  saveTimer = setTimeout(() => {
-    if (lessonId.value) {
-      progressStore.saveUserCode(lessonId.value, code)
-    }
-  }, 1000)
 }
-
-onBeforeUnmount(() => {
-  if (saveTimer) clearTimeout(saveTimer)
-  if (lessonId.value) {
-    progressStore.saveUserCode(lessonId.value, userCode.value)
-  }
-})
 
 // ===== 面板拖动缩放 =====
 const PANEL_STORAGE_KEY = 'code-score-panel-widths'
+const PANEL_WIDTHS_VERSION = 2
 
 interface PanelWidths {
-  content: number  // 百分比
+  content: number
   editor: number
   preview: number
 }
 
 const defaultWidths: PanelWidths = {
-  content: 37.5,
-  editor: 37.5,
-  preview: 25
+  content: 40,
+  editor: 30,
+  preview: 30
 }
 
 const panelWidths = ref<PanelWidths>({ ...defaultWidths })
@@ -72,7 +57,14 @@ function loadPanelWidths() {
   try {
     const raw = localStorage.getItem(PANEL_STORAGE_KEY)
     if (raw) {
-      const parsed = JSON.parse(raw) as PanelWidths
+      const data = JSON.parse(raw)
+      // 版本控制：版本不匹配则使用默认值
+      if (data._version !== PANEL_WIDTHS_VERSION) {
+        panelWidths.value = { ...defaultWidths }
+        savePanelWidths()
+        return
+      }
+      const parsed = data.widths as PanelWidths
       if (parsed.content && parsed.editor && parsed.preview) {
         panelWidths.value = parsed
       }
@@ -81,7 +73,10 @@ function loadPanelWidths() {
 }
 
 function savePanelWidths() {
-  localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify(panelWidths.value))
+  localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify({
+    _version: PANEL_WIDTHS_VERSION,
+    widths: panelWidths.value
+  }))
 }
 
 const MIN_PANEL_PCT = 15
@@ -241,6 +236,7 @@ function toggleSidebar() {
         <CodeEditor
           :model-value="userCode"
           @update:model-value="onCodeChange"
+          @run="triggerPreview"
         />
       </div>
 

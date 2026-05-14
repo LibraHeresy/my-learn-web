@@ -14,6 +14,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:modelValue': [value: { html: string; css: string; js: string }]
+  run: []
 }>()
 
 type Tab = 'html' | 'css' | 'js'
@@ -59,6 +60,7 @@ function createEditor() {
         keymap.of([...defaultKeymap, ...historyKeymap]),
         ...getLangExtension(activeTab.value),
         oneDark,
+        EditorView.lineWrapping,
         updateListener,
         EditorView.updateListener.of(() => {
           // scroll sync could go here
@@ -101,6 +103,7 @@ function switchTab(tab: Tab) {
             keymap.of([...defaultKeymap, ...historyKeymap]),
             ...getLangExtension(tab),
             oneDark,
+            EditorView.lineWrapping,
             EditorView.updateListener.of((update) => {
               if (update.docChanged) {
                 const newValue = update.state.doc.toString()
@@ -154,6 +157,9 @@ onBeforeUnmount(() => {
       >
         {{ tab.label }}
       </button>
+      <button class="editor-run-btn" @click="emit('run')" title="运行代码">
+        ▶ 运行
+      </button>
     </div>
     <div ref="editorHost" class="editor-host" />
   </div>
@@ -194,6 +200,24 @@ onBeforeUnmount(() => {
 .editor-tab.active {
   color: var(--color-gold-light);
   border-bottom-color: var(--color-gold);
+}
+
+.editor-run-btn {
+  margin-left: auto;
+  margin-right: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-gold);
+  border-radius: var(--radius-sm);
+  align-self: center;
+  transition: all var(--transition);
+}
+
+.editor-run-btn:hover {
+  background: var(--color-gold-light);
+  color: var(--color-bg);
 }
 
 .editor-host {

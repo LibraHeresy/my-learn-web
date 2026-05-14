@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { chapters, lessons } from '../data/lessons'
+import { parseInline } from '../utils/markdown'
 
 const router = useRouter()
 
@@ -68,7 +69,7 @@ function goToLesson(lessonId: string) {
             <span class="lesson-order">{{ lesson.order }}</span>
             <div class="lesson-info">
               <span class="lesson-title">{{ lesson.title }}</span>
-              <span class="lesson-analogy">{{ lesson.musicAnalogy }}</span>
+              <span class="lesson-analogy" v-html="parseInline(lesson.musicAnalogy)"></span>
             </div>
             <span class="lesson-arrow">→</span>
           </button>
