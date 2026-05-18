@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import type { Lesson } from '../types'
-import { parseInline } from '../utils/markdown'
+import { parseInline, parseContent } from '../utils/markdown'
 import { glossary } from '../data/glossary'
+import { chapters } from '../data/lessons'
 
-defineProps<{
+const props = defineProps<{
   lesson: Lesson
 }>()
+
+const chapterIndex = computed(() =>
+  chapters.findIndex(c => c.id === props.lesson.chapterId)
+)
 
 defineEmits<{
   complete: []
@@ -94,132 +99,12 @@ onBeforeUnmount(() => {
   document.removeEventListener('scroll', onScroll, true)
 })
 
-// 转义 HTML 特殊字符（保护已有占位符）
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-}
-
-// 还原占位符中的 HTML（代码块内容不需要转义）
-function unescapePlaceholders(text: string, placeholders: string[]): string {
-  return text.replace(/%%P(\d+)%%/g, (_, i) => placeholders[parseInt(i)])
-}
-
-// 在文本中包裹已知术语为 tooltip span
-// 在当前阶段：代码块和行内代码已经替换为 %%P...%% 占位符
-function wrapTerms(text: string, placeholders: string[]): string {
-  let html = text
-  for (const [key, def] of glossary) {
-    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    const regex = new RegExp(escaped, 'g')
-    html = html.replace(regex, (_match) => {
-      const idx = placeholders.length
-      placeholders.push(`<span class="term-tip" data-term="${escapeHtml(key)}">${escapeHtml(key)}</span>`)
-      return `%%P${idx}%%`
-    })
-  }
-  return html
-}
-
-// 将 Markdown 表格转换为 HTML
-function convertTable(md: string): string {
-  const lines = md.trim().split('\n')
-  if (lines.length < 2) return ''
-  const parseRow = (line: string) =>
-    line.replace(/^\||\|$/g, '').split('|').map(c => c.trim())
-
-  function processCell(text: string): string {
-    const ph: string[] = []
-    let result = text.replace(/`([^`]+)`/g, (_, code) => {
-      const idx = ph.length
-      ph.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
-      return `%%P${idx}%%`
-    })
-    result = escapeHtml(result)
-    result = result.replace(/%%P(\d+)%%/g, (_, i) => ph[parseInt(i)])
-    result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    return result
-  }
-
-  const headers = parseRow(lines[0])
-  const rows = lines.slice(2).map(parseRow)
-
-  let html = '<table class="md-table"><thead><tr>'
-  for (const h of headers) {
-    html += `<th>${processCell(h)}</th>`
-  }
-  html += '</tr></thead><tbody>'
-  for (const row of rows) {
-    html += '<tr>'
-    for (const cell of row) {
-      html += `<td>${processCell(cell)}</td>`
-    }
-    html += '</tr>'
-  }
-  html += '</tbody></table>'
-  return html
-}
-
-function parseContent(text: string): string {
-  const placeholders: string[] = []
-
-  // 0. 提取原始 HTML 块 [[html]]...[[/html]]，替换为占位符
-  let html = text.replace(/\[\[html\]\]([\s\S]*?)\[\[\/html\]\]/g, (_, raw) => {
-    const idx = placeholders.length
-    placeholders.push(raw)
-    return `%%P${idx}%%`
-  })
-
-  // 0.5 提取 Markdown 表格
-  html = html.replace(/\|[^\n]+\|\n\|[-:\s|]+\|\n(?:\|[^\n]+\|\n?)*/g, (table) => {
-    const idx = placeholders.length
-    placeholders.push(convertTable(table))
-    return `%%P${idx}%%`
-  })
-
-  // 1. 提取代码块，替换为占位符
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, _lang, code) => {
-    const idx = placeholders.length
-    placeholders.push(`<pre class="code-block"><code>${escapeHtml(code.trimEnd())}</code></pre>`)
-    return `%%P${idx}%%`
-  })
-
-  // 2. 提取行内代码，替换为占位符
-  html = html.replace(/`([^`]+)`/g, (_, code) => {
-    const idx = placeholders.length
-    placeholders.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
-    return `%%P${idx}%%`
-  })
-
-  // 2.5 包裹编程术语为 tooltip span（在转义之前，因为 term 可能含 HTML 特殊字符）
-  html = wrapTerms(html, placeholders)
-
-  // 3. 对剩余文本转义 HTML
-  html = escapeHtml(html)
-
-  // 4. 还原占位符
-  html = unescapePlaceholders(html, placeholders)
-
-  // 5. Markdown 样式转换
-  html = html
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>')
-
-  return `<p>${html}</p>`
-}
-
 </script>
 
 <template>
   <div class="content-panel">
     <div class="content-header">
-      <span class="lesson-number">第 {{ lesson.order }} 课</span>
+      <span class="lesson-number">第 {{ chapterIndex + 1 }} 章 · 第 {{ lesson.order }} 课</span>
       <h2 class="lesson-title">{{ lesson.title }}</h2>
     </div>
 
@@ -392,36 +277,6 @@ function parseContent(text: string): string {
 
 :deep(p) {
   margin-bottom: var(--sp-2);
-}
-
-/* ===== 表格 ===== */
-:deep(.md-table) {
-  width: 100%;
-  border-collapse: collapse;
-  margin: var(--sp-3) 0;
-  font-size: var(--fs-sm);
-}
-
-:deep(.md-table th),
-:deep(.md-table td) {
-  padding: var(--sp-2) var(--sp-3);
-  border: 1px solid var(--color-border);
-  text-align: left;
-  vertical-align: top;
-}
-
-:deep(.md-table th) {
-  background: var(--color-bg-warm);
-  font-weight: 600;
-  color: var(--color-accent);
-}
-
-:deep(.md-table tbody tr:nth-child(even)) {
-  background: #FFFDF9;
-}
-
-:deep(.md-table tbody tr:hover) {
-  background: #FFF8EC;
 }
 
 /* ===== 推荐聆听 ===== */

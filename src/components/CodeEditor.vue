@@ -61,10 +61,7 @@ function createEditor() {
         ...getLangExtension(activeTab.value),
         oneDark,
         EditorView.lineWrapping,
-        updateListener,
-        EditorView.updateListener.of(() => {
-          // scroll sync could go here
-        })
+        updateListener
       ]
     }),
     parent: editorHost.value

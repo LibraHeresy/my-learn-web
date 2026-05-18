@@ -7,7 +7,15 @@
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
       "WebFetch(domain:localhost)",
-      "Bash(npx vue-tsc *)"
+      "Bash(npx vite *)",
+      "Bash(npx vue-tsc *)",
+      "Bash(node -e \"const {lessons, chapters} = require\\('./src/data/lessons.ts' || '{}'\\); console.log\\('Cannot require TS, using grep instead'\\)\")",
+      "Bash(node insert-lessons.js)",
+      "Bash(node insert-lessons.cjs)",
+      "Bash(git checkout *)",
+      "Bash(node splice-lessons.cjs)",
+      "Bash(node remove-vue.cjs)",
+      "Bash(node -e ' *)"
     ]
   }
 }

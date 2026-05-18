@@ -1,4 +1,4 @@
-import { ref, watch, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import type { UserCode } from '../types'
 
 // 组合 HTML/CSS/JS 为完整的 HTML 文档
@@ -98,18 +98,10 @@ function buildDocument(code: UserCode): string {
 
 export function useCodePreview(code: Ref<UserCode>) {
   const previewSrc = ref('')
-  const dirty = ref(false)
 
   function triggerPreview() {
     previewSrc.value = buildDocument(code.value)
   }
-
-  // 首次加载自动预览
-  watch(
-    code,
-    () => { dirty.value = true },
-    { deep: true, immediate: true }
-  )
 
   // 初始自动渲染
   triggerPreview()

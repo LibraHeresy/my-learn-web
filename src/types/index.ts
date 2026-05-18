@@ -5,15 +5,52 @@ export interface LessonSection {
   content: string
 }
 
+// 学习轨道
+export interface Track {
+  id: string
+  title: string
+  subtitle: string
+  icon: string
+  order: number
+}
+
+// 学习模式：sandbox = 浏览器内编辑器+预览 | local = 引导在本地 IDE 操作
+export type LessonMode = 'sandbox' | 'local'
+
 // 单节课程
 export interface Lesson {
   id: string
   chapterId: string
+  trackId?: string
   order: number
   title: string
   musicAnalogy: string
   sections: LessonSection[]
   starterCode: { html: string; css: string; js: string }
+  listenTo?: string
+  mode?: LessonMode  // 默认 'sandbox'
+}
+
+// 项目步骤
+export interface ProjectStep {
+  title: string
+  content: string
+  task: string
+  hint?: string
+  starterCode?: { html: string; css: string; js: string }
+}
+
+// 实践项目
+export interface Project {
+  id: string
+  trackId: string
+  order: number
+  title: string
+  subtitle: string
+  icon: string
+  musicAnalogy: string
+  prerequisiteTrackIds: string[]
+  steps: ProjectStep[]
   listenTo?: string
 }
 

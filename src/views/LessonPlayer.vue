@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeUnmount, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { lessons } from '../data/lessons'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
+import { usePanelResize } from '../composables/usePanelResize'
 import type { UserCode } from '../types'
 import LessonContent from '../components/LessonContent.vue'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
+import PlayerFooter from '../components/PlayerFooter.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -17,9 +19,14 @@ const progressStore = useProgressStore()
 const lessonId = computed(() => route.params.lessonId as string)
 const lesson = computed(() => lessons.find(l => l.id === lessonId.value))
 
+// 登台篇课程使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
+const isLocalMode = computed(() => lesson.value?.mode === 'local')
+
 // 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
-const playerMainRef = ref<HTMLDivElement>()
+
+// ===== 面板拖动缩放 =====
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-panel-widths', 2)
 
 // 手动预览
 const { previewSrc, triggerPreview } = useCodePreview(userCode)
@@ -41,112 +48,6 @@ watch(lessonId, (id) => {
 function onCodeChange(code: UserCode) {
   userCode.value = code
 }
-
-// ===== 面板拖动缩放 =====
-const PANEL_STORAGE_KEY = 'code-score-panel-widths'
-const PANEL_WIDTHS_VERSION = 2
-
-interface PanelWidths {
-  content: number
-  editor: number
-  preview: number
-}
-
-const defaultWidths: PanelWidths = {
-  content: 40,
-  editor: 30,
-  preview: 30
-}
-
-const panelWidths = ref<PanelWidths>({ ...defaultWidths })
-
-function loadPanelWidths() {
-  try {
-    const raw = localStorage.getItem(PANEL_STORAGE_KEY)
-    if (raw) {
-      const data = JSON.parse(raw)
-      // 版本控制：版本不匹配则使用默认值
-      if (data._version !== PANEL_WIDTHS_VERSION) {
-        panelWidths.value = { ...defaultWidths }
-        savePanelWidths()
-        return
-      }
-      const parsed = data.widths as PanelWidths
-      if (parsed.content && parsed.editor && parsed.preview) {
-        panelWidths.value = parsed
-      }
-    }
-  } catch { /* use defaults */ }
-}
-
-function savePanelWidths() {
-  localStorage.setItem(PANEL_STORAGE_KEY, JSON.stringify({
-    _version: PANEL_WIDTHS_VERSION,
-    widths: panelWidths.value
-  }))
-}
-
-const MIN_PANEL_PCT = 15
-
-// 拖动状态
-const dragging = ref<'content-editor' | 'editor-preview' | null>(null)
-
-function startDrag(which: 'content-editor' | 'editor-preview', e: MouseEvent) {
-  e.preventDefault()
-  dragging.value = which
-  document.body.style.cursor = 'col-resize'
-  document.body.style.userSelect = 'none'
-}
-
-function onMouseMove(e: MouseEvent) {
-  if (!dragging.value || !playerMainRef.value) return
-
-  const rect = playerMainRef.value.getBoundingClientRect()
-  const totalWidth = rect.width
-  if (totalWidth <= 0) return
-
-  const x = e.clientX - rect.left
-  const pct = (x / totalWidth) * 100
-
-  if (dragging.value === 'content-editor') {
-    // content 和 editor 之间的分隔线
-    const newContent = Math.max(MIN_PANEL_PCT, Math.min(pct, 100 - MIN_PANEL_PCT * 2))
-    const remaining = 100 - newContent
-    // editor 和 preview 平分剩余空间，保持比例
-    const editorRatio = panelWidths.value.editor / (panelWidths.value.editor + panelWidths.value.preview)
-    const newEditor = Math.max(MIN_PANEL_PCT, remaining * editorRatio)
-    const newPreview = Math.max(MIN_PANEL_PCT, remaining - newEditor)
-    panelWidths.value = { content: newContent, editor: newEditor, preview: newPreview }
-  } else {
-    // editor 和 preview 之间的分隔线
-    const newContent = Math.max(MIN_PANEL_PCT, panelWidths.value.content)
-    const rightBoundary = 100 - MIN_PANEL_PCT
-    const adjustedPct = Math.max(newContent + MIN_PANEL_PCT, Math.min(pct, rightBoundary))
-    const newEditor = Math.max(MIN_PANEL_PCT, adjustedPct - newContent)
-    const newPreview = Math.max(MIN_PANEL_PCT, 100 - newContent - newEditor)
-    panelWidths.value = { content: newContent, editor: newEditor, preview: newPreview }
-  }
-}
-
-function stopDrag() {
-  if (dragging.value) {
-    dragging.value = null
-    document.body.style.cursor = ''
-    document.body.style.userSelect = ''
-    savePanelWidths()
-  }
-}
-
-onMounted(() => {
-  loadPanelWidths()
-  window.addEventListener('mousemove', onMouseMove)
-  window.addEventListener('mouseup', stopDrag)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('mousemove', onMouseMove)
-  window.removeEventListener('mouseup', stopDrag)
-})
 
 // ===== 侧边栏 =====
 const sidebarOpen = ref(false)
@@ -180,6 +81,20 @@ function goNext() {
     router.push(`/lesson/${nextLesson.value.id}`)
   }
 }
+
+// 跨章节导航标签：检查实际跳转目标是否跨章
+const prevLabel = computed(() => {
+  if (prevLesson.value && prevLesson.value.chapterId !== lesson.value?.chapterId) return '上一章'
+  return '上一课'
+})
+
+const nextLabel = computed(() => {
+  if (nextLesson.value && nextLesson.value.chapterId !== lesson.value?.chapterId) return '下一章'
+  return '下一课'
+})
+
+const prevDisabled = computed(() => !prevLesson.value)
+const nextDisabled = computed(() => !nextLesson.value)
 
 function markComplete() {
   progressStore.markComplete(lessonId.value)
@@ -216,51 +131,53 @@ function toggleSidebar() {
     <div
       v-if="lesson"
       ref="playerMainRef"
-      :class="['player-main', { 'is-dragging': dragging }]"
+      :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
     >
       <!-- 左面板：教学内容 -->
       <div
         class="panel-content"
-        :style="{ width: panelWidths.content + '%' }"
+        :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
       >
         <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
       </div>
 
-      <!-- 分隔线 1：内容 ↔ 编辑器 -->
-      <div
-        class="resizer"
-        @mousedown="startDrag('content-editor', $event)"
-      >
-        <div class="resizer-handle" />
-      </div>
+      <template v-if="!isLocalMode">
+        <!-- 分隔线 1：内容 ↔ 编辑器 -->
+        <div
+          class="resizer"
+          @mousedown="startDrag('content-editor', $event)"
+        >
+          <div class="resizer-handle" />
+        </div>
 
-      <!-- 中面板：代码编辑器 -->
-      <div
-        class="panel-editor"
-        :style="{ width: panelWidths.editor + '%' }"
-      >
-        <CodeEditor
-          :model-value="userCode"
-          @update:model-value="onCodeChange"
-          @run="triggerPreview"
-        />
-      </div>
+        <!-- 中面板：代码编辑器 -->
+        <div
+          class="panel-editor"
+          :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
+        >
+          <CodeEditor
+            :model-value="userCode"
+            @update:model-value="onCodeChange"
+            @run="triggerPreview"
+          />
+        </div>
 
-      <!-- 分隔线 2：编辑器 ↔ 预览 -->
-      <div
-        class="resizer"
-        @mousedown="startDrag('editor-preview', $event)"
-      >
-        <div class="resizer-handle" />
-      </div>
+        <!-- 分隔线 2：编辑器 ↔ 预览 -->
+        <div
+          class="resizer"
+          @mousedown="startDrag('editor-preview', $event)"
+        >
+          <div class="resizer-handle" />
+        </div>
 
-      <!-- 右面板：实时预览 -->
-      <div
-        class="panel-preview"
-        :style="{ width: panelWidths.preview + '%' }"
-      >
-        <LivePreview :srcdoc="previewSrc" />
-      </div>
+        <!-- 右面板：实时预览 -->
+        <div
+          class="panel-preview"
+          :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
+        >
+          <LivePreview :srcdoc="previewSrc" />
+        </div>
+      </template>
     </div>
 
     <!-- 未找到课程 -->
@@ -270,28 +187,18 @@ function toggleSidebar() {
     </div>
 
     <!-- 底部导航 -->
-    <div v-if="lesson" class="player-footer">
-      <button
-        :class="['footer-btn', { disabled: !prevLesson }]"
-        :disabled="!prevLesson"
-        @click="goPrev"
-      >
-        ← 上一课
-      </button>
-
-      <button class="footer-btn complete-btn" @click="markComplete">
-        <span v-if="progressStore.isCompleted(lessonId)">✓ 已完成</span>
-        <span v-else>标记完成</span>
-      </button>
-
-      <button
-        :class="['footer-btn', { disabled: !nextLesson }]"
-        :disabled="!nextLesson"
-        @click="goNext"
-      >
-        下一课 →
-      </button>
-    </div>
+    <PlayerFooter
+      v-if="lesson"
+      :prev-label="prevLabel"
+      :next-label="nextLabel"
+      :prev-disabled="prevDisabled"
+      :next-disabled="nextDisabled"
+      :show-complete="true"
+      :is-completed="progressStore.isCompleted(lessonId)"
+      @prev="goPrev"
+      @next="goNext"
+      @complete="markComplete"
+    />
   </div>
 </template>
 
@@ -363,6 +270,17 @@ function toggleSidebar() {
   pointer-events: none;
 }
 
+/* local 模式：纯教程内容，全宽滚动 */
+.player-main.is-local {
+  display: block;
+  overflow-y: auto;
+}
+
+.player-main.is-local .panel-content {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
 .panel-content,
 .panel-editor,
 .panel-preview {
@@ -406,43 +324,6 @@ function toggleSidebar() {
 .player-main.is-dragging .resizer .resizer-handle {
   background: #fff;
   height: 60px;
-}
-
-/* ===== 底部导航 ===== */
-.player-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--sp-2) var(--sp-4);
-  background: var(--color-panel);
-  border-top: 1px solid var(--color-border-light);
-  flex-shrink: 0;
-}
-
-.footer-btn {
-  padding: var(--sp-2) var(--sp-4);
-  background: transparent;
-  color: var(--color-text);
-  font-size: var(--fs-sm);
-  border-radius: var(--radius-sm);
-}
-
-.footer-btn:hover:not(.disabled) {
-  background: var(--color-bg-warm);
-}
-
-.footer-btn.disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.complete-btn {
-  color: var(--color-success);
-  font-weight: 600;
-}
-
-.complete-btn:hover {
-  background: var(--color-success-bg);
 }
 
 /* ===== 课程未找到 ===== */

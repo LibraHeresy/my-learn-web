@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { LessonProgress, UserCode } from '../types'
+import type { LessonProgress } from '../types'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码
@@ -57,31 +57,6 @@ export const useProgressStore = defineStore('progress', () => {
     }))
   }
 
-  // 保存用户代码
-  function saveUserCode(lessonId: string, code: UserCode) {
-    if (!lessonProgress.value[lessonId]) {
-      lessonProgress.value[lessonId] = {
-        lessonId,
-        completed: false,
-        userCode: code,
-        lastVisited: Date.now()
-      }
-    } else {
-      lessonProgress.value[lessonId].userCode = code
-      lessonProgress.value[lessonId].lastVisited = Date.now()
-    }
-    persistProgress()
-  }
-
-  // 获取用户代码（如果有保存则返回，否则返回 starterCode）
-  function getUserCode(lessonId: string, starterCode: UserCode): UserCode {
-    const saved = lessonProgress.value[lessonId]
-    if (saved && saved.userCode) {
-      return saved.userCode
-    }
-    return starterCode
-  }
-
   // 标记完成
   function markComplete(lessonId: string) {
     if (!lessonProgress.value[lessonId]) {
@@ -110,8 +85,6 @@ export const useProgressStore = defineStore('progress', () => {
     lessonProgress,
     currentLessonId,
     completedLessons,
-    saveUserCode,
-    getUserCode,
     markComplete,
     isCompleted,
     loadProgress

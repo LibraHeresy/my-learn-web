@@ -25,5 +25,6 @@ import AppHeader from './components/AppHeader.vue'
 .app-main {
   flex: 1;
   overflow: hidden;
+  padding: 0 8px;
 }
 </style>
