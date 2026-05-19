@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { chapters, lessons } from '../data/lessons'
 import { tracks } from '../data/tracks'
@@ -11,6 +11,22 @@ const router = useRouter()
 const progressStore = useProgressStore()
 
 const expandedTrack = ref<string | null>(null)
+const showStickyNav = ref(false)
+const homeRef = ref<HTMLElement | null>(null)
+
+function onScroll() {
+  const el = homeRef.value
+  if (!el) return
+  const hero = document.getElementById('hero-section')
+  showStickyNav.value = hero ? el.scrollTop > hero.offsetHeight * 0.6 : el.scrollTop > 300
+}
+
+onMounted(() => {
+  if (homeRef.value) homeRef.value.addEventListener('scroll', onScroll, { passive: true })
+})
+onBeforeUnmount(() => {
+  if (homeRef.value) homeRef.value.removeEventListener('scroll', onScroll)
+})
 
 function getTrackLessonCount(trackId: string): number {
   if (trackId === 'projects') return projects.length
@@ -41,6 +57,22 @@ function toggleTrack(trackId: string) {
   }
 }
 
+function jumpToSection(targetId: string) {
+  if (targetId === 'hero') {
+    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' })
+    return
+  }
+  if (targetId === 'projects') {
+    document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })
+    return
+  }
+  // 轨道卡片：展开 + 滚动
+  expandedTrack.value = targetId
+  nextTick(() => {
+    document.getElementById(`track-${targetId}`)?.scrollIntoView({ behavior: 'smooth' })
+  })
+}
+
 function goToLesson(lessonId: string) {
   router.push(`/lesson/${lessonId}`)
 }
@@ -51,15 +83,29 @@ function goToProject(projectId: string) {
 </script>
 
 <template>
-  <div class="home">
+  <div ref="homeRef" class="home">
     <!-- Hero 区 -->
-    <section class="hero">
+    <section id="hero-section" class="hero">
       <div class="hero-content">
         <p class="hero-greeting">你的学习之旅</p>
         <h1 class="hero-title">代码乐章</h1>
         <p class="hero-desc">从五线谱到代码编辑器，从音符到标签，<br>用你熟悉的音乐语言，一步步成为创作者。</p>
       </div>
     </section>
+
+    <!-- 粘性迷你导航 -->
+    <nav :class="['sticky-nav', { visible: showStickyNav }]">
+      <button class="sticky-nav-item" @click="jumpToSection('hero')">🎵 首页</button>
+      <button
+        v-for="track in tracks"
+        :key="track.id"
+        class="sticky-nav-item"
+        @click="jumpToSection(track.id)"
+      >
+        {{ track.icon }} {{ track.title }}
+      </button>
+      <button class="sticky-nav-item" @click="jumpToSection('projects')">🎁 作品集</button>
+    </nav>
 
     <!-- 四轨旅程 -->
     <section class="journey-section">
@@ -156,7 +202,7 @@ function goToProject(projectId: string) {
     </section>
 
     <!-- 作品集 -->
-    <section class="projects-section">
+    <section id="projects-section" class="projects-section">
       <h2 class="section-title">作品集</h2>
       <hr class="staff-divider">
       <p class="projects-intro">每个阶段结束，你都会完成一个音乐收藏库的新版本——从手稿到乐团，一步步见证成长。</p>
@@ -253,10 +299,53 @@ function goToProject(projectId: string) {
   line-height: 1.8;
 }
 
+/* ===== 粘性迷你导航 ===== */
+.sticky-nav {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: 0 2px 8px rgba(61, 43, 31, 0.06);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sticky-nav.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sticky-nav-item {
+  padding: var(--sp-1) var(--sp-3);
+  background: transparent;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--color-text-light);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.sticky-nav-item:hover {
+  background: var(--color-bg-warm);
+  color: var(--color-accent);
+}
+
 /* ===== 分段标题 ===== */
 .journey-section,
 .projects-section {
   padding: var(--sp-6) 0;
+  scroll-margin-top: 28px;
 }
 
 .section-title {
@@ -293,6 +382,7 @@ function goToProject(projectId: string) {
   padding: var(--sp-5);
   transition: all 0.2s;
   cursor: pointer;
+  scroll-margin-top: var(--header-height);
 }
 
 .track-card.draft {
@@ -621,6 +711,24 @@ function goToProject(projectId: string) {
   .project-meta {
     flex-direction: column;
     gap: var(--sp-1);
+  }
+
+  .sticky-nav {
+    gap: 2px;
+    padding: var(--sp-1) var(--sp-2);
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sticky-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sticky-nav-item {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    flex-shrink: 0;
   }
 }
 </style>
