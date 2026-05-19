@@ -555,6 +555,7 @@ function goToProject(projectId: string) {
   border-radius: 12px;
   flex-shrink: 0;
   height: min-content;
+  width: max-content;
 }
 
 .project-listen {

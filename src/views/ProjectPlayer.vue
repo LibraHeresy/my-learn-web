@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { projects } from '../data/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
-import { parseInline } from '../utils/markdown'
+import { parseInline, parseContent } from '../utils/markdown'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
@@ -53,11 +53,16 @@ const currentStepData = computed(() => {
   return p.steps[currentStep.value] || null
 })
 
+// 登台篇项目使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
+const isLocalMode = computed(() => project.value?.mode === 'local')
+
 const hasCode = computed(() => {
   const code = currentStepData.value?.starterCode
   if (!code) return false
   return code.html !== '' || code.css !== '' || code.js !== ''
 })
+
+const showEditor = computed(() => !isLocalMode.value && hasCode.value)
 
 function goToStep(index: number) {
   if (index < 0 || index >= totalSteps.value) return
@@ -109,6 +114,23 @@ function goFooterNext() {
   }
 }
 
+// 键盘导航：左右方向键切换步骤
+function onKeydown(e: KeyboardEvent) {
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+  const canPrev = !isFirstStep.value || !!prevProject.value
+  const canNext = !isLastStep.value || !!nextProject.value
+  if (e.key === 'ArrowLeft' && canPrev) {
+    e.preventDefault()
+    goFooterPrev()
+  } else if (e.key === 'ArrowRight' && canNext) {
+    e.preventDefault()
+    goFooterNext()
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+
 // ===== 面板拖动缩放 =====
 const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-project-panel-widths', 1)
 </script>
@@ -142,17 +164,17 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
     <div
       v-if="project && currentStepData"
       ref="playerMainRef"
-      :class="['player-main', { 'is-dragging': dragging, 'no-code': !hasCode }]"
+      :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode, 'no-code': !hasCode }]"
     >
       <!-- 左面板：步骤指引 -->
       <div
         class="panel-content"
-        :style="{ width: hasCode ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
+        :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
         <div class="step-panel">
           <div class="step-body">
             <h3 class="step-title">{{ currentStepData.title }}</h3>
-            <div class="step-content" v-html="parseInline(currentStepData.content)" />
+            <div class="step-content" v-html="parseContent(currentStepData.content)" />
             <div class="step-task">
               <span class="step-task-label">你的任务</span>
               <p v-html="parseInline(currentStepData.task)" />
@@ -168,7 +190,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
         </div>
       </div>
 
-      <template v-if="hasCode">
+      <template v-if="showEditor">
         <!-- 分隔线 1：内容 ↔ 编辑器 -->
         <div class="resizer" @mousedown="startDrag('content-editor', $event)">
           <div class="resizer-handle" />
@@ -334,11 +356,13 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.player-main.no-code {
+.player-main.no-code,
+.player-main.is-local {
   display: block;
   overflow-y: auto;
 }
 
+.player-main.is-local .panel-content,
 .player-main.no-code .panel-content {
   max-width: 860px;
   margin: 0 auto;
@@ -375,6 +399,14 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
 :deep(.step-content strong) {
   color: var(--color-accent);
+}
+
+:deep(.step-content p) {
+  margin: 0 0 var(--sp-2) 0;
+}
+
+:deep(.step-content p:last-child) {
+  margin-bottom: 0;
 }
 
 .step-task {
@@ -469,9 +501,18 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
 /* ===== 响应式 ===== */
 @media (max-width: 900px) {
+  .project-player {
+    width: 100vw;
+  }
+
+  .project-header {
+    padding: var(--sp-2) var(--sp-3);
+  }
+
   .player-main {
     flex-direction: column;
     overflow-y: auto;
+    width: 100vw;
   }
 
   .panel-content,
@@ -484,18 +525,21 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
   .panel-content {
     border-bottom: 1px solid var(--color-border-light);
-    max-height: 35%;
+  }
+
+  .step-body {
+    padding: var(--sp-3);
   }
 
   .panel-preview {
-    height: 360px;
+    min-height: 360px;
     border-left: none;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .panel-editor {
-    height: 320px;
+    min-height: 320px;
   }
 
   .resizer {

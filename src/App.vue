@@ -27,4 +27,10 @@ import AppHeader from './components/AppHeader.vue'
   overflow: hidden;
   padding: 0 8px;
 }
+
+@media (max-width: 900px) {
+  .app-main {
+    padding: 0;
+  }
+}
 </style>

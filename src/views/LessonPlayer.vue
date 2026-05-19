@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { lessons } from '../data/lessons'
 import { useProgressStore } from '../stores/progress'
@@ -103,6 +103,21 @@ function markComplete() {
 function toggleSidebar() {
   sidebarOpen.value = !sidebarOpen.value
 }
+
+// 键盘导航：左右方向键切换课程
+function onKeydown(e: KeyboardEvent) {
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+  if (e.key === 'ArrowLeft' && !prevDisabled.value) {
+    e.preventDefault()
+    goPrev()
+  } else if (e.key === 'ArrowRight' && !nextDisabled.value) {
+    e.preventDefault()
+    goNext()
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
@@ -338,6 +353,10 @@ function toggleSidebar() {
 
 /* ===== 响应式 ===== */
 @media (max-width: 900px) {
+  .lesson-player {
+    width: 100vw;
+  }
+
   .mobile-bar {
     display: flex;
   }
@@ -346,6 +365,7 @@ function toggleSidebar() {
     flex-direction: column;
     overflow-y: auto;
     flex: 1;
+    width: 100vw;
   }
 
   .panel-content,
@@ -361,14 +381,14 @@ function toggleSidebar() {
   }
 
   .panel-editor {
-    height: 320px;
+    min-height: 320px;
     border-left: none;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .panel-preview {
-    height: 360px;
+    min-height: 360px;
   }
 
   .resizer {

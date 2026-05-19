@@ -40,6 +40,9 @@ export interface ProjectStep {
   starterCode?: { html: string; css: string; js: string }
 }
 
+// 学习模式：sandbox = 浏览器内编辑器+预览 | local = 引导在本地 IDE 操作
+export type ProjectMode = 'sandbox' | 'local'
+
 // 实践项目
 export interface Project {
   id: string
@@ -50,6 +53,7 @@ export interface Project {
   icon: string
   musicAnalogy: string
   prerequisiteTrackIds: string[]
+  mode: ProjectMode
   steps: ProjectStep[]
   listenTo?: string
 }
