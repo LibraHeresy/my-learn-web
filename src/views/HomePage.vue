@@ -47,20 +47,9 @@ function goToProject(projectId: string) {
   <div class="home">
     <!-- Hero 区 -->
     <section class="hero">
-      <div class="hero-staff">
-        <svg class="staff-svg" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" stroke="var(--color-border)" stroke-width="1">
-            <line x1="0" y1="10" x2="600" y2="10"/>
-            <line x1="0" y1="20" x2="600" y2="20"/>
-            <line x1="0" y1="30" x2="600" y2="30"/>
-            <line x1="0" y1="40" x2="600" y2="40"/>
-            <line x1="0" y1="50" x2="600" y2="50"/>
-          </g>
-        </svg>
-      </div>
       <div class="hero-content">
         <p class="hero-greeting">你的学习之旅</p>
-        <h1 class="hero-title">代码谱</h1>
+        <h1 class="hero-title">代码乐章</h1>
         <p class="hero-desc">从五线谱到代码编辑器，从音符到标签，<br>用你熟悉的音乐语言，一步步成为创作者。</p>
       </div>
     </section>
@@ -223,17 +212,6 @@ function goToProject(projectId: string) {
   text-align: center;
   padding: var(--sp-6) 0 var(--sp-4);
   position: relative;
-}
-
-.hero-staff {
-  margin-bottom: var(--sp-4);
-}
-
-.staff-svg {
-  max-width: 400px;
-  width: 100%;
-  height: 50px;
-  animation: staffFadeIn 1.2s ease-out;
 }
 
 @keyframes staffFadeIn {

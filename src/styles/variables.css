@@ -25,9 +25,9 @@
   --color-success-bg:    #EEF5EE;      /* 完成背景 */
 
   /* ===== 字体 ===== */
-  --font-heading:  'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
-  --font-body:     'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-code:     'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+  --font-heading:  'Source Han Serif SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  --font-body:     'Source Han Sans SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-code:     'Cascadia Code', 'Fira Code', 'Consolas', 'Monaco', monospace;
 
   /* ===== 字号 ===== */
   --fs-xs:     0.75rem;

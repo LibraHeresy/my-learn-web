@@ -12,7 +12,7 @@ function goHome() {
   <header class="app-header">
     <div class="header-left" @click="goHome">
       <span class="header-logo">🎼</span>
-      <span class="header-title">代码谱</span>
+      <span class="header-title">代码乐章</span>
       <span class="header-subtitle">从乐谱到代码</span>
     </div>
   </header>
