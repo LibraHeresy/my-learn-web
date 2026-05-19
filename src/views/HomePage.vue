@@ -58,6 +58,7 @@ function toggleTrack(trackId: string) {
 }
 
 function jumpToSection(targetId: string) {
+  expandedTrack.value = null
   if (targetId === 'hero') {
     document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' })
     return
@@ -716,7 +717,7 @@ function goToProject(projectId: string) {
   .sticky-nav {
     gap: 2px;
     padding: var(--sp-1) var(--sp-2);
-    justify-content: flex-start;
+    justify-content: center;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
