@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { chapters, lessons } from '../data/lessons'
 import { tracks } from '../data/tracks'
@@ -31,7 +31,14 @@ function getTrackChapters(trackId: string) {
 }
 
 function toggleTrack(trackId: string) {
-  expandedTrack.value = expandedTrack.value === trackId ? null : trackId
+  const isExpanding = expandedTrack.value !== trackId
+  expandedTrack.value = isExpanding ? trackId : null
+  if (isExpanding) {
+    nextTick(() => {
+      const el = document.getElementById(`track-${trackId}`)
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }
 }
 
 function goToLesson(lessonId: string) {
@@ -63,6 +70,7 @@ function goToProject(projectId: string) {
         <div
           v-for="track in tracks"
           :key="track.id"
+          :id="`track-${track.id}`"
           :class="['track-card', {
             expanded: expandedTrack === track.id,
             draft: getTrackLessonCount(track.id) === 0
