@@ -60,11 +60,15 @@ function toggleTrack(trackId: string) {
 function jumpToSection(targetId: string) {
   expandedTrack.value = null
   if (targetId === 'hero') {
-    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' })
+    nextTick(() => {
+      document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' })
+    })
     return
   }
   if (targetId === 'projects') {
-    document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })
+    nextTick(() => {
+      document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })
+    })
     return
   }
   // 轨道卡片：展开 + 滚动
