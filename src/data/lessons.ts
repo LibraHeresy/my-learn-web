@@ -57,7 +57,7 @@ export const lessons: Lesson[] = [
   // ================================================================
 
   // ===== 1.1 html-intro =====
-  {
+    {
     id: "html-intro",
     chapterId: "html-basics",
     order: 1,
@@ -100,7 +100,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.2 html-doc-structure =====
-  {
+    {
     id: "html-doc-structure",
     chapterId: "html-basics",
     order: 2,
@@ -149,7 +149,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.3 html-emphasis =====
-  {
+    {
     id: "html-emphasis",
     chapterId: "html-basics",
     order: 3,
@@ -186,7 +186,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.4 html-lists =====
-  {
+    {
     id: "html-lists",
     chapterId: "html-basics",
     order: 4,
@@ -223,7 +223,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.5 html-images-links =====
-  {
+    {
     id: "html-images-links",
     chapterId: "html-basics",
     order: 5,
@@ -266,7 +266,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.6 html-div-span =====
-  {
+    {
     id: "html-div-span",
     chapterId: "html-basics",
     order: 6,
@@ -309,7 +309,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.7 html-semantic =====
-  {
+    {
     id: "html-semantic",
     chapterId: "html-basics",
     order: 7,
@@ -352,7 +352,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.8 html-audio-video =====
-  {
+    {
     id: "html-audio-video",
     chapterId: "html-basics",
     order: 8,
@@ -407,7 +407,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.9 html-tables =====
-  {
+    {
     id: "html-tables",
     chapterId: "html-basics",
     order: 9,
@@ -456,7 +456,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.10 html-forms =====
-  {
+    {
     id: "html-forms",
     chapterId: "html-basics",
     order: 10,
@@ -505,7 +505,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.11 html-input-types =====
-  {
+    {
     id: "html-input-types",
     chapterId: "html-basics",
     order: 11,
@@ -554,7 +554,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 1.12 html-capstone =====
-  {
+    {
     id: "html-capstone",
     chapterId: "html-basics",
     order: 12,
@@ -595,7 +595,7 @@ export const lessons: Lesson[] = [
   // ================================================================
 
   // ===== 2.1 css-intro =====
-  {
+    {
     id: "css-intro",
     chapterId: "css-style",
     order: 1,
@@ -638,7 +638,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.2 css-bg-border =====
-  {
+    {
     id: "css-bg-border",
     chapterId: "css-style",
     order: 2,
@@ -681,7 +681,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.3 css-font-spacing =====
-  {
+    {
     id: "css-font-spacing",
     chapterId: "css-style",
     order: 3,
@@ -724,7 +724,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.4 css-box-model =====
-  {
+    {
     id: "css-box-model",
     chapterId: "css-style",
     order: 4,
@@ -767,7 +767,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.5 css-selectors =====
-  {
+    {
     id: "css-selectors",
     chapterId: "css-style",
     order: 5,
@@ -816,7 +816,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.6 css-cascade =====
-  {
+    {
     id: "css-cascade",
     chapterId: "css-style",
     order: 6,
@@ -865,7 +865,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 2.7 css-transitions =====
-  {
+    {
     id: "css-transitions",
     chapterId: "css-style",
     order: 7,
@@ -913,11 +913,53 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 2.8 css-variables =====
+  // ===== 2.8 css-animations =====
   {
+    id: 'css-animations',
+    chapterId: 'css-style',
+    order: 8,
+    title: 'CSS 动画深入 — 让页面充满律动',
+    musicAnalogy: '如果说 transition 是渐强记号（从 pp 平滑到 ff），那么 @keyframes 就是一段完整的节奏型——精确控制每个时间点的状态。animation 属性像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。',
+    listenTo: '斯特拉文斯基《春之祭》— 复杂的节奏型、不规则的拍号、多个声部的交错进行，就像页面中同时运行的多个 @keyframes 动画。每一个拍点都精确计算，却产生了震撼人心的效果。',
+    sections: [
+      {
+        type: 'explain',
+        title: '@keyframes — 定义动画的"节奏型"',
+        content: '还记得 transition 吗？它只能在两个状态之间平滑过渡（比如 hover 前 → hover 后）。@keyframes 让你定义**任意多个关键帧**，创建更复杂的动画：\n\n```css\n@keyframes swing {\n  0%   { transform: rotate(0deg); }\n  25%  { transform: rotate(5deg); }\n  50%  { transform: rotate(0deg); }\n  75%  { transform: rotate(-5deg); }\n  100% { transform: rotate(0deg); }\n}\n```\n\n- 百分比代表动画的进度（0% = 开始，100% = 结束）\n- 也可以用 from（= 0%）和 to（= 100%）\n- 每个关键帧可以定义任意多个 CSS 属性\n\n就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。',
+      },
+      {
+        type: 'explain',
+        title: 'animation 属性 — 演奏法标记全解',
+        content: '定义好 @keyframes 后，用 animation 属性把它应用到元素上。它是 8 个子属性的简写：\n\n```css\n.card {\n  animation:\n    swing          /* animation-name: 用哪个关键帧 */\n    2s             /* animation-duration: 一个周期多长时间 */\n    ease-in-out    /* animation-timing-function: 缓动函数 */\n    1s             /* animation-delay: 等多久再开始 */\n    3              /* animation-iteration-count: 重复几次，infinite = 无限 */\n    alternate      /* animation-direction: 正放还是倒放 */\n    forwards       /* animation-fill-mode: 结束后保持哪个状态 */\n    running;       /* animation-play-state: running 或 paused */\n}\n```\n\n**常用 timing-function：**\n- ease — 慢→快→慢（默认）\n- linear — 匀速\n- ease-in — 慢→快\n- ease-out — 快→慢\n- cubic-bezier(n,n,n,n) — 自定义曲线\n\n**fill-mode 关键值：**\n- none — 结束后回到初始状态\n- forwards — 结束后保持在最后一帧\n- backwards — 开始前就取第一帧状态\n- both — 同时应用 forwards + backwards',
+      },
+      {
+        type: 'explain',
+        title: 'transform 进阶 — 变形、旋转与 3D',
+        content: 'transform 不止能用在 transition 中，配合 @keyframes 效果更丰富：\n\n```css\n/* 2D 变换 */\ntransform: translateX(100px);    /* 水平移动 */\ntransform: translateY(-20px);    /* 垂直移动 */\ntransform: scale(1.2);           /* 放大到 1.2 倍 */\ntransform: rotate(45deg);        /* 顺时针旋转 45° */\ntransform: skewX(10deg);         /* 水平倾斜 */\n\n/* 组合变换（空格分隔，顺序很重要！） */\ntransform: translateX(100px) rotate(45deg) scale(1.1);\n\n/* 设置旋转中心点 */\ntransform-origin: center center;  /* 默认是元素中心 */\ntransform-origin: top left;       /* 改为左上角 */\n```\n\n3D 变换（需要 perspective 才能看到深度效果）：\n```css\n.container {\n  perspective: 600px;  /* 透视距离——越小越夸张 */\n}\n.card {\n  transform: rotateY(30deg);   /* 绕 Y 轴旋转 */\n  transform: rotateX(15deg);   /* 绕 X 轴翻转 */\n}\n```\n\n就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。',
+      },
+      {
+        type: 'example',
+        title: '看例子',
+        content: '下面的代码展示了三种经典动画效果：\n\n```css\n/* 摇摆——像节拍器 */\n@keyframes swing {\n  0%, 100% { transform: rotate(-3deg); }\n  50% { transform: rotate(3deg); }\n}\n\n/* 淡入上浮——像幕布升起 */\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* 心跳——缩放+透明度脉动 */\n@keyframes heartbeat {\n  0%, 100% { transform: scale(1); }\n  15% { transform: scale(1.15); }\n  30% { transform: scale(1); }\n  45% { transform: scale(1.1); }\n  60% { transform: scale(1); }\n}\n```\n\n看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '切换到 CSS 标签页，试试：\n\n1. 把 swing 动画的 rotate 角度从 3deg 改成 8deg，看摇摆幅度变大\n2. 修改 fadeInUp 的 translateY 从 30px 改成 60px——漂移更明显\n3. 给 heartbeat 的 animation-duration 从 1.5s 改成 0.8s——心跳更快\n4. 挑战：用 @keyframes 写一个唱片旋转动画（rotate + infinite + linear）\n5. 挑战：把 fadeInUp 动画的 fill-mode 改成 forwards 和 none，分别观察结束后的状态',
+      },
+    ],
+    starterCode: {
+      html: '<h1>🎬 动画舞台</h1>\n\n<div class="stage">\n  <div class="anim-card swing-card">\n    <span class="card-icon">🎵</span>\n    <strong>摇摆</strong>\n    <p>像节拍器一样摆动</p>\n  </div>\n  <div class="anim-card fade-card">\n    <span class="card-icon">🎭</span>\n    <strong>淡入上浮</strong>\n    <p>幕布升起的效果</p>\n  </div>\n  <div class="anim-card heart-card">\n    <span class="card-icon">💗</span>\n    <strong>心跳</strong>\n    <p>缩放脉动的节奏</p>\n  </div>\n</div>\n\n<div class="controls">\n  <button id="pauseBtn">⏯ 暂停动画</button>\n</div>',
+      css: 'h1 { text-align: center; color: #8B2E2E; margin-bottom: 24px; }\n.stage { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }\n.anim-card { background: #FFFAF2; border: 1px solid #D4C5A9; border-radius: 12px; padding: 28px 24px; text-align: center; width: 180px; }\n.card-icon { font-size: 40px; display: block; margin-bottom: 8px; }\n.anim-card strong { display: block; color: #3D2B1F; font-size: 16px; margin-bottom: 4px; }\n.anim-card p { color: #6B5A4E; font-size: 12px; margin: 0; }\n\n@keyframes swing {\n  0%, 100% { transform: rotate(-3deg); }\n  50% { transform: rotate(3deg); }\n}\n.swing-card { animation: swing 2s ease-in-out infinite; transform-origin: center top; }\n\n@keyframes fadeInUp {\n  from { opacity: 0; transform: translateY(30px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n.fade-card { animation: fadeInUp 1.5s ease-out infinite; }\n\n@keyframes heartbeat {\n  0%, 100% { transform: scale(1); }\n  15% { transform: scale(1.15); }\n  30% { transform: scale(1); }\n  45% { transform: scale(1.1); }\n  60% { transform: scale(1); }\n}\n.heart-card { animation: heartbeat 1.5s ease-in-out infinite; }\n\n.controls { text-align: center; margin-top: 28px; }\n#pauseBtn { padding: 10px 24px; background: #8B2E2E; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.2s; }\n#pauseBtn:hover { background: #C94545; }\n.stage.paused .anim-card { animation-play-state: paused; }',
+      js: 'const pauseBtn = document.getElementById(\'pauseBtn\');\nconst stage = document.querySelector(\'.stage\');\n\npauseBtn.addEventListener(\'click\', () => {\n  const isPaused = stage.classList.toggle(\'paused\');\n  pauseBtn.textContent = isPaused ? \'▶ 恢复动画\' : \'⏯ 暂停动画\';\n});',
+    },
+  },
+
+  // ===== 2.9 css-variables =====
+    {
     id: "css-variables",
     chapterId: "css-style",
-    order: 8,
+    order: 9,
     title: "CSS 变量 — 一次定义，全局共鸣",
     musicAnalogy:
       "CSS 变量就像乐谱开头的**调号（key signature）**——升 fa 升 do 写一次，全曲所有的 fa 和 do 都跟着自动升。用 `--main-color` 定义一种颜色，全站所有用到它的地方一起改变。这个网站本身就在大量使用 CSS 变量！",
@@ -961,7 +1003,7 @@ export const lessons: Lesson[] = [
   // ================================================================
 
   // ===== 3.1 css-flexbox =====
-  {
+    {
     id: "css-flexbox",
     chapterId: "css-layout",
     order: 1,
@@ -1010,7 +1052,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 3.2 css-centering =====
-  {
+    {
     id: "css-centering",
     chapterId: "css-layout",
     order: 2,
@@ -1053,7 +1095,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 3.3 css-position =====
-  {
+    {
     id: "css-position",
     chapterId: "css-layout",
     order: 3,
@@ -1102,7 +1144,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 3.4 css-grid =====
-  {
+    {
     id: "css-grid",
     chapterId: "css-layout",
     order: 4,
@@ -1151,7 +1193,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 3.5 css-responsive =====
-  {
+    {
     id: "css-responsive",
     chapterId: "css-layout",
     order: 5,
@@ -1194,7 +1236,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 3.6 css-layout-capstone =====
-  {
+    {
     id: "css-layout-capstone",
     chapterId: "css-layout",
     order: 6,
@@ -1235,7 +1277,7 @@ export const lessons: Lesson[] = [
   // ================================================================
 
   // ===== 4.1 js-intro =====
-  {
+    {
     id: "js-intro",
     chapterId: "js-basics",
     order: 1,
@@ -1284,7 +1326,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.2 js-variables =====
-  {
+    {
     id: "js-variables",
     chapterId: "js-basics",
     order: 2,
@@ -1333,7 +1375,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.3 js-types =====
-  {
+    {
     id: "js-types",
     chapterId: "js-basics",
     order: 3,
@@ -1382,7 +1424,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.4 js-functions =====
-  {
+    {
     id: "js-functions",
     chapterId: "js-basics",
     order: 4,
@@ -1425,7 +1467,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.5 js-events =====
-  {
+    {
     id: "js-events",
     chapterId: "js-basics",
     order: 5,
@@ -1468,7 +1510,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.6 js-events-more =====
-  {
+    {
     id: "js-events-more",
     chapterId: "js-basics",
     order: 6,
@@ -1517,7 +1559,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.7 js-conditions =====
-  {
+    {
     id: "js-conditions",
     chapterId: "js-basics",
     order: 7,
@@ -1560,7 +1602,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.8 js-arrays =====
-  {
+    {
     id: "js-arrays",
     chapterId: "js-basics",
     order: 8,
@@ -1603,7 +1645,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.9 js-loops =====
-  {
+    {
     id: "js-loops",
     chapterId: "js-basics",
     order: 9,
@@ -1646,7 +1688,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.10 js-array-methods =====
-  {
+    {
     id: "js-array-methods",
     chapterId: "js-basics",
     order: 10,
@@ -1695,7 +1737,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.11 js-querySelectorAll =====
-  {
+    {
     id: "js-querySelectorAll",
     chapterId: "js-basics",
     order: 11,
@@ -1738,7 +1780,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.12 js-objects =====
-  {
+    {
     id: "js-objects",
     chapterId: "js-basics",
     order: 12,
@@ -1781,7 +1823,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.13 js-dom-advanced =====
-  {
+    {
     id: "js-dom-advanced",
     chapterId: "js-basics",
     order: 13,
@@ -1824,7 +1866,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.14 js-timers =====
-  {
+    {
     id: "js-timers",
     chapterId: "js-basics",
     order: 14,
@@ -1867,7 +1909,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 4.15 js-capstone =====
-  {
+    {
     id: "js-capstone",
     chapterId: "js-basics",
     order: 15,
@@ -1908,7 +1950,7 @@ export const lessons: Lesson[] = [
   // ================================================================
 
   // ===== 5.1 workflow-three-step =====
-  {
+    {
     id: "workflow-three-step",
     chapterId: "js-advanced",
     trackId: "framework",
@@ -1946,7 +1988,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 5.2 workflow-plan-first =====
-  {
+    {
     id: "workflow-plan-first",
     chapterId: "js-advanced",
     trackId: "framework",
@@ -1984,7 +2026,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 5.3 workflow-console-intro =====
-  {
+    {
     id: "workflow-console-intro",
     chapterId: "js-advanced",
     trackId: "framework",
@@ -2028,7 +2070,7 @@ export const lessons: Lesson[] = [
   },
 
   // ===== 5.4 workflow-console-log =====
-  {
+    {
     id: "workflow-console-log",
     chapterId: "js-advanced",
     trackId: "framework",
@@ -2071,12 +2113,55 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.5 workflow-naming =====
+  // ===== 5.5 workflow-debugger =====
   {
+    id: 'workflow-debugger',
+    chapterId: 'js-advanced',
+    trackId: "framework",
+    order: 5,
+    title: '断点调试 — 用 Sources 面板听诊代码',
+    musicAnalogy: 'console.log 就像在排练中让乐手报一遍自己的音符——能发现问题，却看不清全局。断点调试则像指挥让乐队在某一个小节停下来，逐个声部检查：长笛吹的是什么音？定音鼓在这个拍点上的力度对吗？你可以在任意时刻凝固住整个程序，查看所有变量的值，然后一行一行地执行，观察数据如何流动。',
+    listenTo: '贝多芬《第九交响曲》排练录音 — 任何一位指挥在排练时都会反复停下、纠正、重来。断点调试就是你在代码中的排练指挥棒——发现不和谐的音（bug），停下来，找到原因，修正好，再继续。',
+    sections: [
+      {
+        type: 'explain',
+        title: 'console.log 不够用了吗？',
+        content: '你一直在用 console.log 来调试代码——这在简单场景下确实管用。但当你遇到复杂问题时：\n\n- 变量在 5 个地方被修改，不知道是谁改错了\n- 循环 100 次，不知道第 47 次为什么出问题\n- 异步代码的执行顺序让人困惑\n- 想看某个时刻**所有**变量的值，而不是只 log 一个\n\n这时候你需要断点（breakpoint）——在代码的某一行设置一个暂停标记，程序运行到这里就会停下来，你可以慢慢检查一切。\n\n**打开 DevTools Sources 面板：**\n1. 按 F12 打开开发者工具\n2. 切换到 Sources（源代码）面板\n3. 左侧找到你的 JS 文件\n4. 点击行号设置断点（出现蓝色箭头标记）\n5. 刷新页面或触发事件——程序在断点处暂停！',
+      },
+      {
+        type: 'explain',
+        title: '断点操作 — 你的指挥手势',
+        content: '程序暂停后，你可以使用以下控制按钮（像指挥的不同手势）：\n\n| 按钮 | 快捷键 | 作用 |\n|------|--------|------|\n| Resume | F8 | 继续执行，直到下一个断点 |\n| Step Over | F10 | 执行当前行，不进入函数内部 |\n| Step Into | F11 | 进入函数内部，逐行执行 |\n| Step Out | Shift+F11 | 跳出当前函数 |\n\n暂停时，你可以：\n- **鼠标悬停**在任何变量上查看它的值\n- 在右侧 **Scope（作用域）** 面板查看所有局部和全局变量\n- 在 **Watch（监视）** 面板添加表达式，实时追踪其值变化\n- 在 **Console** 面板直接输入变量名来测试表达式\n\n> 🎯 就像一个指挥随时可以指着某个乐手问你这里奏的是什么，你随时可以查看任何变量的值。',
+      },
+      {
+        type: 'explain',
+        title: '条件断点与 DOM 断点',
+        content: '**条件断点：** 右键点击行号 → "Add conditional breakpoint" → 输入条件表达式（如 i === 47）。只有当条件为 true 时才会暂停。这在调试第 47 次循环出问题时是救星。\n\n```js\n// 条件断点表达式：i === 47\n// 循环到第 48 次（i=47）时才会暂停\nfor (let i = 0; i < 100; i++) {\n  processItem(data[i])\n}\n```\n\n**DOM 断点：** 在 Elements 面板中右键一个 DOM 元素 → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个元素被修改、删除或属性变化时，自动跳转到修改它的 JS 代码。\n\n**XHR/Fetch 断点：** 在 Sources 面板右侧的 XHR/fetch Breakpoints 中添加 URL 片段（如 search）。当有请求匹配这个 URL 时自动暂停——调试网络请求的神器。',
+      },
+      {
+        type: 'example',
+        title: '看例子',
+        content: '下面的代码是一个猜数字游戏。请在 Sources 面板中设置断点来调试：\n\n```js\nlet target = Math.floor(Math.random() * 100)\nlet score = 100\nlet attempts = 0\n\nfunction guess(num) {\n  attempts++\n  if (num > target) {\n    score -= 10\n    return \'太大了！\'\n  } else if (num < target) {\n    score -= 10\n    return \'太小了！\'\n  } else {\n    // 在这里设置一个断点——检查 num、target、score 的值\n    return \'恭喜！你得分为 \' + score\n  }\n}\n```\n\n打开 F12 → Sources → 在 return 那行设置断点 → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有变量。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '请在预览区的输入框中输入数字，触发 guess() 函数：\n\n1. 打开 F12 → Sources 面板，在 guess 函数的第一行设置断点\n2. 输入一个数字，观察程序暂停时右侧 Scope 面板中的变量值\n3. 使用 Step Over（F10）逐行执行，观察 score 和 attempts 的变化\n4. 在 num === target 的判断行设置条件断点（num > 80 && num < 90），只在特定范围暂停\n5. 挑战：在 Watch 面板添加表达式 target - num，实时追踪差值',
+      },
+    ],
+    starterCode: {
+      html: '<h1>🔍 调试实验室</h1>\n\n<div class="game-box">\n  <p class="hint-text">我已经想好了一个 0~99 之间的数字 👀</p>\n  <div class="input-row">\n    <input type="number" id="guessInput" min="0" max="99" placeholder="输入你的猜测...">\n    <button id="guessBtn">猜！</button>\n  </div>\n  <div class="info-row">\n    <span>💯 得分：<strong id="scoreDisplay">100</strong></span>\n    <span>🎯 尝试：<strong id="attemptsDisplay">0</strong></span>\n  </div>\n  <p id="message" class="message"></p>\n  <button id="resetBtn" class="reset-btn">🔄 重新开始</button>\n</div>',
+      css: 'h1 { text-align: center; color: #8B2E2E; margin-bottom: 20px; }\n.game-box { max-width: 420px; margin: 0 auto; background: #FFFAF2; border: 2px solid #D4C5A9; border-radius: 14px; padding: 28px; text-align: center; }\n.hint-text { color: #6B5A4E; font-size: 14px; margin: 0 0 16px 0; }\n.input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }\n#guessInput { width: 140px; padding: 10px 14px; border: 2px solid #D4C5A9; border-radius: 8px; font-size: 16px; text-align: center; outline: none; font-family: inherit; }\n#guessInput:focus { border-color: #C9A96E; }\n#guessBtn { padding: 10px 24px; background: #8B2E2E; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background 0.2s; }\n#guessBtn:hover { background: #C94545; }\n.info-row { display: flex; justify-content: center; gap: 24px; margin-bottom: 14px; font-size: 14px; color: #3D2B1F; }\n.message { font-size: 18px; font-weight: 600; min-height: 28px; margin: 0 0 14px 0; }\n.message.win { color: #2E7D32; }\n.message.hint { color: #C9A96E; }\n.reset-btn { background: transparent; color: #8B2E2E; border: 1px solid #D4C5A9; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.2s; }\n.reset-btn:hover { background: #FFFAF2; border-color: #8B2E2E; }',
+      js: 'let target = Math.floor(Math.random() * 100);\nlet score = 100;\nlet attempts = 0;\n\nconsole.log(\'🎯 答案在这里（调试时你可以在 Scope 面板中看到 target）：\', target);\n\nconst input = document.getElementById(\'guessInput\');\nconst btn = document.getElementById(\'guessBtn\');\nconst msg = document.getElementById(\'message\');\nconst scoreDisplay = document.getElementById(\'scoreDisplay\');\nconst attemptsDisplay = document.getElementById(\'attemptsDisplay\');\nconst resetBtn = document.getElementById(\'resetBtn\');\n\nfunction guess(num) {\n  attempts++;\n  attemptsDisplay.textContent = attempts;\n  if (num > target) {\n    score -= 10;\n    scoreDisplay.textContent = score;\n    return \'📈 太大了！往下猜\';\n  } else if (num < target) {\n    score -= 10;\n    scoreDisplay.textContent = score;\n    return \'📉 太小了！往上猜\';\n  } else {\n    return { text: \'🎉 恭喜！答案就是 \' + target + \'。得分：\' + score, isWin: true };\n  }\n}\n\nbtn.addEventListener(\'click\', () => {\n  const val = parseInt(input.value);\n  if (isNaN(val) || val < 0 || val > 99) {\n    msg.textContent = \'请输入 0~99 之间的数字\';\n    msg.className = \'message\';\n    return;\n  }\n  const result = guess(val);\n  if (typeof result === \'string\') {\n    msg.textContent = result;\n    msg.className = \'message hint\';\n  } else {\n    msg.textContent = result.text;\n    msg.className = result.isWin ? \'message win\' : \'message\';\n    btn.disabled = result.isWin;\n  }\n  input.value = \'\';\n  input.focus();\n});\n\nresetBtn.addEventListener(\'click\', () => {\n  target = Math.floor(Math.random() * 100);\n  score = 100;\n  attempts = 0;\n  scoreDisplay.textContent = score;\n  attemptsDisplay.textContent = attempts;\n  msg.textContent = \'\';\n  msg.className = \'message\';\n  btn.disabled = false;\n  console.log(\'🎯 新答案是：\', target);\n  input.focus();\n});',
+    },
+  },
+
+  // ===== 5.6 workflow-naming =====
+    {
     id: "workflow-naming",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 5,
+    order: 6,
     title: "命名就像给音符标注指法 — 让代码自己说话",
     musicAnalogy:
       "乐谱上标注的指法标记让演奏者一眼就知道用哪个手指。同样，**好的变量名和类名让阅读代码的人（包括一个月后的你自己）一眼就知道这段代码在做什么**。命名是程序员最被低估的技能——它不改变功能，但能让你写代码的速度快 10 倍。",
@@ -2109,12 +2194,12 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.6 workflow-decompose =====
-  {
+  // ===== 5.7 workflow-decompose =====
+    {
     id: "workflow-decompose",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 6,
+    order: 7,
     title: "拆分函数 — 把大段乐谱分成清晰的乐章",
     musicAnalogy:
       "一首 40 分钟的交响曲会分成几个乐章，每个乐章又有自己的主题和发展。如果全部堆在一起，演奏者和听众都会迷失。同样，**当你的函数超过 20 行，就该考虑拆分了**。每个函数只做一件事，就像每个乐章有一个主题。",
@@ -2153,12 +2238,12 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.7 workflow-create-element =====
-  {
+  // ===== 5.8 workflow-create-element =====
+    {
     id: "workflow-create-element",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 7,
+    order: 8,
     title: 'DOM 动态创建 — 用 JS "凭空造出"页面元素',
     musicAnalogy:
       '用 `innerHTML` 像"复印一整页乐谱"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像"一个音符一个音符地写"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。',
@@ -2191,12 +2276,12 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.8 workflow-event-delegation =====
-  {
+  // ===== 5.9 workflow-event-delegation =====
+    {
     id: "workflow-event-delegation",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 8,
+    order: 9,
     title: '事件委托 — 让"指挥"替你监听每一个"乐手"',
     musicAnalogy:
       '指挥不需要跑到每一位演奏者面前单独说"到你吹了"——演奏者自己看总谱、听音乐，知道什么时候进入。**事件委托**就是这个道理：你不用给每一个元素单独绑定事件，而是把事件绑在父容器上，由父容器来判断"触发者是谁"，做出相应的反应。',
@@ -2235,12 +2320,12 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.9 workflow-data-driven =====
-  {
+  // ===== 5.10 workflow-data-driven =====
+    {
     id: "workflow-data-driven",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 9,
+    order: 10,
     title: "数据驱动思维 — 改数据就是改页面",
     musicAnalogy:
       '总谱是"数据"，演奏是"渲染"。指挥在总谱上改一个音符，所有乐手下一遍就按新谱子演奏——不需要每个人单独通知。这就是**数据驱动**：你只需要修改数据，然后调用一次渲染函数，页面自动跟上。',
@@ -2273,12 +2358,12 @@ export const lessons: Lesson[] = [
     },
   },
 
-  // ===== 5.10 js-es6-syntax =====
-  {
+  // ===== 5.11 js-es6-syntax =====
+    {
     id: "js-es6-syntax",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 10,
+    order: 11,
     title: 'ES6 新语法 — 让代码更优雅的"新乐器"',
     musicAnalogy:
       '就像现代音乐加入了电声乐器让表现力更丰富，ES6（ECMAScript 2015）为 JavaScript 带来了更简洁、更强大的语法。用这些新"乐器"，你可以用更少的音符写出更丰富的旋律。',
@@ -2351,12 +2436,12 @@ console.log('乐器信息：', describe(instrument))`,
     mode: "sandbox",
   },
 
-  // ===== 5.11 js-error-handling =====
-  {
+  // ===== 5.12 js-error-handling =====
+    {
     id: "js-error-handling",
     chapterId: "js-advanced",
     trackId: "framework",
-    order: 11,
+    order: 12,
     title: '错误处理 — 给代码上"保险"',
     musicAnalogy:
       '演奏中难免出错（碰错音、进错拍），好乐手知道如何处理——继续演奏而不是停下来。编程也一样：错误一定会发生，关键是优雅地处理它们，而不是让整个程序"戛然而止"。',
@@ -2420,7 +2505,7 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
   // ================================================================
 
   // ===== 6.1 workflow-localstorage =====
-  {
+    {
     id: "workflow-localstorage",
     chapterId: "async-data",
     trackId: "framework",
@@ -2458,7 +2543,7 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
   },
 
   // ===== 6.2 async-event-loop =====
-  {
+    {
     id: "async-event-loop",
     chapterId: "async-data",
     trackId: "framework",
@@ -2517,7 +2602,7 @@ console.log('B: 第一乐章')
   },
 
   // ===== 6.3 async-promise =====
-  {
+    {
     id: "async-promise",
     chapterId: "async-data",
     trackId: "framework",
@@ -2582,7 +2667,7 @@ function searchMusic(keyword) {
   },
 
   // ===== 6.4 async-await =====
-  {
+    {
     id: "async-await",
     chapterId: "async-data",
     trackId: "framework",
@@ -2654,7 +2739,7 @@ loadConcert().then(data => console.log('结果：', data))`,
   },
 
   // ===== 6.5 async-fetch =====
-  {
+    {
     id: "async-fetch",
     chapterId: "async-data",
     trackId: "framework",
@@ -2719,7 +2804,7 @@ getPosts()
   },
 
   // ===== 6.6 async-api-client =====
-  {
+    {
     id: "async-api-client",
     chapterId: "async-data",
     trackId: "framework",
@@ -2784,7 +2869,7 @@ test()`,
   },
 
   // ===== 6.7 async-search-debounce =====
-  {
+    {
     id: "async-search-debounce",
     chapterId: "async-data",
     trackId: "framework",
@@ -2855,7 +2940,7 @@ debouncedSearch('贝多芬')
   },
 
   // ===== 6.8 async-capstone =====
-  {
+    {
     id: "async-capstone",
     chapterId: "async-data",
     trackId: "framework",
@@ -2906,7 +2991,7 @@ debouncedSearch('贝多芬')
   // ================================================================
 
   // ===== 7.1 tooling-nodejs =====
-  {
+    {
     id: "tooling-nodejs",
     chapterId: "engineering-tooling",
     trackId: "engineering",
@@ -2947,7 +3032,7 @@ debouncedSearch('贝多芬')
   },
 
   // ===== 7.2 tooling-vscode =====
-  {
+    {
     id: "tooling-vscode",
     chapterId: "engineering-tooling",
     trackId: "engineering",
@@ -2988,7 +3073,7 @@ debouncedSearch('贝多芬')
   },
 
   // ===== 7.3 tooling-terminal =====
-  {
+    {
     id: "tooling-terminal",
     chapterId: "engineering-tooling",
     trackId: "engineering",
@@ -3028,12 +3113,56 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 7.4 tooling-npm =====
+  // ===== 7.4 tooling-modules =====
   {
+    id: 'tooling-modules',
+    chapterId: 'engineering-tooling',
+    trackId: "engineering",
+    order: 4,
+    title: 'JS 模块化 — 把代码分成声部管理',
+    musicAnalogy: '管弦乐总谱不会把所有音符挤在一行——第一小提琴、第二小提琴、中提琴、大提琴各有自己的谱表。模块化就是给你的代码分声部：一个文件管搜索（search.js），一个文件管渲染（render.js），一个文件管数据（store.js）。每个模块有自己的职责，通过 import/export 像不同声部之间的对话一样协作。',
+    listenTo: '本杰明·布里顿《青少年管弦乐队指南》— 一段主题由不同乐器组依次演奏，每个乐器组（模块）独立展示自己的音色（功能），最后由整个乐队合奏（import 整合）。完美的模块化示范！',
+    mode: 'local',
+    sections: [
+      {
+        type: 'explain',
+        title: '为什么需要模块化？',
+        content: '早期的网页开发中，所有 JS 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n\n- 变量名冲突（两个函数都想用 name 这个变量）\n- 代码难以维护（找一个 bug 要翻几千行）\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\n\n模块化解决了这些问题：\n\n```\n// 之前：一个巨大的 script.js\nscript.js (800 行)\n\n// 之后：按职责分成小文件\nutils.js        ← 工具函数（格式化日期、编码等）\napi.js          ← 网络请求\nrender.js       ← 渲染页面\napp.js          ← 主入口，引入其他模块\n```\n\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。',
+      },
+      {
+        type: 'explain',
+        title: 'export — 两种导出方式',
+        content: 'ES Modules 提供两种导出方式：\n\n**1. 命名导出（Named Export）** — 一个模块可以导出多个东西：\n\n```js\n// utils.js — 导出多个工具函数\nexport function formatDate(date) {\n  return date.toLocaleDateString(\'zh-CN\')\n}\n\nexport const API_BASE = \'https://api.example.com\'\n\nexport function debounce(fn, delay) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), delay)\n  }\n}\n```\n\n**2. 默认导出（Default Export）** — 一个模块只导出一个主角：\n\n```js\n// search.js — 这个文件的主角就是 searchMusic\nexport default async function searchMusic(keyword) {\n  const res = await fetch(API_BASE + \'/search?q=\' + keyword)\n  return res.json()\n}\n```\n\n每个模块只能有一个 default export。\n\n> 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。',
+      },
+      {
+        type: 'explain',
+        title: 'import — 引入其他模块',
+        content: '**导入命名导出：** 用花括号 `{}` 精确指定要导入什么\n\n```js\n// 按需导入\nimport { formatDate, debounce } from \'./utils.js\'\n\n// 重命名（避免命名冲突）\nimport { debounce as deb } from \'./utils.js\'\n\n// 全部导入到一个命名空间\nimport * as utils from \'./utils.js\'\nutils.formatDate(new Date())\n```\n\n**导入默认导出：** 不用花括号，名字可以自己取\n\n```js\nimport searchMusic from \'./search.js\'\n// 名字可以自己定，但建议和导出保持一致\n```\n\n**混合导入：**\n\n```js\nimport searchMusic, { API_BASE } from \'./search.js\'\n```\n\n**npm 包的导入：** (不需要 ./ 或 ../ 前缀)\n\n```js\nimport { ref, computed } from \'vue\'\nimport axios from \'axios\'\n```\n\n**注意：** `.js` 后缀在 Vite/Vue 项目中可以省略，在纯浏览器 ESM 中必须写。',
+      },
+      {
+        type: 'example',
+        title: '看例子',
+        content: '假设你在做一个音乐搜索器，模块化之后项目结构是这样的：\n\n```\nmusic-searcher/\n├── index.html\n├── js/\n│   ├── app.js        ← 主入口（组装所有模块）\n│   ├── api.js        ← 封装 fetch 请求\n│   ├── render.js     ← 负责渲染 DOM\n│   └── utils.js      ← 通用工具（防抖、格式化）\n```\n\n```js\n// api.js — 只负责数据\nexport async function searchMusic(keyword) {\n  const res = await fetch(\n    \'https://itunes.apple.com/search?term=\' + encodeURIComponent(keyword) + \'&limit=10\'\n  )\n  return res.json()\n}\n\n// render.js — 只负责 DOM\nexport function renderResults(data, container) {\n  container.innerHTML = data.results.map(item => `\n    <div class="card">\n      <img src="${item.artworkUrl100}" />\n      <h3>${item.trackName}</h3>\n    </div>\n  `).join(\'\')\n}\n\n// app.js — 组装一切\nimport { searchMusic } from \'./api.js\'\nimport { renderResults } from \'./render.js\'\nimport { debounce } from \'./utils.js\'\n\nconst input = document.querySelector(\'#search\')\nconst results = document.querySelector(\'#results\')\n\ninput.addEventListener(\'input\', debounce(async (e) => {\n  const data = await searchMusic(e.target.value)\n  renderResults(data, results)\n}, 400))\n```\n\n每个文件职责单一——修改渲染逻辑不会影响 API 代码，反之亦然。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '在本地 VS Code 中练习（这是 local 模式课程）：\n\n1. 创建一个 music-searcher 文件夹，在其中创建 api.js、render.js、app.js 三个文件\n2. 在 api.js 中 export 一个 searchMusic 函数（用到 fetch）\n3. 在 render.js 中 export 一个 renderResults 函数（创建 DOM 元素）\n4. 在 app.js 中 import 这两个函数，组装成完整的搜索功能\n5. 练习：尝试用 default export 改写 api.js，看 import 语法有什么变化\n6. 练习：尝试 import * as 的方式，对比按需导入的区别',
+      },
+    ],
+    starterCode: {
+      html: '',
+      css: '',
+      js: '',
+    },
+  },
+
+  // ===== 7.5 tooling-npm =====
+    {
     id: "tooling-npm",
     chapterId: "engineering-tooling",
     trackId: "engineering",
-    order: 4,
+    order: 5,
     title: '包管理器 — 你的"乐谱图书馆"',
     musicAnalogy:
       '作曲家不需要从零发明每一个和弦——他们在已有的音乐体系上创作。**npm 就是编程世界的音乐图书馆**：全球开发者共享了超过 200 万个"包"，你只需要 `npm install`，就能把别人写好的功能直接拿来用。',
@@ -3069,12 +3198,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 7.5 tooling-vite =====
-  {
+  // ===== 7.6 tooling-vite =====
+    {
     id: "tooling-vite",
     chapterId: "engineering-tooling",
     trackId: "engineering",
-    order: 5,
+    order: 6,
     title: "创建第一个 Vue 项目 — Vite 登场",
     musicAnalogy:
       '排练一场交响乐需要准备场地、谱架、乐器、灯光……但如果有一个"排练厅管家"帮你一次性搞定所有配置呢？**Vite 就是这个管家**——一条命令，给你搭好整个项目框架：文件夹结构、配置文件、开发服务器，全部就位。你只需要开始写代码。',
@@ -3110,12 +3239,56 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 7.6 tooling-git-init =====
+  // ===== 7.7 tooling-eslint =====
   {
+    id: 'tooling-eslint',
+    chapterId: 'engineering-tooling',
+    trackId: "engineering",
+    order: 7,
+    title: 'ESLint 与 Prettier — 代码的调音师',
+    musicAnalogy: '乐团上台前需要调音——每把乐器校准到标准音高 A=440Hz。代码也需要调音：ESLint 是音准仪——检查有没有错音（语法错误、不良模式）；Prettier 是节拍器——确保节奏统一（缩进、引号、分号风格一致）。两个工具配合使用，让你的代码像专业乐团一样整齐统一。',
+    listenTo: '柏林爱乐乐团音乐会前的调音 — 各乐器组依次校准，双簧管给出标准音 A，其他乐器与之对齐。ESLint 就是那个标准音——所有代码都要对齐到它的规则。',
+    mode: 'local',
+    sections: [
+      {
+        type: 'explain',
+        title: '为什么需要代码规范？',
+        content: '你有没有遇到过这些问题：\n\n- 队友用 2 空格缩进，你用 4 空格——代码合并时满屏冲突\n- 有人用单引号，有人用双引号——整个项目风格混乱\n- 定义了一个变量但从未使用，自己都没注意到\n- console.log 忘记删就提交了\n\n团队协作时，代码风格的统一比个人偏好重要得多。就像交响乐团——每个乐手可以有不同的演奏风格，但在同一个乐队里，必须听指挥的统一调度。\n\n**ESLint** 负责代码质量（有没有 bug）\n**Prettier** 负责代码格式（好不好看）\n\n两者配合使用：ESLint 抓错误，Prettier 管风格。',
+      },
+      {
+        type: 'explain',
+        title: 'ESLint — 代码质量检查',
+        content: 'ESLint 是 JS/TS 生态中最主流的代码检查工具。它定义了一套规则，不符合规则就报错或警告。\n\n**安装与初始化：**\n```bash\nnpm init @eslint/config\n# 按提示选择：Vue、TypeScript、ESM 等\n# 会在项目根目录生成 eslint.config.js\n```\n\n**常见规则举例：**\n```js\n// eslint.config.js\nexport default [\n  {\n    rules: {\n      \'no-unused-vars\': \'warn\',     // 定义了但没用的变量 → 警告\n      \'no-console\': \'warn\',          // console.log → 警告\n      \'no-undef\': \'error\',           // 未定义的变量 → 报错\n      \'eqeqeq\': \'error\',             // 必须用 === 而不是 ==\n    }\n  }\n]\n```\n\n**VSCode 集成：** 安装 ESLint 插件后，错误会在编辑器中直接标红下划线，保存时自动修复部分问题。\n\n> 🎯 ESLint 就像排练时的指挥——等一下，第二小提琴，你这里有个音不准（变量未定义），重来。',
+      },
+      {
+        type: 'explain',
+        title: 'Prettier — 代码格式化',
+        content: 'Prettier 是一个有强迫症的代码格式化工具——它不检查 bug，只负责让代码**看起来**一致。\n\n**安装：**\n```bash\nnpm install -D prettier\n```\n\n**配置文件 .prettierrc：**\n```json\n{\n  "semi": false,\n  "singleQuote": true,\n  "tabWidth": 2,\n  "trailingComma": "es5",\n  "printWidth": 100\n}\n```\n\n保存文件时，Prettier 自动把：\n```js\n// 格式化前\nconst x=1;const y=2;function foo(a,b){return a+b}\n\n// 格式化后\nconst x = 1\nconst y = 2\nfunction foo(a, b) {\n  return a + b\n}\n```\n\n**让 ESLint 和 Prettier 和平共处：**\n安装 eslint-config-prettier，关闭 ESLint 中与 Prettier 冲突的规则。\n\n> 📐 Prettier 就像乐谱排版师——音符是对的（ESLint 验证过了），但间距、对齐、换行要美观统一。',
+      },
+      {
+        type: 'example',
+        title: '看例子：在 Vite + Vue 项目中配置',
+        content: '在你的 music-collection-vue 项目中：\n\n```bash\n# 安装依赖\nnpm install -D eslint prettier eslint-plugin-vue eslint-config-prettier\n\n# ESLint 配置（eslint.config.js）\nimport pluginVue from \'eslint-plugin-vue\'\nexport default [\n  ...pluginVue.configs[\'flat/recommended\'],\n  {\n    rules: {\n      \'vue/multi-word-component-names\': \'off\',\n      \'no-console\': \'warn\'\n    }\n  }\n]\n\n# VS Code 设置（.vscode/settings.json）\n{\n  "editor.formatOnSave": true,\n  "editor.defaultFormatter": "esbenp.prettier-vscode",\n  "editor.codeActionsOnSave": {\n    "source.fixAll.eslint": true\n  }\n}\n```\n\n配置完成后，每次保存文件：Prettier 先格式化，ESLint 再检查和自动修复。你的代码会像印刷出来的乐谱一样整齐。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '在你的 music-collection-vue 项目中：\n\n1. 安装 ESLint + Prettier + eslint-config-prettier\n2. 创建 eslint.config.js 和 .prettierrc 配置文件\n3. 在 VS Code 中安装 ESLint 和 Prettier 插件\n4. 故意写一些不规范的代码——不统一的引号、缺少空格、定义未使用的变量\n5. 保存文件，观察自动格式化效果\n6. 运行 npx eslint . 在终端中查看所有警告和错误',
+      },
+    ],
+    starterCode: {
+      html: '',
+      css: '',
+      js: '',
+    },
+  },
+
+  // ===== 7.8 tooling-git-init =====
+    {
     id: "tooling-git-init",
     chapterId: "engineering-tooling",
     trackId: "engineering",
-    order: 6,
+    order: 8,
     title: 'Git — 你的"乐谱版本管理器"',
     musicAnalogy:
       '作曲家写一部作品，通常会经历多个版本：草稿、修改稿、定稿、修订版……每一个版本都可能需要回头查看。**Git 就是这个"版本档案柜"**——你每完成一步就"存档"一次，随时可以回到任何历史版本，也随时知道"谁在什么时候改了什么"。',
@@ -3151,12 +3324,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 7.7 tooling-github =====
-  {
+  // ===== 7.9 tooling-github =====
+    {
     id: "tooling-github",
     chapterId: "engineering-tooling",
     trackId: "engineering",
-    order: 7,
+    order: 9,
     title: 'GitHub — 把你的作品"发布到音乐厅"',
     musicAnalogy:
       '到目前为止，你的乐谱（代码）只存在于自己的电脑上。**GitHub 就像是把乐谱出版发行**——你的作品有了一个公开的地址，别人可以看到、使用、甚至贡献。它也是程序员界的"LinkedIn"——你的 GitHub 主页就是你的技术名片。',
@@ -3192,12 +3365,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 7.8 tooling-build-deploy =====
-  {
+  // ===== 7.10 tooling-build-deploy =====
+    {
     id: "tooling-build-deploy",
     chapterId: "engineering-tooling",
     trackId: "engineering",
-    order: 8,
+    order: 10,
     title: "构建与部署 — 让全世界看到你的作品",
     musicAnalogy:
       "排练结束（开发完成），最后一步是：**正式演出**（部署）。你把排练时的草稿整理成精美的节目单（构建），然后打开音乐厅的大门，让观众进场（部署到服务器）。从此你的作品有了一个公开的网址，任何人都可以访问。",
@@ -3233,12 +3406,56 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
+  // ===== 7.11 tooling-env =====
+  {
+    id: 'tooling-env',
+    chapterId: 'engineering-tooling',
+    trackId: "engineering",
+    order: 11,
+    title: '环境变量 — 给不同的舞台不同的配置',
+    musicAnalogy: '同一首曲子，在排练室演奏和在金色大厅演奏，需要的配置不同——排练室用小型 PA 系统，音乐厅有专业的声学设计和混音台。开发环境和生产环境也是两个不同的舞台：开发时 API 指向本地服务器，上线后指向真实 API。环境变量让你在每个舞台上自动切换正确的配置，不需要手动改代码。',
+    listenTo: '马勒《第八交响曲》千人交响曲 — 这部作品需要极大规模的编制，每次演出前必须根据演出场地的声学特性（就像环境变量）调整乐队的摆位和动态平衡。同一个总谱，不同的场地需要不同的配置。',
+    mode: 'local',
+    sections: [
+      {
+        type: 'explain',
+        title: '为什么需要环境变量？',
+        content: '在真实项目中，你经常会遇到不同环境用不同值的场景：\n\n| 场景 | 开发环境 | 生产环境 |\n|------|----------|----------|\n| API 地址 | http://localhost:3000/api | https://api.myapp.com |\n| 调试模式 | 开启（显示 log、调试面板） | 关闭 |\n| 分析工具 | 禁用 | 启用 |\n\n如果没有环境变量，你需要**每次部署前手动改代码**——繁琐且容易出错。环境变量让这些值外置到配置文件中，根据运行环境自动切换。',
+      },
+      {
+        type: 'explain',
+        title: '.env 文件 — 你的后台配置单',
+        content: 'Vite 项目默认支持 .env 文件（通过 dotenv）：\n\n```bash\n# .env.development  — 开发时自动加载\nVITE_API_BASE=http://localhost:3000/api\nVITE_DEBUG=true\nVITE_APP_TITLE=音乐收藏（开发版）\n\n# .env.production  — 构建时自动加载\nVITE_API_BASE=https://api.myapp.com\nVITE_DEBUG=false\nVITE_APP_TITLE=音乐收藏\n```\n\n**命名规则：** 只有以 VITE_ 开头的变量才会暴露给客户端代码。这是 Vite 的安全措施——防止意外的敏感信息泄露。\n\n**注意：** .env 文件**不应该提交到 Git**（把 .env 加入 .gitignore）。敏感信息如 API 密钥永远不要放在前端环境变量中——它们会被打包进 JS 文件，任何人都能看到。',
+      },
+      {
+        type: 'explain',
+        title: '在代码中使用环境变量',
+        content: '在 Vue 组件或 JS 文件中通过 import.meta.env 访问：\n\n```js\n// 在任何 .vue 或 .js 文件中\nconst API_BASE = import.meta.env.VITE_API_BASE\nconst isDebug = import.meta.env.VITE_DEBUG === \'true\'\n\n// 使用\nasync function searchMusic(keyword) {\n  const res = await fetch(\n    import.meta.env.VITE_API_BASE + \'/search?q=\' + keyword\n  )\n  return res.json()\n}\n\n// 条件逻辑\nif (import.meta.env.DEV) {\n  console.log(\'当前是开发环境\')\n}\n\nif (import.meta.env.PROD) {\n  // 生产环境特有的逻辑\n}\n```\n\n**Vite 内置的环境变量：**\n- import.meta.env.MODE — 当前模式（development / production）\n- import.meta.env.DEV — 是否开发模式（boolean）\n- import.meta.env.PROD — 是否生产模式（boolean）\n- import.meta.env.BASE_URL — 部署的基础路径（来自 vite.config.js 的 base）\n\n> 🎭 环境变量就像演出前的后台配置——灯光师根据场地调试灯光，音响师根据厅堂调 EQ。开发和生产是两种完全不同的演出，需要不同的配置。',
+      },
+      {
+        type: 'example',
+        title: '看例子',
+        content: '以下是一个使用环境变量的实际例子：\n\n```js\n// src/config.js — 集中管理所有环境配置\nexport const config = {\n  apiBase: import.meta.env.VITE_API_BASE || \'http://localhost:3000/api\',\n  debug: import.meta.env.VITE_DEBUG === \'true\',\n  appTitle: import.meta.env.VITE_APP_TITLE || \'音乐收藏\',\n  enableAnalytics: import.meta.env.PROD  // 只在生产环境开启统计\n}\n\n// 在组件中使用\nimport { config } from \'./config.js\'\n\nconsole.log(\'当前环境：\', import.meta.env.MODE)\nconsole.log(\'API 地址：\', config.apiBase)\nconsole.log(\'调试模式：\', config.debug ? \'开启\' : \'关闭\')\n```\n\n开发时运行 npm run dev，自动读取 .env.development。\n构建时运行 npm run build，自动读取 .env.production。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '在你的 music-collection-vue 项目中：\n\n1. 创建 .env.development 和 .env.production 文件\n2. 在两个文件中定义不同的 VITE_API_BASE 和 VITE_APP_TITLE\n3. 在项目中用 import.meta.env 读取这些变量，并在页面标题或 console.log 中显示\n4. 分别运行 npm run dev 和 npm run build && npm run preview，观察变量值的变化\n5. 确认 .gitignore 中包含 .env（避免提交到 Git）\n6. 挑战：在 vite.config.js 中用 define 选项定义自定义的全局常量',
+      },
+    ],
+    starterCode: {
+      html: '',
+      css: '',
+      js: '',
+    },
+  },
+
   // ================================================================
   // 第八章：Vue 实战
   // ================================================================
 
   // ===== 8.1 tooling-sfc =====
-  {
+    {
     id: "tooling-sfc",
     trackId: "engineering",
     chapterId: "vue-framework",
@@ -3278,12 +3495,108 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.2 tooling-ref-reactive =====
+  // ===== 8.2 vue-directives =====
   {
+    id: 'vue-directives',
+    chapterId: 'vue-framework',
+    trackId: "engineering",
+    order: 2,
+    title: 'Vue 指令 — 模板的演奏记号',
+    musicAnalogy: '乐谱上有各种演奏记号——f 代表强奏、p 代表弱奏、tr 是颤音、反复记号指定哪些小节要重复。Vue 指令就是模板中的演奏记号：v-if 是此处休止（这个声部不奏）、v-show 是加弱音器（还在但静默）、v-for 是反复记号（同一乐句重复多次）、v-bind 是连音线（把数据和 DOM 属性连起来）、v-html 是即兴华彩段（直接插入内容，但需谨慎）。',
+    listenTo: '帕格尼尼《24 首随想曲》— 每一首都是对一种特定演奏技巧（泛音、双音、拨弦、跳弓）的极致发挥。Vue 的每个指令就像一种特定的演奏技巧——各司其职，组合起来就是一场华丽的演出。',
+    sections: [
+      {
+        type: 'explain',
+        title: 'v-bind — 动态绑定属性',
+        content: '`v-bind` 把 JS 表达式的值绑定到 HTML 属性上。简写是 `:`：\n\n```html\n<!-- 完整写法 -->\n<img v-bind:src="imageUrl">\n<a v-bind:href="\'/user/\' + userId">用户</a>\n<div v-bind:class="{ active: isActive }">...</div>\n\n<!-- 简写（最常用） -->\n<img :src="imageUrl">\n<a :href="\'/user/\' + userId">用户</a>\n<div :class="{ active: isActive }">...</div>\n<div :style="{ color: textColor, fontSize: size + \'px\' }">...</div>\n```\n\n**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上\n\n```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src="imageUrl" :alt="imageDesc">\n<button :disabled="isLoading">提交</button>\n```\n\n就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。',
+      },
+      {
+        type: 'explain',
+        title: 'v-if / v-show — 条件渲染',
+        content: '**v-if / v-else-if / v-else：** 根据条件决定是否**创建/销毁** DOM 元素\n\n```html\n<div v-if="status === \'loading\'">加载中...</div>\n<div v-else-if="status === \'error\'">出错了！</div>\n<div v-else-if="status === \'empty\'">没有数据</div>\n<div v-else>\n  <p>{{ result }}</p>\n</div>\n```\n\n**v-show：** 根据条件决定是否**显示**元素（元素始终存在，只是切换 display:none）\n\n```html\n<div v-show="isVisible">这段文字可以快速切换显示/隐藏</div>\n```\n\n**v-if vs v-show 的选择：**\n\n| | v-if | v-show |\n|------|------|--------|\n| 机制 | 移除/创建 DOM | display: none 切换 |\n| 初始渲染 | 条件为 false 时不渲染 | 始终渲染 |\n| 切换开销 | 大（销毁+重建） | 小（只改 CSS） |\n| 适用场景 | 条件很少改变 | 频繁切换 |\n\n> 🎼 v-if 是这个乐手这场不参加（人根本不在舞台上），v-show 是这个乐手在场但保持沉默（人在但不出声）。',
+      },
+      {
+        type: 'explain',
+        title: 'v-for — 列表渲染',
+        content: '`v-for` 遍历数组或对象，为每个元素渲染一段模板：\n\n```html\n<!-- 遍历数组：item in items -->\n<ul>\n  <li v-for="item in items" :key="item.id">\n    {{ item.name }} — {{ item.price }} 元\n  </li>\n</ul>\n\n<!-- 带索引： (item, index) in items -->\n<li v-for="(item, index) in items" :key="item.id">\n  {{ index + 1 }}. {{ item.name }}\n</li>\n\n<!-- 遍历对象： (value, key, index) in obj -->\n<li v-for="(value, key) in composer" :key="key">\n  {{ key }}: {{ value }}\n</li>\n\n<!-- 遍历数字范围 -->\n<span v-for="n in 5" :key="n">{{ n }}</span>\n```\n\n**`:key` 为什么重要：**\n\nkey 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会导致：\n- 列表更新时出现错误的 DOM 复用\n- 组件状态错乱\n- 过渡动画失效\n\n始终给 v-for 一个唯一且稳定的 key（通常是 id，**永远不要用 index 作为 key** ——除非列表是静态的且不会重新排序）。',
+      },
+      {
+        type: 'explain',
+        title: 'v-html / v-text 与其他常用指令',
+        content: '**v-html：** 把字符串当作 HTML 渲染（⚠️ 有 XSS 安全风险！）\n\n```html\n<div v-html="rawHtml"></div>\n<!-- 仅在信任内容来源时使用！用户输入绝不能直接用 v-html -->\n```\n\n**v-text：** 等价于 {{ }}，设置元素的文本内容\n\n```html\n<span v-text="message"></span>\n<!-- 等价于 <span>{{ message }}</span> -->\n```\n\n**v-once：** 只渲染一次，后续不再响应数据变化（静态内容优化）\n\n```html\n<div v-once>这个标题永远不会变：{{ title }}</div>\n```\n\n**v-pre：** 跳过这个元素及其子元素的编译（显示原始 Mustache 语法）\n\n```html\n<pre v-pre>{{ 这里不会编译，直接显示 {{ message }} 原文 }}</pre>\n```',
+      },
+      {
+        type: 'example',
+        title: '看例子：一个完整的指令演示',
+        content: '下面的代码综合展示了所有主要指令。切换到预览区，实际操作感受：\n\n```html\n<!-- 条件渲染：切换 tab -->\n<div :class="[\'tab\', { active: activeTab === \'all\' }]" @click="activeTab = \'all\'">全部</div>\n\n<!-- 列表渲染：遍历曲目 -->\n<div v-for="track in filteredTracks" :key="track.id" class="track-card">\n  <img :src="track.cover" :alt="track.title">\n  <h3>{{ track.title }}</h3>\n  <p v-if="track.artist">{{ track.artist }}</p>\n  <span :class="[\'tag\', \'tag-\' + track.genre]">{{ track.genre }}</span>\n</div>\n\n<!-- v-show 切换 -->\n<div v-show="showPlayer" class="player">播放器控件</div>\n```\n\n注意：:class 可以接收对象（{ active: isActive }）或数组（[\'base\', dynamicClass]）。:style 同样支持对象语法。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '请在编辑器中：\n\n1. 修改 filterButtons 数组——添加一个印象派筛选选项\n2. 在 tracks 数组中添加两首你自己喜欢的曲目\n3. 用 v-if 添加暂无匹配曲目的空状态提示\n4. 把 v-show 切换按钮改成正在播放的动态显示\n5. 挑战：用 v-for 的索引给每张卡片前加上序号（1. 2. 3. ...），观察为每个 `<li>` 添加唯一的 :key',
+      },
+    ],
+    starterCode: {
+      html: '<h1>🎵 我的音乐收藏</h1>\n\n<div class="filter-bar">\n  <button\n    v-for="btn in filterButtons"\n    :key="btn.key"\n    :class="[\'filter-btn\', { active: activeFilter === btn.key }]"\n    @click="activeFilter = btn.key"\n  >\n    {{ btn.label }}\n  </button>\n</div>\n\n<div v-if="filteredTracks.length === 0" class="empty-state">\n  <p>😔 暂无匹配曲目</p>\n</div>\n\n<div v-else class="track-grid">\n  <div\n    v-for="track in filteredTracks"\n    :key="track.id"\n    class="track-card"\n  >\n    <img :src="track.cover" :alt="track.title">\n    <div class="track-info">\n      <h3>{{ track.title }}</h3>\n      <p>{{ track.composer }}</p>\n      <span :class="[\'tag\', \'tag-\' + track.genre]">{{ track.genre }}</span>\n    </div>\n  </div>\n</div>\n\n<div class="toggle-bar">\n  <button @click="showPlayer = !showPlayer" class="toggle-btn">\n    {{ showPlayer ? \'🙈 隐藏\' : \'🎧 显示\' }}播放器\n  </button>\n  <span v-show="showPlayer" class="now-playing">\n    ▶ 正在播放：{{ currentTrack }}\n  </span>\n</div>',
+      css: 'h1 { text-align: center; color: #8B2E2E; margin-bottom: 20px; }\n.filter-bar { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }\n.filter-btn { padding: 6px 16px; border: 1px solid #D4C5A9; border-radius: 20px; background: #fff; color: #6B5A4E; font-size: 13px; cursor: pointer; transition: all 0.2s; }\n.filter-btn.active { background: #8B2E2E; color: #fff; border-color: #8B2E2E; }\n.filter-btn:hover:not(.active) { border-color: #8B2E2E; }\n.empty-state { text-align: center; color: #9B8579; padding: 40px; }\n.track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }\n.track-card { display: flex; gap: 14px; background: #FFFDF7; border: 1px solid #E8DDCC; border-radius: 12px; padding: 16px; transition: all 0.2s; }\n.track-card:hover { box-shadow: 0 4px 16px rgba(61, 43, 31, 0.1); transform: translateY(-2px); }\n.track-card img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }\n.track-info { flex: 1; }\n.track-info h3 { margin: 0 0 4px 0; color: #3D2B1F; font-size: 16px; }\n.track-info p { margin: 0 0 8px 0; color: #6B5A4E; font-size: 13px; }\n.tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }\n.tag-baroque { background: #F5EEE0; color: #8B5A2B; }\n.tag-classical { background: #E8F0F5; color: #2B5A8B; }\n.tag-romantic { background: #FCE8EC; color: #8B2B4E; }\n.toggle-bar { display: flex; align-items: center; gap: 16px; justify-content: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid #E8DDCC; }\n.toggle-btn { padding: 8px 20px; background: #8B2E2E; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.2s; }\n.toggle-btn:hover { background: #C94545; }\n.now-playing { color: #C9A96E; font-size: 14px; font-weight: 500; animation: fadeIn 0.3s ease; }\n@keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }',
+      js: 'import { ref, computed } from \'https://unpkg.com/vue@3/dist/vue.esm-browser.js\'\n\nconst app = {\n  setup() {\n    const activeFilter = ref(\'all\')\n    const showPlayer = ref(false)\n    const currentTrack = ref(\'莫扎特 - g小调第40号交响曲\')\n\n    const filterButtons = [\n      { key: \'all\', label: \'🪄 全部\' },\n      { key: \'baroque\', label: \'🎻 巴洛克\' },\n      { key: \'classical\', label: \'🎹 古典\' },\n      { key: \'romantic\', label: \'🎭 浪漫\' }\n    ]\n\n    const tracks = [\n      { id: 1, title: \'G大调第一无伴奏大提琴组曲\', composer: \'巴赫\', genre: \'baroque\', cover: \'https://is1-ssl.mzstatic.com/image/thumb/Music/v4/6c/6c/6c/6c6c6c6c-6c6c-6c6c-6c6c-6c6c6c6c6c6c/source/100x100bb.jpg\' },\n      { id: 2, title: \'g小调第40号交响曲\', composer: \'莫扎特\', genre: \'classical\', cover: \'https://is1-ssl.mzstatic.com/image/thumb/Music/v4/d1/d1/d1/d1d1d1d1-d1d1-d1d1-d1d1-d1d1d1d1d1d1/source/100x100bb.jpg\' },\n      { id: 3, title: \'E大调练习曲离别\', composer: \'肖邦\', genre: \'romantic\', cover: \'https://is1-ssl.mzstatic.com/image/thumb/Music/v4/e2/e2/e2/e2e2e2e2-e2e2-e2e2-e2e2-e2e2e2e2e2e2/source/100x100bb.jpg\' },\n      { id: 4, title: \'D小调第九交响曲合唱\', composer: \'贝多芬\', genre: \'classical\', cover: \'https://is1-ssl.mzstatic.com/image/thumb/Music/v4/f3/f3/f3/f3f3f3f3-f3f3-f3f3-f3f3-f3f3f3f3f3f3/source/100x100bb.jpg\' }\n    ]\n\n    const filteredTracks = computed(() => {\n      if (activeFilter.value === \'all\') return tracks\n      return tracks.filter(t => t.genre === activeFilter.value)\n    })\n\n    return {\n      activeFilter,\n      showPlayer,\n      currentTrack,\n      filterButtons,\n      tracks,\n      filteredTracks\n    }\n  }\n}\n\nimport { createApp } from \'https://unpkg.com/vue@3/dist/vue.esm-browser.js\'\ncreateApp(app).mount(\'#app\')',
+    },
+  },
+
+  // ===== 8.3 vue-lifecycle =====
+  {
+    id: 'vue-lifecycle',
+    chapterId: 'vue-framework',
+    trackId: "engineering",
+    order: 3,
+    title: 'Vue 生命周期 — 组件的乐章结构',
+    musicAnalogy: '每首乐曲都有固定的结构——序奏呈示主题、展开部发展变化、再现部回归、尾声收束。Vue 组件也有自己的乐章结构（生命周期）：创建（setup）→ 挂载到 DOM（onMounted）→ 数据更新（onUpdated）→ 即将销毁（onBeforeUnmount）→ 已销毁（onUnmounted）。每个阶段都有对应的钩子函数，让你在正确的时间点执行正确的代码。',
+    listenTo: '贝多芬《第五交响曲》全四个乐章 — 第一乐章：命运的动机登场（setup/onMounted），第二乐章：变奏展开（响应式更新），第三乐章：谐谑曲的神秘过渡（onBeforeUnmount），第四乐章：辉煌的凯旋（组件完成使命）。一部交响曲的生命周期，和 Vue 组件的生命周期如出一辙。',
+    sections: [
+      {
+        type: 'explain',
+        title: '什么是生命周期？',
+        content: '每个 Vue 组件从创建到销毁，会经历一系列阶段。Vue 在每个阶段提供了**钩子函数（hooks）**，让你在特定时机执行代码：\n\n```\nsetup() → 创建响应式状态\n  ↓\nonBeforeMount() → 即将挂载（很少用）\n  ↓\nonMounted() → 已挂载到 DOM ✅ 常用\n  ↓\nonBeforeUpdate() → 数据变了，DOM 即将更新\n  ↓\nonUpdated() → DOM 已更新\n  ↓\nonBeforeUnmount() → 组件即将销毁 ✅ 常用\n  ↓\nonUnmounted() → 组件已销毁\n```\n\n**你只需要了解最常用的三个就够了：**\n- onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）\n- onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听）\n- watch / watchEffect — 响应式数据变化时自动执行\n\n> 🎼 就像在奏鸣曲的呈示部结束时要做转调，在再现部开始前要回到原调——生命周期的每个节点都有它特定的音乐任务。',
+      },
+      {
+        type: 'explain',
+        title: 'onMounted — 登台时刻',
+        content: '`onMounted` 是使用最频繁的钩子。在 `<script setup>` 中，**顶层的代码在组件创建时执行**，但此时 DOM 还不存在。任何需要操作 DOM 的代码必须放在 onMounted 中：\n\n```vue\n<script setup>\nimport { ref, onMounted } from \'vue\'\n\nconst inputRef = ref(null)  // template ref\n\n// ❌ 错误：此时 DOM 还没渲染，inputRef.value 是 null\n// inputRef.value.focus()\n\n// ✅ 正确：onMounted 中 DOM 已就绪\nonMounted(() => {\n  inputRef.value?.focus()    // 自动聚焦输入框\n  fetchUserData()            // 发初始请求\n  startTimer()               // 启动定时器\n  window.addEventListener(\'scroll\', handleScroll)  // 绑定全局事件\n})\n</script>\n```\n\n**onMounted 的常见用途：**\n- 获取初始数据（调用 API）\n- 操作 DOM 元素（聚焦、滚动、初始化第三方库）\n- 启动定时器 / 订阅事件\n- 添加全局事件监听（scroll、resize、keydown）',
+      },
+      {
+        type: 'explain',
+        title: 'onBeforeUnmount — 谢幕前的清理',
+        content: '组件销毁前，必须清理你在 onMounted 中创建的东西——否则会导致内存泄露或意外行为：\n\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount } from \'vue\'\n\nlet timer = null\n\nonMounted(() => {\n  timer = setInterval(() => {\n    console.log(\'tick\')\n  }, 1000)\n  window.addEventListener(\'resize\', handleResize)\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)  // 清理定时器——不然组件销毁后还在 tick！\n  window.removeEventListener(\'resize\', handleResize)  // 移除事件监听——不然会内存泄露\n})\n</script>\n```\n\n**清理清单：**\n- clearInterval / clearTimeout — 清除定时器\n- removeEventListener — 移除全局事件监听\n- 取消未完成的 fetch 请求（用 AbortController）\n- 销毁第三方库实例（如图表、地图）\n\n> 🎭 演出结束后的收琴——提琴手松弓毛、管乐手清理乐器、钢琴家合上琴盖。不清理的话，乐器会受损（内存泄露），下次演出也会出问题。',
+      },
+      {
+        type: 'explain',
+        title: 'watch 与 watchEffect — 自动跟进的伴奏',
+        content: '虽然 watch 不是严格的生命周期钩子，但它和生命周期密切相关——它监听数据变化并在正确的时机执行。\n\n**watch：** 明确指定要监听的数据源\n\n```vue\n<script setup>\nimport { ref, watch } from \'vue\'\n\nconst keyword = ref(\'\')\nconst results = ref([])\n\n// 监听 keyword 变化，自动搜索\nwatch(keyword, async (newVal, oldVal) => {\n  console.log(\'搜索词从\', oldVal, \'变为\', newVal)\n  if (newVal.trim()) {\n    results.value = await searchAPI(newVal)\n  }\n})\n\n// 监听多个数据源\nwatch([keyword, category], ([newKw, newCat]) => {\n  // keyword 或 category 任一变化都会触发\n})\n\n// 深度监听对象\nwatch(user, (newUser) => {\n  console.log(\'用户信息变化了\', newUser)\n}, { deep: true })\n</script>\n```\n\n**watchEffect：** 自动追踪内部用到的响应式数据，任意一个变化就重新执行\n\n```js\nwatchEffect(() => {\n  console.log(keyword.value, category.value)\n  document.title = keyword.value || \'音乐收藏\'\n})\n```\n\n**watch vs watchEffect：**\n- watch — 明确知道要监听什么，可以获取旧值\n- watchEffect — 不需要指定依赖，自动追踪，更简洁',
+      },
+      {
+        type: 'example',
+        title: '看例子：生命周期实战',
+        content: '下面的代码是一个时钟组件，完整展示了生命周期钩子的使用：\n\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount, watch } from \'vue\'\n\nconst time = ref(new Date().toLocaleTimeString())\nconst isRunning = ref(true)\nlet timer = null\n\nfunction tick() {\n  time.value = new Date().toLocaleTimeString()\n}\n\nfunction startClock() {\n  isRunning.value = true\n  timer = setInterval(tick, 1000)\n}\n\nfunction stopClock() {\n  isRunning.value = false\n  clearInterval(timer)\n  timer = null\n}\n\nonMounted(() => {\n  startClock()\n  console.log(\'🕐 时钟组件已挂载\')\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)\n  console.log(\'🕐 时钟组件已卸载，定时器已清理\')\n})\n\nwatch(isRunning, (running) => {\n  console.log(\'时钟状态：\', running ? \'运行中\' : \'已暂停\')\n})\n</script>\n```\n\n注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。',
+      },
+      {
+        type: 'task',
+        title: '动手试试 ✨',
+        content: '请在编辑器中：\n\n1. 观察时钟组件——打开/关闭它，看控制台的生命周期日志\n2. 修改 onMounted 中的 startClock——让时钟初始显示为 1.5 倍速\n3. 用 watch 监听 time 的变化，在整分钟时打印 🎵\n4. 添加一个计数器（ref），在 onMounted 中启动自增，onBeforeUnmount 中清除\n5. 挑战：用 watchEffect 替代 watch，观察两者的区别',
+      },
+    ],
+    starterCode: {
+      html: '<h1>⏱ 生命周期演示</h1>\n\n<div class="controls">\n  <button @click="toggleClock" :class="[\'btn\', clockVisible ? \'btn-stop\' : \'btn-start\']">\n    {{ clockVisible ? \'⏹ 关闭时钟\' : \'▶ 打开时钟\' }}\n  </button>\n</div>\n\n<div v-if="clockVisible" class="clock-panel">\n  <div class="clock-face">\n    <span class="clock-time">{{ time }}</span>\n    <span class="clock-status">{{ isRunning ? \'🟢 运行中\' : \'🔴 已暂停\' }}</span>\n  </div>\n  <div class="clock-actions">\n    <button @click="startClock" :disabled="isRunning" class="action-btn">▶ 启动</button>\n    <button @click="stopClock" :disabled="!isRunning" class="action-btn">⏸ 暂停</button>\n  </div>\n</div>\n\n<div v-else class="placeholder">\n  <p>时钟组件已销毁</p>\n  <p class="sub">点击上方按钮重新创建</p>\n</div>\n\n<div class="log-panel">\n  <h3>📋 生命周期日志</h3>\n  <div class="log-list">\n    <div v-for="(log, i) in logs" :key="i" class="log-item">\n      <span class="log-time">{{ log.time }}</span>\n      <span class="log-msg">{{ log.msg }}</span>\n    </div>\n    <div v-if="logs.length === 0" class="log-empty">等待事件...</div>\n  </div>\n</div>',
+      css: 'h1 { text-align: center; color: #8B2E2E; margin-bottom: 20px; }\n.controls { text-align: center; margin-bottom: 24px; }\n.btn { padding: 10px 28px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: all 0.2s; color: #fff; }\n.btn-start { background: #2E7D32; }\n.btn-start:hover { background: #388E3C; }\n.btn-stop { background: #C94545; }\n.btn-stop:hover { background: #D32F2F; }\n.clock-panel { max-width: 360px; margin: 0 auto 24px; background: #FFFAF2; border: 2px solid #D4C5A9; border-radius: 14px; padding: 32px; text-align: center; }\n.clock-face { margin-bottom: 20px; }\n.clock-time { display: block; font-size: 48px; font-family: \'Fira Code\', monospace; color: #3D2B1F; margin-bottom: 8px; }\n.clock-status { font-size: 14px; color: #6B5A4E; }\n.clock-actions { display: flex; gap: 10px; justify-content: center; }\n.action-btn { padding: 6px 20px; background: #8B2E2E; color: #fff; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.2s; }\n.action-btn:hover:not(:disabled) { background: #C94545; }\n.action-btn:disabled { opacity: 0.4; cursor: not-allowed; }\n.placeholder { text-align: center; padding: 40px; color: #9B8579; }\n.placeholder .sub { font-size: 13px; color: #CCC5B5; }\n.log-panel { max-width: 480px; margin: 0 auto; background: #1E1E1E; border-radius: 10px; padding: 16px; }\n.log-panel h3 { color: #D4C5A9; font-size: 14px; margin: 0 0 10px 0; }\n.log-list { max-height: 180px; overflow-y: auto; }\n.log-item { font-family: \'Fira Code\', monospace; font-size: 12px; padding: 4px 0; border-bottom: 1px solid #333; display: flex; gap: 12px; }\n.log-time { color: #6B5A4E; flex-shrink: 0; }\n.log-msg { color: #D4C5A9; }\n.log-empty { color: #555; font-size: 12px; text-align: center; padding: 12px; }',
+      js: 'import { ref, watch, onMounted, onBeforeUnmount } from \'https://unpkg.com/vue@3/dist/vue.esm-browser.js\'\n\nconst app = {\n  setup() {\n    const clockVisible = ref(true)\n    const time = ref(new Date().toLocaleTimeString())\n    const isRunning = ref(true)\n    const logs = ref([])\n    let timer = null\n\n    function addLog(msg) {\n      const now = new Date().toLocaleTimeString()\n      logs.value.unshift({ time: now, msg })\n      if (logs.value.length > 20) logs.value.pop()\n      console.log(msg)\n    }\n\n    function tick() {\n      time.value = new Date().toLocaleTimeString()\n    }\n\n    function startClock() {\n      isRunning.value = true\n      timer = setInterval(tick, 1000)\n      addLog(\'▶ 时钟已启动\')\n    }\n\n    function stopClock() {\n      isRunning.value = false\n      clearInterval(timer)\n      timer = null\n      addLog(\'⏸ 时钟已暂停\')\n    }\n\n    function toggleClock() {\n      clockVisible.value = !clockVisible.value\n    }\n\n    onMounted(() => {\n      startClock()\n      addLog(\'✅ onMounted: 组件已挂载，时钟启动\')\n    })\n\n    onBeforeUnmount(() => {\n      clearInterval(timer)\n      addLog(\'❌ onBeforeUnmount: 组件即将销毁，定时器已清理\')\n    })\n\n    watch(isRunning, (running) => {\n      addLog(running ? \'🟢 状态变更: 运行中\' : \'🔴 状态变更: 已暂停\')\n    })\n\n    watch(clockVisible, (visible) => {\n      if (!visible) {\n        addLog(\'🔄 时钟组件被移除（v-if=false 会触发销毁）\')\n      } else {\n        addLog(\'🔄 时钟组件被重新创建（v-if=true 会重新挂载）\')\n      }\n    })\n\n    return {\n      clockVisible,\n      time,\n      isRunning,\n      logs,\n      startClock,\n      stopClock,\n      toggleClock\n    }\n  }\n}\n\nimport { createApp } from \'https://unpkg.com/vue@3/dist/vue.esm-browser.js\'\ncreateApp(app).mount(\'#app\')',
+    },
+  },
+
+  // ===== 8.4 tooling-ref-reactive =====
+    {
     id: "tooling-ref-reactive",
     trackId: "engineering",
     chapterId: "vue-framework",
-    order: 2,
+    order: 4,
     title: "响应式数据 — ref 与 computed 的真实写法",
     musicAnalogy:
       "在乐理篇和合奏篇，你每次修改数据后都要手动调用 `render()` 更新页面——就像每次排练后手动重新整理乐谱。Vue 的 `ref` 和 `computed` 让这一切自动化：数据就像被施了魔法，你改一个值，所有用到它的地方自动更新。**你只需要关注数据本身，不用管 DOM。**",
@@ -3319,12 +3632,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.3 tooling-props-emits =====
-  {
+  // ===== 8.5 tooling-props-emits =====
+    {
     id: "tooling-props-emits",
     trackId: "engineering",
     chapterId: "vue-framework",
-    order: 3,
+    order: 5,
     title: "组件通信 — Props 向下，Emits 向上",
     musicAnalogy:
       '在乐团中，**指挥把总谱发给各声部**（Props，父→子），而**各声部首席向指挥反馈准备就绪**（Emits，子→父）。数据总是向下流动，事件总是向上传递——这个"单向数据流"原则让复杂的应用变得可预测。',
@@ -3360,12 +3673,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.4 vue-philosophy =====
-  {
+  // ===== 8.6 vue-philosophy =====
+    {
     id: "vue-philosophy",
     chapterId: "vue-framework",
     trackId: "engineering",
-    order: 4,
+    order: 6,
     title: 'Vue 的思维方式 — 从"操作 DOM"到"声明结果"',
     musicAnalogy:
       '在此之前，你写 JS 操作 DOM 就像逐音给乐手指令："第一小提琴第二拍拉G"。而 Vue 像指挥给总谱——你描述"这里要有弦乐主题"，Vue 负责让弦乐在正确的时间出声。这是从**命令式**到**声明式**的思维转变。',
@@ -3401,12 +3714,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.5 vue-computed-watch =====
-  {
+  // ===== 8.7 vue-computed-watch =====
+    {
     id: "vue-computed-watch",
     chapterId: "vue-framework",
     trackId: "engineering",
-    order: 5,
+    order: 7,
     title: 'computed 与 watch — 自动跟进的"伴奏"',
     musicAnalogy:
       '乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（computed——自动计算，有缓存）；一种是鼓手听到变换后才改变节奏型（watch——观察变化，执行副作用）。两者各有用途，选对工具让你的"演奏"更流畅。',
@@ -3448,12 +3761,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.6 vue-vmodel-deep =====
-  {
+  // ===== 8.8 vue-vmodel-deep =====
+    {
     id: "vue-vmodel-deep",
     chapterId: "vue-framework",
     trackId: "engineering",
-    order: 6,
+    order: 8,
     title: 'v-model 深入 — 双向绑定的"默契"',
     musicAnalogy:
       '在四手联弹中，两位演奏者需要完美默契：一个人弹主旋律，另一个人同时配合，两人互相倾听、即时响应。`v-model` 就是数据和表单之间的"四手联弹"——用户输入，数据更新；数据变化，表单自动显示。',
@@ -3489,12 +3802,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.7 vue-slots =====
-  {
+  // ===== 8.9 vue-slots =====
+    {
     id: "vue-slots",
     chapterId: "vue-framework",
     trackId: "engineering",
-    order: 7,
+    order: 9,
     title: '插槽（Slots）— 组件的"自由声部"',
     musicAnalogy:
       '协奏曲中有华彩乐段（Cadenza）——作曲家留出空白，由独奏者自由发挥。**Slot（插槽）** 就是组件的"华彩乐段"：组件定义框架，使用者在 Slot 中填入自定义内容。这让组件既统一又灵活。',
@@ -3524,12 +3837,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.8 vue-router-intro =====
-  {
+  // ===== 8.10 vue-router-intro =====
+    {
     id: "vue-router-intro",
     chapterId: "vue-framework",
     trackId: "engineering",
-    order: 8,
+    order: 10,
     title: 'Vue Router — 给你的应用"翻页"',
     musicAnalogy:
       '一本乐谱有目录，你可以翻到任何一页。交响乐有四个乐章，听众知道"现在在第几乐章"。单页应用（SPA）的多页面体验就靠 **Vue Router** ——它让 URL 变化时页面切换，就像翻乐谱一样自然。',
@@ -3577,12 +3890,12 @@ debouncedSearch('贝多芬')
     mode: "local",
   },
 
-  // ===== 8.9 tooling-capstone =====
-  {
+  // ===== 8.11 tooling-capstone =====
+    {
     id: "tooling-capstone",
     trackId: "engineering",
     chapterId: "vue-framework",
-    order: 9,
+    order: 11,
     title: "登台篇结业 — 你的第一个工程化作品",
     musicAnalogy:
       "独奏会的时间到了。你已经从认识乐器（乐理篇）、学会合奏（合奏篇）、掌握了演出流程（登台篇）——现在，**在真正的音乐厅里，用专业的方式，演奏你自己的作品。**",
@@ -3617,4 +3930,5 @@ debouncedSearch('贝多芬')
     starterCode: { html: "", css: "", js: "" },
     mode: "local",
   },
+
 ];
