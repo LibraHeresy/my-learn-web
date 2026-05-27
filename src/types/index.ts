@@ -1,3 +1,10 @@
+// 教学内容段落类型
+export interface LessonSection {
+  type: 'explain' | 'task' | 'hint' | 'example'
+  title?: string
+  content: string
+}
+
 // 学习轨道
 export interface Track {
   id: string
@@ -18,28 +25,18 @@ export interface Lesson {
   order: number
   title: string
   musicAnalogy: string
-  /** @deprecated 使用组件化方案后，课程内容移至独立的 .vue 组件中 */
-  sections?: Array<{
-    type: 'explain' | 'task' | 'hint' | 'example'
-    title?: string
-    content: string
-  }>
-  /** @deprecated 预置代码移至 config/starter-codes.ts */
-  starterCode?: { html: string; css: string; js: string }
+  sections: LessonSection[]
+  starterCode: { html: string; css: string; js: string }
   listenTo?: string
-  mode?: LessonMode
+  mode?: LessonMode  // 默认 'sandbox'
 }
 
 // 项目步骤
 export interface ProjectStep {
   title: string
-  /** @deprecated 使用组件化方案后，步骤内容移至独立的 .vue 组件中 */
-  content?: string
-  /** @deprecated 使用组件化方案后，步骤任务移至独立的 .vue 组件中 */
-  task?: string
-  /** @deprecated 使用组件化方案后，步骤提示移至独立的 .vue 组件中 */
+  content: string
+  task: string
   hint?: string
-  /** @deprecated 预置代码移至 config/starter-codes.ts */
   starterCode?: { html: string; css: string; js: string }
 }
 

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, watch, shallowRef, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { projects } from '../data/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { parseInline, parseContent } from '../utils/markdown'
-import { hasProjectComponent, getProjectComponent } from './projects/registry'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
@@ -16,19 +15,6 @@ const router = useRouter()
 
 const projectId = computed(() => route.params.projectId as string)
 const project = computed(() => projects.find(p => p.id === projectId.value))
-
-// 检查该项目是否已有独立组件实现
-const hasComponent = computed(() => project.value ? hasProjectComponent(project.value.id) : false)
-const projectComponent = shallowRef<any>(null)
-
-watch(projectId, (id) => {
-  const p = projects.find(p => p.id === id)
-  if (p && hasProjectComponent(p.id)) {
-    projectComponent.value = getProjectComponent(p.id)
-  } else {
-    projectComponent.value = null
-  }
-}, { immediate: true })
 
 const currentStep = ref(0)
 
@@ -185,27 +171,22 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
         class="panel-content"
         :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
-        <!-- 使用组件渲染 -->
-        <div v-if="hasComponent && projectComponent" class="step-panel">
-          <component :is="projectComponent" :project-meta="project" :current-step="currentStep" />
-        </div>
-
-        <!-- 使用 JSON 渲染（向后兼容） -->
-        <div v-else class="step-panel">
+        <div class="step-panel">
           <div class="step-body">
             <h3 class="step-title">{{ currentStepData.title }}</h3>
-            <div class="step-content" v-html="parseContent(currentStepData.content || '')" />
+            <div class="step-content" v-html="parseContent(currentStepData.content)" />
             <div class="step-task">
               <span class="step-task-label">你的任务</span>
-              <p v-html="parseInline(currentStepData.task || '')" />
+              <p v-html="parseInline(currentStepData.task)" />
             </div>
             <div v-if="currentStepData.hint" class="step-hint-wrap">
               <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
                 💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
               </button>
-              <p v-if="hintExpanded" class="step-hint" v-html="parseInline(currentStepData.hint || '')" />
+              <p v-if="hintExpanded" class="step-hint" v-html="parseInline(currentStepData.hint)" />
             </div>
           </div>
+
         </div>
       </div>
 
