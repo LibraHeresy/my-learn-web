@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, shallowRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { lessons } from '../data/lessons'
+import { starterCodes } from '../config/starter-codes'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
+import { useTermTooltip } from '../composables/useTermTooltip'
+import { hasLessonComponent, getLessonComponent } from './lessons/registry'
 import type { UserCode } from '../types'
-import LessonContent from '../components/LessonContent.vue'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
@@ -19,26 +21,40 @@ const progressStore = useProgressStore()
 const lessonId = computed(() => route.params.lessonId as string)
 const lesson = computed(() => lessons.find(l => l.id === lessonId.value))
 
-// 登台篇课程使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
+// 检查该课程是否已有独立组件实现
+const hasComponent = computed(() => lesson.value ? hasLessonComponent(lesson.value.id) : false)
+const lessonComponent = shallowRef<any>(null)
+
+// 监听 lessonId 变化，加载对应组件
+watch(lessonId, (id) => {
+  const l = lessons.find(l => l.id === id)
+  if (l && hasLessonComponent(l.id)) {
+    lessonComponent.value = getLessonComponent(l.id)
+  } else {
+    lessonComponent.value = null
+  }
+}, { immediate: true })
+
+// 登台篇课程使用 local 模式
 const isLocalMode = computed(() => lesson.value?.mode === 'local')
 
-// 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
+// 从 config 加载预置代码
+function getStarterCode(lessonId: string): UserCode {
+  return starterCodes[lessonId] || { html: '', css: '', js: '' }
+}
+
+// 用户代码
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
 
-// ===== 面板拖动缩放 =====
 const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-panel-widths', 2)
-
-// 手动预览
 const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
 watch(lessonId, (id) => {
   const l = lessons.find(l => l.id === id)
   if (l) {
     progressStore.currentLessonId = id
-    userCode.value = { ...l.starterCode }
-    // 切换课程时预览页面也初始化
+    userCode.value = getStarterCode(id)
     triggerPreview()
-    // 移动端切换课程时滚动到顶端
     if (playerMainRef.value) {
       playerMainRef.value.scrollTop = 0
     }
@@ -82,7 +98,6 @@ function goNext() {
   }
 }
 
-// 跨章节导航标签：检查实际跳转目标是否跨章
 const prevLabel = computed(() => {
   if (prevLesson.value && prevLesson.value.chapterId !== lesson.value?.chapterId) return '上一章'
   return '上一课'
@@ -104,7 +119,7 @@ function toggleSidebar() {
   sidebarOpen.value = !sidebarOpen.value
 }
 
-// 键盘导航：左右方向键切换课程
+// 键盘导航
 function onKeydown(e: KeyboardEvent) {
   if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
   if (e.key === 'ArrowLeft' && !prevDisabled.value) {
@@ -116,8 +131,23 @@ function onKeydown(e: KeyboardEvent) {
   }
 }
 
+import { onMounted, onBeforeUnmount } from 'vue'
 onMounted(() => window.addEventListener('keydown', onKeydown))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+
+// 术语 Tooltip
+const {
+  tooltipVisible,
+  tooltipContent,
+  tooltipStyle,
+  onContentClick,
+  onContentMouseover,
+} = useTermTooltip()
+
+// 课程组件完成事件
+function onComponentComplete() {
+  markComplete()
+}
 </script>
 
 <template>
@@ -133,7 +163,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
       <div v-if="sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
     </Transition>
 
-    <!-- 侧边栏（移动端抽屉） -->
+    <!-- 侧边栏 -->
     <div :class="['sidebar-wrapper', { open: sidebarOpen }]">
       <LessonSidebar
         :current-lesson-id="lessonId"
@@ -148,28 +178,41 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
       ref="playerMainRef"
       :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
     >
-      <!-- 左面板：教学内容 -->
+      <!-- 左面板：课程内容 -->
       <div
         class="panel-content"
         :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
       >
-        <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
+        <!-- 使用组件渲染（新方案） -->
+        <div
+          v-if="hasComponent && lessonComponent"
+          class="content-wrapper"
+          @click="onContentClick"
+          @mouseover="onContentMouseover"
+        >
+          <component
+            :is="lessonComponent"
+            :lesson-meta="lesson"
+            @complete="onComponentComplete"
+          />
+        </div>
+
+        <!-- 使用 JSON 渲染（旧方案，已废弃） -->
+        <div
+          v-else
+          class="content-wrapper"
+        >
+          <p style="padding: var(--sp-4); color: var(--color-text-light);">该课程暂无内容</p>
+        </div>
       </div>
 
       <template v-if="!isLocalMode">
-        <!-- 分隔线 1：内容 ↔ 编辑器 -->
-        <div
-          class="resizer"
-          @mousedown="startDrag('content-editor', $event)"
-        >
+        <!-- 分隔线 -->
+        <div class="resizer" @mousedown="startDrag('content-editor', $event)">
           <div class="resizer-handle" />
         </div>
 
-        <!-- 中面板：代码编辑器 -->
-        <div
-          class="panel-editor"
-          :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
-        >
+        <div class="panel-editor" :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }">
           <CodeEditor
             :model-value="userCode"
             @update:model-value="onCodeChange"
@@ -177,25 +220,16 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
           />
         </div>
 
-        <!-- 分隔线 2：编辑器 ↔ 预览 -->
-        <div
-          class="resizer"
-          @mousedown="startDrag('editor-preview', $event)"
-        >
+        <div class="resizer" @mousedown="startDrag('editor-preview', $event)">
           <div class="resizer-handle" />
         </div>
 
-        <!-- 右面板：实时预览 -->
-        <div
-          class="panel-preview"
-          :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
-        >
+        <div class="panel-preview" :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }">
           <LivePreview :srcdoc="previewSrc" />
         </div>
       </template>
     </div>
 
-    <!-- 未找到课程 -->
     <div v-else class="lesson-not-found">
       <p>课程未找到</p>
       <button @click="router.push('/')">返回首页</button>
@@ -214,6 +248,19 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
       @next="goNext"
       @complete="markComplete"
     />
+
+    <!-- 术语 Tooltip -->
+    <Transition name="tooltip-fade">
+      <div
+        v-if="tooltipVisible"
+        class="term-tooltip"
+        :style="tooltipStyle"
+      >
+        <div class="tooltip-term">🎼 {{ tooltipContent.term }}</div>
+        <p class="tooltip-explanation">{{ tooltipContent.explanation }}</p>
+        <p v-if="tooltipContent.analogy" class="tooltip-analogy">{{ tooltipContent.analogy }}</p>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -224,7 +271,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   height: 100%;
 }
 
-/* ===== 移动端顶栏 ===== */
 .mobile-bar {
   display: none;
   align-items: center;
@@ -251,7 +297,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   white-space: nowrap;
 }
 
-/* ===== 侧边栏 ===== */
 .sidebar-wrapper {
   position: fixed;
   top: var(--header-height);
@@ -274,7 +319,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   z-index: 199;
 }
 
-/* ===== 主面板布局 ===== */
 .player-main {
   flex: 1;
   display: flex;
@@ -285,7 +329,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   pointer-events: none;
 }
 
-/* local 模式：纯教程内容，全宽滚动 */
 .player-main.is-local {
   display: block;
   overflow-y: auto;
@@ -308,7 +351,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ===== 拖动分隔线 ===== */
+.content-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+
 .resizer {
   width: 6px;
   flex-shrink: 0;
@@ -341,7 +388,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   height: 60px;
 }
 
-/* ===== 课程未找到 ===== */
 .lesson-not-found {
   flex: 1;
   display: flex;
@@ -351,7 +397,55 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   gap: var(--sp-4);
 }
 
-/* ===== 响应式 ===== */
+/* ===== 术语 Tooltip ===== */
+.term-tooltip {
+  position: fixed;
+  z-index: 300;
+  max-width: 260px;
+  background: #2D2520;
+  color: #E8DCC8;
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  padding: 14px 16px;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-term {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.tooltip-explanation {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 4px 0;
+  color: #FFFAF2;
+}
+
+.tooltip-analogy {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 6px 0 0 0;
+  color: #C9A96E;
+  font-style: italic;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tooltip-fade-enter-active,
+.tooltip-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.tooltip-fade-enter-from,
+.tooltip-fade-leave-to {
+  opacity: 0;
+}
+
 @media (max-width: 900px) {
   .lesson-player {
     width: 100vw;
