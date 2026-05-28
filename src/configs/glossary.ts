@@ -8,6 +8,10 @@ export interface TermDef {
 
 // 按 key 长度降序排列——长术语优先匹配，避免"标签"先于"标签对"匹配
 export const glossary: [string, TermDef][] = [
+  ['addEventListener("click"', {
+    explanation: '监听元素的点击事件——用户点击时触发',
+    analogy: '就像按下钢琴琴键——按下这个动作触发声音'
+  }],
   ['addEventListener', {
     explanation: '给元素绑定一个事件监听器——当用户触发某个动作（如点击）时，执行指定的函数',
     analogy: '就像指挥给某个乐器声部指定一个进入信号——信号一到，立刻演奏'
@@ -47,10 +51,6 @@ export const glossary: [string, TermDef][] = [
   ['!important', {
     explanation: 'CSS 中的强制优先级标记，盖过所有普通规则的权重计算',
     analogy: '就像独奏段落中所有伴奏都必须给独奏让路——但它破坏了正常的和声层级，应尽量少用'
-  }],
-  ['addEventListener("click"', {
-    explanation: '监听元素的点击事件——用户点击时触发',
-    analogy: '就像按下钢琴琴键——按下这个动作触发声音'
   }],
   ['document.querySelector', {
     explanation: '从整个页面文档中选中一个元素',
@@ -261,10 +261,6 @@ export const glossary: [string, TermDef][] = [
     explanation: '代码中的错误——导致程序不按预期运行',
     analogy: '就像乐谱上印错了一个音符——演奏出来会别扭，需要修正'
   }],
-  ['事件', {
-    explanation: '用户在页面上触发的动作——点击、输入、滚动等',
-    analogy: '就像演奏者听到指挥棒敲击谱架的声音——这是开始演奏的"事件"'
-  }],
   ['占位符', {
     explanation: '一个临时替代的标记，用于在文本处理过程中保护特殊内容不被修改',
     analogy: '就像排练时用数字代替尚未确定的歌词——先占个位置，后面再替换'
@@ -284,6 +280,10 @@ export const glossary: [string, TermDef][] = [
   ['事件对象', {
     explanation: '事件触发时浏览器自动创建的参数，包含事件的详细信息',
     analogy: '就像演出记录单——记录了谁、什么时间、以什么方式演奏'
+  }],
+  ['事件', {
+    explanation: '用户在页面上触发的动作——点击、输入、滚动等',
+    analogy: '就像演奏者听到指挥棒敲击谱架的声音——这是开始演奏的"事件"'
   }],
   ['标签对', {
     explanation: '成对出现的 HTML 标签：开始标签 + 内容 + 结束标签',

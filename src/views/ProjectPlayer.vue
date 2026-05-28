@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { projects } from '../data/projects'
+import { projects } from '../configs/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { useKeyboardNav } from '../composables/useKeyboardNav'

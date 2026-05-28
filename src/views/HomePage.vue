@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
-import { chapters, lessons } from '../data/lessons'
-import { tracks } from '../data/tracks'
-import { projects } from '../data/projects'
+import { chapters, lessons } from '../configs/lessons'
+import { tracks } from '../configs/tracks'
+import { projects } from '../configs/projects'
 import { useProgressStore } from '../stores/progress'
 import { parseInline } from '../utils/markdown'
-import { prologueCards } from '../data/prologues'
+import { prologueCards } from '../configs/prologues'
 
 const router = useRouter()
 const progressStore = useProgressStore()

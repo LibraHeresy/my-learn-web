@@ -2,8 +2,8 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import type { Lesson } from '../types'
 import { parseInline, parseContent } from '../utils/markdown'
-import { glossary } from '../data/glossary'
-import { chapters } from '../data/lessons'
+import { glossary } from '../configs/glossary'
+import { chapters } from '../configs/lessons'
 
 const props = defineProps<{
   lesson: Lesson

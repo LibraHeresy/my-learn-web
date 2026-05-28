@@ -148,3 +148,137 @@ describe('markdown 工具函数', () => {
     expect(result).toContain('const a = 1')
   })
 })
+
+describe('ProjectPlayer 步骤边界逻辑', () => {
+  function getStepNavLabels(
+    currentStep: number,
+    totalSteps: number,
+    hasPrevProject: boolean,
+    hasNextProject: boolean,
+    prevProjectTitle?: string,
+    nextProjectTitle?: string,
+    currentStepTitle?: string,
+    prevStepTitle?: string,
+    nextStepTitle?: string
+  ) {
+    const isFirst = currentStep === 0
+    const isLast = currentStep >= totalSteps - 1
+
+    const prevLabel = (isFirst && hasPrevProject)
+      ? '上个项目'
+      : (!isFirst ? '上一步' : '')
+
+    const nextLabel = (isLast && hasNextProject)
+      ? '下个项目'
+      : (!isLast ? '下一步' : '')
+
+    const prevTitle = (isFirst && hasPrevProject)
+      ? prevProjectTitle ?? ''
+      : (!isFirst ? (prevStepTitle ?? '') : '')
+
+    const nextTitle = (isLast && hasNextProject)
+      ? nextProjectTitle ?? ''
+      : (!isLast ? (nextStepTitle ?? '') : '')
+
+    return { prevLabel, nextLabel, prevTitle, nextTitle }
+  }
+
+  it('第一步：无上一步，有下一步', () => {
+    const r = getStepNavLabels(0, 5, false, false)
+    expect(r.prevLabel).toBe('')
+    expect(r.nextLabel).toBe('下一步')
+  })
+
+  it('中间步骤：上一步 + 下一步', () => {
+    const r = getStepNavLabels(2, 5, false, false)
+    expect(r.prevLabel).toBe('上一步')
+    expect(r.nextLabel).toBe('下一步')
+  })
+
+  it('最后一步：无下一步', () => {
+    const r = getStepNavLabels(4, 5, false, false)
+    expect(r.prevLabel).toBe('上一步')
+    expect(r.nextLabel).toBe('')
+  })
+
+  it('第一步有上个项目：跨项目导航', () => {
+    const r = getStepNavLabels(0, 3, true, false, '上个项目名')
+    expect(r.prevLabel).toBe('上个项目')
+    expect(r.prevTitle).toBe('上个项目名')
+  })
+
+  it('最后一步有下个项目：跨项目导航', () => {
+    const r = getStepNavLabels(2, 3, false, true, undefined, '下个项目名')
+    expect(r.nextLabel).toBe('下个项目')
+    expect(r.nextTitle).toBe('下个项目名')
+  })
+
+  it('步骤内导航显示步骤标题', () => {
+    const r = getStepNavLabels(
+      1, 3, false, false,
+      undefined, undefined, undefined,
+      '第一步标题', '第三步标题'
+    )
+    expect(r.prevTitle).toBe('第一步标题')
+    expect(r.nextTitle).toBe('第三步标题')
+  })
+})
+
+describe('useCodePreview 错误映射', () => {
+  const hintMap: [RegExp, string][] = [
+    [/queryselector/i, 'querySelector'],
+    [/querySelectorAll/i, 'querySelectorAll（大写 S 和 A）'],
+    [/docuemnt|doucment|docment|documnet/i, 'document'],
+    [/addeventlistener/i, 'addEventListener'],
+    [/textcontent/i, 'textContent'],
+    [/innerhtml/i, 'innerHTML'],
+    [/Cannot read propert.* of null/i, '选择器没找到元素'],
+    [/is not a function/i, '函数名拼写'],
+    [/is not defined/i, '还没有声明'],
+    [/SyntaxError/i, '语法错误'],
+    [/Cannot set propert.* of null/i, 'querySelector 找到了目标元素'],
+    [/null is not an object/i, 'querySelector 的返回值'],
+    [/setTimeout|setInterval/i, '定时器函数'],
+  ]
+
+  function matchError(message: string): string {
+    for (const [pattern, hint] of hintMap) {
+      if (pattern.test(message)) return hint
+    }
+    return '仔细检查报错行附近的代码'
+  }
+
+  it('queryselector 大小写错误', () => {
+    expect(matchError('queryselector is not defined')).toContain('querySelector')
+  })
+
+  it('document 拼写错误', () => {
+    expect(matchError('docuemnt.getElementById')).toContain('document')
+  })
+
+  it('null 属性读取错误', () => {
+    expect(matchError("Cannot read properties of null (reading 'classList')")).toContain('选择器没找到元素')
+  })
+
+  it('is not a function', () => {
+    expect(matchError('x.click is not a function')).toContain('函数名拼写')
+  })
+
+  it('is not defined', () => {
+    expect(matchError('myVar is not defined')).toContain('还没有声明')
+  })
+
+  it('SyntaxError', () => {
+    expect(matchError('SyntaxError: Unexpected token }')).toContain('语法错误')
+  })
+
+  it('未知错误返回兜底提示', () => {
+    expect(matchError('some unknown error message')).toContain('仔细检查')
+  })
+
+  it('所有正则均合法', () => {
+    for (const [pattern] of hintMap) {
+      expect(pattern instanceof RegExp).toBe(true)
+    }
+  })
+})

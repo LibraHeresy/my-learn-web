@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { chapters, lessons } from '../data/lessons'
-import { prologueLessons, prologueCards } from '../data/prologues'
-import { projects } from '../data/projects'
-import { tracks } from '../data/tracks'
+import { chapters, lessons } from '../configs/lessons'
+import { prologueLessons, prologueCards } from '../configs/prologues'
+import { projects } from '../configs/projects'
+import { tracks } from '../configs/tracks'
+import { glossary } from '../configs/glossary'
 
 // ============================================================
 // 第一层：数据完整性测试
@@ -119,6 +120,40 @@ describe('数据完整性', () => {
       for (const p of projects) {
         for (const s of p.steps) {
           expect(s.task.trim(), `project "${p.id}" step "${s.title}" task 为空`).not.toBe('')
+        }
+      }
+    })
+  })
+
+  // ---- Glossary ----
+  describe('glossary', () => {
+    it('术语 key 无重复', () => {
+      const keys = glossary.map(([k]) => k)
+      expect(new Set(keys).size).toBe(keys.length)
+    })
+
+    it('所有术语有 explanation', () => {
+      for (const [key, def] of glossary) {
+        expect(def.explanation, `术语 "${key}" 缺少 explanation`).toBeTruthy()
+      }
+    })
+
+    it('长术语排在短术语前面（同前缀检查）', () => {
+      // 只检查共享前缀的术语对——短术语不应排在长术语前面
+      for (let i = 0; i < glossary.length; i++) {
+        const [keyA] = glossary[i]
+        for (let j = i + 1; j < glossary.length; j++) {
+          const [keyB] = glossary[j]
+          if (keyA.startsWith(keyB) && keyA.length > keyB.length) {
+            // keyA 更长且包含 keyB 作为前缀，keyA 应该排在前面 ✓
+            break
+          }
+          if (keyB.startsWith(keyA) && keyB.length > keyA.length) {
+            // keyB 更长但排在后面——这是错误
+            expect.fail(
+              `术语顺序错误: 更长的 "${keyB}" 排在更短的 "${keyA}" 后面，短术语会先匹配导致长术语永不生效`
+            )
+          }
         }
       }
     })

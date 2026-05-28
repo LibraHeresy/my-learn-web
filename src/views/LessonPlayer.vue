@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { lessons } from '../data/lessons'
-import { prologueLessons } from '../data/prologues'
+import { lessons } from '../configs/lessons'
+import { prologueLessons } from '../configs/prologues'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'

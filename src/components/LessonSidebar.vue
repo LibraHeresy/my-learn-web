@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { chapters, lessons } from '../data/lessons'
+import { chapters, lessons } from '../configs/lessons'
 import { useProgressStore } from '../stores/progress'
 
 const props = defineProps<{

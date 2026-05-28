@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import { lessons } from '../data/lessons'
-import { prologueLessons } from '../data/prologues'
-import { projects } from '../data/projects'
+import { lessons } from '../configs/lessons'
+import { prologueLessons } from '../configs/prologues'
+import { projects } from '../configs/projects'
 
 // ============================================================
 // 第三层：页面冒烟测试

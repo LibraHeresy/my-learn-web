@@ -1,4 +1,4 @@
-import { glossary } from '../data/glossary'
+import { glossary } from '../configs/glossary'
 
 // 转义 HTML 特殊字符
 function escapeHtml(text: string): string {
