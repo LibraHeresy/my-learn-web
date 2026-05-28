@@ -134,6 +134,7 @@ function goToProject(projectId: string) {
     <section class="journey-section">
       <h2 class="section-title">🎼 成长路径</h2>
       <hr class="staff-divider">
+      <p class="section-intro">四条路径，四重境界——从识谱到演奏，从独奏到指挥，一步步成为现代前端开发者。</p>
 
       <div class="track-cards">
         <div
@@ -272,6 +273,7 @@ function goToProject(projectId: string) {
     <section id="prologue-section" class="prologue-section">
       <h2 class="section-title">🏮 筚路蓝缕</h2>
       <hr class="staff-divider">
+      <p class="section-intro">从 1989 年日内瓦的一间办公室，到 2026 年的 AI 协作——回望 Web 三十六年筚路蓝缕。</p>
       <div class="prologue-grid">
         <div
           v-for="card in prologueCards"
@@ -586,6 +588,7 @@ function goToProject(projectId: string) {
 }
 
 /* ===== 作品集 ===== */
+.section-intro,
 .projects-intro {
   text-align: center;
   color: var(--color-text-light);
