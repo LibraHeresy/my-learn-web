@@ -29,50 +29,67 @@ function wrapTerms(text: string, placeholders: string[]): string {
   return html
 }
 
-// 轻量内联 Markdown → HTML，不包裹 <p>
-export function parseInline(text: string): string {
-  const placeholders: string[] = []
-
-  // 0. 提取围栏代码块 ```...``` → 占位符
-  let html = text.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+// 提取围栏代码块 → 占位符
+function extractCodeFences(text: string, placeholders: string[], withClass: boolean): string {
+  return text.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
     const idx = placeholders.length
-    const langAttr = lang ? ` class="language-${escapeHtml(lang)}"` : ''
-    placeholders.push(`<pre><code${langAttr}>${escapeHtml(code)}</code></pre>`)
+    const codeContent = withClass ? escapeHtml(code.trimEnd()) : escapeHtml(code)
+    const langAttr = !withClass && lang ? ` class="language-${escapeHtml(lang)}"` : ''
+    const classAttr = withClass ? ' class="code-block"' : ''
+    placeholders.push(`<pre${classAttr}><code${langAttr}>${codeContent}</code></pre>`)
     return `%%P${idx}%%`
   })
+}
 
-  // 0.5. 提取表格
-  html = html.replace(/(?:^|\n)(\|[^\n]+\|\n)(\|[-:| ]+\|\n)((?:\|[^\n]+\|(?:\n|$))+)/g, (match) => {
+// 提取表格 → 占位符
+function extractTables(text: string, placeholders: string[]): string {
+  return text.replace(/(?:^|\n)(\|[^\n]+\|\n)(\|[-:| ]+\|\n)((?:\|[^\n]+\|(?:\n|$))+)/g, (match) => {
     const idx = placeholders.length
     placeholders.push(parseTable(match))
     return `%%P${idx}%%`
   })
+}
 
-  // 1. 提取行内代码 → 占位符
-  html = html.replace(/`([^`]+)`/g, (_, code) => {
+// 共享的内联处理管道：行内代码 → 术语 → 转义 → 还原 → 粗体/斜体
+function applyInlinePipeline(text: string, placeholders: string[]): string {
+  // 1. 提取行内代码
+  let html = text.replace(/`([^`]+)`/g, (_, code) => {
     const idx = placeholders.length
     placeholders.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
     return `%%P${idx}%%`
   })
 
-  // 1.5 包裹术语
+  // 2. 包裹术语
   html = wrapTerms(html, placeholders)
 
-  // 2. 转义 HTML
+  // 3. 转义 HTML
   html = escapeHtml(html)
 
-  // 3. 还原占位符
+  // 4. 还原占位符
   html = restorePlaceholders(html, placeholders)
 
-  // 4. 粗体 / 斜体
+  // 5. 粗体 / 斜体
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
 
-  // 5. 换行处理
+  return html
+}
+
+// 轻量内联 Markdown → HTML，不包裹 <p>
+export function parseInline(text: string): string {
+  const placeholders: string[] = []
+
+  // 提取代码块 + 表格
+  let html = extractCodeFences(text, placeholders, false)
+  html = extractTables(html, placeholders)
+
+  // 内联管道
+  html = applyInlinePipeline(html, placeholders)
+
+  // 换行处理
   html = html.trim()
   html = html.replace(/\n{2,}/g, '\n\n')
   html = html.replace(/\n/g, '<br>')
-  // 合并连续 <br>（最多保留两个）
   html = html.replace(/(<br>\s*){3,}/g, '<br><br>')
   html = html.replace(/^(<br>)+|(<br>)+$/g, '')
 
@@ -91,6 +108,7 @@ function parseTable(text: string): string {
       .map(cell => cell.trim())
   }
 
+  // 表格单元格内联处理（不含术语包裹，避免在表头中触发术语 tooltip）
   function processCell(text: string): string {
     const ph: string[] = []
     let result = text.replace(/`([^`]+)`/g, (_, code) => {
@@ -99,7 +117,7 @@ function parseTable(text: string): string {
       return `%%P${idx}%%`
     })
     result = escapeHtml(result)
-    result = result.replace(/%%P(\d+)%%/g, (_, i) => ph[parseInt(i)])
+    result = restorePlaceholders(result, ph)
     result = result.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     result = result.replace(/\*([^*]+)\*/g, '<em>$1</em>')
     return result
@@ -128,55 +146,24 @@ export function parseContent(text: string): string {
     return `%%H${idx}%%`
   })
 
-  // 1. 提取围栏代码块
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, _lang, code) => {
-    const idx = placeholders.length
-    placeholders.push(`<pre class="code-block"><code>${escapeHtml(code.trimEnd())}</code></pre>`)
-    return `%%P${idx}%%`
-  })
+  // 1. 提取代码块 + 表格
+  html = extractCodeFences(html, placeholders, true)
+  html = extractTables(html, placeholders)
 
-  // 2. 提取表格
-  html = html.replace(/(?:^|\n)(\|[^\n]+\|\n)(\|[-:| ]+\|\n)((?:\|[^\n]+\|(?:\n|$))+)/g, (match) => {
-    const idx = placeholders.length
-    placeholders.push(parseTable(match))
-    return `%%P${idx}%%`
-  })
+  // 2. 内联管道
+  html = applyInlinePipeline(html, placeholders)
 
-  // 3. 提取行内代码
-  html = html.replace(/`([^`]+)`/g, (_, code) => {
-    const idx = placeholders.length
-    placeholders.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
-    return `%%P${idx}%%`
-  })
-
-  // 4. 包裹术语
-  html = wrapTerms(html, placeholders)
-
-  // 5. 转义剩余 HTML
-  html = escapeHtml(html)
-
-  // 6. 还原占位符（不含 [[html]] 块）
-  html = restorePlaceholders(html, placeholders)
-
-  // 7. 粗体 / 斜体
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
-
-  // 8. 段落处理
+  // 3. 段落处理
   html = html.trim()
   html = html.replace(/\n{2,}/g, '</p><p>')
   html = html.replace(/\n/g, '<br>')
-  // 清除段落边界 <br>（如 \n\n\n 产生的 </p><p><br>）
   html = html.replace(/(?:^|<p>)(<br>)+/g, '<p>')
   html = html.replace(/(<br>)+(?:$|<\/p>)/g, '</p>')
-  // 移除孤立的空 <p></p> 标签
   html = html.replace(/<p><\/p>/g, '')
 
-  // 9. 还原 [[html]] 块（在段落处理之后，避免 \n → <br> 破坏内容）
+  // 4. 还原 [[html]] 块
   html = html.replace(/%%H(\d+)%%/g, (_, i) => htmlBlocks[parseInt(i)])
 
-  // 若内容全空则直接返回
   if (!html.trim()) return ''
-
   return `<p>${html}</p>`
 }

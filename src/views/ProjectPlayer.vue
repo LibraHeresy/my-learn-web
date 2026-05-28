@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { projects } from '../data/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
+import { useKeyboardNav } from '../composables/useKeyboardNav'
 import { parseInline, parseContent } from '../utils/markdown'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
+import Resizer from '../components/Resizer.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -126,22 +128,12 @@ function goFooterNext() {
   }
 }
 
-// 键盘导航：左右方向键切换步骤
-function onKeydown(e: KeyboardEvent) {
-  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
-  const canPrev = !isFirstStep.value || !!prevProject.value
-  const canNext = !isLastStep.value || !!nextProject.value
-  if (e.key === 'ArrowLeft' && canPrev) {
-    e.preventDefault()
-    goFooterPrev()
-  } else if (e.key === 'ArrowRight' && canNext) {
-    e.preventDefault()
-    goFooterNext()
-  }
-}
-
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+useKeyboardNav({
+  canPrev: () => !isFirstStep.value || !!prevProject.value,
+  canNext: () => !isLastStep.value || !!nextProject.value,
+  onPrev: goFooterPrev,
+  onNext: goFooterNext,
+})
 
 // ===== 面板拖动缩放 =====
 const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-project-panel-widths', 1)
@@ -204,9 +196,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
       <template v-if="showEditor">
         <!-- 分隔线 1：内容 ↔ 编辑器 -->
-        <div class="resizer" @mousedown="startDrag('content-editor', $event)">
-          <div class="resizer-handle" />
-        </div>
+        <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
 
         <!-- 中面板：代码编辑器 -->
         <div
@@ -222,9 +212,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
         </div>
 
         <!-- 分隔线 2：编辑器 ↔ 预览 -->
-        <div class="resizer" @mousedown="startDrag('editor-preview', $event)">
-          <div class="resizer-handle" />
-        </div>
+        <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
 
         <!-- 右面板：实时预览 -->
         <div
@@ -470,39 +458,6 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
   color: #6B5A4E;
 }
 
-/* ===== 拖动分隔线 ===== */
-.resizer {
-  width: 6px;
-  flex-shrink: 0;
-  cursor: col-resize;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  position: relative;
-  z-index: 10;
-  transition: background 0.15s;
-}
-
-.resizer:hover,
-.player-main.is-dragging .resizer {
-  background: var(--color-gold);
-}
-
-.resizer-handle {
-  width: 2px;
-  height: 40px;
-  border-radius: 1px;
-  background: var(--color-border);
-  transition: background 0.15s, height 0.15s;
-}
-
-.resizer:hover .resizer-handle,
-.player-main.is-dragging .resizer .resizer-handle {
-  background: #fff;
-  height: 60px;
-}
-
 /* ===== 项目未找到 ===== */
 .project-not-found {
   flex: 1;
@@ -554,10 +509,6 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
   .panel-editor {
     min-height: 320px;
-  }
-
-  .resizer {
-    display: none;
   }
 
   .step-dots {

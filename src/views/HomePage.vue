@@ -59,29 +59,15 @@ function toggleTrack(trackId: string) {
 }
 
 function jumpToSection(targetId: string) {
-  expandedTrack.value = null
-  if (targetId === 'hero') {
-    nextTick(() => {
-      document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' })
-    })
-    return
+  const sectionMap: Record<string, string> = {
+    hero: 'hero-section',
+    projects: 'projects-section',
+    prologue: 'prologue-section',
   }
-  if (targetId === 'projects') {
-    nextTick(() => {
-      document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })
-    })
-    return
-  }
-  if (targetId === 'prologue') {
-    nextTick(() => {
-      document.getElementById('prologue-section')?.scrollIntoView({ behavior: 'smooth' })
-    })
-    return
-  }
-  // 轨道卡片：展开 + 滚动
-  expandedTrack.value = targetId
+  const sectionId = sectionMap[targetId] || `track-${targetId}`
+  expandedTrack.value = sectionMap[targetId] ? null : targetId
   nextTick(() => {
-    document.getElementById(`track-${targetId}`)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
   })
 }
 

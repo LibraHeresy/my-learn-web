@@ -37,35 +37,36 @@ function getLangExtension(tab: Tab) {
   }
 }
 
-function createEditor() {
+function createEditorView(code: { html: string; css: string; js: string }, tab: Tab) {
   if (!editorHost.value) return
-
-  const updateListener = EditorView.updateListener.of((update) => {
-    if (update.docChanged) {
-      const newValue = update.state.doc.toString()
-      emit('update:modelValue', {
-        ...props.modelValue,
-        [activeTab.value]: newValue
-      })
-    }
-  })
 
   editorView = new EditorView({
     state: EditorState.create({
-      doc: props.modelValue[activeTab.value],
+      doc: code[tab],
       extensions: [
         lineNumbers(),
         highlightActiveLine(),
         history(),
         keymap.of([...defaultKeymap, ...historyKeymap]),
-        ...getLangExtension(activeTab.value),
+        ...getLangExtension(tab),
         oneDark,
         EditorView.lineWrapping,
-        updateListener
+        EditorView.updateListener.of((update) => {
+          if (update.docChanged) {
+            emit('update:modelValue', {
+              ...code,
+              [tab]: update.state.doc.toString()
+            })
+          }
+        })
       ]
     }),
     parent: editorHost.value
   })
+}
+
+function createEditor() {
+  createEditorView(props.modelValue, activeTab.value)
 }
 
 function destroyEditor() {
@@ -78,44 +79,15 @@ function destroyEditor() {
 function switchTab(tab: Tab) {
   if (tab === activeTab.value) return
   const oldTab = activeTab.value
+
+  // 保存当前编辑器内容到旧 tab
+  const code = editorView
+    ? { ...props.modelValue, [oldTab]: editorView.state.doc.toString() }
+    : props.modelValue
+
+  destroyEditor()
   activeTab.value = tab
-
-  if (editorView) {
-    const currentDoc = editorView.state.doc.toString()
-    // 把当前编辑器的内容保存到旧 tab 对应的字段
-    const code = { ...props.modelValue, [oldTab]: currentDoc }
-    destroyEditor()
-
-    nextTick(() => {
-      // 用新 tab 对应的内容初始化编辑器
-      const doc = code[tab]
-
-      editorView = new EditorView({
-        state: EditorState.create({
-          doc,
-          extensions: [
-            lineNumbers(),
-            highlightActiveLine(),
-            history(),
-            keymap.of([...defaultKeymap, ...historyKeymap]),
-            ...getLangExtension(tab),
-            oneDark,
-            EditorView.lineWrapping,
-            EditorView.updateListener.of((update) => {
-              if (update.docChanged) {
-                const newValue = update.state.doc.toString()
-                emit('update:modelValue', {
-                  ...code,
-                  [tab]: newValue
-                })
-              }
-            })
-          ]
-        }),
-        parent: editorHost.value!
-      })
-    })
-  }
+  nextTick(() => createEditorView(code, tab))
 }
 
 watch(() => props.modelValue, (newVal) => {
