@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="content-panel">
     <div class="content-header">
-      <span class="lesson-number">第 {{ chapterIndex + 1 }} 章 · 第 {{ lesson.order }} 课</span>
+      <span v-if="false" class="lesson-number">第 {{ chapterIndex + 1 }} 章 · 第 {{ lesson.order }} 课</span>
       <h2 class="lesson-title">{{ lesson.title }}</h2>
     </div>
 

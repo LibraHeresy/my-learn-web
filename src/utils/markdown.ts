@@ -119,12 +119,13 @@ function parseTable(text: string): string {
 // 完整 Markdown → HTML（包裹 <p>，支持 [[html]] 块）
 export function parseContent(text: string): string {
   const placeholders: string[] = []
+  const htmlBlocks: string[] = []
 
-  // 0. 提取 [[html]] 块
+  // 0. 提取 [[html]] 块（单独存储，避开后续的 \n → <br> 处理）
   let html = text.replace(/\[\[html\]\]([\s\S]*?)\[\[\/html\]\]/g, (_, raw) => {
-    const idx = placeholders.length
-    placeholders.push(raw)
-    return `%%P${idx}%%`
+    const idx = htmlBlocks.length
+    htmlBlocks.push(raw)
+    return `%%H${idx}%%`
   })
 
   // 1. 提取围栏代码块
@@ -154,7 +155,7 @@ export function parseContent(text: string): string {
   // 5. 转义剩余 HTML
   html = escapeHtml(html)
 
-  // 6. 还原占位符
+  // 6. 还原占位符（不含 [[html]] 块）
   html = restorePlaceholders(html, placeholders)
 
   // 7. 粗体 / 斜体
@@ -170,6 +171,9 @@ export function parseContent(text: string): string {
   html = html.replace(/(<br>)+(?:$|<\/p>)/g, '</p>')
   // 移除孤立的空 <p></p> 标签
   html = html.replace(/<p><\/p>/g, '')
+
+  // 9. 还原 [[html]] 块（在段落处理之后，避免 \n → <br> 破坏内容）
+  html = html.replace(/%%H(\d+)%%/g, (_, i) => htmlBlocks[parseInt(i)])
 
   // 若内容全空则直接返回
   if (!html.trim()) return ''

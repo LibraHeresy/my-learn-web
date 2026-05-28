@@ -2,6 +2,7 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { lessons } from '../data/lessons'
+import { prologueLessons } from '../data/prologues'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
@@ -16,8 +17,10 @@ const route = useRoute()
 const router = useRouter()
 const progressStore = useProgressStore()
 
+const allLessons = computed(() => [...lessons, ...prologueLessons])
+
 const lessonId = computed(() => route.params.lessonId as string)
-const lesson = computed(() => lessons.find(l => l.id === lessonId.value))
+const lesson = computed(() => allLessons.value.find(l => l.id === lessonId.value))
 
 // 登台篇课程使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
 const isLocalMode = computed(() => lesson.value?.mode === 'local')
@@ -32,13 +35,11 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
 watch(lessonId, (id) => {
-  const l = lessons.find(l => l.id === id)
+  const l = allLessons.value.find(l => l.id === id)
   if (l) {
     progressStore.currentLessonId = id
     userCode.value = { ...l.starterCode }
-    // 切换课程时预览页面也初始化
     triggerPreview()
-    // 移动端切换课程时滚动到顶端
     if (playerMainRef.value) {
       playerMainRef.value.scrollTop = 0
     }
@@ -57,17 +58,20 @@ function selectLesson(id: string) {
   router.push(`/lesson/${id}`)
 }
 
-// 上一课 / 下一课
+const isPrologue = computed(() => lesson.value?.chapterId === 'web-history')
+
+const navList = computed(() => isPrologue.value ? prologueLessons : lessons)
+
 const currentIndex = computed(() =>
-  lessons.findIndex(l => l.id === lessonId.value)
+  navList.value.findIndex(l => l.id === lessonId.value)
 )
 
 const prevLesson = computed(() =>
-  currentIndex.value > 0 ? lessons[currentIndex.value - 1] : null
+  currentIndex.value > 0 ? navList.value[currentIndex.value - 1] : null
 )
 
 const nextLesson = computed(() =>
-  currentIndex.value < lessons.length - 1 ? lessons[currentIndex.value + 1] : null
+  currentIndex.value < navList.value.length - 1 ? navList.value[currentIndex.value + 1] : null
 )
 
 function goPrev() {
@@ -82,16 +86,18 @@ function goNext() {
   }
 }
 
-// 跨章节导航标签：检查实际跳转目标是否跨章
 const prevLabel = computed(() => {
-  if (prevLesson.value && prevLesson.value.chapterId !== lesson.value?.chapterId) return '上一章'
-  return '上一课'
+  if (isPrologue.value) return '上一篇'
+  return (prevLesson.value && prevLesson.value.chapterId !== lesson.value?.chapterId) ? '上一章' : '上一课'
 })
 
 const nextLabel = computed(() => {
-  if (nextLesson.value && nextLesson.value.chapterId !== lesson.value?.chapterId) return '下一章'
-  return '下一课'
+  if (isPrologue.value) return '下一篇'
+  return (nextLesson.value && nextLesson.value.chapterId !== lesson.value?.chapterId) ? '下一章' : '下一课'
 })
+
+const prevNavTitle = computed(() => prevLesson.value?.title ?? '')
+const nextNavTitle = computed(() => nextLesson.value?.title ?? '')
 
 const prevDisabled = computed(() => !prevLesson.value)
 const nextDisabled = computed(() => !nextLesson.value)
@@ -206,9 +212,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
       v-if="lesson"
       :prev-label="prevLabel"
       :next-label="nextLabel"
+      :prev-nav-title="prevNavTitle"
+      :next-nav-title="nextNavTitle"
       :prev-disabled="prevDisabled"
       :next-disabled="nextDisabled"
-      :show-complete="true"
+      :show-complete="!isPrologue"
       :is-completed="progressStore.isCompleted(lessonId)"
       @prev="goPrev"
       @next="goNext"

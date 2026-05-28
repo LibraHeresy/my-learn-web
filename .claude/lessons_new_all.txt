@@ -1,0 +1,171 @@
+  // ===== 0.1 诞生：1990-1993 =====
+  {
+    id: "dawn-era",
+    chapterId: "web-history",
+    order: 1,
+    title: "诞生——从 0 到 1",
+    musicAnalogy: "「最早的网页没有颜色，就像最早的歌没有和声——但一切伟大的事物，都始于简单。」",
+    listenTo: "Gregorian Chant《Veni Creator Spiritus》— 公元 9 世纪的素歌，简单到只有一条旋律线。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、1989，一个人的提案",
+        content: "1989 年，瑞士日内瓦。CERN 的一间办公室里，Tim Berners-Lee 面对着三台互不兼容的电脑。他想：为什么不同电脑上的信息不能互相链接？\n\n他拿起一个笔记本，写了一份提案：《Information Management: A Proposal》。\n\n上司批了五个字：\"Vague but exciting.\"——模糊，但令人兴奋。这五个字，是万维网的第一张准生证。",
+      },
+      {
+        type: "explain",
+        title: "二、HTML、HTTP、URL",
+        content: "1990 年底，Tim 一个人写出了三样东西：\n\nHTML——网页的结构语言。HTTP——浏览器和服务器怎么通信。URL——每个页面在互联网上的唯一地址。他还写出了世界上第一个网页浏览器 WorldWideWeb。\n\n1991 年 8 月 6 日，第一个网站上线。地址 info.cern.ch。页面上只有几行文字和几个蓝色链接。\n\n你今天用手机打开的每一个页面——短视频、外卖、地图、支付——它们的根，都扎在 1991 年这个只有几行蓝字的页面上。",
+      },
+      {
+        type: "explain",
+        title: "三、图片来了，群众来了",
+        content: "1993 年，Mosaic 浏览器诞生。它做了第一件革命性的事：能显示图片。互联网从此不再是学术圈的专属品，普通人涌了进来。\n\n1994 年，Mosaic 的核心开发者 Marc Andreessen 创办 Netscape，互联网商业化正式拉开序幕。全世界的公司开始疯狂建网站。\n\n但 HTML 最初是为学术论文设计的——标题、段落、引用。它没有布局能力。于是整个 90 年代末，开发者不得不用 <table> 做页面布局：<table> 套 <tr> 套 <td> 套另一个 <table>，层层嵌套。改一处崩一页，是那个年代的日常。\n\n工具不完美，但开发者从来不会因此停下。",
+      },
+    ],
+  },
+
+  // ===== 0.2 混战：1994-2001 =====
+  {
+    id: "browser-war",
+    chapterId: "web-history",
+    order: 2,
+    title: "混战——浏览器战争",
+    musicAnalogy: "「十天生出 JavaScript，就像即兴哼出的旋律成了传世经典。」",
+    listenTo: "维瓦尔第《四季》— 巴洛克时代的「爆款」，就像 JavaScript 在 1995 年横空出世。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、十天生出的语言",
+        content: "1995 年，Netscape 占据浏览器市场 90%。他们想要一门能在浏览器里做交互的脚本语言。任务交给了 Brendan Eich。\n\n给他的时间：十天。\n\n十天后他交出一门语言。最初叫 Mocha，后来改 LiveScript，发布前改叫 JavaScript——纯粹是蹭当时 Java 的热度。这门语言跟 Java，除了名字像，没有别的关系。\n\n十天生出来的语言，后来成了地球上使用人数最多的编程语言。",
+      },
+      {
+        type: "explain",
+        title: "二、微软出手",
+        content: "1995 年 5 月，比尔·盖茨发了一封内部备忘录《互联网浪潮》，把互联网定为微软最高优先级。\n\n随后 IE 被捆绑进 Windows 95——免费送。Netscape 卖 49 美元一套，微软直接白给。这不是技术竞争，这是平台垄断者对挑战者的绞杀。IE3 在技术上远不如 Netscape Navigator 3，但免费就是最狠的武器。\n\n到 1998 年，Netscape 被 AOL 收购，市场份额跌到个位数。但它临终前做了一件事：把源码公开了。这堆代码后来变成了 Mozilla 项目，再后来成了 Firefox 的祖先。",
+      },
+      {
+        type: "explain",
+        title: "三、CSS 与 XMLHttpRequest",
+        content: "1996 年，W3C 发布了 CSS1。HTML 管结构，CSS 管样式，这个分工确立了。但在之后的几年里，不同浏览器对 CSS 的实现各不一样。写一套 CSS，在 IE 和 Netscape 上效果完全不同。\n\n1999 年，微软在 IE5 中实现了一个叫 XMLHttpRequest 的 API——可以不刷新页面就跟服务器通信。这个 API 在浏览器里躺了五年，几乎没人注意。但它后来成了 Ajax 的核心。\n\n2001 年，IE6 随 Windows XP 发布，最终占据 95% 市场份额。微软随后解散了 IE 开发团队。此后的五年，Web 开发几乎原地踏步。但困境倒逼出了最早的工程化实践：跨浏览器兼容从选做题变成了必修课。",
+      },
+    ],
+  },
+  // ===== 0.3 破冰：2002-2007 =====
+  {
+    id: "ajax-web20",
+    chapterId: "web-history",
+    order: 3,
+    title: "破冰——从停滞到 Ajax",
+    musicAnalogy: "「Ajax 让网页学会了呼吸——不需要刷新就能和世界对话。」",
+    listenTo: "Miles Davis《Kind of Blue》— 现代爵士乐的开山之作，即兴与结构的完美平衡。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、Gmail：愚人节不是玩笑",
+        content: "2004 年 4 月 1 日，Google 发布 Gmail——1GB 免费空间。当时主流邮箱是 2MB，差了 500 倍。\n\n但真正让开发者世界炸锅的，不是容量。是你点开一封邮件，页面居然不刷新。没有白屏，没有等待。\n\n背后用的技术，就是微软五年前在 IE5 里埋下的 XMLHttpRequest。这个 API 在浏览器里沉睡了五年，直到 Google 把它用到了极致，全世界才发现：原来浏览器还能这么玩。",
+      },
+      {
+        type: "explain",
+        title: "二、Ajax 有了名字",
+        content: "2005 年 2 月，设计师 Jesse James Garrett 写了一篇博客：《Ajax: A New Approach to Web Applications》。他给这套技术方案起了一个名字——Ajax（Asynchronous JavaScript and XML）。\n\n它不是新技术。它只是用一种新的方式组合了已有的技术。但命名本身就是力量——有了名字，就有了方向。\n\n同年，Google Maps 上线。你可以拖拽地图，周边区域自动加载——不刷新。人们第一次感觉到：网页不是一个「页面」了，它是一个「应用」。前端开发的身份认同，从这一刻开始裂变。",
+      },
+      {
+        type: "explain",
+        title: "三、jQuery：一个美元符号",
+        content: "在 Ajax 带来的兴奋之外，还有一个根本痛苦：跨浏览器兼容。IE6 仍然统治市场，Firefox 刚刚冒头，同一个效果要在不同浏览器上写不同的代码。\n\n2006 年，John Resig 发布了 jQuery。一个美元符号，一行顶十行。$('#menu').show().addClass('active')——链式调用、CSS 选择器、跨浏览器统一 API。\n\njQuery 解决的问题在今天已经不那么重要了。但它确立的设计思想——用简洁的 API 封装复杂的底层——影响了之后所有的框架。到 2008 年，它已经是前端标配。一个库的使命会结束，但它的遗产不会。",
+      },
+    ],
+  },
+
+  // ===== 0.4 爆发：2008-2015 =====
+  {
+    id: "framework-spring",
+    chapterId: "web-history",
+    order: 4,
+    title: "爆发——JavaScript 成为平台",
+    musicAnalogy: "「V8 引擎如同管弦乐团的指挥——让每一个音符都在正确的时间响起。」",
+    listenTo: "贝多芬《第五交响曲》— 从一个动机发展出整个交响世界，就像 JavaScript 从浏览器脚本变成了全平台语言。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、V8 和 Node.js",
+        content: "2008 年，Google 发布了 Chrome 浏览器和 V8 JavaScript 引擎。V8 把 JS 的执行速度提升了一个数量级——之前 JS 慢是共识，之后 JS 快成了可能。\n\n2009 年，Ryan Dahl 把 V8 引擎提取出来，包了一层 C++，做成了 Node.js。JavaScript 从此能在服务器上跑了。\n\n同年 npm 诞生。前端有了自己的包管理工具。Grunt、Gulp 让自动化构建成为可能。JavaScript 不再只是「浏览器脚本」，它成了一门真正的编程语言。",
+      },
+      {
+        type: "explain",
+        title: "二、框架觉醒",
+        content: "jQuery 解决了 DOM 操作，但没有解决代码组织。当应用越来越复杂，代码像面条一样缠在一起。\n\n2010 年，Backbone.js 把 MVC 架构引入前端。同年 AngularJS 带来双向数据绑定。2011 年，Ember.js 推崇约定优于配置。框架各自为政，选型成了信仰之争。但「需要框架」这件事本身，已经没有争议。前端开发者的身份也从「写页面的」变成了「前端工程师」。",
+      },
+      {
+        type: "explain",
+        title: "三、React 和 ES6",
+        content: "2013 年，Facebook 开源了 React。把 HTML 写在 JavaScript 里——整个社区都觉得疯了。但 Virtual DOM 带来的性能优势和组件化思维，最终让反对者闭了嘴。\n\n2014 年，尤雨溪发布 Vue.js。不像 Angular 那么重，不像 React 那么激进。你可以只在一个 div 上用 Vue，也可以用它构建整个 SPA。「渐进式」三个字，让 Vue 走出了一条独特的路。\n\n2015 年，ES6（ES2015）发布。箭头函数、class、Promise、模块、模板字符串——JavaScript 终于看起来像一门现代语言了。Babel 负责把新语法转译成旧浏览器能跑的代码，webpack 把 JS、CSS、图片全部打包。前端工程化的基础设施，从这一年开始成型。",
+      },
+    ],
+  },
+  // ===== 0.5 工程化：2016-2020 =====
+  {
+    id: "component-revolution",
+    chapterId: "web-history",
+    order: 5,
+    title: "工程化——从手艺到工业",
+    musicAnalogy: "「工程化是把乐谱交给每个乐手，让他们各自精彩。」",
+    listenTo: "斯特拉文斯基《春之祭》— 颠覆性的节奏和结构，就像前端构建工具对传统开发方式的彻底革新。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、Vue 生态成型",
+        content: "2016 年到 2018 年，Vue 从一个个人项目长成了完整生态。Vue Router 处理路由，Vuex 管理状态，Vue CLI 一键生成项目脚手架。单文件组件（.vue）把模板、逻辑、样式放在同一个文件里，直观、好维护。\n\n到 2020 年，Vue 在 GitHub 上的 star 数超过了 React。React 和 Vue 两条路，各有各的设计哲学。没有绝对的赢家，但「组件化」作为思考方式，已成共识。",
+      },
+      {
+        type: "explain",
+        title: "二、TypeScript 和构建工具",
+        content: "2012 年微软发布了 TypeScript——给 JavaScript 加上类型系统。到了 2016-2018 年，TypeScript 开始被大规模采用。类型检查能在编译阶段发现大量 bug，大型项目从中获益最大。\n\nwebpack 成了打包工具的事实标准，但它那上百行的配置文件也让开发者叫苦不迭。「webpack 配置工程师」成了半开玩笑的职位名称。\n\n2018 年，尤雨溪发布了 Vite 原型。核心理念：利用浏览器原生 ES Modules，只在需要时编译用到的文件。开发服务器启动从分钟级降到秒级。前端工具进入了下一个时代。",
+      },
+      {
+        type: "explain",
+        title: "三、现代化成为常态",
+        content: "到 2020 年，前端开发的基本范式已经确定：组件化架构 + 声明式 UI + 构建工具链。React、Vue、Angular 三足鼎立。\n\nCSS 也有了 CSS Variables、CSS Grid、Flexbox——不再需要用 <table> 做布局了。浏览器终于可以信任了。\n\n但新的烦恼也来了：工具太多。「前端疲劳症」成了社区热词。每出一个新工具，你都要判断——这是趋势还是过客？学还是不学？\n\n回头看这十年，每一次进步都在解决上一个方案带来的问题，每一个解决方案又引入新的问题。这就是前端永远有趣的原因。",
+      },
+    ],
+  },
+
+  // ===== 0.6 AI 时代：2016-2026 =====
+  {
+    id: "ai-era",
+    chapterId: "web-history",
+    order: 6,
+    title: "AI 时代——从写代码到写 Prompt",
+    musicAnalogy: "「最快的工具不是跑得最快，而是知道什么时候该跑。」",
+    listenTo: "John Cage《4分33秒》— 有时候沉默本身就是音乐，就像有时最好的代码是不写代码。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、AI 的序曲：2016-2020",
+        content: "2016 年 3 月，AlphaGo 击败李世石。AI 这个词第一次从学术论文走进了大众视野。\n\n2017 年，Google 的团队发表了一篇论文：《Attention is All You Need》。它提出了 Transformer 架构——今天所有大语言模型的祖先。这篇论文的八位作者，后来全部离开了 Google，各自创办或加入了 AI 公司。\n\n2018 年，OpenAI 发布 GPT-1。1.17 亿参数。没多少人注意到它。2019 年，GPT-2 发布，15 亿参数。OpenAI 一度拒绝开源，理由是「太危险了」——反而引发了更大的好奇。\n\n2020 年，GPT-3 发布，1750 亿参数。它能写文章、写代码、做翻译。同年，微软收购 GitHub——这个收购在后来看，意味深长。",
+      },
+      {
+        type: "explain",
+        title: "二、爆发：2021-2023",
+        content: "2021 年 6 月，GitHub Copilot 发布技术预览版。基于 OpenAI Codex，它能用注释生成代码。你写一行注释，它补全整个函数。开发者的反应从怀疑到震惊到离不开。\n\n2022 年 11 月 30 日，OpenAI 发布 ChatGPT。两个月，一亿用户——人类历史上增速最快的应用。这不止是技术突破，这是文化现象。\n\n2023 年 3 月，GPT-4 发布。同月，Anthropic 发布 Claude。AI 编程助手从此成为标配。Cursor、Windsurf 等 AI-native IDE 涌现。开发者不再从零写每一行代码。工作重心从「怎么写」变成了「写什么」和「对不对」。",
+      },
+      {
+        type: "explain",
+        title: "三、2024-2026：AI 原生开发",
+        content: "2024 年，AI 编程工具全面普及。Claude Artifacts 能直接生成可交互的页面预览。Vercel 推出 v0——用文字描述界面，AI 生成完整 UI 代码。\n\n2025 年，AI Coding Agent 出现。Claude Code、Gemini Code Assist、Copilot Agent 模式——AI 不只补全代码，它能理解整个项目结构、运行终端命令、查看错误、修改多个文件。从辅助变成协作。\n\n到 2026 年，前端开发的工作流已经彻底变了。但这不意味着开发者被取代。理解代码、系统思维、判断 AI 产出是否正确——这些能力比以前更值钱了。\n\n1990 年，一个人在日内瓦写下几页纸，创造了万维网。三十六年后的今天，一个人对着 AI 描述需求，几分钟能搭出一个完整的 Web 应用。工具在变，但在工具的尽头，始终站着那个知道自己要做什么的人。\n\n筚路蓝缕，以启山林。这条路还在继续。",
+      },
+    ],
+  },

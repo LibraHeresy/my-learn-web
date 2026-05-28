@@ -1,0 +1,57 @@
+  // ===== 0.1 诞生：1990-1993 =====
+  {
+    id: "dawn-era",
+    chapterId: "web-history",
+    order: 1,
+    title: "诞生——从 0 到 1",
+    musicAnalogy: "「最早的网页没有颜色，就像最早的歌没有和声——但一切伟大的事物，都始于简单。」",
+    listenTo: "Gregorian Chant《Veni Creator Spiritus》— 公元 9 世纪的素歌，简单到只有一条旋律线。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、1989，一个人的提案",
+        content: "1989 年，瑞士日内瓦。CERN 的一间办公室里，Tim Berners-Lee 面对着三台互不兼容的电脑。他想：为什么不同电脑上的信息不能互相链接？\n\n他拿起一个笔记本，写了一份提案：《Information Management: A Proposal》。\n\n上司批了五个字：\"Vague but exciting.\"——模糊，但令人兴奋。这五个字，是万维网的第一张准生证。",
+      },
+      {
+        type: "explain",
+        title: "二、HTML、HTTP、URL",
+        content: "1990 年底，Tim 一个人写出了三样东西：\n\nHTML——网页的结构语言。HTTP——浏览器和服务器怎么通信。URL——每个页面在互联网上的唯一地址。他还写出了世界上第一个网页浏览器 WorldWideWeb。\n\n1991 年 8 月 6 日，第一个网站上线。地址 info.cern.ch。页面上只有几行文字和几个蓝色链接。\n\n你今天用手机打开的每一个页面——短视频、外卖、地图、支付——它们的根，都扎在 1991 年这个只有几行蓝字的页面上。",
+      },
+      {
+        type: "explain",
+        title: "三、图片来了，群众来了",
+        content: "1993 年，Mosaic 浏览器诞生。它做了第一件革命性的事：能显示图片。互联网从此不再是学术圈的专属品，普通人涌了进来。\n\n1994 年，Mosaic 的核心开发者 Marc Andreessen 创办 Netscape，互联网商业化正式拉开序幕。全世界的公司开始疯狂建网站。\n\n但 HTML 最初是为学术论文设计的——标题、段落、引用。它没有布局能力。于是整个 90 年代末，开发者不得不用 <table> 做页面布局：<table> 套 <tr> 套 <td> 套另一个 <table>，层层嵌套。改一处崩一页，是那个年代的日常。\n\n工具不完美，但开发者从来不会因此停下。",
+      },
+    ],
+  },
+
+  // ===== 0.2 混战：1994-2001 =====
+  {
+    id: "browser-war",
+    chapterId: "web-history",
+    order: 2,
+    title: "混战——浏览器战争",
+    musicAnalogy: "「十天生出 JavaScript，就像即兴哼出的旋律成了传世经典。」",
+    listenTo: "维瓦尔第《四季》— 巴洛克时代的「爆款」，就像 JavaScript 在 1995 年横空出世。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、十天生出的语言",
+        content: "1995 年，Netscape 占据浏览器市场 90%。他们想要一门能在浏览器里做交互的脚本语言。任务交给了 Brendan Eich。\n\n给他的时间：十天。\n\n十天后他交出一门语言。最初叫 Mocha，后来改 LiveScript，发布前改叫 JavaScript——纯粹是蹭当时 Java 的热度。这门语言跟 Java，除了名字像，没有别的关系。\n\n十天生出来的语言，后来成了地球上使用人数最多的编程语言。",
+      },
+      {
+        type: "explain",
+        title: "二、微软出手",
+        content: "1995 年 5 月，比尔·盖茨发了一封内部备忘录《互联网浪潮》，把互联网定为微软最高优先级。\n\n随后 IE 被捆绑进 Windows 95——免费送。Netscape 卖 49 美元一套，微软直接白给。这不是技术竞争，这是平台垄断者对挑战者的绞杀。IE3 在技术上远不如 Netscape Navigator 3，但免费就是最狠的武器。\n\n到 1998 年，Netscape 被 AOL 收购，市场份额跌到个位数。但它临终前做了一件事：把源码公开了。这堆代码后来变成了 Mozilla 项目，再后来成了 Firefox 的祖先。",
+      },
+      {
+        type: "explain",
+        title: "三、CSS 与 XMLHttpRequest",
+        content: "1996 年，W3C 发布了 CSS1。HTML 管结构，CSS 管样式，这个分工确立了。但在之后的几年里，不同浏览器对 CSS 的实现各不一样。写一套 CSS，在 IE 和 Netscape 上效果完全不同。\n\n1999 年，微软在 IE5 中实现了一个叫 XMLHttpRequest 的 API——可以不刷新页面就跟服务器通信。这个 API 在浏览器里躺了五年，几乎没人注意。但它后来成了 Ajax 的核心。\n\n2001 年，IE6 随 Windows XP 发布，最终占据 95% 市场份额。微软随后解散了 IE 开发团队。此后的五年，Web 开发几乎原地踏步。但困境倒逼出了最早的工程化实践：跨浏览器兼容从选做题变成了必修课。",
+      },
+    ],
+  },

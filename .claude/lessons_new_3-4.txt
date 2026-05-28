@@ -1,0 +1,57 @@
+  // ===== 0.3 破冰：2002-2007 =====
+  {
+    id: "ajax-web20",
+    chapterId: "web-history",
+    order: 3,
+    title: "破冰——从停滞到 Ajax",
+    musicAnalogy: "「Ajax 让网页学会了呼吸——不需要刷新就能和世界对话。」",
+    listenTo: "Miles Davis《Kind of Blue》— 现代爵士乐的开山之作，即兴与结构的完美平衡。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、Gmail：愚人节不是玩笑",
+        content: "2004 年 4 月 1 日，Google 发布 Gmail——1GB 免费空间。当时主流邮箱是 2MB，差了 500 倍。\n\n但真正让开发者世界炸锅的，不是容量。是你点开一封邮件，页面居然不刷新。没有白屏，没有等待。\n\n背后用的技术，就是微软五年前在 IE5 里埋下的 XMLHttpRequest。这个 API 在浏览器里沉睡了五年，直到 Google 把它用到了极致，全世界才发现：原来浏览器还能这么玩。",
+      },
+      {
+        type: "explain",
+        title: "二、Ajax 有了名字",
+        content: "2005 年 2 月，设计师 Jesse James Garrett 写了一篇博客：《Ajax: A New Approach to Web Applications》。他给这套技术方案起了一个名字——Ajax（Asynchronous JavaScript and XML）。\n\n它不是新技术。它只是用一种新的方式组合了已有的技术。但命名本身就是力量——有了名字，就有了方向。\n\n同年，Google Maps 上线。你可以拖拽地图，周边区域自动加载——不刷新。人们第一次感觉到：网页不是一个「页面」了，它是一个「应用」。前端开发的身份认同，从这一刻开始裂变。",
+      },
+      {
+        type: "explain",
+        title: "三、jQuery：一个美元符号",
+        content: "在 Ajax 带来的兴奋之外，还有一个根本痛苦：跨浏览器兼容。IE6 仍然统治市场，Firefox 刚刚冒头，同一个效果要在不同浏览器上写不同的代码。\n\n2006 年，John Resig 发布了 jQuery。一个美元符号，一行顶十行。$('#menu').show().addClass('active')——链式调用、CSS 选择器、跨浏览器统一 API。\n\njQuery 解决的问题在今天已经不那么重要了。但它确立的设计思想——用简洁的 API 封装复杂的底层——影响了之后所有的框架。到 2008 年，它已经是前端标配。一个库的使命会结束，但它的遗产不会。",
+      },
+    ],
+  },
+
+  // ===== 0.4 爆发：2008-2015 =====
+  {
+    id: "framework-spring",
+    chapterId: "web-history",
+    order: 4,
+    title: "爆发——JavaScript 成为平台",
+    musicAnalogy: "「V8 引擎如同管弦乐团的指挥——让每一个音符都在正确的时间响起。」",
+    listenTo: "贝多芬《第五交响曲》— 从一个动机发展出整个交响世界，就像 JavaScript 从浏览器脚本变成了全平台语言。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、V8 和 Node.js",
+        content: "2008 年，Google 发布了 Chrome 浏览器和 V8 JavaScript 引擎。V8 把 JS 的执行速度提升了一个数量级——之前 JS 慢是共识，之后 JS 快成了可能。\n\n2009 年，Ryan Dahl 把 V8 引擎提取出来，包了一层 C++，做成了 Node.js。JavaScript 从此能在服务器上跑了。\n\n同年 npm 诞生。前端有了自己的包管理工具。Grunt、Gulp 让自动化构建成为可能。JavaScript 不再只是「浏览器脚本」，它成了一门真正的编程语言。",
+      },
+      {
+        type: "explain",
+        title: "二、框架觉醒",
+        content: "jQuery 解决了 DOM 操作，但没有解决代码组织。当应用越来越复杂，代码像面条一样缠在一起。\n\n2010 年，Backbone.js 把 MVC 架构引入前端。同年 AngularJS 带来双向数据绑定。2011 年，Ember.js 推崇约定优于配置。框架各自为政，选型成了信仰之争。但「需要框架」这件事本身，已经没有争议。前端开发者的身份也从「写页面的」变成了「前端工程师」。",
+      },
+      {
+        type: "explain",
+        title: "三、React 和 ES6",
+        content: "2013 年，Facebook 开源了 React。把 HTML 写在 JavaScript 里——整个社区都觉得疯了。但 Virtual DOM 带来的性能优势和组件化思维，最终让反对者闭了嘴。\n\n2014 年，尤雨溪发布 Vue.js。不像 Angular 那么重，不像 React 那么激进。你可以只在一个 div 上用 Vue，也可以用它构建整个 SPA。「渐进式」三个字，让 Vue 走出了一条独特的路。\n\n2015 年，ES6（ES2015）发布。箭头函数、class、Promise、模块、模板字符串——JavaScript 终于看起来像一门现代语言了。Babel 负责把新语法转译成旧浏览器能跑的代码，webpack 把 JS、CSS、图片全部打包。前端工程化的基础设施，从这一年开始成型。",
+      },
+    ],
+  },

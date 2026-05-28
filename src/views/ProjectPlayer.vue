@@ -98,6 +98,18 @@ const nextLabel = computed(() => {
   return '下一步'
 })
 
+const prevNavTitle = computed(() => {
+  if (isFirstStep.value && prevProject.value) return prevProject.value.title
+  if (!isFirstStep.value) return project.value?.steps[currentStep.value - 1]?.title ?? ''
+  return ''
+})
+
+const nextNavTitle = computed(() => {
+  if (isLastStep.value && nextProject.value) return nextProject.value.title
+  if (!isLastStep.value) return project.value?.steps[currentStep.value + 1]?.title ?? ''
+  return ''
+})
+
 function goFooterPrev() {
   if (!isFirstStep.value) {
     goToStep(currentStep.value - 1)
@@ -235,6 +247,8 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
       v-if="project"
       :prev-label="prevLabel"
       :next-label="nextLabel"
+      :prev-nav-title="prevNavTitle"
+      :next-nav-title="nextNavTitle"
       :prev-disabled="isFirstStep && !prevProject"
       :next-disabled="isLastStep && !nextProject"
       :center-label="'步骤 ' + (currentStep + 1) + ' / ' + totalSteps"

@@ -1,0 +1,57 @@
+  // ===== 0.5 工程化：2016-2020 =====
+  {
+    id: "component-revolution",
+    chapterId: "web-history",
+    order: 5,
+    title: "工程化——从手艺到工业",
+    musicAnalogy: "「工程化是把乐谱交给每个乐手，让他们各自精彩。」",
+    listenTo: "斯特拉文斯基《春之祭》— 颠覆性的节奏和结构，就像前端构建工具对传统开发方式的彻底革新。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、Vue 生态成型",
+        content: "2016 年到 2018 年，Vue 从一个个人项目长成了完整生态。Vue Router 处理路由，Vuex 管理状态，Vue CLI 一键生成项目脚手架。单文件组件（.vue）把模板、逻辑、样式放在同一个文件里，直观、好维护。\n\n到 2020 年，Vue 在 GitHub 上的 star 数超过了 React。React 和 Vue 两条路，各有各的设计哲学。没有绝对的赢家，但「组件化」作为思考方式，已成共识。",
+      },
+      {
+        type: "explain",
+        title: "二、TypeScript 和构建工具",
+        content: "2012 年微软发布了 TypeScript——给 JavaScript 加上类型系统。到了 2016-2018 年，TypeScript 开始被大规模采用。类型检查能在编译阶段发现大量 bug，大型项目从中获益最大。\n\nwebpack 成了打包工具的事实标准，但它那上百行的配置文件也让开发者叫苦不迭。「webpack 配置工程师」成了半开玩笑的职位名称。\n\n2018 年，尤雨溪发布了 Vite 原型。核心理念：利用浏览器原生 ES Modules，只在需要时编译用到的文件。开发服务器启动从分钟级降到秒级。前端工具进入了下一个时代。",
+      },
+      {
+        type: "explain",
+        title: "三、现代化成为常态",
+        content: "到 2020 年，前端开发的基本范式已经确定：组件化架构 + 声明式 UI + 构建工具链。React、Vue、Angular 三足鼎立。\n\nCSS 也有了 CSS Variables、CSS Grid、Flexbox——不再需要用 <table> 做布局了。浏览器终于可以信任了。\n\n但新的烦恼也来了：工具太多。「前端疲劳症」成了社区热词。每出一个新工具，你都要判断——这是趋势还是过客？学还是不学？\n\n回头看这十年，每一次进步都在解决上一个方案带来的问题，每一个解决方案又引入新的问题。这就是前端永远有趣的原因。",
+      },
+    ],
+  },
+
+  // ===== 0.6 AI 时代：2016-2026 =====
+  {
+    id: "ai-era",
+    chapterId: "web-history",
+    order: 6,
+    title: "AI 时代——从写代码到写 Prompt",
+    musicAnalogy: "「最快的工具不是跑得最快，而是知道什么时候该跑。」",
+    listenTo: "John Cage《4分33秒》— 有时候沉默本身就是音乐，就像有时最好的代码是不写代码。",
+    mode: "local",
+    starterCode: { html: "", css: "", js: "" },
+    sections: [
+      {
+        type: "explain",
+        title: "一、AI 的序曲：2016-2020",
+        content: "2016 年 3 月，AlphaGo 击败李世石。AI 这个词第一次从学术论文走进了大众视野。\n\n2017 年，Google 的团队发表了一篇论文：《Attention is All You Need》。它提出了 Transformer 架构——今天所有大语言模型的祖先。这篇论文的八位作者，后来全部离开了 Google，各自创办或加入了 AI 公司。\n\n2018 年，OpenAI 发布 GPT-1。1.17 亿参数。没多少人注意到它。2019 年，GPT-2 发布，15 亿参数。OpenAI 一度拒绝开源，理由是「太危险了」——反而引发了更大的好奇。\n\n2020 年，GPT-3 发布，1750 亿参数。它能写文章、写代码、做翻译。同年，微软收购 GitHub——这个收购在后来看，意味深长。",
+      },
+      {
+        type: "explain",
+        title: "二、爆发：2021-2023",
+        content: "2021 年 6 月，GitHub Copilot 发布技术预览版。基于 OpenAI Codex，它能用注释生成代码。你写一行注释，它补全整个函数。开发者的反应从怀疑到震惊到离不开。\n\n2022 年 11 月 30 日，OpenAI 发布 ChatGPT。两个月，一亿用户——人类历史上增速最快的应用。这不止是技术突破，这是文化现象。\n\n2023 年 3 月，GPT-4 发布。同月，Anthropic 发布 Claude。AI 编程助手从此成为标配。Cursor、Windsurf 等 AI-native IDE 涌现。开发者不再从零写每一行代码。工作重心从「怎么写」变成了「写什么」和「对不对」。",
+      },
+      {
+        type: "explain",
+        title: "三、2024-2026：AI 原生开发",
+        content: "2024 年，AI 编程工具全面普及。Claude Artifacts 能直接生成可交互的页面预览。Vercel 推出 v0——用文字描述界面，AI 生成完整 UI 代码。\n\n2025 年，AI Coding Agent 出现。Claude Code、Gemini Code Assist、Copilot Agent 模式——AI 不只补全代码，它能理解整个项目结构、运行终端命令、查看错误、修改多个文件。从辅助变成协作。\n\n到 2026 年，前端开发的工作流已经彻底变了。但这不意味着开发者被取代。理解代码、系统思维、判断 AI 产出是否正确——这些能力比以前更值钱了。\n\n1990 年，一个人在日内瓦写下几页纸，创造了万维网。三十六年后的今天，一个人对着 AI 描述需求，几分钟能搭出一个完整的 Web 应用。工具在变，但在工具的尽头，始终站着那个知道自己要做什么的人。\n\n筚路蓝缕，以启山林。这条路还在继续。",
+      },
+    ],
+  },

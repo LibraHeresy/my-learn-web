@@ -2,6 +2,8 @@
 defineProps<{
   prevLabel: string
   nextLabel: string
+  prevNavTitle?: string
+  nextNavTitle?: string
   centerLabel?: string
   prevDisabled?: boolean
   nextDisabled?: boolean
@@ -24,7 +26,7 @@ defineEmits<{
         class="footer-btn"
         @click="$emit('prev')"
       >
-        ← {{ prevLabel }}
+        ← {{ prevLabel }}<span v-if="prevNavTitle" class="nav-sep"> · </span><span v-if="prevNavTitle" class="nav-title">{{ prevNavTitle }}</span>
       </button>
     </div>
 
@@ -46,7 +48,7 @@ defineEmits<{
         class="footer-btn"
         @click="$emit('next')"
       >
-        {{ nextLabel }} →
+        <span v-if="nextNavTitle" class="nav-title">{{ nextNavTitle }}</span><span v-if="nextNavTitle" class="nav-sep"> · </span>{{ nextLabel }} →
       </button>
     </div>
   </div>
@@ -108,5 +110,16 @@ defineEmits<{
   font-size: var(--fs-xs);
   color: var(--color-text-light);
   font-family: var(--font-code);
+}
+
+.nav-title {
+  color: #8B2E2E;
+}
+
+@media (max-width: 640px) {
+  .nav-title,
+  .nav-sep {
+    display: none;
+  }
 }
 </style>

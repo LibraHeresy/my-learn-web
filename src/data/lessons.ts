@@ -3,7 +3,7 @@ import type { Lesson, Chapter } from "../types";
 export const chapters: Chapter[] = [
   {
     id: "html-basics",
-    title: "第一章：HTML 基础",
+    title: "第一章 HTML 基础",
     subtitle: "用代码乐章写你的第一页乐谱",
     icon: "🎼",
   },
@@ -53,7 +53,7 @@ export const chapters: Chapter[] = [
 
 export const lessons: Lesson[] = [
   // ================================================================
-  // 第一章：HTML 基础
+  // HTML 基础
   // ================================================================
 
   // ===== 1.1 html-intro =====
@@ -83,7 +83,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看一个例子",
         content:
-          "下面这段代码就是编辑器中你看到的代码。一个 `<h1>` 大标题加上一段 `<p>` 文字：\n\n```html\n<h1>你好，音乐世界！</h1>\n<p>我开始了我的编程之旅。</p>\n```\n右边预览区会实时显示这段代码的效果。",
+          "下面这段代码就是编辑器中你看到的代码。一个 `<h1>` 大标题加上一段 `<p>` 文字：\n\n\```html\n<h1>你好，音乐世界！</h1>\n<p>我开始了我的编程之旅。</p>\n\```\n右边预览区会实时显示这段代码的效果。",
       },
       {
         type: "task",
@@ -114,7 +114,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '每个网页都有一副"骨架"',
         content:
-          '你之前写的 `<h1>` 和 `<p>` 代码，实际上运行在一个看不见的文档结构里。完整的 HTML 页面长这样：\n\n```html\n<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>我的页面标题</title>\n</head>\n<body>\n  <h1>你好，音乐世界！</h1>\n  <p>这是页面上可见的内容。</p>\n</body>\n</html>\n```\n\n这就是一份"标准乐谱"——每一部分都有固定的位置和意义。',
+          '你之前写的 `<h1>` 和 `<p>` 代码，实际上运行在一个看不见的文档结构里。完整的 HTML 页面长这样：\n\n\```html\n<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>我的页面标题</title>\n</head>\n<body>\n  <h1>你好，音乐世界！</h1>\n  <p>这是页面上可见的内容。</p>\n</body>\n</html>\n\```\n\n这就是一份"标准乐谱"——每一部分都有固定的位置和意义。',
       },
       {
         type: "explain",
@@ -126,13 +126,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "head 中的其他重要元素",
         content:
-          '`<head>` 区还可以包含：\n\n```html\n<head>\n  <!-- 链接 CSS 样式文件 -->\n  <link rel="stylesheet" href="style.css">\n\n  <!-- 网站的图标（favicon） -->\n  <link rel="icon" href="favicon.ico">\n\n  <!-- SEO 描述 -->\n  <meta name="description" content="一个学习编程的音乐主题网站">\n</head>\n```\n\n虽然 `<head>` 里的内容不直接显示在页面上，但它像乐谱上的速度标记 Andante 一样——决定了页面如何被理解和渲染。',
+          '`<head>` 区还可以包含：\n\n\```html\n<head>\n  <!-- 链接 CSS 样式文件 -->\n  <link rel="stylesheet" href="style.css">\n\n  <!-- 网站的图标（favicon） -->\n  <link rel="icon" href="favicon.ico">\n\n  <!-- SEO 描述 -->\n  <meta name="description" content="一个学习编程的音乐主题网站">\n</head>\n\```\n\n虽然 `<head>` 里的内容不直接显示在页面上，但它像乐谱上的速度标记 Andante 一样——决定了页面如何被理解和渲染。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '现在你右侧编辑器中看到的代码，就是放在 `<body>` 里面的。但这个教学平台已经帮你写好了 `<head>` 和 `<body>` 的框架——这就是为什么你只需要写内容部分的代码。\n\n当你未来自己创建一个 `.html` 文件时，记得要先写完整的文档结构！\n\n```html\n<!-- 你将来会这样开始一个网页 -->\n<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n  <meta charset="UTF-8">\n  <title>我的音乐博客</title>\n</head>\n<body>\n  <!-- 你的内容写在这里 -->\n</body>\n</html>\n```',
+          '现在你右侧编辑器中看到的代码，就是放在 `<body>` 里面的。但这个教学平台已经帮你写好了 `<head>` 和 `<body>` 的框架——这就是为什么你只需要写内容部分的代码。\n\n当你未来自己创建一个 `.html` 文件时，记得要先写完整的文档结构！\n\n\```html\n<!-- 你将来会这样开始一个网页 -->\n<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n  <meta charset="UTF-8">\n  <title>我的音乐博客</title>\n</head>\n<body>\n  <!-- 你的内容写在这里 -->\n</body>\n</html>\n\```',
       },
       {
         type: "task",
@@ -169,7 +169,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面就是编辑器中的代码。注意看 `<strong>` 和 `<em>` 标签是如何包裹文字的：\n\n```html\n<h1>我的音乐故事</h1>\n<p>我最喜欢的作曲家是<strong>肖邦</strong>。</p>\n<p>他的夜曲<em>优美而忧伤</em>，<br>每次听都让我感动。</p>\n```\n你可以看到"肖邦"加粗了，"优美而忧伤"变成斜体了，而且中间还有一个换行。',
+          '下面就是编辑器中的代码。注意看 `<strong>` 和 `<em>` 标签是如何包裹文字的：\n\n\```html\n<h1>我的音乐故事</h1>\n<p>我最喜欢的作曲家是<strong>肖邦</strong>。</p>\n<p>他的夜曲<em>优美而忧伤</em>，<br>每次听都让我感动。</p>\n\```\n你可以看到"肖邦"加粗了，"优美而忧伤"变成斜体了，而且中间还有一个换行。',
       },
       {
         type: "task",
@@ -206,7 +206,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          "下面就是编辑器中的代码。一个无序列表列出作曲家，一个有序列表排出练琴顺序：\n\n```html\n<h1>我的音乐收藏</h1>\n<p>这里是我喜欢的音乐作品：</p>\n\n<h2>我喜欢的作曲家</h2>\n<ul>\n  <li>巴赫</li>\n  <li>莫扎特</li>\n  <li>肖邦</li>\n</ul>\n\n<h2>我的练琴顺序</h2>\n<ol>\n  <li>音阶练习</li>\n  <li>练习曲</li>\n  <li>乐曲演奏</li>\n</ol>\n```\n注意 `<li>` 要放在 `<ul>` 或 `<ol>` 里面，不能单独使用哦。就像乐谱中的音符必须放在小节里一样！",
+          "下面就是编辑器中的代码。一个无序列表列出作曲家，一个有序列表排出练琴顺序：\n\n\```html\n<h1>我的音乐收藏</h1>\n<p>这里是我喜欢的音乐作品：</p>\n\n<h2>我喜欢的作曲家</h2>\n<ul>\n  <li>巴赫</li>\n  <li>莫扎特</li>\n  <li>肖邦</li>\n</ul>\n\n<h2>我的练琴顺序</h2>\n<ol>\n  <li>音阶练习</li>\n  <li>练习曲</li>\n  <li>乐曲演奏</li>\n</ol>\n\```\n注意 `<li>` 要放在 `<ul>` 或 `<ol>` 里面，不能单独使用哦。就像乐谱中的音符必须放在小节里一样！",
       },
       {
         type: "task",
@@ -237,19 +237,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "添加图片",
         content:
-          '纯文字太单调了！用 `<img>` 标签可以插入图片：\n\n```html\n<img src="图片地址" alt="图片描述">\n```\n\n- `src` — 图片的地址（可以是网上链接）\n- `alt` — 图片加载不出来时显示的文字\n\n注意：`<img>` 是**单标签**，不需要写 `</img>`，就像休止符不需要配对！',
+          '纯文字太单调了！用 `<img>` 标签可以插入图片：\n\n\```html\n<img src="图片地址" alt="图片描述">\n\```\n\n- `src` — 图片的地址（可以是网上链接）\n- `alt` — 图片加载不出来时显示的文字\n\n注意：`<img>` 是**单标签**，不需要写 `</img>`，就像休止符不需要配对！',
       },
       {
         type: "explain",
         title: "添加链接",
         content:
-          '用 `<a>` 标签可以创建超链接，点击后跳转到其他页面：\n\n```html\n<a href="网址">点击这里</a>\n```\n\n- `href` — 要跳转的网址\n- 标签中间的文字是显示给用户看的',
+          '用 `<a>` 标签可以创建超链接，点击后跳转到其他页面：\n\n\```html\n<a href="网址">点击这里</a>\n\```\n\n- `href` — 要跳转的网址\n- 标签中间的文字是显示给用户看的',
       },
       {
         type: "example",
         title: "完整示例",
         content:
-          '下面就是编辑器中的代码。结合了图片和链接的个人音乐卡片：\n\n```html\n<h1>肖邦</h1>\n<img src="https://oss.tan8.com/yuepuku/155/77798/77798_prev.jpg" alt="作曲家肖像">\n<p>\n  了解更多，请访问\n  <a href="https://zh.wikipedia.org/wiki/肖邦">肖邦的维基百科</a>\n</p>\n```',
+          '下面就是编辑器中的代码。结合了图片和链接的个人音乐卡片：\n\n\```html\n<h1>肖邦</h1>\n<img src="https://oss.tan8.com/yuepuku/155/77798/77798_prev.jpg" alt="作曲家肖像">\n<p>\n  了解更多，请访问\n  <a href="https://zh.wikipedia.org/wiki/肖邦">肖邦的维基百科</a>\n</p>\n\```',
       },
       {
         type: "task",
@@ -280,7 +280,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '两种最基本的"容器"',
         content:
-          "`<div>` 和 `<span>` 本身不添加任何样式，它们的作用是**把内容分组**，方便后面用 CSS 美化或用 JS 操控。\n\n- `<div>` — **块级元素**（block），独占一行，像一整个段落\n- `<span>` — **内联元素**（inline），在文字流内部，像句子中的标记\n\n```html\n<div>我是一个块，占满整行。</div>\n<div>我是另一个块，自动换行。</div>\n<p>文字中<span>这个部分</span>被span标记了。</p>\n```",
+          "`<div>` 和 `<span>` 本身不添加任何样式，它们的作用是**把内容分组**，方便后面用 CSS 美化或用 JS 操控。\n\n- `<div>` — **块级元素**（block），独占一行，像一整个段落\n- `<span>` — **内联元素**（inline），在文字流内部，像句子中的标记\n\n\```html\n<div>我是一个块，占满整行。</div>\n<div>我是另一个块，自动换行。</div>\n<p>文字中<span>这个部分</span>被span标记了。</p>\n\```",
       },
       {
         type: "explain",
@@ -292,7 +292,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用 `<div>` 创建了三张音乐卡片，用 `<span>` 在文字中高亮了作曲家名字：\n\n```html\n<div class="card">\n  <h2><span class="name">巴赫</span></h2>\n  <p>时期：<span class="name">巴洛克</span></p>\n</div>\n```\n注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。',
+          '下面的代码用 `<div>` 创建了三张音乐卡片，用 `<span>` 在文字中高亮了作曲家名字：\n\n\```html\n<div class="card">\n  <h2><span class="name">巴赫</span></h2>\n  <p>时期：<span class="name">巴洛克</span></p>\n</div>\n\```\n注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。',
       },
       {
         type: "task",
@@ -329,13 +329,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "一个典型的页面结构",
         content:
-          "```html\n<body>\n  <header>\n    <h1>网站标题</h1>\n    <nav>导航链接</nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>第一块内容</h2>\n      <article>一篇文章</article>\n    </section>\n  </main>\n\n  <footer>\n    <p>版权信息</p>\n  </footer>\n</body>\n```\n\n浏览器和搜索引擎看到这个结构，就像指挥看到总谱——一眼就知道每个部分的作用。",
+          "\```html\n<body>\n  <header>\n    <h1>网站标题</h1>\n    <nav>导航链接</nav>\n  </header>\n\n  <main>\n    <section>\n      <h2>第一块内容</h2>\n      <article>一篇文章</article>\n    </section>\n  </main>\n\n  <footer>\n    <p>版权信息</p>\n  </footer>\n</body>\n\```\n\n浏览器和搜索引擎看到这个结构，就像指挥看到总谱——一眼就知道每个部分的作用。",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用语义化标签构建了一个音乐网站页面。注意看 `<header>`、`<main>`、`<section>`、`<footer>` 是如何组织的：\n\n```html\n<header>\n  <h1>古典音乐鉴赏</h1>\n  <nav>首页 | 作曲家 | 曲目</nav>\n</header>\n<main>\n  <section>今日推荐</section>\n  <section>本周精选</section>\n</main>\n<footer>© 2026 代码乐章</footer>\n```\n虽然看起来和用 `<div>` 差不多，但这些标签自带"身份信息"。',
+          '下面的代码用语义化标签构建了一个音乐网站页面。注意看 `<header>`、`<main>`、`<section>`、`<footer>` 是如何组织的：\n\n\```html\n<header>\n  <h1>古典音乐鉴赏</h1>\n  <nav>首页 | 作曲家 | 曲目</nav>\n</header>\n<main>\n  <section>今日推荐</section>\n  <section>本周精选</section>\n</main>\n<footer>© 2026 代码乐章</footer>\n\```\n虽然看起来和用 `<div>` 差不多，但这些标签自带"身份信息"。',
       },
       {
         type: "task",
@@ -366,25 +366,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "音频标签",
         content:
-          '用 `<audio>` 标签可以在网页中嵌入音乐播放器：\n\n```html\n<audio controls src="音乐文件地址">\n  你的浏览器不支持音频播放\n</audio>\n```\n\n- `controls` — 显示播放/暂停/音量控件\n- `src` — 音频文件的地址\n- `autoplay` — 自动播放（浏览器通常会阻止）\n- `loop` — 循环播放\n\n标签中间的文字只在浏览器不支持时显示。',
+          '用 `<audio>` 标签可以在网页中嵌入音乐播放器：\n\n\```html\n<audio controls src="音乐文件地址">\n  你的浏览器不支持音频播放\n</audio>\n\```\n\n- `controls` — 显示播放/暂停/音量控件\n- `src` — 音频文件的地址\n- `autoplay` — 自动播放（浏览器通常会阻止）\n- `loop` — 循环播放\n\n标签中间的文字只在浏览器不支持时显示。',
       },
       {
         type: "explain",
         title: "音频格式与多音源",
         content:
-          '不同的浏览器支持不同的音频格式（MP3、OGG、WAV 等）。为了保证所有浏览器都能播放，可以用 `<source>` 标签提供多种格式：\n\n```html\n<audio controls>\n  <source src="music.mp3" type="audio/mpeg">\n  <source src="music.ogg" type="audio/ogg">\n  你的浏览器不支持音频播放\n</audio>\n```\n\n浏览器会从上到下尝试，播放第一个支持的格式。就像准备不同版本的乐谱给不同乐器！',
+          '不同的浏览器支持不同的音频格式（MP3、OGG、WAV 等）。为了保证所有浏览器都能播放，可以用 `<source>` 标签提供多种格式：\n\n\```html\n<audio controls>\n  <source src="music.mp3" type="audio/mpeg">\n  <source src="music.ogg" type="audio/ogg">\n  你的浏览器不支持音频播放\n</audio>\n\```\n\n浏览器会从上到下尝试，播放第一个支持的格式。就像准备不同版本的乐谱给不同乐器！',
       },
       {
         type: "explain",
         title: "视频标签",
         content:
-          '`<video>` 标签的用法和 `<audio>` 非常相似：\n\n```html\n<video controls width="400" src="视频地址">\n  你的浏览器不支持视频播放\n</video>\n```\n\n- `controls` — 显示播放控件\n- `width` / `height` — 设置播放器尺寸\n- 同样支持 `<source>` 提供多种格式\n\n现在你的网页可以像一个音乐播放器一样工作了！',
+          '`<video>` 标签的用法和 `<audio>` 非常相似：\n\n\```html\n<video controls width="400" src="视频地址">\n  你的浏览器不支持视频播放\n</video>\n\```\n\n- `controls` — 显示播放控件\n- `width` / `height` — 设置播放器尺寸\n- 同样支持 `<source>` 提供多种格式\n\n现在你的网页可以像一个音乐播放器一样工作了！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码创建了一个音频播放器和一个视频播放器。注意两个标签的写法几乎一样：\n\n```html\n<audio controls>\n  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">\n</audio>\n\n<video controls width="320" src="视频地址"></video>\n```\n预览区现在有了一个可以点击播放的音乐播放器！',
+          '下面的代码创建了一个音频播放器和一个视频播放器。注意两个标签的写法几乎一样：\n\n\```html\n<audio controls>\n  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">\n</audio>\n\n<video controls width="320" src="视频地址"></video>\n\```\n预览区现在有了一个可以点击播放的音乐播放器！',
       },
       {
         type: "hint",
@@ -421,31 +421,31 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "表格的基本结构",
         content:
-          "表格由外到内有三层标签：\n\n- `<table>` — 整个表格的容器\n- `<tr>` — **表行**（table row），一行\n- `<td>` — **表单元格**（table data），一个格子\n\n```html\n<table>\n  <tr>\n    <td>巴赫</td>\n    <td>巴洛克</td>\n    <td>德国</td>\n  </tr>\n  <tr>\n    <td>肖邦</td>\n    <td>浪漫主义</td>\n    <td>波兰</td>\n  </tr>\n</table>\n```\n\n每一对 `<tr></tr>` 是一行，里面每个 `<td></td>` 是一个格子。",
+          "表格由外到内有三层标签：\n\n- \`<table>\` — 整个表格的容器\n- \`<tr>\` — **表行**（table row），一行\n- \`<td>\` — **表单元格**（table data），一个格子\n\n\```html\n<table>\n  <tr>\n    <td>巴赫</td>\n    <td>巴洛克</td>\n    <td>德国</td>\n  </tr>\n  <tr>\n    <td>肖邦</td>\n    <td>浪漫主义</td>\n    <td>波兰</td>\n  </tr>\n</table>\n\```\n\n每一对 `<tr></tr>` 是一行，里面每个 `<td></td>` 是一个格子。",
       },
       {
         type: "explain",
         title: "表头与分区",
         content:
-          "`<th>` 代替 `<td>` 可以做**表头**（加粗居中）：\n\n```html\n<tr>\n  <th>作曲家</th>\n  <th>时期</th>\n  <th>国家</th>\n</tr>\n```\n\n`<thead>`、`<tbody>` 把表头和表体分开，方便分别设置样式：\n\n```html\n<table>\n  <thead>\n    <tr><th>列1</th><th>列2</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>数据1</td><td>数据2</td></tr>\n  </tbody>\n</table>\n```",
+          "`<th>` 代替 \`<td>\` 可以做**表头**（加粗居中）：\n\n\```html\n<tr>\n  <th>作曲家</th>\n  <th>时期</th>\n  <th>国家</th>\n</tr>\n\```\n\n`<thead>`、`<tbody>` 把表头和表体分开，方便分别设置样式：\n\n\```html\n<table>\n  <thead>\n    <tr><th>列1</th><th>列2</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>数据1</td><td>数据2</td></tr>\n  </tbody>\n</table>\n\```",
       },
       {
         type: "explain",
         title: "合并单元格",
         content:
-          '有时候一个格子需要跨越多列或多行，用 `colspan` 和 `rowspan`：\n\n- `colspan="2"` — 跨 2 列（水平合并）\n- `rowspan="3"` — 跨 3 行（垂直合并）\n\n```html\n<td colspan="2">这格占了两个列的宽度</td>\n```\n\n就像节目单中的"中场休息"横跨整页！',
+          '有时候一个格子需要跨越多列或多行，用 `colspan` 和 `rowspan`：\n\n- `colspan="2"` — 跨 2 列（水平合并）\n- `rowspan="3"` — 跨 3 行（垂直合并）\n\n\```html\n<td colspan="2">这格占了两个列的宽度</td>\n\```\n\n就像节目单中的"中场休息"横跨整页！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码创建了一张作曲家信息表，有表头和两行数据：\n\n```html\n<table>\n  <thead>\n    <tr>\n      <th>作曲家</th>\n      <th>时期</th>\n      <th>代表作</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>巴赫</td>\n      <td>巴洛克</td>\n      <td>赋格的艺术</td>\n    </tr>\n  </tbody>\n</table>\n```",
+          "下面的代码创建了一张作曲家信息表，有表头和两行数据：\n\n\```html\n<table>\n  <thead>\n    <tr>\n      <th>作曲家</th>\n      <th>时期</th>\n      <th>代表作</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>巴赫</td>\n      <td>巴洛克</td>\n      <td>赋格的艺术</td>\n    </tr>\n  </tbody>\n</table>\n\```",
       },
       {
         type: "task",
         title: "动手试试 ✨",
         content:
-          '请在编辑器中：\n\n1. 在表格中添加一行新数据，写你喜欢的作曲家\n2. 在表头再加一列（比如"国家"），每行也加对应的 `<td>`\n3. 试试在表格下方加一行 `<tr><td colspan="3">更多作曲家敬请期待</td></tr>` 感受合并效果\n4. 挑战：创建一个新的表格，列出你的"每周练琴计划"（日期、曲目、时长）',
+          '请在编辑器中：\n\n1. 在表格中添加一行新数据，写你喜欢的作曲家\n2. 在表头再加一列（比如"国家"），每行也加对应的 \`<td>\`\n3. 试试在表格下方加一行 `<tr><td colspan="3">更多作曲家敬请期待</td></tr>` 感受合并效果\n4. 挑战：创建一个新的表格，列出你的"每周练琴计划"（日期、曲目、时长）',
       },
     ],
     starterCode: {
@@ -476,19 +476,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "各种输入类型",
         content:
-          '`<input>` 标签通过 `type` 属性可以变成不同类型的输入框：\n\n- `type="text"` — 普通文本输入\n- `type="email"` — 邮箱地址输入\n- `type="password"` — 密码输入（显示为圆点）\n- `type="date"` — 日期选择器\n- `placeholder="..."` — 输入框中的提示文字\n\n```html\n<input type="text" placeholder="请输入你的名字">\n<input type="email" placeholder="请输入邮箱">\n<input type="date">\n```\n\n不同的 type 就像不同的乐器，各有各的用途！',
+          '`<input>` 标签通过 `type` 属性可以变成不同类型的输入框：\n\n- `type="text"` — 普通文本输入\n- `type="email"` — 邮箱地址输入\n- `type="password"` — 密码输入（显示为圆点）\n- `type="date"` — 日期选择器\n- `placeholder="..."` — 输入框中的提示文字\n\n\```html\n<input type="text" placeholder="请输入你的名字">\n<input type="email" placeholder="请输入邮箱">\n<input type="date">\n\```\n\n不同的 type 就像不同的乐器，各有各的用途！',
       },
       {
         type: "explain",
         title: "下拉框与多行文本",
         content:
-          '`<select>` 创建下拉选择框，`<option>` 是其中的选项：\n\n```html\n<select>\n  <option>巴赫</option>\n  <option>莫扎特</option>\n  <option>肖邦</option>\n</select>\n```\n\n`<textarea>` 创建多行文本输入框，用 `rows` 设置行数：\n\n```html\n<textarea rows="3" placeholder="请写下你的感想..."></textarea>\n```\n\n`<label>` 的 `for` 属性对应 `<input>` 的 `id`，点击标签文字时输入框会自动获得焦点——就像节目单上"独奏者："后面跟着一条填空线。',
+          '`<select>` 创建下拉选择框，`<option>` 是其中的选项：\n\n\```html\n<select>\n  <option>巴赫</option>\n  <option>莫扎特</option>\n  <option>肖邦</option>\n</select>\n\```\n\n`<textarea>` 创建多行文本输入框，用 `rows` 设置行数：\n\n\```html\n<textarea rows="3" placeholder="请写下你的感想..."></textarea>\n\```\n\n`<label>` 的 `for` 属性对应 `<input>` 的 `id`，点击标签文字时输入框会自动获得焦点——就像节目单上"独奏者："后面跟着一条填空线。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码创建了一张音乐偏好调查表。包含了文本输入、下拉选择和多行文本框：\n\n```html\n<form>\n  <label for="name">你的名字：</label>\n  <input type="text" id="name" placeholder="请输入你的名字">\n\n  <label for="composer">最喜欢的作曲家：</label>\n  <select id="composer">\n    <option>请选择...</option>\n    <option>巴赫</option>\n    <option>肖邦</option>\n  </select>\n\n  <label for="comment">想说的话：</label>\n  <textarea id="comment" rows="3"></textarea>\n\n  <button type="submit">提交</button>\n</form>\n```\n切换到预览区，可以和这个表单互动！',
+          '下面的代码创建了一张音乐偏好调查表。包含了文本输入、下拉选择和多行文本框：\n\n\```html\n<form>\n  <label for="name">你的名字：</label>\n  <input type="text" id="name" placeholder="请输入你的名字">\n\n  <label for="composer">最喜欢的作曲家：</label>\n  <select id="composer">\n    <option>请选择...</option>\n    <option>巴赫</option>\n    <option>肖邦</option>\n  </select>\n\n  <label for="comment">想说的话：</label>\n  <textarea id="comment" rows="3"></textarea>\n\n  <button type="submit">提交</button>\n</form>\n\```\n切换到预览区，可以和这个表单互动！',
       },
       {
         type: "task",
@@ -519,25 +519,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "radio — 单选按钮",
         content:
-          '当用户只能**选一个**时用 radio。同一组 radio 的 `name` 属性必须相同：\n\n```html\n<fieldset>\n  <legend>你最喜欢的时期：</legend>\n\n  <input type="radio" id="baroque" name="period" value="baroque">\n  <label for="baroque">巴洛克时期</label>\n\n  <input type="radio" id="classical" name="period" value="classical">\n  <label for="classical">古典主义时期</label>\n\n  <input type="radio" id="romantic" name="period" value="romantic">\n  <label for="romantic">浪漫主义时期</label>\n</fieldset>\n```\n\n`name` 相同的 radio 互斥——就像单选题，只能圈一个答案。',
+          '当用户只能**选一个**时用 radio。同一组 radio 的 `name` 属性必须相同：\n\n\```html\n<fieldset>\n  <legend>你最喜欢的时期：</legend>\n\n  <input type="radio" id="baroque" name="period" value="baroque">\n  <label for="baroque">巴洛克时期</label>\n\n  <input type="radio" id="classical" name="period" value="classical">\n  <label for="classical">古典主义时期</label>\n\n  <input type="radio" id="romantic" name="period" value="romantic">\n  <label for="romantic">浪漫主义时期</label>\n</fieldset>\n\```\n\n`name` 相同的 radio 互斥——就像单选题，只能圈一个答案。',
       },
       {
         type: "explain",
         title: "checkbox — 多选按钮",
         content:
-          '当用户可以**选多个**时用 checkbox：\n\n```html\n<fieldset>\n  <legend>你喜欢的乐器（可多选）：</legend>\n\n  <input type="checkbox" id="piano" name="instrument" value="piano">\n  <label for="piano">🎹 钢琴</label>\n\n  <input type="checkbox" id="violin" name="instrument" value="violin">\n  <label for="violin">🎻 小提琴</label>\n\n  <input type="checkbox" id="cello" name="instrument" value="cello">\n  <label for="cello">🎻 大提琴</label>\n</fieldset>\n```\n\n每个 checkbox 独立开/关——就像配器时选择用哪些乐器。',
+          '当用户可以**选多个**时用 checkbox：\n\n\```html\n<fieldset>\n  <legend>你喜欢的乐器（可多选）：</legend>\n\n  <input type="checkbox" id="piano" name="instrument" value="piano">\n  <label for="piano">🎹 钢琴</label>\n\n  <input type="checkbox" id="violin" name="instrument" value="violin">\n  <label for="violin">🎻 小提琴</label>\n\n  <input type="checkbox" id="cello" name="instrument" value="cello">\n  <label for="cello">🎻 大提琴</label>\n</fieldset>\n\```\n\n每个 checkbox 独立开/关——就像配器时选择用哪些乐器。',
       },
       {
         type: "explain",
         title: "更多实用 input 类型",
         content:
-          'HTML 提供丰富的输入类型，浏览器会自动优化交互方式：\n\n- `<input type="range" min="0" max="100">` — 滑块，适合选音量、评分\n- `<input type="number" min="1" max="10">` — 数字输入，带增减箭头\n- `<input type="color">` — 颜色选择器\n- `<input type="date">` — 日期选择器\n- `<input type="time">` — 时间选择器\n- `<input type="file">` — 文件上传\n- `<input type="search">` — 搜索框（带清除按钮）\n\n`<fieldset>` + `<legend>` 用来分组：\n```html\n<fieldset>\n  <legend>个人信息</legend>\n  <!-- 相关字段放一起 -->\n</fieldset>\n```',
+          'HTML 提供丰富的输入类型，浏览器会自动优化交互方式：\n\n- `<input type="range" min="0" max="100">` — 滑块，适合选音量、评分\n- `<input type="number" min="1" max="10">` — 数字输入，带增减箭头\n- `<input type="color">` — 颜色选择器\n- `<input type="date">` — 日期选择器\n- `<input type="time">` — 时间选择器\n- `<input type="file">` — 文件上传\n- `<input type="search">` — 搜索框（带清除按钮）\n\n`<fieldset>` + `<legend>` 用来分组：\n\```html\n<fieldset>\n  <legend>个人信息</legend>\n  <!-- 相关字段放一起 -->\n</fieldset>\n\```',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的表单综合使用了 radio、checkbox 和 range：\n\n```html\n<form>\n  <fieldset>\n    <legend>基础信息</legend>\n    <label>姓名：<input type="text" name="name"></label>\n    <label>练琴时长：<input type="range" min="0" max="120" value="30"> 分钟/天</label>\n  </fieldset>\n\n  <fieldset>\n    <legend>偏好设置</legend>\n    <p>演奏水平：</p>\n    <label><input type="radio" name="level" value="beginner"> 入门</label>\n    <label><input type="radio" name="level" value="intermediate"> 进阶</label>\n    <label><input type="radio" name="level" value="advanced"> 专业</label>\n  </fieldset>\n\n  <fieldset>\n    <legend>擅长乐器</legend>\n    <label><input type="checkbox" name="inst" value="piano"> 钢琴</label>\n    <label><input type="checkbox" name="inst" value="violin"> 小提琴</label>\n    <label><input type="checkbox" name="inst" value="voice"> 声乐</label>\n  </fieldset>\n</form>\n```',
+          '下面的表单综合使用了 radio、checkbox 和 range：\n\n\```html\n<form>\n  <fieldset>\n    <legend>基础信息</legend>\n    <label>姓名：<input type="text" name="name"></label>\n    <label>练琴时长：<input type="range" min="0" max="120" value="30"> 分钟/天</label>\n  </fieldset>\n\n  <fieldset>\n    <legend>偏好设置</legend>\n    <p>演奏水平：</p>\n    <label><input type="radio" name="level" value="beginner"> 入门</label>\n    <label><input type="radio" name="level" value="intermediate"> 进阶</label>\n    <label><input type="radio" name="level" value="advanced"> 专业</label>\n  </fieldset>\n\n  <fieldset>\n    <legend>擅长乐器</legend>\n    <label><input type="checkbox" name="inst" value="piano"> 钢琴</label>\n    <label><input type="checkbox" name="inst" value="violin"> 小提琴</label>\n    <label><input type="checkbox" name="inst" value="voice"> 声乐</label>\n  </fieldset>\n</form>\n\```',
       },
       {
         type: "task",
@@ -568,7 +568,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "你已经学会了很多！",
         content:
-          '回顾一下你学过的所有 HTML 标签：\n\n| 标签 | 用途 |\n|------|------|\n| `<h1>`~`<h4>` | 标题 |\n| `<p>` | 段落 |\n| `<strong>`, `<em>`, `<br>` | 强调与换行 |\n| `<ul>`, `<ol>`, `<li>` | 列表 |\n| `<img>`, `<a>` | 图片与链接 |\n| `<div>`, `<span>` | 容器与行内标记 |\n| `<header>`, `<main>`, `<section>`, `<footer>` | 语义化结构 |\n| `<table>`, `<tr>`, `<th>`, `<td>` | 表格 |\n\n现在，把这些知识组合起来，做一张属于你自己的"个人音乐主页"！',
+          '回顾一下你学过的所有 HTML 标签：\n\n| 标签 | 用途 |\n|------|------|\n| `<h1>`~`<h4>` | 标题 |\n| `<p>` | 段落 |\n| `<strong>`, `<em>`, `<br>` | 强调与换行 |\n| `<ul>`, `<ol>`, `<li>` | 列表 |\n| `<img>`, `<a>` | 图片与链接 |\n| `<div>`, `<span>` | 容器与行内标记 |\n| `<header>`, `<main>`, `<section>`, `<footer>` | 语义化结构 |\n| \`<table>\`, \`<tr>\`, `<th>`, \`<td>\` | 表格 |\n\n现在，把这些知识组合起来，做一张属于你自己的"个人音乐主页"！',
       },
       {
         type: "task",
@@ -580,7 +580,7 @@ export const lessons: Lesson[] = [
         type: "hint",
         title: "别忘了这些要点",
         content:
-          "- 标签要**成对**使用，有开就有合（`<img>` 除外）\n- 嵌套关系要清晰：`<ul>` 里放 `<li>`，`<table>` 里放 `<tr>` 再放 `<td>`\n- 语义化标签让页面结构清晰：`header` → `main` → `section` → `footer`\n- 完成之后，这就是你的**第一章毕业作品**！🎉",
+          "- 标签要**成对**使用，有开就有合（`<img>` 除外）\n- 嵌套关系要清晰：`<ul>` 里放 `<li>`，\`<table>\` 里放 \`<tr>\` 再放 \`<td>\`\n- 语义化标签让页面结构清晰：`header` → `main` → `section` → `footer`\n- 完成之后，这就是你的**第一章毕业作品**！🎉",
       },
     ],
     starterCode: {
@@ -609,7 +609,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是 CSS？",
         content:
-          'CSS（Cascading Style Sheets，层叠样式表）负责网页的外观。HTML 决定了"有什么"，CSS 决定了"长什么样"。\n\n一句 CSS 规则由三部分组成：\n\n```css\nh1 {\n  color: #8B2E2E;\n  font-size: 32px;\n}\n```\n\n- `h1` 是**选择器**——选中文档中的 `<h1>` 元素\n- `color` 和 `font-size` 是**属性**——你想改变什么\n- `#8B2E2E` 和 `32px` 是**值**——改成什么',
+          'CSS（Cascading Style Sheets，层叠样式表）负责网页的外观。HTML 决定了"有什么"，CSS 决定了"长什么样"。\n\n一句 CSS 规则由三部分组成：\n\n\```css\nh1 {\n  color: #8B2E2E;\n  font-size: 32px;\n}\n\```\n\n- `h1` 是**选择器**——选中文档中的 `<h1>` 元素\n- `color` 和 `font-size` 是**属性**——你想改变什么\n- `#8B2E2E` 和 `32px` 是**值**——改成什么',
       },
       {
         type: "explain",
@@ -621,7 +621,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          "下面的代码就是编辑器中你看到的。我们给标题设置了暗红色和 36px 大小，给段落设置了深棕色：\n\n```css\nh1 {\n  color: #8B2E2E;\n  font-size: 36px;\n}\n\np {\n  color: #6B5A4E;\n  font-size: 18px;\n}\n```\n切换到 CSS 标签页可以看到完整样式，预览区能看到效果。",
+          "下面的代码就是编辑器中你看到的。我们给标题设置了暗红色和 36px 大小，给段落设置了深棕色：\n\n\```css\nh1 {\n  color: #8B2E2E;\n  font-size: 36px;\n}\n\np {\n  color: #6B5A4E;\n  font-size: 18px;\n}\n\```\n切换到 CSS 标签页可以看到完整样式，预览区能看到效果。",
       },
       {
         type: "task",
@@ -652,19 +652,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "背景颜色",
         content:
-          "用 `background-color` 属性可以给元素添加背景色：\n\n```css\ndiv {\n  background-color: #FFFAF2;\n}\n```\n\n就像给乐谱选一张暖色调的纸，背景色能改变整个页面的氛围。",
+          "用 `background-color` 属性可以给元素添加背景色：\n\n\```css\ndiv {\n  background-color: #FFFAF2;\n}\n\```\n\n就像给乐谱选一张暖色调的纸，背景色能改变整个页面的氛围。",
       },
       {
         type: "explain",
         title: "边框与圆角",
         content:
-          "`border` 给元素加上边框，`border-radius` 让边角变圆滑：\n\n```css\ndiv {\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n}\n```\n\n- `2px` — 边框粗细\n- `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）\n- `#D4C5A9` — 边框颜色\n- `border-radius: 12px` — 圆角半径，值越大越圆\n\n圆角让卡片更柔和，就像乐谱中圆润的连音线。",
+          "`border` 给元素加上边框，`border-radius` 让边角变圆滑：\n\n\```css\ndiv {\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n}\n\```\n\n- `2px` — 边框粗细\n- `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）\n- `#D4C5A9` — 边框颜色\n- `border-radius: 12px` — 圆角半径，值越大越圆\n\n圆角让卡片更柔和，就像乐谱中圆润的连音线。",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码创建了一张"作曲家卡片"，有暖色背景、细边框和圆角：\n\n```css\n.card {\n  background-color: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n  padding: 20px;\n}\n\n.card h2 {\n  color: #8B2E2E;\n}\n```\n切换到 CSS 标签页查看完整代码。',
+          '下面的代码创建了一张"作曲家卡片"，有暖色背景、细边框和圆角：\n\n\```css\n.card {\n  background-color: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n  padding: 20px;\n}\n\n.card h2 {\n  color: #8B2E2E;\n}\n\```\n切换到 CSS 标签页查看完整代码。',
       },
       {
         type: "task",
@@ -695,7 +695,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "字体系列",
         content:
-          '`font-family` 决定文字使用什么字体：\n\n```css\nh1 {\n  font-family: "Noto Serif SC", serif;\n}\n\np {\n  font-family: "Noto Sans SC", sans-serif;\n}\n```\n\n两种主要的字体类型：\n- **衬线体（serif）**：笔划末端有装饰，典雅庄重，适合标题\n- **无衬线体（sans-serif）**：笔划均匀，简洁现代，适合正文\n\n像选乐器一样——你不会用小提琴的音色去吹进行曲。',
+          '`font-family` 决定文字使用什么字体：\n\n\```css\nh1 {\n  font-family: "Noto Serif SC", serif;\n}\n\np {\n  font-family: "Noto Sans SC", sans-serif;\n}\n\```\n\n两种主要的字体类型：\n- **衬线体（serif）**：笔划末端有装饰，典雅庄重，适合标题\n- **无衬线体（sans-serif）**：笔划均匀，简洁现代，适合正文\n\n像选乐器一样——你不会用小提琴的音色去吹进行曲。',
       },
       {
         type: "explain",
@@ -707,7 +707,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面这段 CSS 展示了字体和间距的综合运用。切换到 CSS 标签页查看：\n\n```css\n.card {\n  font-family: "Noto Serif SC", serif;\n  line-height: 1.8;\n  letter-spacing: 0.05em;\n  text-align: center;\n}\n```\n注意预览区中文字的字体风格、行间距和字间距的变化。',
+          '下面这段 CSS 展示了字体和间距的综合运用。切换到 CSS 标签页查看：\n\n\```css\n.card {\n  font-family: "Noto Serif SC", serif;\n  line-height: 1.8;\n  letter-spacing: 0.05em;\n  text-align: center;\n}\n\```\n注意预览区中文字的字体风格、行间距和字间距的变化。',
       },
       {
         type: "task",
@@ -750,7 +750,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          "下面的代码展示了盒模型的实际应用。两张卡片，每张都有自己的padding和margin：\n\n```css\n.card {\n  background-color: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 24px;       /* 内容到边框的距离 */\n  margin-bottom: 20px;  /* 卡片之间的间隔 */\n}\n```",
+          "下面的代码展示了盒模型的实际应用。两张卡片，每张都有自己的padding和margin：\n\n\```css\n.card {\n  background-color: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 24px;       /* 内容到边框的距离 */\n  margin-bottom: 20px;  /* 卡片之间的间隔 */\n}\n\```",
       },
       {
         type: "task",
@@ -781,25 +781,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "基础选择器",
         content:
-          '选择器告诉 CSS"对谁生效"。三种最基础的选择器：\n\n| 选择器 | 写法 | 含义 |\n|--------|------|------|\n| 元素选择器 | `h1` | 选中所有 `<h1>` |\n| 类选择器 | `.card` | 选中所有 `class="card"` 的元素 |\n| ID选择器 | `#title` | 选中 `id="title"` 的元素 |\n\n```css\nh1 { color: #8B2E2E; }        /* 所有 h1 */\n.card { background: #FFFAF2; } /* 所有带 class="card" 的 */\n#title { font-size: 2rem; }    /* 只有 id="title" 那个 */\n```\n\n**类选择器最常用**——一个类可以给多个元素，一个元素也可以有多个类。',
+          '选择器告诉 CSS"对谁生效"。三种最基础的选择器：\n\n| 选择器 | 写法 | 含义 |\n|--------|------|------|\n| 元素选择器 | `h1` | 选中所有 `<h1>` |\n| 类选择器 | `.card` | 选中所有 `class="card"` 的元素 |\n| ID选择器 | `#title` | 选中 `id="title"` 的元素 |\n\n\```css\nh1 { color: #8B2E2E; }        /* 所有 h1 */\n.card { background: #FFFAF2; } /* 所有带 class="card" 的 */\n#title { font-size: 2rem; }    /* 只有 id="title" 那个 */\n\```\n\n**类选择器最常用**——一个类可以给多个元素，一个元素也可以有多个类。',
       },
       {
         type: "explain",
         title: "组合与后代",
         content:
-          '选择器可以组合使用，精确指定层级关系：\n\n- `.card h2` — **后代选择器**，`.card` 内部的所有 `<h2>`\n- `.card > h2` — **子代选择器**，`.card` 的直接子元素 `<h2>`\n- `h2, h3` — **分组选择器**，同时选中 `<h2>` 和 `<h3>`\n- `.card.featured` — **交集选择器**，同时有 `class="card featured"` 的元素\n\n```css\n.card h2 { color: #8B2E2E; }       /* card 内的所有 h2 */\n.card.featured { border-color: gold; } /* 只有 featured 的那张卡片 */\n```\n\n就像指挥可以指向"弦乐组中的第一小提琴"或"整个管乐声部"。',
+          '选择器可以组合使用，精确指定层级关系：\n\n- `.card h2` — **后代选择器**，`.card` 内部的所有 `<h2>`\n- `.card > h2` — **子代选择器**，`.card` 的直接子元素 `<h2>`\n- `h2, h3` — **分组选择器**，同时选中 `<h2>` 和 `<h3>`\n- `.card.featured` — **交集选择器**，同时有 `class="card featured"` 的元素\n\n\```css\n.card h2 { color: #8B2E2E; }       /* card 内的所有 h2 */\n.card.featured { border-color: gold; } /* 只有 featured 的那张卡片 */\n\```\n\n就像指挥可以指向"弦乐组中的第一小提琴"或"整个管乐声部"。',
       },
       {
         type: "explain",
         title: "伪类选择器 — 状态触发的魔法",
         content:
-          "伪类以 `:` 开头，根据元素的**状态**来应用样式：\n\n- `:hover` — 鼠标悬停时\n- `:first-child` — 是父元素的第一个子元素\n- `:last-child` — 是父元素的最后一个子元素\n- `:nth-child(n)` — 是父元素的第 n 个子元素\n\n```css\n.card:hover { transform: translateY(-2px); }\n.card:first-child { border-color: #8B2E2E; }\n.card:nth-child(2) { border-color: #C9A96E; }\n```\n\n`:hover` 是交互感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！",
+          "伪类以 `:` 开头，根据元素的**状态**来应用样式：\n\n- `:hover` — 鼠标悬停时\n- `:first-child` — 是父元素的第一个子元素\n- `:last-child` — 是父元素的最后一个子元素\n- `:nth-child(n)` — 是父元素的第 n 个子元素\n\n\```css\n.card:hover { transform: translateY(-2px); }\n.card:first-child { border-color: #8B2E2E; }\n.card:nth-child(2) { border-color: #C9A96E; }\n\```\n\n`:hover` 是交互感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码有三张卡片，用不同的选择器为它们设置了左侧的强调色：\n\n```css\n/* 所有卡片共享的样式 */\n.card {\n  background-color: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 16px;\n  margin-bottom: 12px;\n  transition: all 0.3s ease;\n}\n\n/* :hover 交互反馈 */\n.card:hover {\n  border-color: #C9A96E;\n  transform: translateY(-2px);\n}\n\n/* :nth-child 给每张卡片不同的强调色 */\n.card:nth-child(1) { border-left: 4px solid #8B2E2E; }\n.card:nth-child(2) { border-left: 4px solid #C9A96E; }\n.card:nth-child(3) { border-left: 4px solid #5B8C5A; }\n```\n试试把鼠标移到卡片上，看它们微微上浮的效果！",
+          "下面的代码有三张卡片，用不同的选择器为它们设置了左侧的强调色：\n\n\```css\n/* 所有卡片共享的样式 */\n.card {\n  background-color: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 16px;\n  margin-bottom: 12px;\n  transition: all 0.3s ease;\n}\n\n/* :hover 交互反馈 */\n.card:hover {\n  border-color: #C9A96E;\n  transform: translateY(-2px);\n}\n\n/* :nth-child 给每张卡片不同的强调色 */\n.card:nth-child(1) { border-left: 4px solid #8B2E2E; }\n.card:nth-child(2) { border-left: 4px solid #C9A96E; }\n.card:nth-child(3) { border-left: 4px solid #5B8C5A; }\n\```\n试试把鼠标移到卡片上，看它们微微上浮的效果！",
       },
       {
         type: "task",
@@ -836,19 +836,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "权重计算实例",
         content:
-          '看这几个例子，理解权重怎么算：\n\n```css\nh1 { color: red; }                     /* 权重: 1 */\n.card h1 { color: blue; }              /* 权重: 10+1=11 */\n#main h1 { color: green; }             /* 权重: 100+1=101 */\n.card h1.title { color: gold; }        /* 权重: 10+1+10=21 */\n```\n\n`.card h1` 会覆盖 `h1`，因为 11 > 1。\n`#main h1` 会覆盖所有上面三个，因为 101 最高。\n\n```css\n/* 权重相同 */\n.card h1 { color: red; }\n.card h1 { color: blue; }  /* ← 这条胜利！（后写） */\n```\n\n提示：用浏览器 DevTools（F12）可以看到被"划掉"的失效样式——被谁覆盖了，一目了然。',
+          '看这几个例子，理解权重怎么算：\n\n\```css\nh1 { color: red; }                     /* 权重: 1 */\n.card h1 { color: blue; }              /* 权重: 10+1=11 */\n#main h1 { color: green; }             /* 权重: 100+1=101 */\n.card h1.title { color: gold; }        /* 权重: 10+1+10=21 */\n\```\n\n`.card h1` 会覆盖 `h1`，因为 11 > 1。\n`#main h1` 会覆盖所有上面三个，因为 101 最高。\n\n\```css\n/* 权重相同 */\n.card h1 { color: red; }\n.card h1 { color: blue; }  /* ← 这条胜利！（后写） */\n\```\n\n提示：用浏览器 DevTools（F12）可以看到被"划掉"的失效样式——被谁覆盖了，一目了然。',
       },
       {
         type: "explain",
         title: "!important — 紧急按钮，慎用！",
         content:
-          "`!important` 写在属性值后面，会让这条声明**无视权重直接生效**：\n\n```css\nh1 {\n  color: #8B2E2E !important;\n}\n\n/* 即使其他规则权重更高也会被覆盖 */\n```\n\n**为什么要慎用？**\n`!important` 就像在交响乐中加入电吉他——它能占据主导，但**破坏了正常的层叠逻辑**。一旦用了第一次，很快就需要用更多 `!important` 去覆盖之前的 `!important`，最后变得无法维护。\n\n**只有两种情况应该用：**\n1. 覆盖你无法控制的第三方样式（如 UI 库）\n2. 工具类（如 `.hidden` 必须隐藏元素）",
+          "`!important` 写在属性值后面，会让这条声明**无视权重直接生效**：\n\n\```css\nh1 {\n  color: #8B2E2E !important;\n}\n\n/* 即使其他规则权重更高也会被覆盖 */\n\```\n\n**为什么要慎用？**\n`!important` 就像在交响乐中加入电吉他——它能占据主导，但**破坏了正常的层叠逻辑**。一旦用了第一次，很快就需要用更多 `!important` 去覆盖之前的 `!important`，最后变得无法维护。\n\n**只有两种情况应该用：**\n1. 覆盖你无法控制的第三方样式（如 UI 库）\n2. 工具类（如 `.hidden` 必须隐藏元素）",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码故意写了冲突的规则，感受层叠效果：\n\n```css\n/* 规则 1：权重 1 */\np { color: gray; }\n\n/* 规则 2：权重 11 —— 会覆盖规则 1 */\n.card p { color: #3D2B1F; }\n\n/* 规则 3：权重 21 —— 会覆盖规则 2 */\n.card p.highlight { color: #8B2E2E; }\n\n/* 规则 4：权重 101 —— 无人能敌 */\n#special { color: #C9A96E; }\n```\n\n在预览区看第三条卡片的文字颜色——ID 选择器的金色覆盖了所有其他。",
+          "下面的代码故意写了冲突的规则，感受层叠效果：\n\n\```css\n/* 规则 1：权重 1 */\np { color: gray; }\n\n/* 规则 2：权重 11 —— 会覆盖规则 1 */\n.card p { color: #3D2B1F; }\n\n/* 规则 3：权重 21 —— 会覆盖规则 2 */\n.card p.highlight { color: #8B2E2E; }\n\n/* 规则 4：权重 101 —— 无人能敌 */\n#special { color: #C9A96E; }\n\```\n\n在预览区看第三条卡片的文字颜色——ID 选择器的金色覆盖了所有其他。",
       },
       {
         type: "task",
@@ -879,25 +879,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "transition — 平滑过渡",
         content:
-          "`transition` 让属性变化变得平滑，而不是瞬间跳变：\n\n```css\n.card {\n  background: #FFFAF2;\n  transition: all 0.3s ease;\n}\n\n.card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n```\n\n- `all` — 所有属性都过渡\n- `0.3s` — 过渡耗时 0.3 秒\n- `ease` — 缓动函数（开始快，结束慢）\n\n就像渐强记号把音量从一个等级平滑带到另一个等级。",
+          "`transition` 让属性变化变得平滑，而不是瞬间跳变：\n\n\```css\n.card {\n  background: #FFFAF2;\n  transition: all 0.3s ease;\n}\n\n.card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n\```\n\n- `all` — 所有属性都过渡\n- `0.3s` — 过渡耗时 0.3 秒\n- `ease` — 缓动函数（开始快，结束慢）\n\n就像渐强记号把音量从一个等级平滑带到另一个等级。",
       },
       {
         type: "explain",
         title: "transform — 变换形态",
         content:
-          "`transform` 可以改变元素的形状和位置，配合 `transition` 效果最佳：\n\n- `translateY(-4px)` — 向上移动 4px\n- `scale(1.1)` — 放大到 1.1 倍\n- `rotate(5deg)` — 旋转 5 度\n\n```css\n.card:hover {\n  transform: translateY(-4px) scale(1.02);\n}\n```\n\n多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！",
+          "`transform` 可以改变元素的形状和位置，配合 `transition` 效果最佳：\n\n- `translateY(-4px)` — 向上移动 4px\n- `scale(1.1)` — 放大到 1.1 倍\n- `rotate(5deg)` — 旋转 5 度\n\n\```css\n.card:hover {\n  transform: translateY(-4px) scale(1.02);\n}\n\```\n\n多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！",
       },
       {
         type: "explain",
         title: "@keyframes — 关键帧动画",
         content:
-          "`@keyframes` 可以定义更复杂的、自动播放的动画：\n\n```css\n@keyframes pulse {\n  0%   { opacity: 1; transform: scale(1); }\n  50%  { opacity: 0.6; transform: scale(1.05); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n.card {\n  animation: pulse 2s ease-in-out infinite;\n}\n```\n\n- `pulse` — 动画名称（自己命名）\n- `2s` — 一个周期 2 秒\n- `ease-in-out` — 缓入缓出\n- `infinite` — 无限循环\n\n就像一个持续重复的节奏型——鼓手打的固定节拍！",
+          "`@keyframes` 可以定义更复杂的、自动播放的动画：\n\n\```css\n@keyframes pulse {\n  0%   { opacity: 1; transform: scale(1); }\n  50%  { opacity: 0.6; transform: scale(1.05); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n.card {\n  animation: pulse 2s ease-in-out infinite;\n}\n\```\n\n- `pulse` — 动画名称（自己命名）\n- `2s` — 一个周期 2 秒\n- `ease-in-out` — 缓入缓出\n- `infinite` — 无限循环\n\n就像一个持续重复的节奏型——鼓手打的固定节拍！",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码展示了三种动画效果。鼠标悬停在前两张卡片上看过渡效果，第三张是自动播放的脉动动画：\n\n```css\n.fade-card { transition: all 0.3s ease; }\n.fade-card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n\n.bounce-card:hover {\n  animation: bounce 0.6s ease;\n}\n\n@keyframes bounce {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-10px); }\n}\n```\n切换到预览区，把鼠标移到卡片上试试！",
+          "下面的代码展示了三种动画效果。鼠标悬停在前两张卡片上看过渡效果，第三张是自动播放的脉动动画：\n\n\```css\n.fade-card { transition: all 0.3s ease; }\n.fade-card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n\n.bounce-card:hover {\n  animation: bounce 0.6s ease;\n}\n\n@keyframes bounce {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-10px); }\n}\n\```\n切换到预览区，把鼠标移到卡片上试试！",
       },
       {
         type: "task",
@@ -925,22 +925,22 @@ export const lessons: Lesson[] = [
       {
         type: 'explain',
         title: '@keyframes — 定义动画的"节奏型"',
-        content: '还记得 transition 吗？它只能在两个状态之间平滑过渡（比如 hover 前 → hover 后）。@keyframes 让你定义**任意多个关键帧**，创建更复杂的动画：\n\n```css\n@keyframes swing {\n  0%   { transform: rotate(0deg); }\n  25%  { transform: rotate(5deg); }\n  50%  { transform: rotate(0deg); }\n  75%  { transform: rotate(-5deg); }\n  100% { transform: rotate(0deg); }\n}\n```\n\n- 百分比代表动画的进度（0% = 开始，100% = 结束）\n- 也可以用 from（= 0%）和 to（= 100%）\n- 每个关键帧可以定义任意多个 CSS 属性\n\n就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。',
+        content: '还记得 transition 吗？它只能在两个状态之间平滑过渡（比如 hover 前 → hover 后）。@keyframes 让你定义**任意多个关键帧**，创建更复杂的动画：\n\n\```css\n@keyframes swing {\n  0%   { transform: rotate(0deg); }\n  25%  { transform: rotate(5deg); }\n  50%  { transform: rotate(0deg); }\n  75%  { transform: rotate(-5deg); }\n  100% { transform: rotate(0deg); }\n}\n\```\n\n- 百分比代表动画的进度（0% = 开始，100% = 结束）\n- 也可以用 from（= 0%）和 to（= 100%）\n- 每个关键帧可以定义任意多个 CSS 属性\n\n就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。',
       },
       {
         type: 'explain',
         title: 'animation 属性 — 演奏法标记全解',
-        content: '定义好 @keyframes 后，用 animation 属性把它应用到元素上。它是 8 个子属性的简写：\n\n```css\n.card {\n  animation:\n    swing          /* animation-name: 用哪个关键帧 */\n    2s             /* animation-duration: 一个周期多长时间 */\n    ease-in-out    /* animation-timing-function: 缓动函数 */\n    1s             /* animation-delay: 等多久再开始 */\n    3              /* animation-iteration-count: 重复几次，infinite = 无限 */\n    alternate      /* animation-direction: 正放还是倒放 */\n    forwards       /* animation-fill-mode: 结束后保持哪个状态 */\n    running;       /* animation-play-state: running 或 paused */\n}\n```\n\n**常用 timing-function：**\n- ease — 慢→快→慢（默认）\n- linear — 匀速\n- ease-in — 慢→快\n- ease-out — 快→慢\n- cubic-bezier(n,n,n,n) — 自定义曲线\n\n**fill-mode 关键值：**\n- none — 结束后回到初始状态\n- forwards — 结束后保持在最后一帧\n- backwards — 开始前就取第一帧状态\n- both — 同时应用 forwards + backwards',
+        content: '定义好 @keyframes 后，用 animation 属性把它应用到元素上。它是 8 个子属性的简写：\n\n\```css\n.card {\n  animation:\n    swing          /* animation-name: 用哪个关键帧 */\n    2s             /* animation-duration: 一个周期多长时间 */\n    ease-in-out    /* animation-timing-function: 缓动函数 */\n    1s             /* animation-delay: 等多久再开始 */\n    3              /* animation-iteration-count: 重复几次，infinite = 无限 */\n    alternate      /* animation-direction: 正放还是倒放 */\n    forwards       /* animation-fill-mode: 结束后保持哪个状态 */\n    running;       /* animation-play-state: running 或 paused */\n}\n\```\n\n**常用 timing-function：**\n- ease — 慢→快→慢（默认）\n- linear — 匀速\n- ease-in — 慢→快\n- ease-out — 快→慢\n- cubic-bezier(n,n,n,n) — 自定义曲线\n\n**fill-mode 关键值：**\n- none — 结束后回到初始状态\n- forwards — 结束后保持在最后一帧\n- backwards — 开始前就取第一帧状态\n- both — 同时应用 forwards + backwards',
       },
       {
         type: 'explain',
         title: 'transform 进阶 — 变形、旋转与 3D',
-        content: 'transform 不止能用在 transition 中，配合 @keyframes 效果更丰富：\n\n```css\n/* 2D 变换 */\ntransform: translateX(100px);    /* 水平移动 */\ntransform: translateY(-20px);    /* 垂直移动 */\ntransform: scale(1.2);           /* 放大到 1.2 倍 */\ntransform: rotate(45deg);        /* 顺时针旋转 45° */\ntransform: skewX(10deg);         /* 水平倾斜 */\n\n/* 组合变换（空格分隔，顺序很重要！） */\ntransform: translateX(100px) rotate(45deg) scale(1.1);\n\n/* 设置旋转中心点 */\ntransform-origin: center center;  /* 默认是元素中心 */\ntransform-origin: top left;       /* 改为左上角 */\n```\n\n3D 变换（需要 perspective 才能看到深度效果）：\n```css\n.container {\n  perspective: 600px;  /* 透视距离——越小越夸张 */\n}\n.card {\n  transform: rotateY(30deg);   /* 绕 Y 轴旋转 */\n  transform: rotateX(15deg);   /* 绕 X 轴翻转 */\n}\n```\n\n就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。',
+        content: 'transform 不止能用在 transition 中，配合 @keyframes 效果更丰富：\n\n\```css\n/* 2D 变换 */\ntransform: translateX(100px);    /* 水平移动 */\ntransform: translateY(-20px);    /* 垂直移动 */\ntransform: scale(1.2);           /* 放大到 1.2 倍 */\ntransform: rotate(45deg);        /* 顺时针旋转 45° */\ntransform: skewX(10deg);         /* 水平倾斜 */\n\n/* 组合变换（空格分隔，顺序很重要！） */\ntransform: translateX(100px) rotate(45deg) scale(1.1);\n\n/* 设置旋转中心点 */\ntransform-origin: center center;  /* 默认是元素中心 */\ntransform-origin: top left;       /* 改为左上角 */\n\```\n\n3D 变换（需要 perspective 才能看到深度效果）：\n\```css\n.container {\n  perspective: 600px;  /* 透视距离——越小越夸张 */\n}\n.card {\n  transform: rotateY(30deg);   /* 绕 Y 轴旋转 */\n  transform: rotateX(15deg);   /* 绕 X 轴翻转 */\n}\n\```\n\n就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。',
       },
       {
         type: 'example',
         title: '看例子',
-        content: '下面的代码展示了三种经典动画效果：\n\n```css\n/* 摇摆——像节拍器 */\n@keyframes swing {\n  0%, 100% { transform: rotate(-3deg); }\n  50% { transform: rotate(3deg); }\n}\n\n/* 淡入上浮——像幕布升起 */\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* 心跳——缩放+透明度脉动 */\n@keyframes heartbeat {\n  0%, 100% { transform: scale(1); }\n  15% { transform: scale(1.15); }\n  30% { transform: scale(1); }\n  45% { transform: scale(1.1); }\n  60% { transform: scale(1); }\n}\n```\n\n看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。',
+        content: '下面的代码展示了三种经典动画效果：\n\n\```css\n/* 摇摆——像节拍器 */\n@keyframes swing {\n  0%, 100% { transform: rotate(-3deg); }\n  50% { transform: rotate(3deg); }\n}\n\n/* 淡入上浮——像幕布升起 */\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* 心跳——缩放+透明度脉动 */\n@keyframes heartbeat {\n  0%, 100% { transform: scale(1); }\n  15% { transform: scale(1.15); }\n  30% { transform: scale(1); }\n  45% { transform: scale(1.1); }\n  60% { transform: scale(1); }\n}\n\```\n\n看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。',
       },
       {
         type: 'task',
@@ -970,19 +970,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "定义和使用变量",
         content:
-          "CSS 变量以 `--` 开头，在 `var()` 中引用：\n\n```css\n:root {\n  --main-color: #8B2E2E;\n  --card-bg: #FFFAF2;\n  --spacing: 16px;\n}\n\n.card {\n  color: var(--main-color);\n  background: var(--card-bg);\n  padding: var(--spacing);\n}\n```\n\n- `:root` — 全局作用域（相当于 `<html>`），在这里定义的变量全站可用\n- 变量名大小写敏感：`--mainColor` ≠ `--maincolor`\n- `var(--name, fallback)` — 第二个参数是备用值\n\n想看实际应用？打开 `src/styles/variables.css`——这个网站的每个颜色、间距、字体都定义在那里。",
+          "CSS 变量以 `--` 开头，在 `var()` 中引用：\n\n\```css\n:root {\n  --main-color: #8B2E2E;\n  --card-bg: #FFFAF2;\n  --spacing: 16px;\n}\n\n.card {\n  color: var(--main-color);\n  background: var(--card-bg);\n  padding: var(--spacing);\n}\n\```\n\n- `:root` — 全局作用域（相当于 `<html>`），在这里定义的变量全站可用\n- 变量名大小写敏感：`--mainColor` ≠ `--maincolor`\n- `var(--name, fallback)` — 第二个参数是备用值\n\n想看实际应用？打开 `src/styles/variables.css`——这个网站的每个颜色、间距、字体都定义在那里。",
       },
       {
         type: "explain",
         title: "局部覆盖与主题切换",
         content:
-          "变量可以在任意元素上重新定义，子元素继承新值：\n\n```css\n:root {\n  --theme: #8B2E2E;\n}\n\n.card.dark {\n  --theme: #C9A96E;\n  /* 这张卡片内的所有子元素都会用金色主题 */\n}\n```\n\n这就像乐曲中的**转调**——同一段旋律换一个调演奏，感觉完全不同。\n\n**实战优势：**\n- 颜色、间距、圆角全部用变量管理\n- 更换主题只需改一组变量值\n- 修改一个地方，全站自动同步",
+          "变量可以在任意元素上重新定义，子元素继承新值：\n\n\```css\n:root {\n  --theme: #8B2E2E;\n}\n\n.card.dark {\n  --theme: #C9A96E;\n  /* 这张卡片内的所有子元素都会用金色主题 */\n}\n\```\n\n这就像乐曲中的**转调**——同一段旋律换一个调演奏，感觉完全不同。\n\n**实战优势：**\n- 颜色、间距、圆角全部用变量管理\n- 更换主题只需改一组变量值\n- 修改一个地方，全站自动同步",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码在 `:root` 中定义了色彩变量，第二张卡片通过 `.dark` 类覆盖了局部变量值。两张卡片用了**完全相同的样式规则**，只因变量不同而呈现截然不同的风格：\n\n```css\n:root {\n  --card-bg: #FFFAF2;\n  --card-accent: #8B2E2E;\n  --card-sub: #6B5A4E;\n}\n\n.card.dark {\n  --card-bg: #3D2B1F;\n  --card-accent: #C9A96E;\n  --card-sub: #B8A898;\n}\n```\n看预览区——白天与黑夜，同一套规则，两组变量。",
+          "下面的代码在 `:root` 中定义了色彩变量，第二张卡片通过 `.dark` 类覆盖了局部变量值。两张卡片用了**完全相同的样式规则**，只因变量不同而呈现截然不同的风格：\n\n\```css\n:root {\n  --card-bg: #FFFAF2;\n  --card-accent: #8B2E2E;\n  --card-sub: #6B5A4E;\n}\n\n.card.dark {\n  --card-bg: #3D2B1F;\n  --card-accent: #C9A96E;\n  --card-sub: #B8A898;\n}\n\```\n看预览区——白天与黑夜，同一套规则，两组变量。",
       },
       {
         type: "task",
@@ -1017,7 +1017,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是 Flexbox？",
         content:
-          "Flexbox（弹性盒子）让元素排列变得简单。只需在**父元素**上设置 `display: flex`，子元素就会自动排列：\n\n```css\n.container {\n  display: flex;\n}\n```\n\n默认情况下，子元素会**横向排列**（就像乐团的乐器按行排开）。",
+          "Flexbox（弹性盒子）让元素排列变得简单。只需在**父元素**上设置 `display: flex`，子元素就会自动排列：\n\n\```css\n.container {\n  display: flex;\n}\n\```\n\n默认情况下，子元素会**横向排列**（就像乐团的乐器按行排开）。",
       },
       {
         type: "explain",
@@ -1035,7 +1035,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          "下面的代码用 Flexbox 把三张作曲家卡片横向排列。注意 `.container` 上的 `display: flex`：\n\n```css\n.container {\n  display: flex;\n  gap: 20px;\n  justify-content: center;\n}\n\n.card {\n  flex: 1;\n}\n```\n`gap` 是卡片之间的间距，`flex: 1` 让每张卡片平均分配宽度。",
+          "下面的代码用 Flexbox 把三张作曲家卡片横向排列。注意 `.container` 上的 `display: flex`：\n\n\```css\n.container {\n  display: flex;\n  gap: 20px;\n  justify-content: center;\n}\n\n.card {\n  flex: 1;\n}\n\```\n`gap` 是卡片之间的间距，`flex: 1` 让每张卡片平均分配宽度。",
       },
       {
         type: "task",
@@ -1066,7 +1066,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "水平居中与垂直居中",
         content:
-          "在网页布局中，居中对齐是最常用的技巧之一：\n\n**水平居中（文字）：**\n```css\ntext-align: center;\n```\n\n**水平居中（块级元素）：**\n```css\nmargin: 0 auto;\n```\n\n**Flexbox 一键居中（最强方法）：**\n```css\n.container {\n  display: flex;\n  justify-content: center;  /* 水平居中 */\n  align-items: center;      /* 垂直居中 */\n}\n```",
+          "在网页布局中，居中对齐是最常用的技巧之一：\n\n**水平居中（文字）：**\n\```css\ntext-align: center;\n\```\n\n**水平居中（块级元素）：**\n\```css\nmargin: 0 auto;\n\```\n\n**Flexbox 一键居中（最强方法）：**\n\```css\n.container {\n  display: flex;\n  justify-content: center;  /* 水平居中 */\n  align-items: center;      /* 垂直居中 */\n}\n\```",
       },
       {
         type: "explain",
@@ -1078,7 +1078,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面的代码创建了一个居中的"演奏邀请卡"。`.wrapper` 使用 Flexbox 将卡片在页面中水平和垂直居中，`.card` 内的文字也居中对齐：\n\n```css\n.wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 200px;\n}\n\n.card {\n  text-align: center;\n}\n```',
+          '下面的代码创建了一个居中的"演奏邀请卡"。`.wrapper` 使用 Flexbox 将卡片在页面中水平和垂直居中，`.card` 内的文字也居中对齐：\n\n\```css\n.wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 200px;\n}\n\n.card {\n  text-align: center;\n}\n\```',
       },
       {
         type: "task",
@@ -1109,25 +1109,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "static 与 relative",
         content:
-          "所有元素默认都是 `position: static`（正常文档流，位置由 HTML 顺序决定）。\n\n`position: relative` 让元素可以**相对于自己原来的位置**偏移：\n\n```css\n.box {\n  position: relative;\n  top: 10px;    /* 下移 10px */\n  left: 20px;   /* 右移 20px */\n}\n```\n\n- 元素仍然占据原来的空间（别人不会顶上来）\n- 就像乐团成员在自己的座位上微微调整姿势，不影响旁边的乐手",
+          "所有元素默认都是 `position: static`（正常文档流，位置由 HTML 顺序决定）。\n\n`position: relative` 让元素可以**相对于自己原来的位置**偏移：\n\n\```css\n.box {\n  position: relative;\n  top: 10px;    /* 下移 10px */\n  left: 20px;   /* 右移 20px */\n}\n\```\n\n- 元素仍然占据原来的空间（别人不会顶上来）\n- 就像乐团成员在自己的座位上微微调整姿势，不影响旁边的乐手",
       },
       {
         type: "explain",
         title: "absolute — 脱离文档流",
         content:
-          "`position: absolute` 让元素脱离正常文档流，相对于**最近的已定位祖先**定位：\n\n```css\n.stage {\n  position: relative;  /* 祖先必须有定位 */\n}\n\n.soloist {\n  position: absolute;\n  top: 20px;\n  right: 30px;\n}\n```\n\n- 元素完全脱离文档流（不占据原来的空间）\n- 用 `top`、`right`、`bottom`、`left` 控制位置\n- 就像**独奏者走出乐团，站在舞台前方的精确位置**",
+          "`position: absolute` 让元素脱离正常文档流，相对于**最近的已定位祖先**定位：\n\n\```css\n.stage {\n  position: relative;  /* 祖先必须有定位 */\n}\n\n.soloist {\n  position: absolute;\n  top: 20px;\n  right: 30px;\n}\n\```\n\n- 元素完全脱离文档流（不占据原来的空间）\n- 用 `top`、`right`、`bottom`、`left` 控制位置\n- 就像**独奏者走出乐团，站在舞台前方的精确位置**",
       },
       {
         type: "explain",
         title: "fixed 与 sticky",
         content:
-          '`position: fixed` — 相对于**浏览器窗口**定位，滚动也不动：\n\n```css\n.navbar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  z-index: 100;\n}\n```\n\n`position: sticky` — 滚动到一定阈值后"粘"住：\n\n```css\n.header {\n  position: sticky;\n  top: 0;\n}\n```\n\n- `fixed` 像**舞台追光灯**——永远锁定在视野中\n- `sticky` 像**指挥台**——正常流动，但一旦到达顶部就固定\n- `z-index` 控制层叠顺序（数值越大越靠前）',
+          '`position: fixed` — 相对于**浏览器窗口**定位，滚动也不动：\n\n\```css\n.navbar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  z-index: 100;\n}\n\```\n\n`position: sticky` — 滚动到一定阈值后"粘"住：\n\n\```css\n.header {\n  position: sticky;\n  top: 0;\n}\n\```\n\n- `fixed` 像**舞台追光灯**——永远锁定在视野中\n- `sticky` 像**指挥台**——正常流动，但一旦到达顶部就固定\n- `z-index` 控制层叠顺序（数值越大越靠前）',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码模拟了一个舞台布局：指挥台（sticky 顶部）、独奏者（absolute 在卡片中央）、乐手（relative 偏移）：\n\n```css\n.stage {\n  position: relative;\n  height: 300px;\n}\n\n.soloist {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.player {\n  position: relative;\n  left: 20px;\n}\n```\n看预览区中元素的位置关系。独奏者始终在卡片右上角！",
+          "下面的代码模拟了一个舞台布局：指挥台（sticky 顶部）、独奏者（absolute 在卡片中央）、乐手（relative 偏移）：\n\n\```css\n.stage {\n  position: relative;\n  height: 300px;\n}\n\n.soloist {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.player {\n  position: relative;\n  left: 20px;\n}\n\```\n看预览区中元素的位置关系。独奏者始终在卡片右上角！",
       },
       {
         type: "task",
@@ -1158,13 +1158,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "创建网格",
         content:
-          '用 `display: grid` 创建网格容器，`grid-template-columns` 定义列：\n\n```css\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 16px;\n}\n```\n\n- `1fr` — "一份"（fraction），自动分配剩余空间\n- `1fr 1fr 1fr` — 三等分（三列宽度相等）\n- `repeat(3, 1fr)` — 等价写法\n- `gap` — 格子之间的间距\n\n三列等宽就像三行声部并行推进——每个格子就是一个小节！',
+          '用 `display: grid` 创建网格容器，`grid-template-columns` 定义列：\n\n\```css\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 16px;\n}\n\```\n\n- `1fr` — "一份"（fraction），自动分配剩余空间\n- `1fr 1fr 1fr` — 三等分（三列宽度相等）\n- `repeat(3, 1fr)` — 等价写法\n- `gap` — 格子之间的间距\n\n三列等宽就像三行声部并行推进——每个格子就是一个小节！',
       },
       {
         type: "explain",
         title: "行与列的精确控制",
         content:
-          "`grid-template-rows` 定义行高：\n\n```css\n.container {\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 200px;\n}\n```\n\n子元素可以跨越多列或多行：\n\n```css\n.card:first-child {\n  grid-column: span 2;  /* 跨 2 列 */\n}\n\n.card:last-child {\n  grid-column: 1 / 3;   /* 从第1条线到第3条线（也是跨2列） */\n}\n```\n\n就像总谱中某个声部的长音符跨越了好几个小节！",
+          "`grid-template-rows` 定义行高：\n\n\```css\n.container {\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 200px;\n}\n\```\n\n子元素可以跨越多列或多行：\n\n\```css\n.card:first-child {\n  grid-column: span 2;  /* 跨 2 列 */\n}\n\n.card:last-child {\n  grid-column: 1 / 3;   /* 从第1条线到第3条线（也是跨2列） */\n}\n\```\n\n就像总谱中某个声部的长音符跨越了好几个小节！",
       },
       {
         type: "explain",
@@ -1176,7 +1176,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          "下面的代码用 Grid 创建了 2×3 的作曲家卡片网格，最后一张跨 2 列：\n\n```css\n.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 12px;\n}\n\n.card:last-child {\n  grid-column: span 2;\n}\n```\n切换到预览区观察网格布局——每张卡片在二维网格中都有精确位置。",
+          "下面的代码用 Grid 创建了 2×3 的作曲家卡片网格，最后一张跨 2 列：\n\n\```css\n.grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 12px;\n}\n\n.card:last-child {\n  grid-column: span 2;\n}\n\```\n切换到预览区观察网格布局——每张卡片在二维网格中都有精确位置。",
       },
       {
         type: "task",
@@ -1207,19 +1207,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是响应式设计？",
         content:
-          '响应式设计让同一个网页在桌面、平板、手机上都有良好的体验。核心工具是 `@media` 查询：\n\n```css\n/* 手机端（默认） */\n.card { width: 100%; }\n\n/* 平板（≥600px） */\n@media (min-width: 600px) {\n  .card { width: 48%; }\n}\n\n/* 桌面（≥900px） */\n@media (min-width: 900px) {\n  .card { width: 30%; }\n}\n```\n\n`@media` 后面跟着一个"条件"——当条件满足时，里面的样式才生效。\n\n**移动端优先（推荐）**：先写手机样式作为默认，再用 `min-width` 逐步增强大屏。',
+          '响应式设计让同一个网页在桌面、平板、手机上都有良好的体验。核心工具是 `@media` 查询：\n\n\```css\n/* 手机端（默认） */\n.card { width: 100%; }\n\n/* 平板（≥600px） */\n@media (min-width: 600px) {\n  .card { width: 48%; }\n}\n\n/* 桌面（≥900px） */\n@media (min-width: 900px) {\n  .card { width: 30%; }\n}\n\```\n\n`@media` 后面跟着一个"条件"——当条件满足时，里面的样式才生效。\n\n**移动端优先（推荐）**：先写手机样式作为默认，再用 `min-width` 逐步增强大屏。',
       },
       {
         type: "explain",
         title: "常见的断点",
         content:
-          "三个常用的响应式断点：\n\n| 断点 | 设备 | 典型宽度 |\n|------|------|----------|\n| 小屏 | 手机 | < 640px（默认） |\n| 中屏 | 平板 | 640px ~ 1024px |\n| 大屏 | 桌面 | > 1024px |\n\n```css\n/* 默认：手机（单列） */\n.grid { grid-template-columns: 1fr; }\n\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n\n就像独奏版（手机）、室内乐版（平板）、管弦乐版（桌面）——核心旋律不变，编制递增！",
+          "三个常用的响应式断点：\n\n| 断点 | 设备 | 典型宽度 |\n|------|------|----------|\n| 小屏 | 手机 | < 640px（默认） |\n| 中屏 | 平板 | 640px ~ 1024px |\n| 大屏 | 桌面 | > 1024px |\n\n\```css\n/* 默认：手机（单列） */\n.grid { grid-template-columns: 1fr; }\n\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n\```\n\n就像独奏版（手机）、室内乐版（平板）、管弦乐版（桌面）——核心旋律不变，编制递增！",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          "下面的代码已经包含了响应式断点。试着**改变浏览器窗口的宽度**，你会看到卡片从 1 列变成 2 列再变成 3 列：\n\n```css\n/* 手机：单列 */\n.grid { grid-template-columns: 1fr; }\n\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n在这个网站中，把浏览器窗口从左边向右拖拽，看看发生了什么？",
+          "下面的代码已经包含了响应式断点。试着**改变浏览器窗口的宽度**，你会看到卡片从 1 列变成 2 列再变成 3 列：\n\n\```css\n/* 手机：单列 */\n.grid { grid-template-columns: 1fr; }\n\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n\```\n在这个网站中，把浏览器窗口从左边向右拖拽，看看发生了什么？",
       },
       {
         type: "task",
@@ -1297,19 +1297,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "第一行 JavaScript",
         content:
-          'JavaScript 写在 `<script>` 标签中。先看一个最简单的方法——`alert()`，它会弹出一个提示框：\n\n```html\n<script>\n  alert("你好，音乐世界！");\n</script>\n```\n\n切换到 JS 标签页，你可以看到编辑器中已经有了这段代码。预览区会在页面加载时弹出问候。',
+          'JavaScript 写在 `<script>` 标签中。先看一个最简单的方法——`alert()`，它会弹出一个提示框：\n\n\```html\n<script>\n  alert("你好，音乐世界！");\n</script>\n\```\n\n切换到 JS 标签页，你可以看到编辑器中已经有了这段代码。预览区会在页面加载时弹出问候。',
       },
       {
         type: "explain",
         title: "console.log — 开发者的耳朵",
         content:
-          '`console.log()` 是 JS 中最常用的调试方法。它会在浏览器的**控制台**（Console）中输出信息：\n\n```js\nconsole.log("这段文字会出现在控制台");\n```\n\n就像指挥家用耳朵听排练效果，开发者用 `console.log` 查看代码运行情况。\n\n打开预览区，然后按 `F12` 打开开发者工具，切换到"Console"标签页，你就能看到输出了！',
+          '`console.log()` 是 JS 中最常用的调试方法。它会在浏览器的**控制台**（Console）中输出信息：\n\n\```js\nconsole.log("这段文字会出现在控制台");\n\```\n\n就像指挥家用耳朵听排练效果，开发者用 `console.log` 查看代码运行情况。\n\n打开预览区，然后按 `F12` 打开开发者工具，切换到"Console"标签页，你就能看到输出了！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码就是编辑器中你看到的。一个 `alert` 欢迎你，一个 `console.log` 输出信息：\n\n```js\nalert("欢迎来到音乐编程之旅！");\nconsole.log("页面加载完成，准备就绪！");\n```\n试试修改 `alert` 和 `console.log` 中的文字。',
+          '下面的代码就是编辑器中你看到的。一个 `alert` 欢迎你，一个 `console.log` 输出信息：\n\n\```js\nalert("欢迎来到音乐编程之旅！");\nconsole.log("页面加载完成，准备就绪！");\n\```\n试试修改 `alert` 和 `console.log` 中的文字。',
       },
       {
         type: "task",
@@ -1340,25 +1340,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是变量？",
         content:
-          '变量是一个**有名字的容器**，用来存储数据。你可以把任何东西放进去，然后用名字来取用：\n\n```js\nlet composer = "肖邦";\nlet piece = "夜曲";\nlet year = 1830;\n```\n\n- `let` — 声明一个变量（可以修改）\n- `const` — 声明一个常量（不能修改）\n- `composer` / `piece` — 变量名（你自己起的名字）\n- `"肖邦"` — 字符串（文本），用引号包裹\n- `1830` — 数字，不需要引号',
+          '变量是一个**有名字的容器**，用来存储数据。你可以把任何东西放进去，然后用名字来取用：\n\n\```js\nlet composer = "肖邦";\nlet piece = "夜曲";\nlet year = 1830;\n\```\n\n- `let` — 声明一个变量（可以修改）\n- `const` — 声明一个常量（不能修改）\n- `composer` / `piece` — 变量名（你自己起的名字）\n- `"肖邦"` — 字符串（文本），用引号包裹\n- `1830` — 数字，不需要引号',
       },
       {
         type: "explain",
         title: "拼接字符串",
         content:
-          '用 `+` 号可以把字符串和变量拼接在一起：\n\n```js\nlet composer = "肖邦";\nlet sentence = "我最喜欢的作曲家是" + composer;\n```\n\n更好的写法是**模板字符串**，用反引号 `` ` `` 包裹，`${}` 插入变量：\n\n```js\nlet sentence = `我最喜欢的作曲家是${composer}`;\n```\n\n就像把两个乐句连接成一个完整的乐段！',
+          '用 `+` 号可以把字符串和变量拼接在一起：\n\n\```js\nlet composer = "肖邦";\nlet sentence = "我最喜欢的作曲家是" + composer;\n\```\n\n更好的写法是**模板字符串**，用反引号 `` ` `` 包裹，`${}` 插入变量：\n\n\```js\nlet sentence = `我最喜欢的作曲家是${composer}`;\n\```\n\n就像把两个乐句连接成一个完整的乐段！',
       },
       {
         type: "explain",
         title: "document.querySelector — 找到页面中的元素",
         content:
-          '`document.querySelector()` 可以找到页面上的 HTML 元素，然后通过 `.textContent` 修改它的文字内容：\n\n```js\nlet el = document.querySelector("h1");\nel.textContent = "新的标题";\n```\n\n就像指挥家用手势指定"现在看这里"，`querySelector` 帮你指向页面中的元素。',
+          '`document.querySelector()` 可以找到页面上的 HTML 元素，然后通过 `.textContent` 修改它的文字内容：\n\n\```js\nlet el = document.querySelector("h1");\nel.textContent = "新的标题";\n\```\n\n就像指挥家用手势指定"现在看这里"，`querySelector` 帮你指向页面中的元素。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用变量存储了作曲家信息，然后用 `querySelector` 把它们显示在页面上：\n\n```js\nlet composer = "弗雷德里克·肖邦";\nlet piece = "降E大调夜曲 Op.9 No.2";\nlet description = `${composer}的代表作之一是《${piece}》。`;\n\ndocument.querySelector("#composer").textContent = composer;\ndocument.querySelector("#piece").textContent = piece;\ndocument.querySelector("#description").textContent = description;\n```\n切换到 JS 标签页查看完整代码。运行后，JavaScript 会自动把信息填入页面。',
+          '下面的代码用变量存储了作曲家信息，然后用 `querySelector` 把它们显示在页面上：\n\n\```js\nlet composer = "弗雷德里克·肖邦";\nlet piece = "降E大调夜曲 Op.9 No.2";\nlet description = `${composer}的代表作之一是《${piece}》。`;\n\ndocument.querySelector("#composer").textContent = composer;\ndocument.querySelector("#piece").textContent = piece;\ndocument.querySelector("#description").textContent = description;\n\```\n切换到 JS 标签页查看完整代码。运行后，JavaScript 会自动把信息填入页面。',
       },
       {
         type: "task",
@@ -1389,25 +1389,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "四种基础数据类型",
         content:
-          'JavaScript 有几种基础数据类型，就像乐团中的乐器分类：\n\n- **string（字符串）** — 文字，用引号包裹 `"巴赫"`\n- **number（数字）** — 数值，可运算 `1685`, `3.14`\n- **boolean（布尔值）** — 只有 `true` 或 `false`，像二分音符的"有/无"\n- **null / undefined** — "空"值，表示没有内容\n\n```js\nlet composer = "巴赫";        // string\nlet birthYear = 1685;         // number\nlet isBaroque = true;         // boolean\nlet encore = null;            // null（故意为空）\n```\n\n用 `typeof` 查看类型：\n```js\nconsole.log(typeof "巴赫");   // "string"\nconsole.log(typeof 1685);     // "number"\nconsole.log(typeof true);     // "boolean"\n```',
+          'JavaScript 有几种基础数据类型，就像乐团中的乐器分类：\n\n- **string（字符串）** — 文字，用引号包裹 `"巴赫"`\n- **number（数字）** — 数值，可运算 `1685`, `3.14`\n- **boolean（布尔值）** — 只有 `true` 或 `false`，像二分音符的"有/无"\n- **null / undefined** — "空"值，表示没有内容\n\n\```js\nlet composer = "巴赫";        // string\nlet birthYear = 1685;         // number\nlet isBaroque = true;         // boolean\nlet encore = null;            // null（故意为空）\n\```\n\n用 `typeof` 查看类型：\n\```js\nconsole.log(typeof "巴赫");   // "string"\nconsole.log(typeof 1685);     // "number"\nconsole.log(typeof true);     // "boolean"\n\```',
       },
       {
         type: "explain",
         title: "算术运算符 — 数字的计算",
         content:
-          '数字可以做加减乘除，就像计算节拍：\n\n```js\nlet a = 10;\nlet b = 3;\n\nconsole.log(a + b);  // 13  加法（也用于字符串拼接！）\nconsole.log(a - b);  // 7   减法\nconsole.log(a * b);  // 30  乘法\nconsole.log(a / b);  // 3.333... 除法\nconsole.log(a % b);  // 1   取余数（模运算）\nconsole.log(a ** 2); // 100 幂运算\n```\n\n`%`（取余）特别实用——判断奇偶：`n % 2 === 0` 就是偶数。\n\n字符串的 `+` 是拼接：`"Bach" + " " + "1685"` → `"Bach 1685"`',
+          '数字可以做加减乘除，就像计算节拍：\n\n\```js\nlet a = 10;\nlet b = 3;\n\nconsole.log(a + b);  // 13  加法（也用于字符串拼接！）\nconsole.log(a - b);  // 7   减法\nconsole.log(a * b);  // 30  乘法\nconsole.log(a / b);  // 3.333... 除法\nconsole.log(a % b);  // 1   取余数（模运算）\nconsole.log(a ** 2); // 100 幂运算\n\```\n\n`%`（取余）特别实用——判断奇偶：`n % 2 === 0` 就是偶数。\n\n字符串的 `+` 是拼接：`"Bach" + " " + "1685"` → `"Bach 1685"`',
       },
       {
         type: "explain",
         title: "比较运算符 — 返回布尔值",
         content:
-          "比较运算符像评委打分，返回 `true` 或 `false`：\n\n```js\nconsole.log(5 > 3);   // true\nconsole.log(5 < 3);   // false\nconsole.log(5 === 5); // true（等于）\nconsole.log(5 !== 3); // true（不等于）\nconsole.log(5 >= 5);  // true\nconsole.log(5 <= 3);  // false\n```\n\n比较结果常用于 `if` 条件判断中——这就是下一节课要学的！",
+          "比较运算符像评委打分，返回 `true` 或 `false`：\n\n\```js\nconsole.log(5 > 3);   // true\nconsole.log(5 < 3);   // false\nconsole.log(5 === 5); // true（等于）\nconsole.log(5 !== 3); // true（不等于）\nconsole.log(5 >= 5);  // true\nconsole.log(5 <= 3);  // false\n\```\n\n比较结果常用于 `if` 条件判断中——这就是下一节课要学的！",
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码练习了数据类型和运算符：\n\n```js\nlet composer = "巴赫";\nlet birthYear = 1685;\nlet isBaroque = true;\n\n// 计算今年是多少周年\nlet currentYear = 2026;\nlet anniversary = currentYear - birthYear;\n\n// 判断是否是整百年\nlet isCentury = birthYear % 100 === 0;\n\nconsole.log(composer + " 诞生于 " + birthYear);\nconsole.log("距今 " + anniversary + " 年");\nconsole.log("是否整百年？" + isCentury);\n```',
+          '下面的代码练习了数据类型和运算符：\n\n\```js\nlet composer = "巴赫";\nlet birthYear = 1685;\nlet isBaroque = true;\n\n// 计算今年是多少周年\nlet currentYear = 2026;\nlet anniversary = currentYear - birthYear;\n\n// 判断是否是整百年\nlet isCentury = birthYear % 100 === 0;\n\nconsole.log(composer + " 诞生于 " + birthYear);\nconsole.log("距今 " + anniversary + " 年");\nconsole.log("是否整百年？" + isCentury);\n\```',
       },
       {
         type: "task",
@@ -1438,19 +1438,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是函数？",
         content:
-          '函数是一段**有名字的代码块**，把一组操作封装起来，需要时调用：\n\n```js\nfunction sayHello() {\n  alert("你好！");\n}\n\nsayHello();  // 调用函数\n```\n\n函数的好处：\n- **避免重复**：同样的代码不用写很多遍\n- **给代码起名字**：一看函数名就知道它做什么\n- **可以传参数**：像给动机配不同的乐器',
+          '函数是一段**有名字的代码块**，把一组操作封装起来，需要时调用：\n\n\```js\nfunction sayHello() {\n  alert("你好！");\n}\n\nsayHello();  // 调用函数\n\```\n\n函数的好处：\n- **避免重复**：同样的代码不用写很多遍\n- **给代码起名字**：一看函数名就知道它做什么\n- **可以传参数**：像给动机配不同的乐器',
       },
       {
         type: "explain",
         title: "带参数的函数",
         content:
-          '函数可以接收**参数**（输入），然后根据参数做不同的事：\n\n```js\nfunction introduce(composer, piece) {\n  return `${composer}创作了《${piece}》。`;\n}\n\nlet result1 = introduce("肖邦", "夜曲");\nlet result2 = introduce("莫扎特", "魔笛");\n```\n\n- `composer` 和 `piece` 是**参数**——像函数接收的输入\n- `return` 把结果**返回**——像函数给出的输出\n- 同样一个 `introduce` 函数，传入不同的作曲家，得到不同的句子',
+          '函数可以接收**参数**（输入），然后根据参数做不同的事：\n\n\```js\nfunction introduce(composer, piece) {\n  return `${composer}创作了《${piece}》。`;\n}\n\nlet result1 = introduce("肖邦", "夜曲");\nlet result2 = introduce("莫扎特", "魔笛");\n\```\n\n- `composer` 和 `piece` 是**参数**——像函数接收的输入\n- `return` 把结果**返回**——像函数给出的输出\n- 同样一个 `introduce` 函数，传入不同的作曲家，得到不同的句子',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码定义了一个 `createCard` 函数，它接收作曲家信息并返回 HTML 字符串：\n\n```js\nfunction createCard(composer, period, piece) {\n  return `\n    <div class="card">\n      <h2>${composer}</h2>\n      <p>时期：${period}</p>\n      <p>代表作：《${piece}》</p>\n    </div>\n  `;\n}\n\nlet html = createCard("巴赫", "巴洛克", "赋格的艺术");\nlet html2 = createCard("德彪西", "印象派", "月光");\n```\n切换到 JS 标签页看看函数怎么生成页面的三张卡片。',
+          '下面的代码定义了一个 `createCard` 函数，它接收作曲家信息并返回 HTML 字符串：\n\n\```js\nfunction createCard(composer, period, piece) {\n  return `\n    <div class="card">\n      <h2>${composer}</h2>\n      <p>时期：${period}</p>\n      <p>代表作：《${piece}》</p>\n    </div>\n  `;\n}\n\nlet html = createCard("巴赫", "巴洛克", "赋格的艺术");\nlet html2 = createCard("德彪西", "印象派", "月光");\n\```\n切换到 JS 标签页看看函数怎么生成页面的三张卡片。',
       },
       {
         type: "task",
@@ -1481,19 +1481,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "什么是事件？",
         content:
-          '在 JavaScript 中，**事件**是发生在 HTML 元素上的"事情"：\n\n- `click` — 用户点击了一个元素\n- `input` — 用户在输入框中输入了文字\n- `mouseenter` — 鼠标移入了一个元素\n\n用 `addEventListener` 可以"监听"这些事件：\n\n```js\nlet btn = document.querySelector("#myBtn");\n\nbtn.addEventListener("click", function() {\n  alert("你点击了按钮！");\n});\n```\n\n就像给按钮装了一只耳朵，它时刻听着有没有"点击"这件事发生。',
+          '在 JavaScript 中，**事件**是发生在 HTML 元素上的"事情"：\n\n- `click` — 用户点击了一个元素\n- `input` — 用户在输入框中输入了文字\n- `mouseenter` — 鼠标移入了一个元素\n\n用 `addEventListener` 可以"监听"这些事件：\n\n\```js\nlet btn = document.querySelector("#myBtn");\n\nbtn.addEventListener("click", function() {\n  alert("你点击了按钮！");\n});\n\```\n\n就像给按钮装了一只耳朵，它时刻听着有没有"点击"这件事发生。',
       },
       {
         type: "explain",
         title: "事件处理函数",
         content:
-          '`addEventListener` 接收两个参数：\n1. 事件类型（`"click"`）\n2. 事件处理函数——事件发生时执行的代码\n\n```js\nbtn.addEventListener("click", function() {\n  // 点击后执行的代码写在这里\n  document.querySelector("h1").textContent = "标题变了！";\n});\n```\n\n事件处理函数就像一个"回响"——你按下琴键（触发事件），琴声响起（执行函数）。',
+          '`addEventListener` 接收两个参数：\n1. 事件类型（`"click"`）\n2. 事件处理函数——事件发生时执行的代码\n\n\```js\nbtn.addEventListener("click", function() {\n  // 点击后执行的代码写在这里\n  document.querySelector("h1").textContent = "标题变了！";\n});\n\```\n\n事件处理函数就像一个"回响"——你按下琴键（触发事件），琴声响起（执行函数）。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码有一个按钮和一个显示区域。每次点击按钮，计数器就会加 1：\n\n```js\nlet count = 0;\nlet btn = document.querySelector("#countBtn");\nlet display = document.querySelector("#display");\n\nbtn.addEventListener("click", function() {\n  count = count + 1;\n  display.textContent = `你点击了 ${count} 次`;\n});\n```\n切换到 JS 标签页和预览区，试试点击按钮！',
+          '下面的代码有一个按钮和一个显示区域。每次点击按钮，计数器就会加 1：\n\n\```js\nlet count = 0;\nlet btn = document.querySelector("#countBtn");\nlet display = document.querySelector("#display");\n\nbtn.addEventListener("click", function() {\n  count = count + 1;\n  display.textContent = `你点击了 ${count} 次`;\n});\n\```\n切换到 JS 标签页和预览区，试试点击按钮！',
       },
       {
         type: "task",
@@ -1524,25 +1524,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "不只是 click — 认识更多事件类型",
         content:
-          '`addEventListener` 的第一个参数是事件**类型**，除了 `"click"`，还有很多常用事件：\n\n- `"input"` — 输入框内容**每次变化**都触发\n- `"change"` — 输入框内容改变且**失去焦点**时触发\n- `"keydown"` — 键盘**按下**任意键\n- `"mouseenter"` — 鼠标**进入**元素\n- `"mouseleave"` — 鼠标**离开**元素\n- `"submit"` — 表单**提交**时触发\n\n```js\ninputEl.addEventListener("input", function() {\n  // 用户每输入一个字就执行\n});\n```',
+          '`addEventListener` 的第一个参数是事件**类型**，除了 `"click"`，还有很多常用事件：\n\n- `"input"` — 输入框内容**每次变化**都触发\n- `"change"` — 输入框内容改变且**失去焦点**时触发\n- `"keydown"` — 键盘**按下**任意键\n- `"mouseenter"` — 鼠标**进入**元素\n- `"mouseleave"` — 鼠标**离开**元素\n- `"submit"` — 表单**提交**时触发\n\n\```js\ninputEl.addEventListener("input", function() {\n  // 用户每输入一个字就执行\n});\n\```',
       },
       {
         type: "explain",
         title: 'event 对象 — 事件携带的"信息卡"',
         content:
-          '每个事件触发时，浏览器都会创建一个 **event 对象**，包含了事件的详细信息。在回调函数中通过参数接收：\n\n```js\nbtn.addEventListener("click", function(event) {\n  console.log(event.target);  // 被点击的元素\n  console.log(event.type);    // "click"\n});\n\ninputEl.addEventListener("input", function(event) {\n  console.log(event.target.value); // 输入框当前内容\n});\n\ndocument.addEventListener("keydown", function(event) {\n  console.log(event.key); // 按下的键名，如 "Enter"、"a"\n});\n```\n\n`event.target` 是触发事件的元素——就像知道是哪个乐器在发声。',
+          '每个事件触发时，浏览器都会创建一个 **event 对象**，包含了事件的详细信息。在回调函数中通过参数接收：\n\n\```js\nbtn.addEventListener("click", function(event) {\n  console.log(event.target);  // 被点击的元素\n  console.log(event.type);    // "click"\n});\n\ninputEl.addEventListener("input", function(event) {\n  console.log(event.target.value); // 输入框当前内容\n});\n\ndocument.addEventListener("keydown", function(event) {\n  console.log(event.key); // 按下的键名，如 "Enter"、"a"\n});\n\```\n\n`event.target` 是触发事件的元素——就像知道是哪个乐器在发声。',
       },
       {
         type: "explain",
         title: "preventDefault — 阻止默认行为",
         content:
-          '有些元素有自己的默认行为：\n\n- 表单的 `<button type="submit">` 点击后会**刷新页面**\n- `<a>` 链接点击后会**跳转**\n\n用 `event.preventDefault()` 阻止这些默认行为：\n\n```js\nform.addEventListener("submit", function(event) {\n  event.preventDefault();  // 阻止页面刷新！\n  console.log("表单已提交（但页面不刷新）");\n});\n```\n\n这在前端开发中非常常用——表单提交通常用 JS 处理，不需要刷新页面。',
+          '有些元素有自己的默认行为：\n\n- 表单的 `<button type="submit">` 点击后会**刷新页面**\n- `<a>` 链接点击后会**跳转**\n\n用 `event.preventDefault()` 阻止这些默认行为：\n\n\```js\nform.addEventListener("submit", function(event) {\n  event.preventDefault();  // 阻止页面刷新！\n  console.log("表单已提交（但页面不刷新）");\n});\n\```\n\n这在前端开发中非常常用——表单提交通常用 JS 处理，不需要刷新页面。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码综合使用多种事件：\n\n```js\n// 实时显示输入内容\ninputEl.addEventListener("input", function(event) {\n  displayEl.textContent = event.target.value;\n});\n\n// 鼠标悬停高亮\ncard.addEventListener("mouseenter", function() {\n  card.style.borderColor = "#C9A96E";\n});\ncard.addEventListener("mouseleave", function() {\n  card.style.borderColor = "#D4C5A9";\n});\n\n// 回车键提交\ndocument.addEventListener("keydown", function(event) {\n  if (event.key === "Enter") {\n    console.log("你按了回车！");\n  }\n});\n```',
+          '下面的代码综合使用多种事件：\n\n\```js\n// 实时显示输入内容\ninputEl.addEventListener("input", function(event) {\n  displayEl.textContent = event.target.value;\n});\n\n// 鼠标悬停高亮\ncard.addEventListener("mouseenter", function() {\n  card.style.borderColor = "#C9A96E";\n});\ncard.addEventListener("mouseleave", function() {\n  card.style.borderColor = "#D4C5A9";\n});\n\n// 回车键提交\ndocument.addEventListener("keydown", function(event) {\n  if (event.key === "Enter") {\n    console.log("你按了回车！");\n  }\n});\n\```',
       },
       {
         type: "task",
@@ -1573,19 +1573,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: 'if 语句 — 代码的"如果"',
         content:
-          '`if` 后面跟一个**条件**（真或假），条件为真时执行花括号里的代码：\n\n```js\nlet score = 85;\n\nif (score >= 80) {\n  console.log("优秀！");\n}\n```\n\n比较运算符：\n- `===` — 等于（推荐）\n- `!==` — 不等于\n- `>` / `<` — 大于/小于\n- `>=` / `<=` — 大于等于/小于等于\n\n就像评委打分：分数 ≥ 80 才算优秀。',
+          '`if` 后面跟一个**条件**（真或假），条件为真时执行花括号里的代码：\n\n\```js\nlet score = 85;\n\nif (score >= 80) {\n  console.log("优秀！");\n}\n\```\n\n比较运算符：\n- `===` — 等于（推荐）\n- `!==` — 不等于\n- `>` / `<` — 大于/小于\n- `>=` / `<=` — 大于等于/小于等于\n\n就像评委打分：分数 ≥ 80 才算优秀。',
       },
       {
         type: "explain",
         title: "else 与 else if — 多分岔路",
         content:
-          '`else` 处理"否则"的情况，`else if` 添加更多分岔：\n\n```js\nlet score = 75;\n\nif (score >= 90) {\n  console.log("金奖！🥇");\n} else if (score >= 80) {\n  console.log("银奖！🥈");\n} else if (score >= 60) {\n  console.log("铜奖🥉");\n} else {\n  console.log("继续努力！");\n}\n```\n\n逻辑运算符：\n- `&&` — 并且（两个条件都成立）\n- `||` — 或者（任意一个成立）\n\n```js\nif (score >= 80 && score < 90) {\n  console.log("优秀但未达金奖");\n}\n```',
+          '`else` 处理"否则"的情况，`else if` 添加更多分岔：\n\n\```js\nlet score = 75;\n\nif (score >= 90) {\n  console.log("金奖！🥇");\n} else if (score >= 80) {\n  console.log("银奖！🥈");\n} else if (score >= 60) {\n  console.log("铜奖🥉");\n} else {\n  console.log("继续努力！");\n}\n\```\n\n逻辑运算符：\n- `&&` — 并且（两个条件都成立）\n- `||` — 或者（任意一个成立）\n\n\```js\nif (score >= 80 && score < 90) {\n  console.log("优秀但未达金奖");\n}\n\```',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码是一个作曲家答题器。输入答案后点击提交，JS 判断你的答案是否正确：\n\n```js\nlet answer = document.querySelector("#answer").value;\n\nif (answer === "肖邦") {\n  display.textContent = "✓ 回答正确！";\n} else {\n  display.textContent = "✗ 再想想？提示：他是波兰人";\n}\n```\n切换到 JS 标签页，看 submit 按钮的点击事件中完整的 if/else 逻辑。',
+          '下面的代码是一个作曲家答题器。输入答案后点击提交，JS 判断你的答案是否正确：\n\n\```js\nlet answer = document.querySelector("#answer").value;\n\nif (answer === "肖邦") {\n  display.textContent = "✓ 回答正确！";\n} else {\n  display.textContent = "✗ 再想想？提示：他是波兰人";\n}\n\```\n切换到 JS 标签页，看 submit 按钮的点击事件中完整的 if/else 逻辑。',
       },
       {
         type: "task",
@@ -1616,19 +1616,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "创建和访问数组",
         content:
-          '数组用 `[]` 创建，每个值用逗号分隔：\n\n```js\nlet composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];\n```\n\n- `composers[0]` — 第 1 项（"巴赫"），索引从 0 开始\n- `composers[2]` — 第 3 项（"贝多芬"）\n- `composers.length` — 数组长度（4）\n\n就像曲目单上第一首是 0 号，不是 1 号——这是编程的习惯。',
+          '数组用 `[]` 创建，每个值用逗号分隔：\n\n\```js\nlet composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];\n\```\n\n- `composers[0]` — 第 1 项（"巴赫"），索引从 0 开始\n- `composers[2]` — 第 3 项（"贝多芬"）\n- `composers.length` — 数组长度（4）\n\n就像曲目单上第一首是 0 号，不是 1 号——这是编程的习惯。',
       },
       {
         type: "explain",
         title: "数组常用方法",
         content:
-          '数组有一套强大的操作方法：\n\n- `.push("德彪西")` — 在末尾添加一项\n- `.pop()` — 移除末尾一项\n- `.join("、")` — 用指定分隔符拼接为字符串\n\n```js\nlet composers = ["巴赫", "莫扎特"];\ncomposers.push("肖邦");  // 末尾追加\n// composers 现在是 ["巴赫", "莫扎特", "肖邦"]\n\nlet text = composers.join(" | ");\n// text 是 "巴赫 | 莫扎特 | 肖邦"\n```\n\n`.join()` 特别实用——把一个数组变成页面上的文字！',
+          '数组有一套强大的操作方法：\n\n- `.push("德彪西")` — 在末尾添加一项\n- `.pop()` — 移除末尾一项\n- `.join("、")` — 用指定分隔符拼接为字符串\n\n\```js\nlet composers = ["巴赫", "莫扎特"];\ncomposers.push("肖邦");  // 末尾追加\n// composers 现在是 ["巴赫", "莫扎特", "肖邦"]\n\nlet text = composers.join(" | ");\n// text 是 "巴赫 | 莫扎特 | 肖邦"\n\```\n\n`.join()` 特别实用——把一个数组变成页面上的文字！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码维护了一个作曲家数组，用 `.push()` 添加新名字，用 `.join()` 显示到页面上：\n\n```js\nlet composers = ["巴赫", "莫扎特", "贝多芬"];\n\n// 显示列表\nlet text = composers.join(" · ");\ndisplay.textContent = text;\n\n// 添加新作曲家\ncomposers.push("肖邦");\ntext = composers.join(" · ");\ndisplay.textContent = text;\n```\n切换到 JS 标签页，输入一个名字点击添加，看列表实时更新。',
+          '下面的代码维护了一个作曲家数组，用 `.push()` 添加新名字，用 `.join()` 显示到页面上：\n\n\```js\nlet composers = ["巴赫", "莫扎特", "贝多芬"];\n\n// 显示列表\nlet text = composers.join(" · ");\ndisplay.textContent = text;\n\n// 添加新作曲家\ncomposers.push("肖邦");\ntext = composers.join(" · ");\ndisplay.textContent = text;\n\```\n切换到 JS 标签页，输入一个名字点击添加，看列表实时更新。',
       },
       {
         type: "task",
@@ -1659,19 +1659,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "for 循环",
         content:
-          "`for` 循环由三部分组成：初始化、条件、步进：\n\n```js\nfor (let i = 0; i < composers.length; i++) {\n  console.log(composers[i]);\n}\n```\n\n- `let i = 0` — 从 0 开始\n- `i < composers.length` — 只要 i 小于数组长度就继续\n- `i++` — 每轮 i 加 1\n\n`i` 是计数器，第一轮是 0，第二轮是 1... 依次取遍数组中的每一项，就像**节拍器从第 1 拍数到最后 1 拍**。",
+          "`for` 循环由三部分组成：初始化、条件、步进：\n\n\```js\nfor (let i = 0; i < composers.length; i++) {\n  console.log(composers[i]);\n}\n\```\n\n- `let i = 0` — 从 0 开始\n- `i < composers.length` — 只要 i 小于数组长度就继续\n- `i++` — 每轮 i 加 1\n\n`i` 是计数器，第一轮是 0，第二轮是 1... 依次取遍数组中的每一项，就像**节拍器从第 1 拍数到最后 1 拍**。",
       },
       {
         type: "explain",
         title: "forEach — 更优雅的循环",
         content:
-          '`forEach` 是专门为数组设计的循环方法：\n\n```js\ncomposers.forEach(function(name, index) {\n  console.log(`${index + 1}. ${name}`);\n});\n```\n\n- `name` — 当前项的值\n- `index` — 当前项的索引（0 开始）\n\n```js\n// 用 forEach 批量生成 HTML\nlet html = "";\ncomposers.forEach(function(composer) {\n  html += `<li>${composer}</li>`;\n});\ndocument.querySelector("ul").innerHTML = html;\n```\n\n`forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。',
+          '`forEach` 是专门为数组设计的循环方法：\n\n\```js\ncomposers.forEach(function(name, index) {\n  console.log(`${index + 1}. ${name}`);\n});\n\```\n\n- `name` — 当前项的值\n- `index` — 当前项的索引（0 开始）\n\n\```js\n// 用 forEach 批量生成 HTML\nlet html = "";\ncomposers.forEach(function(composer) {\n  html += `<li>${composer}</li>`;\n});\ndocument.querySelector("ul").innerHTML = html;\n\```\n\n`forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用 `forEach` 遍历作曲家数组，把每一项渲染成 HTML 卡片：\n\n```js\nlet composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];\nlet html = "";\n\ncomposers.forEach(function(name, index) {\n  html += `\n    <div class="card">\n      <span class="num">${index + 1}</span>\n      ${name}\n    </div>\n  `;\n});\n\ndocument.querySelector("#list").innerHTML = html;\n```\n切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。',
+          '下面的代码用 `forEach` 遍历作曲家数组，把每一项渲染成 HTML 卡片：\n\n\```js\nlet composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];\nlet html = "";\n\ncomposers.forEach(function(name, index) {\n  html += `\n    <div class="card">\n      <span class="num">${index + 1}</span>\n      ${name}\n    </div>\n  `;\n});\n\ndocument.querySelector("#list").innerHTML = html;\n\```\n切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。',
       },
       {
         type: "task",
@@ -1702,25 +1702,25 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '.map() — 把每个元素"转换"成新值',
         content:
-          '`.map()` 遍历数组中的每一项，执行一个函数，**返回一个新数组**：\n\n```js\nlet names = ["bach", "mozart", "beethoven"];\n\nlet upper = names.map(function(name) {\n  return name.toUpperCase();\n});\n// upper 是 ["BACH", "MOZART", "BEETHOVEN"]\n// names 没变！\n```\n\n就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。',
+          '`.map()` 遍历数组中的每一项，执行一个函数，**返回一个新数组**：\n\n\```js\nlet names = ["bach", "mozart", "beethoven"];\n\nlet upper = names.map(function(name) {\n  return name.toUpperCase();\n});\n// upper 是 ["BACH", "MOZART", "BEETHOVEN"]\n// names 没变！\n\```\n\n就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。',
       },
       {
         type: "explain",
         title: ".filter() — 筛选符合条件的元素",
         content:
-          "`.filter()` 遍历数组，**只保留**让条件函数返回 `true` 的项：\n\n```js\nlet years = [1685, 1756, 1770, 1810, 1862];\n\nlet after1800 = years.filter(function(year) {\n  return year > 1800;\n});\n// after1800 是 [1810, 1862]\n```\n\n就像在管弦乐团中只挑出木管声部——其他声部还在，但你只需要木管。",
+          "`.filter()` 遍历数组，**只保留**让条件函数返回 `true` 的项：\n\n\```js\nlet years = [1685, 1756, 1770, 1810, 1862];\n\nlet after1800 = years.filter(function(year) {\n  return year > 1800;\n});\n// after1800 是 [1810, 1862]\n\```\n\n就像在管弦乐团中只挑出木管声部——其他声部还在，但你只需要木管。",
       },
       {
         type: "explain",
         title: "链式调用 — map 和 filter 组合",
         content:
-          '`.map()` 和 `.filter()` 都返回数组，所以可以**链式调用**：\n\n```js\nlet composers = [\n  { name: "巴赫", year: 1720 },\n  { name: "莫扎特", year: 1785 },\n  { name: "贝多芬", year: 1805 },\n  { name: "肖邦", year: 1835 }\n];\n\n// 先筛选 1800 年后的，再只取名字\nlet names = composers\n  .filter(function(c) { return c.year > 1800; })\n  .map(function(c) { return c.name; });\n// names 是 ["贝多芬", "肖邦"]\n```\n\n就像先筛选出 19 世纪的作品，再把它们的标题提取出来——流水线操作！',
+          '`.map()` 和 `.filter()` 都返回数组，所以可以**链式调用**：\n\n\```js\nlet composers = [\n  { name: "巴赫", year: 1720 },\n  { name: "莫扎特", year: 1785 },\n  { name: "贝多芬", year: 1805 },\n  { name: "肖邦", year: 1835 }\n];\n\n// 先筛选 1800 年后的，再只取名字\nlet names = composers\n  .filter(function(c) { return c.year > 1800; })\n  .map(function(c) { return c.name; });\n// names 是 ["贝多芬", "肖邦"]\n\```\n\n就像先筛选出 19 世纪的作品，再把它们的标题提取出来——流水线操作！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用 `.filter()` 筛选出含有"A"的作曲家名字，再用 `.map()` 转为大写：\n\n```js\nlet composers = ["Bach", "Mozart", "Beethoven", "Chopin", "Debussy", "Vivaldi"];\n\n// 筛选名字里含 "a"（不区分大小写）的\nlet filtered = composers.filter(function(name) {\n  return name.toLowerCase().includes("a");\n});\n\n// 转为大写\nlet result = filtered.map(function(name) {\n  return name.toUpperCase();\n});\n\ndocument.querySelector("#output").innerHTML =\n  result.join(" | ");\n```',
+          '下面的代码用 `.filter()` 筛选出含有"A"的作曲家名字，再用 `.map()` 转为大写：\n\n\```js\nlet composers = ["Bach", "Mozart", "Beethoven", "Chopin", "Debussy", "Vivaldi"];\n\n// 筛选名字里含 "a"（不区分大小写）的\nlet filtered = composers.filter(function(name) {\n  return name.toLowerCase().includes("a");\n});\n\n// 转为大写\nlet result = filtered.map(function(name) {\n  return name.toUpperCase();\n});\n\ndocument.querySelector("#output").innerHTML =\n  result.join(" | ");\n\```',
       },
       {
         type: "task",
@@ -1751,19 +1751,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "选中一组元素",
         content:
-          '`querySelectorAll` 返回所有匹配的元素列表（NodeList）：\n\n```js\nlet cards = document.querySelectorAll(".card");\n```\n\nNodeList 可以和数组一样用 `forEach` 遍历：\n\n```js\ncards.forEach(function(card) {\n  card.style.border = "2px solid gold";\n});\n```\n\n也支持索引：\n```js\ncards[0].style.background = "#FFFAF2";  // 第一张\ncards[1].style.background = "#F0F8FF";  // 第二张\n```',
+          '`querySelectorAll` 返回所有匹配的元素列表（NodeList）：\n\n\```js\nlet cards = document.querySelectorAll(".card");\n\```\n\nNodeList 可以和数组一样用 `forEach` 遍历：\n\n\```js\ncards.forEach(function(card) {\n  card.style.border = "2px solid gold";\n});\n\```\n\n也支持索引：\n\```js\ncards[0].style.background = "#FFFAF2";  // 第一张\ncards[1].style.background = "#F0F8FF";  // 第二张\n\```',
       },
       {
         type: "explain",
         title: "classList — 批量切换样式类",
         content:
-          '`classList` 比直接操作 `style` 更优雅，配合 CSS 类使用：\n\n- `.classList.add("active")` — 添加类\n- `.classList.remove("active")` — 移除类\n- `.classList.toggle("active")` — 切换（有则删，无则加）\n- `.classList.contains("active")` — 判断是否包含\n\n```js\nlet cards = document.querySelectorAll(".card");\n\ncards.forEach(function(card) {\n  card.classList.add("highlighted");\n});\n```\n\n然后 CSS 中定义 `.highlighted` 的样式即可——JS 负责逻辑，CSS 负责外观，各司其职。',
+          '`classList` 比直接操作 `style` 更优雅，配合 CSS 类使用：\n\n- `.classList.add("active")` — 添加类\n- `.classList.remove("active")` — 移除类\n- `.classList.toggle("active")` — 切换（有则删，无则加）\n- `.classList.contains("active")` — 判断是否包含\n\n\```js\nlet cards = document.querySelectorAll(".card");\n\ncards.forEach(function(card) {\n  card.classList.add("highlighted");\n});\n\```\n\n然后 CSS 中定义 `.highlighted` 的样式即可——JS 负责逻辑，CSS 负责外观，各司其职。',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码有 5 张乐器卡片。三个按钮分别实现"全选高亮""取消高亮""切换 \'弦乐\' 类"：\n\n```js\n// 高亮全部\nlet cards = document.querySelectorAll(".card");\ncards.forEach(function(card) {\n  card.classList.add("highlighted");\n});\n\n// 只看弦乐\ncards.forEach(function(card) {\n  card.classList.toggle("hidden", !card.classList.contains("strings"));\n});\n```\n切换到 JS 标签页查看完整代码，预览区点击按钮试试批量效果。',
+          '下面的代码有 5 张乐器卡片。三个按钮分别实现"全选高亮""取消高亮""切换 \'弦乐\' 类"：\n\n\```js\n// 高亮全部\nlet cards = document.querySelectorAll(".card");\ncards.forEach(function(card) {\n  card.classList.add("highlighted");\n});\n\n// 只看弦乐\ncards.forEach(function(card) {\n  card.classList.toggle("hidden", !card.classList.contains("strings"));\n});\n\```\n切换到 JS 标签页查看完整代码，预览区点击按钮试试批量效果。',
       },
       {
         type: "task",
@@ -1794,19 +1794,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "创建和访问对象",
         content:
-          '对象用 `{}` 创建，包含多组键值对：\n\n```js\nlet composer = {\n  name: "肖邦",\n  period: "浪漫主义",\n  country: "波兰",\n  birthYear: 1810\n};\n```\n\n访问属性有两种方式：\n```js\ncomposer.name       // "肖邦"（点号）\ncomposer["period"]  // "浪漫主义"（方括号）\n```\n\n修改或新增：\n```js\ncomposer.famousPiece = "夜曲";  // 新增\ncomposer.birthYear = 1809;      // 修正（肖邦实际生于 1810）\n```',
+          '对象用 `{}` 创建，包含多组键值对：\n\n\```js\nlet composer = {\n  name: "肖邦",\n  period: "浪漫主义",\n  country: "波兰",\n  birthYear: 1810\n};\n\```\n\n访问属性有两种方式：\n\```js\ncomposer.name       // "肖邦"（点号）\ncomposer["period"]  // "浪漫主义"（方括号）\n\```\n\n修改或新增：\n\```js\ncomposer.famousPiece = "夜曲";  // 新增\ncomposer.birthYear = 1809;      // 修正（肖邦实际生于 1810）\n\```',
       },
       {
         type: "explain",
         title: "对象数组 — 真正的数据结构",
         content:
-          '对象最强大的用法是和数组结合——**对象数组**：\n\n```js\nlet composers = [\n  { name: "巴赫", period: "巴洛克", country: "德国" },\n  { name: "莫扎特", period: "古典主义", country: "奥地利" },\n  { name: "肖邦", period: "浪漫主义", country: "波兰" }\n];\n\n// 用 forEach 遍历\ncomposers.forEach(function(c) {\n  console.log(`${c.name} — ${c.period}`);\n});\n```\n\n这才是实际开发中最常见的数据形式——数组里包着对象，每个对象代表一条记录。就像 Excel 表格：每一行是数组的一项，每一列是对象的属性！',
+          '对象最强大的用法是和数组结合——**对象数组**：\n\n\```js\nlet composers = [\n  { name: "巴赫", period: "巴洛克", country: "德国" },\n  { name: "莫扎特", period: "古典主义", country: "奥地利" },\n  { name: "肖邦", period: "浪漫主义", country: "波兰" }\n];\n\n// 用 forEach 遍历\ncomposers.forEach(function(c) {\n  console.log(`${c.name} — ${c.period}`);\n});\n\```\n\n这才是实际开发中最常见的数据形式——数组里包着对象，每个对象代表一条记录。就像 Excel 表格：每一行是数组的一项，每一列是对象的属性！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码用对象数组存储了作曲家信息，用 `forEach` 遍历并生成卡片：\n\n```js\nlet composers = [\n  { name: "巴赫", period: "巴洛克", piece: "赋格的艺术" },\n  { name: "莫扎特", period: "古典主义", piece: "魔笛" },\n  { name: "肖邦", period: "浪漫主义", piece: "夜曲" }\n];\n\nlet html = "";\ncomposers.forEach(function(c) {\n  html += `\n    <div class="card">\n      <h2>${c.name}</h2>\n      <p>时期：${c.period}</p>\n      <p>代表作：《${c.piece}》</p>\n    </div>\n  `;\n});\n```\n切换到 JS 标签页查看完整代码——对象数据的结构和用途一目了然。',
+          '下面的代码用对象数组存储了作曲家信息，用 `forEach` 遍历并生成卡片：\n\n\```js\nlet composers = [\n  { name: "巴赫", period: "巴洛克", piece: "赋格的艺术" },\n  { name: "莫扎特", period: "古典主义", piece: "魔笛" },\n  { name: "肖邦", period: "浪漫主义", piece: "夜曲" }\n];\n\nlet html = "";\ncomposers.forEach(function(c) {\n  html += `\n    <div class="card">\n      <h2>${c.name}</h2>\n      <p>时期：${c.period}</p>\n      <p>代表作：《${c.piece}》</p>\n    </div>\n  `;\n});\n\```\n切换到 JS 标签页查看完整代码——对象数据的结构和用途一目了然。',
       },
       {
         type: "task",
@@ -1837,19 +1837,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "动态创建元素",
         content:
-          '`document.createElement()` 可以凭空创建一个新元素：\n\n```js\n// 创建元素\nlet card = document.createElement("div");\ncard.className = "card";         // 设类名\ncard.innerHTML = "<h2>新卡片</h2>";  // 设内容\n\n// 追加到页面\ndocument.querySelector("#list").appendChild(card);\n```\n\n就像在曲谱的空白处临时加了一行乐句——全新的元素出现在页面上。',
+          '`document.createElement()` 可以凭空创建一个新元素：\n\n\```js\n// 创建元素\nlet card = document.createElement("div");\ncard.className = "card";         // 设类名\ncard.innerHTML = "<h2>新卡片</h2>";  // 设内容\n\n// 追加到页面\ndocument.querySelector("#list").appendChild(card);\n\```\n\n就像在曲谱的空白处临时加了一行乐句——全新的元素出现在页面上。',
       },
       {
         type: "explain",
         title: "删除与替换",
         content:
-          '`.remove()` 直接删除元素：\n\n```js\nlet card = document.querySelector("#card3");\ncard.remove();  // 没了！\n```\n\n配合 `createElement` 实现增删：\n```js\nfunction addCard(title) {\n  let card = document.createElement("div");\n  card.className = "card";\n  card.textContent = title;\n  document.querySelector("#list").appendChild(card);\n}\n\nfunction removeLast() {\n  let cards = document.querySelectorAll(".card");\n  let last = cards[cards.length - 1];\n  if (last) last.remove();\n}\n```\n\n增删改查——完整的数据操作闭环！',
+          '`.remove()` 直接删除元素：\n\n\```js\nlet card = document.querySelector("#card3");\ncard.remove();  // 没了！\n\```\n\n配合 `createElement` 实现增删：\n\```js\nfunction addCard(title) {\n  let card = document.createElement("div");\n  card.className = "card";\n  card.textContent = title;\n  document.querySelector("#list").appendChild(card);\n}\n\nfunction removeLast() {\n  let cards = document.querySelectorAll(".card");\n  let last = cards[cards.length - 1];\n  if (last) last.remove();\n}\n\```\n\n增删改查——完整的数据操作闭环！',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码有一个输入框和"添加""删除最后"两个按钮，可以动态维护一张练琴计划列表：\n\n```js\nfunction addItem() {\n  let item = document.createElement("div");\n  item.className = "plan-item";\n  item.textContent = input.value;\n  list.appendChild(item);\n  input.value = "";\n}\n\nfunction removeLast() {\n  let items = document.querySelectorAll(".plan-item");\n  let last = items[items.length - 1];\n  if (last) last.remove();\n}\n```\n切换到预览区，输入内容点添加，再点删除试试——页面元素在动态变化！',
+          '下面的代码有一个输入框和"添加""删除最后"两个按钮，可以动态维护一张练琴计划列表：\n\n\```js\nfunction addItem() {\n  let item = document.createElement("div");\n  item.className = "plan-item";\n  item.textContent = input.value;\n  list.appendChild(item);\n  input.value = "";\n}\n\nfunction removeLast() {\n  let items = document.querySelectorAll(".plan-item");\n  let last = items[items.length - 1];\n  if (last) last.remove();\n}\n\```\n切换到预览区，输入内容点添加，再点删除试试——页面元素在动态变化！',
       },
       {
         type: "task",
@@ -1880,19 +1880,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "setInterval — 定时重复",
         content:
-          '`setInterval` 每隔指定毫秒执行一次回调函数：\n\n```js\n// 每 1000 毫秒（1 秒）执行一次\nlet timer = setInterval(function() {\n  count++;\n  display.textContent = count;\n  console.log("一秒过去了");\n}, 1000);\n\n// 停止\nclearInterval(timer);\n```\n\n1000 毫秒 = 1 秒。就像节拍器打在每分钟 60 拍（每拍 1000ms）。',
+          '`setInterval` 每隔指定毫秒执行一次回调函数：\n\n\```js\n// 每 1000 毫秒（1 秒）执行一次\nlet timer = setInterval(function() {\n  count++;\n  display.textContent = count;\n  console.log("一秒过去了");\n}, 1000);\n\n// 停止\nclearInterval(timer);\n\```\n\n1000 毫秒 = 1 秒。就像节拍器打在每分钟 60 拍（每拍 1000ms）。',
       },
       {
         type: "explain",
         title: "setTimeout — 延迟一次",
         content:
-          '`setTimeout` 等待指定时间后执行**一次**：\n\n```js\n// 3 秒后弹出提示\nsetTimeout(function() {\n  alert("3 秒到了！");\n}, 3000);\n\n// 取消（在还没执行前）\nlet timer = setTimeout(fn, 5000);\nclearTimeout(timer);  // 不执行了\n```\n\n就像乐谱上的延长音记号——在某个音符上停留指定时长，然后继续演奏下一个音符。\n\n`setInterval` 适合：自动轮播、倒计时、节拍器\n`setTimeout` 适合：延迟提示、debounce、定时检查',
+          '`setTimeout` 等待指定时间后执行**一次**：\n\n\```js\n// 3 秒后弹出提示\nsetTimeout(function() {\n  alert("3 秒到了！");\n}, 3000);\n\n// 取消（在还没执行前）\nlet timer = setTimeout(fn, 5000);\nclearTimeout(timer);  // 不执行了\n\```\n\n就像乐谱上的延长音记号——在某个音符上停留指定时长，然后继续演奏下一个音符。\n\n`setInterval` 适合：自动轮播、倒计时、节拍器\n`setTimeout` 适合：延迟提示、debounce、定时检查',
       },
       {
         type: "example",
         title: "看例子",
         content:
-          '下面的代码实现了一个节拍器：点击"开始"按钮，计数器每秒 +1；点击"暂停"停止：\n\n```js\nlet count = 0;\nlet timer = null;\n\nfunction startMetronome() {\n  if (timer) return;  // 防止重复启动\n  timer = setInterval(function() {\n    count++;\n    display.textContent = `节拍 ${count}`;\n  }, 1000);\n}\n\nfunction stopMetronome() {\n  clearInterval(timer);\n  timer = null;\n}\n```\n切换到预览区，点击"开始节拍"看数字每秒递增。',
+          '下面的代码实现了一个节拍器：点击"开始"按钮，计数器每秒 +1；点击"暂停"停止：\n\n\```js\nlet count = 0;\nlet timer = null;\n\nfunction startMetronome() {\n  if (timer) return;  // 防止重复启动\n  timer = setInterval(function() {\n    count++;\n    display.textContent = `节拍 ${count}`;\n  }, 1000);\n}\n\nfunction stopMetronome() {\n  clearInterval(timer);\n  timer = null;\n}\n\```\n切换到预览区，点击"开始节拍"看数字每秒递增。',
       },
       {
         type: "task",
@@ -2003,13 +2003,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '注释是你的"排练笔记"',
         content:
-          'HTML 注释用 `<!-- 注释内容 -->` 包裹，CSS 注释用 `/* 注释内容 */` 包裹，JS 注释用 `//` 或 `/* */`。\n\n注释不会被浏览器执行——它们只给"人类"看，包括未来的你自己！\n\n当你面对一个空白页面时，不要急着写代码。先写注释：\n\n```html\n<!-- 页面分为三个区域：\n  1. 顶部标题区\n  2. 中间卡片列表（3张卡片）\n  3. 底部统计区\n-->\n```\n\n这就像在乐谱上标注：呈示部、展开部、再现部。',
+          'HTML 注释用 `<!-- 注释内容 -->` 包裹，CSS 注释用 `/* 注释内容 */` 包裹，JS 注释用 `//` 或 `/* */`。\n\n注释不会被浏览器执行——它们只给"人类"看，包括未来的你自己！\n\n当你面对一个空白页面时，不要急着写代码。先写注释：\n\n\```html\n<!-- 页面分为三个区域：\n  1. 顶部标题区\n  2. 中间卡片列表（3张卡片）\n  3. 底部统计区\n-->\n\```\n\n这就像在乐谱上标注：呈示部、展开部、再现部。',
       },
       {
         type: "explain",
         title: "好的注释写什么？",
         content:
-          '**写"意图"，不写"操作"**\n\n❌ 不好的注释（描述你做了什么）：\n`// 把 3 赋给 x`\n`let x = 3;`\n\n✅ 好的注释（解释为什么）：\n`// 页面默认显示 3 张卡片（移动端一屏刚好够）`\n`let cardCount = 3;`\n\n✅ 规划型注释（先画结构，再填空）：\n```html\n<!-- 顶部区：标题 + 副标题 -->\n<header>\n  <h1>我的音乐收藏</h1>\n  <p>记录那些打动我的旋律</p>\n</header>\n\n<!-- 主内容：3 列卡片网格 -->\n<main>\n  <!-- 每张卡片：封面图、曲名、作曲家、时期标签 -->\n</main>\n```',
+          '**写"意图"，不写"操作"**\n\n❌ 不好的注释（描述你做了什么）：\n`// 把 3 赋给 x`\n`let x = 3;`\n\n✅ 好的注释（解释为什么）：\n`// 页面默认显示 3 张卡片（移动端一屏刚好够）`\n`let cardCount = 3;`\n\n✅ 规划型注释（先画结构，再填空）：\n\```html\n<!-- 顶部区：标题 + 副标题 -->\n<header>\n  <h1>我的音乐收藏</h1>\n  <p>记录那些打动我的旋律</p>\n</header>\n\n<!-- 主内容：3 列卡片网格 -->\n<main>\n  <!-- 每张卡片：封面图、曲名、作曲家、时期标签 -->\n</main>\n\```',
       },
       {
         type: "task",
@@ -2085,13 +2085,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "console.log 是什么？",
         content:
-          '`console.log()` 是 JavaScript 中最常用的调试工具。它能在控制台中打印出任何你想看的值：\n\n```js\nlet composer = "肖邦";\nconsole.log(composer);  // 控制台输出：肖邦\n\nlet count = 5;\nconsole.log("当前数量：", count);  // 可以同时打印文字和变量\n\nlet list = ["巴赫", "莫扎特", "贝多芬"];\nconsole.log("列表内容：", list);  // 数组也可以打印\n```\n\n**用法：** 在你怀疑有问题的地方，插入 `console.log(变量名)`，然后打开控制台（F12）查看输出。',
+          '`console.log()` 是 JavaScript 中最常用的调试工具。它能在控制台中打印出任何你想看的值：\n\n\```js\nlet composer = "肖邦";\nconsole.log(composer);  // 控制台输出：肖邦\n\nlet count = 5;\nconsole.log("当前数量：", count);  // 可以同时打印文字和变量\n\nlet list = ["巴赫", "莫扎特", "贝多芬"];\nconsole.log("列表内容：", list);  // 数组也可以打印\n\```\n\n**用法：** 在你怀疑有问题的地方，插入 `console.log(变量名)`，然后打开控制台（F12）查看输出。',
       },
       {
         type: "explain",
         title: "用 console.log 追踪代码流程",
         content:
-          '最常见的调试模式是**在函数开头和关键位置加 console.log**，追踪代码执行到了哪里：\n\n```js\nfunction playMusic(piece) {\n  console.log("=== playMusic 被调用了 ===");\n  console.log("传入的参数 piece：", piece);\n\n  if (piece === "夜曲") {\n    console.log("进入夜曲分支");\n    // ... 处理夜曲\n  } else {\n    console.log("进入其他曲目分支");\n    // ... 处理其他\n  }\n\n  console.log("=== playMusic 执行完毕 ===");\n}\n```\n\n这就像在排练中逐段录音回放——你清楚地知道代码走到了哪里、每个变量是什么值。当你觉得"为什么结果不对"时，先 `console.log` 看看到底发生了什么。',
+          '最常见的调试模式是**在函数开头和关键位置加 console.log**，追踪代码执行到了哪里：\n\n\```js\nfunction playMusic(piece) {\n  console.log("=== playMusic 被调用了 ===");\n  console.log("传入的参数 piece：", piece);\n\n  if (piece === "夜曲") {\n    console.log("进入夜曲分支");\n    // ... 处理夜曲\n  } else {\n    console.log("进入其他曲目分支");\n    // ... 处理其他\n  }\n\n  console.log("=== playMusic 执行完毕 ===");\n}\n\```\n\n这就像在排练中逐段录音回放——你清楚地知道代码走到了哪里、每个变量是什么值。当你觉得"为什么结果不对"时，先 `console.log` 看看到底发生了什么。',
       },
       {
         type: "example",
@@ -2136,12 +2136,12 @@ export const lessons: Lesson[] = [
       {
         type: 'explain',
         title: '条件断点与 DOM 断点',
-        content: '**条件断点：** 右键点击行号 → "Add conditional breakpoint" → 输入条件表达式（如 i === 47）。只有当条件为 true 时才会暂停。这在调试第 47 次循环出问题时是救星。\n\n```js\n// 条件断点表达式：i === 47\n// 循环到第 48 次（i=47）时才会暂停\nfor (let i = 0; i < 100; i++) {\n  processItem(data[i])\n}\n```\n\n**DOM 断点：** 在 Elements 面板中右键一个 DOM 元素 → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个元素被修改、删除或属性变化时，自动跳转到修改它的 JS 代码。\n\n**XHR/Fetch 断点：** 在 Sources 面板右侧的 XHR/fetch Breakpoints 中添加 URL 片段（如 search）。当有请求匹配这个 URL 时自动暂停——调试网络请求的神器。',
+        content: '**条件断点：** 右键点击行号 → "Add conditional breakpoint" → 输入条件表达式（如 i === 47）。只有当条件为 true 时才会暂停。这在调试第 47 次循环出问题时是救星。\n\n\```js\n// 条件断点表达式：i === 47\n// 循环到第 48 次（i=47）时才会暂停\nfor (let i = 0; i < 100; i++) {\n  processItem(data[i])\n}\n\```\n\n**DOM 断点：** 在 Elements 面板中右键一个 DOM 元素 → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个元素被修改、删除或属性变化时，自动跳转到修改它的 JS 代码。\n\n**XHR/Fetch 断点：** 在 Sources 面板右侧的 XHR/fetch Breakpoints 中添加 URL 片段（如 search）。当有请求匹配这个 URL 时自动暂停——调试网络请求的神器。',
       },
       {
         type: 'example',
         title: '看例子',
-        content: '下面的代码是一个猜数字游戏。请在 Sources 面板中设置断点来调试：\n\n```js\nlet target = Math.floor(Math.random() * 100)\nlet score = 100\nlet attempts = 0\n\nfunction guess(num) {\n  attempts++\n  if (num > target) {\n    score -= 10\n    return \'太大了！\'\n  } else if (num < target) {\n    score -= 10\n    return \'太小了！\'\n  } else {\n    // 在这里设置一个断点——检查 num、target、score 的值\n    return \'恭喜！你得分为 \' + score\n  }\n}\n```\n\n打开 F12 → Sources → 在 return 那行设置断点 → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有变量。',
+        content: '下面的代码是一个猜数字游戏。请在 Sources 面板中设置断点来调试：\n\n\```js\nlet target = Math.floor(Math.random() * 100)\nlet score = 100\nlet attempts = 0\n\nfunction guess(num) {\n  attempts++\n  if (num > target) {\n    score -= 10\n    return \'太大了！\'\n  } else if (num < target) {\n    score -= 10\n    return \'太小了！\'\n  } else {\n    // 在这里设置一个断点——检查 num、target、score 的值\n    return \'恭喜！你得分为 \' + score\n  }\n}\n\```\n\n打开 F12 → Sources → 在 return 那行设置断点 → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有变量。',
       },
       {
         type: 'task',
@@ -2172,7 +2172,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "好名字 vs 坏名字",
         content:
-          '来看一组对比：\n\n**❌ 坏命名（你一个月后根本看不懂）：**\n```js\nlet a = ["巴赫", "莫扎特", "贝多芬"];\nlet b = document.querySelector("#c");\nlet d = document.querySelector("#e");\nd.addEventListener("click", function() {\n  let f = Math.floor(Math.random() * a.length);\n  b.textContent = a[f];\n});\n```\n\n**✅ 好命名（任何人都看得懂）：**\n```js\nlet composers = ["巴赫", "莫扎特", "贝多芬"];\nlet displayEl = document.querySelector("#composerDisplay");\nlet shuffleBtn = document.querySelector("#shuffleBtn");\nshuffleBtn.addEventListener("click", function() {\n  let randomIndex = Math.floor(Math.random() * composers.length);\n  displayEl.textContent = composers[randomIndex];\n});\n```\n\n两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**',
+          '来看一组对比：\n\n**❌ 坏命名（你一个月后根本看不懂）：**\n\```js\nlet a = ["巴赫", "莫扎特", "贝多芬"];\nlet b = document.querySelector("#c");\nlet d = document.querySelector("#e");\nd.addEventListener("click", function() {\n  let f = Math.floor(Math.random() * a.length);\n  b.textContent = a[f];\n});\n\```\n\n**✅ 好命名（任何人都看得懂）：**\n\```js\nlet composers = ["巴赫", "莫扎特", "贝多芬"];\nlet displayEl = document.querySelector("#composerDisplay");\nlet shuffleBtn = document.querySelector("#shuffleBtn");\nshuffleBtn.addEventListener("click", function() {\n  let randomIndex = Math.floor(Math.random() * composers.length);\n  displayEl.textContent = composers[randomIndex];\n});\n\```\n\n两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**',
       },
       {
         type: "explain",
@@ -2210,7 +2210,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "为什么要把大函数拆小？",
         content:
-          '看看这个"做了一切"的函数：\n\n```js\nfunction handleEverything() {\n  // 获取数据\n  // 验证数据\n  // 渲染页面\n  // 绑定事件\n  // 处理点击\n  // 更新显示\n  // 保存记录\n  // …… 100 行代码\n}\n```\n\n问题：\n1. **难读懂** — 你需要从头到尾理解才能修改其中一步\n2. **难调试** — 出错时不知道是哪一步的问题\n3. **难复用** — 如果另一个地方也需要"渲染页面"，你没法单独调用\n\n**好代码的样子：**\n```js\nfunction initPage() {\n  let data = loadData();\n  renderCards(data);\n  bindEvents();\n}\n\nfunction loadData() { /* 只负责获取数据 */ }\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindEvents() { /* 只负责绑定事件 */ }\n```\n\n每个函数**只做一件事**，函数名准确描述它做什么。这就是"单一职责"——编程最重要的组织原则之一。',
+          '看看这个"做了一切"的函数：\n\n\```js\nfunction handleEverything() {\n  // 获取数据\n  // 验证数据\n  // 渲染页面\n  // 绑定事件\n  // 处理点击\n  // 更新显示\n  // 保存记录\n  // …… 100 行代码\n}\n\```\n\n问题：\n1. **难读懂** — 你需要从头到尾理解才能修改其中一步\n2. **难调试** — 出错时不知道是哪一步的问题\n3. **难复用** — 如果另一个地方也需要"渲染页面"，你没法单独调用\n\n**好代码的样子：**\n\```js\nfunction initPage() {\n  let data = loadData();\n  renderCards(data);\n  bindEvents();\n}\n\nfunction loadData() { /* 只负责获取数据 */ }\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindEvents() { /* 只负责绑定事件 */ }\n\```\n\n每个函数**只做一件事**，函数名准确描述它做什么。这就是"单一职责"——编程最重要的组织原则之一。',
       },
       {
         type: "explain",
@@ -2222,7 +2222,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "拆分前 vs 拆分后",
         content:
-          '**拆分前（一个函数做三件事）：**\n```js\nfunction setupMusicPage() {\n  // 渲染卡片 — 15 行\n  let cardHTML = "";\n  for (let i = 0; i < pieces.length; i++) {\n    cardHTML += `<div class="card"><h3>${pieces[i].name}</h3></div>`;\n  }\n  gallery.innerHTML = cardHTML;\n\n  // 绑定筛选 — 10 行\n  filterBtn.addEventListener("click", function() {\n    let filtered = pieces.filter(/* ... */);\n    // 重新渲染...\n  });\n\n  // 显示统计 — 8 行\n  let total = pieces.length;\n  statsEl.textContent = "共 " + total + " 首曲目";\n}\n```\n\n**拆分后（三个函数各司其职）：**\n```js\nfunction initPage() {\n  renderCards(pieces);\n  bindFilter();\n  showStats(pieces);\n}\n\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindFilter() { /* 只负责筛选逻辑 */ }\nfunction showStats(list) { /* 只负责显示统计 */ }\n```\n\n现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新渲染——这就是拆分的威力！',
+          '**拆分前（一个函数做三件事）：**\n\```js\nfunction setupMusicPage() {\n  // 渲染卡片 — 15 行\n  let cardHTML = "";\n  for (let i = 0; i < pieces.length; i++) {\n    cardHTML += `<div class="card"><h3>${pieces[i].name}</h3></div>`;\n  }\n  gallery.innerHTML = cardHTML;\n\n  // 绑定筛选 — 10 行\n  filterBtn.addEventListener("click", function() {\n    let filtered = pieces.filter(/* ... */);\n    // 重新渲染...\n  });\n\n  // 显示统计 — 8 行\n  let total = pieces.length;\n  statsEl.textContent = "共 " + total + " 首曲目";\n}\n\```\n\n**拆分后（三个函数各司其职）：**\n\```js\nfunction initPage() {\n  renderCards(pieces);\n  bindFilter();\n  showStats(pieces);\n}\n\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindFilter() { /* 只负责筛选逻辑 */ }\nfunction showStats(list) { /* 只负责显示统计 */ }\n\```\n\n现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新渲染——这就是拆分的威力！',
       },
       {
         type: "task",
@@ -2254,13 +2254,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "innerHTML vs createElement",
         content:
-          '到目前为止你都是用 `innerHTML` 来渲染内容：\n\n```js\nlistEl.innerHTML = "<div class=\\"card\\"><h3>" + name + "</h3></div>";\n```\n\n这种方式像"复印乐谱"——一次性替换全部内容。问题是什么？\n\n1. **会覆盖已有的内容** —— 你无法只"添加一张卡片"，必须重新生成全部卡片\n2. **已绑定的事件会丢失** —— 替换 innerHTML 后，原来的按钮点击事件没了\n3. **字符串拼接容易出错** —— 引号嵌套很痛苦\n\n`createElement` 更精细：\n\n```js\nlet card = document.createElement("div");  // 创建一个 <div>\ncard.classList.add("card");                 // 加 class="card"\nlet title = document.createElement("h3");\ncard.appendChild(title);                    // 把 h3 放入 div\nlistEl.appendChild(card);                   // 把卡片放入页面\n```\n\n每个元素都是独立的对象，你可以随时修改、删除、移动它们——就像活页乐谱，可以随时插入一页。',
+          '到目前为止你都是用 `innerHTML` 来渲染内容：\n\n\```js\nlistEl.innerHTML = "<div class=\\"card\\"><h3>" + name + "</h3></div>";\n\```\n\n这种方式像"复印乐谱"——一次性替换全部内容。问题是什么？\n\n1. **会覆盖已有的内容** —— 你无法只"添加一张卡片"，必须重新生成全部卡片\n2. **已绑定的事件会丢失** —— 替换 innerHTML 后，原来的按钮点击事件没了\n3. **字符串拼接容易出错** —— 引号嵌套很痛苦\n\n`createElement` 更精细：\n\n\```js\nlet card = document.createElement("div");  // 创建一个 <div>\ncard.classList.add("card");                 // 加 class="card"\nlet title = document.createElement("h3");\ncard.appendChild(title);                    // 把 h3 放入 div\nlistEl.appendChild(card);                   // 把卡片放入页面\n\```\n\n每个元素都是独立的对象，你可以随时修改、删除、移动它们——就像活页乐谱，可以随时插入一页。',
       },
       {
         type: "explain",
         title: "createElement 五步法",
         content:
-          '创建一个元素的标准流程：\n\n**1. 创建元素：** `document.createElement("标签名")`\n```js\nlet card = document.createElement("div");\n```\n\n**2. 设置内容：** `.textContent` 或 `.classList.add()`\n```js\ncard.textContent = "肖邦夜曲";\ncard.classList.add("card");\n```\n\n**3. 找到容器：** `document.querySelector("...")`\n```js\nlet list = document.querySelector("#cardList");\n```\n\n**4. 挂载到页面：** `.appendChild(元素)`\n```js\nlist.appendChild(card);  // 卡片出现在页面上了！\n```\n\n**5. 可以继续操作它：** 因为它是一个变量，随时可以修改\n```js\ncard.style.background = "#FFFAF2";  // 改变背景\ncard.addEventListener("click", function() { ... });  // 加事件\n```\n\n对比一下：innerHTML 生成的内容是"死"的字符串，createElement 生成的是"活"的对象。',
+          '创建一个元素的标准流程：\n\n**1. 创建元素：** `document.createElement("标签名")`\n\```js\nlet card = document.createElement("div");\n\```\n\n**2. 设置内容：** `.textContent` 或 `.classList.add()`\n\```js\ncard.textContent = "肖邦夜曲";\ncard.classList.add("card");\n\```\n\n**3. 找到容器：** `document.querySelector("...")`\n\```js\nlet list = document.querySelector("#cardList");\n\```\n\n**4. 挂载到页面：** `.appendChild(元素)`\n\```js\nlist.appendChild(card);  // 卡片出现在页面上了！\n\```\n\n**5. 可以继续操作它：** 因为它是一个变量，随时可以修改\n\```js\ncard.style.background = "#FFFAF2";  // 改变背景\ncard.addEventListener("click", function() { ... });  // 加事件\n\```\n\n对比一下：innerHTML 生成的内容是"死"的字符串，createElement 生成的是"活"的对象。',
       },
       {
         type: "task",
@@ -2292,19 +2292,19 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "问题：动态创建的元素没有事件",
         content:
-          '上一节课你学会了用 `createElement` 动态创建元素。但这里有一个棘手的问题：\n\n```js\n// 页面初始有 3 张卡片，每张绑定了点击事件\nlet cards = document.querySelectorAll(".card");\ncards.forEach(function(card) {\n  card.addEventListener("click", function() {\n    alert("点击了卡片！");\n  });\n});\n\n// 后来动态添加了一张新卡片\nlet newCard = document.createElement("div");\nnewCard.classList.add("card");\nlistEl.appendChild(newCard);\n// ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在\n```\n\n这是一个很常见的 bug：**动态添加的元素不会自动继承之前绑定的事件**。',
+          '上一节课你学会了用 `createElement` 动态创建元素。但这里有一个棘手的问题：\n\n\```js\n// 页面初始有 3 张卡片，每张绑定了点击事件\nlet cards = document.querySelectorAll(".card");\ncards.forEach(function(card) {\n  card.addEventListener("click", function() {\n    alert("点击了卡片！");\n  });\n});\n\n// 后来动态添加了一张新卡片\nlet newCard = document.createElement("div");\nnewCard.classList.add("card");\nlistEl.appendChild(newCard);\n// ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在\n\```\n\n这是一个很常见的 bug：**动态添加的元素不会自动继承之前绑定的事件**。',
       },
       {
         type: "explain",
         title: "解决方案：把事件绑在父容器上",
         content:
-          '不分别给每张卡片绑事件，而是**给包含所有卡片的父容器绑一个事件**。当子元素被点击时，事件会"冒泡"到父容器：\n\n```js\n// 给父容器绑定事件（只绑定一次！）\nlistEl.addEventListener("click", function(event) {\n  // event.target 是实际被点击的元素\n  // closest(".card") 向上查找最近的 .card 容器\n  let card = event.target.closest(".card");\n  if (card) {\n    // 找到了！说明点击的是某张卡片\n    card.classList.toggle("highlight");\n  }\n});\n\n// 之后动态添加的卡片也会自动响应，因为事件绑在父容器上！\n```\n\n这就是**事件委托**——把事件交给父容器代理，不管子元素是初始就有还是后来加的，都能响应。',
+          '不分别给每张卡片绑事件，而是**给包含所有卡片的父容器绑一个事件**。当子元素被点击时，事件会"冒泡"到父容器：\n\n\```js\n// 给父容器绑定事件（只绑定一次！）\nlistEl.addEventListener("click", function(event) {\n  // event.target 是实际被点击的元素\n  // closest(".card") 向上查找最近的 .card 容器\n  let card = event.target.closest(".card");\n  if (card) {\n    // 找到了！说明点击的是某张卡片\n    card.classList.toggle("highlight");\n  }\n});\n\n// 之后动态添加的卡片也会自动响应，因为事件绑在父容器上！\n\```\n\n这就是**事件委托**——把事件交给父容器代理，不管子元素是初始就有还是后来加的，都能响应。',
       },
       {
         type: "explain",
         title: "关键 API：closest() 和 matches()",
         content:
-          '**`event.target`** — 实际被点击的元素（可能是卡片里的 h3、span、甚至卡片本身）\n\n**`.closest("选择器")`** — 从当前元素向上查找最近的匹配祖先\n```js\nevent.target.closest(".card");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span\n```\n\n**`.matches("选择器")`** — 判断当前元素是否匹配选择器\n```js\nif (event.target.matches("button")) {\n  // 点击的是按钮\n}\n```\n\n**常见模式：用 data 属性区分不同元素**\n```html\n<button data-action="delete">删除</button>\n<button data-action="like">收藏</button>\n```\n```js\nlet action = event.target.dataset.action;  // "delete" 或 "like"\n```',
+          '**`event.target`** — 实际被点击的元素（可能是卡片里的 h3、span、甚至卡片本身）\n\n**`.closest("选择器")`** — 从当前元素向上查找最近的匹配祖先\n\```js\nevent.target.closest(".card");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span\n\```\n\n**`.matches("选择器")`** — 判断当前元素是否匹配选择器\n\```js\nif (event.target.matches("button")) {\n  // 点击的是按钮\n}\n\```\n\n**常见模式：用 data 属性区分不同元素**\n\```html\n<button data-action="delete">删除</button>\n<button data-action="like">收藏</button>\n\```\n\```js\nlet action = event.target.dataset.action;  // "delete" 或 "like"\n\```',
       },
       {
         type: "task",
@@ -2336,13 +2336,13 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "两种操作 DOM 的思维方式",
         content:
-          '你在前面几节课中接触过两种操作页面的方式：\n\n**方式一：命令式（Imperative）—— 直接告诉 DOM "做什么"**\n```js\n// 添加一项：创建元素、设置内容、挂载到页面\nlet card = document.createElement("div");\ncard.textContent = "肖邦夜曲";\nlistEl.appendChild(card);\n\n// 删除一项：找到元素、调用 remove()\ndocument.querySelector("#card-3").remove();\n\n// 修改一项：找到元素、修改内容\ndocument.querySelector("#card-2 h3").textContent = "新曲名";\n```\n每一步都要精确操作 DOM。简单直接，但程序复杂时很容易混乱——你需要同时记住"数据在哪"和"DOM 在哪"。\n\n**方式二：声明式（Declarative）—— 告诉程序 "我想要什么"，然后调用渲染函数**\n```js\nlet pieces = [{ name: "肖邦夜曲" }, { name: "布兰登堡" }];\n\nfunction render(list) {\n  // 清空容器\n  listEl.innerHTML = "";\n  // 根据数据重新生成全部 DOM\n  list.forEach(function(p) {\n    let card = document.createElement("div");\n    card.textContent = p.name;\n    listEl.appendChild(card);\n  });\n}\n\nrender(pieces);  // 初始渲染\n\n// 需要添加时：只修改数据，然后重新渲染\npieces.push({ name: "月光奏鸣曲" });\nrender(pieces);\n\n// 删除、修改——全部一样：先改数据，再 render()\n```\n\n这就是**数据驱动**——数据是"唯一的真相来源"，页面只是数据的反映。',
+          '你在前面几节课中接触过两种操作页面的方式：\n\n**方式一：命令式（Imperative）—— 直接告诉 DOM "做什么"**\n\```js\n// 添加一项：创建元素、设置内容、挂载到页面\nlet card = document.createElement("div");\ncard.textContent = "肖邦夜曲";\nlistEl.appendChild(card);\n\n// 删除一项：找到元素、调用 remove()\ndocument.querySelector("#card-3").remove();\n\n// 修改一项：找到元素、修改内容\ndocument.querySelector("#card-2 h3").textContent = "新曲名";\n\```\n每一步都要精确操作 DOM。简单直接，但程序复杂时很容易混乱——你需要同时记住"数据在哪"和"DOM 在哪"。\n\n**方式二：声明式（Declarative）—— 告诉程序 "我想要什么"，然后调用渲染函数**\n\```js\nlet pieces = [{ name: "肖邦夜曲" }, { name: "布兰登堡" }];\n\nfunction render(list) {\n  // 清空容器\n  listEl.innerHTML = "";\n  // 根据数据重新生成全部 DOM\n  list.forEach(function(p) {\n    let card = document.createElement("div");\n    card.textContent = p.name;\n    listEl.appendChild(card);\n  });\n}\n\nrender(pieces);  // 初始渲染\n\n// 需要添加时：只修改数据，然后重新渲染\npieces.push({ name: "月光奏鸣曲" });\nrender(pieces);\n\n// 删除、修改——全部一样：先改数据，再 render()\n\```\n\n这就是**数据驱动**——数据是"唯一的真相来源"，页面只是数据的反映。',
       },
       {
         type: "explain",
         title: "为什么框架都用这个模式？",
         content:
-          'Vue、React、Angular——所有现代前端框架的核心思想都是**数据驱动视图**。\n\n```\n数据 (Data)  ──→  渲染函数 (Render)  ──→  页面 (DOM)\n    ↑                                         │\n    └────── 用户操作 (Events) ──────────────────┘\n```\n\n流程：\n1. **数据变了** → 用户点击、输入、或定时器触发\n2. **重新渲染** → 根据最新数据重新生成 DOM\n3. **页面更新** → 用户看到新内容\n\n框架帮我们做了"自动检测数据变化 + 高效更新 DOM"。但在纯 JS 中，你需要手动调用 `render()`。\n\n理解了这个模式，以后学 Vue 时你会发现：它做的事情一模一样，只是把"手动调 render()"变成了**自动**——你改数据，它自动帮你重新渲染。',
+          'Vue、React、Angular——所有现代前端框架的核心思想都是**数据驱动视图**。\n\n\```\n数据 (Data)  ──→  渲染函数 (Render)  ──→  页面 (DOM)\n    ↑                                         │\n    └────── 用户操作 (Events) ──────────────────┘\n\```\n\n流程：\n1. **数据变了** → 用户点击、输入、或定时器触发\n2. **重新渲染** → 根据最新数据重新生成 DOM\n3. **页面更新** → 用户看到新内容\n\n框架帮我们做了"自动检测数据变化 + 高效更新 DOM"。但在纯 JS 中，你需要手动调用 `render()`。\n\n理解了这个模式，以后学 Vue 时你会发现：它做的事情一模一样，只是把"手动调 render()"变成了**自动**——你改数据，它自动帮你重新渲染。',
       },
       {
         type: "task",
@@ -2380,19 +2380,19 @@ export const lessons: Lesson[] = [
         type: "example",
         title: '解构赋值 — 从"抽屉"里取东西',
         content:
-          "想象你有一个乐谱夹，里面有多首曲子。以前你要一首一首拿：\n\n```js\n// 旧写法\nconst piece1 = pieces[0]\nconst piece2 = pieces[1]\nconst piece3 = pieces[2]\n```\n\n解构赋值让你一次取出：\n\n```js\n// 数组解构\nconst [piece1, piece2, piece3] = pieces\n\n// 对象解构\nconst { name, composer, period } = piece\n```\n\n就像从谱架上一次取下三本乐谱——整齐又高效。",
+          "想象你有一个乐谱夹，里面有多首曲子。以前你要一首一首拿：\n\n\```js\n// 旧写法\nconst piece1 = pieces[0]\nconst piece2 = pieces[1]\nconst piece3 = pieces[2]\n\```\n\n解构赋值让你一次取出：\n\n\```js\n// 数组解构\nconst [piece1, piece2, piece3] = pieces\n\n// 对象解构\nconst { name, composer, period } = piece\n\```\n\n就像从谱架上一次取下三本乐谱——整齐又高效。",
       },
       {
         type: "example",
         title: '箭头函数 — 精简的"旋律线"',
         content:
-          "箭头函数是 `function` 的简写版：\n\n```js\n// 旧写法\nconst double = function(x) {\n  return x * 2\n}\n\n// 箭头函数\nconst double = x => x * 2\n\n// 多行逻辑用花括号\nconst greet = name => {\n  const message = '你好，' + name\n  return message\n}\n```\n\n箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。",
+          "箭头函数是 `function` 的简写版：\n\n\```js\n// 旧写法\nconst double = function(x) {\n  return x * 2\n}\n\n// 箭头函数\nconst double = x => x * 2\n\n// 多行逻辑用花括号\nconst greet = name => {\n  const message = '你好，' + name\n  return message\n}\n\```\n\n箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。",
       },
       {
         type: "example",
         title: "展开运算符 — 拆包与合并",
         content:
-          "`...` 像一只手，可以把数组/对象\"展开\"：\n\n```js\n// 合并数组\nconst classical = ['巴赫', '莫扎特']\nconst romantic = ['肖邦', '李斯特']\nconst all = [...classical, ...romantic]\n// ['巴赫', '莫扎特', '肖邦', '李斯特']\n\n// 复制对象并修改\nconst piece = { name: '月光', composer: '贝多芬' }\nconst updated = { ...piece, period: '古典主义' }\n```\n\n就像把两个乐团的乐手合并成一个更大的乐团——不改变原来的，创造一个新的。",
+          "`...` 像一只手，可以把数组/对象\"展开\"：\n\n\```js\n// 合并数组\nconst classical = ['巴赫', '莫扎特']\nconst romantic = ['肖邦', '李斯特']\nconst all = [...classical, ...romantic]\n// ['巴赫', '莫扎特', '肖邦', '李斯特']\n\n// 复制对象并修改\nconst piece = { name: '月光', composer: '贝多芬' }\nconst updated = { ...piece, period: '古典主义' }\n\```\n\n就像把两个乐团的乐手合并成一个更大的乐团——不改变原来的，创造一个新的。",
       },
       {
         type: "task",
@@ -2458,19 +2458,19 @@ console.log('乐器信息：', describe(instrument))`,
         type: "example",
         title: 'try/catch — "排练一下，看看会不会出错"',
         content:
-          "基本结构：\n\n```js\ntry {\n  // 尝试执行可能有风险的代码\n  const data = JSON.parse(userInput)\n  console.log('解析成功：', data)\n} catch (error) {\n  // 如果出错，在这里处理\n  console.log('解析失败，请输入合法的 JSON')\n  console.log('错误详情：', error.message)\n}\n```\n\n**try** 说\"试试这段代码\"。**catch** 说\"如果出错了，执行这段\"。\n\n就像排练时你标记出可能出错的地方，想好补救方案。",
+          "基本结构：\n\n\```js\ntry {\n  // 尝试执行可能有风险的代码\n  const data = JSON.parse(userInput)\n  console.log('解析成功：', data)\n} catch (error) {\n  // 如果出错，在这里处理\n  console.log('解析失败，请输入合法的 JSON')\n  console.log('错误详情：', error.message)\n}\n\```\n\n**try** 说\"试试这段代码\"。**catch** 说\"如果出错了，执行这段\"。\n\n就像排练时你标记出可能出错的地方，想好补救方案。",
       },
       {
         type: "example",
         title: 'throw — 主动"喊停"',
         content:
-          "有时候你需要主动抛出错误：\n\n```js\nfunction setVolume(level) {\n  if (level < 0 || level > 100) {\n    throw new Error('音量必须在 0-100 之间')\n  }\n  console.log('音量设置为：' + level)\n}\n\ntry {\n  setVolume(150)  // 这会触发错误\n} catch (e) {\n  console.log('设置失败：' + e.message)\n}\n```\n\n`throw` 就像指挥突然停下乐队：\"不对，长号声音太大了！\"——主动发现并指出问题。",
+          "有时候你需要主动抛出错误：\n\n\```js\nfunction setVolume(level) {\n  if (level < 0 || level > 100) {\n    throw new Error('音量必须在 0-100 之间')\n  }\n  console.log('音量设置为：' + level)\n}\n\ntry {\n  setVolume(150)  // 这会触发错误\n} catch (e) {\n  console.log('设置失败：' + e.message)\n}\n\```\n\n`throw` 就像指挥突然停下乐队：\"不对，长号声音太大了！\"——主动发现并指出问题。",
       },
       {
         type: "example",
         title: "实际场景：localStorage 读取",
         content:
-          "`localStorage` 读取时经常出错（数据损坏、格式不对）：\n\n```js\nfunction loadCollection() {\n  try {\n    const raw = localStorage.getItem('my-collection')\n    if (!raw) return []  // 没有数据，返回空数组\n    const data = JSON.parse(raw)\n    if (!Array.isArray(data)) throw new Error('数据格式错误')\n    return data\n  } catch (e) {\n    console.log('读取收藏失败，已重置：', e.message)\n    return []  // 出错就返回空数组，程序不崩溃\n  }\n}\n```\n\n这就是\"防御性编程\"——假设任何可能出错的地方都会出错，提前做好准备。",
+          "`localStorage` 读取时经常出错（数据损坏、格式不对）：\n\n\```js\nfunction loadCollection() {\n  try {\n    const raw = localStorage.getItem('my-collection')\n    if (!raw) return []  // 没有数据，返回空数组\n    const data = JSON.parse(raw)\n    if (!Array.isArray(data)) throw new Error('数据格式错误')\n    return data\n  } catch (e) {\n    console.log('读取收藏失败，已重置：', e.message)\n    return []  // 出错就返回空数组，程序不崩溃\n  }\n}\n\```\n\n这就是\"防御性编程\"——假设任何可能出错的地方都会出错，提前做好准备。",
       },
       {
         type: "task",
@@ -2482,7 +2482,7 @@ console.log('乐器信息：', describe(instrument))`,
         type: "hint",
         title: "提示",
         content:
-          "```js\nfunction safeParse(str) {\n  try {\n    const result = JSON.parse(str)\n    return result  // 成功则返回解析结果\n  } catch (e) {\n    return { error: true, message: e.message }  // 失败返回错误对象\n  }\n}\n```",
+          "\```js\nfunction safeParse(str) {\n  try {\n    const result = JSON.parse(str)\n    return result  // 成功则返回解析结果\n  } catch (e) {\n    return { error: true, message: e.message }  // 失败返回错误对象\n  }\n}\n\```",
       },
     ],
     starterCode: {
@@ -2520,13 +2520,13 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
         type: "explain",
         title: "为什么需要 localStorage？",
         content:
-          '目前你写的所有页面都有一个共同的问题：**刷新页面后，所有数据都丢失了**。\n\n收藏的曲目？没了。输入的列表？清空了。计数器？归零了。\n\n这是因为 JavaScript 变量只存在于**当前页面会话**中。刷新页面等于重新开始——所有变量重新初始化。\n\n`localStorage` 解决的就是这个问题：它把数据存在浏览器里，和页面会话无关。\n\n```js\n// 存数据\nlocalStorage.setItem("userName", "小雅");\n\n// 取数据（刷新页面后依然能读到！）\nlet name = localStorage.getItem("userName");  // "小雅"\n\n// 删数据\nlocalStorage.removeItem("userName");\n\n// 清空全部\nlocalStorage.clear();\n```',
+          '目前你写的所有页面都有一个共同的问题：**刷新页面后，所有数据都丢失了**。\n\n收藏的曲目？没了。输入的列表？清空了。计数器？归零了。\n\n这是因为 JavaScript 变量只存在于**当前页面会话**中。刷新页面等于重新开始——所有变量重新初始化。\n\n`localStorage` 解决的就是这个问题：它把数据存在浏览器里，和页面会话无关。\n\n\```js\n// 存数据\nlocalStorage.setItem("userName", "小雅");\n\n// 取数据（刷新页面后依然能读到！）\nlet name = localStorage.getItem("userName");  // "小雅"\n\n// 删数据\nlocalStorage.removeItem("userName");\n\n// 清空全部\nlocalStorage.clear();\n\```',
       },
       {
         type: "explain",
         title: "存储复杂数据：JSON.stringify 和 JSON.parse",
         content:
-          'localStorage 只能存储**字符串**。如果你要存数组或对象，需要用 JSON 转换：\n\n```js\n// 存对象/数组：先用 JSON.stringify 转成字符串\nlet pieces = [\n  { name: "布兰登堡协奏曲", period: "巴洛克" },\n  { name: "夜曲 Op.9 No.2", period: "浪漫主义" }\n];\nlocalStorage.setItem("myPieces", JSON.stringify(pieces));\n\n// 取对象/数组：先用 JSON.parse 转回对象\nlet saved = JSON.parse(localStorage.getItem("myPieces"));\n// saved 现在是真正的数组，可以正常使用！\nconsole.log(saved[0].name);  // "布兰登堡协奏曲"\n```\n\n**常用模式：加载 + 保存**\n```js\n// 页面启动时：尝试从 localStorage 加载数据\nlet pieces = JSON.parse(localStorage.getItem("myPieces")) || [];\n\nfunction saveData() {\n  localStorage.setItem("myPieces", JSON.stringify(pieces));\n}\n\n// 每次修改数据后调用 saveData()\npieces.push(newPiece);\nsaveData();\nrender(pieces);\n```\n\n> 💡 提示：`localStorage.getItem` 返回 `null` 如果 key 不存在，所以用 `|| []` 给一个默认值。',
+          'localStorage 只能存储**字符串**。如果你要存数组或对象，需要用 JSON 转换：\n\n\```js\n// 存对象/数组：先用 JSON.stringify 转成字符串\nlet pieces = [\n  { name: "布兰登堡协奏曲", period: "巴洛克" },\n  { name: "夜曲 Op.9 No.2", period: "浪漫主义" }\n];\nlocalStorage.setItem("myPieces", JSON.stringify(pieces));\n\n// 取对象/数组：先用 JSON.parse 转回对象\nlet saved = JSON.parse(localStorage.getItem("myPieces"));\n// saved 现在是真正的数组，可以正常使用！\nconsole.log(saved[0].name);  // "布兰登堡协奏曲"\n\```\n\n**常用模式：加载 + 保存**\n\```js\n// 页面启动时：尝试从 localStorage 加载数据\nlet pieces = JSON.parse(localStorage.getItem("myPieces")) || [];\n\nfunction saveData() {\n  localStorage.setItem("myPieces", JSON.stringify(pieces));\n}\n\n// 每次修改数据后调用 saveData()\npieces.push(newPiece);\nsaveData();\nrender(pieces);\n\```\n\n> 💡 提示：`localStorage.getItem` 返回 `null` 如果 key 不存在，所以用 `|| []` 给一个默认值。',
       },
       {
         type: "task",
@@ -2558,13 +2558,13 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
         type: "explain",
         title: 'JavaScript 是"单线程"的',
         content:
-          'JavaScript 一次只能做一件事（单线程），就像你一个人没法同时弹钢琴和拉小提琴。\n\n但浏览器不是只有 JS 引擎——它还有 Web API（定时器、网络请求等）。JS 把耗时任务"外包"给 Web API，自己继续执行后面的代码。\n\n任务完成后，Web API 把回调函数放进**任务队列**，Event Loop 检查主线程空闲了，就把队列里的任务取出来执行。\n\n**直观流程：**\n```\n调用栈（主线程） → 遇到异步任务 → 交给 Web API\n                                    ↓\n主线程继续执行        Web API 完成后 → 任务队列\n                                    ↓\n主线程空闲 ← Event Loop 调度 ← 任务队列\n```',
+          'JavaScript 一次只能做一件事（单线程），就像你一个人没法同时弹钢琴和拉小提琴。\n\n但浏览器不是只有 JS 引擎——它还有 Web API（定时器、网络请求等）。JS 把耗时任务"外包"给 Web API，自己继续执行后面的代码。\n\n任务完成后，Web API 把回调函数放进**任务队列**，Event Loop 检查主线程空闲了，就把队列里的任务取出来执行。\n\n**直观流程：**\n\```\n调用栈（主线程） → 遇到异步任务 → 交给 Web API\n                                    ↓\n主线程继续执行        Web API 完成后 → 任务队列\n                                    ↓\n主线程空闲 ← Event Loop 调度 ← 任务队列\n\```',
       },
       {
         type: "example",
         title: 'setTimeout 不是"暂停"',
         content:
-          "看这段代码的执行顺序：\n\n```js\nconsole.log('① 开始演奏')\n\nsetTimeout(() => {\n  console.log('③ 定音鼓进入')\n}, 1000)\n\nconsole.log('② 弦乐继续')\n```\n\n输出顺序是：① → ② → ③\n\n即使 `setTimeout` 的延迟是 0，结果也是 ① → ② → ③：\n\n```js\nconsole.log('① 开始')\nsetTimeout(() => console.log('③ 异步回调'), 0)\nconsole.log('② 继续')\n```\n\n因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像指挥不会在小提琴拉到一半时突然让定音鼓插入。",
+          "看这段代码的执行顺序：\n\n\```js\nconsole.log('① 开始演奏')\n\nsetTimeout(() => {\n  console.log('③ 定音鼓进入')\n}, 1000)\n\nconsole.log('② 弦乐继续')\n\```\n\n输出顺序是：① → ② → ③\n\n即使 `setTimeout` 的延迟是 0，结果也是 ① → ② → ③：\n\n\```js\nconsole.log('① 开始')\nsetTimeout(() => console.log('③ 异步回调'), 0)\nconsole.log('② 继续')\n\```\n\n因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像指挥不会在小提琴拉到一半时突然让定音鼓插入。",
       },
       {
         type: "example",
@@ -2576,7 +2576,7 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
         type: "task",
         title: "动手试试 ✨",
         content:
-          "请预测以下代码的输出顺序，然后在编辑器中运行验证：\n\n```js\nconsole.log('A: 序曲')\n\nsetTimeout(() => console.log('C: 第二乐章'), 500)\nsetTimeout(() => console.log('D: 第三乐章'), 0)\n\nconsole.log('B: 第一乐章')\n```\n\n你的预测是什么？实际输出是否一致？想想为什么 D 在 C 之前。\n\n> 💡 **提示**：代码使用 `console.log` 输出结果，请在预览区**右键 → 检查**（或按 F12），切换到 **Console（控制台）** 面板查看输出。",
+          "请预测以下代码的输出顺序，然后在编辑器中运行验证：\n\n\```js\nconsole.log('A: 序曲')\n\nsetTimeout(() => console.log('C: 第二乐章'), 500)\nsetTimeout(() => console.log('D: 第三乐章'), 0)\n\nconsole.log('B: 第一乐章')\n\```\n\n你的预测是什么？实际输出是否一致？想想为什么 D 在 C 之前。\n\n> 💡 **提示**：代码使用 `console.log` 输出结果，请在预览区**右键 → 检查**（或按 F12），切换到 **Console（控制台）** 面板查看输出。",
       },
       {
         type: "hint",
@@ -2617,19 +2617,19 @@ console.log('B: 第一乐章')
         type: "explain",
         title: "回调地狱 → Promise",
         content:
-          "如果用传统的回调嵌套处理多个异步操作，代码会变成\"金字塔\"：\n\n```js\n// 回调地狱 💀\ngetUser(id, (user) => {\n  getOrders(user.id, (orders) => {\n    getDetails(orders[0].id, (details) => {\n      console.log(details)\n    })\n  })\n})\n```\n\nPromise 用链式调用拉平了结构：\n\n```js\n// Promise 链式调用 ✨\ngetUser(id)\n  .then(user => getOrders(user.id))\n  .then(orders => getDetails(orders[0].id))\n  .then(details => console.log(details))\n  .catch(err => console.log('出错了：', err))\n```\n\n就像从复杂的多声部对位变成了清晰的主旋律加伴奏。",
+          "如果用传统的回调嵌套处理多个异步操作，代码会变成\"金字塔\"：\n\n\```js\n// 回调地狱 💀\ngetUser(id, (user) => {\n  getOrders(user.id, (orders) => {\n    getDetails(orders[0].id, (details) => {\n      console.log(details)\n    })\n  })\n})\n\```\n\nPromise 用链式调用拉平了结构：\n\n\```js\n// Promise 链式调用 ✨\ngetUser(id)\n  .then(user => getOrders(user.id))\n  .then(orders => getDetails(orders[0].id))\n  .then(details => console.log(details))\n  .catch(err => console.log('出错了：', err))\n\```\n\n就像从复杂的多声部对位变成了清晰的主旋律加伴奏。",
       },
       {
         type: "example",
         title: "Promise 的三种状态",
         content:
-          "一个 Promise 有三种状态：\n\n| 状态 | 含义 | 音乐比喻 |\n|------|------|----------|\n| pending | 等待结果 | 乐团正在调音，还没开始 |\n| fulfilled | 成功完成 | 演奏完美落幕，掌声响起 |\n| rejected | 失败了 | 小提琴断弦，需要调整 |\n\n```js\nconst ticket = new Promise((resolve, reject) => {\n  const available = Math.random() > 0.3  // 70% 概率有票\n  setTimeout(() => {\n    if (available) {\n      resolve('🎫 订票成功！座位号：A-12')\n    } else {\n      reject('😞 抱歉，已售罄')\n    }\n  }, 1000)\n})\n\nticket\n  .then(msg => console.log(msg))   // 成功走这里\n  .catch(err => console.log(err))  // 失败走这里\n```",
+          "一个 Promise 有三种状态：\n\n| 状态 | 含义 | 音乐比喻 |\n|------|------|----------|\n| pending | 等待结果 | 乐团正在调音，还没开始 |\n| fulfilled | 成功完成 | 演奏完美落幕，掌声响起 |\n| rejected | 失败了 | 小提琴断弦，需要调整 |\n\n\```js\nconst ticket = new Promise((resolve, reject) => {\n  const available = Math.random() > 0.3  // 70% 概率有票\n  setTimeout(() => {\n    if (available) {\n      resolve('🎫 订票成功！座位号：A-12')\n    } else {\n      reject('😞 抱歉，已售罄')\n    }\n  }, 1000)\n})\n\nticket\n  .then(msg => console.log(msg))   // 成功走这里\n  .catch(err => console.log(err))  // 失败走这里\n\```",
       },
       {
         type: "example",
         title: ".then() 的链式传递",
         content:
-          "`.then()` 每次都返回一个新的 Promise，所以可以一直 `.then()` 下去——就像多米诺骨牌。\n\n```js\nfetchUserId('小明')\n  .then(id => fetchUserInfo(id))      // 返回新 Promise\n  .then(info => fetchFavorites(info))  // 再返回新 Promise\n  .then(favs => console.log('喜欢的曲子：', favs))\n  .catch(err => console.log('某一步失败了：', err))\n```\n\n关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。",
+          "`.then()` 每次都返回一个新的 Promise，所以可以一直 `.then()` 下去——就像多米诺骨牌。\n\n\```js\nfetchUserId('小明')\n  .then(id => fetchUserInfo(id))      // 返回新 Promise\n  .then(info => fetchFavorites(info))  // 再返回新 Promise\n  .then(favs => console.log('喜欢的曲子：', favs))\n  .catch(err => console.log('某一步失败了：', err))\n\```\n\n关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。",
       },
       {
         type: "task",
@@ -2641,7 +2641,7 @@ console.log('B: 第一乐章')
         type: "hint",
         title: "提示",
         content:
-          "```js\nsearchMusic('月光')\n  .then(result => {\n    console.log('第一次搜索：', result)\n    return searchMusic('贝多芬')  // 返回新的 Promise\n  })\n  .then(result => console.log('第二次搜索：', result))\n  .catch(err => console.log('搜索失败：', err))\n```",
+          "\```js\nsearchMusic('月光')\n  .then(result => {\n    console.log('第一次搜索：', result)\n    return searchMusic('贝多芬')  // 返回新的 Promise\n  })\n  .then(result => console.log('第二次搜索：', result))\n  .catch(err => console.log('搜索失败：', err))\n\```",
       },
     ],
     starterCode: {
@@ -2682,19 +2682,19 @@ function searchMusic(keyword) {
         type: "explain",
         title: "async/await 是什么？",
         content:
-          "`async/await` 是 Promise 的\"语法糖\"——底层还是 Promise，但写起来像同步代码。\n\n```js\n// Promise 写法\nfunction getMusicInfo() {\n  return fetchUser('小明')\n    .then(user => fetchFavorites(user.id))\n    .then(favs => console.log(favs))\n}\n\n// async/await 写法\nasync function getMusicInfo() {\n  const user = await fetchUser('小明')\n  const favs = await fetchFavorites(user.id)\n  console.log(favs)\n}\n```\n\n`async` 标记函数是异步的，`await` 等待 Promise 的结果。代码从上到下读，逻辑清晰。",
+          "`async/await` 是 Promise 的\"语法糖\"——底层还是 Promise，但写起来像同步代码。\n\n\```js\n// Promise 写法\nfunction getMusicInfo() {\n  return fetchUser('小明')\n    .then(user => fetchFavorites(user.id))\n    .then(favs => console.log(favs))\n}\n\n// async/await 写法\nasync function getMusicInfo() {\n  const user = await fetchUser('小明')\n  const favs = await fetchFavorites(user.id)\n  console.log(favs)\n}\n\```\n\n`async` 标记函数是异步的，`await` 等待 Promise 的结果。代码从上到下读，逻辑清晰。",
       },
       {
         type: "example",
         title: "错误处理：try/catch 回归",
         content:
-          "用 async/await 时，错误处理回到了熟悉的 try/catch：\n\n```js\nasync function loadMusicData() {\n  try {\n    const user = await fetchUser('小明')\n    const favs = await fetchFavorites(user.id)\n    const details = await fetchDetails(favs[0].id)\n    console.log('加载成功：', details)\n  } catch (error) {\n    console.log('加载失败：', error.message)\n    // 可以在这里显示友好的错误提示\n  }\n}\n```\n\n这就是为什么学错误处理（上一章）很重要——async/await 中 try/catch 是最佳实践。",
+          "用 async/await 时，错误处理回到了熟悉的 try/catch：\n\n\```js\nasync function loadMusicData() {\n  try {\n    const user = await fetchUser('小明')\n    const favs = await fetchFavorites(user.id)\n    const details = await fetchDetails(favs[0].id)\n    console.log('加载成功：', details)\n  } catch (error) {\n    console.log('加载失败：', error.message)\n    // 可以在这里显示友好的错误提示\n  }\n}\n\```\n\n这就是为什么学错误处理（上一章）很重要——async/await 中 try/catch 是最佳实践。",
       },
       {
         type: "example",
         title: "并行 vs 串行",
         content:
-          "注意：`await` 是**串行**的（一个接一个等）。如果两个请求互不依赖，应该**并行**：\n\n```js\n// ❌ 串行：总要 2000ms（每个 1000ms）\nconst result1 = await fetchOne()   // 等 1000ms\nconst result2 = await fetchTwo()   // 再等 1000ms\n\n// ✅ 并行：只要 1000ms（同时进行）\nconst [result1, result2] = await Promise.all([\n  fetchOne(),\n  fetchTwo()\n])\n```\n\n`Promise.all()` 就像指挥同时给弦乐和管乐起拍——一起开始，一起等。",
+          "注意：`await` 是**串行**的（一个接一个等）。如果两个请求互不依赖，应该**并行**：\n\n\```js\n// ❌ 串行：总要 2000ms（每个 1000ms）\nconst result1 = await fetchOne()   // 等 1000ms\nconst result2 = await fetchTwo()   // 再等 1000ms\n\n// ✅ 并行：只要 1000ms（同时进行）\nconst [result1, result2] = await Promise.all([\n  fetchOne(),\n  fetchTwo()\n])\n\```\n\n`Promise.all()` 就像指挥同时给弦乐和管乐起拍——一起开始，一起等。",
       },
       {
         type: "task",
@@ -2706,7 +2706,7 @@ function searchMusic(keyword) {
         type: "hint",
         title: "提示",
         content:
-          "```js\nasync function loadConcert() {\n  try {\n    const concert = await fetchConcert()\n    const program = await fetchProgram(concert.id)\n    return { concert, program }\n  } catch (e) {\n    console.log('加载出错：', e.message)\n    return null\n  }\n}\n```",
+          "\```js\nasync function loadConcert() {\n  try {\n    const concert = await fetchConcert()\n    const program = await fetchProgram(concert.id)\n    return { concert, program }\n  } catch (e) {\n    console.log('加载出错：', e.message)\n    return null\n  }\n}\n\```",
       },
     ],
     starterCode: {
@@ -2760,13 +2760,13 @@ loadConcert().then(data => console.log('结果：', data))`,
         type: "example",
         title: "你的第一个 fetch",
         content:
-          "```js\n// GET 请求：获取数据\nasync function getPieces() {\n  const response = await fetch('https://api.example.com/pieces')\n  if (!response.ok) {\n    throw new Error('请求失败：' + response.status)\n  }\n  const data = await response.json()  // 把 JSON 转成 JS 对象\n  console.log('获取到的曲目：', data)\n  return data\n}\n```\n\n**两个 await：** 第一个等网络响应，第二个等 JSON 解析。\n\n就像你先收到一个包裹（response），然后拆开包裹看里面的内容（.json()）。",
+          "\```js\n// GET 请求：获取数据\nasync function getPieces() {\n  const response = await fetch('https://api.example.com/pieces')\n  if (!response.ok) {\n    throw new Error('请求失败：' + response.status)\n  }\n  const data = await response.json()  // 把 JSON 转成 JS 对象\n  console.log('获取到的曲目：', data)\n  return data\n}\n\```\n\n**两个 await：** 第一个等网络响应，第二个等 JSON 解析。\n\n就像你先收到一个包裹（response），然后拆开包裹看里面的内容（.json()）。",
       },
       {
         type: "example",
         title: "POST 请求：发送数据",
         content:
-          "```js\nasync function addPiece(piece) {\n  const response = await fetch('https://api.example.com/pieces', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(piece)  // JS 对象 → JSON 字符串\n  })\n  if (!response.ok) throw new Error('添加失败')\n  const newPiece = await response.json()\n  console.log('新增成功：', newPiece)\n}\n\n// 使用\naddPiece({ name: '雨滴', composer: '肖邦', period: '浪漫主义' })\n```\n\nPOST 类似寄信——你需要写地址（URL）、贴邮票（headers）、装信封（body）。",
+          "\```js\nasync function addPiece(piece) {\n  const response = await fetch('https://api.example.com/pieces', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify(piece)  // JS 对象 → JSON 字符串\n  })\n  if (!response.ok) throw new Error('添加失败')\n  const newPiece = await response.json()\n  console.log('新增成功：', newPiece)\n}\n\n// 使用\naddPiece({ name: '雨滴', composer: '肖邦', period: '浪漫主义' })\n\```\n\nPOST 类似寄信——你需要写地址（URL）、贴邮票（headers）、装信封（body）。",
       },
       {
         type: "example",
@@ -2825,13 +2825,13 @@ getPosts()
         type: "example",
         title: "基础 API 客户端",
         content:
-          "```js\n// api.js — 你的\"乐务\"\nconst BASE_URL = 'https://api.example.com'\n\nasync function request(path, options = {}) {\n  const url = BASE_URL + path\n  const response = await fetch(url, {\n    headers: {\n      'Content-Type': 'application/json',\n      ...options.headers  // 合并自定义 headers\n    },\n    ...options\n  })\n  if (!response.ok) {\n    throw new Error(\\`请求失败：\\${response.status}\\`)\n  }\n  return response.json()\n}\n\n// 语义化方法\nexport const api = {\n  get: (path) => request(path),\n  post: (path, body) => request(path, {\n    method: 'POST',\n    body: JSON.stringify(body)\n  }),\n  delete: (path) => request(path, { method: 'DELETE' })\n}\n```",
+          "\```js\n// api.js — 你的\"乐务\"\nconst BASE_URL = 'https://api.example.com'\n\nasync function request(path, options = {}) {\n  const url = BASE_URL + path\n  const response = await fetch(url, {\n    headers: {\n      'Content-Type': 'application/json',\n      ...options.headers  // 合并自定义 headers\n    },\n    ...options\n  })\n  if (!response.ok) {\n    throw new Error(\\`请求失败：\\${response.status}\\`)\n  }\n  return response.json()\n}\n\n// 语义化方法\nexport const api = {\n  get: (path) => request(path),\n  post: (path, body) => request(path, {\n    method: 'POST',\n    body: JSON.stringify(body)\n  }),\n  delete: (path) => request(path, { method: 'DELETE' })\n}\n\```",
       },
       {
         type: "example",
         title: "使用封装后的 API",
         content:
-          "对比前后的代码：\n\n```js\n// ❌ 未封装：每个地方都要写完整 fetch\nconst res = await fetch(BASE_URL + '/pieces', {\n  headers: { 'Content-Type': 'application/json' }\n})\nif (!res.ok) throw new Error('请求失败')\nconst data = await res.json()\n\n// ✅ 封装后：一行搞定\nconst data = await api.get('/pieces')\n```\n\n封装的好处：\n- 代码量减少 80%\n- 修改 BASE_URL 只改一处\n- 错误处理统一，不会遗漏\n- 可以方便地添加日志、token 等功能",
+          "对比前后的代码：\n\n\```js\n// ❌ 未封装：每个地方都要写完整 fetch\nconst res = await fetch(BASE_URL + '/pieces', {\n  headers: { 'Content-Type': 'application/json' }\n})\nif (!res.ok) throw new Error('请求失败')\nconst data = await res.json()\n\n// ✅ 封装后：一行搞定\nconst data = await api.get('/pieces')\n\```\n\n封装的好处：\n- 代码量减少 80%\n- 修改 BASE_URL 只改一处\n- 错误处理统一，不会遗漏\n- 可以方便地添加日志、token 等功能",
       },
       {
         type: "task",
@@ -2843,7 +2843,7 @@ getPosts()
         type: "hint",
         title: "提示",
         content:
-          "```js\nconst BASE_URL = 'https://jsonplaceholder.typicode.com'\n\nconst api = {\n  get: async (path) => {\n    const res = await fetch(BASE_URL + path)\n    if (!res.ok) throw new Error('请求失败')\n    return res.json()\n  }\n}\n```",
+          "\```js\nconst BASE_URL = 'https://jsonplaceholder.typicode.com'\n\nconst api = {\n  get: async (path) => {\n    const res = await fetch(BASE_URL + path)\n    if (!res.ok) throw new Error('请求失败')\n    return res.json()\n  }\n}\n\```",
       },
     ],
     starterCode: {
@@ -2884,13 +2884,13 @@ test()`,
         type: "explain",
         title: "为什么需要防抖？",
         content:
-          '场景：搜索框。用户输入"贝多芬"，来数数会触发几次请求：\n\n```\n贝 → 请求1\n贝多 → 请求2\n贝多芬 → 请求3\n```\n\n如果每个字都发 API 请求：\n- 浪费网络资源\n- 服务器压力大\n- 返回顺序可能错乱（后发的请求可能先返回）\n\n**防抖：** 用户停止输入 N 毫秒后，才发一次请求。',
+          '场景：搜索框。用户输入"贝多芬"，来数数会触发几次请求：\n\n\```\n贝 → 请求1\n贝多 → 请求2\n贝多芬 → 请求3\n\```\n\n如果每个字都发 API 请求：\n- 浪费网络资源\n- 服务器压力大\n- 返回顺序可能错乱（后发的请求可能先返回）\n\n**防抖：** 用户停止输入 N 毫秒后，才发一次请求。',
       },
       {
         type: "example",
         title: "防抖函数实现",
         content:
-          "防抖的核心：每次触发时清除上一个定时器，重新计时。\n\n```js\nfunction debounce(fn, delay = 300) {\n  let timer = null\n  return function(...args) {\n    clearTimeout(timer)            // 清除上次的定时器\n    timer = setTimeout(() => {     // 重新计时\n      fn.apply(this, args)\n    }, delay)\n  }\n}\n\n// 使用\nconst search = debounce(async (keyword) => {\n  console.log('搜索：', keyword)\n  const result = await api.get(\\`/search?q=\\${keyword}\\`)\n  displayResults(result)\n}, 500)\n\n// 用户在输入框打字\ninput.addEventListener('input', (e) => {\n  search(e.target.value)  // 停止输入 500ms 后才真正搜索\n})\n```",
+          "防抖的核心：每次触发时清除上一个定时器，重新计时。\n\n\```js\nfunction debounce(fn, delay = 300) {\n  let timer = null\n  return function(...args) {\n    clearTimeout(timer)            // 清除上次的定时器\n    timer = setTimeout(() => {     // 重新计时\n      fn.apply(this, args)\n    }, delay)\n  }\n}\n\n// 使用\nconst search = debounce(async (keyword) => {\n  console.log('搜索：', keyword)\n  const result = await api.get(\\`/search?q=\\${keyword}\\`)\n  displayResults(result)\n}, 500)\n\n// 用户在输入框打字\ninput.addEventListener('input', (e) => {\n  search(e.target.value)  // 停止输入 500ms 后才真正搜索\n})\n\```",
       },
       {
         type: "example",
@@ -2961,19 +2961,19 @@ debouncedSearch('贝多芬')
         type: "example",
         title: "iTunes Search API",
         content:
-          'Apple 提供了免费的音乐搜索 API，无需注册：\n\n```\nhttps://itunes.apple.com/search?term=贝多芬&limit=10&country=cn\n```\n\n返回的 JSON 结构：\n```json\n{\n  "resultCount": 10,\n  "results": [\n    {\n      "trackName": "月光奏鸣曲",\n      "artistName": "贝多芬",\n      "artworkUrl100": "封面图片URL",\n      "previewUrl": "试听URL",\n      "collectionName": "专辑名"\n    }\n  ]\n}\n```',
+          'Apple 提供了免费的音乐搜索 API，无需注册：\n\n\```\nhttps://itunes.apple.com/search?term=贝多芬&limit=10&country=cn\n\```\n\n返回的 JSON 结构：\n\```json\n{\n  "resultCount": 10,\n  "results": [\n    {\n      "trackName": "月光奏鸣曲",\n      "artistName": "贝多芬",\n      "artworkUrl100": "封面图片URL",\n      "previewUrl": "试听URL",\n      "collectionName": "专辑名"\n    }\n  ]\n}\n\```',
       },
       {
         type: "task",
         title: "动手实现 ✨",
         content:
-          "在 `music-collection` 项目中创建 `src/utils/debounce.js` 和 `src/utils/api.js`，然后在 `App.vue` 中使用：\n\n```js\n// src/utils/api.js\nconst BASE_URL = 'https://itunes.apple.com'\n\nexport async function searchMusic(term) {\n  const url = \\`\\${BASE_URL}/search?term=\\${encodeURIComponent(term)}&limit=10&country=cn\\`\n  const res = await fetch(url)\n  if (!res.ok) throw new Error(\\`搜索失败：\\${res.status}\\`)\n  const data = await res.json()\n  return data.results\n}\n```\n\n```js\n// src/utils/debounce.js\nexport function debounce(fn, delay = 400) {\n  let timer\n  return function(...args) {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn.apply(this, args), delay)\n  }\n}\n```\n\n在 `App.vue` 中组合使用：\n- 搜索框 + 防抖\n- 结果列表渲染\n- 加载状态和错误提示",
+          "在 `music-collection` 项目中创建 `src/utils/debounce.js` 和 `src/utils/api.js`，然后在 `App.vue` 中使用：\n\n\```js\n// src/utils/api.js\nconst BASE_URL = 'https://itunes.apple.com'\n\nexport async function searchMusic(term) {\n  const url = \\`\\${BASE_URL}/search?term=\\${encodeURIComponent(term)}&limit=10&country=cn\\`\n  const res = await fetch(url)\n  if (!res.ok) throw new Error(\\`搜索失败：\\${res.status}\\`)\n  const data = await res.json()\n  return data.results\n}\n\```\n\n\```js\n// src/utils/debounce.js\nexport function debounce(fn, delay = 400) {\n  let timer\n  return function(...args) {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn.apply(this, args), delay)\n  }\n}\n\```\n\n在 `App.vue` 中组合使用：\n- 搜索框 + 防抖\n- 结果列表渲染\n- 加载状态和错误提示",
       },
       {
         type: "hint",
         title: "实现路线图",
         content:
-          "1. **先写 API 层** — 在 `api.js` 中封装 `searchMusic` 函数\n2. **再写防抖** — 在 `debounce.js` 中实现防抖\n3. **组合使用** — 在 `App.vue` 中用 `import` 引入\n4. **处理状态** — loading、error、no results 三种状态\n5. **展示结果** — 歌曲名、歌手、封面图\n\n完成的代码结构应该像这样清晰分层：\n```\n用户输入 → debounce 等待 → api.searchMusic() → 更新 UI\n```",
+          "1. **先写 API 层** — 在 `api.js` 中封装 `searchMusic` 函数\n2. **再写防抖** — 在 `debounce.js` 中实现防抖\n3. **组合使用** — 在 `App.vue` 中用 `import` 引入\n4. **处理状态** — loading、error、no results 三种状态\n5. **展示结果** — 歌曲名、歌手、封面图\n\n完成的代码结构应该像这样清晰分层：\n\```\n用户输入 → debounce 等待 → api.searchMusic() → 更新 UI\n\```",
       },
       {
         type: "explain",
@@ -3012,7 +3012,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "安装步骤（Windows / Mac 通用）",
         content:
-          '1. 打开浏览器，访问 **nodejs.org**\n\n2. 下载 **LTS 版本**（长期支持版，偶数是版本号，如 20.x）\n   - LTS = Long Term Support，最稳定的版本\n   - 不要下载"Current"版本——那是给尝鲜的人用的\n\n3. 运行安装程序，一路点"Next"（全部默认选项即可）\n\n4. 安装完成后，打开终端验证：\n\n**Windows：** 按 `Win + R`，输入 `cmd`，回车\n**Mac：** 按 `Cmd + 空格`，输入 `Terminal`，回车\n\n在终端中输入：\n```bash\nnode -v\n```\n\n如果看到版本号（如 `v20.11.0`），安装成功！🎉\n\n再输入：\n```bash\nnpm -v\n```\n\n如果也看到版本号（如 `10.2.4`），说明 npm 也装好了。',
+          '1. 打开浏览器，访问 **nodejs.org**\n\n2. 下载 **LTS 版本**（长期支持版，偶数是版本号，如 20.x）\n   - LTS = Long Term Support，最稳定的版本\n   - 不要下载"Current"版本——那是给尝鲜的人用的\n\n3. 运行安装程序，一路点"Next"（全部默认选项即可）\n\n4. 安装完成后，打开终端验证：\n\n**Windows：** 按 `Win + R`，输入 `cmd`，回车\n**Mac：** 按 `Cmd + 空格`，输入 `Terminal`，回车\n\n在终端中输入：\n\```bash\nnode -v\n\```\n\n如果看到版本号（如 `v20.11.0`），安装成功！🎉\n\n再输入：\n\```bash\nnpm -v\n\```\n\n如果也看到版本号（如 `10.2.4`），说明 npm 也装好了。',
       },
       {
         type: "task",
@@ -3094,7 +3094,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "6 个必学命令",
         content:
-          '**1. `pwd` — 我在哪里？**（Print Working Directory）\n```bash\npwd\n# 输出：/Users/xiaomei/my-music-app\n```\n就像 GPS 告诉你当前位置。\n\n**2. `ls` — 这里有什么？**（List）\n```bash\nls\n# 输出：readme.md\n```\n列出当前文件夹中的所有文件。\n\n**3. `cd` — 去别的地方**（Change Directory）\n```bash\ncd my-music-app    # 进入文件夹\ncd ..              # 回到上一级\ncd ~               # 回到家目录\n```\n\n**4. `mkdir` — 创建文件夹**（Make Directory）\n```bash\nmkdir src          # 创建名为 src 的文件夹\nmkdir -p src/components  # 创建嵌套文件夹\n```\n\n**5. `echo` / `type nul` — 创建文件**\n```bash\necho "" > index.html     # Mac/Linux：创建空文件\ntype nul > index.html    # Windows：创建空文件\n```\n\n**6. `code .` — 用 VS Code 打开当前文件夹**\n```bash\ncode .\n# VS Code 会打开当前文件夹\n```',
+          '**1. `pwd` — 我在哪里？**（Print Working Directory）\n\```bash\npwd\n# 输出：/Users/xiaomei/my-music-app\n\```\n就像 GPS 告诉你当前位置。\n\n**2. `ls` — 这里有什么？**（List）\n\```bash\nls\n# 输出：readme.md\n\```\n列出当前文件夹中的所有文件。\n\n**3. `cd` — 去别的地方**（Change Directory）\n\```bash\ncd my-music-app    # 进入文件夹\ncd ..              # 回到上一级\ncd ~               # 回到家目录\n\```\n\n**4. `mkdir` — 创建文件夹**（Make Directory）\n\```bash\nmkdir src          # 创建名为 src 的文件夹\nmkdir -p src/components  # 创建嵌套文件夹\n\```\n\n**5. `echo` / `type nul` — 创建文件**\n\```bash\necho "" > index.html     # Mac/Linux：创建空文件\ntype nul > index.html    # Windows：创建空文件\n\```\n\n**6. `code .` — 用 VS Code 打开当前文件夹**\n\```bash\ncode .\n# VS Code 会打开当前文件夹\n\```',
       },
       {
         type: "task",
@@ -3127,22 +3127,22 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: '为什么需要模块化？',
-        content: '早期的网页开发中，所有 JS 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n\n- 变量名冲突（两个函数都想用 name 这个变量）\n- 代码难以维护（找一个 bug 要翻几千行）\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\n\n模块化解决了这些问题：\n\n```\n// 之前：一个巨大的 script.js\nscript.js (800 行)\n\n// 之后：按职责分成小文件\nutils.js        ← 工具函数（格式化日期、编码等）\napi.js          ← 网络请求\nrender.js       ← 渲染页面\napp.js          ← 主入口，引入其他模块\n```\n\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。',
+        content: '早期的网页开发中，所有 JS 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n\n- 变量名冲突（两个函数都想用 name 这个变量）\n- 代码难以维护（找一个 bug 要翻几千行）\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\n\n模块化解决了这些问题：\n\n\```\n// 之前：一个巨大的 script.js\nscript.js (800 行)\n\n// 之后：按职责分成小文件\nutils.js        ← 工具函数（格式化日期、编码等）\napi.js          ← 网络请求\nrender.js       ← 渲染页面\napp.js          ← 主入口，引入其他模块\n\```\n\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。',
       },
       {
         type: 'explain',
         title: 'export — 两种导出方式',
-        content: 'ES Modules 提供两种导出方式：\n\n**1. 命名导出（Named Export）** — 一个模块可以导出多个东西：\n\n```js\n// utils.js — 导出多个工具函数\nexport function formatDate(date) {\n  return date.toLocaleDateString(\'zh-CN\')\n}\n\nexport const API_BASE = \'https://api.example.com\'\n\nexport function debounce(fn, delay) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), delay)\n  }\n}\n```\n\n**2. 默认导出（Default Export）** — 一个模块只导出一个主角：\n\n```js\n// search.js — 这个文件的主角就是 searchMusic\nexport default async function searchMusic(keyword) {\n  const res = await fetch(API_BASE + \'/search?q=\' + keyword)\n  return res.json()\n}\n```\n\n每个模块只能有一个 default export。\n\n> 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。',
+        content: 'ES Modules 提供两种导出方式：\n\n**1. 命名导出（Named Export）** — 一个模块可以导出多个东西：\n\n\```js\n// utils.js — 导出多个工具函数\nexport function formatDate(date) {\n  return date.toLocaleDateString(\'zh-CN\')\n}\n\nexport const API_BASE = \'https://api.example.com\'\n\nexport function debounce(fn, delay) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), delay)\n  }\n}\n\```\n\n**2. 默认导出（Default Export）** — 一个模块只导出一个主角：\n\n\```js\n// search.js — 这个文件的主角就是 searchMusic\nexport default async function searchMusic(keyword) {\n  const res = await fetch(API_BASE + \'/search?q=\' + keyword)\n  return res.json()\n}\n\```\n\n每个模块只能有一个 default export。\n\n> 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。',
       },
       {
         type: 'explain',
         title: 'import — 引入其他模块',
-        content: '**导入命名导出：** 用花括号 `{}` 精确指定要导入什么\n\n```js\n// 按需导入\nimport { formatDate, debounce } from \'./utils.js\'\n\n// 重命名（避免命名冲突）\nimport { debounce as deb } from \'./utils.js\'\n\n// 全部导入到一个命名空间\nimport * as utils from \'./utils.js\'\nutils.formatDate(new Date())\n```\n\n**导入默认导出：** 不用花括号，名字可以自己取\n\n```js\nimport searchMusic from \'./search.js\'\n// 名字可以自己定，但建议和导出保持一致\n```\n\n**混合导入：**\n\n```js\nimport searchMusic, { API_BASE } from \'./search.js\'\n```\n\n**npm 包的导入：** (不需要 ./ 或 ../ 前缀)\n\n```js\nimport { ref, computed } from \'vue\'\nimport axios from \'axios\'\n```\n\n**注意：** `.js` 后缀在 Vite/Vue 项目中可以省略，在纯浏览器 ESM 中必须写。',
+        content: '**导入命名导出：** 用花括号 `{}` 精确指定要导入什么\n\n\```js\n// 按需导入\nimport { formatDate, debounce } from \'./utils.js\'\n\n// 重命名（避免命名冲突）\nimport { debounce as deb } from \'./utils.js\'\n\n// 全部导入到一个命名空间\nimport * as utils from \'./utils.js\'\nutils.formatDate(new Date())\n\```\n\n**导入默认导出：** 不用花括号，名字可以自己取\n\n\```js\nimport searchMusic from \'./search.js\'\n// 名字可以自己定，但建议和导出保持一致\n\```\n\n**混合导入：**\n\n\```js\nimport searchMusic, { API_BASE } from \'./search.js\'\n\```\n\n**npm 包的导入：** (不需要 ./ 或 ../ 前缀)\n\n\```js\nimport { ref, computed } from \'vue\'\nimport axios from \'axios\'\n\```\n\n**注意：** `.js` 后缀在 Vite/Vue 项目中可以省略，在纯浏览器 ESM 中必须写。',
       },
       {
         type: 'example',
         title: '看例子',
-        content: '假设你在做一个音乐搜索器，模块化之后项目结构是这样的：\n\n```\nmusic-searcher/\n├── index.html\n├── js/\n│   ├── app.js        ← 主入口（组装所有模块）\n│   ├── api.js        ← 封装 fetch 请求\n│   ├── render.js     ← 负责渲染 DOM\n│   └── utils.js      ← 通用工具（防抖、格式化）\n```\n\n```js\n// api.js — 只负责数据\nexport async function searchMusic(keyword) {\n  const res = await fetch(\n    \'https://itunes.apple.com/search?term=\' + encodeURIComponent(keyword) + \'&limit=10\'\n  )\n  return res.json()\n}\n\n// render.js — 只负责 DOM\nexport function renderResults(data, container) {\n  container.innerHTML = data.results.map(item => `\n    <div class="card">\n      <img src="${item.artworkUrl100}" />\n      <h3>${item.trackName}</h3>\n    </div>\n  `).join(\'\')\n}\n\n// app.js — 组装一切\nimport { searchMusic } from \'./api.js\'\nimport { renderResults } from \'./render.js\'\nimport { debounce } from \'./utils.js\'\n\nconst input = document.querySelector(\'#search\')\nconst results = document.querySelector(\'#results\')\n\ninput.addEventListener(\'input\', debounce(async (e) => {\n  const data = await searchMusic(e.target.value)\n  renderResults(data, results)\n}, 400))\n```\n\n每个文件职责单一——修改渲染逻辑不会影响 API 代码，反之亦然。',
+        content: '假设你在做一个音乐搜索器，模块化之后项目结构是这样的：\n\n\```\nmusic-searcher/\n├── index.html\n├── js/\n│   ├── app.js        ← 主入口（组装所有模块）\n│   ├── api.js        ← 封装 fetch 请求\n│   ├── render.js     ← 负责渲染 DOM\n│   └── utils.js      ← 通用工具（防抖、格式化）\n\```\n\n\```js\n// api.js — 只负责数据\nexport async function searchMusic(keyword) {\n  const res = await fetch(\n    \'https://itunes.apple.com/search?term=\' + encodeURIComponent(keyword) + \'&limit=10\'\n  )\n  return res.json()\n}\n\n// render.js — 只负责 DOM\nexport function renderResults(data, container) {\n  container.innerHTML = data.results.map(item => `\n    <div class="card">\n      <img src="${item.artworkUrl100}" />\n      <h3>${item.trackName}</h3>\n    </div>\n  `).join(\'\')\n}\n\n// app.js — 组装一切\nimport { searchMusic } from \'./api.js\'\nimport { renderResults } from \'./render.js\'\nimport { debounce } from \'./utils.js\'\n\nconst input = document.querySelector(\'#search\')\nconst results = document.querySelector(\'#results\')\n\ninput.addEventListener(\'input\', debounce(async (e) => {\n  const data = await searchMusic(e.target.value)\n  renderResults(data, results)\n}, 400))\n\```\n\n每个文件职责单一——修改渲染逻辑不会影响 API 代码，反之亦然。',
       },
       {
         type: 'task',
@@ -3179,7 +3179,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: 'package.json — 项目的"身份证"',
         content:
-          '每个前端项目都有一个 `package.json` 文件，它记录了：\n\n```json\n{\n  "name": "my-music-app",\n  "version": "1.0.0",\n  "description": "我的音乐收藏应用",\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build"\n  },\n  "dependencies": {\n    "vue": "^3.4.0"\n  },\n  "devDependencies": {\n    "vite": "^5.0.0"\n  }\n}\n```\n\n- **name** — 项目名称\n- **scripts** — 你可以运行的命令（`npm run dev` 就是运行这里定义的 `dev` 脚本）\n- **dependencies** — 项目运行需要的包（用户最终也会用到）\n- **devDependencies** — 只在开发时需要用的包（如 Vite、测试工具）\n\n创建 `package.json` 的命令：\n```bash\nnpm init -y\n```\n`-y` 表示跳过所有问题，使用默认值。',
+          '每个前端项目都有一个 `package.json` 文件，它记录了：\n\n\```json\n{\n  "name": "my-music-app",\n  "version": "1.0.0",\n  "description": "我的音乐收藏应用",\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build"\n  },\n  "dependencies": {\n    "vue": "^3.4.0"\n  },\n  "devDependencies": {\n    "vite": "^5.0.0"\n  }\n}\n\```\n\n- **name** — 项目名称\n- **scripts** — 你可以运行的命令（`npm run dev` 就是运行这里定义的 `dev` 脚本）\n- **dependencies** — 项目运行需要的包（用户最终也会用到）\n- **devDependencies** — 只在开发时需要用的包（如 Vite、测试工具）\n\n创建 `package.json` 的命令：\n\```bash\nnpm init -y\n\```\n`-y` 表示跳过所有问题，使用默认值。',
       },
       {
         type: "task",
@@ -3220,13 +3220,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "创建项目",
         content:
-          '在终端中运行：\n\n```bash\nnpm create vite@latest music-collection -- --template vue\n```\n\n这条命令做了什么？\n- `npm create` — npm 的"创建项目"功能\n- `vite@latest` — 使用最新版 Vite 脚手架\n- `music-collection` — 项目名称（也是文件夹名）\n- `-- --template vue` — 使用 Vue 模板\n\n运行后：\n\n```bash\ncd music-collection   # 进入项目文件夹\nnpm install           # 安装依赖（Vue、Vite 等）\nnpm run dev           # 启动开发服务器\n```\n\n浏览器会自动打开 `http://localhost:5173`，你会看到一个 Vue 的欢迎页面！\n\n**项目结构一览：**\n```\nmusic-collection/\n├── index.html          # 入口 HTML\n├── package.json        # 项目配置\n├── vite.config.js      # Vite 配置\n├── src/\n│   ├── main.js         # 应用入口\n│   ├── App.vue         # 根组件\n│   ├── components/     # 放组件的地方\n│   └── assets/         # 放图片、CSS 等\n└── node_modules/       # 依赖包\n```',
+          '在终端中运行：\n\n\```bash\nnpm create vite@latest music-collection -- --template vue\n\```\n\n这条命令做了什么？\n- `npm create` — npm 的"创建项目"功能\n- `vite@latest` — 使用最新版 Vite 脚手架\n- `music-collection` — 项目名称（也是文件夹名）\n- `-- --template vue` — 使用 Vue 模板\n\n运行后：\n\n\```bash\ncd music-collection   # 进入项目文件夹\nnpm install           # 安装依赖（Vue、Vite 等）\nnpm run dev           # 启动开发服务器\n\```\n\n浏览器会自动打开 `http://localhost:5173`，你会看到一个 Vue 的欢迎页面！\n\n**项目结构一览：**\n\```\nmusic-collection/\n├── index.html          # 入口 HTML\n├── package.json        # 项目配置\n├── vite.config.js      # Vite 配置\n├── src/\n│   ├── main.js         # 应用入口\n│   ├── App.vue         # 根组件\n│   ├── components/     # 放组件的地方\n│   └── assets/         # 放图片、CSS 等\n└── node_modules/       # 依赖包\n\```',
       },
       {
         type: "task",
         title: "你的任务 ✨",
         content:
-          "1. 在终端中运行创建命令（在自己选的位置，比如桌面）：\n   ```bash\n   npm create vite@latest music-collection -- --template vue\n   ```\n\n2. `cd music-collection` 进入项目\n\n3. `npm install` 安装依赖\n\n4. `npm run dev` 启动开发服务器\n\n5. 在浏览器中访问 `http://localhost:5173`，看到 Vue 欢迎页\n\n6. 打开 `src/App.vue`，把 `<template>` 里的内容改成 `<h1>🎵 我的音乐收藏</h1>`，保存，看浏览器自动更新！\n\n> 🎉 你刚刚完成了第一个工程化的 Vue 项目！不再是 CDN 引入，而是真正的 npm + Vite + Vue 项目结构。",
+          "1. 在终端中运行创建命令（在自己选的位置，比如桌面）：\n   \```bash\n   npm create vite@latest music-collection -- --template vue\n   \```\n\n2. `cd music-collection` 进入项目\n\n3. `npm install` 安装依赖\n\n4. `npm run dev` 启动开发服务器\n\n5. 在浏览器中访问 `http://localhost:5173`，看到 Vue 欢迎页\n\n6. 打开 `src/App.vue`，把 `<template>` 里的内容改成 `<h1>🎵 我的音乐收藏</h1>`，保存，看浏览器自动更新！\n\n> 🎉 你刚刚完成了第一个工程化的 Vue 项目！不再是 CDN 引入，而是真正的 npm + Vite + Vue 项目结构。",
       },
       {
         type: "hint",
@@ -3258,17 +3258,17 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: 'ESLint — 代码质量检查',
-        content: 'ESLint 是 JS/TS 生态中最主流的代码检查工具。它定义了一套规则，不符合规则就报错或警告。\n\n**安装与初始化：**\n```bash\nnpm init @eslint/config\n# 按提示选择：Vue、TypeScript、ESM 等\n# 会在项目根目录生成 eslint.config.js\n```\n\n**常见规则举例：**\n```js\n// eslint.config.js\nexport default [\n  {\n    rules: {\n      \'no-unused-vars\': \'warn\',     // 定义了但没用的变量 → 警告\n      \'no-console\': \'warn\',          // console.log → 警告\n      \'no-undef\': \'error\',           // 未定义的变量 → 报错\n      \'eqeqeq\': \'error\',             // 必须用 === 而不是 ==\n    }\n  }\n]\n```\n\n**VSCode 集成：** 安装 ESLint 插件后，错误会在编辑器中直接标红下划线，保存时自动修复部分问题。\n\n> 🎯 ESLint 就像排练时的指挥——等一下，第二小提琴，你这里有个音不准（变量未定义），重来。',
+        content: 'ESLint 是 JS/TS 生态中最主流的代码检查工具。它定义了一套规则，不符合规则就报错或警告。\n\n**安装与初始化：**\n\```bash\nnpm init @eslint/config\n# 按提示选择：Vue、TypeScript、ESM 等\n# 会在项目根目录生成 eslint.config.js\n\```\n\n**常见规则举例：**\n\```js\n// eslint.config.js\nexport default [\n  {\n    rules: {\n      \'no-unused-vars\': \'warn\',     // 定义了但没用的变量 → 警告\n      \'no-console\': \'warn\',          // console.log → 警告\n      \'no-undef\': \'error\',           // 未定义的变量 → 报错\n      \'eqeqeq\': \'error\',             // 必须用 === 而不是 ==\n    }\n  }\n]\n\```\n\n**VSCode 集成：** 安装 ESLint 插件后，错误会在编辑器中直接标红下划线，保存时自动修复部分问题。\n\n> 🎯 ESLint 就像排练时的指挥——等一下，第二小提琴，你这里有个音不准（变量未定义），重来。',
       },
       {
         type: 'explain',
         title: 'Prettier — 代码格式化',
-        content: 'Prettier 是一个有强迫症的代码格式化工具——它不检查 bug，只负责让代码**看起来**一致。\n\n**安装：**\n```bash\nnpm install -D prettier\n```\n\n**配置文件 .prettierrc：**\n```json\n{\n  "semi": false,\n  "singleQuote": true,\n  "tabWidth": 2,\n  "trailingComma": "es5",\n  "printWidth": 100\n}\n```\n\n保存文件时，Prettier 自动把：\n```js\n// 格式化前\nconst x=1;const y=2;function foo(a,b){return a+b}\n\n// 格式化后\nconst x = 1\nconst y = 2\nfunction foo(a, b) {\n  return a + b\n}\n```\n\n**让 ESLint 和 Prettier 和平共处：**\n安装 eslint-config-prettier，关闭 ESLint 中与 Prettier 冲突的规则。\n\n> 📐 Prettier 就像乐谱排版师——音符是对的（ESLint 验证过了），但间距、对齐、换行要美观统一。',
+        content: 'Prettier 是一个有强迫症的代码格式化工具——它不检查 bug，只负责让代码**看起来**一致。\n\n**安装：**\n\```bash\nnpm install -D prettier\n\```\n\n**配置文件 .prettierrc：**\n\```json\n{\n  "semi": false,\n  "singleQuote": true,\n  "tabWidth": 2,\n  "trailingComma": "es5",\n  "printWidth": 100\n}\n\```\n\n保存文件时，Prettier 自动把：\n\```js\n// 格式化前\nconst x=1;const y=2;function foo(a,b){return a+b}\n\n// 格式化后\nconst x = 1\nconst y = 2\nfunction foo(a, b) {\n  return a + b\n}\n\```\n\n**让 ESLint 和 Prettier 和平共处：**\n安装 eslint-config-prettier，关闭 ESLint 中与 Prettier 冲突的规则。\n\n> 📐 Prettier 就像乐谱排版师——音符是对的（ESLint 验证过了），但间距、对齐、换行要美观统一。',
       },
       {
         type: 'example',
         title: '看例子：在 Vite + Vue 项目中配置',
-        content: '在你的 music-collection-vue 项目中：\n\n```bash\n# 安装依赖\nnpm install -D eslint prettier eslint-plugin-vue eslint-config-prettier\n\n# ESLint 配置（eslint.config.js）\nimport pluginVue from \'eslint-plugin-vue\'\nexport default [\n  ...pluginVue.configs[\'flat/recommended\'],\n  {\n    rules: {\n      \'vue/multi-word-component-names\': \'off\',\n      \'no-console\': \'warn\'\n    }\n  }\n]\n\n# VS Code 设置（.vscode/settings.json）\n{\n  "editor.formatOnSave": true,\n  "editor.defaultFormatter": "esbenp.prettier-vscode",\n  "editor.codeActionsOnSave": {\n    "source.fixAll.eslint": true\n  }\n}\n```\n\n配置完成后，每次保存文件：Prettier 先格式化，ESLint 再检查和自动修复。你的代码会像印刷出来的乐谱一样整齐。',
+        content: '在你的 music-collection-vue 项目中：\n\n\```bash\n# 安装依赖\nnpm install -D eslint prettier eslint-plugin-vue eslint-config-prettier\n\n# ESLint 配置（eslint.config.js）\nimport pluginVue from \'eslint-plugin-vue\'\nexport default [\n  ...pluginVue.configs[\'flat/recommended\'],\n  {\n    rules: {\n      \'vue/multi-word-component-names\': \'off\',\n      \'no-console\': \'warn\'\n    }\n  }\n]\n\n# VS Code 设置（.vscode/settings.json）\n{\n  "editor.formatOnSave": true,\n  "editor.defaultFormatter": "esbenp.prettier-vscode",\n  "editor.codeActionsOnSave": {\n    "source.fixAll.eslint": true\n  }\n}\n\```\n\n配置完成后，每次保存文件：Prettier 先格式化，ESLint 再检查和自动修复。你的代码会像印刷出来的乐谱一样整齐。',
       },
       {
         type: 'task',
@@ -3299,13 +3299,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "为什么需要 Git？",
         content:
-          '你可能经历过这种情况：\n```\n音乐收藏_v1.html\n音乐收藏_v2.html\n音乐收藏_v2_最终版.html\n音乐收藏_v2_真的最终版.html\n音乐收藏_v3_备份.html\n```\n\nGit 解决了这个混乱。有了 Git：\n- 不需要"v1""v2""最终版"这种命名\n- 每次修改后 `git commit`，自动记录快照\n- 任何时候可以回到之前的版本\n- 清楚地看到每次改了什么（`git diff`）\n\n程序员用 Git，就像作曲家保留每一版草稿——只是更优雅。',
+          '你可能经历过这种情况：\n\```\n音乐收藏_v1.html\n音乐收藏_v2.html\n音乐收藏_v2_最终版.html\n音乐收藏_v2_真的最终版.html\n音乐收藏_v3_备份.html\n\```\n\nGit 解决了这个混乱。有了 Git：\n- 不需要"v1""v2""最终版"这种命名\n- 每次修改后 `git commit`，自动记录快照\n- 任何时候可以回到之前的版本\n- 清楚地看到每次改了什么（`git diff`）\n\n程序员用 Git，就像作曲家保留每一版草稿——只是更优雅。',
       },
       {
         type: "explain",
         title: "三个基本操作",
         content:
-          '**1. `git init` — 初始化仓库**\n```bash\ncd music-collection\ngit init\n```\n这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。\n\n**2. `git add` + `git commit` — 保存快照**\n```bash\ngit add .                    # 把所有修改加入"暂存区"\ngit commit -m "初始化项目"    # 创建一次提交（存档）\n```\n\n每次 commit 需要一条消息（`-m "..."`），说明这次改了什么。\n- `-m` = message（消息）\n\n**3. `.gitignore` — 告诉 Git 忽略什么**\n\n创建 `.gitignore` 文件（注意文件名前面有个点）：\n```\nnode_modules/\ndist/\n.DS_Store\n```\n\n这些文件和文件夹不会被 Git 追踪：\n- `node_modules/` — 太大了，而且别人可以通过 `npm install` 重新下载\n- `dist/` — 构建产物，不是源码\n- `.DS_Store` — Mac 系统文件，和项目无关\n\n**完整工作流：**\n```bash\ngit add .\ngit commit -m "添加了音乐卡片组件"\n# 继续写代码...\ngit add .\ngit commit -m "添加了筛选功能"\n# 继续写代码...\ngit add .\ngit commit -m "修复了收藏按钮的样式"\n```',
+          '**1. `git init` — 初始化仓库**\n\```bash\ncd music-collection\ngit init\n\```\n这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。\n\n**2. `git add` + `git commit` — 保存快照**\n\```bash\ngit add .                    # 把所有修改加入"暂存区"\ngit commit -m "初始化项目"    # 创建一次提交（存档）\n\```\n\n每次 commit 需要一条消息（`-m "..."`），说明这次改了什么。\n- `-m` = message（消息）\n\n**3. `.gitignore` — 告诉 Git 忽略什么**\n\n创建 `.gitignore` 文件（注意文件名前面有个点）：\n\```\nnode_modules/\ndist/\n.DS_Store\n\```\n\n这些文件和文件夹不会被 Git 追踪：\n- `node_modules/` — 太大了，而且别人可以通过 `npm install` 重新下载\n- `dist/` — 构建产物，不是源码\n- `.DS_Store` — Mac 系统文件，和项目无关\n\n**完整工作流：**\n\```bash\ngit add .\ngit commit -m "添加了音乐卡片组件"\n# 继续写代码...\ngit add .\ngit commit -m "添加了筛选功能"\n# 继续写代码...\ngit add .\ngit commit -m "修复了收藏按钮的样式"\n\```',
       },
       {
         type: "task",
@@ -3346,7 +3346,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "关联本地项目到 GitHub",
         content:
-          '**第一步：在 GitHub 上创建仓库**\n\n1. 打开 [github.com](https://github.com)，注册/登录账号\n\n2. 点击右上角的 ➕ → "New repository"\n\n3. 仓库名填写 `music-collection`\n\n4. 设置为 **Public**（公开）\n\n5. **不要勾选** "Add a README file"（因为本地已有项目）\n\n6. 点击 "Create repository"\n\n**第二步：关联本地项目**\n\nGitHub 会显示一段命令，复制并在 VS Code 终端中运行：\n\n```bash\ngit remote add origin https://github.com/你的用户名/music-collection.git\ngit branch -M main\ngit push -u origin main\n```\n\n逐行解释：\n- `git remote add origin <URL>` — 告诉 Git"远程仓库的地址在这里"，给它起个名叫 `origin`\n- `git branch -M main` — 把当前分支命名为 `main`\n- `git push -u origin main` — 把本地的 `main` 分支推送到远程的 `origin`\n\n之后每次有新的 commit，只需要：\n```bash\ngit push\n```\n\n刷新 GitHub 页面，你的代码就出现在网上了！🎉',
+          '**第一步：在 GitHub 上创建仓库**\n\n1. 打开 [github.com](https://github.com)，注册/登录账号\n\n2. 点击右上角的 ➕ → "New repository"\n\n3. 仓库名填写 `music-collection`\n\n4. 设置为 **Public**（公开）\n\n5. **不要勾选** "Add a README file"（因为本地已有项目）\n\n6. 点击 "Create repository"\n\n**第二步：关联本地项目**\n\nGitHub 会显示一段命令，复制并在 VS Code 终端中运行：\n\n\```bash\ngit remote add origin https://github.com/你的用户名/music-collection.git\ngit branch -M main\ngit push -u origin main\n\```\n\n逐行解释：\n- `git remote add origin <URL>` — 告诉 Git"远程仓库的地址在这里"，给它起个名叫 `origin`\n- `git branch -M main` — 把当前分支命名为 `main`\n- `git push -u origin main` — 把本地的 `main` 分支推送到远程的 `origin`\n\n之后每次有新的 commit，只需要：\n\```bash\ngit push\n\```\n\n刷新 GitHub 页面，你的代码就出现在网上了！🎉',
       },
       {
         type: "task",
@@ -3381,13 +3381,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "开发 vs 生产",
         content:
-          '在开发过程中，Vite 的开发服务器做了很多"方便你开发"的事：\n- 热更新（修改代码页面自动刷新）\n- 不压缩代码（方便调试）\n- 源码映射（报错时能看到原始代码位置）\n\n但当你准备发布时，需要"构建"——把代码变成**适合用户访问的最终版本**：\n- 代码压缩（去掉空格、缩短变量名）\n- 文件合并（减少 HTTP 请求次数）\n- 去除开发调试代码\n\n**类比：**\n- 开发 = 排练时的笔记，潦草但你能看懂\n- 构建 = 正式演出的节目单，印刷精美，观众能看懂\n\n**命令：**\n```bash\nnpm run build\n```\n\n运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。\n\n```\ndist/\n├── index.html        # 入口页面\n├── assets/\n│   ├── index-abc123.js   # 打包后的 JS\n│   └── index-def456.css  # 打包后的 CSS\n└── ...\n```\n\n> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的"产品"。',
+          '在开发过程中，Vite 的开发服务器做了很多"方便你开发"的事：\n- 热更新（修改代码页面自动刷新）\n- 不压缩代码（方便调试）\n- 源码映射（报错时能看到原始代码位置）\n\n但当你准备发布时，需要"构建"——把代码变成**适合用户访问的最终版本**：\n- 代码压缩（去掉空格、缩短变量名）\n- 文件合并（减少 HTTP 请求次数）\n- 去除开发调试代码\n\n**类比：**\n- 开发 = 排练时的笔记，潦草但你能看懂\n- 构建 = 正式演出的节目单，印刷精美，观众能看懂\n\n**命令：**\n\```bash\nnpm run build\n\```\n\n运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。\n\n\```\ndist/\n├── index.html        # 入口页面\n├── assets/\n│   ├── index-abc123.js   # 打包后的 JS\n│   └── index-def456.css  # 打包后的 CSS\n└── ...\n\```\n\n> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的"产品"。',
       },
       {
         type: "explain",
         title: "部署到 GitHub Pages",
         content:
-          'GitHub Pages 是 GitHub 提供的免费静态网站托管服务。你可以把 `dist/` 文件夹的内容部署上去，获得一个 `https://你的用户名.github.io/music-collection/` 的网址。\n\n**最简单的部署方式：**\n\n1. 在项目中安装 `gh-pages` 包：\n```bash\nnpm install -D gh-pages\n```\n\n2. 在 `package.json` 中添加部署脚本：\n```json\n{\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build",\n    "deploy": "gh-pages -d dist"\n  }\n}\n```\n\n3. 在 `vite.config.js` 中添加 base 配置：\n```js\nimport { defineConfig } from \'vite\'\nimport vue from \'@vitejs/plugin-vue\'\n\nexport default defineConfig({\n  plugins: [vue()],\n  base: \'/music-collection/\'  // 你的仓库名\n})\n```\n\n4. 构建并部署：\n```bash\nnpm run build\nnpm run deploy\n```\n\n等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉',
+          'GitHub Pages 是 GitHub 提供的免费静态网站托管服务。你可以把 `dist/` 文件夹的内容部署上去，获得一个 `https://你的用户名.github.io/music-collection/` 的网址。\n\n**最简单的部署方式：**\n\n1. 在项目中安装 `gh-pages` 包：\n\```bash\nnpm install -D gh-pages\n\```\n\n2. 在 `package.json` 中添加部署脚本：\n\```json\n{\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build",\n    "deploy": "gh-pages -d dist"\n  }\n}\n\```\n\n3. 在 `vite.config.js` 中添加 base 配置：\n\```js\nimport { defineConfig } from \'vite\'\nimport vue from \'@vitejs/plugin-vue\'\n\nexport default defineConfig({\n  plugins: [vue()],\n  base: \'/music-collection/\'  // 你的仓库名\n})\n\```\n\n4. 构建并部署：\n\```bash\nnpm run build\nnpm run deploy\n\```\n\n等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉',
       },
       {
         type: "task",
@@ -3425,17 +3425,17 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: '.env 文件 — 你的后台配置单',
-        content: 'Vite 项目默认支持 .env 文件（通过 dotenv）：\n\n```bash\n# .env.development  — 开发时自动加载\nVITE_API_BASE=http://localhost:3000/api\nVITE_DEBUG=true\nVITE_APP_TITLE=音乐收藏（开发版）\n\n# .env.production  — 构建时自动加载\nVITE_API_BASE=https://api.myapp.com\nVITE_DEBUG=false\nVITE_APP_TITLE=音乐收藏\n```\n\n**命名规则：** 只有以 VITE_ 开头的变量才会暴露给客户端代码。这是 Vite 的安全措施——防止意外的敏感信息泄露。\n\n**注意：** .env 文件**不应该提交到 Git**（把 .env 加入 .gitignore）。敏感信息如 API 密钥永远不要放在前端环境变量中——它们会被打包进 JS 文件，任何人都能看到。',
+        content: 'Vite 项目默认支持 .env 文件（通过 dotenv）：\n\n\```bash\n# .env.development  — 开发时自动加载\nVITE_API_BASE=http://localhost:3000/api\nVITE_DEBUG=true\nVITE_APP_TITLE=音乐收藏（开发版）\n\n# .env.production  — 构建时自动加载\nVITE_API_BASE=https://api.myapp.com\nVITE_DEBUG=false\nVITE_APP_TITLE=音乐收藏\n\```\n\n**命名规则：** 只有以 VITE_ 开头的变量才会暴露给客户端代码。这是 Vite 的安全措施——防止意外的敏感信息泄露。\n\n**注意：** .env 文件**不应该提交到 Git**（把 .env 加入 .gitignore）。敏感信息如 API 密钥永远不要放在前端环境变量中——它们会被打包进 JS 文件，任何人都能看到。',
       },
       {
         type: 'explain',
         title: '在代码中使用环境变量',
-        content: '在 Vue 组件或 JS 文件中通过 import.meta.env 访问：\n\n```js\n// 在任何 .vue 或 .js 文件中\nconst API_BASE = import.meta.env.VITE_API_BASE\nconst isDebug = import.meta.env.VITE_DEBUG === \'true\'\n\n// 使用\nasync function searchMusic(keyword) {\n  const res = await fetch(\n    import.meta.env.VITE_API_BASE + \'/search?q=\' + keyword\n  )\n  return res.json()\n}\n\n// 条件逻辑\nif (import.meta.env.DEV) {\n  console.log(\'当前是开发环境\')\n}\n\nif (import.meta.env.PROD) {\n  // 生产环境特有的逻辑\n}\n```\n\n**Vite 内置的环境变量：**\n- import.meta.env.MODE — 当前模式（development / production）\n- import.meta.env.DEV — 是否开发模式（boolean）\n- import.meta.env.PROD — 是否生产模式（boolean）\n- import.meta.env.BASE_URL — 部署的基础路径（来自 vite.config.js 的 base）\n\n> 🎭 环境变量就像演出前的后台配置——灯光师根据场地调试灯光，音响师根据厅堂调 EQ。开发和生产是两种完全不同的演出，需要不同的配置。',
+        content: '在 Vue 组件或 JS 文件中通过 import.meta.env 访问：\n\n\```js\n// 在任何 .vue 或 .js 文件中\nconst API_BASE = import.meta.env.VITE_API_BASE\nconst isDebug = import.meta.env.VITE_DEBUG === \'true\'\n\n// 使用\nasync function searchMusic(keyword) {\n  const res = await fetch(\n    import.meta.env.VITE_API_BASE + \'/search?q=\' + keyword\n  )\n  return res.json()\n}\n\n// 条件逻辑\nif (import.meta.env.DEV) {\n  console.log(\'当前是开发环境\')\n}\n\nif (import.meta.env.PROD) {\n  // 生产环境特有的逻辑\n}\n\```\n\n**Vite 内置的环境变量：**\n- import.meta.env.MODE — 当前模式（development / production）\n- import.meta.env.DEV — 是否开发模式（boolean）\n- import.meta.env.PROD — 是否生产模式（boolean）\n- import.meta.env.BASE_URL — 部署的基础路径（来自 vite.config.js 的 base）\n\n> 🎭 环境变量就像演出前的后台配置——灯光师根据场地调试灯光，音响师根据厅堂调 EQ。开发和生产是两种完全不同的演出，需要不同的配置。',
       },
       {
         type: 'example',
         title: '看例子',
-        content: '以下是一个使用环境变量的实际例子：\n\n```js\n// src/config.js — 集中管理所有环境配置\nexport const config = {\n  apiBase: import.meta.env.VITE_API_BASE || \'http://localhost:3000/api\',\n  debug: import.meta.env.VITE_DEBUG === \'true\',\n  appTitle: import.meta.env.VITE_APP_TITLE || \'音乐收藏\',\n  enableAnalytics: import.meta.env.PROD  // 只在生产环境开启统计\n}\n\n// 在组件中使用\nimport { config } from \'./config.js\'\n\nconsole.log(\'当前环境：\', import.meta.env.MODE)\nconsole.log(\'API 地址：\', config.apiBase)\nconsole.log(\'调试模式：\', config.debug ? \'开启\' : \'关闭\')\n```\n\n开发时运行 npm run dev，自动读取 .env.development。\n构建时运行 npm run build，自动读取 .env.production。',
+        content: '以下是一个使用环境变量的实际例子：\n\n\```js\n// src/config.js — 集中管理所有环境配置\nexport const config = {\n  apiBase: import.meta.env.VITE_API_BASE || \'http://localhost:3000/api\',\n  debug: import.meta.env.VITE_DEBUG === \'true\',\n  appTitle: import.meta.env.VITE_APP_TITLE || \'音乐收藏\',\n  enableAnalytics: import.meta.env.PROD  // 只在生产环境开启统计\n}\n\n// 在组件中使用\nimport { config } from \'./config.js\'\n\nconsole.log(\'当前环境：\', import.meta.env.MODE)\nconsole.log(\'API 地址：\', config.apiBase)\nconsole.log(\'调试模式：\', config.debug ? \'开启\' : \'关闭\')\n\```\n\n开发时运行 npm run dev，自动读取 .env.development。\n构建时运行 npm run build，自动读取 .env.production。',
       },
       {
         type: 'task',
@@ -3470,13 +3470,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: ".vue 文件的三段结构",
         content:
-          '打开 `src/App.vue`，你会看到：\n\n```vue\n<script setup>\n// 1. 逻辑区 — 数据和函数\nimport { ref } from \'vue\'\n\nconst message = ref("你好，Vue！")\n</script>\n\n<template>\n  <!-- 2. 模板区 — HTML 结构 -->\n  <h1>{{ message }}</h1>\n</template>\n\n<style scoped>\n/* 3. 样式区 — CSS */\nh1 {\n  color: #8B2E2E;\n}\n</style>\n```\n\n**三段各司其职：**\n- `<script setup>` — JavaScript 逻辑（数据、函数、计算属性等）。`setup` 关键词表示使用 Vue 3 的组合式 API 语法\n- `<template>` — HTML 模板（你在之前课程学的所有标签和指令都在这里：`{{ }}`、`v-if`、`v-for`、`@click` 等）\n- `<style scoped>` — CSS 样式。`scoped` 关键词让这些样式只作用于当前组件，不会影响其他组件\n\n和之前 CDN 方式对比：\n\n**CDN 方式（浏览器内）：**\n- JS、HTML、CSS 分在三个独立的编辑区\n- HTML 需要一个 `<div id="app">` 作为挂载点\n- `createApp({...}).mount("#app")` 手动挂载\n\n**.vue 文件方式（工程化）：**\n- 三段写在一个 `.vue` 文件里，一个组件一个文件\n- 不需要 `createApp` 和 `mount`——Vite 自动处理\n- 组件之间通过 `import` 引入',
+          '打开 `src/App.vue`，你会看到：\n\n\```vue\n<script setup>\n// 1. 逻辑区 — 数据和函数\nimport { ref } from \'vue\'\n\nconst message = ref("你好，Vue！")\n</script>\n\n<template>\n  <!-- 2. 模板区 — HTML 结构 -->\n  <h1>{{ message }}</h1>\n</template>\n\n<style scoped>\n/* 3. 样式区 — CSS */\nh1 {\n  color: #8B2E2E;\n}\n</style>\n\```\n\n**三段各司其职：**\n- `<script setup>` — JavaScript 逻辑（数据、函数、计算属性等）。`setup` 关键词表示使用 Vue 3 的组合式 API 语法\n- `<template>` — HTML 模板（你在之前课程学的所有标签和指令都在这里：`{{ }}`、`v-if`、`v-for`、`@click` 等）\n- `<style scoped>` — CSS 样式。`scoped` 关键词让这些样式只作用于当前组件，不会影响其他组件\n\n和之前 CDN 方式对比：\n\n**CDN 方式（浏览器内）：**\n- JS、HTML、CSS 分在三个独立的编辑区\n- HTML 需要一个 `<div id="app">` 作为挂载点\n- `createApp({...}).mount("#app")` 手动挂载\n\n**.vue 文件方式（工程化）：**\n- 三段写在一个 `.vue` 文件里，一个组件一个文件\n- 不需要 `createApp` 和 `mount`——Vite 自动处理\n- 组件之间通过 `import` 引入',
       },
       {
         type: "explain",
         title: "组件的引入和使用",
         content:
-          '在工程化项目中，组件就是 `.vue` 文件：\n\n**定义一个组件 `MusicCard.vue`：**\n```vue\n<script setup>\ndefineProps(["name", "composer"])\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }}</p>\n  </div>\n</template>\n\n<style scoped>\n.card {\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px;\n}\n</style>\n```\n\n**在 `App.vue` 中使用：**\n```vue\n<script setup>\nimport MusicCard from \'./components/MusicCard.vue\'\n</script>\n\n<template>\n  <MusicCard name="夜曲 Op.9 No.2" composer="肖邦" />\n  <MusicCard name="月光" composer="德彪西" />\n</template>\n```\n\n注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。',
+          '在工程化项目中，组件就是 `.vue` 文件：\n\n**定义一个组件 `MusicCard.vue`：**\n\```vue\n<script setup>\ndefineProps(["name", "composer"])\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }}</p>\n  </div>\n</template>\n\n<style scoped>\n.card {\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px;\n}\n</style>\n\```\n\n**在 `App.vue` 中使用：**\n\```vue\n<script setup>\nimport MusicCard from \'./components/MusicCard.vue\'\n</script>\n\n<template>\n  <MusicCard name="夜曲 Op.9 No.2" composer="肖邦" />\n  <MusicCard name="月光" composer="德彪西" />\n</template>\n\```\n\n注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。',
       },
       {
         type: "task",
@@ -3508,27 +3508,27 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: 'v-bind — 动态绑定属性',
-        content: '`v-bind` 把 JS 表达式的值绑定到 HTML 属性上。简写是 `:`：\n\n```html\n<!-- 完整写法 -->\n<img v-bind:src="imageUrl">\n<a v-bind:href="\'/user/\' + userId">用户</a>\n<div v-bind:class="{ active: isActive }">...</div>\n\n<!-- 简写（最常用） -->\n<img :src="imageUrl">\n<a :href="\'/user/\' + userId">用户</a>\n<div :class="{ active: isActive }">...</div>\n<div :style="{ color: textColor, fontSize: size + \'px\' }">...</div>\n```\n\n**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上\n\n```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src="imageUrl" :alt="imageDesc">\n<button :disabled="isLoading">提交</button>\n```\n\n就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。',
+        content: '`v-bind` 把 JS 表达式的值绑定到 HTML 属性上。简写是 `:`：\n\n\```html\n<!-- 完整写法 -->\n<img v-bind:src="imageUrl">\n<a v-bind:href="\'/user/\' + userId">用户</a>\n<div v-bind:class="{ active: isActive }">...</div>\n\n<!-- 简写（最常用） -->\n<img :src="imageUrl">\n<a :href="\'/user/\' + userId">用户</a>\n<div :class="{ active: isActive }">...</div>\n<div :style="{ color: textColor, fontSize: size + \'px\' }">...</div>\n\```\n\n**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上\n\n\```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src="imageUrl" :alt="imageDesc">\n<button :disabled="isLoading">提交</button>\n\```\n\n就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。',
       },
       {
         type: 'explain',
         title: 'v-if / v-show — 条件渲染',
-        content: '**v-if / v-else-if / v-else：** 根据条件决定是否**创建/销毁** DOM 元素\n\n```html\n<div v-if="status === \'loading\'">加载中...</div>\n<div v-else-if="status === \'error\'">出错了！</div>\n<div v-else-if="status === \'empty\'">没有数据</div>\n<div v-else>\n  <p>{{ result }}</p>\n</div>\n```\n\n**v-show：** 根据条件决定是否**显示**元素（元素始终存在，只是切换 display:none）\n\n```html\n<div v-show="isVisible">这段文字可以快速切换显示/隐藏</div>\n```\n\n**v-if vs v-show 的选择：**\n\n| | v-if | v-show |\n|------|------|--------|\n| 机制 | 移除/创建 DOM | display: none 切换 |\n| 初始渲染 | 条件为 false 时不渲染 | 始终渲染 |\n| 切换开销 | 大（销毁+重建） | 小（只改 CSS） |\n| 适用场景 | 条件很少改变 | 频繁切换 |\n\n> 🎼 v-if 是这个乐手这场不参加（人根本不在舞台上），v-show 是这个乐手在场但保持沉默（人在但不出声）。',
+        content: '**v-if / v-else-if / v-else：** 根据条件决定是否**创建/销毁** DOM 元素\n\n\```html\n<div v-if="status === \'loading\'">加载中...</div>\n<div v-else-if="status === \'error\'">出错了！</div>\n<div v-else-if="status === \'empty\'">没有数据</div>\n<div v-else>\n  <p>{{ result }}</p>\n</div>\n\```\n\n**v-show：** 根据条件决定是否**显示**元素（元素始终存在，只是切换 display:none）\n\n\```html\n<div v-show="isVisible">这段文字可以快速切换显示/隐藏</div>\n\```\n\n**v-if vs v-show 的选择：**\n\n| | v-if | v-show |\n|------|------|--------|\n| 机制 | 移除/创建 DOM | display: none 切换 |\n| 初始渲染 | 条件为 false 时不渲染 | 始终渲染 |\n| 切换开销 | 大（销毁+重建） | 小（只改 CSS） |\n| 适用场景 | 条件很少改变 | 频繁切换 |\n\n> 🎼 v-if 是这个乐手这场不参加（人根本不在舞台上），v-show 是这个乐手在场但保持沉默（人在但不出声）。',
       },
       {
         type: 'explain',
         title: 'v-for — 列表渲染',
-        content: '`v-for` 遍历数组或对象，为每个元素渲染一段模板：\n\n```html\n<!-- 遍历数组：item in items -->\n<ul>\n  <li v-for="item in items" :key="item.id">\n    {{ item.name }} — {{ item.price }} 元\n  </li>\n</ul>\n\n<!-- 带索引： (item, index) in items -->\n<li v-for="(item, index) in items" :key="item.id">\n  {{ index + 1 }}. {{ item.name }}\n</li>\n\n<!-- 遍历对象： (value, key, index) in obj -->\n<li v-for="(value, key) in composer" :key="key">\n  {{ key }}: {{ value }}\n</li>\n\n<!-- 遍历数字范围 -->\n<span v-for="n in 5" :key="n">{{ n }}</span>\n```\n\n**`:key` 为什么重要：**\n\nkey 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会导致：\n- 列表更新时出现错误的 DOM 复用\n- 组件状态错乱\n- 过渡动画失效\n\n始终给 v-for 一个唯一且稳定的 key（通常是 id，**永远不要用 index 作为 key** ——除非列表是静态的且不会重新排序）。',
+        content: '`v-for` 遍历数组或对象，为每个元素渲染一段模板：\n\n\```html\n<!-- 遍历数组：item in items -->\n<ul>\n  <li v-for="item in items" :key="item.id">\n    {{ item.name }} — {{ item.price }} 元\n  </li>\n</ul>\n\n<!-- 带索引： (item, index) in items -->\n<li v-for="(item, index) in items" :key="item.id">\n  {{ index + 1 }}. {{ item.name }}\n</li>\n\n<!-- 遍历对象： (value, key, index) in obj -->\n<li v-for="(value, key) in composer" :key="key">\n  {{ key }}: {{ value }}\n</li>\n\n<!-- 遍历数字范围 -->\n<span v-for="n in 5" :key="n">{{ n }}</span>\n\```\n\n**`:key` 为什么重要：**\n\nkey 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会导致：\n- 列表更新时出现错误的 DOM 复用\n- 组件状态错乱\n- 过渡动画失效\n\n始终给 v-for 一个唯一且稳定的 key（通常是 id，**永远不要用 index 作为 key** ——除非列表是静态的且不会重新排序）。',
       },
       {
         type: 'explain',
         title: 'v-html / v-text 与其他常用指令',
-        content: '**v-html：** 把字符串当作 HTML 渲染（⚠️ 有 XSS 安全风险！）\n\n```html\n<div v-html="rawHtml"></div>\n<!-- 仅在信任内容来源时使用！用户输入绝不能直接用 v-html -->\n```\n\n**v-text：** 等价于 {{ }}，设置元素的文本内容\n\n```html\n<span v-text="message"></span>\n<!-- 等价于 <span>{{ message }}</span> -->\n```\n\n**v-once：** 只渲染一次，后续不再响应数据变化（静态内容优化）\n\n```html\n<div v-once>这个标题永远不会变：{{ title }}</div>\n```\n\n**v-pre：** 跳过这个元素及其子元素的编译（显示原始 Mustache 语法）\n\n```html\n<pre v-pre>{{ 这里不会编译，直接显示 {{ message }} 原文 }}</pre>\n```',
+        content: '**v-html：** 把字符串当作 HTML 渲染（⚠️ 有 XSS 安全风险！）\n\n\```html\n<div v-html="rawHtml"></div>\n<!-- 仅在信任内容来源时使用！用户输入绝不能直接用 v-html -->\n\```\n\n**v-text：** 等价于 {{ }}，设置元素的文本内容\n\n\```html\n<span v-text="message"></span>\n<!-- 等价于 <span>{{ message }}</span> -->\n\```\n\n**v-once：** 只渲染一次，后续不再响应数据变化（静态内容优化）\n\n\```html\n<div v-once>这个标题永远不会变：{{ title }}</div>\n\```\n\n**v-pre：** 跳过这个元素及其子元素的编译（显示原始 Mustache 语法）\n\n\```html\n<pre v-pre>{{ 这里不会编译，直接显示 {{ message }} 原文 }}</pre>\n\```',
       },
       {
         type: 'example',
         title: '看例子：一个完整的指令演示',
-        content: '下面的代码综合展示了所有主要指令。切换到预览区，实际操作感受：\n\n```html\n<!-- 条件渲染：切换 tab -->\n<div :class="[\'tab\', { active: activeTab === \'all\' }]" @click="activeTab = \'all\'">全部</div>\n\n<!-- 列表渲染：遍历曲目 -->\n<div v-for="track in filteredTracks" :key="track.id" class="track-card">\n  <img :src="track.cover" :alt="track.title">\n  <h3>{{ track.title }}</h3>\n  <p v-if="track.artist">{{ track.artist }}</p>\n  <span :class="[\'tag\', \'tag-\' + track.genre]">{{ track.genre }}</span>\n</div>\n\n<!-- v-show 切换 -->\n<div v-show="showPlayer" class="player">播放器控件</div>\n```\n\n注意：:class 可以接收对象（{ active: isActive }）或数组（[\'base\', dynamicClass]）。:style 同样支持对象语法。',
+        content: '下面的代码综合展示了所有主要指令。切换到预览区，实际操作感受：\n\n\```html\n<!-- 条件渲染：切换 tab -->\n<div :class="[\'tab\', { active: activeTab === \'all\' }]" @click="activeTab = \'all\'">全部</div>\n\n<!-- 列表渲染：遍历曲目 -->\n<div v-for="track in filteredTracks" :key="track.id" class="track-card">\n  <img :src="track.cover" :alt="track.title">\n  <h3>{{ track.title }}</h3>\n  <p v-if="track.artist">{{ track.artist }}</p>\n  <span :class="[\'tag\', \'tag-\' + track.genre]">{{ track.genre }}</span>\n</div>\n\n<!-- v-show 切换 -->\n<div v-show="showPlayer" class="player">播放器控件</div>\n\```\n\n注意：:class 可以接收对象（{ active: isActive }）或数组（[\'base\', dynamicClass]）。:style 同样支持对象语法。',
       },
       {
         type: 'task',
@@ -3553,27 +3553,27 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: '什么是生命周期？',
-        content: '每个 Vue 组件从创建到销毁，会经历一系列阶段。Vue 在每个阶段提供了**钩子函数（hooks）**，让你在特定时机执行代码：\n\n```\nsetup() → 创建响应式状态\n  ↓\nonBeforeMount() → 即将挂载（很少用）\n  ↓\nonMounted() → 已挂载到 DOM ✅ 常用\n  ↓\nonBeforeUpdate() → 数据变了，DOM 即将更新\n  ↓\nonUpdated() → DOM 已更新\n  ↓\nonBeforeUnmount() → 组件即将销毁 ✅ 常用\n  ↓\nonUnmounted() → 组件已销毁\n```\n\n**你只需要了解最常用的三个就够了：**\n- onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）\n- onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听）\n- watch / watchEffect — 响应式数据变化时自动执行\n\n> 🎼 就像在奏鸣曲的呈示部结束时要做转调，在再现部开始前要回到原调——生命周期的每个节点都有它特定的音乐任务。',
+        content: '每个 Vue 组件从创建到销毁，会经历一系列阶段。Vue 在每个阶段提供了**钩子函数（hooks）**，让你在特定时机执行代码：\n\n\```\nsetup() → 创建响应式状态\n  ↓\nonBeforeMount() → 即将挂载（很少用）\n  ↓\nonMounted() → 已挂载到 DOM ✅ 常用\n  ↓\nonBeforeUpdate() → 数据变了，DOM 即将更新\n  ↓\nonUpdated() → DOM 已更新\n  ↓\nonBeforeUnmount() → 组件即将销毁 ✅ 常用\n  ↓\nonUnmounted() → 组件已销毁\n\```\n\n**你只需要了解最常用的三个就够了：**\n- onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）\n- onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听）\n- watch / watchEffect — 响应式数据变化时自动执行\n\n> 🎼 就像在奏鸣曲的呈示部结束时要做转调，在再现部开始前要回到原调——生命周期的每个节点都有它特定的音乐任务。',
       },
       {
         type: 'explain',
         title: 'onMounted — 登台时刻',
-        content: '`onMounted` 是使用最频繁的钩子。在 `<script setup>` 中，**顶层的代码在组件创建时执行**，但此时 DOM 还不存在。任何需要操作 DOM 的代码必须放在 onMounted 中：\n\n```vue\n<script setup>\nimport { ref, onMounted } from \'vue\'\n\nconst inputRef = ref(null)  // template ref\n\n// ❌ 错误：此时 DOM 还没渲染，inputRef.value 是 null\n// inputRef.value.focus()\n\n// ✅ 正确：onMounted 中 DOM 已就绪\nonMounted(() => {\n  inputRef.value?.focus()    // 自动聚焦输入框\n  fetchUserData()            // 发初始请求\n  startTimer()               // 启动定时器\n  window.addEventListener(\'scroll\', handleScroll)  // 绑定全局事件\n})\n</script>\n```\n\n**onMounted 的常见用途：**\n- 获取初始数据（调用 API）\n- 操作 DOM 元素（聚焦、滚动、初始化第三方库）\n- 启动定时器 / 订阅事件\n- 添加全局事件监听（scroll、resize、keydown）',
+        content: '`onMounted` 是使用最频繁的钩子。在 `<script setup>` 中，**顶层的代码在组件创建时执行**，但此时 DOM 还不存在。任何需要操作 DOM 的代码必须放在 onMounted 中：\n\n\```vue\n<script setup>\nimport { ref, onMounted } from \'vue\'\n\nconst inputRef = ref(null)  // template ref\n\n// ❌ 错误：此时 DOM 还没渲染，inputRef.value 是 null\n// inputRef.value.focus()\n\n// ✅ 正确：onMounted 中 DOM 已就绪\nonMounted(() => {\n  inputRef.value?.focus()    // 自动聚焦输入框\n  fetchUserData()            // 发初始请求\n  startTimer()               // 启动定时器\n  window.addEventListener(\'scroll\', handleScroll)  // 绑定全局事件\n})\n</script>\n\```\n\n**onMounted 的常见用途：**\n- 获取初始数据（调用 API）\n- 操作 DOM 元素（聚焦、滚动、初始化第三方库）\n- 启动定时器 / 订阅事件\n- 添加全局事件监听（scroll、resize、keydown）',
       },
       {
         type: 'explain',
         title: 'onBeforeUnmount — 谢幕前的清理',
-        content: '组件销毁前，必须清理你在 onMounted 中创建的东西——否则会导致内存泄露或意外行为：\n\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount } from \'vue\'\n\nlet timer = null\n\nonMounted(() => {\n  timer = setInterval(() => {\n    console.log(\'tick\')\n  }, 1000)\n  window.addEventListener(\'resize\', handleResize)\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)  // 清理定时器——不然组件销毁后还在 tick！\n  window.removeEventListener(\'resize\', handleResize)  // 移除事件监听——不然会内存泄露\n})\n</script>\n```\n\n**清理清单：**\n- clearInterval / clearTimeout — 清除定时器\n- removeEventListener — 移除全局事件监听\n- 取消未完成的 fetch 请求（用 AbortController）\n- 销毁第三方库实例（如图表、地图）\n\n> 🎭 演出结束后的收琴——提琴手松弓毛、管乐手清理乐器、钢琴家合上琴盖。不清理的话，乐器会受损（内存泄露），下次演出也会出问题。',
+        content: '组件销毁前，必须清理你在 onMounted 中创建的东西——否则会导致内存泄露或意外行为：\n\n\```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount } from \'vue\'\n\nlet timer = null\n\nonMounted(() => {\n  timer = setInterval(() => {\n    console.log(\'tick\')\n  }, 1000)\n  window.addEventListener(\'resize\', handleResize)\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)  // 清理定时器——不然组件销毁后还在 tick！\n  window.removeEventListener(\'resize\', handleResize)  // 移除事件监听——不然会内存泄露\n})\n</script>\n\```\n\n**清理清单：**\n- clearInterval / clearTimeout — 清除定时器\n- removeEventListener — 移除全局事件监听\n- 取消未完成的 fetch 请求（用 AbortController）\n- 销毁第三方库实例（如图表、地图）\n\n> 🎭 演出结束后的收琴——提琴手松弓毛、管乐手清理乐器、钢琴家合上琴盖。不清理的话，乐器会受损（内存泄露），下次演出也会出问题。',
       },
       {
         type: 'explain',
         title: 'watch 与 watchEffect — 自动跟进的伴奏',
-        content: '虽然 watch 不是严格的生命周期钩子，但它和生命周期密切相关——它监听数据变化并在正确的时机执行。\n\n**watch：** 明确指定要监听的数据源\n\n```vue\n<script setup>\nimport { ref, watch } from \'vue\'\n\nconst keyword = ref(\'\')\nconst results = ref([])\n\n// 监听 keyword 变化，自动搜索\nwatch(keyword, async (newVal, oldVal) => {\n  console.log(\'搜索词从\', oldVal, \'变为\', newVal)\n  if (newVal.trim()) {\n    results.value = await searchAPI(newVal)\n  }\n})\n\n// 监听多个数据源\nwatch([keyword, category], ([newKw, newCat]) => {\n  // keyword 或 category 任一变化都会触发\n})\n\n// 深度监听对象\nwatch(user, (newUser) => {\n  console.log(\'用户信息变化了\', newUser)\n}, { deep: true })\n</script>\n```\n\n**watchEffect：** 自动追踪内部用到的响应式数据，任意一个变化就重新执行\n\n```js\nwatchEffect(() => {\n  console.log(keyword.value, category.value)\n  document.title = keyword.value || \'音乐收藏\'\n})\n```\n\n**watch vs watchEffect：**\n- watch — 明确知道要监听什么，可以获取旧值\n- watchEffect — 不需要指定依赖，自动追踪，更简洁',
+        content: '虽然 watch 不是严格的生命周期钩子，但它和生命周期密切相关——它监听数据变化并在正确的时机执行。\n\n**watch：** 明确指定要监听的数据源\n\n\```vue\n<script setup>\nimport { ref, watch } from \'vue\'\n\nconst keyword = ref(\'\')\nconst results = ref([])\n\n// 监听 keyword 变化，自动搜索\nwatch(keyword, async (newVal, oldVal) => {\n  console.log(\'搜索词从\', oldVal, \'变为\', newVal)\n  if (newVal.trim()) {\n    results.value = await searchAPI(newVal)\n  }\n})\n\n// 监听多个数据源\nwatch([keyword, category], ([newKw, newCat]) => {\n  // keyword 或 category 任一变化都会触发\n})\n\n// 深度监听对象\nwatch(user, (newUser) => {\n  console.log(\'用户信息变化了\', newUser)\n}, { deep: true })\n</script>\n\```\n\n**watchEffect：** 自动追踪内部用到的响应式数据，任意一个变化就重新执行\n\n\```js\nwatchEffect(() => {\n  console.log(keyword.value, category.value)\n  document.title = keyword.value || \'音乐收藏\'\n})\n\```\n\n**watch vs watchEffect：**\n- watch — 明确知道要监听什么，可以获取旧值\n- watchEffect — 不需要指定依赖，自动追踪，更简洁',
       },
       {
         type: 'example',
         title: '看例子：生命周期实战',
-        content: '下面的代码是一个时钟组件，完整展示了生命周期钩子的使用：\n\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount, watch } from \'vue\'\n\nconst time = ref(new Date().toLocaleTimeString())\nconst isRunning = ref(true)\nlet timer = null\n\nfunction tick() {\n  time.value = new Date().toLocaleTimeString()\n}\n\nfunction startClock() {\n  isRunning.value = true\n  timer = setInterval(tick, 1000)\n}\n\nfunction stopClock() {\n  isRunning.value = false\n  clearInterval(timer)\n  timer = null\n}\n\nonMounted(() => {\n  startClock()\n  console.log(\'🕐 时钟组件已挂载\')\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)\n  console.log(\'🕐 时钟组件已卸载，定时器已清理\')\n})\n\nwatch(isRunning, (running) => {\n  console.log(\'时钟状态：\', running ? \'运行中\' : \'已暂停\')\n})\n</script>\n```\n\n注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。',
+        content: '下面的代码是一个时钟组件，完整展示了生命周期钩子的使用：\n\n\```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount, watch } from \'vue\'\n\nconst time = ref(new Date().toLocaleTimeString())\nconst isRunning = ref(true)\nlet timer = null\n\nfunction tick() {\n  time.value = new Date().toLocaleTimeString()\n}\n\nfunction startClock() {\n  isRunning.value = true\n  timer = setInterval(tick, 1000)\n}\n\nfunction stopClock() {\n  isRunning.value = false\n  clearInterval(timer)\n  timer = null\n}\n\nonMounted(() => {\n  startClock()\n  console.log(\'🕐 时钟组件已挂载\')\n})\n\nonBeforeUnmount(() => {\n  clearInterval(timer)\n  console.log(\'🕐 时钟组件已卸载，定时器已清理\')\n})\n\nwatch(isRunning, (running) => {\n  console.log(\'时钟状态：\', running ? \'运行中\' : \'已暂停\')\n})\n</script>\n\```\n\n注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。',
       },
       {
         type: 'task',
@@ -3601,13 +3601,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "ref — 响应式数据的起点",
         content:
-          '在 `<script setup>` 中，用 `ref()` 创建响应式数据：\n\n```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst count = ref(0)\nconst composer = ref("贝多芬")\nconst pieces = ref(["夜曲", "月光", "春"])\n\nfunction addOne() {\n  count.value++  // JS 中读写用 .value\n}\n</script>\n\n<template>\n  <p>计数：{{ count }}</p>        <!-- 模板中不需要 .value！ -->\n  <p>作曲家：{{ composer }}</p>\n  <button @click="addOne">+1</button>\n</template>\n```\n\n**规则不变：JS 中用 `.value`，模板中不用。**\n\n但是写法更简洁了：在 `<script setup>` 中，变量和函数**自动暴露给模板**——不需要像 CDN 方式那样 `return { count, addOne }`！',
+          '在 `<script setup>` 中，用 `ref()` 创建响应式数据：\n\n\```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst count = ref(0)\nconst composer = ref("贝多芬")\nconst pieces = ref(["夜曲", "月光", "春"])\n\nfunction addOne() {\n  count.value++  // JS 中读写用 .value\n}\n</script>\n\n<template>\n  <p>计数：{{ count }}</p>        <!-- 模板中不需要 .value！ -->\n  <p>作曲家：{{ composer }}</p>\n  <button @click="addOne">+1</button>\n</template>\n\```\n\n**规则不变：JS 中用 `.value`，模板中不用。**\n\n但是写法更简洁了：在 `<script setup>` 中，变量和函数**自动暴露给模板**——不需要像 CDN 方式那样 `return { count, addOne }`！',
       },
       {
         type: "explain",
         title: "computed — 自动计算的派生数据",
         content:
-          '`computed` 从其他数据自动推算出一个新值。依赖的数据变了，computed 自动重算。\n\n```vue\n<script setup>\nimport { ref, computed } from \'vue\'\n\nconst pieces = ref([\n  { name: "夜曲", period: "浪漫主义" },\n  { name: "布兰登堡", period: "巴洛克" },\n  { name: "月光", period: "印象派" }\n])\n\nconst selectedPeriod = ref("全部")\n\n// 自动筛选\nconst filteredPieces = computed(() => {\n  if (selectedPeriod.value === "全部") return pieces.value\n  return pieces.value.filter(p => p.period === selectedPeriod.value)\n})\n\n// 自动计数\nconst count = computed(() => filteredPieces.value.length)\n</script>\n\n<template>\n  <button @click="selectedPeriod = \'巴洛克\'">巴洛克</button>\n  <p>共 {{ count }} 首</p>\n  <div v-for="p in filteredPieces" :key="p.name">\n    {{ p.name }} — {{ p.period }}\n  </div>\n</template>\n```\n\n点击"巴洛克"按钮 → `selectedPeriod` 变了 → `filteredPieces` 自动重算 → `count` 自动重算 → 页面自动更新。三行 computed，替代了原来的手动 `render()` 函数！',
+          '`computed` 从其他数据自动推算出一个新值。依赖的数据变了，computed 自动重算。\n\n\```vue\n<script setup>\nimport { ref, computed } from \'vue\'\n\nconst pieces = ref([\n  { name: "夜曲", period: "浪漫主义" },\n  { name: "布兰登堡", period: "巴洛克" },\n  { name: "月光", period: "印象派" }\n])\n\nconst selectedPeriod = ref("全部")\n\n// 自动筛选\nconst filteredPieces = computed(() => {\n  if (selectedPeriod.value === "全部") return pieces.value\n  return pieces.value.filter(p => p.period === selectedPeriod.value)\n})\n\n// 自动计数\nconst count = computed(() => filteredPieces.value.length)\n</script>\n\n<template>\n  <button @click="selectedPeriod = \'巴洛克\'">巴洛克</button>\n  <p>共 {{ count }} 首</p>\n  <div v-for="p in filteredPieces" :key="p.name">\n    {{ p.name }} — {{ p.period }}\n  </div>\n</template>\n\```\n\n点击"巴洛克"按钮 → `selectedPeriod` 变了 → `filteredPieces` 自动重算 → `count` 自动重算 → 页面自动更新。三行 computed，替代了原来的手动 `render()` 函数！',
       },
       {
         type: "task",
@@ -3642,13 +3642,13 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "Props — 父组件给子组件传数据",
         content:
-          '**子组件 `MusicCard.vue`：**\n```vue\n<script setup>\n// 声明"我需要这些数据"\nconst props = defineProps({\n  name: String,\n  composer: String,\n  period: String,\n  liked: Boolean\n})\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }} · {{ period }}</p>\n    <span>{{ liked ? \'❤\' : \'🤍\' }}</span>\n  </div>\n</template>\n```\n\n**父组件 `App.vue`：**\n```vue\n<script setup>\nimport { ref } from \'vue\'\nimport MusicCard from \'./components/MusicCard.vue\'\n\nconst pieces = ref([...])\n</script>\n\n<template>\n  <MusicCard\n    v-for="p in pieces"\n    :key="p.id"\n    :name="p.name"\n    :composer="p.composer"\n    :period="p.period"\n    :liked="p.liked"\n  />\n</template>\n```\n\n`:name="p.name"` 中的冒号 `:` 是 `v-bind:` 的简写——表示传的是 JS 变量而不是字符串。',
+          '**子组件 `MusicCard.vue`：**\n\```vue\n<script setup>\n// 声明"我需要这些数据"\nconst props = defineProps({\n  name: String,\n  composer: String,\n  period: String,\n  liked: Boolean\n})\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }} · {{ period }}</p>\n    <span>{{ liked ? \'❤\' : \'🤍\' }}</span>\n  </div>\n</template>\n\```\n\n**父组件 `App.vue`：**\n\```vue\n<script setup>\nimport { ref } from \'vue\'\nimport MusicCard from \'./components/MusicCard.vue\'\n\nconst pieces = ref([...])\n</script>\n\n<template>\n  <MusicCard\n    v-for="p in pieces"\n    :key="p.id"\n    :name="p.name"\n    :composer="p.composer"\n    :period="p.period"\n    :liked="p.liked"\n  />\n</template>\n\```\n\n`:name="p.name"` 中的冒号 `:` 是 `v-bind:` 的简写——表示传的是 JS 变量而不是字符串。',
       },
       {
         type: "explain",
         title: "Emits — 子组件通知父组件",
         content:
-          '子组件不能直接修改父组件的数据——它只能"通知"父组件：\n\n**子组件 `MusicCard.vue`：**\n```vue\n<script setup>\nconst props = defineProps(["name", "composer", "liked"])\n\n// 声明"我会发出这些事件"\nconst emit = defineEmits(["toggle-like", "delete"])\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <button @click="emit(\'toggle-like\')">\n      {{ liked ? \'❤\' : \'🤍\' }}\n    </button>\n    <button @click="emit(\'delete\')">✕</button>\n  </div>\n</template>\n```\n\n**父组件 `App.vue`：**\n```vue\n<template>\n  <MusicCard\n    v-for="p in pieces"\n    :key="p.id"\n    :name="p.name"\n    :liked="p.liked"\n    @toggle-like="p.liked = !p.liked"\n    @delete="pieces = pieces.filter(item => item.id !== p.id)"\n  />\n</template>\n```\n\n**数据流总结：**\n```\n父组件（拥有数据）\n  │\n  │ Props ↓（传数据）\n  │\n子组件（接收数据，展示）\n  │\n  │ Emits ↑（发事件通知）\n  │\n父组件（收到通知，修改自己的数据）\n```\n这就是"数据向下，事件向上"——Vue 的核心设计模式。',
+          '子组件不能直接修改父组件的数据——它只能"通知"父组件：\n\n**子组件 `MusicCard.vue`：**\n\```vue\n<script setup>\nconst props = defineProps(["name", "composer", "liked"])\n\n// 声明"我会发出这些事件"\nconst emit = defineEmits(["toggle-like", "delete"])\n</script>\n\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <button @click="emit(\'toggle-like\')">\n      {{ liked ? \'❤\' : \'🤍\' }}\n    </button>\n    <button @click="emit(\'delete\')">✕</button>\n  </div>\n</template>\n\```\n\n**父组件 `App.vue`：**\n\```vue\n<template>\n  <MusicCard\n    v-for="p in pieces"\n    :key="p.id"\n    :name="p.name"\n    :liked="p.liked"\n    @toggle-like="p.liked = !p.liked"\n    @delete="pieces = pieces.filter(item => item.id !== p.id)"\n  />\n</template>\n\```\n\n**数据流总结：**\n\```\n父组件（拥有数据）\n  │\n  │ Props ↓（传数据）\n  │\n子组件（接收数据，展示）\n  │\n  │ Emits ↑（发事件通知）\n  │\n父组件（收到通知，修改自己的数据）\n\```\n这就是"数据向下，事件向上"——Vue 的核心设计模式。',
       },
       {
         type: "task",
@@ -3660,7 +3660,7 @@ debouncedSearch('贝多芬')
         type: "hint",
         title: "TypeScript 风格的 Props 定义",
         content:
-          '`defineProps` 有两种写法：\n\n**数组写法（简单）：**\n```js\ndefineProps(["name", "composer"])\n```\n\n**对象写法（带类型，推荐）：**\n```js\ndefineProps({\n  name: String,\n  count: Number,\n  liked: Boolean\n})\n```\n\n对象写法让使用你组件的人一眼就知道需要传什么数据。',
+          '`defineProps` 有两种写法：\n\n**数组写法（简单）：**\n\```js\ndefineProps(["name", "composer"])\n\```\n\n**对象写法（带类型，推荐）：**\n\```js\ndefineProps({\n  name: String,\n  count: Number,\n  liked: Boolean\n})\n\```\n\n对象写法让使用你组件的人一眼就知道需要传什么数据。',
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3683,7 +3683,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "命令式 vs 声明式",
         content:
-          "**命令式（Imperative）：** 一步步告诉计算机怎么做。\n```js\n// 纯 JS：操作 DOM\nconst title = document.createElement('h1')\ntitle.textContent = '你好，音乐世界'\ndocument.getElementById('app').appendChild(title)\n```\n\n**声明式（Declarative）：** 描述你想要什么结果。\n```vue\n<!-- Vue：声明结果 -->\n<template>\n  <h1>{{ message }}</h1>\n</template>\n<script setup>\nconst message = '你好，音乐世界'\n</script>\n```\n\n命令式像给乐手发微信：\"左手按G弦第二品，右手拨弦\"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。",
+          "**命令式（Imperative）：** 一步步告诉计算机怎么做。\n\```js\n// 纯 JS：操作 DOM\nconst title = document.createElement('h1')\ntitle.textContent = '你好，音乐世界'\ndocument.getElementById('app').appendChild(title)\n\```\n\n**声明式（Declarative）：** 描述你想要什么结果。\n\```vue\n<!-- Vue：声明结果 -->\n<template>\n  <h1>{{ message }}</h1>\n</template>\n<script setup>\nconst message = '你好，音乐世界'\n</script>\n\```\n\n命令式像给乐手发微信：\"左手按G弦第二品，右手拨弦\"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。",
       },
       {
         type: "explain",
@@ -3695,7 +3695,7 @@ debouncedSearch('贝多芬')
         type: "example",
         title: "reactivity 的本质",
         content:
-          'Vue 的响应式系统让你专注于数据：\n\n```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst count = ref(0)  // 响应式数据\n\nfunction increment() {\n  count.value++  // 修改数据\n  // 无需操作 DOM！页面自动更新\n}\n</script>\n\n<template>\n  <p>已点赞 {{ count }} 次</p>\n  <button @click="increment">👍 点赞</button>\n</template>\n```\n\n就像 MIDI 键盘：你按键，声音自动发出。你不用管"怎么发声"——那已经被系统处理好了。你只管演奏。',
+          'Vue 的响应式系统让你专注于数据：\n\n\```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst count = ref(0)  // 响应式数据\n\nfunction increment() {\n  count.value++  // 修改数据\n  // 无需操作 DOM！页面自动更新\n}\n</script>\n\n<template>\n  <p>已点赞 {{ count }} 次</p>\n  <button @click="increment">👍 点赞</button>\n</template>\n\```\n\n就像 MIDI 键盘：你按键，声音自动发出。你不用管"怎么发声"——那已经被系统处理好了。你只管演奏。',
       },
       {
         type: "task",
@@ -3724,19 +3724,19 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "computed — 自动计算的属性",
         content:
-          "当某个值可以由其他数据**推导**出来时，用 `computed`：\n\n```vue\n<script setup>\nimport { ref, computed } from 'vue'\n\nconst pieces = ref([\n  { name: '月光', period: '古典主义' },\n  { name: '夜曲', period: '浪漫主义' },\n  { name: '春', period: '巴洛克' },\n  { name: '致爱丽丝', period: '古典主义' },\n])\n\n// computed：自动计算，有缓存\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n</script>\n\n<template>\n  <p>古典主义曲目：{{ classicalPieces.length }} 首</p>\n  <ul>\n    <li v-for=\"p in classicalPieces\" :key=\"p.name\">{{ p.name }}</li>\n  </ul>\n</template>\n```\n\n`classicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**缓存**——不依赖的值没变，不会重复计算。",
+          "当某个值可以由其他数据**推导**出来时，用 `computed`：\n\n\```vue\n<script setup>\nimport { ref, computed } from 'vue'\n\nconst pieces = ref([\n  { name: '月光', period: '古典主义' },\n  { name: '夜曲', period: '浪漫主义' },\n  { name: '春', period: '巴洛克' },\n  { name: '致爱丽丝', period: '古典主义' },\n])\n\n// computed：自动计算，有缓存\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n</script>\n\n<template>\n  <p>古典主义曲目：{{ classicalPieces.length }} 首</p>\n  <ul>\n    <li v-for=\"p in classicalPieces\" :key=\"p.name\">{{ p.name }}</li>\n  </ul>\n</template>\n\```\n\n`classicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**缓存**——不依赖的值没变，不会重复计算。",
       },
       {
         type: "example",
         title: "computed vs 普通函数",
         content:
-          "为什么不用普通函数？\n\n```js\n// ❌ 普通函数：每次模板重渲染都重新计算\nfunction getClassical() {\n  return pieces.value.filter(p => p.period === '古典主义')\n}\n\n// ✅ computed：只在 pieces 变化时才重新计算\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n```\n\n就像乐谱翻页：函数式每次都从头到尾唱一遍来找古典曲目；computed 像在谱子上贴了标签——曲目单不变就不用重新翻。",
+          "为什么不用普通函数？\n\n\```js\n// ❌ 普通函数：每次模板重渲染都重新计算\nfunction getClassical() {\n  return pieces.value.filter(p => p.period === '古典主义')\n}\n\n// ✅ computed：只在 pieces 变化时才重新计算\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n\```\n\n就像乐谱翻页：函数式每次都从头到尾唱一遍来找古典曲目；computed 像在谱子上贴了标签——曲目单不变就不用重新翻。",
       },
       {
         type: "example",
         title: "watch — 观察变化，执行操作",
         content:
-          "`watch` 用于\"当某个值变了，我要做点什么\"——比如保存到 localStorage、发请求：\n\n```vue\n<script setup>\nimport { ref, watch } from 'vue'\n\nconst searchKeyword = ref('')\nconst results = ref([])\n\n// watch：监测 keyword 变化，执行副作用\nwatch(searchKeyword, async (newVal, oldVal) => {\n  if (newVal.length === 0) {\n    results.value = []\n    return\n  }\n  console.log(\\`搜索：\\${oldVal} → \\${newVal}\\`)\n  results.value = await searchAPI(newVal)\n})\n</script>\n```\n\n`watch` 适合：\n- 保存数据到 localStorage\n- 搜索/筛选触发 API 请求\n- 某个值变化时更新页面标题\n- 数据变化时触发动画",
+          "`watch` 用于\"当某个值变了，我要做点什么\"——比如保存到 localStorage、发请求：\n\n\```vue\n<script setup>\nimport { ref, watch } from 'vue'\n\nconst searchKeyword = ref('')\nconst results = ref([])\n\n// watch：监测 keyword 变化，执行副作用\nwatch(searchKeyword, async (newVal, oldVal) => {\n  if (newVal.length === 0) {\n    results.value = []\n    return\n  }\n  console.log(\\`搜索：\\${oldVal} → \\${newVal}\\`)\n  results.value = await searchAPI(newVal)\n})\n</script>\n\```\n\n`watch` 适合：\n- 保存数据到 localStorage\n- 搜索/筛选触发 API 请求\n- 某个值变化时更新页面标题\n- 数据变化时触发动画",
       },
       {
         type: "example",
@@ -3771,19 +3771,19 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "v-model 的本质",
         content:
-          '`v-model` 是 Vue 中最常用的指令之一。它实际是 `v-bind:value` + `v-on:input` 的语法糖：\n\n```vue\n<!-- 这两行等价 -->\n<input v-model="name">\n<input :value="name" @input="name = $event.target.value">\n```\n\n它做了什么？\n1. 把 `name` 的值绑定到 input 的 value（数据 → 视图）\n2. 当用户输入时，自动更新 `name`（视图 → 数据）\n\n这就是**双向绑定**——数据和视图始终保持同步。',
+          '`v-model` 是 Vue 中最常用的指令之一。它实际是 `v-bind:value` + `v-on:input` 的语法糖：\n\n\```vue\n<!-- 这两行等价 -->\n<input v-model="name">\n<input :value="name" @input="name = $event.target.value">\n\```\n\n它做了什么？\n1. 把 `name` 的值绑定到 input 的 value（数据 → 视图）\n2. 当用户输入时，自动更新 `name`（视图 → 数据）\n\n这就是**双向绑定**——数据和视图始终保持同步。',
       },
       {
         type: "example",
         title: "不同表单元素的 v-model",
         content:
-          '```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst text = ref(\'\')          // 文本输入\nconst checked = ref(false)     // 复选框\nconst selected = ref(\'\')      // 单选/下拉\nconst options = ref([])        // 多选\n</script>\n\n<template>\n  <!-- 文本 -->\n  <input v-model="text" placeholder="输入曲名">\n  <p>你输入了：{{ text }}</p>\n\n  <!-- 复选框 -->\n  <label><input type="checkbox" v-model="checked"> 已收藏</label>\n\n  <!-- 下拉选择 -->\n  <select v-model="selected">\n    <option value="">选择时期</option>\n    <option>巴洛克</option>\n    <option>古典主义</option>\n    <option>浪漫主义</option>\n  </select>\n  <p>选中：{{ selected }}</p>\n</template>\n```\n\n每种表单元素都能用 `v-model`，Vue 自动处理不同类型的事件。',
+          '\```vue\n<script setup>\nimport { ref } from \'vue\'\n\nconst text = ref(\'\')          // 文本输入\nconst checked = ref(false)     // 复选框\nconst selected = ref(\'\')      // 单选/下拉\nconst options = ref([])        // 多选\n</script>\n\n<template>\n  <!-- 文本 -->\n  <input v-model="text" placeholder="输入曲名">\n  <p>你输入了：{{ text }}</p>\n\n  <!-- 复选框 -->\n  <label><input type="checkbox" v-model="checked"> 已收藏</label>\n\n  <!-- 下拉选择 -->\n  <select v-model="selected">\n    <option value="">选择时期</option>\n    <option>巴洛克</option>\n    <option>古典主义</option>\n    <option>浪漫主义</option>\n  </select>\n  <p>选中：{{ selected }}</p>\n</template>\n\```\n\n每种表单元素都能用 `v-model`，Vue 自动处理不同类型的事件。',
       },
       {
         type: "example",
         title: "v-model 修饰符",
         content:
-          '修饰符让你精确控制 v-model 的行为：\n\n```vue\n<!-- .lazy：不在 input 时更新，在 change 时更新 -->\n<input v-model.lazy="name">\n\n<!-- .number：自动转为数字 -->\n<input v-model.number="age" type="text">\n\n<!-- .trim：自动去除首尾空格 -->\n<input v-model.trim="title">\n```\n\n这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。',
+          '修饰符让你精确控制 v-model 的行为：\n\n\```vue\n<!-- .lazy：不在 input 时更新，在 change 时更新 -->\n<input v-model.lazy="name">\n\n<!-- .number：自动转为数字 -->\n<input v-model.number="age" type="text">\n\n<!-- .trim：自动去除首尾空格 -->\n<input v-model.trim="title">\n\```\n\n这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。',
       },
       {
         type: "task",
@@ -3812,7 +3812,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "什么是 Slot？",
         content:
-          '之前你学的 props 让组件接收**数据**。Slot 让组件接收**模板内容**。\n\n```vue\n<!-- Card.vue — 定义组件，留出 Slot -->\n<template>\n  <div class="card">\n    <div class="card-header">\n      <slot name="header">默认标题</slot>\n    </div>\n    <div class="card-body">\n      <slot>默认内容</slot>  <!-- 默认 Slot -->\n    </div>\n    <div class="card-footer">\n      <slot name="footer">\n        <button>确定</button>  <!-- 默认 footer -->\n      </slot>\n    </div>\n  </div>\n</template>\n```\n\n```vue\n<!-- App.vue — 使用组件，填入内容 -->\n<template>\n  <Card>\n    <template #header>\n      <h2>🎵 月光奏鸣曲</h2>\n    </template>\n\n    <p>作曲：贝多芬</p>\n    <p>时期：古典主义</p>\n\n    <template #footer>\n      <button @click="like">❤️ 收藏</button>\n    </template>\n  </Card>\n</template>\n```',
+          '之前你学的 props 让组件接收**数据**。Slot 让组件接收**模板内容**。\n\n\```vue\n<!-- Card.vue — 定义组件，留出 Slot -->\n<template>\n  <div class="card">\n    <div class="card-header">\n      <slot name="header">默认标题</slot>\n    </div>\n    <div class="card-body">\n      <slot>默认内容</slot>  <!-- 默认 Slot -->\n    </div>\n    <div class="card-footer">\n      <slot name="footer">\n        <button>确定</button>  <!-- 默认 footer -->\n      </slot>\n    </div>\n  </div>\n</template>\n\```\n\n\```vue\n<!-- App.vue — 使用组件，填入内容 -->\n<template>\n  <Card>\n    <template #header>\n      <h2>🎵 月光奏鸣曲</h2>\n    </template>\n\n    <p>作曲：贝多芬</p>\n    <p>时期：古典主义</p>\n\n    <template #footer>\n      <button @click="like">❤️ 收藏</button>\n    </template>\n  </Card>\n</template>\n\```',
       },
       {
         type: "example",
@@ -3853,19 +3853,19 @@ debouncedSearch('贝多芬')
         type: "example",
         title: "基础路由设置",
         content:
-          "```js\n// src/router/index.js\nimport { createRouter, createWebHistory } from 'vue-router'\nimport Home from '../views/Home.vue'\nimport Detail from '../views/Detail.vue'\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes: [\n    { path: '/', component: Home },\n    { path: '/piece/:id', component: Detail }  // 动态路由\n  ]\n})\n\nexport default router\n```\n\n在 `main.js` 中注册：\n```js\nimport { createApp } from 'vue'\nimport router from './router'\nimport App from './App.vue'\n\ncreateApp(App).use(router).mount('#app')\n```",
+          "\```js\n// src/router/index.js\nimport { createRouter, createWebHistory } from 'vue-router'\nimport Home from '../views/Home.vue'\nimport Detail from '../views/Detail.vue'\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes: [\n    { path: '/', component: Home },\n    { path: '/piece/:id', component: Detail }  // 动态路由\n  ]\n})\n\nexport default router\n\```\n\n在 `main.js` 中注册：\n\```js\nimport { createApp } from 'vue'\nimport router from './router'\nimport App from './App.vue'\n\ncreateApp(App).use(router).mount('#app')\n\```",
       },
       {
         type: "example",
         title: "<router-link> 和 <router-view>",
         content:
-          '```vue\n<!-- App.vue — 布局 -->\n<template>\n  <nav>\n    <!-- 导航链接：to 是目标路径 -->\n    <router-link to=\"/\">🏠 首页</router-link>\n    <router-link to=\"/about\">ℹ️ 关于</router-link>\n  </nav>\n\n  <!-- 路由出口：匹配的组件渲染在这里 -->\n  <router-view />\n</template>\n```\n\n```vue\n<!-- Detail.vue — 获取路由参数 -->\n<script setup>\nimport { useRoute } from \'vue-router\'\nconst route = useRoute()\nconst pieceId = route.params.id  // 来自 /piece/:id\n</script>\n\n<template>\n  <p>正在查看作品：{{ pieceId }}</p>\n</template>\n```\n\n`<router-link>` 替代 `<a href>`。`<router-view>` 是页面内容的"插座"。',
+          '\```vue\n<!-- App.vue — 布局 -->\n<template>\n  <nav>\n    <!-- 导航链接：to 是目标路径 -->\n    <router-link to=\"/\">🏠 首页</router-link>\n    <router-link to=\"/about\">ℹ️ 关于</router-link>\n  </nav>\n\n  <!-- 路由出口：匹配的组件渲染在这里 -->\n  <router-view />\n</template>\n\```\n\n\```vue\n<!-- Detail.vue — 获取路由参数 -->\n<script setup>\nimport { useRoute } from \'vue-router\'\nconst route = useRoute()\nconst pieceId = route.params.id  // 来自 /piece/:id\n</script>\n\n<template>\n  <p>正在查看作品：{{ pieceId }}</p>\n</template>\n\```\n\n`<router-link>` 替代 `<a href>`。`<router-view>` 是页面内容的"插座"。',
       },
       {
         type: "example",
         title: "编程式导航",
         content:
-          "有时候不能只用 `<router-link>`，需要在 JS 中跳转：\n\n```vue\n<script setup>\nimport { useRouter } from 'vue-router'\nconst router = useRouter()\n\nfunction goToDetail(id) {\n  router.push(\\`/piece/\\${id}\\`)  // 跳转到详情页\n}\n\nfunction goBack() {\n  router.back()  // 返回上一页\n}\n</script>\n```\n\n`router.push()` 就像点击链接，`router.back()` 就像按浏览器的后退键。",
+          "有时候不能只用 `<router-link>`，需要在 JS 中跳转：\n\n\```vue\n<script setup>\nimport { useRouter } from 'vue-router'\nconst router = useRouter()\n\nfunction goToDetail(id) {\n  router.push(\\`/piece/\\${id}\\`)  // 跳转到详情页\n}\n\nfunction goBack() {\n  router.back()  // 返回上一页\n}\n</script>\n\```\n\n`router.push()` 就像点击链接，`router.back()` 就像按浏览器的后退键。",
       },
       {
         type: "task",
@@ -3906,7 +3906,7 @@ debouncedSearch('贝多芬')
         type: "task",
         title: "结业项目：音乐收藏管理器 🎵",
         content:
-          '在你的 `music-collection` 项目中，实现一个完整的**音乐收藏管理器**。功能要求：\n\n**基础功能（必须完成）：**\n\n1. 用 `v-for` 展示曲目列表（每首包含曲名、作曲家、时期）\n\n2. 用 `computed` 实现按时期筛选\n\n3. 用 `v-model` + 表单实现添加新曲目\n\n4. 用 `localStorage` 持久化数据（刷新不丢失）\n\n**进阶功能（建议完成）：**\n\n5. 把卡片提取成 `MusicCard.vue` 组件（props + emits）\n\n6. 添加"收藏/取消收藏"功能\n\n7. 添加删除曲目功能\n\n8. 用 `Git` 管理版本（至少 3 次 commit）\n\n9. 部署到 GitHub Pages\n\n**项目结构参考：**\n```\nmusic-collection/\n├── src/\n│   ├── App.vue              # 主页面（列表 + 筛选 + 表单）\n│   ├── components/\n│   │   ├── MusicCard.vue     # 曲目卡片组件\n│   │   ├── FilterBar.vue     # 筛选按钮组\n│   │   └── AddForm.vue       # 添加曲目表单\n│   └── main.js\n├── package.json\n└── vite.config.js\n```\n\n> 💡 这是你在乐理篇"作品集"中用纯 HTML/CSS/JS 做过的同一个项目。现在用工程化的 Vue 重写它——你会清晰地看到"工程化"带来了什么。',
+          '在你的 `music-collection` 项目中，实现一个完整的**音乐收藏管理器**。功能要求：\n\n**基础功能（必须完成）：**\n\n1. 用 `v-for` 展示曲目列表（每首包含曲名、作曲家、时期）\n\n2. 用 `computed` 实现按时期筛选\n\n3. 用 `v-model` + 表单实现添加新曲目\n\n4. 用 `localStorage` 持久化数据（刷新不丢失）\n\n**进阶功能（建议完成）：**\n\n5. 把卡片提取成 `MusicCard.vue` 组件（props + emits）\n\n6. 添加"收藏/取消收藏"功能\n\n7. 添加删除曲目功能\n\n8. 用 `Git` 管理版本（至少 3 次 commit）\n\n9. 部署到 GitHub Pages\n\n**项目结构参考：**\n\```\nmusic-collection/\n├── src/\n│   ├── App.vue              # 主页面（列表 + 筛选 + 表单）\n│   ├── components/\n│   │   ├── MusicCard.vue     # 曲目卡片组件\n│   │   ├── FilterBar.vue     # 筛选按钮组\n│   │   └── AddForm.vue       # 添加曲目表单\n│   └── main.js\n├── package.json\n└── vite.config.js\n\```\n\n> 💡 这是你在乐理篇"作品集"中用纯 HTML/CSS/JS 做过的同一个项目。现在用工程化的 Vue 重写它——你会清晰地看到"工程化"带来了什么。',
       },
       {
         type: "hint",

@@ -6,6 +6,7 @@ import { tracks } from '../data/tracks'
 import { projects } from '../data/projects'
 import { useProgressStore } from '../stores/progress'
 import { parseInline } from '../utils/markdown'
+import { prologueCards } from '../data/prologues'
 
 const router = useRouter()
 const progressStore = useProgressStore()
@@ -34,7 +35,7 @@ function getTrackLessonCount(trackId: string): number {
 }
 
 function getTrackCompletedCount(trackId: string): number {
-  if (trackId === 'projects') return 0 // 项目进度暂不追踪
+  if (trackId === 'projects') return 0
   return lessons
     .filter(l => (l.trackId || 'fundamentals') === trackId)
     .filter(l => progressStore.isCompleted(l.id)).length
@@ -71,6 +72,12 @@ function jumpToSection(targetId: string) {
     })
     return
   }
+  if (targetId === 'prologue') {
+    nextTick(() => {
+      document.getElementById('prologue-section')?.scrollIntoView({ behavior: 'smooth' })
+    })
+    return
+  }
   // 轨道卡片：展开 + 滚动
   expandedTrack.value = targetId
   nextTick(() => {
@@ -100,21 +107,32 @@ function goToProject(projectId: string) {
 
     <!-- 粘性迷你导航 -->
     <nav :class="['sticky-nav', { visible: showStickyNav }]">
-      <button class="sticky-nav-item" @click="jumpToSection('hero')">🎵 首页</button>
+      <button class="sticky-nav-item" @click="jumpToSection('hero')">
+        <span class="sticky-nav-icon">🎵</span>
+        <span class="sticky-nav-label">首页</span>
+      </button>
       <button
         v-for="track in tracks"
         :key="track.id"
         class="sticky-nav-item"
         @click="jumpToSection(track.id)"
       >
-        {{ track.icon }} {{ track.title }}
+        <span class="sticky-nav-icon">{{ track.icon }}</span>
+        <span class="sticky-nav-label">{{ track.title }}</span>
       </button>
-      <button class="sticky-nav-item" @click="jumpToSection('projects')">🎁 作品集</button>
+      <button class="sticky-nav-item" @click="jumpToSection('projects')">
+        <span class="sticky-nav-icon">🎁</span>
+        <span class="sticky-nav-label">作品集</span>
+      </button>
+      <button class="sticky-nav-item" @click="jumpToSection('prologue')">
+        <span class="sticky-nav-icon">🏮</span>
+        <span class="sticky-nav-label">筚路蓝缕</span>
+      </button>
     </nav>
 
     <!-- 四轨旅程 -->
     <section class="journey-section">
-      <h2 class="section-title">成长路径</h2>
+      <h2 class="section-title">🎼 成长路径</h2>
       <hr class="staff-divider">
 
       <div class="track-cards">
@@ -208,7 +226,7 @@ function goToProject(projectId: string) {
 
     <!-- 作品集 -->
     <section id="projects-section" class="projects-section">
-      <h2 class="section-title">作品集</h2>
+      <h2 class="section-title">🎁 作品集</h2>
       <hr class="staff-divider">
       <p class="projects-intro">每个阶段结束，你都会完成一个音乐收藏库的新版本——从手稿到乐团，一步步见证成长。</p>
 
@@ -245,6 +263,27 @@ function goToProject(projectId: string) {
               开始项目
             </button>
             <span v-else class="project-soon-text">内容制作中，敬请期待</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📜 筚路蓝缕 -->
+    <section id="prologue-section" class="prologue-section">
+      <h2 class="section-title">🏮 筚路蓝缕</h2>
+      <hr class="staff-divider">
+      <div class="prologue-grid">
+        <div
+          v-for="card in prologueCards"
+          :key="card.id"
+          class="prologue-card"
+          @click="goToLesson(card.lessonId)"
+        >
+          <div class="prologue-card-thumb" v-html="card.thumbnailSvg"></div>
+          <div class="prologue-card-body">
+            <h3 class="prologue-card-title">{{ card.title }}</h3>
+            <p class="prologue-card-subtitle">{{ card.subtitle }}</p>
+            <p class="prologue-card-tagline">{{ card.tagline }}</p>
           </div>
         </div>
       </div>
@@ -314,7 +353,7 @@ function goToProject(projectId: string) {
   display: flex;
   justify-content: center;
   gap: var(--sp-1);
-  padding: var(--sp-2) var(--sp-4);
+  padding: var(--sp-1) var(--sp-4);
   background: var(--color-panel);
   border-bottom: 1px solid var(--color-border-light);
   box-shadow: 0 2px 8px rgba(61, 43, 31, 0.06);
@@ -678,7 +717,99 @@ function goToProject(projectId: string) {
   font-size: var(--fs-sm);
 }
 
+/* ===== 筚路蓝缕 ===== */
+.prologue-section {
+  padding: var(--sp-8) 0 var(--sp-6);
+  scroll-margin-top: 28px;
+}
+
+.prologue-title {
+  font-size: var(--fs-xl);
+  color: var(--color-accent);
+  text-align: center;
+  margin-bottom: var(--sp-1);
+  font-family: var(--font-heading);
+}
+
+.prologue-meta {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: var(--fs-xs);
+  margin-bottom: var(--sp-6);
+  letter-spacing: 0.05em;
+}
+
+.prologue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.prologue-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prologue-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(139, 46, 46, 0.12);
+}
+
+.prologue-card-thumb {
+  line-height: 0;
+}
+
+.prologue-card-thumb :deep(svg) {
+  display: block;
+  width: 100%;
+}
+
+.prologue-card-body {
+  padding: var(--sp-4) var(--sp-4) var(--sp-4);
+}
+
+.prologue-card-title {
+  font-size: var(--fs-base);
+  color: var(--color-accent);
+  margin-bottom: var(--sp-1);
+  font-family: var(--font-heading);
+}
+
+.prologue-card-subtitle {
+  font-size: var(--fs-xs);
+  color: #A0522D;
+  margin-bottom: var(--sp-2);
+}
+
+.prologue-card-tagline {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.prologue-credit {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: #C9A96E;
+  font-family: var(--font-heading);
+  padding: var(--sp-6) 0 0;
+  border-top: 1px solid #E8DDCC;
+  opacity: 0.7;
+}
+
 /* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  .prologue-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 640px) {
   .home {
     padding: var(--sp-4) var(--sp-4);
@@ -731,9 +862,21 @@ function goToProject(projectId: string) {
   }
 
   .sticky-nav-item {
-    padding: 6px 10px;
+    padding: 6px 8px;
     font-size: 0.7rem;
     flex-shrink: 0;
+  }
+
+  .sticky-nav-label {
+    display: none;
+  }
+
+  .sticky-nav-icon {
+    font-size: 1.2em;
+  }
+
+  .prologue-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
