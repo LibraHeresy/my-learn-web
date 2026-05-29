@@ -175,8 +175,9 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
         class="panel-content"
         :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
-        <div class="step-panel">
-          <div class="step-body">
+        <Transition name="slide-fade" mode="out-in">
+          <div :key="currentStep" class="step-panel">
+            <div class="step-body">
             <h3 class="step-title">{{ currentStepData.title }}</h3>
             <div class="step-content" v-html="parseContent(currentStepData.content)" />
             <div class="step-task">
@@ -192,6 +193,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
           </div>
 
         </div>
+        </Transition>
       </div>
 
       <template v-if="showEditor">
@@ -325,10 +327,17 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
   font-weight: 700;
 }
 
+@keyframes step-complete {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
 .step-dot.done {
   border-color: var(--color-success);
   background: var(--color-success);
   color: #fff;
+  animation: step-complete 0.45s var(--ease-spring) both;
 }
 
 .step-dot:hover:not(.active):not(.done) {

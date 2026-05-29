@@ -36,10 +36,21 @@ function goHome() {
   gap: var(--sp-3);
   cursor: pointer;
   user-select: none;
+  transition: opacity var(--dur-fast);
+}
+
+.header-left:active {
+  opacity: 0.7;
 }
 
 .header-logo {
   font-size: 1.5rem;
+  display: inline-block;
+  transition: transform var(--dur-normal) var(--ease-spring);
+}
+
+.header-left:hover .header-logo {
+  transform: scale(1.15) rotate(-3deg);
 }
 
 .header-title {

@@ -273,15 +273,27 @@ watch(
 }
 
 /* ===== 错误面板动画 ===== */
-.error-slide-enter-active,
+.error-slide-enter-active {
+  transition: all 0.35s var(--ease-out);
+  max-height: 200px;
+}
 .error-slide-leave-active {
-  transition: all 0.25s ease;
+  transition: all 0.2s var(--ease-in);
   max-height: 200px;
 }
 
-.error-slide-enter-from,
+.error-slide-enter-from {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(100%);
+}
 .error-slide-leave-to {
   max-height: 0;
   opacity: 0;
+}
+
+.error-type-badge {
+  animation: pulse-glow 1.5s ease-in-out 1;
+  animation-delay: 0.3s;
 }
 </style>

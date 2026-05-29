@@ -7,7 +7,7 @@ import AppHeader from './components/AppHeader.vue'
     <AppHeader />
     <main class="app-main">
       <RouterView v-slot="{ Component }">
-        <Transition name="fade" mode="out-in">
+        <Transition name="slide-fade" mode="out-in">
           <component :is="Component" />
         </Transition>
       </RouterView>

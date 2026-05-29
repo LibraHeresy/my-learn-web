@@ -100,10 +100,17 @@ defineEmits<{
 .footer-complete {
   color: var(--color-success);
   font-weight: 600;
+  transition: color var(--dur-fast),
+              background var(--dur-fast),
+              transform 0.1s;
 }
 
 .footer-complete:hover {
   background: var(--color-success-bg);
+}
+
+.footer-complete:active {
+  transform: scale(0.95);
 }
 
 .footer-center {

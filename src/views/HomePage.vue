@@ -174,38 +174,44 @@ function goToProject(projectId: string) {
 
           <p v-if="getTrackLessonCount(track.id) === 0" class="track-draft-text">内容制作中，敬请期待</p>
 
-          <!-- 展开的课程列表 -->
-          <div v-if="expandedTrack === track.id && track.id !== 'projects'" class="track-lessons">
-            <div v-for="chapter in getTrackChapters(track.id)" :key="chapter.id" class="track-chapter">
-              <div class="track-chapter-head">
-                <span>{{ chapter.icon }}</span>
-                <span>{{ chapter.title }}</span>
-              </div>
-              <button
-                v-for="lesson in lessons.filter(l => l.chapterId === chapter.id && (l.trackId || 'fundamentals') === track.id)"
-                :key="lesson.id"
-                :class="['track-lesson-item', { completed: progressStore.isCompleted(lesson.id) }]"
-                @click.stop="goToLesson(lesson.id)"
-              >
-                <span class="track-lesson-dot">{{ progressStore.isCompleted(lesson.id) ? '✓' : '·' }}</span>
-                <span class="track-lesson-title">{{ lesson.title }}</span>
-                <span class="track-lesson-arrow">→</span>
-              </button>
+          <!-- 展开的课程列表（CSS 过渡控制） -->
+          <div
+            :class="['track-lessons', {
+              'track-lessons--open': expandedTrack === track.id && getTrackLessonCount(track.id) > 0
+            }]"
+          >
+            <div class="track-lessons-inner">
+              <template v-if="track.id !== 'projects'">
+                <div v-for="chapter in getTrackChapters(track.id)" :key="chapter.id" class="track-chapter">
+                  <div class="track-chapter-head">
+                    <span>{{ chapter.icon }}</span>
+                    <span>{{ chapter.title }}</span>
+                  </div>
+                  <button
+                    v-for="lesson in lessons.filter(l => l.chapterId === chapter.id && (l.trackId || 'fundamentals') === track.id)"
+                    :key="lesson.id"
+                    :class="['track-lesson-item', { completed: progressStore.isCompleted(lesson.id) }]"
+                    @click.stop="goToLesson(lesson.id)"
+                  >
+                    <span class="track-lesson-dot">{{ progressStore.isCompleted(lesson.id) ? '✓' : '·' }}</span>
+                    <span class="track-lesson-title">{{ lesson.title }}</span>
+                    <span class="track-lesson-arrow">→</span>
+                  </button>
+                </div>
+              </template>
+              <template v-if="track.id === 'projects'">
+                <button
+                  v-for="project in projects"
+                  :key="project.id"
+                  class="track-lesson-item"
+                  @click.stop="goToProject(project.id)"
+                >
+                  <span class="track-lesson-dot">·</span>
+                  <span class="track-lesson-title">{{ project.icon }} {{ project.title }}</span>
+                  <span class="track-lesson-arrow">→</span>
+                </button>
+              </template>
             </div>
-          </div>
-
-          <!-- 作品集轨道展开：显示项目列表 -->
-          <div v-if="expandedTrack === track.id && track.id === 'projects'" class="track-lessons">
-            <button
-              v-for="project in projects"
-              :key="project.id"
-              class="track-lesson-item"
-              @click.stop="goToProject(project.id)"
-            >
-              <span class="track-lesson-dot">·</span>
-              <span class="track-lesson-title">{{ project.icon }} {{ project.title }}</span>
-              <span class="track-lesson-arrow">→</span>
-            </button>
           </div>
         </div>
       </div>
@@ -344,16 +350,19 @@ function goToProject(projectId: string) {
   padding: var(--sp-1) var(--sp-4);
   background: var(--color-panel);
   border-bottom: 1px solid var(--color-border-light);
-  box-shadow: 0 2px 8px rgba(61, 43, 31, 0.06);
+  box-shadow: 0 0 0 rgba(61, 43, 31, 0);
   transform: translateY(-100%);
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s var(--ease-out),
+              opacity 0.3s var(--ease-out),
+              box-shadow 0.3s var(--ease-out);
   pointer-events: none;
 }
 
 .sticky-nav.visible {
   transform: translateY(0);
   opacity: 1;
+  box-shadow: 0 2px 16px rgba(61, 43, 31, 0.08);
   pointer-events: auto;
 }
 
@@ -412,10 +421,18 @@ function goToProject(projectId: string) {
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
   padding: var(--sp-5);
-  transition: all 0.2s;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
   cursor: pointer;
   scroll-margin-top: var(--header-height);
+  animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
 }
+
+.track-card:nth-child(1) { animation-delay: 0.10s; }
+.track-card:nth-child(2) { animation-delay: 0.20s; }
+.track-card:nth-child(3) { animation-delay: 0.30s; }
+.track-card:nth-child(4) { animation-delay: 0.40s; }
 
 .track-card.draft {
   cursor: default;
@@ -424,7 +441,8 @@ function goToProject(projectId: string) {
 
 .track-card:not(.draft):hover {
   border-color: var(--color-gold);
-  box-shadow: 0 2px 12px rgba(201, 169, 110, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 110, 0.14);
 }
 
 .track-card-header {
@@ -514,9 +532,29 @@ function goToProject(projectId: string) {
 
 /* ===== 展开的课程列表 ===== */
 .track-lessons {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  border-top: 0 solid var(--color-border-light);
+  transition: max-height var(--dur-slow) var(--ease-in-out),
+              opacity var(--dur-slow) var(--ease-out),
+              margin-top var(--dur-slow) var(--ease-out),
+              padding-top var(--dur-slow) var(--ease-out),
+              border-top-width var(--dur-slow) var(--ease-out);
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.track-lessons--open {
+  max-height: 4000px;
+  opacity: 1;
   margin-top: var(--sp-4);
-  border-top: 1px solid var(--color-border-light);
   padding-top: var(--sp-4);
+  border-top-width: 1px;
+}
+
+.track-lessons-inner {
+  /* 防止内容在 max-height 过渡期间被裁剪 */
 }
 
 .track-chapter {
@@ -595,7 +633,21 @@ function goToProject(projectId: string) {
   border-left: 3px solid var(--color-gold);
   border-radius: var(--radius-lg);
   padding: var(--sp-5);
-  transition: all 0.2s;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.15s; }
+.project-card:nth-child(2) { animation-delay: 0.25s; }
+.project-card:nth-child(3) { animation-delay: 0.35s; }
+.project-card:nth-child(4) { animation-delay: 0.45s; }
+.project-card:nth-child(5) { animation-delay: 0.55s; }
+
+.project-card:not(.draft):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 46, 46, 0.12);
 }
 
 .project-card.draft {
@@ -684,7 +736,7 @@ function goToProject(projectId: string) {
   font-size: var(--fs-sm);
   font-weight: 600;
   border-radius: var(--radius-sm);
-  transition: all 0.2s;
+  transition: background var(--dur-fast), transform var(--dur-fast);
 }
 
 .btn-project-start:hover {
@@ -741,12 +793,28 @@ function goToProject(projectId: string) {
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+  animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
 }
+
+.prologue-card:nth-child(1) { animation-delay: 0.10s; }
+.prologue-card:nth-child(2) { animation-delay: 0.18s; }
+.prologue-card:nth-child(3) { animation-delay: 0.26s; }
+.prologue-card:nth-child(4) { animation-delay: 0.34s; }
+.prologue-card:nth-child(5) { animation-delay: 0.42s; }
+.prologue-card:nth-child(6) { animation-delay: 0.50s; }
 
 .prologue-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(139, 46, 46, 0.12);
+  border-color: var(--color-gold);
+}
+
+.prologue-card:active {
+  transform: scale(0.96);
+  transition: transform 0.05s var(--ease-in);
 }
 
 .prologue-card-thumb {

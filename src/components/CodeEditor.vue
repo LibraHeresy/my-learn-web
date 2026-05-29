@@ -130,7 +130,9 @@ onBeforeUnmount(() => {
         ▶ 运行
       </button>
     </div>
-    <div ref="editorHost" class="editor-host" />
+    <Transition name="editor-swap" mode="out-in">
+      <div :key="activeTab" ref="editorHost" class="editor-host" />
+    </Transition>
   </div>
 </template>
 

@@ -130,6 +130,9 @@ const progressStore = useProgressStore()
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
   color: var(--color-text);
+  transition: background var(--dur-fast) ease,
+              color var(--dur-fast) ease,
+              padding-left var(--dur-normal) var(--ease-out);
 }
 
 .sidebar-lesson:hover {
@@ -140,6 +143,7 @@ const progressStore = useProgressStore()
   background: #FDF0F0;
   color: var(--color-accent);
   font-weight: 600;
+  padding-left: calc(var(--sp-5) + 4px);
 }
 
 .lesson-dot {
@@ -162,6 +166,8 @@ const progressStore = useProgressStore()
   height: 8px;
   border-radius: 50%;
   background: var(--color-accent);
+  box-shadow: 0 0 0 0 rgba(139, 46, 46, 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .dot-pending {

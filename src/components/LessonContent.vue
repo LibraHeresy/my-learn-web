@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
       @mouseover="onContentMouseover"
     >
       <!-- 音乐类比 -->
-      <div class="analogy-box">
+      <div class="analogy-box reveal-target">
         <span class="analogy-icon">🎵</span>
         <p class="analogy-text" v-html="parseInline(lesson.musicAnalogy)"></p>
       </div>
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
       <div
         v-for="(section, index) in lesson.sections"
         :key="index"
-        :class="['content-section', `section-${section.type}`]"
+        :class="['content-section', 'reveal-target', `section-${section.type}`]"
       >
         <h4 v-if="section.title" class="section-title" v-html="parseInline(section.title)"></h4>
         <div
@@ -359,14 +359,22 @@ onBeforeUnmount(() => {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.tooltip-fade-enter-active,
+.tooltip-fade-enter-active {
+  transition: opacity 0.2s ease,
+              transform 0.25s var(--ease-spring);
+}
 .tooltip-fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.15s ease,
+              transform 0.15s var(--ease-in);
 }
 
-.tooltip-fade-enter-from,
+.tooltip-fade-enter-from {
+  opacity: 0;
+  transform: translateY(4px) scale(0.95);
+}
 .tooltip-fade-leave-to {
   opacity: 0;
+  transform: translateY(2px) scale(0.97);
 }
 
 /* ===== 盒模型演示图 ===== */

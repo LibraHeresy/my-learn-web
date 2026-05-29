@@ -153,7 +153,9 @@ useKeyboardNav({
         class="panel-content"
         :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
       >
-        <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
+        <Transition name="slide-fade" mode="out-in">
+          <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
+        </Transition>
       </div>
 
       <template v-if="!isLocalMode">
