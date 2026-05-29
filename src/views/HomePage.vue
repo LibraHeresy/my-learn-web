@@ -1,82 +1,88 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
-import { chapters, lessons } from '../configs/lessons'
-import { tracks } from '../configs/tracks'
-import { projects } from '../configs/projects'
-import { useProgressStore } from '../stores/progress'
-import { parseInline } from '../utils/markdown'
-import { prologueCards } from '../configs/prologues'
+import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { useRouter } from "vue-router";
+import { chapters, lessons } from "../configs/lessons";
+import { tracks } from "../configs/tracks";
+import { projects } from "../configs/projects";
+import { useProgressStore } from "../stores/progress";
+import { parseInline } from "../utils/markdown";
+import { prologueCards } from "../configs/prologues";
 
-const router = useRouter()
-const progressStore = useProgressStore()
+const router = useRouter();
+const progressStore = useProgressStore();
 
-const expandedTrack = ref<string | null>(null)
-const showStickyNav = ref(false)
-const homeRef = ref<HTMLElement | null>(null)
+const expandedTrack = ref<string | null>(null);
+const showStickyNav = ref(false);
+const homeRef = ref<HTMLElement | null>(null);
 
 function onScroll() {
-  const el = homeRef.value
-  if (!el) return
-  const hero = document.getElementById('hero-section')
-  showStickyNav.value = hero ? el.scrollTop > hero.offsetHeight * 0.6 : el.scrollTop > 300
+  const el = homeRef.value;
+  if (!el) return;
+  const hero = document.getElementById("hero-section");
+  showStickyNav.value = hero
+    ? el.scrollTop > hero.offsetHeight * 0.6
+    : el.scrollTop > 300;
 }
 
 onMounted(() => {
-  if (homeRef.value) homeRef.value.addEventListener('scroll', onScroll, { passive: true })
-})
+  if (homeRef.value)
+    homeRef.value.addEventListener("scroll", onScroll, { passive: true });
+});
 onBeforeUnmount(() => {
-  if (homeRef.value) homeRef.value.removeEventListener('scroll', onScroll)
-})
+  if (homeRef.value) homeRef.value.removeEventListener("scroll", onScroll);
+});
 
 function getTrackLessonCount(trackId: string): number {
-  if (trackId === 'projects') return projects.length
-  return lessons.filter(l => (l.trackId || 'fundamentals') === trackId).length
+  if (trackId === "projects") return projects.length;
+  return lessons.filter((l) => (l.trackId || "fundamentals") === trackId)
+    .length;
 }
 
 function getTrackCompletedCount(trackId: string): number {
-  if (trackId === 'projects') return 0
+  if (trackId === "projects") return 0;
   return lessons
-    .filter(l => (l.trackId || 'fundamentals') === trackId)
-    .filter(l => progressStore.isCompleted(l.id)).length
+    .filter((l) => (l.trackId || "fundamentals") === trackId)
+    .filter((l) => progressStore.isCompleted(l.id)).length;
 }
 
 function getTrackChapters(trackId: string) {
-  return chapters.filter(ch =>
-    lessons.some(l => l.chapterId === ch.id && (l.trackId || 'fundamentals') === trackId)
-  )
+  return chapters.filter((ch) =>
+    lessons.some(
+      (l) => l.chapterId === ch.id && (l.trackId || "fundamentals") === trackId,
+    ),
+  );
 }
 
 function toggleTrack(trackId: string) {
-  const isExpanding = expandedTrack.value !== trackId
-  expandedTrack.value = isExpanding ? trackId : null
+  const isExpanding = expandedTrack.value !== trackId;
+  expandedTrack.value = isExpanding ? trackId : null;
   if (isExpanding) {
     nextTick(() => {
-      const el = document.getElementById(`track-${trackId}`)
-      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
+      const el = document.getElementById(`track-${trackId}`);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 }
 
 function jumpToSection(targetId: string) {
   const sectionMap: Record<string, string> = {
-    hero: 'hero-section',
-    projects: 'projects-section',
-    prologue: 'prologue-section',
-  }
-  const sectionId = sectionMap[targetId] || `track-${targetId}`
-  expandedTrack.value = sectionMap[targetId] ? null : targetId
+    hero: "hero-section",
+    projects: "projects-section",
+    prologue: "prologue-section",
+  };
+  const sectionId = sectionMap[targetId] || `track-${targetId}`;
+  expandedTrack.value = sectionMap[targetId] ? null : targetId;
   nextTick(() => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
-  })
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  });
 }
 
 function goToLesson(lessonId: string) {
-  router.push(`/lesson/${lessonId}`)
+  router.push(`/lesson/${lessonId}`);
 }
 
 function goToProject(projectId: string) {
-  router.push(`/project/${projectId}`)
+  router.push(`/project/${projectId}`);
 }
 </script>
 
@@ -87,7 +93,9 @@ function goToProject(projectId: string) {
       <div class="hero-content">
         <p class="hero-greeting">你的学习之旅</p>
         <h1 class="hero-title">代码乐章</h1>
-        <p class="hero-desc">从五线谱到代码编辑器，从音符到标签，<br>用你熟悉的音乐语言，一步步成为创作者。</p>
+        <p class="hero-desc">
+          从五线谱到代码编辑器，从音符到标签，<br />用你熟悉的音乐语言，一步步成为创作者。
+        </p>
       </div>
     </section>
 
@@ -119,18 +127,23 @@ function goToProject(projectId: string) {
     <!-- 四轨旅程 -->
     <section class="journey-section">
       <h2 class="section-title">🎼 成长路径</h2>
-      <hr class="staff-divider">
-      <p class="section-intro">四条路径，四重境界——从识谱到演奏，从独奏到指挥，一步步成为现代前端开发者。</p>
+      <hr class="staff-divider" />
+      <p class="section-intro">
+        四条路径，四重境界——从识谱到演奏，从独奏到指挥，一步步成为现代前端开发者。
+      </p>
 
       <div class="track-cards">
         <div
           v-for="track in tracks"
           :key="track.id"
           :id="`track-${track.id}`"
-          :class="['track-card', {
-            expanded: expandedTrack === track.id,
-            draft: getTrackLessonCount(track.id) === 0
-          }]"
+          :class="[
+            'track-card',
+            {
+              expanded: expandedTrack === track.id,
+              draft: getTrackLessonCount(track.id) === 0,
+            },
+          ]"
           @click="getTrackLessonCount(track.id) > 0 && toggleTrack(track.id)"
         >
           <div class="track-card-header">
@@ -138,7 +151,11 @@ function goToProject(projectId: string) {
             <div class="track-info">
               <h3 class="track-title">
                 {{ track.title }}
-                <span v-if="getTrackLessonCount(track.id) === 0" class="track-soon-tag">即将推出</span>
+                <span
+                  v-if="getTrackLessonCount(track.id) === 0"
+                  class="track-soon-tag"
+                  >即将推出</span
+                >
               </h3>
               <p class="track-subtitle">{{ track.subtitle }}</p>
             </div>
@@ -155,45 +172,75 @@ function goToProject(projectId: string) {
                 <span
                   class="track-arrow"
                   :class="{ open: expandedTrack === track.id }"
-                >▾</span>
+                  >▾</span
+                >
               </template>
             </div>
           </div>
 
           <!-- 进度条 -->
-          <div v-if="getTrackLessonCount(track.id) > 0" class="track-progress-bar">
+          <div
+            v-if="getTrackLessonCount(track.id) > 0"
+            class="track-progress-bar"
+          >
             <div
               class="track-progress-fill"
               :style="{
                 width: getTrackLessonCount(track.id)
-                  ? (getTrackCompletedCount(track.id) / getTrackLessonCount(track.id) * 100) + '%'
-                  : '0%'
+                  ? (getTrackCompletedCount(track.id) /
+                      getTrackLessonCount(track.id)) *
+                      100 +
+                    '%'
+                  : '0%',
               }"
             />
           </div>
 
-          <p v-if="getTrackLessonCount(track.id) === 0" class="track-draft-text">内容制作中，敬请期待</p>
+          <p
+            v-if="getTrackLessonCount(track.id) === 0"
+            class="track-draft-text"
+          >
+            内容制作中，敬请期待
+          </p>
 
           <!-- 展开的课程列表（CSS 过渡控制） -->
           <div
-            :class="['track-lessons', {
-              'track-lessons--open': expandedTrack === track.id && getTrackLessonCount(track.id) > 0
-            }]"
+            :class="[
+              'track-lessons',
+              {
+                'track-lessons--open':
+                  expandedTrack === track.id &&
+                  getTrackLessonCount(track.id) > 0,
+              },
+            ]"
           >
             <div class="track-lessons-inner">
               <template v-if="track.id !== 'projects'">
-                <div v-for="chapter in getTrackChapters(track.id)" :key="chapter.id" class="track-chapter">
+                <div
+                  v-for="chapter in getTrackChapters(track.id)"
+                  :key="chapter.id"
+                  class="track-chapter"
+                >
                   <div class="track-chapter-head">
                     <span>{{ chapter.icon }}</span>
                     <span>{{ chapter.title }}</span>
                   </div>
                   <button
-                    v-for="lesson in lessons.filter(l => l.chapterId === chapter.id && (l.trackId || 'fundamentals') === track.id)"
+                    v-for="lesson in lessons.filter(
+                      (l) =>
+                        l.chapterId === chapter.id &&
+                        (l.trackId || 'fundamentals') === track.id,
+                    )"
                     :key="lesson.id"
-                    :class="['track-lesson-item', { completed: progressStore.isCompleted(lesson.id) }]"
+                    :class="[
+                      'track-lesson-item',
+                      { completed: progressStore.isCompleted(lesson.id) },
+                    ]"
                     @click.stop="goToLesson(lesson.id)"
                   >
-                    <span class="track-lesson-dot">{{ progressStore.isCompleted(lesson.id) ? '✓' : '·' }}</span>
+                    <span class="track-lesson-dot">{{
+                      progressStore.isCompleted(lesson.id) ? "✓" : "·"
+                    }}</span>
                     <span class="track-lesson-title">{{ lesson.title }}</span>
                     <span class="track-lesson-arrow">→</span>
                   </button>
@@ -207,7 +254,9 @@ function goToProject(projectId: string) {
                   @click.stop="goToProject(project.id)"
                 >
                   <span class="track-lesson-dot">·</span>
-                  <span class="track-lesson-title">{{ project.icon }} {{ project.title }}</span>
+                  <span class="track-lesson-title"
+                    >{{ project.icon }} {{ project.title }}</span
+                  >
                   <span class="track-lesson-arrow">→</span>
                 </button>
               </template>
@@ -220,8 +269,10 @@ function goToProject(projectId: string) {
     <!-- 作品集 -->
     <section id="projects-section" class="projects-section">
       <h2 class="section-title">🎁 作品集</h2>
-      <hr class="staff-divider">
-      <p class="projects-intro">每个阶段结束，你都会完成一个音乐收藏库的新版本——从手稿到乐团，一步步见证成长。</p>
+      <hr class="staff-divider" />
+      <p class="projects-intro">
+        每个阶段结束，你都会完成一个音乐收藏库的新版本——从手稿到乐团，一步步见证成长。
+      </p>
 
       <div class="project-cards">
         <div
@@ -234,17 +285,26 @@ function goToProject(projectId: string) {
             <div class="project-info">
               <h3 class="project-title">
                 {{ project.title }}
-                <span v-if="project.steps.length === 0" class="project-soon-tag">即将推出</span>
+                <span v-if="project.steps.length === 0" class="project-soon-tag"
+                  >即将推出</span
+                >
               </h3>
               <p class="project-subtitle">{{ project.subtitle }}</p>
             </div>
           </div>
 
-          <p class="project-analogy" v-html="parseInline(project.musicAnalogy)"></p>
+          <p
+            class="project-analogy"
+            v-html="parseInline(project.musicAnalogy)"
+          ></p>
 
           <div class="project-meta">
-            <span v-if="project.steps.length > 0" class="project-steps">{{ project.steps.length }} 个步骤</span>
-            <span v-if="project.listenTo" class="project-listen">🎧 {{ project.listenTo }}</span>
+            <span v-if="project.steps.length > 0" class="project-steps"
+              >{{ project.steps.length }} 个步骤</span
+            >
+            <span v-if="project.listenTo" class="project-listen"
+              >🎧 {{ project.listenTo }}</span
+            >
           </div>
 
           <div class="project-actions">
@@ -264,8 +324,11 @@ function goToProject(projectId: string) {
     <!-- 📜 筚路蓝缕 -->
     <section id="prologue-section" class="prologue-section">
       <h2 class="section-title">🏮 筚路蓝缕</h2>
-      <hr class="staff-divider">
-      <p class="section-intro">从 1989 年日内瓦的一间办公室，到 2026 年的 AI 协作——回望 Web 三十六年筚路蓝缕。</p>
+      <hr class="staff-divider" />
+      <p class="section-intro">
+        从 1989 年日内瓦的一间办公室，到 2026 年的 AI 协作——回望 Web
+        三十六年筚路蓝缕。
+      </p>
       <div class="prologue-grid">
         <div
           v-for="card in prologueCards"
@@ -307,8 +370,14 @@ function goToProject(projectId: string) {
 }
 
 @keyframes staffFadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-greeting {
@@ -327,8 +396,14 @@ function goToProject(projectId: string) {
 }
 
 @keyframes heroReveal {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .hero-desc {
@@ -353,9 +428,10 @@ function goToProject(projectId: string) {
   box-shadow: 0 0 0 rgba(61, 43, 31, 0);
   transform: translateY(-100%);
   opacity: 0;
-  transition: transform 0.3s var(--ease-out),
-              opacity 0.3s var(--ease-out),
-              box-shadow 0.3s var(--ease-out);
+  transition:
+    transform 0.3s var(--ease-out),
+    opacity 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
   pointer-events: none;
 }
 
@@ -421,18 +497,28 @@ function goToProject(projectId: string) {
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
   padding: var(--sp-5);
-  transition: border-color var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-fast) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out),
+    margin var(--dur-slow) var(--ease-out);
   cursor: pointer;
   scroll-margin-top: var(--header-height);
   animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
 }
 
-.track-card:nth-child(1) { animation-delay: 0.10s; }
-.track-card:nth-child(2) { animation-delay: 0.20s; }
-.track-card:nth-child(3) { animation-delay: 0.30s; }
-.track-card:nth-child(4) { animation-delay: 0.40s; }
+.track-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.track-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.track-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.track-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 .track-card.draft {
   cursor: default;
@@ -443,6 +529,12 @@ function goToProject(projectId: string) {
   border-color: var(--color-gold);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(201, 169, 110, 0.14);
+}
+
+.track-card:not(.draft).expanded {
+  transform: scale(1.012);
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .track-card-header {
@@ -478,7 +570,7 @@ function goToProject(projectId: string) {
   font-size: var(--fs-xs);
   font-weight: 400;
   color: var(--color-gold);
-  background: #FFF8EC;
+  background: #fff8ec;
   border: 1px solid var(--color-gold-light);
   padding: 1px 8px;
   border-radius: 10px;
@@ -533,24 +625,14 @@ function goToProject(projectId: string) {
 /* ===== 展开的课程列表 ===== */
 .track-lessons {
   overflow: hidden;
+  margin-top: var(--sp-4);
   max-height: 0;
-  opacity: 0;
-  border-top: 0 solid var(--color-border-light);
-  transition: max-height var(--dur-slow) var(--ease-in-out),
-              opacity var(--dur-slow) var(--ease-out),
-              margin-top var(--dur-slow) var(--ease-out),
-              padding-top var(--dur-slow) var(--ease-out),
-              border-top-width var(--dur-slow) var(--ease-out);
-  margin-top: 0;
-  padding-top: 0;
+  transition: max-height var(--dur-slow) var(--ease-in-out);
 }
 
 .track-lessons--open {
   max-height: 4000px;
-  opacity: 1;
   margin-top: var(--sp-4);
-  padding-top: var(--sp-4);
-  border-top-width: 1px;
 }
 
 .track-lessons-inner {
@@ -588,6 +670,10 @@ function goToProject(projectId: string) {
 
 .track-lesson-item:hover {
   background: var(--color-bg-warm);
+}
+
+.track-lesson-item:active {
+  transform: none;
 }
 
 .track-lesson-dot {
@@ -633,17 +719,28 @@ function goToProject(projectId: string) {
   border-left: 3px solid var(--color-gold);
   border-radius: var(--radius-lg);
   padding: var(--sp-5);
-  transition: border-color var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-fast) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
   animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
 }
 
-.project-card:nth-child(1) { animation-delay: 0.15s; }
-.project-card:nth-child(2) { animation-delay: 0.25s; }
-.project-card:nth-child(3) { animation-delay: 0.35s; }
-.project-card:nth-child(4) { animation-delay: 0.45s; }
-.project-card:nth-child(5) { animation-delay: 0.55s; }
+.project-card:nth-child(1) {
+  animation-delay: 0.15s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.35s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.45s;
+}
+.project-card:nth-child(5) {
+  animation-delay: 0.55s;
+}
 
 .project-card:not(.draft):hover {
   transform: translateY(-2px);
@@ -689,7 +786,7 @@ function goToProject(projectId: string) {
   font-size: var(--fs-xs);
   font-weight: 400;
   color: var(--color-gold);
-  background: #FFF8EC;
+  background: #fff8ec;
   border: 1px solid var(--color-gold-light);
   padding: 1px 8px;
   border-radius: 10px;
@@ -736,12 +833,19 @@ function goToProject(projectId: string) {
   font-size: var(--fs-sm);
   font-weight: 600;
   border-radius: var(--radius-sm);
-  transition: background var(--dur-fast), transform var(--dur-fast);
+  transition:
+    background var(--dur-fast),
+    transform var(--dur-fast);
 }
 
 .btn-project-start:hover {
   background: var(--color-accent-light);
   transform: translateY(-1px);
+}
+
+.btn-project-start:active {
+  transform: scale(0.95);
+  transition: transform 0.05s var(--ease-in);
 }
 
 .project-soon-text {
@@ -793,18 +897,31 @@ function goToProject(projectId: string) {
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
   animation: reveal-up var(--dur-reveal) var(--ease-out) backwards;
 }
 
-.prologue-card:nth-child(1) { animation-delay: 0.10s; }
-.prologue-card:nth-child(2) { animation-delay: 0.18s; }
-.prologue-card:nth-child(3) { animation-delay: 0.26s; }
-.prologue-card:nth-child(4) { animation-delay: 0.34s; }
-.prologue-card:nth-child(5) { animation-delay: 0.42s; }
-.prologue-card:nth-child(6) { animation-delay: 0.50s; }
+.prologue-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.prologue-card:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.prologue-card:nth-child(3) {
+  animation-delay: 0.26s;
+}
+.prologue-card:nth-child(4) {
+  animation-delay: 0.34s;
+}
+.prologue-card:nth-child(5) {
+  animation-delay: 0.42s;
+}
+.prologue-card:nth-child(6) {
+  animation-delay: 0.5s;
+}
 
 .prologue-card:hover {
   transform: translateY(-3px);
@@ -839,7 +956,7 @@ function goToProject(projectId: string) {
 
 .prologue-card-subtitle {
   font-size: var(--fs-xs);
-  color: #A0522D;
+  color: #a0522d;
   margin-bottom: var(--sp-2);
 }
 
@@ -853,10 +970,10 @@ function goToProject(projectId: string) {
 .prologue-credit {
   text-align: center;
   font-size: var(--fs-sm);
-  color: #C9A96E;
+  color: #c9a96e;
   font-family: var(--font-heading);
   padding: var(--sp-6) 0 0;
-  border-top: 1px solid #E8DDCC;
+  border-top: 1px solid #e8ddcc;
   opacity: 0.7;
 }
 
