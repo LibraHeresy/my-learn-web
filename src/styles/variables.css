@@ -23,6 +23,9 @@
   /* ===== 功能色 ===== */
   --color-success:       #5B8C5A;      /* 完成状态 */
   --color-success-bg:    #EEF5EE;      /* 完成背景 */
+  --color-accent-bg:     #FDF0F0;      /* 强调色浅底 */
+  --color-accent-border: #E8C0C0;      /* 强调色边框 */
+  --color-gold-bg:       #FFF8EC;      /* 金色浅底 */
 
   /* ===== 字体 ===== */
   --font-heading:  'Source Han Serif SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
@@ -57,8 +60,8 @@
 
   /* ===== 布局 ===== */
   --header-height: 56px;
-  --sidebar-width: 260px;
-  --sidebar-collapsed-width: 48px;
+  --sidebar-width: 300px;
+  --sidebar-collapsed-width: 42px;
 
   /* ===== 过渡 ===== */
   --transition: 0.2s ease;

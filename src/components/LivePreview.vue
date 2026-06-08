@@ -201,7 +201,7 @@ watch(
 }
 
 .preview-nav-btn:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--color-bg-warm);
   color: var(--color-text);
 }
 
@@ -217,6 +217,7 @@ watch(
   color: var(--color-text-light);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 .error-indicator {

@@ -58,7 +58,7 @@ defineEmits<{
 .player-footer {
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 6px var(--sp-6);
   background: var(--color-panel);
   border-top: 1px solid var(--color-border-light);
@@ -87,10 +87,10 @@ defineEmits<{
   padding: var(--sp-1) var(--sp-4);
   background: transparent;
   color: var(--color-text);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   border-radius: var(--radius-sm);
   white-space: nowrap;
-  transition: all 0.15s;
+  transition: background var(--dur-fast), color var(--dur-fast);
 }
 
 .footer-btn:hover:not(.disabled) {
@@ -100,17 +100,10 @@ defineEmits<{
 .footer-complete {
   color: var(--color-success);
   font-weight: 600;
-  transition: color var(--dur-fast),
-              background var(--dur-fast),
-              transform 0.1s;
 }
 
 .footer-complete:hover {
   background: var(--color-success-bg);
-}
-
-.footer-complete:active {
-  transform: scale(0.95);
 }
 
 .footer-center {
@@ -120,7 +113,7 @@ defineEmits<{
 }
 
 .nav-title {
-  color: #8B2E2E;
+  color: var(--color-accent);
 }
 
 @media (max-width: 640px) {

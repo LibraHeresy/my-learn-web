@@ -6,11 +6,11 @@ import { useProgressStore } from '../stores/progress'
 const props = withDefaults(defineProps<{
   currentLessonId: string
   trackId?: string
-  variant?: 'overlay' | 'expanded' | 'collapsed'
+  variant?: 'mobile' | 'expanded' | 'collapsed'
   currentPosition?: { lessonIndex: number; totalLessons: number }
 }>(), {
   trackId: 'fundamentals',
-  variant: 'overlay',
+  variant: 'mobile',
   currentPosition: () => ({ lessonIndex: 0, totalLessons: 0 })
 })
 
@@ -100,10 +100,11 @@ function expandToCurrent() {
       </div>
     </template>
 
-    <!-- 展开 / overlay 模式 -->
+    <!-- 展开 / mobile 模式 -->
     <template v-else>
-      <!-- overlay 模式顶部关闭按钮 -->
-      <div v-if="variant === 'overlay'" class="sidebar-close-bar">
+      <!-- mobile 模式顶部关闭按钮 -->
+      <div v-if="variant === 'mobile'" class="sidebar-close-bar">
+        <span class="sidebar-close-title">导航</span>
         <button class="sidebar-header-btn" @click="emit('close')">✕</button>
       </div>
 
@@ -161,12 +162,13 @@ function expandToCurrent() {
   flex-shrink: 0;
   height: 100%;
   overflow: hidden;
-  transition: width 0.25s ease;
+  transition: width var(--dur-normal) var(--ease-out);
+  max-width: 300px;
 }
 
-/* ===== 展开 / overlay 模式 ===== */
+/* ===== 展开 / mobile 模式 ===== */
 .sidebar-expanded,
-.sidebar-overlay {
+.sidebar-mobile {
   width: var(--sidebar-width);
 }
 
@@ -205,8 +207,8 @@ function expandToCurrent() {
 }
 
 .collapsed-chapter-btn.active {
-  background: #FDF0F0;
-  border-color: #E8C0C0;
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent-border);
 }
 
 .collapsed-expand-btn {
@@ -230,13 +232,21 @@ function expandToCurrent() {
   color: var(--color-text);
 }
 
-/* ===== overlay 关闭按钮 ===== */
+/* ===== mobile 关闭按钮 ===== */
 .sidebar-close-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: var(--sp-2) var(--sp-3);
   flex-shrink: 0;
 }
+
+.sidebar-close-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-left: 8px;
+} 
 
 .sidebar-header-btn {
   width: 28px;
@@ -257,7 +267,7 @@ function expandToCurrent() {
 
 /* ===== 底部收起按钮 ===== */
 .sidebar-footer {
-  padding: var(--sp-2) var(--sp-3);
+  padding: var(--sp-1) var(--sp-3);
   border-top: 1px solid var(--color-border-light);
   flex-shrink: 0;
 }
@@ -324,7 +334,7 @@ function expandToCurrent() {
   background: transparent;
   text-align: left;
   border-radius: var(--radius-sm);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   color: var(--color-text);
   transition: background var(--dur-fast) ease,
               color var(--dur-fast) ease,
@@ -336,7 +346,7 @@ function expandToCurrent() {
 }
 
 .sidebar-lesson.active {
-  background: #FDF0F0;
+  background: var(--color-accent-bg);
   color: var(--color-accent);
   font-weight: 600;
   padding-left: calc(var(--sp-5) + 4px);

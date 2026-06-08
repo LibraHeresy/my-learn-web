@@ -313,7 +313,7 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
   font-size: 12px;
   font-family: var(--font-code);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
   display: flex;
   align-items: center;
   justify-content: center;

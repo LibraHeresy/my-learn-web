@@ -447,7 +447,7 @@ function goToProject(projectId: string) {
   gap: var(--sp-4);
   padding: var(--sp-4) var(--sp-5);
   margin: var(--sp-2) auto 0;
-  background: linear-gradient(135deg, #FFF8EC, #FDF0F0);
+  background: linear-gradient(135deg, var(--color-gold-bg), var(--color-accent-bg));
   border: 1px solid var(--color-gold-light);
   border-radius: var(--radius-md);
   max-width: 600px;
@@ -534,7 +534,7 @@ function goToProject(projectId: string) {
   color: var(--color-text-light);
   border-radius: var(--radius-sm);
   white-space: nowrap;
-  transition: all 0.15s;
+  transition: background var(--dur-fast), color var(--dur-fast);
 }
 
 .sticky-nav-item:hover {
@@ -654,7 +654,7 @@ function goToProject(projectId: string) {
   font-size: var(--fs-xs);
   font-weight: 400;
   color: var(--color-gold);
-  background: #fff8ec;
+  background: var(--color-gold-bg);
   border: 1px solid var(--color-gold-light);
   padding: 1px 8px;
   border-radius: 10px;
@@ -682,7 +682,7 @@ function goToProject(projectId: string) {
 
 .track-arrow {
   color: var(--color-text-light);
-  transition: transform 0.2s;
+  transition: transform var(--dur-fast);
   font-size: var(--fs-sm);
 }
 
@@ -870,7 +870,7 @@ function goToProject(projectId: string) {
   font-size: var(--fs-xs);
   font-weight: 400;
   color: var(--color-gold);
-  background: #fff8ec;
+  background: var(--color-gold-bg);
   border: 1px solid var(--color-gold-light);
   padding: 1px 8px;
   border-radius: 10px;
@@ -925,11 +925,6 @@ function goToProject(projectId: string) {
 .btn-project-start:hover {
   background: var(--color-accent-light);
   transform: translateY(-1px);
-}
-
-.btn-project-start:active {
-  transform: scale(0.95);
-  transition: transform 0.05s var(--ease-in);
 }
 
 .project-soon-text {
@@ -1014,7 +1009,7 @@ function goToProject(projectId: string) {
 }
 
 .prologue-card:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
   transition: transform 0.05s var(--ease-in);
 }
 
@@ -1040,7 +1035,7 @@ function goToProject(projectId: string) {
 
 .prologue-card-subtitle {
   font-size: var(--fs-xs);
-  color: #a0522d;
+  color: var(--color-accent);
   margin-bottom: var(--sp-2);
 }
 

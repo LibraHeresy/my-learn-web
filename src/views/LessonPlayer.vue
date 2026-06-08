@@ -47,24 +47,23 @@ const centerLabel = computed(() => {
   return ''
 })
 
-// ===== 侧边栏状态 =====
+// ===== 侧边栏状态（统一管理桌面端折叠/展开 & 移动端隐藏/显示） =====
 const windowWidth = ref(window.innerWidth)
 function onResize() { windowWidth.value = window.innerWidth }
 onMounted(() => window.addEventListener('resize', onResize))
 onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
-const sidebarCollapsed = ref(true)
-
-function toggleSidebarCollapse() {
-  sidebarCollapsed.value = !sidebarCollapsed.value
-}
+const sidebarExpanded = ref(false)
+const isMobile = computed(() => windowWidth.value < 901)
 
 const sidebarVariant = computed(() => {
-  if (windowWidth.value < 901) return 'overlay'
-  return sidebarCollapsed.value ? 'collapsed' : 'expanded'
+  if (isMobile.value) return 'mobile'
+  return sidebarExpanded.value ? 'expanded' : 'collapsed'
 })
 
-const isOverlay = computed(() => windowWidth.value < 901)
+function toggleSidebar() {
+  sidebarExpanded.value = !sidebarExpanded.value
+}
 
 // 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
@@ -91,11 +90,10 @@ function onCodeChange(code: UserCode) {
   userCode.value = code
 }
 
-// ===== 侧边栏 =====
-const sidebarOpen = ref(false)
-
 function selectLesson(id: string) {
-  sidebarOpen.value = false
+  if (isMobile.value) {
+    sidebarExpanded.value = false
+  }
   router.push(`/lesson/${id}`)
 }
 
@@ -147,10 +145,6 @@ function markComplete() {
   progressStore.markComplete(lessonId.value)
 }
 
-function toggleSidebar() {
-  sidebarOpen.value = !sidebarOpen.value
-}
-
 useKeyboardNav({
   canPrev: () => !prevDisabled.value,
   canNext: () => !nextDisabled.value,
@@ -162,7 +156,7 @@ useKeyboardNav({
 <template>
   <div class="lesson-player">
     <!-- 桌面端顶部面包屑导航 -->
-    <div v-if="lesson && !isOverlay" class="lesson-topbar">
+    <div v-if="lesson && !isMobile" class="lesson-topbar">
       <div class="topbar-breadcrumb">
         <button class="topbar-home" @click="router.push('/')">🏠首页</button>
         <span class="breadcrumb-sep">›</span>
@@ -182,36 +176,37 @@ useKeyboardNav({
 
     <!-- 移动端顶部条 -->
     <div class="mobile-bar">
-      <button class="mobile-menu-btn" @click="sidebarOpen = true">☰</button>
+      <button v-if="!isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
       <span class="mobile-lesson-title">{{ lesson?.title }}</span>
     </div>
 
     <!-- 侧边栏遮罩（仅移动端） -->
     <Transition name="fade">
-      <div v-if="isOverlay && sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
+      <div v-if="isMobile && sidebarExpanded" class="sidebar-overlay" @click="sidebarExpanded = false" />
     </Transition>
 
     <!-- 主内容区（侧栏 + 内容并排） -->
     <div class="player-layout">
-      <!-- 侧边栏（筚路蓝缕课程不展示） -->
-      <div
-        v-if="!isPrologue"
-        :class="['sidebar-wrapper', {
-          open: sidebarOpen,
-          visible: !isOverlay,
-          collapsed: sidebarVariant === 'collapsed'
-        }]"
-      >
-        <LessonSidebar
-          :variant="sidebarVariant"
-          :current-lesson-id="lessonId"
-          :track-id="currentTrackId"
-          :current-position="{ lessonIndex: positionInChapter, totalLessons: totalInChapter }"
-          @select="selectLesson"
-          @close="sidebarOpen = false"
-          @toggle="toggleSidebarCollapse"
-        />
-      </div>
+      <!-- 侧边栏（筚路蓝缕课程不展示。移动端关闭时不渲染，桌面端始终渲染） -->
+      <Transition name="sidebar-slide">
+        <div
+          v-if="!isPrologue && (!isMobile || sidebarExpanded)"
+          :class="['sidebar-wrapper', {
+            visible: !isMobile,
+            collapsed: sidebarVariant === 'collapsed'
+          }]"
+        >
+          <LessonSidebar
+            :variant="sidebarVariant"
+            :current-lesson-id="lessonId"
+            :track-id="currentTrackId"
+            :current-position="{ lessonIndex: positionInChapter, totalLessons: totalInChapter }"
+            @select="selectLesson"
+            @close="sidebarExpanded = false"
+            @toggle="toggleSidebar"
+          />
+        </div>
+      </Transition>
 
       <div
         v-if="lesson"
@@ -337,18 +332,6 @@ useKeyboardNav({
   color: var(--color-text-light);
 }
 
-.topbar-toggle {
-  background: none;
-  font-size: var(--fs-xs);
-  color: var(--color-text-light);
-  padding: var(--sp-1);
-  flex-shrink: 0;
-}
-
-.topbar-toggle:hover {
-  color: var(--color-accent);
-}
-
 /* ===== 移动端顶栏 ===== */
 .mobile-bar {
   display: none;
@@ -384,9 +367,19 @@ useKeyboardNav({
 .sidebar-overlay {
   position: fixed;
   inset: 0;
-  top: var(--header-height);
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 199;
+}
+
+/* 移动端侧边栏滑入/滑出动画 */
+.sidebar-slide-enter-active,
+.sidebar-slide-leave-active {
+  transition: transform var(--dur-normal) var(--ease-out);
+}
+
+.sidebar-slide-enter-from,
+.sidebar-slide-leave-to {
+  transform: translateX(-100%);
 }
 
 /* ===== 主布局：侧栏 + 内容并排 ===== */
@@ -457,17 +450,11 @@ useKeyboardNav({
 
   .sidebar-wrapper {
     position: fixed;
-    top: var(--header-height);
-    left: 0;
-    bottom: 0;
+    inset: 0;
+    width: var(--sidebar-width);
     z-index: 200;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
     display: block;
-  }
-
-  .sidebar-wrapper.open {
-    transform: translateX(0);
+    background: var(--color-panel);
   }
 
   .player-layout {
