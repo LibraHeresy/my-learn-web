@@ -6,6 +6,21 @@ const props = defineProps<{
 }>()
 
 const iframeRef = ref<HTMLIFrameElement>()
+
+function goBack() {
+  iframeRef.value?.contentWindow?.history.back()
+}
+
+function goForward() {
+  iframeRef.value?.contentWindow?.history.forward()
+}
+
+function refresh() {
+  if (props.srcdoc) {
+    loadPreview(props.srcdoc)
+  }
+}
+
 const errorState = ref<{
   message: string
   lineno: number
@@ -75,8 +90,24 @@ watch(
 <template>
   <div class="preview-panel">
     <div class="preview-header">
-      <span class="preview-label">预览</span>
-      <span v-if="errorState" class="error-indicator">⚠ 有错误</span>
+      <div class="preview-nav-btns">
+        <button class="preview-nav-btn" @click="goBack" title="后退">
+          <span class="nav-icon">←</span>
+          <span class="nav-text">后退</span>
+        </button>
+        <button class="preview-nav-btn" @click="goForward" title="前进">
+          <span class="nav-icon">→</span>
+          <span class="nav-text">前进</span>
+        </button>
+        <button class="preview-nav-btn" @click="refresh" title="刷新">
+          <span class="nav-icon">↻</span>
+          <span class="nav-text">刷新</span>
+        </button>
+      </div>
+      <div class="preview-header-right">
+        <span v-if="errorState" class="error-indicator">⚠ 有错误</span>
+        <span class="preview-label">预览</span>
+      </div>
     </div>
     <div class="preview-frame-wrap">
       <iframe
@@ -125,9 +156,56 @@ watch(
 }
 
 .preview-header {
-  padding: var(--sp-2) var(--sp-4);
+  padding: var(--sp-2) var(--sp-3);
   border-bottom: 1px solid var(--color-border-light);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preview-nav-btns {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.preview-nav-btn {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 8px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.preview-nav-btn .nav-icon {
+  font-size: 13px;
+}
+
+.preview-nav-btn .nav-text {
+  font-size: var(--fs-xs);
+}
+
+.preview-nav-btn:last-child {
+  border-right: none;
+}
+
+.preview-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--color-text);
+}
+
+.preview-header-right {
   display: flex;
   align-items: center;
   gap: var(--sp-3);

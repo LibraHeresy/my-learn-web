@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { EditorView, keymap, lineNumbers, highlightActiveLine } from '@codemirror/view'
+import { EditorView, keymap, lineNumbers, highlightActiveLine, placeholder } from '@codemirror/view'
 import { EditorState } from '@codemirror/state'
 import { html } from '@codemirror/lang-html'
 import { css } from '@codemirror/lang-css'
@@ -40,6 +40,12 @@ function getLangExtension(tab: Tab) {
 function createEditorView(code: { html: string; css: string; js: string }, tab: Tab) {
   if (!editorHost.value) return
 
+  const tabLabels: Record<Tab, string> = {
+    html: '本课程无 HTML 代码',
+    css: '本课程无 CSS 代码',
+    js: '本课程无 JS 代码'
+  }
+
   editorView = new EditorView({
     state: EditorState.create({
       doc: code[tab],
@@ -51,6 +57,7 @@ function createEditorView(code: { html: string; css: string; js: string }, tab: 
         ...getLangExtension(tab),
         oneDark,
         EditorView.lineWrapping,
+        ...(code[tab].trim() === '' ? [placeholder(tabLabels[tab])] : []),
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
             emit('update:modelValue', {
@@ -80,14 +87,16 @@ function switchTab(tab: Tab) {
   if (tab === activeTab.value) return
   const oldTab = activeTab.value
 
-  // 保存当前编辑器内容到旧 tab
-  const code = editorView
-    ? { ...props.modelValue, [oldTab]: editorView.state.doc.toString() }
-    : props.modelValue
+  if (editorView) {
+    emit('update:modelValue', {
+      ...props.modelValue,
+      [oldTab]: editorView.state.doc.toString()
+    })
+  }
 
   destroyEditor()
   activeTab.value = tab
-  nextTick(() => createEditorView(code, tab))
+  nextTick(() => createEditorView({ ...props.modelValue }, tab))
 }
 
 watch(() => props.modelValue, (newVal) => {
@@ -130,9 +139,7 @@ onBeforeUnmount(() => {
         ▶ 运行
       </button>
     </div>
-    <Transition name="editor-swap" mode="out-in">
-      <div :key="activeTab" ref="editorHost" class="editor-host" />
-    </Transition>
+    <div ref="editorHost" class="editor-host" />
   </div>
 </template>
 
@@ -184,6 +191,7 @@ onBeforeUnmount(() => {
   border-radius: var(--radius-sm);
   align-self: center;
   transition: all var(--transition);
+  flex-shrink: 0;
 }
 
 .editor-run-btn:hover {

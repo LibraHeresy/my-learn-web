@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { lessons } from '../configs/lessons'
+import { lessons, chapters } from '../configs/lessons'
+import { tracks } from '../configs/tracks'
 import { prologueLessons } from '../configs/prologues'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
@@ -26,6 +27,44 @@ const lesson = computed(() => allLessons.value.find(l => l.id === lessonId.value
 
 // 登台篇课程使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
 const isLocalMode = computed(() => lesson.value?.mode === 'local')
+
+// ===== 当前位置信息 =====
+const currentTrackId = computed(() => lesson.value?.trackId || 'fundamentals')
+const currentChapterId = computed(() => lesson.value?.chapterId)
+const currentChapter = computed(() => chapters.find(ch => ch.id === currentChapterId.value))
+const currentTrack = computed(() => tracks.find(t => t.id === currentTrackId.value))
+const currentChapterLessons = computed(() =>
+  lessons.filter(l => l.chapterId === currentChapterId.value)
+)
+const positionInChapter = computed(() =>
+  currentChapterLessons.value.findIndex(l => l.id === lessonId.value) + 1
+)
+const totalInChapter = computed(() => currentChapterLessons.value.length)
+
+const centerLabel = computed(() => {
+  if (isPrologue.value) return `第 ${currentIndex.value + 1}/${prologueLessons.length} 篇`
+  if (positionInChapter.value > 0) return `第 ${positionInChapter.value}/${totalInChapter.value} 课`
+  return ''
+})
+
+// ===== 侧边栏状态 =====
+const windowWidth = ref(window.innerWidth)
+function onResize() { windowWidth.value = window.innerWidth }
+onMounted(() => window.addEventListener('resize', onResize))
+onBeforeUnmount(() => window.removeEventListener('resize', onResize))
+
+const sidebarCollapsed = ref(true)
+
+function toggleSidebarCollapse() {
+  sidebarCollapsed.value = !sidebarCollapsed.value
+}
+
+const sidebarVariant = computed(() => {
+  if (windowWidth.value < 901) return 'overlay'
+  return sidebarCollapsed.value ? 'collapsed' : 'expanded'
+})
+
+const isOverlay = computed(() => windowWidth.value < 901)
 
 // 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
@@ -122,75 +161,107 @@ useKeyboardNav({
 
 <template>
   <div class="lesson-player">
+    <!-- 桌面端顶部面包屑导航 -->
+    <div v-if="lesson && !isOverlay" class="lesson-topbar">
+      <div class="topbar-breadcrumb">
+        <button class="topbar-home" @click="router.push('/')">🏠首页</button>
+        <span class="breadcrumb-sep">›</span>
+        <template v-if="isPrologue">
+          <span>📜 筚路蓝缕</span>
+          <span class="breadcrumb-sep">·</span>
+          <span class="breadcrumb-position">{{ centerLabel }}</span>
+        </template>
+        <template v-else>
+          <span>{{ currentTrack?.icon }} {{ currentTrack?.title }}</span>
+          <span class="breadcrumb-sep">›</span>
+          <span>{{ currentChapter?.title }}</span>
+          <span class="breadcrumb-position">{{ centerLabel }}</span>
+        </template>
+      </div>
+    </div>
+
     <!-- 移动端顶部条 -->
     <div class="mobile-bar">
-      <button class="mobile-menu-btn" @click="toggleSidebar">☰</button>
+      <button class="mobile-menu-btn" @click="sidebarOpen = true">☰</button>
       <span class="mobile-lesson-title">{{ lesson?.title }}</span>
     </div>
 
-    <!-- 侧边栏遮罩 -->
+    <!-- 侧边栏遮罩（仅移动端） -->
     <Transition name="fade">
-      <div v-if="sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
+      <div v-if="isOverlay && sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false" />
     </Transition>
 
-    <!-- 侧边栏（移动端抽屉） -->
-    <div :class="['sidebar-wrapper', { open: sidebarOpen }]">
-      <LessonSidebar
-        :current-lesson-id="lessonId"
-        @select="selectLesson"
-        @close="sidebarOpen = false"
-      />
-    </div>
-
-    <!-- 主内容区 -->
-    <div
-      v-if="lesson"
-      ref="playerMainRef"
-      :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
-    >
-      <!-- 左面板：教学内容 -->
+    <!-- 主内容区（侧栏 + 内容并排） -->
+    <div class="player-layout">
+      <!-- 侧边栏（筚路蓝缕课程不展示） -->
       <div
-        class="panel-content"
-        :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
+        v-if="!isPrologue"
+        :class="['sidebar-wrapper', {
+          open: sidebarOpen,
+          visible: !isOverlay,
+          collapsed: sidebarVariant === 'collapsed'
+        }]"
       >
-        <Transition name="slide-fade" mode="out-in">
-          <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
-        </Transition>
+        <LessonSidebar
+          :variant="sidebarVariant"
+          :current-lesson-id="lessonId"
+          :track-id="currentTrackId"
+          :current-position="{ lessonIndex: positionInChapter, totalLessons: totalInChapter }"
+          @select="selectLesson"
+          @close="sidebarOpen = false"
+          @toggle="toggleSidebarCollapse"
+        />
       </div>
 
-      <template v-if="!isLocalMode">
-        <!-- 分隔线 1：内容 ↔ 编辑器 -->
-        <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
-
-        <!-- 中面板：代码编辑器 -->
+      <div
+        v-if="lesson"
+        ref="playerMainRef"
+        :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
+      >
+        <!-- 左面板：教学内容 -->
         <div
-          class="panel-editor"
-          :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
+          class="panel-content"
+          :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
         >
-          <CodeEditor
-            :model-value="userCode"
-            @update:model-value="onCodeChange"
-            @run="triggerPreview"
-          />
+          <Transition name="slide-fade" mode="out-in">
+            <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
+          </Transition>
         </div>
 
-        <!-- 分隔线 2：编辑器 ↔ 预览 -->
-        <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
+        <template v-if="!isLocalMode">
+          <!-- 分隔线 1：内容 ↔ 编辑器 -->
+          <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
 
-        <!-- 右面板：实时预览 -->
-        <div
-          class="panel-preview"
-          :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
-        >
-          <LivePreview :srcdoc="previewSrc" />
-        </div>
-      </template>
-    </div>
+          <!-- 中面板：代码编辑器 -->
+          <div
+            class="panel-editor"
+            :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
+          >
+            <CodeEditor
+              :model-value="userCode"
+              @update:model-value="onCodeChange"
+              @run="triggerPreview"
+            />
+          </div>
 
-    <!-- 未找到课程 -->
-    <div v-else class="lesson-not-found">
-      <p>课程未找到</p>
-      <button @click="router.push('/')">返回首页</button>
+          <!-- 分隔线 2：编辑器 ↔ 预览 -->
+          <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
+
+          <!-- 右面板：实时预览 -->
+          <div
+            class="panel-preview"
+            :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
+          >
+            <LivePreview :srcdoc="previewSrc" />
+          </div>
+        </template>
+      </div>
+
+      <!-- 未找到课程 -->
+      <div v-else class="lesson-not-found">
+        <p>课程未找到</p>
+        <button @click="router.push('/')">返回首页</button>
+      </div>
     </div>
 
     <!-- 底部导航 -->
@@ -204,6 +275,7 @@ useKeyboardNav({
       :next-disabled="nextDisabled"
       :show-complete="!isPrologue"
       :is-completed="progressStore.isCompleted(lessonId)"
+      :center-label="centerLabel"
       @prev="goPrev"
       @next="goNext"
       @complete="markComplete"
@@ -216,6 +288,65 @@ useKeyboardNav({
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+/* ===== 桌面端顶部面包屑 ===== */
+.lesson-topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0 var(--sp-4);
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border-light);
+  flex-shrink: 0;
+  min-height: 36px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+.topbar-home {
+  background: none;
+  color: var(--color-text-light);
+  font-size: var(--fs-xs);
+  padding: 2px 0;
+  flex-shrink: 0;
+}
+
+.topbar-home:hover {
+  color: var(--color-accent);
+}
+
+.topbar-breadcrumb {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+.breadcrumb-sep {
+  color: var(--color-border);
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+}
+
+.breadcrumb-position {
+  color: var(--color-text-light);
+}
+
+.topbar-toggle {
+  background: none;
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  padding: var(--sp-1);
+  flex-shrink: 0;
+}
+
+.topbar-toggle:hover {
+  color: var(--color-accent);
 }
 
 /* ===== 移动端顶栏 ===== */
@@ -245,19 +376,9 @@ useKeyboardNav({
   white-space: nowrap;
 }
 
-/* ===== 侧边栏 ===== */
+/* ===== 侧边栏容器 ===== */
 .sidebar-wrapper {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  bottom: 0;
-  z-index: 200;
-  transform: translateX(-100%);
-  transition: transform 0.25s ease;
-}
-
-.sidebar-wrapper.open {
-  transform: translateX(0);
+  display: none;
 }
 
 .sidebar-overlay {
@@ -266,6 +387,14 @@ useKeyboardNav({
   top: var(--header-height);
   background: rgba(0, 0, 0, 0.3);
   z-index: 199;
+}
+
+/* ===== 主布局：侧栏 + 内容并排 ===== */
+.player-layout {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
 }
 
 /* ===== 主面板布局 ===== */
@@ -318,8 +447,31 @@ useKeyboardNav({
     width: 100vw;
   }
 
+  .lesson-topbar {
+    display: none;
+  }
+
   .mobile-bar {
     display: flex;
+  }
+
+  .sidebar-wrapper {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    bottom: 0;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    display: block;
+  }
+
+  .sidebar-wrapper.open {
+    transform: translateX(0);
+  }
+
+  .player-layout {
+    width: 100vw;
   }
 
   .player-main {
@@ -351,18 +503,12 @@ useKeyboardNav({
   .panel-preview {
     min-height: 360px;
   }
-
 }
 
 @media (min-width: 901px) {
-  .sidebar-wrapper {
-    position: relative;
-    top: auto;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    z-index: auto;
-    display: none;
+  .sidebar-wrapper.visible {
+    display: block;
+    height: 100%;
   }
 }
 </style>

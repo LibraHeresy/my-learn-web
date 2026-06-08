@@ -58,6 +58,7 @@
   /* ===== 布局 ===== */
   --header-height: 56px;
   --sidebar-width: 260px;
+  --sidebar-collapsed-width: 48px;
 
   /* ===== 过渡 ===== */
   --transition: 0.2s ease;

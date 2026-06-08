@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { chapters, lessons } from "../configs/lessons";
 import { tracks } from "../configs/tracks";
 import { projects } from "../configs/projects";
 import { useProgressStore } from "../stores/progress";
 import { parseInline } from "../utils/markdown";
-import { prologueCards } from "../configs/prologues";
+import { prologueCards, prologueLessons } from "../configs/prologues";
 
 const router = useRouter();
 const progressStore = useProgressStore();
@@ -53,6 +53,21 @@ function getTrackChapters(trackId: string) {
   );
 }
 
+// 最近访问的课程
+const resumeLesson = computed(() => {
+  const entries = Object.values(progressStore.lessonProgress)
+    .filter(p => p.lastVisited)
+    .sort((a, b) => (b.lastVisited || 0) - (a.lastVisited || 0))
+  if (entries.length === 0) return null
+  const lastId = entries[0].lessonId
+  return [...lessons, ...prologueLessons].find(l => l.id === lastId) || null
+})
+
+const resumeChapter = computed(() => {
+  if (!resumeLesson.value) return null
+  return chapters.find(ch => ch.id === resumeLesson.value!.chapterId) || null
+})
+
 function toggleTrack(trackId: string) {
   const isExpanding = expandedTrack.value !== trackId;
   expandedTrack.value = isExpanding ? trackId : null;
@@ -98,6 +113,18 @@ function goToProject(projectId: string) {
         </p>
       </div>
     </section>
+
+    <!-- 继续学习 -->
+    <div v-if="resumeLesson" class="resume-bar">
+      <div class="resume-info">
+        <span class="resume-icon">📍</span>
+        <span class="resume-label">继续学习</span>
+        <span class="resume-chapter" v-if="resumeChapter">{{ resumeChapter.icon }} {{ resumeChapter.title }}</span>
+      </div>
+      <button class="resume-btn" @click="goToLesson(resumeLesson.id)">
+        {{ resumeLesson.title }} →
+      </button>
+    </div>
 
     <!-- 粘性迷你导航 -->
     <nav :class="['sticky-nav', { visible: showStickyNav }]">
@@ -412,6 +439,63 @@ function goToProject(projectId: string) {
   line-height: 1.8;
 }
 
+/* ===== 继续学习 ===== */
+.resume-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  margin: var(--sp-2) auto 0;
+  background: linear-gradient(135deg, #FFF8EC, #FDF0F0);
+  border: 1px solid var(--color-gold-light);
+  border-radius: var(--radius-md);
+  max-width: 600px;
+}
+
+.resume-info {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.resume-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.resume-label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.resume-chapter {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resume-btn {
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: background var(--dur-fast), transform var(--dur-fast);
+}
+
+.resume-btn:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-1px);
+}
+
 /* ===== 粘性迷你导航 ===== */
 .sticky-nav {
   position: fixed;
@@ -539,7 +623,7 @@ function goToProject(projectId: string) {
 
 .track-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--sp-4);
 }
 
@@ -1004,6 +1088,21 @@ function goToProject(projectId: string) {
 
   .track-card {
     padding: var(--sp-4);
+  }
+
+  .track-card-header {
+    flex-wrap: wrap;
+    row-gap: var(--sp-2);
+  }
+
+  .track-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .track-status {
+    flex-basis: 100%;
+    margin-left: calc(2.2rem + var(--sp-4));
   }
 
   .track-icon {
