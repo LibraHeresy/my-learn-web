@@ -157,7 +157,7 @@ describe('ProjectPlayer 步骤边界逻辑', () => {
     hasNextProject: boolean,
     prevProjectTitle?: string,
     nextProjectTitle?: string,
-    currentStepTitle?: string,
+    _currentStepTitle?: string,
     prevStepTitle?: string,
     nextStepTitle?: string
   ) {

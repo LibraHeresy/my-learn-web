@@ -11,7 +11,7 @@ import { projects } from '../configs/projects'
 // ============================================================
 
 // 创建最小路由实例
-function makeRouter(initialRoute: string) {
+function makeRouter(_initialRoute: string) {
   return createRouter({
     history: createWebHistory(),
     routes: [

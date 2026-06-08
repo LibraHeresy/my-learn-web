@@ -136,7 +136,7 @@ useKeyboardNav({
 })
 
 // ===== 面板拖动缩放 =====
-const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-project-panel-widths', 1)
+const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-panel-widths', 1)
 </script>
 
 <template>

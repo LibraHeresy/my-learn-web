@@ -8,6 +8,15 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      // GitHub Pages SPA redirect: restore path from 404.html redirect
+      const base = '/my-learn-web/'
+      const redirect = sessionStorage.getItem('__redirect')
+      if (redirect) {
+        sessionStorage.removeItem('__redirect')
+        history.replaceState(null, '', base + redirect.replace(/^\//, ''))
+      }
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

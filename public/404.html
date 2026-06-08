@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>代码乐章 — 从乐谱到代码</title>
+    <script>
+      // GitHub Pages SPA redirect: 404 → index.html via query param
+      const base = '/my-learn-web/'
+      const path = sessionStorage.getItem('__redirect') ||
+        location.pathname.replace(base, '/') +
+          location.search + location.hash
+      sessionStorage.setItem('__redirect', path)
+      location.replace(base)
+    </script>
+  </head>
+  <body></body>
+</html>

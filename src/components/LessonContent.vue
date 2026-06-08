@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import type { Lesson } from '../types'
 import { parseInline, parseContent } from '../utils/markdown'
 import { glossary } from '../configs/glossary'
-import { chapters } from '../configs/lessons'
-
 const props = defineProps<{
   lesson: Lesson
 }>()
-
-const chapterIndex = computed(() =>
-  chapters.findIndex(c => c.id === props.lesson.chapterId)
-)
 
 defineEmits<{
   complete: []
