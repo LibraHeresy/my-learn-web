@@ -4,7 +4,6 @@ import { useRoute, useRouter } from 'vue-router'
 import { projects } from '../configs/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
-import { useKeyboardNav } from '../composables/useKeyboardNav'
 import { parseInline, parseContent } from '../utils/markdown'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
@@ -128,12 +127,6 @@ function goFooterNext() {
   }
 }
 
-useKeyboardNav({
-  canPrev: () => !isFirstStep.value || !!prevProject.value,
-  canNext: () => !isLastStep.value || !!nextProject.value,
-  onPrev: goFooterPrev,
-  onNext: goFooterNext,
-})
 
 // ===== 面板拖动缩放 =====
 const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-panel-widths', 1)

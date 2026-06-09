@@ -7,7 +7,6 @@ import { prologueLessons } from '../configs/prologues'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
-import { useKeyboardNav } from '../composables/useKeyboardNav'
 import type { UserCode } from '../types'
 import LessonContent from '../components/LessonContent.vue'
 import CodeEditor from '../components/CodeEditor.vue'
@@ -145,12 +144,6 @@ function markComplete() {
   progressStore.markComplete(lessonId.value)
 }
 
-useKeyboardNav({
-  canPrev: () => !prevDisabled.value,
-  canNext: () => !nextDisabled.value,
-  onPrev: goPrev,
-  onNext: goNext,
-})
 </script>
 
 <template>

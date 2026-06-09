@@ -40,7 +40,6 @@ src/
 │   ├── CodeEditor.vue, LivePreview.vue, PlayerFooter.vue, Resizer.vue
 ├── composables/
 │   ├── useCodePreview.ts    # 组合 HTML/CSS/JS → iframe srcdoc
-│   ├── useKeyboardNav.ts    # 左右箭头键导航
 │   └── usePanelResize.ts    # 三栏拖动缩放（localStorage 持久化宽度）
 ├── utils/markdown.ts        # 轻量 Markdown 解析器（行内 + 块级 + 术语提示包装）
 └── styles/
