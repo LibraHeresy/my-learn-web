@@ -162,7 +162,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "目前编辑器里只显示 body 内容。试试：\n\n1. 打开浏览器开发者工具（F12），在 Elements/元素 面板中查看页面完整结构——你能找到 `<head>` 和 `<body>` 标签吗？\n2. 修改 `<h1>` 标签中的标题\n3. 观察代码中的 `<!-- 这是一条HTML注释 -->`——它在预览里看得到吗？\n4. 挑战：写两段不同的 `<p>` 内容，用注释隐藏其中一段，切换注释看效果",
+          "目前编辑器里只显示 body 内容。试试：\n\n1. 打开浏览器开发者工具（F12），在 Elements/元素 面板中查看页面完整结构——你能找到 `<head>` 和 `<body>` 标签吗？\n2. 修改 `<h1>` 标签中的标题\n3. 观察代码中的 `<!-- 这是一条HTML注释 -->`——它在预览里看得到吗？\n4. 挑战：写两段不同的 `<p>` 内容，用注释隐藏其中一段，切换注释看效果\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 编辑器中添加两段 <code>&lt;p&gt;</code>，用注释隐藏一段：</p><pre><code>&lt;p&gt;这是第一段：音乐是心灵的语言。&lt;/p&gt;\n\n&lt;!-- 下面这段被注释隐藏了，切换注释即可显示 --&gt;\n&lt;!--\n&lt;p&gt;这是第二段：代码编织出动人的乐章。&lt;/p&gt;\n--&gt;</code></pre><p>想看到「第二段」时，删除 <code>&lt;!--</code> 和 <code>--&gt;</code> 即可；想再次隐藏它，按 <code>Ctrl + /</code> 重新注释。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -279,7 +279,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "综合挑战 ✨",
         content:
-          '这是本章的最后一节课！请在编辑器中修改代码，制作一张属于你自己的"个人音乐卡片"：\n\n1. 把 `<h1>` 中的"肖邦"改成你喜欢的音乐家\n2. 把 `<img>` 的 `src` 换成你想展示的图片链接\n3. 把 `<a>` 的 `href` 换成你想推荐的网页链接\n4. 试着再加上一个列表，列出这位音乐家的代表作\n\n完成之后，第一章就毕业了！🎉',
+          '这是本章的最后一节课！请在编辑器中修改代码，制作一张属于你自己的"个人音乐卡片"：\n\n1. 把 `<h1>` 中的"肖邦"改成你喜欢的音乐家\n2. 把 `<img>` 的 `src` 换成你想展示的图片链接\n3. 把 `<a>` 的 `href` 换成你想推荐的网页链接\n4. 试着再加上一个列表，列出这位音乐家的代表作\n\n完成之后，第一章就毕业了！🎉\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>完成后的个人音乐卡片示例：</p><pre><code>&lt;h1&gt;贝多芬&lt;/h1&gt;\n&lt;img src=https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg alt=贝多芬肖像 width=200&gt;\n&lt;p&gt;\n  了解更多，请访问\n  &lt;a href=https://zh.wikipedia.org/wiki/贝多芬&gt;贝多芬的维基百科&lt;/a&gt;\n&lt;/p&gt;\n\n&lt;h2&gt;代表作&lt;/h2&gt;\n&lt;ul&gt;\n  &lt;li&gt;🎵 第五交响曲「命运」&lt;/li&gt;\n  &lt;li&gt;🎵 第九交响曲「合唱」&lt;/li&gt;\n  &lt;li&gt;🎵 第十四钢琴奏鸣曲「月光」&lt;/li&gt;\n  &lt;li&gt;🎵 致爱丽丝&lt;/li&gt;\n&lt;/ul&gt;</code></pre><p>回顾你学到的标签：<code>&lt;h1&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code>。组合起来就是一张完整的个人卡片！</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -420,7 +420,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "请在编辑器中：\n\n1. 点击预览区中的音频播放器，看看能否播放\n2. 给 `<audio>` 标签加上 `loop` 属性，让音乐循环播放\n3. 尝试修改音频的 `src` 地址（可以搜索一个网上可用的 MP3 链接）\n4. 挑战：在 `<audio>` 下面加一个 `<video>` 标签，找一个在线视频链接试试",
+          "请在编辑器中：\n\n1. 点击预览区中的音频播放器，看看能否播放\n2. 给 `<audio>` 标签加上 `loop` 属性，让音乐循环播放\n3. 尝试修改音频的 `src` 地址（可以搜索一个网上可用的 MP3 链接）\n4. 挑战：在 `<audio>` 下面加一个 `<video>` 标签，找一个在线视频链接试试\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>&lt;audio&gt;</code> 下方添加 <code>&lt;video&gt;</code> 标签：</p><pre><code>&lt;video controls width=400&gt;\n  &lt;source src=https://www.w3schools.com/html/mov_bbb.mp4 type=video/mp4&gt;\n  你的浏览器不支持视频播放\n&lt;/video&gt;</code></pre><p>关键点：<code>controls</code> 显示播放控件，<code>width</code> 控制播放器宽度。<code>&lt;source&gt;</code> 提供视频文件地址和类型，浏览器会选择支持的格式播放。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -469,7 +469,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '请在编辑器中：\n\n1. 在表格中添加一行新数据，写你喜欢的作曲家\n2. 在表头再加一列（比如"国家"），每行也加对应的 \`<td>\`\n3. 试试在表格下方加一行 `<tr><td colspan="3">更多作曲家敬请期待</td></tr>` 感受合并效果\n4. 挑战：创建一个新的表格，列出你的"每周练琴计划"（日期、曲目、时长）',
+          '请在编辑器中：\n\n1. 在表格中添加一行新数据，写你喜欢的作曲家\n2. 在表头再加一列（比如"国家"），每行也加对应的 \`<td>\`\n3. 试试在表格下方加一行 `<tr><td colspan="3">更多作曲家敬请期待</td></tr>` 感受合并效果\n4. 挑战：创建一个新的表格，列出你的"每周练琴计划"（日期、曲目、时长）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在第一个表格下方新建一个表格：</p><pre><code>&lt;h2&gt;每周练琴计划&lt;/h2&gt;\n\n&lt;table&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;日期&lt;/th&gt;\n      &lt;th&gt;曲目&lt;/th&gt;\n      &lt;th&gt;时长&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周一&lt;/td&gt;\n      &lt;td&gt;巴赫 C大调前奏曲&lt;/td&gt;\n      &lt;td&gt;30 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周三&lt;/td&gt;\n      &lt;td&gt;车尔尼 练习曲&lt;/td&gt;\n      &lt;td&gt;45 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周五&lt;/td&gt;\n      &lt;td&gt;肖邦 夜曲&lt;/td&gt;\n      &lt;td&gt;60 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/table&gt;</code></pre><p>这样你就有了两张独立的表格：一张「作曲家速查表」和一张「练琴计划表」。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -567,7 +567,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 HTML 标签页，试着：\n\n1. 给"演奏水平"增加第 4 个选项"大师级"\n2. 给"擅长乐器"增加两个选项（如中提琴、长笛）\n3. 添加一个 `<input type="color">` 选择"最喜欢的音乐色彩"\n4. 挑战：再添加一个 `<fieldset>`，里面用 radio 给"练琴频率"设置 3 个选项（每天、每周、偶尔）',
+          '切换到 HTML 标签页，试着：\n\n1. 给"演奏水平"增加第 4 个选项"大师级"\n2. 给"擅长乐器"增加两个选项（如中提琴、长笛）\n3. 添加一个 `<input type="color">` 选择"最喜欢的音乐色彩"\n4. 挑战：再添加一个 `<fieldset>`，里面用 radio 给"练琴频率"设置 3 个选项（每天、每周、偶尔）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在最后一个 <code>&lt;fieldset&gt;</code> 后面添加：</p><pre><code>&lt;fieldset&gt;\n  &lt;legend&gt;练琴频率&lt;/legend&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=daily&gt;\n    📅 每天\n  &lt;/label&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=weekly&gt;\n    📆 每周\n  &lt;/label&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=occasional checked&gt;\n    🎵 偶尔\n  &lt;/label&gt;\n&lt;/fieldset&gt;</code></pre><p>注意所有 radio 的 <code>name</code> 属性必须相同（<code>name=frequency</code>），这样它们才互斥。<code>checked</code> 表示默认选中。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -598,7 +598,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "逐步构建你的主页 ✨",
         content:
-          '编辑器里已经有了一个模板。请按以下步骤完善它：\n\n**第一步：修改标题和介绍**\n- 把 `<header>` 中的标题改成"XXX的音乐主页"（XXX 是你的名字）\n- 修改 `<nav>` 中的导航项目\n\n**第二步：修改"关于我"**\n- 在"关于我"区域的 `<p>` 中写下你的音乐故事\n- 可以换一张你喜欢的音乐家图片（修改 `src`）\n\n**第三步：丰富音乐收藏**\n- 在列表中替换成你喜欢的作曲家或曲目\n- 在表格中添加你真正喜欢的音乐数据\n\n**第四步：添加你自己的内容**\n- 挑战：在 `<main>` 中新增一个 `<section>`，内容自定\n- 可以是一段推荐曲目、一个聆听列表、或任何你想展示的内容',
+          '编辑器里已经有了一个模板。请按以下步骤完善它：\n\n**第一步：修改标题和介绍**\n- 把 `<header>` 中的标题改成"XXX的音乐主页"（XXX 是你的名字）\n- 修改 `<nav>` 中的导航项目\n\n**第二步：修改"关于我"**\n- 在"关于我"区域的 `<p>` 中写下你的音乐故事\n- 可以换一张你喜欢的音乐家图片（修改 `src`）\n\n**第三步：丰富音乐收藏**\n- 在列表中替换成你喜欢的作曲家或曲目\n- 在表格中添加你真正喜欢的音乐数据\n\n**第四步：添加你自己的内容**\n- 挑战：在 `<main>` 中新增一个 `<section>`，内容自定\n- 可以是一段推荐曲目、一个聆听列表、或任何你想展示的内容\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>&lt;section class=playlist&gt;</code> 后面新增一个推荐曲目区块：</p><pre><code>&lt;section class=recommend&gt;\n  &lt;h2&gt;本月推荐曲目&lt;/h2&gt;\n  &lt;ol&gt;\n    &lt;li&gt;德彪西《月光》— 印象派的朦胧之美&lt;/li&gt;\n    &lt;li&gt;拉赫玛尼诺夫《第二钢琴协奏曲》— 浪漫与激情的交织&lt;/li&gt;\n    &lt;li&gt;皮亚佐拉《自由探戈》— 古典与爵士的碰撞&lt;/li&gt;\n  &lt;/ol&gt;\n&lt;/section&gt;</code></pre><p>然后在 CSS 中添加对应的样式：</p><pre><code>.recommend ol {\n  padding-left: 20px;\n}\n\n.recommend li {\n  margin: 8px 0;\n  color: #3D2B1F;\n  line-height: 1.6;\n}</code></pre><p>结构 = <code>&lt;section&gt;</code> + 标题 + 列表，内容自定！</p></div></details>[[/html]]',
       },
       {
         type: "hint",
@@ -835,7 +835,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，尝试：\n\n1. 把 `.card:nth-child(1)` 的左边框颜色换一个\n2. 给 `.card:hover` 增加 `box-shadow` 属性，让悬浮效果更明显\n3. 试试 `.card:last-child` 选择器，给最后一张卡片特殊的样式\n4. 挑战：添加一张新卡片（第4张），用 `.card:nth-child(4)` 给它设置不同的颜色",
+          "切换到 CSS 标签页，尝试：\n\n1. 把 `.card:nth-child(1)` 的左边框颜色换一个\n2. 给 `.card:hover` 增加 `box-shadow` 属性，让悬浮效果更明显\n3. 试试 `.card:last-child` 选择器，给最后一张卡片特殊的样式\n4. 挑战：添加一张新卡片（第4张），用 `.card:nth-child(4)` 给它设置不同的颜色\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 中三张卡片的最后添加第四张：</p><pre><code>&lt;div class=card&gt;\n  &lt;h2&gt;🎵 肖邦&lt;/h2&gt;\n  &lt;p&gt;浪漫主义的钢琴诗人&lt;/p&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 末尾添加：</p><pre><code>.card:nth-child(4) {\n  border-left: 4px solid #E67E22;\n  background: #FFF5EC;\n}</code></pre><p><code>:nth-child(4)</code> 从父容器中选中第 4 个子元素。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -884,7 +884,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，试试：\n\n1. 去掉 `#special` 的 color 样式，看第三条文字变成什么颜色\n2. 给 `.card p.highlight` 的 color 加 `!important`，看效果\n3. 在 DevTools（F12）中查看元素的 Computed 样式，观察被划掉的规则\n4. 挑战：增加一条 `body .card p` 规则（权重 12），写一个颜色的 color，观察谁能赢",
+          "切换到 CSS 标签页，试试：\n\n1. 去掉 `#special` 的 color 样式，看第三条文字变成什么颜色\n2. 给 `.card p.highlight` 的 color 加 `!important`，看效果\n3. 在 DevTools（F12）中查看元素的 Computed 样式，观察被划掉的规则\n4. 挑战：增加一条 `body .card p` 规则（权重 12），写一个颜色的 color，观察谁能赢\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 CSS 中规则 4 的下面添加：</p><pre><code>/* 挑战：权重 1+10+1=12 */\nbody .card p { color: #E67E22; }</code></pre><p>权重分析：<code>body</code>（1）+ <code>.card</code>（10）+ <code>p</code>（1）= 12。<br>对比：<code>.card p</code>（11）被覆盖，<code>.card p.highlight</code>（21）胜出，<code>#special</code>（101）胜出。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -933,7 +933,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，试试：\n\n1. 把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢\n2. 修改 `@keyframes bounce` 中的 `-10px` 改成 `-20px`，让跳动更大\n3. 调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快\n4. 挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画",
+          "切换到 CSS 标签页，试试：\n\n1. 把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢\n2. 修改 `@keyframes bounce` 中的 `-10px` 改成 `-20px`，让跳动更大\n3. 调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快\n4. 挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 CSS 末尾添加：</p><pre><code>@keyframes spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n.spin-card:hover {\n  animation: spin 0.8s ease-in-out;\n}</code></pre><p>在 HTML 的 <code>&lt;div class=animation-group&gt;</code> 中添加第四张卡片：</p><pre><code>&lt;div class=anim-card spin-card&gt;\n  &lt;span class=card-icon&gt;🌀&lt;/span&gt;\n  &lt;strong&gt;旋转动画&lt;/strong&gt;\n  &lt;p&gt;鼠标移到这里&lt;/p&gt;\n&lt;/div&gt;</code></pre><p><code>from { rotate(0deg) }</code> 到 <code>to { rotate(360deg) }</code> 完成一整圈旋转！</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -975,7 +975,7 @@ export const lessons: Lesson[] = [
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '切换到 CSS 标签页，试试：\n\n1. 把 swing 动画的 rotate 角度从 3deg 改成 8deg，看摇摆幅度变大\n2. 修改 fadeInUp 的 translateY 从 30px 改成 60px——漂移更明显\n3. 给 heartbeat 的 animation-duration 从 1.5s 改成 0.8s——心跳更快\n4. 挑战：用 @keyframes 写一个唱片旋转动画（rotate + infinite + linear）\n5. 挑战：把 fadeInUp 动画的 fill-mode 改成 forwards 和 none，分别观察结束后的状态',
+        content: '切换到 CSS 标签页，试试：\n\n1. 把 swing 动画的 rotate 角度从 3deg 改成 8deg，看摇摆幅度变大\n2. 修改 fadeInUp 的 translateY 从 30px 改成 60px——漂移更明显\n3. 给 heartbeat 的 animation-duration 从 1.5s 改成 0.8s——心跳更快\n4. 挑战：用 @keyframes 写一个唱片旋转动画（rotate + infinite + linear）\n5. 挑战：把 fadeInUp 动画的 fill-mode 改成 forwards 和 none，分别观察结束后的状态\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>挑战1：唱片旋转动画</strong></p><pre><code>@keyframes vinyl-spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n.vinyl {\n  animation: vinyl-spin 3s linear infinite;\n}</code></pre><p>三个关键值：<code>rotate</code> 旋转、<code>linear</code> 匀速、<code>infinite</code> 无限循环。</p><p><strong>挑战2：fill-mode 实验</strong></p><pre><code>/* forwards — 动画结束后停在最后一帧 */\n.fade-card {\n  animation: fadeInUp 1.5s ease-out 1 forwards;\n}\n\n/* none — 动画结束后回到初始状态（闪回）*/\n.fade-card {\n  animation: fadeInUp 1.5s ease-out 1 none;\n}</code></pre><p>把 <code>infinite</code> 改成 <code>1</code>（只播一次），分别设置 forwards 和 none 观察区别。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1018,7 +1018,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，试试：\n\n1. 修改 `:root` 中的 `--card-accent` 颜色，看两张卡片的变化\n2. 在 `:root` 中新增一个 `--radius: 8px` 变量，让两张卡片用 `var(--radius)` 替代固定的 `border-radius`\n3. 修改 `.card.dark` 中的变量值，创造你自己的暗色主题色板\n4. 挑战：创建第三张卡片，给它一个 `.warm` 类并定义一套暖橙色调变量",
+          "切换到 CSS 标签页，试试：\n\n1. 修改 `:root` 中的 `--card-accent` 颜色，看两张卡片的变化\n2. 在 `:root` 中新增一个 `--radius: 8px` 变量，让两张卡片用 `var(--radius)` 替代固定的 `border-radius`\n3. 修改 `.card.dark` 中的变量值，创造你自己的暗色主题色板\n4. 挑战：创建第三张卡片，给它一个 `.warm` 类并定义一套暖橙色调变量\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 第二张卡片（.dark）后面添加第三张：</p><pre><code>&lt;div class=&quot;card warm&quot;&gt;\n  &lt;h2&gt;暖阳主题&lt;/h2&gt;\n  &lt;p&gt;橘色底色，棕红强调色&lt;/p&gt;\n  &lt;span class=&quot;tag&quot;&gt;暖阳&lt;/span&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 的 <code>.card.dark</code> 后面添加暖色主题：</p><pre><code>/* 暖橙主题 */\n.card.warm {\n  --card-bg: #FFF3E0;\n  --card-accent: #E65100;\n  --card-text: #4E342E;\n  --card-sub: #8D6E63;\n}</code></pre><p>在 <code>.card.warm</code> 中重新定义 CSS 变量，这些值只对当前元素及子元素生效——这就是 CSS 变量的作用域。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1212,7 +1212,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，试试：\n\n1. 把 `grid-template-columns` 从 `repeat(3, 1fr)` 改成 `repeat(2, 1fr)`，观察变成 2 列\n2. 把 `gap` 从 `12px` 改成 `24px`，看卡片间距变大\n3. 修改 `.card:last-child` 的 `grid-column` 改成 `span 3`（2列时跨3无效）\n4. 挑战：用 `grid-template-columns: 1fr 2fr` 创建左窄右宽的两列布局",
+          "切换到 CSS 标签页，试试：\n\n1. 把 `grid-template-columns` 从 `repeat(3, 1fr)` 改成 `repeat(2, 1fr)`，观察变成 2 列\n2. 把 `gap` 从 `12px` 改成 `24px`，看卡片间距变大\n3. 修改 `.card:last-child` 的 `grid-column` 改成 `span 3`（2列时跨3无效）\n4. 挑战：用 `grid-template-columns: 1fr 2fr` 创建左窄右宽的两列布局\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>.grid</code> 的 <code>grid-template-columns</code> 改为 1:2 比例：</p><pre><code>.grid {\n  display: grid;\n  grid-template-columns: 1fr 2fr;\n  gap: 12px;\n}</code></pre><p><code>1fr 2fr</code>：第一列占 1 份宽度，第二列占 2 份宽度。<code>fr</code>（fraction）是按比例分配剩余空间的单位。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1255,7 +1255,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 CSS 标签页，试试：\n\n1. 调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）\n2. 修改 `640px` 断点为 `500px`，看更早进入两列\n3. 在 `1024px` 断点里给 `.card` 添加 `font-size: 18px`，桌面端文字更大\n4. 挑战：在手机断点（默认）隐藏 `.desktop-only` 元素，在桌面断点显示它\n  提示：`display: none` 隐藏，`@media` 中 `display: block` 显示",
+          "切换到 CSS 标签页，试试：\n\n1. 调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）\n2. 修改 `640px` 断点为 `500px`，看更早进入两列\n3. 在 `1024px` 断点里给 `.card` 添加 `font-size: 18px`，桌面端文字更大\n4. 挑战：在手机断点（默认）隐藏 `.desktop-only` 元素，在桌面断点显示它\n  提示：`display: none` 隐藏，`@media` 中 `display: block` 显示\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=grid&gt;</code> 前面添加：</p><pre><code>&lt;p class=desktop-only&gt;🖥 你在桌面设备上看到这条消息！&lt;/p&gt;</code></pre><p>在 CSS 中添加：</p><pre><code>/* 手机端默认隐藏 */\n.desktop-only {\n  display: none;\n}\n\n/* 桌面断点显示 */\n@media (min-width: 1024px) {\n  .desktop-only {\n    display: block;\n    text-align: center;\n    color: #8B2E2E;\n    font-weight: 600;\n    margin-bottom: 16px;\n  }\n}</code></pre><p><code>display: none</code> 让元素在手机端消失，<code>@media (min-width: 1024px)</code> 中 <code>display: block</code> 让它在桌面端重新出现。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1286,7 +1286,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "逐步构建 ✨",
         content:
-          '编辑器中已经有一个半成品页面。请完成以下任务：\n\n**第一步：完善导航栏**\n- 用 Flexbox 让导航链接水平排列\n- 给当前页链接加 `.active` 样式\n\n**第二步：完善节目单网格**\n- 用 Grid 把曲目列表排成两列（桌面端）\n- 给每个曲目的 `.time` 设置左对齐、`.piece` 设置右对齐\n\n**第三步：演奏者卡片**\n- 用 Flexbox 让三张卡片水平排列并自动换行\n- 给卡片加 hover 上浮效果\n\n**第四步：底部固定按钮**\n- 用 `position: fixed` 让"购票"按钮始终在右下角\n\n**第五步：响应式**\n- 在 `@media (max-width: 640px)` 中，把节目单改为单列\n- 把导航栏从横排改为竖排',
+          '编辑器中已经有一个半成品页面。请完成以下任务：\n\n**第一步：完善导航栏**\n- 用 Flexbox 让导航链接水平排列\n- 给当前页链接加 `.active` 样式\n\n**第二步：完善节目单网格**\n- 用 Grid 把曲目列表排成两列（桌面端）\n- 给每个曲目的 `.time` 设置左对齐、`.piece` 设置右对齐\n\n**第三步：演奏者卡片**\n- 用 Flexbox 让三张卡片水平排列并自动换行\n- 给卡片加 hover 上浮效果\n\n**第四步：底部固定按钮**\n- 用 `position: fixed` 让"购票"按钮始终在右下角\n\n**第五步：响应式**\n- 在 `@media (max-width: 640px)` 中，把节目单改为单列\n- 把导航栏从横排改为竖排\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>这个页面的大部分样式已经就绪，你只需要完成以下部分：</p><p><strong>第一步：导航栏 Flexbox</strong> — <code>.navbar</code> 已有 <code>display: flex</code> 和居中，只需确保链接间有间距：</p><pre><code>.navbar a { padding: 12px 24px; }</code></pre><p><strong>第二步：节目单 Grid</strong> — <code>.program-grid</code> 已设置 <code>grid-template-columns: 80px 1fr</code>：</p><pre><code>.program-grid .time { text-align: left; }\n.program-grid .piece { text-align: left; }</code></pre><p><strong>第三步：演奏者卡片</strong> — <code>.performer-cards</code> 已有 flex 布局，hover 效果也已写好。</p><p><strong>第四步：固定按钮</strong> — <code>.buy-btn</code> 已有 <code>position: fixed; bottom: 24px; right: 24px</code>。</p><p><strong>第五步：响应式</strong> — 关键部分已写好在 <code>@media (max-width: 640px)</code> 中，看看 <code>grid-template-columns: 1fr</code> 和 <code>flex-direction: column</code> 如何改变布局。关键是理解每个布局属性的作用：Flexbox 做一维排列，Grid 做二维布局，fixed 做固定定位。</p></div></details>[[/html]]',
       },
       {
         type: "hint",
@@ -1449,7 +1449,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n\n1. 修改 `birthYear` 的值，看周年数自动变化\n2. 用 `typeof` 检查 `isBaroque` 的类型\n3. 试试用 `%` 判断 `birthYear` 是否能被 4 整除（音乐节拍经常是 4 拍）\n4. 挑战：计算"如果一个人出生于 birthYear + 20 年，他今年多大"',
+          '切换到 JS 标签页，试试：\n\n1. 修改 `birthYear` 的值，看周年数自动变化\n2. 用 `typeof` 检查 `isBaroque` 的类型\n3. 试试用 `%` 判断 `birthYear` 是否能被 4 整除（音乐节拍经常是 4 拍）\n4. 挑战：计算"如果一个人出生于 birthYear + 20 年，他今年多大"\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 中添加计算逻辑：</p><pre><code>let newBirthYear = birthYear + 20;\nlet newAge = currentYear - newBirthYear;\n// HTML 中添加：&lt;p&gt;&lt;strong&gt;晚生20年则今年：&lt;/strong&gt;&lt;span id=newAge&gt;&lt;/span&gt;&lt;/p&gt;\ndocument.querySelector(&quot;#newAge&quot;).textContent = newAge + &quot; 岁（出生于 &quot; + newBirthYear + &quot; 年）&quot;;</code></pre><p>如果 <code>birthYear = 1685</code>，则 <code>newAge = 2026 - 1705 = 321</code> 岁。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1535,7 +1535,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 JS 标签页，试试：\n\n1. 在预览区点击按钮，看计数器变化\n2. 修改 `display.textContent` 的文字，换一种表达方式\n3. 试着把 `count = count + 1` 改成 `count = count + 5`，每次加 5\n4. 挑战：在 HTML 面板中复制一个按钮（`#resetBtn`），在 JS 中给它加一个点击事件，点击后把 `count` 归零",
+          "切换到 JS 标签页，试试：\n\n1. 在预览区点击按钮，看计数器变化\n2. 修改 `display.textContent` 的文字，换一种表达方式\n3. 试着把 `count = count + 1` 改成 `count = count + 5`，每次加 5\n4. 挑战：在 HTML 面板中复制一个按钮（`#resetBtn`），在 JS 中给它加一个点击事件，点击后把 `count` 归零\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=counter-box&gt;</code> 中添加：</p><pre><code>&lt;button id=resetBtn&gt;🔄 归零&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let resetBtn = document.querySelector(&quot;#resetBtn&quot;);\nresetBtn.addEventListener(&quot;click&quot;, function() {\n  count = 0;\n  display.textContent = &quot;计数器已归零&quot;;\n});</code></pre><p>三步走：HTML 加按钮 → querySelector 获取 → addEventListener 绑定事件。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1584,7 +1584,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 JS 标签页，试试：\n\n1. 在输入框中打字，观察下方实时显示\n2. 把鼠标移到卡片上再移开，看边框颜色变化\n3. 按回车键，看提示信息\n4. 挑战：给输入框增加 `keydown` 事件，当按 Escape 键时清空输入框内容",
+          "切换到 JS 标签页，试试：\n\n1. 在输入框中打字，观察下方实时显示\n2. 把鼠标移到卡片上再移开，看边框颜色变化\n3. 按回车键，看提示信息\n4. 挑战：给输入框增加 `keydown` 事件，当按 Escape 键时清空输入框内容\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 末尾添加：</p><pre><code>inputEl.addEventListener(&quot;keydown&quot;, function(event) {\n  if (event.key === &quot;Escape&quot;) {\n    inputEl.value = &quot;&quot;;\n    liveText.textContent = &quot;---&quot;;\n    keyHint.textContent = &quot;⌨️ 输入框已清空（你按了 Escape）&quot;;\n    keyHint.style.color = &quot;#8B2E2E&quot;;\n  }\n});</code></pre><p><code>event.key === &quot;Escape&quot;</code> 判断是否按了 Esc 键。<code>inputEl.value = &quot;&quot;</code> 清空输入框。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1627,7 +1627,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n\n1. 在预览区输入"肖邦"点击提交，看正确反馈\n2. 输入别的名字点击提交，看 else 分支的反馈\n3. 在 if 中增加一个条件：用 `&&` 同时判断两个输入框\n4. 挑战：增加一个 `else if` 分支，判断是否为空（`=== ""`）',
+          '切换到 JS 标签页，试试：\n\n1. 在预览区输入"肖邦"点击提交，看正确反馈\n2. 输入别的名字点击提交，看 else 分支的反馈\n3. 在 if 中增加一个条件：用 `&&` 同时判断两个输入框\n4. 挑战：增加一个 `else if` 分支，判断是否为空（`=== ""`）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 已有的 <code>else if</code> 后面添加一个新分支：</p><pre><code>// 挑战：判断是否输入了李斯特\n} else if (answer === &quot;李斯特&quot;) {\n  result.style.color = &quot;#8B2E2E&quot;;\n  result.textContent = &quot;李斯特也是一位伟大的钢琴家，但标准答案是肖邦。&quot;;\n}</code></pre><p>完整的 if-else if-else 链：肖邦 → 空值 → 李斯特 → 其他。每个 <code>else if</code> 处理一种情况。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1670,7 +1670,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n\n1. 在预览区输入框输入"德彪西"点添加，看列表变化\n2. 修改 `.join()` 的分隔符，从 `" · "` 改成 `" | "` 或 `", "`\n3. 修改数组初始值，换成你自己喜欢的作曲家\n4. 挑战：添加一个"删除最后一位"按钮（用 `.pop()` 方法）',
+          '切换到 JS 标签页，试试：\n\n1. 在预览区输入框输入"德彪西"点添加，看列表变化\n2. 修改 `.join()` 的分隔符，从 `" · "` 改成 `" | "` 或 `", "`\n3. 修改数组初始值，换成你自己喜欢的作曲家\n4. 挑战：添加一个"删除最后一位"按钮（用 `.pop()` 方法）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=add-row&gt;</code> 中添加：</p><pre><code>&lt;button id=removeBtn&gt;➖ 删除最后&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let removeBtn = document.querySelector(&quot;#removeBtn&quot;);\nremoveBtn.addEventListener(&quot;click&quot;, function() {\n  if (composers.length &gt; 0) {\n    composers.pop();  // .pop() 删除并返回最后一个\n    showList();\n  }\n});</code></pre><p><code>.pop()</code> 删除数组最后一个元素。<code>if (composers.length &gt; 0)</code> 防止空数组时报错。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1713,7 +1713,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "切换到 JS 标签页，试试：\n\n1. 在数组中再添加一个作曲家，看循环自动生成新卡片\n2. 把 `forEach` 改成 `for` 循环，实现同样的效果\n3. 修改卡片模板，增加曲目信息（把数组改成二维数组）\n4. 挑战：在 `forEach` 内用 `if` 判断 `name.length > 2`，只显示名字长度大于 2 的项",
+          "切换到 JS 标签页，试试：\n\n1. 在数组中再添加一个作曲家，看循环自动生成新卡片\n2. 把 `forEach` 改成 `for` 循环，实现同样的效果\n3. 修改卡片模板，增加曲目信息（把数组改成二维数组）\n4. 挑战：在 `forEach` 内用 `if` 判断 `name.length > 2`，只显示名字长度大于 2 的项\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>forEach</code> 循环中添加条件判断：</p><pre><code>composers.forEach(function(name, index) {\n  if (name.length &gt; 2) {\n    html += &lt;div class=card&gt;...&lt;/div&gt;;\n  }\n});</code></pre><p><code>name.length</code> 返回名字的字符数。如果数组中有短名如「李」（长度 1），<code>if</code> 会跳过它。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -1762,7 +1762,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n\n1. 修改筛选条件——只显示名字长度 ≥ 6 的作曲家\n2. 用 `.map()` 给每个名字加上"作曲家："前缀\n3. 用 `链式调用` 一步完成筛选+转换（不用中间变量 filtered）\n4. 挑战：在输入框输入字母，只显示名字包含该字母的作曲家（实时筛选）',
+          '切换到 JS 标签页，试试：\n\n1. 修改筛选条件——只显示名字长度 ≥ 6 的作曲家\n2. 用 `.map()` 给每个名字加上"作曲家："前缀\n3. 用 `链式调用` 一步完成筛选+转换（不用中间变量 filtered）\n4. 挑战：在输入框输入字母，只显示名字包含该字母的作曲家（实时筛选）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>这个挑战的答案已经在初始代码中实现了！核心代码：</p><pre><code>document.querySelector("#filterInput").addEventListener("input", function() {\n  updateList(this.value);\n});\n\nfunction updateList(letter) {\n  let result = composers\n    .filter(function(name) {\n      return name.toLowerCase().includes(letter.toLowerCase());\n    })\n    .map(function(name) {\n      return name.toUpperCase();\n    });\n  outputEl.textContent = result.length &gt; 0 ? result.join(" | ") : "（无匹配）";\n}</code></pre><p>三步链式调用：<code>.filter()</code> 筛选 → <code>.map()</code> 转换 → <code>.join()</code> 拼接。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1805,7 +1805,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 和预览区，试试：\n\n1. 点击"高亮全部"看效果\n2. 点击"只看弦乐"看过滤效果\n3. 修改 `#showAllBtn` 的逻辑，把 `card.classList.remove("hidden")` 改成移除高亮\n4. 挑战：新增一个按钮"高亮管乐"，只高亮 class 包含 `winds` 的卡片',
+          '切换到 JS 和预览区，试试：\n\n1. 点击"高亮全部"看效果\n2. 点击"只看弦乐"看过滤效果\n3. 修改 `#showAllBtn` 的逻辑，把 `card.classList.remove("hidden")` 改成移除高亮\n4. 挑战：新增一个按钮"高亮管乐"，只高亮 class 包含 `winds` 的卡片\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=controls&gt;</code> 中添加按钮：</p><pre><code>&lt;button id=highlightWindsBtn&gt;高亮管乐&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let highlightWindsBtn = document.querySelector("#highlightWindsBtn");\nhighlightWindsBtn.addEventListener("click", function() {\n  cards.forEach(function(card) {\n    if (card.classList.contains("winds")) {\n      card.classList.add("highlighted");\n    }\n  });\n});</code></pre><p><code>card.classList.contains("winds")</code> 检查卡片是否有 winds 类。只给管乐卡片添加高亮。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1848,7 +1848,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n\n1. 在对象数组中新增一个作曲家对象\n2. 给每个对象增加 `country` 属性，在卡片模板中显示\n3. 修改某个作曲家的 `period`，看页面自动更新\n4. 挑战：用 `if` 判断，只显示 `period === "浪漫主义"` 的作品家（配合 `.filter()` 或条件判断）',
+          '切换到 JS 标签页，试试：\n\n1. 在对象数组中新增一个作曲家对象\n2. 给每个对象增加 `country` 属性，在卡片模板中显示\n3. 修改某个作曲家的 `period`，看页面自动更新\n4. 挑战：用 `if` 判断，只显示 `period === "浪漫主义"` 的作品家（配合 `.filter()` 或条件判断）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>方法一：在 <code>forEach</code> 中用 <code>if</code> 判断：</p><pre><code>composers.forEach(function(c) {\n  if (c.period === "浪漫主义") {\n    html += `&lt;div class=card&gt;...&lt;/div&gt;`;\n  }\n});</code></pre><p>方法二：先 <code>.filter()</code> 再 <code>.forEach()</code>：</p><pre><code>composers\n  .filter(function(c) { return c.period === "浪漫主义"; })\n  .forEach(function(c) {\n    html += `&lt;div class=card&gt;...&lt;/div&gt;`;\n  });</code></pre><p>通过 <code>c.period === "浪漫主义"</code> 判断时期属性。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1891,7 +1891,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页和预览区，试试：\n\n1. 在输入框输入内容，点"添加"，看列表增长\n2. 连续点"删除最后"，看列表缩短\n3. 修改 `addItem` 函数，让每个项带上序号\n4. 挑战：给每个项加一个删除按钮（在 `createElement` 时内置一个独立删除功能）',
+          '切换到 JS 标签页和预览区，试试：\n\n1. 在输入框输入内容，点"添加"，看列表增长\n2. 连续点"删除最后"，看列表缩短\n3. 修改 `addItem` 函数，让每个项带上序号\n4. 挑战：给每个项加一个删除按钮（在 `createElement` 时内置一个独立删除功能）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改 JS 的添加逻辑，在每个 <code>plan-item</code> 内嵌入删除按钮：</p><pre><code>addBtn.addEventListener("click", function() {\n  let text = input.value.trim();\n  if (text === "") return;\n  let item = document.createElement("div");\n  item.className = "plan-item";\n  item.style.cssText = "display:flex;justify-content:space-between;align-items:center";\n  let textSpan = document.createElement("span");\n  textSpan.textContent = text;\n  let delBtn = document.createElement("button");\n  delBtn.textContent = "✕";\n  delBtn.style.cssText = "background:none;border:none;color:#C94545;cursor:pointer;font-size:16px";\n  delBtn.addEventListener("click", function() {\n    item.remove();  // 只删除自己所在的 plan-item\n  });\n  item.appendChild(textSpan);\n  item.appendChild(delBtn);\n  list.appendChild(item);\n  input.value = "";\n});</code></pre><p>核心技巧：在 createElement 时就把删除按钮和事件一起创建好。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1934,7 +1934,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到预览区和 JS 标签页，试试：\n\n1. 点击"开始节拍"看计数，点"暂停"看停止\n2. 把 `setInterval` 的时间从 `1000` 改成 `500`，变成更快的 120bpm\n3. 增加一个 `setTimeout` 实现的"3 秒后自动停止"功能\n4. 挑战：让节拍每 4 拍换一个颜色（提示：用 `count % 4 === 0` 判断）',
+          '切换到预览区和 JS 标签页，试试：\n\n1. 点击"开始节拍"看计数，点"暂停"看停止\n2. 把 `setInterval` 的时间从 `1000` 改成 `500`，变成更快的 120bpm\n3. 增加一个 `setTimeout` 实现的"3 秒后自动停止"功能\n4. 挑战：让节拍每 4 拍换一个颜色（提示：用 `count % 4 === 0` 判断）\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改 <code>setInterval</code> 中的回调函数：</p><pre><code>let colors = ["#8B2E2E", "#C9A96E", "#5B8C5A", "#E67E22"];\nlet colorIndex = 0;\ntimer = setInterval(function() {\n  count++;\n  if (count % 4 === 1) {\n    colorIndex = (colorIndex + 1) % colors.length;\n  }\n  display.style.color = colors[colorIndex];\n  display.textContent = `节拍 ${count}`;\n}, 1000);</code></pre><p>原理：<code>count % 4</code> 返回 0,1,2,3,0,1,2,3...，<code>=== 1</code> 时换颜色，<code>% colors.length</code> 确保索引不越界。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -1965,7 +1965,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "逐步构建 ✨",
         content:
-          '编辑器里已经有了一个模板，包含作曲家数组和基础结构。请按以下步骤完善：\n\n**第一步：理解现有代码**\n- 查看 JS 标签页，理解 `composers` 对象数组的结构\n- 查看 `showGallery()` 函数如何用 `forEach` 循环渲染卡片\n\n**第二步：添加筛选功能**\n- "全部"按钮应显示所有作曲家\n- "浪漫主义"按钮只显示 `period === "浪漫主义"` 的\n- "巴洛克"按钮略...（新增一个按钮和逻辑）\n\n**第三步：完善"添加"功能**\n- 让"添加"按钮真正把新对象 push 到数组中\n- 调用 `showGallery()` 刷新显示\n\n**第四步：增加你自己的创意**\n- 给卡片加 hover 高亮效果\n- 加一个自动播放按钮（用 setInterval 定时切换高亮）\n- 任何你想加的功能！',
+          '编辑器里已经有了一个模板，包含作曲家数组和基础结构。请按以下步骤完善：\n\n**第一步：理解现有代码**\n- 查看 JS 标签页，理解 `composers` 对象数组的结构\n- 查看 `showGallery()` 函数如何用 `forEach` 循环渲染卡片\n\n**第二步：添加筛选功能**\n- "全部"按钮应显示所有作曲家\n- "浪漫主义"按钮只显示 `period === "浪漫主义"` 的\n- "巴洛克"按钮略...（新增一个按钮和逻辑）\n\n**第三步：完善"添加"功能**\n- 让"添加"按钮真正把新对象 push 到数组中\n- 调用 `showGallery()` 刷新显示\n\n**第四步：增加你自己的创意**\n- 给卡片加 hover 高亮效果\n- 加一个自动播放按钮（用 setInterval 定时切换高亮）\n- 任何你想加的功能！\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>第一步：理解代码</strong> — <code>showGallery(list)</code> 接收数组，用 forEach 循环拼接 HTML，设置 <code>gallery.innerHTML</code>。</p><p><strong>第二步：添加巴洛克筛选</strong></p><pre><code>// HTML 中添加：\n&lt;button id="showBaroqueBtn"&gt;巴洛克&lt;/button&gt;\n\n// JS 中添加：\ndocument.querySelector("#showBaroqueBtn").addEventListener("click", function() {\n  setActive(this);\n  let filtered = composers.filter(function(c) {\n    return c.period === "巴洛克";\n  });\n  showGallery(filtered);\n});</code></pre><p><strong>第三步：完善添加功能</strong> — 让添加按钮恢复所有按钮的激活状态并显示全部：</p><pre><code>document.querySelector("#addBtn").addEventListener("click", function() {\n  if (added &lt; pool.length) {\n    composers.push(pool[added]);\n    added++;\n    // 恢复"全部"按钮激活\n    setActive(document.querySelector("#showAllBtn"));\n    showGallery(composers);\n  }\n});</code></pre><p><strong>第四步：创意扩展</strong> — 自动轮播：</p><pre><code>let autoTimer = null;\nlet highlightIndex = 0;\ndocument.querySelector("#autoBtn").addEventListener("click", function() {\n  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; return; }\n  autoTimer = setInterval(function() {\n    let cards = document.querySelectorAll(".card");\n    cards.forEach(function(c) { c.style.borderColor = "#D4C5A9"; });\n    if (cards[highlightIndex]) cards[highlightIndex].style.borderColor = "#8B2E2E";\n    highlightIndex = (highlightIndex + 1) % cards.length;\n  }, 1000);\n});</code></pre></div></details>[[/html]]',
       },
       {
         type: "hint",
@@ -2019,7 +2019,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '编辑器里有一个空的起始模板。请按照三段工作流，从零构建一个 **"作曲家名言"卡片**：\n\n**第一步（HTML）：** 写一个 `<div>`，里面包含一个标题 `<h2>`、一句名言 `<p>`、一个 `<button>`\n\n**第二步（CSS）：** 给卡片加背景色、圆角、内边距；给按钮加样式让它好看\n\n**第三步（JS）：** 参考上方"两个常用的数学工具"，准备一个名言数组，让按钮点击后随机换一句名言\n\n记住：一步一步来！先确保 HTML 在预览中能看到，再写 CSS，最后写 JS。',
+          '编辑器里有一个空的起始模板。请按照三段工作流，从零构建一个 **"作曲家名言"卡片**：\n\n**第一步（HTML）：** 写一个 `<div>`，里面包含一个标题 `<h2>`、一句名言 `<p>`、一个 `<button>`\n\n**第二步（CSS）：** 给卡片加背景色、圆角、内边距；给按钮加样式让它好看\n\n**第三步（JS）：** 参考上方"两个常用的数学工具"，准备一个名言数组，让按钮点击后随机换一句名言\n\n记住：一步一步来！先确保 HTML 在预览中能看到，再写 CSS，最后写 JS。\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>完整代码：</p><pre><code>&lt;!-- HTML --&gt;\n&lt;div class=&quot;quote-card&quot;&gt;\n  &lt;h2&gt;作曲家名言&lt;/h2&gt;\n  &lt;p id=&quot;quote&quot;&gt;音乐是心灵的窗户。&lt;/p&gt;\n  &lt;button id=&quot;changeBtn&quot;&gt;换一句&lt;/button&gt;\n&lt;/div&gt;\n\n/* CSS */\n.quote-card {\n  background: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n  padding: 32px;\n  text-align: center;\n  max-width: 400px;\n  margin: 40px auto;\n}\n.quote-card h2 { color: #8B2E2E; margin-bottom: 16px; }\n.quote-card p { color: #3D2B1F; font-size: 18px; line-height: 1.8; margin-bottom: 20px; min-height: 40px; }\n#changeBtn {\n  background: #8B2E2E; color: #fff; border: none;\n  padding: 10px 28px; border-radius: 8px; font-size: 15px; cursor: pointer;\n}\n#changeBtn:hover { background: #C94545; }\n\n// JS\nlet quotes = [\n  &quot;音乐是心灵的窗户。— 贝多芬&quot;,\n  &quot;简洁是智慧的灵魂。— 巴赫&quot;,\n  &quot;音乐应当使人类的精神爆发出火花。— 贝多芬&quot;,\n  &quot;没有音乐，生命将是一个错误。— 尼采&quot;\n];\nlet quoteEl = document.querySelector(&quot;#quote&quot;);\nlet btn = document.querySelector(&quot;#changeBtn&quot;);\nbtn.addEventListener(&quot;click&quot;, function() {\n  let i = Math.floor(Math.random() * quotes.length);\n  quoteEl.textContent = quotes[i];\n});</code></pre><p>三步工作流：HTML 定义结构 → CSS 美化外观 → JS 添加交互。每一步完成后都在预览中确认！</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -2057,7 +2057,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "编辑器里有一份带规划注释的模板，但代码还没写完。请：\n\n**第一步：** 阅读三组注释，理解页面结构\n\n**第二步：** 在每组注释下方，填入对应的 HTML 标签和 CSS 样式\n\n**第三步：** 在 JS 中也先用注释规划逻辑，再写代码——让顶部大标题点击后变成随机口号\n\n**第四步（挑战）：** 尝试给卡片区也添加注释规划，然后补充内容",
+          "编辑器里有一份带规划注释的模板，但代码还没写完。请：\n\n**第一步：** 阅读三组注释，理解页面结构\n\n**第二步：** 在每组注释下方，填入对应的 HTML 标签和 CSS 样式\n\n**第三步：** 在 JS 中也先用注释规划逻辑，再写代码——让顶部大标题点击后变成随机口号\n\n**第四步（挑战）：** 尝试给卡片区也添加注释规划，然后补充内容\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的注释区补充内容：</p><pre><code>&lt;!-- ===== 2. 中间卡片列表区 ===== --&gt;\n&lt;!-- 规划：3张卡片，每张包含曲名、作曲家、时期 --&gt;\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 月光&lt;/h3&gt;\n  &lt;p&gt;作曲家：德彪西&lt;/p&gt;\n  &lt;span class=tag&gt;印象派&lt;/span&gt;\n&lt;/div&gt;\n\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 天鹅湖&lt;/h3&gt;\n  &lt;p&gt;作曲家：柴可夫斯基&lt;/p&gt;\n  &lt;span class=tag&gt;浪漫主义&lt;/span&gt;\n&lt;/div&gt;\n\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 四季·春&lt;/h3&gt;\n  &lt;p&gt;作曲家：维瓦尔第&lt;/p&gt;\n  &lt;span class=tag&gt;巴洛克&lt;/span&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 中补充样式：</p><pre><code>.card {\n  background: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 16px 20px;\n  margin-bottom: 10px;\n}\n.tag {\n  display: inline-block;\n  background: #8B2E2E;\n  color: #fff;\n  padding: 2px 8px;\n  border-radius: 4px;\n  font-size: 11px;\n}</code></pre><p>先写注释规划结构 → 再填具体代码，这个工作流让思路更清晰！</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -2188,7 +2188,7 @@ export const lessons: Lesson[] = [
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在预览区的输入框中输入数字，触发 guess() 函数：\n\n1. 打开 F12 → Sources 面板，在 guess 函数的第一行设置断点\n2. 输入一个数字，观察程序暂停时右侧 Scope 面板中的变量值\n3. 使用 Step Over（F10）逐行执行，观察 score 和 attempts 的变化\n4. 在 num === target 的判断行设置条件断点（num > 80 && num < 90），只在特定范围暂停\n5. 挑战：在 Watch 面板添加表达式 target - num，实时追踪差值',
+        content: '请在预览区的输入框中输入数字，触发 guess() 函数：\n\n1. 打开 F12 → Sources 面板，在 guess 函数的第一行设置断点\n2. 输入一个数字，观察程序暂停时右侧 Scope 面板中的变量值\n3. 使用 Step Over（F10）逐行执行，观察 score 和 attempts 的变化\n4. 在 num === target 的判断行设置条件断点（num > 80 && num < 90），只在特定范围暂停\n5. 挑战：在 Watch 面板添加表达式 target - num，实时追踪差值\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>操作步骤：</p><p><strong>1.</strong> 在 <code>guess</code> 函数的 <code>if (num &gt; target)</code> 行设置断点</p><p><strong>2.</strong> 在输入框输入一个数字，点击按钮触发 <code>guess()</code>，程序在断点处暂停</p><p><strong>3.</strong> 在右侧 <strong>Watch</strong> 面板中点击 + 添加表达式：<code>target - num</code></p><p><strong>4.</strong> 观察：&gt;0 猜小了，&lt;0 猜大了，=0 答对了</p><p><strong>5.</strong> 还可添加：<code>Math.abs(target - num)</code>（差值绝对值）、<code>score</code>（剩余分数）、<code>attempts</code>（尝试次数）</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -2270,7 +2270,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '编辑器里有一个"音乐会节目单"页面，但所有代码都塞在 `setupPage()` 这一个函数里，足足 40 多行！\n\n**你的任务：** 把 `setupPage()` 拆分成几个小函数：\n\n1. **`renderProgram(list)`** — 负责渲染节目单（接收数组参数，方便筛选后重新渲染）\n2. **`bindFilterButtons()`** — 负责给筛选按钮绑定事件\n3. **`updateCount(count)`** — 负责更新底部统计数字\n4. **`initPage()`** — 只负责调用上面三个函数\n\n拆分后，当你点击筛选按钮时，可以直接调用 `renderProgram(filtered)` 来刷新显示——代码逻辑清晰了 10 倍！',
+          '编辑器里有一个"音乐会节目单"页面，但所有代码都塞在 `setupPage()` 这一个函数里，足足 40 多行！\n\n**你的任务：** 把 `setupPage()` 拆分成几个小函数：\n\n1. **`renderProgram(list)`** — 负责渲染节目单（接收数组参数，方便筛选后重新渲染）\n2. **`bindFilterButtons()`** — 负责给筛选按钮绑定事件\n3. **`updateCount(count)`** — 负责更新底部统计数字\n4. **`initPage()`** — 只负责调用上面三个函数\n\n拆分后，当你点击筛选按钮时，可以直接调用 `renderProgram(filtered)` 来刷新显示——代码逻辑清晰了 10 倍！\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>setupPage()</code> 替换为以下 4 个函数：</p><pre><code>// 1. 渲染节目单（接收数组参数）\nfunction renderProgram(list) {\n  let html = "";\n  for (let i = 0; i &lt; list.length; i++) {\n    let p = list[i];\n    html += \'&lt;div class="card"&gt;&lt;h3&gt;\' + p.name + \'&lt;/h3&gt;&lt;span class="period"&gt;\' + p.composer + \' · \' + p.period + \'&lt;/span&gt;&lt;/div&gt;\';\n  }\n  listEl.innerHTML = html;\n}\n\n// 2. 更新底部统计\nfunction updateCount(n) {\n  countEl.textContent = "共 " + n + " 首曲目";\n}\n\n// 3. 绑定筛选按钮事件\nfunction bindFilterButtons() {\n  function setActive(btn) {\n    document.querySelectorAll(".toolbar button").forEach(function(b) {\n      b.classList.remove("active");\n    });\n    btn.classList.add("active");\n  }\n\n  document.querySelector("#allBtn").addEventListener("click", function() {\n    setActive(this);\n    renderProgram(pieces);\n    updateCount(pieces.length);\n  });\n\n  document.querySelector("#baroqueBtn").addEventListener("click", function() {\n    setActive(this);\n    let filtered = pieces.filter(function(p) { return p.period === "巴洛克"; });\n    renderProgram(filtered);\n    updateCount(filtered.length);\n  });\n\n  document.querySelector("#classicalBtn").addEventListener("click", function() {\n    setActive(this);\n    let filtered = pieces.filter(function(p) { return p.period === "古典主义"; });\n    renderProgram(filtered);\n    updateCount(filtered.length);\n  });\n}\n\n// 4. 初始化页面\nfunction initPage() {\n  renderProgram(pieces);\n  bindFilterButtons();\n  updateCount(pieces.length);\n}\n\n// 启动！\ninitPage();</code></pre><p>核心收益：筛选时直接调用 <code>renderProgram(filtered)</code>，不再需要复制粘贴渲染代码。每个函数只做一件事，职责清晰。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -2308,7 +2308,7 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          "编辑器里有一个简单的收藏列表。目前它用 innerHTML 渲染卡片。\n\n**你的任务：改写渲染逻辑**\n\n1. 在 JS 中找到使用 `innerHTML` 的地方\n2. 把它改成用 `createElement` + `appendChild` 逐个创建卡片\n3. 每张卡片应该包含：一个 `<div>` 容器、一个 `<h3>` 标题、一个 `<span>` 标签\n4. 确认功能不变——列表应该正常显示\n\n提示：先用循环创建所有卡片，再一次性 appendChild 到容器中。",
+          "编辑器里有一个简单的收藏列表。目前它用 innerHTML 渲染卡片。\n\n**你的任务：改写渲染逻辑**\n\n1. 在 JS 中找到使用 `innerHTML` 的地方\n2. 把它改成用 `createElement` + `appendChild` 逐个创建卡片\n3. 每张卡片应该包含：一个 `<div>` 容器、一个 `<h3>` 标题、一个 `<span>` 标签\n4. 确认功能不变——列表应该正常显示\n\n提示：先用循环创建所有卡片，再一次性 appendChild 到容器中。\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>render()</code> 中的 <code>innerHTML</code> 替换为 <code>createElement</code>：</p><pre><code>function render() {\n  // 先清空容器\n  listEl.innerHTML = \"\";\n\n  for (let i = 0; i &lt; pieces.length; i++) {\n    // 创建卡片容器\n    let card = document.createElement(\"div\");\n    card.className = \"card\";\n\n    // 创建标题\n    let title = document.createElement(\"h3\");\n    title.textContent = pieces[i].name;\n\n    // 创建标签\n    let tag = document.createElement(\"span\");\n    tag.className = \"tag\";\n    tag.textContent = pieces[i].period;\n\n    // 组装：标题和标签放入卡片\n    card.appendChild(title);\n    card.appendChild(tag);\n\n    // 卡片放入列表容器\n    listEl.appendChild(card);\n  }\n}</code></pre><p>三个步骤：<code>document.createElement()</code> 创建元素 → <code>.textContent</code> 设置内容 → <code>.appendChild()</code> 组装到父元素。相比 innerHTML，createElement 更安全（防止 XSS），也更容易给单个元素绑定事件。</p></div></details>[[/html]]",
       },
     ],
     starterCode: {
@@ -3482,7 +3482,7 @@ debouncedSearch('贝多芬')
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '在你的 music-collection-vue 项目中：\n\n1. 创建 .env.development 和 .env.production 文件\n2. 在两个文件中定义不同的 VITE_API_BASE 和 VITE_APP_TITLE\n3. 在项目中用 import.meta.env 读取这些变量，并在页面标题或 console.log 中显示\n4. 分别运行 npm run dev 和 npm run build && npm run preview，观察变量值的变化\n5. 确认 .gitignore 中包含 .env（避免提交到 Git）\n6. 挑战：在 vite.config.js 中用 define 选项定义自定义的全局常量',
+        content: '在你的 music-collection-vue 项目中：\n\n1. 创建 .env.development 和 .env.production 文件\n2. 在两个文件中定义不同的 VITE_API_BASE 和 VITE_APP_TITLE\n3. 在项目中用 import.meta.env 读取这些变量，并在页面标题或 console.log 中显示\n4. 分别运行 npm run dev 和 npm run build && npm run preview，观察变量值的变化\n5. 确认 .gitignore 中包含 .env（避免提交到 Git）\n6. 挑战：在 vite.config.js 中用 define 选项定义自定义的全局常量\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>vite.config.js</code> 中添加 <code>define</code> 配置：</p><pre><code>import { defineConfig } from "vite";\nimport vue from "@vitejs/plugin-vue";\n\nexport default defineConfig({\n  plugins: [vue()],\n  define: {\n    __APP_VERSION__: JSON.stringify("1.0.0"),\n    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),\n    __AUTHOR__: JSON.stringify("你的名字"),\n  },\n});</code></pre><p>在代码中直接使用：<code>console.log("版本：", __APP_VERSION__);</code></p><p><code>define</code> 在编译时替换，适合版本号等固定值；<code>import.meta.env.VITE_*</code> 运行时读取，适合环境相关值。</p></div></details>[[/html]]',
       },
     ],
     starterCode: {
@@ -3575,7 +3575,7 @@ debouncedSearch('贝多芬')
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在编辑器中：\n\n1. 修改 filterButtons 数组——添加一个印象派筛选选项\n2. 在 tracks 数组中添加两首你自己喜欢的曲目\n3. 用 v-if 添加暂无匹配曲目的空状态提示\n4. 把 v-show 切换按钮改成正在播放的动态显示\n5. 挑战：用 v-for 的索引给每张卡片前加上序号（1. 2. 3. ...），观察为每个 `<li>` 添加唯一的 :key',
+        content: '请在编辑器中：\n\n1. 修改 filterButtons 数组——添加一个印象派筛选选项\n2. 在 tracks 数组中添加两首你自己喜欢的曲目\n3. 用 v-if 添加暂无匹配曲目的空状态提示\n4. 把 v-show 切换按钮改成正在播放的动态显示\n5. 挑战：用 v-for 的索引给每张卡片前加上序号（1. 2. 3. ...），观察为每个 `<li>` 添加唯一的 :key\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改模板中的 <code>v-for</code>：</p><pre><code>&lt;template&gt;\n  &lt;ul&gt;\n    &lt;li v-for="(track, index) in filteredTracks" :key="track.id"&gt;\n      &lt;span class="num"&gt;{{ index + 1 }}.&lt;/span&gt;\n      &lt;strong&gt;{{ track.name }}&lt;/strong&gt;\n      &lt;span&gt;— {{ track.composer }}&lt;/span&gt;\n      &lt;span class="period"&gt;{{ track.period }}&lt;/span&gt;\n    &lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/template&gt;</code></pre><p>关键：<code>v-for="(track, index)"</code> 中 index 从 0 开始；<code>{{ index + 1 }}</code> 显示为 1,2,3...；<code>:key="track.id"</code> 始终用唯一 ID，不要用 index 做 key。</p></div></details>[[/html]]',
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3620,7 +3620,7 @@ debouncedSearch('贝多芬')
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在编辑器中：\n\n1. 观察时钟组件——打开/关闭它，看控制台的生命周期日志\n2. 修改 onMounted 中的 startClock——让时钟初始显示为 1.5 倍速\n3. 用 watch 监听 time 的变化，在整分钟时打印 🎵\n4. 添加一个计数器（ref），在 onMounted 中启动自增，onBeforeUnmount 中清除\n5. 挑战：用 watchEffect 替代 watch，观察两者的区别',
+        content: '请在编辑器中：\n\n1. 观察时钟组件——打开/关闭它，看控制台的生命周期日志\n2. 修改 onMounted 中的 startClock——让时钟初始显示为 1.5 倍速\n3. 用 watch 监听 time 的变化，在整分钟时打印 🎵\n4. 添加一个计数器（ref），在 onMounted 中启动自增，onBeforeUnmount 中清除\n5. 挑战：用 watchEffect 替代 watch，观察两者的区别\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>watch 的写法：</strong></p><pre><code>import { ref, watch } from "vue";\nconst time = ref(0);\nwatch(time, (newVal, oldVal) =&gt; {\n  if (newVal % 60 === 0 &amp;&amp; newVal !== 0) {\n    console.log("🎵 整分钟到了！");\n  }\n});</code></pre><p><strong>watchEffect 的写法：</strong></p><pre><code>import { ref, watchEffect } from "vue";\nconst time = ref(0);\nwatchEffect(() =&gt; {\n  if (time.value % 60 === 0 &amp;&amp; time.value !== 0) {\n    console.log("🎵 整分钟到了！（watchEffect）");\n  }\n});</code></pre><p><strong>核心区别：</strong><br>• watch 手动指定数据源，可拿到旧值<br>• watchEffect 自动追踪依赖，默认立即执行一次<br>• 需要旧值时用 watch，简单副作用用 watchEffect</p></div></details>[[/html]]',
       },
     ],
     starterCode: { html: "", css: "", js: "" },

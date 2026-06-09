@@ -113,7 +113,7 @@ watch(() => props.modelValue, (newVal) => {
       })
     }
   }
-}, { deep: true })
+})
 
 onMounted(() => {
   nextTick(() => createEditor())

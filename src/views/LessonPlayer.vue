@@ -226,6 +226,7 @@ function markComplete() {
             :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
           >
             <CodeEditor
+              :key="lessonId"
               :model-value="userCode"
               @update:model-value="onCodeChange"
               @run="triggerPreview"

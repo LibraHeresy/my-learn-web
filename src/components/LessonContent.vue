@@ -409,4 +409,80 @@ onBeforeUnmount(() => {
   color: #6B5A4E;
   font-size: 12px;
 }
+
+/* ===== 挑战答案折叠 ===== */
+:deep(.challenge-answer) {
+  margin-top: 12px;
+  border: 1px solid #E0D5C0;
+  border-radius: var(--radius-sm);
+  background: #FDFAF3;
+  overflow: hidden;
+}
+
+:deep(.challenge-answer > summary) {
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-gold);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: background 0.2s;
+}
+
+:deep(.challenge-answer > summary::-webkit-details-marker) {
+  display: none;
+}
+
+:deep(.challenge-answer > summary::before) {
+  content: '▶';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 11px;
+  transition: transform 0.25s ease;
+}
+
+:deep(.challenge-answer[open] > summary::before) {
+  transform: rotate(90deg);
+}
+
+:deep(.challenge-answer > summary:hover) {
+  background: #F5EDD8;
+}
+
+:deep(.challenge-answer .answer-content) {
+  padding: 12px 16px;
+  border-top: 1px solid #E0D5C0;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text-light);
+  background: #FFFDF7;
+}
+
+:deep(.challenge-answer .answer-content pre) {
+  background: #2D2520;
+  color: #E8DCC8;
+  padding: 10px 14px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+:deep(.challenge-answer .answer-content code) {
+  background: #F5EDD8;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-code);
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+
+:deep(.challenge-answer .answer-content pre code) {
+  background: transparent;
+  padding: 0;
+  color: #E8DCC8;
+}
 </style>
