@@ -41,6 +41,46 @@ function extractCodeFences(text: string, placeholders: string[], withClass: bool
   })
 }
 
+// 提取引用块 → 占位符（在列表提取之前调用）
+function extractBlockquotes(text: string, placeholders: string[]): string {
+  // 匹配连续的 > 行（> 后空格可选，支持空行）
+  return text.replace(/(?:^|\n)((?:> ?[^\n]*(?:\n|$))+)/gm, (match) => {
+    const trimmed = match.replace(/^\n/, '')
+    const lines = trimmed.split('\n')
+    const parts: string[] = []
+    let buf: string[] = []
+
+    for (const line of lines) {
+      const content = line.replace(/^> ?/, '')
+      if (content.trim() === '') {
+        if (buf.length > 0) { parts.push(buf.join('<br>')); buf = [] }
+      } else {
+        const localPh: string[] = []
+        let html = content
+        html = html.replace(/`([^`]+)`/g, (_, code) => {
+          const i = localPh.length
+          localPh.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
+          return `%%P${i}%%`
+        })
+        html = extractLinks(html, localPh)
+        html = escapeHtml(html)
+        html = restorePlaceholders(html, localPh)
+        html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        // 高亮 "Day N" 日记标签
+        html = html.replace(/^(Day \d+[：:])/, '<span class="diary-day">$1</span>')
+        buf.push(html)
+      }
+    }
+    if (buf.length > 0) parts.push(buf.join('<br>'))
+
+    const inner = parts.map(p => `<p>${p}</p>`).join('')
+    const idx = placeholders.length
+    placeholders.push(`<blockquote class="md-blockquote">${inner}</blockquote>`)
+    return `%%P${idx}%%`
+  })
+}
+
 // 提取列表 → 占位符（在代码块提取之后调用）
 function extractLists(text: string, placeholders: string[]): string {
   const listBlockRegex = /(?:^|\n)((?:(?:  )?(?:[-*]|\d+\.)\s[^\n]+\n?)+)/gm
@@ -121,13 +161,18 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
   // 3. 包裹术语
   html = wrapTerms(html, placeholders)
 
-  // 4. 转义 HTML
+  // 4. 自动链接裸 URL（必须在 escapeHtml 和 restorePlaceholders 之前：此时代码块等
+  //    块级元素仍为占位符，其中的 URL 不会被误匹配；生成的 <a> 标签存入占位符数组，
+  //    由 restorePlaceholders 统一还原，不会被 escapeHtml 转义）
+  html = autoLinkUrls(html, placeholders)
+
+  // 5. 转义 HTML
   html = escapeHtml(html)
 
-  // 5. 还原占位符
+  // 6. 还原占位符
   html = restorePlaceholders(html, placeholders)
 
-  // 6. 粗体 / 斜体
+  // 7. 粗体 / 斜体
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
 
@@ -138,26 +183,21 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
 export function parseInline(text: string): string {
   const placeholders: string[] = []
 
-  // 提取代码块 + 表格 + 列表
+  // 提取代码块 + 引用块 + 表格 + 列表
   let html = extractCodeFences(text, placeholders, false)
+  html = extractBlockquotes(html, placeholders)
   html = extractTables(html, placeholders)
   html = extractLists(html, placeholders)
 
   // 内联管道
   html = applyInlinePipeline(html, placeholders)
 
-  // 自动链接裸 URL
-  html = autoLinkUrls(html, placeholders)
-
   // 换行处理
   html = html.trim()
-  html = html.replace(/\n{2,}/g, '\n\n')
+  html = html.replace(/\n{2,}/g, '\n')
   html = html.replace(/\n/g, '<br>')
   html = html.replace(/(<br>\s*){3,}/g, '<br><br>')
   html = html.replace(/^(<br>)+|(<br>)+$/g, '')
-
-  // 最终还原
-  html = restorePlaceholders(html, placeholders)
 
   return html
 }
@@ -212,29 +252,38 @@ export function parseContent(text: string): string {
     return `%%H${idx}%%`
   })
 
-  // 1. 提取代码块 + 表格 + 列表
+  // 1. 提取代码块 + 引用块 + 表格 + 列表
   html = extractCodeFences(html, placeholders, true)
+  html = extractBlockquotes(html, placeholders)
   html = extractTables(html, placeholders)
   html = extractLists(html, placeholders)
 
   // 2. 内联管道（含链接提取）
   html = applyInlinePipeline(html, placeholders)
 
-  // 3. 自动链接裸 URL
-  html = autoLinkUrls(html, placeholders)
-
-  // 4. 段落处理
+  // 3. 段落处理
   html = html.trim()
+  if (html) html = '<p>' + html + '</p>'
   html = html.replace(/\n{2,}/g, '</p><p>')
   html = html.replace(/\n/g, '<br>')
-  html = html.replace(/(?:^|<p>)(<br>)+/g, '<p>')
-  html = html.replace(/(<br>)+(?:$|<\/p>)/g, '</p>')
+  html = html.replace(/<p>\s*(?:<br>\s*)+/g, '<p>')
+  html = html.replace(/(?:\s*<br>\s*)+<\/p>/g, '</p>')
   html = html.replace(/<p><\/p>/g, '')
 
-  // 5. 还原 [[html]] 块和剩余占位符
+  // 5. 注入块级占位符：块级元素不能嵌套在 <p> 内，提取出来
+  html = html.replace(/<p>(%%P\d+%%)<\/p>/g, (_, ph) => {
+    const idx = parseInt((ph as string).replace(/\D/g, ''))
+    const content = placeholders[idx]
+    if (content && /^<(?:pre|blockquote|ul|ol|table)/.test(content)) {
+      return ph as string
+    }
+    return `<p>${ph}</p>`
+  })
+
+  // 6. 还原 [[html]] 块和剩余占位符
   html = html.replace(/%%H(\d+)%%/g, (_, i) => htmlBlocks[parseInt(i)])
   html = restorePlaceholders(html, placeholders)
 
   if (!html.trim()) return ''
-  return `<p>${html}</p>`
+  return html
 }

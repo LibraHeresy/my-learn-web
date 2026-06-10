@@ -46,7 +46,6 @@ function chapterTotalCount(chapterId: string): number {
 }
 
 // 自动滚动
-const bodyRef = ref<HTMLDivElement>()
 const activeLessonRef = ref<HTMLButtonElement>()
 const chapterEls: Record<string, HTMLElement> = {}
 

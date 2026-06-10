@@ -141,11 +141,46 @@ describe('markdown 工具函数', () => {
     expect(result).toContain('</p><p>')
   })
 
+  it('parseContent 单换行转为 <br>', async () => {
+    const { parseContent } = await getMarkdown()
+    const result = parseContent('第一段\n第二段')
+    expect(result).toContain('<p>')
+    expect(result).toContain('<br>')
+    expect(result).not.toContain('</p><p>')
+  })
+
   it('parseContent 代码块', async () => {
     const { parseContent } = await getMarkdown()
     const result = parseContent('```js\nconst a = 1\n```')
     expect(result).toContain('<pre class="code-block">')
     expect(result).toContain('const a = 1')
+  })
+
+  it('parseContent 正文裸 URL 自动链接', async () => {
+    const { parseContent } = await getMarkdown()
+    const result = parseContent('访问 https://example.com 了解更多')
+    expect(result).toContain('<a href="https://example.com"')
+  })
+
+  it('parseContent 代码块内 URL 不被自动链接', async () => {
+    const { parseContent } = await getMarkdown()
+    const result = parseContent('```html\n<img src="https://oss.tan8.com/a.jpg">\n```')
+    // 代码块内的 URL 不应被包装为 <a> 标签
+    expect(result).toContain('<pre class="code-block">')
+    expect(result).not.toContain('<a href=')
+  })
+
+  it('parseContent 行内代码中的 URL 不被自动链接', async () => {
+    const { parseContent } = await getMarkdown()
+    const result = parseContent('使用 `https://example.com` 这个地址')
+    expect(result).toContain('<code class="inline-code">https://example.com</code>')
+    expect(result).not.toContain('<a href=')
+  })
+
+  it('parseInline 正文裸 URL 自动链接', async () => {
+    const { parseInline } = await getMarkdown()
+    const result = parseInline('访问 https://test.com')
+    expect(result).toContain('<a href="https://test.com"')
   })
 })
 

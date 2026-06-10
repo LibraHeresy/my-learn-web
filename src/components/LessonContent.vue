@@ -259,6 +259,42 @@ onBeforeUnmount(() => {
   margin: var(--sp-2) 0;
 }
 
+/* ===== 列表 ===== */
+:deep(.md-list) {
+  margin: var(--sp-2) 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+:deep(.md-list li) {
+  margin-bottom: var(--sp-1);
+  line-height: 1.8;
+}
+
+/* ===== 块引用 ===== */
+:deep(.md-blockquote) {
+  margin: var(--sp-4) 0;
+  padding: 0;
+  border: none;
+}
+
+:deep(.md-blockquote p) {
+  position: relative;
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-5);
+  margin-bottom: var(--sp-2);
+  background: linear-gradient(135deg, #FDFAF3 0%, #F9F4E8 100%);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+}
+
+:deep(.diary-day) {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* ===== 行内代码 ===== */
 :deep(.inline-code) {
   background: var(--color-bg-warm);
   padding: 1px 6px;
