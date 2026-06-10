@@ -41,7 +41,63 @@ function extractCodeFences(text: string, placeholders: string[], withClass: bool
   })
 }
 
-// 提取表格 → 占位符
+// 提取列表 → 占位符（在代码块提取之后调用）
+function extractLists(text: string, placeholders: string[]): string {
+  const listBlockRegex = /(?:^|\n)((?:(?:  )?(?:[-*]|\d+\.)\s[^\n]+\n?)+)/gm
+
+  return text.replace(listBlockRegex, (match) => {
+    const trimmed = match.replace(/^\n/, '')
+    const lines = trimmed.split('\n').filter(l => l.trim())
+    if (lines.length === 0) return match
+
+    const firstLine = lines[0].trim()
+    const isOrdered = /^\d+\.\s/.test(firstLine)
+    const tag = isOrdered ? 'ol' : 'ul'
+
+    const items = lines.map(line => {
+      const content = line.replace(/^\s*(?:[-*]|\d+\.)\s/, '')
+      // Use isolated placeholders for list item inline processing
+      const localPh: string[] = []
+      let processed = content.replace(/`([^`]+)`/g, (_, code) => {
+        const idx = localPh.length
+        localPh.push(`<code class="inline-code">${escapeHtml(code)}</code>`)
+        return `%%P${idx}%%`
+      })
+      processed = extractLinks(processed, localPh)
+      processed = escapeHtml(processed)
+      processed = restorePlaceholders(processed, localPh)
+      processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      processed = processed.replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      return `<li>${processed}</li>`
+    }).join('')
+
+    const idx = placeholders.length
+    placeholders.push(`<${tag} class="md-list">${items}</${tag}>`)
+    return `%%P${idx}%%`
+  })
+}
+
+// 提取 Markdown 链接 → 占位符（在转义前调用）
+function extractLinks(text: string, placeholders: string[]): string {
+  // Match [text](url) pattern
+  return text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) => {
+    const idx = placeholders.length
+    placeholders.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`)
+    return `%%P${idx}%%`
+  })
+}
+
+// 自动链接裸 URL（在转义前调用，避免匹配已在链接中的 URL）
+function autoLinkUrls(text: string, placeholders: string[]): string {
+  // Only match URLs that are NOT already inside a placeholder
+  return text.replace(/(?<!%%P\d)https?:\/\/[^\s<>"']+/g, (url) => {
+    // Remove trailing punctuation that's likely not part of the URL
+    const cleaned = url.replace(/[.,;:!?)\]]+$/, '')
+    const idx = placeholders.length
+    placeholders.push(`<a href="${escapeHtml(cleaned)}" target="_blank" rel="noopener">${escapeHtml(cleaned)}</a>`)
+    return `%%P${idx}%%`
+  })
+}
 function extractTables(text: string, placeholders: string[]): string {
   return text.replace(/(?:^|\n)(\|[^\n]+\|\n)(\|[-:| ]+\|\n)((?:\|[^\n]+\|(?:\n|$))+)/g, (match) => {
     const idx = placeholders.length
@@ -50,7 +106,7 @@ function extractTables(text: string, placeholders: string[]): string {
   })
 }
 
-// 共享的内联处理管道：行内代码 → 术语 → 转义 → 还原 → 粗体/斜体
+// 共享的内联处理管道：行内代码 → 链接 → 术语 → 转义 → 还原 → 粗体/斜体
 function applyInlinePipeline(text: string, placeholders: string[]): string {
   // 1. 提取行内代码
   let html = text.replace(/`([^`]+)`/g, (_, code) => {
@@ -59,16 +115,19 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
     return `%%P${idx}%%`
   })
 
-  // 2. 包裹术语
+  // 2. 提取 Markdown 链接
+  html = extractLinks(html, placeholders)
+
+  // 3. 包裹术语
   html = wrapTerms(html, placeholders)
 
-  // 3. 转义 HTML
+  // 4. 转义 HTML
   html = escapeHtml(html)
 
-  // 4. 还原占位符
+  // 5. 还原占位符
   html = restorePlaceholders(html, placeholders)
 
-  // 5. 粗体 / 斜体
+  // 6. 粗体 / 斜体
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
 
@@ -79,12 +138,16 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
 export function parseInline(text: string): string {
   const placeholders: string[] = []
 
-  // 提取代码块 + 表格
+  // 提取代码块 + 表格 + 列表
   let html = extractCodeFences(text, placeholders, false)
   html = extractTables(html, placeholders)
+  html = extractLists(html, placeholders)
 
   // 内联管道
   html = applyInlinePipeline(html, placeholders)
+
+  // 自动链接裸 URL
+  html = autoLinkUrls(html, placeholders)
 
   // 换行处理
   html = html.trim()
@@ -92,6 +155,9 @@ export function parseInline(text: string): string {
   html = html.replace(/\n/g, '<br>')
   html = html.replace(/(<br>\s*){3,}/g, '<br><br>')
   html = html.replace(/^(<br>)+|(<br>)+$/g, '')
+
+  // 最终还原
+  html = restorePlaceholders(html, placeholders)
 
   return html
 }
@@ -146,14 +212,18 @@ export function parseContent(text: string): string {
     return `%%H${idx}%%`
   })
 
-  // 1. 提取代码块 + 表格
+  // 1. 提取代码块 + 表格 + 列表
   html = extractCodeFences(html, placeholders, true)
   html = extractTables(html, placeholders)
+  html = extractLists(html, placeholders)
 
-  // 2. 内联管道
+  // 2. 内联管道（含链接提取）
   html = applyInlinePipeline(html, placeholders)
 
-  // 3. 段落处理
+  // 3. 自动链接裸 URL
+  html = autoLinkUrls(html, placeholders)
+
+  // 4. 段落处理
   html = html.trim()
   html = html.replace(/\n{2,}/g, '</p><p>')
   html = html.replace(/\n/g, '<br>')
@@ -161,8 +231,9 @@ export function parseContent(text: string): string {
   html = html.replace(/(<br>)+(?:$|<\/p>)/g, '</p>')
   html = html.replace(/<p><\/p>/g, '')
 
-  // 4. 还原 [[html]] 块
+  // 5. 还原 [[html]] 块和剩余占位符
   html = html.replace(/%%H(\d+)%%/g, (_, i) => htmlBlocks[parseInt(i)])
+  html = restorePlaceholders(html, placeholders)
 
   if (!html.trim()) return ''
   return `<p>${html}</p>`

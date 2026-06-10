@@ -53,7 +53,7 @@ export const prologueLessons: Lesson[] = [
     order: 2,
     title: "混战——浏览器战争",
     musicAnalogy: "「十天生出 JavaScript，就像即兴哼出的旋律成了传世经典。」",
-    listenTo: "维瓦尔第《四季》— 巴洛克时代的「爆款」，就像 JavaScript 在 1995 年横空出世。",
+    listenTo: "斯特拉文斯基《春之祭》— 1913 年首演时引发骚乱，正如 JavaScript 在 1995 年横空出世，颠覆了人们对浏览器能做什么的全部认知。",
     mode: "local",
     starterCode: { html: "", css: "", js: "" },
     sections: [

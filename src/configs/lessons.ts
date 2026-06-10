@@ -28,7 +28,7 @@ export const chapters: Chapter[] = [
   {
     id: "js-advanced",
     title: "第五章：JavaScript 进阶",
-    subtitle: "从独奏到合奏——写出更优雅的代码",
+    subtitle: "工作流与进阶——从写好代码到写出好代码",
     icon: "🎻",
   },
   {
@@ -414,7 +414,7 @@ export const lessons: Lesson[] = [
         type: "hint",
         title: "关于音频链接",
         content:
-          '免费可用的音频链接不太好找。如果你想用自己的音乐文件，可以把 MP3 文件放在项目 `public/` 目录下，然后用 `<audio controls src="/你的文件名.mp3">` 来播放。',
+          '免费可用的音频链接不太好找。你可以用网上公开的音频链接（如 SoundHelix 提供的免费示例音乐），或者搜索其他免费音乐资源网站来获取可在线播放的 MP3 链接。',
       },
       {
         type: "task",
@@ -573,7 +573,7 @@ export const lessons: Lesson[] = [
     starterCode: {
       html: '<h1>音乐偏好调查</h1>\n\n<form>\n  <fieldset>\n    <legend>基础信息</legend>\n    <label>你的名字：<input type="text" name="name" placeholder="请输入名字"></label>\n    <div class="range-row">\n      <label>每天练琴时长：</label>\n      <input type="range" id="practiceRange" min="0" max="120" value="30">\n      <span id="rangeValue">30 分钟</span>\n    </div>\n  </fieldset>\n\n  <fieldset>\n    <legend>你的演奏水平</legend>\n    <label class="radio-label"><input type="radio" name="level" value="beginner" checked> 🎵 入门级</label>\n    <label class="radio-label"><input type="radio" name="level" value="intermediate"> 🎶 进阶级</label>\n    <label class="radio-label"><input type="radio" name="level" value="advanced"> 🎼 专业级</label>\n  </fieldset>\n\n  <fieldset>\n    <legend>你擅长的乐器（可多选）</legend>\n    <label class="checkbox-label"><input type="checkbox" name="instrument" value="piano"> 🎹 钢琴</label>\n    <label class="checkbox-label"><input type="checkbox" name="instrument" value="violin"> 🎻 小提琴</label>\n    <label class="checkbox-label"><input type="checkbox" name="instrument" value="cello"> 🎻 大提琴</label>\n    <label class="checkbox-label"><input type="checkbox" name="instrument" value="flute"> 🎵 长笛</label>\n    <label class="checkbox-label"><input type="checkbox" name="instrument" value="voice"> 🎤 声乐</label>\n  </fieldset>\n\n  <button type="submit">✨ 提交</button>\n</form>',
       css: 'h1 {\n  text-align: center;\n  color: #8B2E2E;\n  margin-bottom: 20px;\n}\n\nform {\n  max-width: 480px;\n  margin: 0 auto;\n}\n\nfieldset {\n  background: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 20px;\n  margin-bottom: 16px;\n}\n\nlegend {\n  font-weight: 700;\n  color: #8B2E2E;\n  font-size: 15px;\n  padding: 0 8px;\n}\n\nlabel {\n  display: block;\n  margin: 8px 0;\n  color: #3D2B1F;\n  font-size: 14px;\n}\n\ninput[type="text"] {\n  width: 100%;\n  padding: 8px 12px;\n  border: 1px solid #D4C5A9;\n  border-radius: 5px;\n  font-size: 14px;\n  font-family: inherit;\n}\n\n.range-row {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  margin: 12px 0;\n}\n\n.range-row label {\n  margin: 0;\n  white-space: nowrap;\n}\n\n.range-row input[type="range"] {\n  flex: 1;\n  accent-color: #8B2E2E;\n}\n\n#rangeValue {\n  color: #8B2E2E;\n  font-weight: 700;\n  font-size: 14px;\n  min-width: 50px;\n}\n\n.radio-label,\n.checkbox-label {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 6px 10px;\n  border-radius: 6px;\n  cursor: pointer;\n  transition: background 0.15s;\n  margin: 4px 0 !important;\n}\n\n.radio-label:hover,\n.checkbox-label:hover {\n  background: #FFF8EC;\n}\n\nbutton {\n  display: block;\n  width: 100%;\n  padding: 12px;\n  background: #8B2E2E;\n  color: #fff;\n  font-size: 16px;\n  font-weight: 600;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  margin-top: 8px;\n}\n\nbutton:hover {\n  background: #C94545;\n}',
-      js: '// 实时显示 range 滑块的值\nlet rangeEl = document.querySelector("#practiceRange");\nlet rangeValue = document.querySelector("#rangeValue");\n\nrangeEl.addEventListener("input", function(event) {\n  let val = event.target.value;\n  rangeValue.textContent = val + " 分钟";\n});',
+      js: '',
     },
   },
 
@@ -745,6 +745,12 @@ export const lessons: Lesson[] = [
         content:
           "切换到 CSS 标签页，试试调整：\n\n1. 把 `.card` 的 `font-family` 改成 `sans-serif`，感受字体变化\n2. 把 `line-height` 从 `1.8` 改成 `1.3` 和 `2.5`，看看行间距的疏密变化\n3. 把 `letter-spacing` 加大到 `0.15em`，感受字间距\n4. 把 `text-align` 改成 `left` 和 `right`，看对齐变化",
       },
+      {
+        type: "explain",
+        title: "CSS 中的长度单位 — px / em / rem / vh / vw",
+        content:
+          "CSS 中有多种长度单位，理解它们的区别很重要：\n\n**绝对单位**\n- `px`（像素）— 屏幕上的固定点数，最直观。\"给我 16 个像素的字体。\"\n\n**字体相对单位**\n- `em` — 相对于**父元素**的字体大小。`2em` 表示当前父元素字体 2 倍\n- `rem`（root em）— 相对于**根元素**（`<html>`）的字体大小，不受嵌套影响\n\n\```css\nhtml { font-size: 16px; }        /* 根字体 16px */\nh1 { font-size: 2rem; }           /* 32px */\np { font-size: 1rem; }            /* 16px */\n.card { padding: 1.5rem; }        /* 24px */\n\```\n\n**视口相对单位**\n- `vw` — 视口宽度的 1%（50vw = 屏幕一半宽）\n- `vh` — 视口高度的 1%（100vh = 满屏高度）\n- `%` — 相对于**父元素**对应属性的百分比\n\n**用什么？**\n- 字体大小、间距 → `rem`（统一缩放，不受嵌套影响）\n- 边框粗细 → `px`（精确控制）\n- 全屏布局 → `vw` / `vh`\n- 容器内比例 → `%`\n\n> 🎵 类比：`px` 像调音器上的刻度（精确但死板），`rem` 像移调后的音高（跟着基准音变），`vw` 像音乐厅的声场大小（跟着空间变）。",
+      },
     ],
     starterCode: {
       html: '<h1>音乐随想</h1>\n\n<div class="card">\n  <h2>月光之下</h2>\n  <p>德彪西的《月光》如流水般倾泻，每一个音符都像是洒在琴键上的银色月光。</p>\n  <p>闭上眼睛，让音乐带你进入一个朦胧而美丽的梦境。</p>\n</div>',
@@ -775,6 +781,12 @@ export const lessons: Lesson[] = [
         title: "padding 和 margin 的区别",
         content:
           "- `padding`（内边距）：内容与边框之间的距离，在边框**里面**\n- `margin`（外边距）：边框与相邻元素之间的距离，在边框**外面**\n\n一个常用的记忆方式：\n- padding 有背景色（在盒子里）\n- margin 透明（盒子之外）\n\n就像舞台上的地毯（padding）和舞台之间的过道（margin）！",
+      },
+      {
+        type: "explain",
+        title: "box-sizing — 盒子大小的计算方式",
+        content:
+          "一个容易困惑的地方：默认情况下，`width` 只控制**内容区**的宽度。如果你设置 `width: 100%` 再加上 `padding`，盒子就会溢出：\n\n\```css\n/* 默认 box-sizing: content-box */\n.card {\n  width: 100%;          /* 内容区占满父容器 */\n  padding: 24px;        /* 额外增加 48px 宽度（左右各 24px） */\n  border: 2px solid;    /* 又额外增加 4px */\n  /* 实际占用宽度 = 100% + 48px + 4px → 溢出了！ */\n}\n\```\n\n解决方案是使用 `box-sizing: border-box`：\n\n\```css\n.card {\n  box-sizing: border-box;  /* width 包含 content + padding + border */\n  width: 100%;             /* 现在不会溢出了 */\n  padding: 24px;\n  border: 2px solid;\n}\n\```\n\n推荐在所有项目中加上这段 CSS reset，让所有元素都使用 `border-box`：\n\n\```css\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\```\n\n> 🎵 类比：`content-box` 像只算舞台面积，不算幕布和墙壁；`border-box` 像算整个音乐厅的占地面积——一次性算清。",
       },
       {
         type: "example",
@@ -1480,7 +1492,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "带参数的函数",
         content:
-          '函数可以接收**参数**（输入），然后根据参数做不同的事：\n\n\```js\nfunction introduce(composer, piece) {\n  return `${composer}创作了《${piece}》。`;\n}\n\nlet result1 = introduce("肖邦", "夜曲");\nlet result2 = introduce("莫扎特", "魔笛");\n\```\n\n- `composer` 和 `piece` 是**参数**——像函数接收的输入\n- `return` 把结果**返回**——像函数给出的输出\n- 同样一个 `introduce` 函数，传入不同的作曲家，得到不同的句子',
+          '函数可以接收**参数**（输入），然后根据参数做不同的事：\n\n\```js\nfunction introduce(composer, piece) {\n  return `${composer}创作了《${piece}》。`;\n}\n\nlet result1 = introduce("肖邦", "夜曲");\nlet result2 = introduce("莫扎特", "魔笛");\n\```\n\n- `composer` 和 `piece` 是**参数**——像函数接收的输入\n- `return` 把结果**返回**——像函数给出的输出\n- 同样一个 `introduce` 函数，传入不同的作曲家，得到不同的句子\n\n> 💡 关于 `this`：在普通函数中，`this` 指向"谁调用了这个函数"。比如 `button.addEventListener("click", handleClick)` 中，`handleClick` 里的 `this` 指向被点击的 `button`。后面学到事件和对象时你会更深入地理解它。',
       },
       {
         type: "example",
@@ -2286,7 +2298,7 @@ export const lessons: Lesson[] = [
     chapterId: "js-advanced",
     trackId: "framework",
     order: 8,
-    title: 'DOM 动态创建 — 用 JS "凭空造出"页面元素',
+    title: 'DOM 渲染进阶 — innerHTML 对比与 classList 操控',
     musicAnalogy:
       '用 `innerHTML` 像"复印一整页乐谱"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像"一个音符一个音符地写"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。',
     listenTo:
@@ -2294,26 +2306,26 @@ export const lessons: Lesson[] = [
     sections: [
       {
         type: "explain",
-        title: "innerHTML vs createElement",
+        title: "innerHTML vs createElement — 两种渲染方式对比",
         content:
-          '到目前为止你都是用 `innerHTML` 来渲染内容：\n\n\```js\nlistEl.innerHTML = "<div class=\\"card\\"><h3>" + name + "</h3></div>";\n\```\n\n这种方式像"复印乐谱"——一次性替换全部内容。问题是什么？\n\n1. **会覆盖已有的内容** —— 你无法只"添加一张卡片"，必须重新生成全部卡片\n2. **已绑定的事件会丢失** —— 替换 innerHTML 后，原来的按钮点击事件没了\n3. **字符串拼接容易出错** —— 引号嵌套很痛苦\n\n`createElement` 更精细：\n\n\```js\nlet card = document.createElement("div");  // 创建一个 <div>\ncard.classList.add("card");                 // 加 class="card"\nlet title = document.createElement("h3");\ncard.appendChild(title);                    // 把 h3 放入 div\nlistEl.appendChild(card);                   // 把卡片放入页面\n\```\n\n每个元素都是独立的对象，你可以随时修改、删除、移动它们——就像活页乐谱，可以随时插入一页。',
+          "回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建元素。现在我们来深入对比这两种方式，理解什么时候该用哪个：\n\n| 特性 | innerHTML | createElement |\n|------|-----------|---------------|\n| 速度 | 一次性替换，批量操作快 | 逐个创建，精细控制快 |\n| 事件保留 | 替换后旧事件丢失 | 事件绑定在元素上，不受影响 |\n| 安全性 | 容易 XSS 注入 | textContent 天然安全 |\n| 精细度 | 只能整体替换 | 可以单独修改任一元素 |\n| 代码量 | 代码少 | 代码多 |\n\n**经验法则：**\n- 初始化页面、展示静态数据用 `innerHTML` 更简洁\n- 需要绑定事件、频繁更新、处理用户输入用 `createElement` 更安全灵活\n\n就像排练新曲子：第一次通读可以直接复印全谱（innerHTML），但之后要修改某几个小节的指法，就得逐个音符编辑（createElement）。",
       },
       {
         type: "explain",
-        title: "createElement 五步法",
+        title: "classList API — 精确操控样式类",
         content:
-          '创建一个元素的标准流程：\n\n**1. 创建元素：** `document.createElement("标签名")`\n\```js\nlet card = document.createElement("div");\n\```\n\n**2. 设置内容：** `.textContent` 或 `.classList.add()`\n\```js\ncard.textContent = "肖邦夜曲";\ncard.classList.add("card");\n\```\n\n**3. 找到容器：** `document.querySelector("...")`\n\```js\nlet list = document.querySelector("#cardList");\n\```\n\n**4. 挂载到页面：** `.appendChild(元素)`\n\```js\nlist.appendChild(card);  // 卡片出现在页面上了！\n\```\n\n**5. 可以继续操作它：** 因为它是一个变量，随时可以修改\n\```js\ncard.style.background = "#FFFAF2";  // 改变背景\ncard.addEventListener("click", function() { ... });  // 加事件\n\```\n\n对比一下：innerHTML 生成的内容是"死"的字符串，createElement 生成的是"活"的对象。',
+          "`classList` 提供了比 `className` 更精细的 class 控制方式：\n\n\```js\nlet el = document.querySelector('.card')\n\n// 添加一个 class（不会覆盖已有的）\nel.classList.add('highlight')\n\n// 移除一个 class\nel.classList.remove('highlight')\n\n// 切换：有则删，无则加\nel.classList.toggle('active')\n\n// 检查是否包含\nif (el.classList.contains('card')) {\n  console.log('这是一张卡片')\n}\n\```\n\n`classList` 的优势：\n- `className = 'xxx'` 会覆盖所有已有 class\n- `classList.add()` 只追加，不影响已有 class\n- `classList.toggle()` 一行搞定开关效果\n\n> 类比：`className` 像换一件新乐器的全部配件，`classList` 像微调——只给长笛加个弱音器、给小提琴上调一个琴码。",
       },
       {
         type: "task",
         title: "动手试试 ✨",
         content:
-          "编辑器里有一个简单的收藏列表。目前它用 innerHTML 渲染卡片。\n\n**你的任务：改写渲染逻辑**\n\n1. 在 JS 中找到使用 `innerHTML` 的地方\n2. 把它改成用 `createElement` + `appendChild` 逐个创建卡片\n3. 每张卡片应该包含：一个 `<div>` 容器、一个 `<h3>` 标题、一个 `<span>` 标签\n4. 确认功能不变——列表应该正常显示\n\n提示：先用循环创建所有卡片，再一次性 appendChild 到容器中。\n\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>render()</code> 中的 <code>innerHTML</code> 替换为 <code>createElement</code>：</p><pre><code>function render() {\n  // 先清空容器\n  listEl.innerHTML = \"\";\n\n  for (let i = 0; i &lt; pieces.length; i++) {\n    // 创建卡片容器\n    let card = document.createElement(\"div\");\n    card.className = \"card\";\n\n    // 创建标题\n    let title = document.createElement(\"h3\");\n    title.textContent = pieces[i].name;\n\n    // 创建标签\n    let tag = document.createElement(\"span\");\n    tag.className = \"tag\";\n    tag.textContent = pieces[i].period;\n\n    // 组装：标题和标签放入卡片\n    card.appendChild(title);\n    card.appendChild(tag);\n\n    // 卡片放入列表容器\n    listEl.appendChild(card);\n  }\n}</code></pre><p>三个步骤：<code>document.createElement()</code> 创建元素 → <code>.textContent</code> 设置内容 → <code>.appendChild()</code> 组装到父元素。相比 innerHTML，createElement 更安全（防止 XSS），也更容易给单个元素绑定事件。</p></div></details>[[/html]]",
+          "编辑器里有一个收藏列表，每次点击按钮会用 innerHTML 重新渲染。\n\n**你的任务：**\n\n1. 把 `render()` 改成用 `createElement` + `appendChild` 实现\n2. 给每张卡片绑定点击事件——点击后调用 `classList.toggle('liked')` 切换收藏状态\n3. 确保动态添加的卡片也能点击切换状态\n\n提示：任务 2 和 3 可以结合事件委托来实现，事半功倍。\n\n[[html]]<details class=challenge-answer><summary>查看答案</summary><div class=answer-content><pre><code>function render() {\n  listEl.innerHTML = ''\n  for (let i = 0; i < pieces.length; i++) {\n    let card = document.createElement('div')\n    card.className = 'card'\n    let title = document.createElement('h3')\n    title.textContent = pieces[i].name\n    let tag = document.createElement('span')\n    tag.className = 'tag'\n    tag.textContent = pieces[i].period\n    card.appendChild(title)\n    card.appendChild(tag)\n    card.addEventListener('click', function() {\n      this.classList.toggle('liked')\n    })\n    listEl.appendChild(card)\n  }\n}</code></pre></div></details>[[/html]]",
       },
     ],
     starterCode: {
       html: '<h1>我的收藏列表</h1>\n\n<div id="cardList"></div>\n\n<div class="add-bar">\n  <button id="addBtn">➕ 添加随机曲目</button>\n</div>',
-      css: "h1 {\n  text-align: center;\n  color: #8B2E2E;\n}\n\n#cardList {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  max-width: 400px;\n  margin: 16px auto;\n}\n\n.card {\n  background: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.card h3 {\n  margin: 0;\n  color: #8B2E2E;\n  font-size: 16px;\n}\n\n.card .tag {\n  color: #C9A96E;\n  font-size: 12px;\n  font-weight: 600;\n}\n\n.add-bar {\n  text-align: center;\n  margin-top: 16px;\n}\n\n#addBtn {\n  padding: 10px 24px;\n  background: #8B2E2E;\n  color: white;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-size: 15px;\n}\n\n#addBtn:hover {\n  background: #C94545;\n}",
+      css: "h1 {\n  text-align: center;\n  color: #8B2E2E;\n}\n\n#cardList {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  max-width: 400px;\n  margin: 16px auto;\n}\n\n.card {\n  background: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  cursor: pointer;\n  transition: background 0.2s, border-color 0.2s;\n}\n\n.card:hover {\n  border-color: #C9A96E;\n}\n\n.card.liked {\n  background: #FFF0E8;\n  border-color: #C94545;\n}\n\n.card h3 {\n  margin: 0;\n  color: #8B2E2E;\n  font-size: 16px;\n}\n\n.card .tag {\n  color: #C9A96E;\n  font-size: 12px;\n  font-weight: 600;\n}\n\n.add-bar {\n  text-align: center;\n  margin-top: 16px;\n}\n\n#addBtn {\n  padding: 10px 24px;\n  background: #8B2E2E;\n  color: white;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-size: 15px;\n}\n\n#addBtn:hover {\n  background: #C94545;\n}",
       js: '// 曲目数据\nlet pieces = [\n  { name: "布兰登堡协奏曲", period: "巴洛克" },\n  { name: "费加罗的婚礼序曲", period: "古典主义" },\n  { name: "月光奏鸣曲", period: "古典主义" }\n];\n\nlet listEl = document.querySelector("#cardList");\n\n// 当前用 innerHTML 渲染——你的任务：改成 createElement + appendChild\nfunction render() {\n  let html = "";\n  for (let i = 0; i < pieces.length; i++) {\n    html += \'<div class="card"><h3>\' + pieces[i].name + \'</h3><span class="tag">\' + pieces[i].period + \'</span></div>\';\n  }\n  listEl.innerHTML = html;\n}\n\nrender();\n\n// 添加随机曲目\ndocument.querySelector("#addBtn").addEventListener("click", function() {\n  let randomPieces = [\n    { name: "G弦上的咏叹调", period: "巴洛克" },\n    { name: "第40号交响曲", period: "古典主义" },\n    { name: "夜曲 Op.9 No.2", period: "浪漫主义" }\n  ];\n  let pick = randomPieces[Math.floor(Math.random() * randomPieces.length)];\n  pieces.push(pick);\n  render();\n});',
     },
   },
@@ -2428,7 +2440,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: '箭头函数 — 精简的"旋律线"',
         content:
-          "箭头函数是 `function` 的简写版：\n\n\```js\n// 旧写法\nconst double = function(x) {\n  return x * 2\n}\n\n// 箭头函数\nconst double = x => x * 2\n\n// 多行逻辑用花括号\nconst greet = name => {\n  const message = '你好，' + name\n  return message\n}\n\```\n\n箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。",
+          "箭头函数是 `function` 的简写版：\n\n\```js\n// 旧写法\nconst double = function(x) {\n  return x * 2\n}\n\n// 箭头函数\nconst double = x => x * 2\n\n// 多行逻辑用花括号\nconst greet = name => {\n  const message = '你好，' + name\n  return message\n}\n\```\n\n箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。\n\n**重要区别：箭头函数没有自己的 `this`。** 普通函数中的 `this` 取决于谁调用了它，而箭头函数的 `this` 继承自定义它的外层作用域。这在事件处理中尤其需要注意。",
       },
       {
         type: "example",
@@ -2941,6 +2953,12 @@ test()`,
           '防抖就像等电梯：\n\n- 不断有人按关门键（每次按键触发 debounce）\n- 电梯不会立刻关门（清除之前的定时器）\n- 等最后一个人进来后，过几秒才关门（定时器到期，执行回调）\n\n在搜索场景中，用户连续输入"贝"→"多"→"芬"，每次输入都重置计时器。等用户停止输入 500ms 后，才发送搜索"贝多芬"的请求。',
       },
       {
+        type: "explain",
+        title: '闭包 — 函数"记住"外部变量的能力',
+        content:
+          "防抖函数之所以能工作，依赖一个重要的概念：**闭包（Closure）**。\n\n看防抖的结构：\n\n\```js\nfunction debounce(fn, delay) {\n  let timer = null           // 外层函数的变量\n\n  return function(...args) {  // 内层函数\n    clearTimeout(timer)       // 访问了外层的 timer！\n    timer = setTimeout(...)   // 修改了外层的 timer！\n  }\n}\n\```\n\n**闭包**就是：内层函数可以记住并访问外层函数的变量，即使外层函数已经执行完毕。就像乐队成员各自记住自己的分谱——音乐会结束后，谱子仍然在他们的记忆里。\n\n`timer` 变量被所有防抖调用共享——每次调用 `clearTimeout(timer)` 清除的都是同一个 timer，这正是防抖能取消上一次等待的关键。\n\n闭包是 JavaScript 中最强大的特性之一，你在事件处理、模块封装、数据缓存等场景都会用到它。",
+      },
+      {
         type: "task",
         title: "动手试试 ✨",
         content:
@@ -2997,7 +3015,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "我们做什么",
         content:
-          '打开你的 `music-collection` 项目，我们添加一个**音乐搜索器**功能：\n\n1. 用户输入搜索关键词\n2. 调用 iTunes Search API（免费公开 API）\n3. 用防抖优化搜索体验\n4. 展示搜索结果（歌曲名、歌手、封面）\n5. 错误处理（网络故障、无结果）\n\n> 🎯 这是你在"合奏篇"旅程的终点。你会惊喜地发现：你已经能写出真正有用的功能了。',
+          '我们来做一个**音乐搜索器**，整合合奏篇学到的全部技能：\n\n1. 用户输入搜索关键词\n2. 调用 iTunes Search API（免费公开 API）\n3. 用防抖优化搜索体验\n4. 展示搜索结果（歌曲名、歌手、封面）\n5. 错误处理（网络故障、无结果）\n\n> 🎯 这是你在"合奏篇"旅程的终点。你会惊喜地发现：你已经能写出真正有用的功能了。',
       },
       {
         type: "example",
@@ -3009,7 +3027,7 @@ debouncedSearch('贝多芬')
         type: "task",
         title: "动手实现 ✨",
         content:
-          "在 `music-collection` 项目中创建 `src/utils/debounce.js` 和 `src/utils/api.js`，然后在 `App.vue` 中使用：\n\n\```js\n// src/utils/api.js\nconst BASE_URL = 'https://itunes.apple.com'\n\nexport async function searchMusic(term) {\n  const url = \\`\\${BASE_URL}/search?term=\\${encodeURIComponent(term)}&limit=10&country=cn\\`\n  const res = await fetch(url)\n  if (!res.ok) throw new Error(\\`搜索失败：\\${res.status}\\`)\n  const data = await res.json()\n  return data.results\n}\n\```\n\n\```js\n// src/utils/debounce.js\nexport function debounce(fn, delay = 400) {\n  let timer\n  return function(...args) {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn.apply(this, args), delay)\n  }\n}\n\```\n\n在 `App.vue` 中组合使用：\n- 搜索框 + 防抖\n- 结果列表渲染\n- 加载状态和错误提示",
+          "创建一个新的 HTML 文件（或在编辑器中直接编写），按以下步骤实现音乐搜索器：\n\n**第一步：封装 API 请求函数**\n\n\```js\nconst BASE_URL = 'https://itunes.apple.com'\n\nasync function searchMusic(term) {\n  const url = `${BASE_URL}/search?term=${encodeURIComponent(term)}&limit=10&country=cn`\n  const res = await fetch(url)\n  if (!res.ok) throw new Error(`搜索失败：${res.status}`)\n  const data = await res.json()\n  return data.results\n}\n\```\n\n**第二步：实现防抖函数**\n\n\```js\nfunction debounce(fn, delay = 400) {\n  let timer\n  return function(...args) {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn.apply(this, args), delay)\n  }\n}\n\```\n\n在 `<script>` 标签中组合使用：搜索框 + 防抖 + API 调用 + 结果渲染 + 加载状态和错误提示。",
       },
       {
         type: "hint",
