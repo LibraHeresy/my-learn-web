@@ -82,6 +82,7 @@ function toggleTrack(trackId: string) {
 function jumpToSection(targetId: string) {
   const sectionMap: Record<string, string> = {
     hero: "hero-section",
+    tracks: "tracks-section",
     projects: "projects-section",
     prologue: "prologue-section",
   };
@@ -132,14 +133,9 @@ function goToProject(projectId: string) {
         <span class="sticky-nav-icon">🎵</span>
         <span class="sticky-nav-label">首页</span>
       </button>
-      <button
-        v-for="track in tracks"
-        :key="track.id"
-        class="sticky-nav-item"
-        @click="jumpToSection(track.id)"
-      >
-        <span class="sticky-nav-icon">{{ track.icon }}</span>
-        <span class="sticky-nav-label">{{ track.title }}</span>
+      <button class="sticky-nav-item" @click="jumpToSection('tracks')">
+        <span class="sticky-nav-icon">🎼</span>
+        <span class="sticky-nav-label">成长路径</span>
       </button>
       <button class="sticky-nav-item" @click="jumpToSection('projects')">
         <span class="sticky-nav-icon">🎁</span>
@@ -152,7 +148,7 @@ function goToProject(projectId: string) {
     </nav>
 
     <!-- 四轨旅程 -->
-    <section class="journey-section">
+    <section id="tracks-section" class="journey-section">
       <h2 class="section-title">🎼 成长路径</h2>
       <hr class="staff-divider" />
       <p class="section-intro">
