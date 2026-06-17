@@ -1,8 +1,16 @@
+// 课程子步骤
+export interface LessonSubStep {
+  content: string          // 这一步做什么（markdown）
+  purpose?: string         // 这一步的目的
+  expectedResult?: string  // 完成后应该看到的效果
+}
+
 // 教学内容段落类型
 export interface LessonSection {
   type: 'explain' | 'task' | 'hint' | 'example'
   title?: string
   content: string
+  subSteps?: LessonSubStep[]  // 子步骤列表（仅 task 章节使用）
 }
 
 // 学习轨道
@@ -38,6 +46,8 @@ export interface ProjectStep {
   task: string
   hint?: string
   starterCode?: { html: string; css: string; js: string }
+  purpose?: string         // 这一步的目的
+  expectedResult?: string  // 完成后应该看到的效果
 }
 
 // 学习模式：sandbox = 浏览器内编辑器+预览 | local = 引导在本地 IDE 操作

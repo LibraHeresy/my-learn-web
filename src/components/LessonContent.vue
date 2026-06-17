@@ -119,10 +119,30 @@ onBeforeUnmount(() => {
         :class="['content-section', 'reveal-target', `section-${section.type}`]"
       >
         <h4 v-if="section.title" class="section-title" v-html="parseInline(section.title)"></h4>
-        <div
-          class="section-content"
-          v-html="parseContent(section.content)"
-        />
+
+        <!-- 子步骤卡片模式 -->
+        <template v-if="section.subSteps">
+          <div class="section-content" v-html="parseContent(section.content)" />
+          <div class="substeps-list">
+            <div v-for="(step, i) in section.subSteps" :key="i" class="substep-card">
+              <div class="substep-header">
+                <span class="substep-number">{{ i + 1 }}</span>
+                <div class="substep-content" v-html="parseContent(step.content)" />
+              </div>
+              <div v-if="step.purpose" class="purpose-box">
+                <span class="purpose-label">这一步的目的</span>
+                <div class="purpose-content" v-html="parseContent(step.purpose)" />
+              </div>
+              <div v-if="step.expectedResult" class="expected-box">
+                <span class="expected-label">完成后你应该看到</span>
+                <div class="expected-content" v-html="parseContent(step.expectedResult)" />
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- 无子步骤时保持原有渲染 -->
+        <div v-else class="section-content" v-html="parseContent(section.content)" />
       </div>
 
       <!-- 推荐聆听 -->
@@ -262,8 +282,11 @@ onBeforeUnmount(() => {
 /* ===== 列表 ===== */
 :deep(.md-list) {
   margin: var(--sp-2) 0;
-  padding-left: 0;
-  list-style-position: inside;
+  padding-left: 1.5em;
+}
+
+:deep(.md-list .md-list) {
+  padding-left: 1.2em;
 }
 
 :deep(.md-list li) {
@@ -520,5 +543,132 @@ onBeforeUnmount(() => {
   background: transparent;
   padding: 0;
   color: #E8DCC8;
+}
+
+/* ===== 子步骤卡片 ===== */
+.substeps-list {
+  counter-reset: substep;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+
+.substep-card {
+  background: #FFFDF9;
+  border: 1px solid #E8DDCC;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.substep-header {
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  align-items: flex-start;
+}
+
+.substep-number {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  margin-top: 1px;
+}
+
+.substep-content {
+  flex: 1;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.substep-content :deep(p) {
+  margin: 0 0 var(--sp-1) 0;
+}
+
+.substep-content :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.substep-content :deep(.inline-code) {
+  background: #F5EDD8;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-code);
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+
+/* ===== 目的说明 ===== */
+.purpose-box {
+  padding: var(--sp-2) var(--sp-4);
+  margin: 0 var(--sp-3) var(--sp-3) var(--sp-3);
+  background: #F4F8FC;
+  border-left: 3px solid #8BA4B8;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.purpose-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #6B8A9E;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--sp-1);
+}
+
+.purpose-content {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.purpose-content :deep(p) {
+  margin: 0 0 var(--sp-1) 0;
+}
+
+.purpose-content :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+/* ===== 预期结果 ===== */
+.expected-box {
+  padding: var(--sp-2) var(--sp-4);
+  margin: 0 var(--sp-3) var(--sp-3) var(--sp-3);
+  background: #F4F8F0;
+  border-left: 3px solid #8BA87D;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.expected-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #6B8A5E;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--sp-1);
+}
+
+.expected-content {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.expected-content :deep(p) {
+  margin: 0 0 var(--sp-1) 0;
+}
+
+.expected-content :deep(p:last-child) {
+  margin-bottom: 0;
 }
 </style>

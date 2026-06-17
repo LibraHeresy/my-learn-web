@@ -31,7 +31,11 @@ function wrapTerms(text: string, placeholders: string[]): string {
 
 // 提取围栏代码块 → 占位符
 function extractCodeFences(text: string, placeholders: string[], withClass: boolean): string {
-  return text.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
+  // 支持多种格式：
+  //   ```lang\ncode\n```         标准格式
+  //   ```\ncode\n```            无语言标识
+  //   ```inline content\n```    内容紧跟（如 ```App.vue（根组件）...）
+  return text.replace(/```[ \t]*(?:(\w+)[ \t]*\n)?([\s\S]*?)```/g, (_, lang, code) => {
     const idx = placeholders.length
     const codeContent = withClass ? escapeHtml(code.trimEnd()) : escapeHtml(code)
     const langAttr = !withClass && lang ? ` class="language-${escapeHtml(lang)}"` : ''
@@ -107,7 +111,7 @@ function extractLists(text: string, placeholders: string[]): string {
       processed = escapeHtml(processed)
       processed = restorePlaceholders(processed, localPh)
       processed = processed.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      processed = processed.replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      processed = processed.replace(/\*([^*]+)\*\*/g, '<em>$1</em>')
       return `<li>${processed}</li>`
     }).join('')
 

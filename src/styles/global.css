@@ -11,6 +11,14 @@
   box-sizing: border-box;
 }
 
+/* ===== 列表还原缩进 ===== */
+ul, ol {
+  padding-left: 1.5em;
+}
+ul ul, ul ol, ol ul, ol ol {
+  padding-left: 1.2em;
+}
+
 html, body {
   height: 100%;
 }

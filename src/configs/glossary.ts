@@ -1,4 +1,4 @@
-// 编程术语词库 — 每个术语有中文解释和音乐类比
+﻿// 编程术语词库 — 每个术语有中文解释和音乐类比
 // key 为术语的中文/英文写法，在课程内容中自动识别并显示 tooltip
 
 export interface TermDef {
@@ -8,9 +8,23 @@ export interface TermDef {
 
 // 按 key 长度降序排列——长术语优先匹配，避免"标签"先于"标签对"匹配
 export const glossary: [string, TermDef][] = [
+  ['Information Management: A Proposal', {
+    explanation: '1945年 Vannevar Bush 发表的文章，首次提出 Memex 概念——一个可以存储、检索个人信息的设备雏形，被视为超文本思想的源头。',
+    analogy: '就像一份畅想未来的提案——很多伟大的技术都始于一篇看似遥不可及的论文。'
+  }],
+  ['Asynchronous JavaScript And XML', {
+    explanation: 'Ajax 的全称——异步 JavaScript 和 XML。核心技术：用 XMLHttpRequest 在不刷新页面的情况下向服务器请求数据并局部更新页面。'
+  }],
+  ['Attention is All You Need', {
+    explanation: '2017年 Google 研究团队发表的里程碑论文——提出了 Transformer 架构。论文标题的意思是「注意力机制就是你需要的全部」，这句话改写了 AI 的历史。'
+  }],
   ['animation-timing-function', {
     explanation: 'CSS 动画的时间函数——控制动画在时间轴上的速度曲线。常用值：ease（默认，慢→快→慢）、linear（匀速）、ease-in（慢→快）、ease-out（快→慢）。',
     analogy: '就像扬琴曲中的速度变化——渐快（accelerando）或渐慢（ritardando），决定了音乐推进的"感觉"是平滑均匀还是起伏变化。'
+  }],
+  ['animation-iteration-count', {
+    explanation: 'CSS 动画的播放次数——可以设置具体数字（如 3 次）或 infinite（无限循环）。英文原意是「迭代次数」。',
+    analogy: '就像乐谱上的反复记号——Da Capo al Fine 表示从头反复到 Fine，可以指定反复几次。'
   }],
   ['addEventListener("click"', {
     explanation: '监听元素的点击事件——用户点击时触发',
@@ -32,9 +46,20 @@ export const glossary: [string, TermDef][] = [
     explanation: '定义 Grid 布局的列宽',
     analogy: '就像确定乐谱上每行小节的数量和宽度'
   }],
+  ['Vague but exciting.', {
+    explanation: '1989年 Tim Berners-Lee 提交万维网提案时，上司在封面写的批注——意思是「模糊但令人兴奋」。这句轻描淡写的话开启了整个 Web 时代。',
+    analogy: '就像导师在学生的创新课题申报书上批的"想法天马行空，但万一成了呢"——历史上最重要的创新往往始于模糊的兴奋。'
+  }],
   ['animation-fill-mode', {
     explanation: 'CSS 动画的填充模式——控制动画执行前后元素的状态。常用值：none（默认，不保留）、forwards（保留结束状态）、backwards（动画开始前就应用初始状态）、both（同时保留前后状态）。',
     analogy: '就像演奏前先摆好起始手型（backwards），弹完后保持最后的余音姿势（forwards）——不让元素"弹回"到动画前的样子。'
+  }],
+  ['animation-direction', {
+    explanation: 'CSS 动画的播放方向——normal（正向）、reverse（反向）、alternate（来回交替）。英文原意是「方向」。',
+    analogy: '就像演奏中的顺奏与逆行——可以正向弹、倒着弹、或者正反交替进行。'
+  }],
+  ['Gemini Code Assist', {
+    explanation: 'Google 2024年发布的 AI 编程助手——基于 Gemini 模型，集成在 VS Code 和 IntelliJ 等 IDE 中。'
   }],
   ['animation-duration', {
     explanation: 'CSS 动画属性——设置动画完成一个周期所需的时间。如 1s 表示1秒，0.5s 表示0.5秒。值越小动画越快。'
@@ -47,6 +72,12 @@ export const glossary: [string, TermDef][] = [
     explanation: '元素脱离正常文档流，相对于最近的定位祖先定位',
     analogy: '就像协奏曲中的独奏者——从乐队中走出来站在前面'
   }],
+  ['Douglas Crockford', {
+    explanation: 'JavaScript 领域的重量级人物——JSON 格式的发明者，著有《JavaScript: The Good Parts》，是 JS 社区最具影响力的布道者之一。'
+  }],
+  ['Sun Microsystems', {
+    explanation: '1982年创立的计算机公司——Java 语言的创造者，SPARC 工作站和 Solaris 系统在早期 Web 服务器中广泛使用。2009年被 Oracle 收购。'
+  }],
   ['addEventListener', {
     explanation: '给元素绑定一个事件监听器——当用户触发某个动作（如点击）时，执行指定的函数',
     analogy: '就像指挥给某个乐器声部指定一个进入信号——信号一到，立刻演奏'
@@ -54,6 +85,9 @@ export const glossary: [string, TermDef][] = [
   ['querySelectorAll', {
     explanation: '选中所有匹配指定选择器的元素，返回一个列表',
     analogy: '就像指挥同时命令整个弦乐声部做同一个动作'
+  }],
+  ['AI Coding Agent', {
+    explanation: 'AI 编程智能体——能自主完成复杂编程任务的 AI，包括读代码、写代码、运行测试、调试修复。区别于简单补全，Agent 能独立规划和执行多步骤的开发任务。'
   }],
   ['justify-content', {
     explanation: 'Flex 容器中沿主轴对齐子元素的方式',
@@ -71,6 +105,13 @@ export const glossary: [string, TermDef][] = [
     explanation: 'CSS 动画的时间函数——控制动画在时间轴上的速度曲线。常用值：ease（慢→快→慢）、linear（匀速）、ease-in（慢→快）、ease-out（快→慢）。',
     analogy: '就像扬琴曲中的速度变化——渐快或渐慢，决定了音乐推进的"感觉"是平滑均匀还是起伏变化。'
   }],
+  ['animation-delay', {
+    explanation: 'CSS 动画的延迟时间——设置动画在开始前等待多久。英文原意是「延迟」。',
+    analogy: '就像演奏开始前的静默——指挥抬手后才开始奏响第一个音符，中间的停顿就是 delay。'
+  }],
+  ['XMLHttpRequest', {
+    explanation: '浏览器提供的 API 对象——在不刷新页面的情况下与服务器交换数据。它是 Ajax 技术的核心，2005年被 Google 在 Gmail 和 Google Maps 中大量使用后成为 Web 2.0 的基石。'
+  }],
   ['盒模型（Box Model）', {
     explanation: '每个元素都是一个矩形盒子，从外到内由 margin → border → padding → content 四层组成',
     analogy: '就像一件乐器的包装——外箱是 margin、箱壁是 border、内衬是 padding、乐器本身是 content'
@@ -86,6 +127,21 @@ export const glossary: [string, TermDef][] = [
   ['preventDefault', {
     explanation: '阻止元素的默认行为（如阻止表单提交后刷新页面）',
     analogy: '就像指挥临时叫停一个自动重复的乐段'
+  }],
+  ['localhost:5173', {
+    explanation: 'Vite 开发服务器默认地址——5173 是 Vite 默认使用的端口号，一个电脑上可能同时运行多个服务，每个占一个端口。',
+    analogy: '就像琴房号码——5173 号琴房是你的专属排练室，同一栋楼里还有其他琴房（其他端口），互不干扰。'
+  }],
+  ['letter-spacing', {
+    explanation: 'CSS 属性——控制字符之间的水平间距。值越大字越疏朗，适合做标题呼吸感。值可用 em 单位相对于字体大小。',
+    analogy: '就像音符之间的间距——拉宽了读起来轻松悠扬，收紧了显得紧张密集。'
+  }],
+  ['Copilot Agent', {
+    explanation: 'GitHub 2024年发布的 AI 编程代理模式——Copilot 从代码补全升级为能自主读取项目、规划任务、修改多个文件的智能代理。'
+  }],
+  ['style.display', {
+    explanation: 'JS 中控制元素的显示方式——设置 display 属性来显示或隐藏元素。"" 表示恢复默认，`none` 表示隐藏。',
+    analogy: '就像舞台上聚光灯的开关——决定哪个乐器组被观众看到、哪个暂时退到幕后。'
   }],
   ['border-radius', {
     explanation: '给元素设置圆角',
@@ -106,6 +162,15 @@ export const glossary: [string, TermDef][] = [
   ['querySelector', {
     explanation: '选中第一个匹配指定选择器的元素',
     analogy: '就像指挥指向某一位独奏者'
+  }],
+  ['WorldWideWeb', {
+    explanation: '1990年 Tim Berners-Lee 开发的世界上第一个浏览器——同时也是编辑器。万维网由此诞生。'
+  }],
+  ['tree-shaking', {
+    explanation: '打包工具的优化技术——自动移除代码中未被引用的「死代码」，就像摇树把枯叶摇掉。webpack 和 Rollup 都支持。'
+  }],
+  ['OpenAI Codex', {
+    explanation: 'OpenAI 2021年发布的代码生成模型——能把自然语言描述转成代码，是 GitHub Copilot 背后的引擎。'
   }],
   ['属性（Property）', {
     explanation: 'CSS 中你想设置的样式特征，如 color、font-size——每个属性后面跟一个值',
@@ -130,6 +195,32 @@ export const glossary: [string, TermDef][] = [
   ['script setup', {
     explanation: 'Vue 3 组合式 API 的语法糖——在 .vue 文件中更简洁地编写组件逻辑，定义的变量和函数自动暴露给模板',
     analogy: '就像总谱上用简记符号代替完整的演奏说明——熟练之后，一个记号抵得上一段话'
+  }],
+  ['node_modules', {
+    explanation: 'Node.js 项目的依赖文件夹——npm install 后自动生成，包含项目用到的所有第三方包。体积很大，绝不能提交到 Git（应加入 .gitignore）。',
+    analogy: '就像演奏前从乐谱库借来的所有分谱——不是你的原创，用的时候拿过来，不用自己存。别人也可以通过节目单（package.json）自己借到同样的谱子。'
+  }],
+  ['Transformer', {
+    explanation: 'Google 2017年提出的神经网络架构——用自注意力机制替代传统的循环和卷积。它是 ChatGPT、Claude 等所有大语言模型的底层架构基础。'
+  }],
+  ['Claude Code', {
+    explanation: 'Anthropic 2025年发布的 AI 编程工具——运行在终端中，能读写文件、执行命令、管理 Git，像一个全能的 AI 工程师。'
+  }],
+  ['appendChild', {
+    explanation: 'DOM 方法——将一个元素作为子节点添加到另一个元素末尾。需要先用 createElement 创建新元素。',
+    analogy: '就像在乐谱的末尾增加一段新的旋律——新增的内容附加在已有内容之后。'
+  }],
+  ['removeChild', {
+    explanation: 'DOM 方法——从父元素中移除一个子元素。与 appendChild 相反的操作。',
+    analogy: '就像从节目单中划掉一首曲目——该声部退出演奏。'
+  }],
+  ['Computed 面板', {
+    explanation: '浏览器 DevTools 中的一个面板——显示元素最终生效的 CSS 样式，可以看哪些规则被覆盖了（划删除线）。',
+    analogy: '就像总谱上最终的演奏标记汇总——有些记号被后来的修改覆盖了，划掉的就是被替代的旧版本。'
+  }],
+  ['Elements 面板', {
+    explanation: '浏览器 DevTools 中最常用的面板——显示页面的 HTML 结构树，可以查看、编辑每个元素的标签和属性。按 F12 打开。',
+    analogy: '就像翻开总谱查看每个声部的详细记谱——每一行、每一个标记都一目了然。'
   }],
   ['层叠（Cascade）', {
     explanation: 'CSS 的核心理念——多条规则可能同时作用于一个元素，浏览器按权重和顺序决定最终样式',
@@ -165,6 +256,32 @@ export const glossary: [string, TermDef][] = [
   ['textContent', {
     explanation: '获取或设置元素的纯文本内容（不含 HTML 标签）',
     analogy: '就像只读歌词，不管谱号调号'
+  }],
+  ['flex-shrink', {
+    explanation: 'CSS Flexbox 属性——控制弹性元素在空间不足时的收缩比例。默认 1（可以收缩），0 表示不收缩保持原尺寸。',
+    analogy: '就像舞台上空间不够时，哪些乐器组可以挤一挤（shrink），哪些必须保持自己的位置（不收缩）。'
+  }],
+  ['font-family', {
+    explanation: 'CSS 属性——设置文字的字体。可指定多个字体用逗号分隔，浏览器按顺序查找第一个可用的。最后应写通用字体族（如 serif、sans-serif）作为后备。',
+    analogy: '就像指定演奏者——"请小提琴独奏，如果小提琴手不在，请中提琴代替，再不行就钢琴"。按优先级排好替补名单，总有人能上场。'
+  }],
+  ['font-weight', {
+    explanation: 'CSS 属性——控制文字的粗细。可用数值（100~900）或关键字（normal=400、bold=700、lighter、bolder）。数字越大字体越粗。',
+    analogy: '就像演奏力度的标记——normal 是 mf（中强），bold 是 f（强），100 是 ppp（极弱），900 是 fff（极强）。粗细就是文字的"力度"。'
+  }],
+  ['Windows XP', {
+    explanation: '微软 2001 年发布的操作系统——预装 IE6 浏览器，由于 XP 的世纪性普及，IE6 成了前端开发者长达十年的兼容噩梦。'
+  }],
+  ['TypeScript', {
+    explanation: '微软 2012年发布的开源语言——JavaScript 的超集，添加了静态类型检查。大型项目中能提前发现大量错误，已成为前端主流。'
+  }],
+  ['mouseenter', {
+    explanation: '鼠标进入元素区域时触发的事件——只在首次进入时触发一次，不会冒泡。与 mouseover 不同，进入子元素不会重复触发。',
+    analogy: '就像指挥棒首次指向某个乐器组——只在指向的瞬间给出指示，不会因为乐器组内的人员变动而重复示意。'
+  }],
+  ['mouseleave', {
+    explanation: '鼠标离开元素区域时触发的事件——只在完全离开时触发一次，不会冒泡。与 mouseout 不同，离开到子元素不会触发。',
+    analogy: '就像指挥棒从某个乐器组移开——只在离开时给出一个收束手势。'
   }],
   [':nth-child', {
     explanation: '匹配父元素中第 n 个子元素的伪类选择器',
@@ -211,6 +328,27 @@ export const glossary: [string, TermDef][] = [
   ['translateY', {
     explanation: 'CSS transform 函数——沿 Y 轴（垂直方向）移动元素。如 translateY(30px) 向下30像素，负数向上。英文原意是「沿Y轴平移」。'
   }],
+  ['object-fit', {
+    explanation: 'CSS 属性——控制图片或视频在容器内的填充方式。cover（裁剪填满）、contain（完整显示不裁剪）、fill（拉伸变形）。',
+    analogy: '就像把一张大照片放进相框——可以裁掉多余部分（cover）、缩到能完整显示（contain）、或者强行拉变形（fill）。'
+  }],
+  ['text-align', {
+    explanation: 'CSS 属性——控制文字的水平对齐方式。left（左对齐）、center（居中）、right（右对齐）、justify（两端对齐，拉大字间距填满整行）。',
+    analogy: '就像舞台上合唱团的站队——可以靠左站、居中对齐、靠右排列，justify 则是均匀拉开填满整个舞台宽度。'
+  }],
+  ['hypertext', {
+    explanation: '超文本——通过链接把不同文档关联在一起的文本系统。HTML 中的 HT 就是 HyperText。点击一个词就跳到相关页面。'
+  }],
+  ['Wikipedia', {
+    explanation: '2001年上线的自由百科全书——任何人都可以编辑，是 Web 2.0 用户协作模式的标志性代表。'
+  }],
+  ['Anthropic', {
+    explanation: '2021年由前 OpenAI 研究员创立的 AI 公司——以 AI 安全为核心使命，开发了 Claude 系列模型。'
+  }],
+  ['classList', {
+    explanation: 'DOM 元素的类名列表对象——提供了 add、remove、toggle、contains 等方法操作 CSS class',
+    analogy: '就像调整乐团某个声部的角色标签——随时可以加上"主奏"、去掉"伴奏"、或在两者之间切换。'
+  }],
   ['alternate', {
     explanation: 'CSS animation-direction 的值——动画在奇数遍正向播放、偶数遍反向播放。英文原意是「交替的」。'
   }],
@@ -255,6 +393,19 @@ export const glossary: [string, TermDef][] = [
   }],
   ['uppercase', {
     explanation: 'CSS text-transform 的值——将所有字母转为大写。英文原意是「大写字母」。'
+  }],
+  ['polyfill', {
+    explanation: '一段代码用来在旧浏览器中模拟现代 Web API——让新特性在老环境中也能工作。就像补牙材料填平坑洞。'
+  }],
+  ['Facebook', {
+    explanation: '2004年成立的社交网络平台——改变了互联网信息传播方式，催生了前端框架（React 就是 Facebook 开发的）。'
+  }],
+  ['Windsurf', {
+    explanation: 'Codeium 公司 2024年发布的 AI 编程 IDE——以「流式 AI 编程」为特色，AI 能自动理解项目上下文并提供流畅的编码体验。'
+  }],
+  ['DevTools', {
+    explanation: '浏览器开发者工具——按 F12 打开。包含 Elements（元素）、Console（控制台）、Sources（源码）、Network（网络）等面板，是前端开发最常用的调试工具。',
+    analogy: '就像音乐家的调音器和节拍器——不是演出用的乐器，但排练和调试时离不开它们。'
   }],
   ['::before', {
     explanation: '在元素内容之前插入装饰性内容的伪元素',
@@ -327,6 +478,51 @@ export const glossary: [string, TermDef][] = [
   ['textarea', {
     explanation: '多行文本输入标签——可以输入大段文字。rows 属性设置显示行数。',
     analogy: '就像报名表上的"个人简介"大框——不是窄窄一条线，而是一整块区域。'
+  }],
+  ['position', {
+    explanation: 'CSS 定位属性——控制元素在页面上的定位方式。可选 static（默认）、relative（相对）、absolute（绝对）、fixed（固定）、sticky（粘性）。',
+    analogy: '就像指挥决定每个乐器组在舞台上的位置——弦乐坐前排还是后排、独奏者站在哪里，都是定位决定的。'
+  }],
+  ['reactive', {
+    explanation: 'Vue 3 组合式 API 的响应式对象——用 reactive() 包裹一个对象，使其所有属性变成响应式的。不需要 .value。',
+    analogy: '就像给整本乐谱贴上感应标签——翻到任何一页、修改任何一个标记，乐谱管理系统都会自动感知和记录变化。'
+  }],
+  ['Web 2.0', {
+    explanation: '2004年前后兴起的第二代互联网模式——用户从单纯的内容消费者变成内容创造者（YouTube、Flickr、Facebook、Wikipedia）。强调互动、分享、协作。'
+  }],
+  ['Firefox', {
+    explanation: 'Mozilla 基金会的开源浏览器——2004年发布后打破了 IE 的垄断地位，拥有优秀的开发者工具和标准兼容性。'
+  }],
+  ['Twitter', {
+    explanation: '2006年上线的微博客平台——140字短消息改变了信息传播的速度和方式。'
+  }],
+  ['YouTube', {
+    explanation: '2005年上线的视频分享平台——Web 2.0 典范，后被 Google 收购。'
+  }],
+  ['Session', {
+    explanation: '服务端维护的用户会话状态——用户登录后，服务器记住你是谁，直到你退出或超时。通常配合 Cookie 使用。'
+  }],
+  ['Angular', {
+    explanation: 'Google 2010年发布的前端框架——2016年用 TypeScript 完全重写，提供了完整的前端开发解决方案。'
+  }],
+  ['webpack', {
+    explanation: '2012年发布的前端模块打包工具——将 JS、CSS、图片等资源视为模块，用 loader 和 plugin 统一处理和打包。'
+  }],
+  ['AlphaGo', {
+    explanation: 'DeepMind 2016年开发的围棋 AI——击败了世界冠军李世石，标志着 AI 在复杂策略游戏中超越了人类。核心是深度强化学习。'
+  }],
+  ['ChatGPT', {
+    explanation: 'OpenAI 2022年11月发布的对话式 AI 产品——两个月内用户突破 1 亿，是史上增长最快的消费级应用，彻底改变了普通人使用 AI 的方式。'
+  }],
+  ['Copilot', {
+    explanation: 'GitHub 和 OpenAI 2021年联合推出的 AI 编程助手——在编辑器中根据上下文自动补全代码，相当于一个实时协作的 AI 编程伙伴。'
+  }],
+  ['Express', {
+    explanation: 'Node.js 最流行的 Web 后端框架——轻量、灵活，是 MEAN/MERN 技术栈的核心。用 get()、post() 等简洁方法定义路由。'
+  }],
+  ['Console', {
+    explanation: '浏览器 DevTools 的控制台面板——显示 console.log() 输出的信息、JS 错误、警告。是开发者"听"代码运行情况的主要窗口。',
+    analogy: '就像排练时指挥的耳朵——通过听来判断每个声部是否正确、哪里有走音、哪里需要调整。'
   }],
   ['::after', {
     explanation: '在元素内容之后插入装饰性内容的伪元素',
@@ -447,6 +643,46 @@ export const glossary: [string, TermDef][] = [
   ['z-index', {
     explanation: '控制定位元素的前后层叠顺序，数值越大越靠前',
     analogy: '就像乐谱上标注的声部主次——数值大的在最前面（独奏），小的在背景（伴奏）'
+  }],
+  ['display', {
+    explanation: 'CSS 显示属性——控制元素的显示方式。block（块级，独占一行）、inline（内联，不换行）、none（隐藏）、flex（弹性布局）、grid（网格布局）。',
+    analogy: '就像决定乐器是独奏（block，独占舞台）还是合奏（inline，共享一行），或者暂时退场（none，隐藏）。'
+  }],
+  ['Google', {
+    explanation: '1998年创立的互联网公司——搜索引擎起家，通过 Gmail 和 Google Maps 展示了 Ajax 的威力，直接催生了 Web 2.0 时代。'
+  }],
+  ['Chrome', {
+    explanation: 'Google 2008年发布的开源浏览器——内置强大的 DevTools、超快的 V8 JS 引擎，彻底改变了前端开发。目前全球份额第一。'
+  }],
+  ['Flickr', {
+    explanation: '2004年上线的照片分享网站——Web 2.0 时代的标志性产品之一。'
+  }],
+  ['Apache', {
+    explanation: '全球使用最广泛的 Web 服务器软件——1995年发布，开源免费。LAMP 曾是 Web 开发的标准架构。'
+  }],
+  ['Cookie', {
+    explanation: '浏览器存储在用户电脑上的小块数据——用于记住登录状态、购物车、偏好设置等。每次请求自动发送给服务器。英文原意是「小甜饼」。'
+  }],
+  ['jQuery', {
+    explanation: '2006年发布的 JS 库——用简洁的 $() 语法解决了 DOM 操作和浏览器兼容问题。write less, do more 是其核心理念。'
+  }],
+  ['Svelte', {
+    explanation: '2016年发布的前端框架——核心理念是「消失的框架」：编译阶段把代码转为纯 JS，运行时没有框架开销。'
+  }],
+  ['plugin', {
+    explanation: '构建工具的插件——扩展打包器的功能，如压缩代码、注入环境变量。webpack 和 Vite 都有丰富的插件生态。'
+  }],
+  ['loader', {
+    explanation: 'webpack 的概念——将非 JS 文件（CSS、图片、字体等）转换为可被 JS 模块引用的格式。每种文件类型需要对应的 loader。'
+  }],
+  ['OpenAI', {
+    explanation: '2015年成立的人工智能研究公司——开发了 GPT 系列、DALL-E、Codex 等重量级 AI 模型。'
+  }],
+  ['Claude', {
+    explanation: 'Anthropic 开发的 AI 助手——强调安全性、可靠性和长上下文能力。Claude 3.5/4 系列在编程和推理方面表现突出。'
+  }],
+  ['Cursor', {
+    explanation: '2023年发布的 AI 编程编辑器——基于 VS Code，内嵌 AI 代码补全和对话功能。AI Coding 时代的标志性工具之一。'
   }],
   ['@media', {
     explanation: 'CSS 媒体查询——根据屏幕宽度等条件应用不同的样式',
@@ -629,6 +865,46 @@ export const glossary: [string, TermDef][] = [
   ['window', {
     explanation: '浏览器中的全局对象——代表浏览器窗口，所有全局变量和函数都是 window 的属性。英文原意是「窗口」。'
   }],
+  ['dashed', {
+    explanation: 'CSS 边框样式——虚线，由短线段和间隔组成。适合表示临时或可拖拽的边界。',
+    analogy: '就像用虚线笔在乐谱上画的分割线——表示分隔但不那么强调，比实线更轻、更随意。'
+  }],
+  ['column', {
+    explanation: 'CSS Flexbox 的 flex-direction 值——让子元素纵向排列（从上到下），主轴变为垂直方向。与 row（横向）相对。',
+    analogy: '就像把横排的管乐队改成竖排的队列——同样的队员，只是从"横排"变成了"竖列"，排列方向变了。'
+  }],
+  ['v-bind', {
+    explanation: 'Vue 的绑定指令——将元素的属性动态绑定到 JS 表达式。简写为一个冒号 :（如 :src="url"）。绑定的值变化时属性自动更新。',
+    analogy: '就像把乐谱上的某一个音和演奏者的指法绑定——换了音高（数据变了），指法（属性）自动跟着变。'
+  }],
+  ['method', {
+    explanation: 'JavaScript 中属于对象的方法（函数）——如 array.push()、element.addEventListener()。方法是"属于某个对象的函数"，与独立函数略有不同。',
+    analogy: '就像某位演奏者独有的技巧——大提琴的揉弦（cello.vibrato()）是一种 method，只有大提琴能用；拍手（clap()）是通用 function，谁都能做。'
+  }],
+  ['Memex', {
+    explanation: '1945年 Vannevar Bush 构想的个人信息管理设备——用索引和关联链在不同文档间快速跳转，是超文本和 Web 的思想原型。'
+  }],
+  ['Nginx', {
+    explanation: '2004年发布的高性能 Web 服务器和反向代理——俄罗斯工程师 Igor Sysoev 为解决高并发问题而开发。英文读音 engine x。'
+  }],
+  ['React', {
+    explanation: 'Facebook 2013年发布的前端 UI 库——用 JSX 语法和组件化思维构建界面，引入虚拟 DOM 概念。目前全球最流行的前端库。'
+  }],
+  ['渐进式框架', {
+    explanation: 'Vue 的核心设计理念——可以只用部分功能，也可以逐步加入组件、路由、状态管理等全家桶。英文原名 Progressive Framework。'
+  }],
+  ['Babel', {
+    explanation: 'JavaScript 编译器——将新版 JS（ES6+）转换为旧浏览器也能运行的版本。以传说中通向天堂的巴别塔命名。'
+  }],
+  ['chunk', {
+    explanation: '构建工具将代码拆分成多个独立的文件块——实现按需加载，减少首屏下载量。英文原意是「一大块」。'
+  }],
+  ['Grunt', {
+    explanation: '2012年发布的 JS 任务运行器——用配置文件定义构建任务，是前端工程化早期的标志性工具。后来被 Gulp 和 webpack 取代。'
+  }],
+  ['Bower', {
+    explanation: '2012年发布的前端包管理器——在 npm 支持前端之前是下载前端库的主要工具。2015年后被 npm/Yarn 取代。'
+  }],
   ['单文件组件', {
     explanation: 'Vue 的 .vue 文件——把模板、逻辑、样式写在同一个文件中，一个组件一个文件',
     analogy: '就像一份完整的声部分谱——含乐谱内容、演奏标记、声部说明，三合一'
@@ -803,6 +1079,29 @@ export const glossary: [string, TermDef][] = [
   ['width', {
     explanation: '📍 特有属性。元素宽度——img、video 等元素特有。设定显示宽度。',
     analogy: '就像规定乐谱在谱架上的摆放宽度——太宽占地方，太窄看不清。'
+  }],
+  ['UTF-8', {
+    explanation: '最通用的字符编码标准——支持包括中文在内的几乎全世界所有文字。HTML 文件头部必须声明 <meta charset="UTF-8">。',
+    analogy: '就像国际通用的五线谱记谱法——全世界音乐家都能读懂，不管你是中国人、德国人还是日本人，看到五线谱上的音符就知道弹什么音。'
+  }],
+  ['https', {
+    explanation: '安全超文本传输协议——网址前面的协议标记。有加密，数据传输更安全。书写链接时必须包含 https:// 前缀。',
+    analogy: '就像用加密信封寄乐谱——不是普通明信片（http），而是封口的保密信封，中途不会被偷看。'
+  }],
+  ['Java', {
+    explanation: 'Sun Microsystems 1995年发布的编程语言——「一次编写，到处运行」。和 JavaScript 除了名字前四个字母外没有关系。'
+  }],
+  ['Ruby', {
+    explanation: '1995年发布的开源编程语言——以简洁优雅著称。配合 Rails 框架（2005年）掀起了「约定优于配置」的 Web 开发革命。'
+  }],
+  ['CPAN', {
+    explanation: 'Comprehensive Perl Archive Network——Perl 语言的全能档案网络。编程世界最早的集中式包管理系统之一，启发了后来的 npm、pip 等。'
+  }],
+  ['模板语法', {
+    explanation: 'Vue 等框架中在 HTML 中嵌入动态表达式的语法——如 {{ message }}、v-if、v-for。用声明式的方式描述页面和数据的关系。'
+  }],
+  ['Gulp', {
+    explanation: '2013年发布的流式构建工具——用 JS 代码定义构建流程，比 Grunt 更快更灵活。'
   }],
   ['.vue', {
     explanation: 'Vue 单文件组件的文件后缀——一个文件包含 template（模板）、script（逻辑）、style（样式）三部分',
@@ -1004,6 +1303,55 @@ export const glossary: [string, TermDef][] = [
   ['YAML', {
     explanation: '一种人类友好的数据序列化格式——用缩进表示层级，比 JSON 更易读写。常用于配置文件。全称 YAML Ain\'t Markup Language。'
   }],
+  ['emit', {
+    explanation: 'Vue 组件中向父组件发送事件的方法——子组件通过 emit 通知父组件"发生了一件事"，父组件决定如何响应。',
+    analogy: '就像乐手在演奏中举手示意指挥——表示"我这一部分结束了"或"我需要翻谱"，指挥听到后做出相应的调整。'
+  }],
+  ['wrap', {
+    explanation: 'CSS Flexbox 的 flex-wrap 值——允许弹性子元素在空间不足时自动换行到下一行。默认是 nowrap（不换行，挤在一行）。',
+    analogy: '就像乐谱中一行写不下了自动换到下一行——wrap 让卡片像谱面一样自然折行，不会硬挤出去。'
+  }],
+  ['slot', {
+    explanation: 'Vue 的插槽机制——组件内部预留的"占位孔"，父组件可以向这些孔中插入自定义内容。默认 slot、具名 slot、作用域 slot 三种形式。',
+    analogy: '就像协奏曲中的华彩段——作曲家留出一段空白，由独奏者在演出时即兴填充。每个演奏者填的内容不同，但框架（组件）是一样的。'
+  }],
+  ['v-on', {
+    explanation: 'Vue 的事件监听指令——给元素绑定 DOM 事件处理函数。简写为 @（如 @click="handle"）。监听到事件时执行指定的方法。',
+    analogy: '就像指挥给某个声部一个进入手势——挥到那个位置（事件触发），对应的乐手就开始演奏（执行处理函数）。'
+  }],
+  ['无衬线体', {
+    explanation: '笔画末端没有装饰线的字体——如 Windows 自带的微软雅黑、网页常用的 Arial。干净利落、现代感强，适合正文阅读。英文名 sans-serif。',
+    analogy: '就像长笛的音色——干净纯粹、没有多余的泛音装饰，直来直去的线条感。'
+  }],
+  ['http', {
+    explanation: '超文本传输协议——网址前面的协议标记。没有加密。现在大多数网站已经升级到 https。',
+    analogy: '就像用普通明信片寄乐谱——中途可能被看到内容。现在基本都用 https（加密信封）替代了。'
+  }],
+  ['输入模式', {
+    explanation: 'HTML input 标签的 type 属性决定输入模式——text（文本）、email（邮箱）、number（数字）、date（日期）等。不同模式提供不同的输入体验和验证。',
+    analogy: '就像报名表上不同的填空线——"姓名"是写文字的、"出生日期"是数字的、"邮箱"有特殊的格式要求。每种线有它自己的填写规则。'
+  }],
+  ['PHP', {
+    explanation: '1995年诞生的服务器端脚本语言——曾驱动了 Facebook、Wikipedia 等早期 Web 巨头，至今仍运行着互联网大量的网站。'
+  }],
+  ['gem', {
+    explanation: 'Ruby 语言的包管理器——gem install xxx 从 RubyGems 仓库下载包。'
+  }],
+  ['pip', {
+    explanation: 'Python 语言的包管理器——pip install xxx 从 PyPI 仓库下载第三方库。全称 Pip Installs Packages（递归缩写）。'
+  }],
+  ['JSX', {
+    explanation: 'JavaScript XML——React 引入的语法扩展，让你在 JS 中写类似 HTML 的标记。JSX 会被 Babel 编译为标准的 JavaScript 函数调用。'
+  }],
+  ['SQL', {
+    explanation: 'Structured Query Language（结构化查询语言）——操作数据库的标准语言。前端开发者虽不直接写大量 SQL，但 ORM、GraphQL 等工具都是对 SQL 的封装。'
+  }],
+  ['GPT', {
+    explanation: 'Generative Pre-trained Transformer——OpenAI 开发的大语言模型系列。GPT-3 在 2020 年引起巨大轰动，ChatGPT 在 2022 年底引爆了 AI 革命。'
+  }],
+  ['JWT', {
+    explanation: 'JSON Web Token——一种紧凑的令牌格式，用于在客户端和服务端之间安全传输认证信息。登录后服务端签发 JWT，后续请求携带它证明身份。'
+  }],
   ['标签对', {
     explanation: '成对出现的 HTML 标签：开始标签 + 内容 + 结束标签',
     analogy: '就像乐谱中的小节线——有开始就有结束，成对出现'
@@ -1174,6 +1522,43 @@ export const glossary: [string, TermDef][] = [
   ['XML', {
     explanation: '可扩展标记语言——一种类似 HTML 的数据格式，用于存储和传输数据。全称 eXtensible Markup Language。'
   }],
+  ['gap', {
+    explanation: 'CSS 属性——在 Flexbox 和 Grid 布局中设置行列之间的间距。一个值同时控制行列间距，两个值分别控制。比 margin 更简单直观。',
+    analogy: '就像乐团座次之间的间隔——每个乐器组之间留出舒适的距离，让声音不混在一起。'
+  }],
+  ['作用域', {
+    explanation: 'JavaScript 中变量可被访问的范围——全局作用域（到处可用）和局部作用域（仅函数/块内可用）。let/const 创建块级作用域，var 只有函数作用域。',
+    analogy: '就像琴房和音乐厅的区别——在琴房里练的一段旋律（局部变量）只有你自己知道，在舞台上演奏的（全局变量）整个乐团都能听到。'
+  }],
+  ['衬线体', {
+    explanation: '笔画末端有装饰线（衬线）的字体——如 Times New Roman、宋体。笔划粗细有变化、典雅庄重，适合标题。英文名 serif。',
+    analogy: '就像小提琴的音色——有丰富的泛音和装饰音，笔画的粗细变化就像揉弦的深浅起伏。'
+  }],
+  ['装饰线', {
+    explanation: '衬线字体笔画末端的小横线——serif 字体的标志特征。中文字体的宋体也有类似装饰。有装饰线 = 衬线体，没有 = 无衬线体。',
+    analogy: '就像音符上的装饰音记号——不是主体旋律，但增添了韵味和风格。'
+  }],
+  ['IE', {
+    explanation: 'Internet Explorer——微软的老牌浏览器，曾占 95% 份额。长期不遵守 Web 标准导致前端开发者需要大量 hack 和 polyfill。2022年正式退役。'
+  }],
+  ['AI', {
+    explanation: 'Artificial Intelligence（人工智能）——让机器模拟人类智能行为的技术。从1956年达特茅斯会议正式确立，近期以深度学习和大语言模型为核心突破。'
+  }],
+  ['插件', {
+    explanation: 'Plugin——可插拔的扩展模块，为已有软件增加新功能。VS Code 的插件生态让它可以变成任何语言的 IDE。'
+  }],
+  ['框架', {
+    explanation: 'Framework——一套预定义好的代码结构和规范。你用框架就按它的规则来写，框架负责调用你的代码（控制反转）。'
+  }],
+  ['分包', {
+    explanation: '把应用代码拆成多个独立的小包——用户访问时只下载当前需要的部分，加快首屏加载。Vite 和 webpack 都支持自动分包。'
+  }],
+  ['异步', {
+    explanation: 'Asynchronous——代码不会阻塞等待结果，而是注册一个回调，结果来了再处理。JS 是单线程语言，异步是其处理网络请求的核心机制。'
+  }],
+  ['加载', {
+    explanation: 'Load——浏览器从服务器获取资源（HTML、CSS、JS、图片）并展示给用户。加载性能直接影响用户体验，是现代前端开发的核心关注点。'
+  }],
   ['变量', {
     explanation: '一个有名字的数据容器，用 let 或 const 声明——存储值以便后续使用',
     analogy: '就像乐谱上用字母标注的段落——A 段、B 段，指代一段具体的内容'
@@ -1335,10 +1720,65 @@ export const glossary: [string, TermDef][] = [
     explanation: '无序列表容器——列表项前显示圆点，顺序不重要时使用。li 必须放在 ul 或 ol 里面。',
     analogy: '就像练琴前的备选曲目单——先挑哪首练都可以，每首地位平等。'
   }],
+  ['编码', {
+    explanation: '字符编码——规定计算机如何存储和传输文字。UTF-8 是最常用的编码，支持中文、英文等几乎所有语言。乱码通常是因为编码不一致。',
+    analogy: '就像乐谱的记谱法——五线谱、简谱、工尺谱是不同的"编码方式"，如果演奏者用简谱的思维去读五线谱，就会"乱码"（读错音）。'
+  }],
+  ['渲染', {
+    explanation: '浏览器将 HTML/CSS/JS 代码转换成屏幕上可见像素的过程。每次代码变化，浏览器都可能重新渲染受影响的区域。',
+    analogy: '就像将乐谱上的音符转换成真实的声音——乐谱是代码（二维符号），演奏出来的音乐是渲染结果（声波/像素），中间需要演奏者（浏览器引擎）的转换。'
+  }],
+  ['视口', {
+    explanation: '用户在浏览器中实际看到网页的可见区域——不同设备视口宽度不同（手机约 375px，桌面约 1920px）。响应式设计根据视口宽度调整布局。',
+    analogy: '就像舞台的可见区域——观众（用户）只能看到舞台框内的表演（视口内的页面），但后台还有很多准备中的道具（视口外的内容）。'
+  }],
+  ['请求', {
+    explanation: '客户端（浏览器）向服务器发送的数据请求——如打开网页（GET 请求）、提交表单（POST 请求）。服务器处理后返回响应（response）。',
+    analogy: '就像向乐谱管理员提出借阅申请——"我想借贝多芬第九交响曲的总谱"（请求），管理员找到后递给你（响应）。请求和响应是 Web 通信的基本模式。'
+  }],
+  ['缓存', {
+    explanation: '浏览器将已加载的资源（HTML/CSS/JS/图片）暂存在本地，下次访问同一页面时直接从本地读取，大幅加快加载速度。',
+    analogy: '就像背谱演奏——第一次要看着乐谱弹（从网络下载），熟练后记在脑子里（缓存），以后弹同一首曲子不用再看谱了。'
+  }],
+  ['迭代', {
+    explanation: '循环中每一次执行叫一次迭代——如 forEach 遍历数组，数组有 5 个元素就是 5 次迭代。也泛指开发中的反复改进过程。',
+    analogy: '就像反复练习同一段音阶——第 1 遍、第 2 遍、第 3 遍……每一遍都是一次迭代，每次都在上一次的基础上改进。'
+  }],
+  ['断点', {
+    explanation: '双重含义——在响应式设计中指 @media 查询的屏幕宽度阈值（如 640px、1024px）；在调试中指代码中设置的暂停执行标记。',
+    analogy: '就像乐谱中的排练号——在 A 段标记处乐队调整编制（响应式断点），也可以在某小节停下来检查音准（调试断点）。'
+  }],
+  ['弹性', {
+    explanation: 'Flexbox 布局的中文叫法——弹性盒子，元素可以根据可用空间自动伸缩。Flexbox 的核心就是"弹性"——能伸能缩，不写死尺寸。',
+    analogy: '就像橡皮筋——拉一拉变宽（flex-grow），压一压变窄（flex-shrink），永远适应当前的空间。弹性布局让页面像橡皮筋一样灵活。'
+  }],
+  ['行高', {
+    explanation: 'CSS line-height 属性的中文叫法——控制文字行与行之间的垂直距离。值越大行距越疏朗，越小越紧凑。推荐正文 1.6~1.8。',
+    analogy: '就像五线谱行与行之间的距离——太密了音符会挤在一起，太宽了浪费纸面。合适的行高让阅读像听舒缓的柔板一样舒适。'
+  }],
+  ['重置', {
+    explanation: 'CSS Reset——在写样式之前，先把浏览器默认的 margin、padding 等统归零，再按需设置。避免不同浏览器默认样式不一致。',
+    analogy: '就像排练前把乐谱架和座椅全部归位到标准位置——统一从"零"开始，每个人再按需要微调自己的位置。'
+  }],
+  ['索引', {
+    explanation: '数组中每个元素的编号——从 0 开始计数。如 arr[0] 是第一个元素，arr[1] 是第二个。也叫下标。',
+    analogy: '就像乐谱上的小节号——第 1 小节是 1，但在数组思维中它是 arr[0]，只是计数的起点不同。'
+  }],
+  ['交互', {
+    explanation: '用户与网页之间的双向交流——用户点击按钮、输入文字，页面做出响应（变化、跳转、弹窗等）。JavaScript 是实现交互的主要手段。',
+    analogy: '就像演奏者与听众之间的互动——演奏者弹出一个乐句（输入），听众鼓掌或安静聆听（响应），形成了完整的交流。'
+  }],
+  ['样式', {
+    explanation: 'CSS 为 HTML 元素添加的视觉表现——颜色、字体、大小、间距、背景等都属于样式。HTML 是内容，样式是外观。',
+    analogy: '就像演奏者穿的演出服和舞台灯光——不改变演奏的内容（音符），但决定了观众看到的视觉感受。'
+  }],
   ['vh', {
     explanation: 'CSS 相对长度单位——相对于视口高度的百分比。1vh=视口高度的1%。全称 viewport height。'
   }],
   ['vw', {
     explanation: 'CSS 相对长度单位——相对于视口宽度的百分比。1vw=视口宽度的1%。全称 viewport width。'
+  }],
+  ['层', {
+    explanation: 'Layer——编程中把不同职责的代码分层，如表现层（UI）、业务逻辑层、数据层。分层是软件架构的基本思想。'
   }]
-]
+];

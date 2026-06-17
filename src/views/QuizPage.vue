@@ -311,7 +311,7 @@ function goLesson(id?: string) { if (id) router.push(`/lesson/${id}`) }
 </template>
 
 <style scoped>
-.quiz-page { height: 100%; overflow-y: auto; padding: var(--sp-6); max-width: 800px; margin: 0 auto; position: relative; }
+.quiz-page { height: 100%; overflow-y: auto; padding: var(--sp-6); max-width: 860px; margin: 0 auto; position: relative; }
 
 /* Achievements */
 .achievements { display: flex; gap: var(--sp-3); margin-bottom: var(--sp-6); justify-content: center; }

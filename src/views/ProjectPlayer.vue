@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { projects } from '../configs/projects'
 import { useCodePreview } from '../composables/useCodePreview'
@@ -18,6 +18,19 @@ const projectId = computed(() => route.params.projectId as string)
 const project = computed(() => projects.find(p => p.id === projectId.value))
 
 const currentStep = ref(0)
+const contentPanelRef = ref<HTMLElement | null>(null)
+
+// 切换步骤时自动回到内容区顶部
+watch(currentStep, () => {
+  nextTick(() => {
+    const el = contentPanelRef.value
+    if (el) {
+      // 优先找内部滚动容器 .step-body，找不到则用面板本身
+      const scrollEl = el.querySelector('.step-body') || el
+      scrollEl.scrollTop = 0
+    }
+  })
+})
 
 const emptyCode: UserCode = { html: '', css: '', js: '' }
 const userCode = ref<UserCode>({ ...emptyCode })
@@ -165,6 +178,7 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
     >
       <!-- 左面板：步骤指引 -->
       <div
+        ref="contentPanelRef"
         class="panel-content"
         :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
@@ -176,6 +190,14 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
             <div class="step-task">
               <span class="step-task-label">你的任务</span>
               <p v-html="parseInline(currentStepData.task)" />
+            </div>
+            <div v-if="currentStepData.purpose" class="purpose-box">
+              <span class="purpose-label">这一步的目的</span>
+              <div class="purpose-content" v-html="parseContent(currentStepData.purpose)" />
+            </div>
+            <div v-if="currentStepData.expectedResult" class="expected-box">
+              <span class="expected-label">完成后你应该看到</span>
+              <div class="expected-content" v-html="parseContent(currentStepData.expectedResult)" />
             </div>
             <div v-if="currentStepData.hint" class="step-hint-wrap">
               <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
@@ -458,6 +480,70 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
   font-size: var(--fs-xs);
   line-height: 1.6;
   color: #6B5A4E;
+}
+
+/* ===== 目的说明 ===== */
+.purpose-box {
+  padding: var(--sp-2) var(--sp-4);
+  margin-bottom: var(--sp-3);
+  background: #F4F8FC;
+  border-left: 3px solid #8BA4B8;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.purpose-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #6B8A9E;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--sp-1);
+}
+
+.purpose-content {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.purpose-content :deep(p) {
+  margin: 0 0 var(--sp-1) 0;
+}
+
+.purpose-content :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+/* ===== 预期结果 ===== */
+.expected-box {
+  padding: var(--sp-2) var(--sp-4);
+  margin-bottom: var(--sp-3);
+  background: #F4F8F0;
+  border-left: 3px solid #8BA87D;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.expected-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #6B8A5E;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: var(--sp-1);
+}
+
+.expected-content {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.expected-content :deep(p) {
+  margin: 0 0 var(--sp-1) 0;
+}
+
+.expected-content :deep(p:last-child) {
+  margin-bottom: 0;
 }
 
 /* ===== 项目未找到 ===== */

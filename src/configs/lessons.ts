@@ -106,8 +106,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "请修改编辑器中的 `<h1>` 标签里的内容，把标题改成你自己的名字或你想写的任何内容。改完后看看右侧预览区，你会发现页面立刻发生了变化！",
+        content: "来写你的第一行代码！下面有三个小练习，逐个试试看：",
+        subSteps: [
+          {
+            content: "把 `<h1>` 标签里的内容改成你自己的名字或任何你想写的内容",
+            purpose: "让你体验**修改代码 → 立刻看到变化**的感觉。编程就是这样：写代码、看效果、再调整。未来每一节课都是这个循环。",
+            expectedResult: "右侧预览区的标题会**立即变成你写的文字**。如果没变，检查 `<h1>` 和 `</h1>` 是否拼写正确。",
+          },
+          {
+            content: "把 `<p>` 标签里的文字也改一改，写一句你想说的话",
+            purpose: "巩固刚才的体验——标签不同，但操作方式完全一样。**所有 HTML 标签都是这样工作的**：改标签里的内容，页面就变。",
+            expectedResult: "预览区中 `<p>` 标签内的文字也**立即更新**为你写的新内容。你同时改变了标题和段落两处内容。",
+          },
+          {
+            content: "试试在 `<p>` 标签下面再加一行新的 `<p>...</p>`，写点别的内容",
+            purpose: "让你自己**从零创建一个新元素**——不只是修改已有内容，而是真正动手写代码。这也是你第一次添加新标签。",
+            expectedResult: "预览区中**多出了一行新文字**，说明你成功创建了一个新的 HTML 元素。你已经会写网页了！",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -156,13 +172,34 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "HTML 注释：给自己留便条",
         content:
-          '写代码时经常想给自己留个记号——这段是干什么的、为什么这样写——但又不想让它显示在页面上。\nHTML 提供了**注释（Comment）**：\n```html\n<!-- 这是注释，不会显示在页面上 -->\n<p>这行会正常显示</p>\n```\n注释以 `<!--` 开头，以 `-->` 结尾，中间的内容会被浏览器完全忽略。\n**快捷键：** 选中要注释的代码，按 `Ctrl + /`（Mac: `Cmd + /`），编辑器会自动添加或移除注释。这个快捷键在 HTML、CSS、JS 中都通用。\n**注释能做什么：**\n- 📝 标记代码区块，方便以后维护（"这一段是导航栏"）\n- 🙈 暂时隐藏某些内容（调试时很有用）\n- 💬 给合作的队友留下说明\n```html\n<!-- 导航栏区域 -->\n<nav>\n  <a href="/">首页</a>\n  <!-- 暂时隐藏"关于我们"，下个月上线\n  <a href="/about">关于我们</a>\n  -->\n</nav>\n```\n\`<!--\` 和 `-->` 之间的内容不仅不会显示——它也不会执行。注释掉整段 `<p>` 标签，这段文字就从页面中消失了。',
+          '写代码时经常想给自己留个记号——这段是干什么的、为什么这样写——但又不想让它显示在页面上。\nHTML 提供了**注释（Comment）**：\n```html\n<!-- 这是注释，不会显示在页面上 -->\n<p>这行会正常显示</p>\n```注释以 `<!--` 开头，以 `-->` 结尾，中间的内容会被浏览器完全忽略。\n**快捷键：** 选中要注释的代码，按 `Ctrl + /`（Mac: `Cmd + /`），编辑器会自动添加或移除注释。这个快捷键在 HTML、CSS、JS 中都通用。\n**注释能做什么：**\n- 📝 标记代码区块，方便以后维护（"这一段是导航栏"）\n- 🙈 暂时隐藏某些内容（调试时很有用）\n- 💬 给合作的队友留下说明\n```html\n<!-- 导航栏区域 -->\n<nav>\n  <a href="/">首页</a>\n  <!-- 暂时隐藏"关于我们"，下个月上线\n  <a href="/about">关于我们</a>\n  -->\n</nav>\n```\`<!--\` 和 `-->` 之间的内容不仅不会显示——它也不会执行。注释掉整段 `<p>` 标签，这段文字就从页面中消失了。',
       },
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "目前编辑器里只显示 body 内容。试试：\n1. 打开浏览器开发者工具（F12），在 Elements/元素 面板中查看页面完整结构——你能找到 `<head>` 和 `<body>` 标签吗？\n2. 修改 `<h1>` 标签中的标题\n3. 观察代码中的 `<!-- 这是一条HTML注释 -->`——它在预览里看得到吗？\n4. 挑战：写两段不同的 `<p>` 内容，用注释隐藏其中一段，切换注释看效果\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 编辑器中添加两段 <code>&lt;p&gt;</code>，用注释隐藏一段：</p><pre><code>&lt;p&gt;这是第一段：音乐是心灵的语言。&lt;/p&gt;\n&lt;!-- 下面这段被注释隐藏了，切换注释即可显示 --&gt;\n&lt;!--\n&lt;p&gt;这是第二段：代码编织出动人的乐章。&lt;/p&gt;\n--&gt;</code></pre><p>想看到「第二段」时，删除 <code>&lt;!--</code> 和 <code>--&gt;</code> 即可；想再次隐藏它，按 <code>Ctrl + /</code> 重新注释。</p></div></details>[[/html]]",
+        content: "先观察页面结构，再动手改代码：",
+        subSteps: [
+          {
+            content: "打开浏览器开发者工具（F12），在 Elements/元素 面板中查看页面完整结构——你能找到 `<head>` 和 `<body>` 标签吗？",
+            purpose: "DevTools 是你以后**最常用的调试工具**。学会用它看页面结构，就像演奏者学会看谱——这是基本功。",
+            expectedResult: "Elements 面板会显示完整的 HTML 树形结构。你能看到 `<html>` → `<head>` + `<body>` 的层级关系，以及 `<body>` 里你写的那些标签。",
+          },
+          {
+            content: "修改 `<h1>` 标签中的标题",
+            purpose: "在了解了文档骨架之后，回到你熟悉的操作——改内容即可看到变化。",
+            expectedResult: "预览区标题立即更新。你知道了：所有可见内容都在 `<body>` 里面。",
+          },
+          {
+            content: "观察代码中的 `<!-- 这是一条HTML注释 -->`——它在预览里看得到吗？",
+            purpose: "理解注释的作用：**写给人看，浏览器忽略**。注释是给自己或队友留的便签。",
+            expectedResult: "预览区看不到注释内容。注释只存在于代码中，不会渲染到页面上。",
+          },
+          {
+            content: "挑战：写两段不同的 `<p>` 内容，用注释隐藏其中一段，切换注释看效果（快捷键 `Ctrl + /`）",
+            purpose: "掌握用注释**临时隐藏代码**的技巧。这在调试时非常有用——不确定某段代码是否导致问题时，注释掉试试就知道了。",
+            expectedResult: "被注释包裹的 `<p>` 从预览区消失了。去掉 `<!--` 和 `-->` 后，它又回来了。Ctrl + / 可以快速切换注释。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -198,8 +235,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '请在编辑器中，把 `<strong>` 里的"肖邦"改成你最喜欢的作曲家，把 `<em>` 里的"优美而忧伤"改成你自己的感受。试试修改 `<br>` 的位置看看效果！',
+        content: "来给文字加上强弱变化：",
+        subSteps: [
+          {
+            content: "把 `<strong>` 里的「肖邦」改成你最喜欢的作曲家",
+            purpose: "`<strong>` 表示**重要内容**——不只是视觉加粗，更有语义含义。浏览器和搜索引擎会把它理解为「这是关键信息」。",
+            expectedResult: "预览区中你改的名字**加粗显示**了。`<strong>` 像乐谱中的重音记号（>），告诉浏览器：这个内容很重要。",
+          },
+          {
+            content: "把 `<em>` 里的「优美而忧伤」改成你自己的感受",
+            purpose: "`<em>` 表示**语气强调**——不是粗声强调，而是语调变化。就像你说话时在某个词上放缓加重。",
+            expectedResult: "预览区中你写的感受文字变成了**斜体**。`<em>` 像揉弦/颤音——不是更大声，而是更有韵味。",
+          },
+          {
+            content: "试试修改 `<br>` 的位置，看看换行效果怎么变化",
+            purpose: "`<br>` 是**单标签**（不需要结束标签），在文字中插入换行。它像乐谱中的换气记号。",
+            expectedResult: "移动 `<br>` 位置后，换行的位置也变了。把它删掉，两段文字会连成一行。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -235,8 +288,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "请在编辑器中修改这两个列表：把无序列表中的作曲家改成你喜欢的，把有序列表改成你自己的学习计划。试试把 `<ul>` 改成 `<ol>` 看看列表样式会怎么变化？",
+        content: "来打造你自己的列表：",
+        subSteps: [
+          {
+            content: "把无序列表中的作曲家改成你喜欢的",
+            purpose: "`<ul>` 是无序列表——项目之间**没有先后顺序**，就像推荐歌单，先听哪首都行。",
+            expectedResult: "预览区的列表项变成了你写的作曲家名字，前面还是圆点标记。",
+          },
+          {
+            content: "把有序列表改成你自己的学习计划",
+            purpose: "`<ol>` 是有序列表——**顺序很重要**，就像练琴顺序：先音阶、后练习曲、再乐曲。",
+            expectedResult: "第二条列表变成了你的练琴计划，前面是数字编号。",
+          },
+          {
+            content: "试试把 `<ul>` 改成 `<ol>`，看列表样式怎么变化",
+            purpose: "理解 ul vs ol 的视觉差异：一个是圆点，一个是数字。这个差异反映了**信息是否有先后**。",
+            expectedResult: "原来带圆点的项目变成了数字编号。同样把 `<ol>` 改成 `<ul>`，数字会变回圆点。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -278,8 +347,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "综合挑战 ✨",
-        content:
-          '这是本章的最后一节课！请在编辑器中修改代码，制作一张属于你自己的"个人音乐卡片"：\n1. 把 `<h1>` 中的"肖邦"改成你喜欢的音乐家\n2. 把 `<img>` 的 `src` 换成你想展示的图片链接\n3. 把 `<a>` 的 `href` 换成你想推荐的网页链接\n4. 试着再加上一个列表，列出这位音乐家的代表作\n完成之后，第一章就毕业了！🎉\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>完成后的个人音乐卡片示例：</p><pre><code>&lt;h1&gt;贝多芬&lt;/h1&gt;\n&lt;img src=https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg alt=贝多芬肖像 width=200&gt;\n&lt;p&gt;\n  了解更多，请访问\n  &lt;a href=https://zh.wikipedia.org/wiki/贝多芬&gt;贝多芬的维基百科&lt;/a&gt;\n&lt;/p&gt;\n&lt;h2&gt;代表作&lt;/h2&gt;\n&lt;ul&gt;\n  &lt;li&gt;🎵 第五交响曲「命运」&lt;/li&gt;\n  &lt;li&gt;🎵 第九交响曲「合唱」&lt;/li&gt;\n  &lt;li&gt;🎵 第十四钢琴奏鸣曲「月光」&lt;/li&gt;\n  &lt;li&gt;🎵 致爱丽丝&lt;/li&gt;\n&lt;/ul&gt;</code></pre><p>回顾你学到的标签：<code>&lt;h1&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;ul&gt;</code>/<code>&lt;li&gt;</code>。组合起来就是一张完整的个人卡片！</p></div></details>[[/html]]',
+        content: '这是第一章的重要实践！请按顺序完成以下步骤，制作一张属于你自己的"个人音乐卡片"：',
+        subSteps: [
+          {
+            content: "把 `<h1>` 中的「肖邦」改成你喜欢的音乐家",
+            purpose: "复习最基础的标签操作——修改标题内容。你从第一节课就会了，现在已经很熟练了。",
+            expectedResult: "卡片标题变成了你选的名字。",
+          },
+          {
+            content: "把 `<img>` 的 `src` 换成你想展示的图片链接",
+            purpose: "理解 `src` 属性的作用——它告诉浏览器**去哪里找图片**。如果链接失效，图片就显示不出来，只会显示 `alt` 文字。",
+            expectedResult: "预览区中显示了新图片。如果图片不显示，检查链接是否以 `https://` 开头，以及图片链接是否有效。",
+          },
+          {
+            content: "把 `<a>` 的 `href` 换成你想推荐的网页链接",
+            purpose: "理解 `href` 属性的作用——它告诉浏览器**点击后跳转到哪里**。必须写完整的 `https://` 地址。",
+            expectedResult: "点击链接会跳转到你指定的网页。如果没反应，检查 `href` 是否以 `https://` 开头。",
+          },
+          {
+            content: "挑战：在卡片下方再加一个列表（`<ul>` 或 `<ol>`），列出这位音乐家的代表作",
+            purpose: "这是一个**综合练习**——你需要回忆之前学的列表标签（`<ul>`、`<ol>`、`<li>`），并独立添加新元素。",
+            expectedResult: "卡片下方多出了一组列表，展示了代表作。完成后，你就用学过的标签独立完成了一张完整的个人音乐卡片！",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -321,8 +411,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '请在编辑器中：\n1. 给第三张卡片也加上 `<span class="name">` 高亮作曲家名字和时期\n2. 试着复制一张卡片（整个 `<div>` 块），看看它是独占一行还是并排\n3. 把某个 `<span>` 改成 `<div>`，观察布局的变化——这就是块级 vs 内联的区别！',
+        content: "通过动手来理解块级与内联的区别：",
+        subSteps: [
+          {
+            content: "给第三张卡片也加上 `<span class=\"name\">` 高亮作曲家名字和时期",
+            purpose: "练习 `span` 的用法——`span` 是内联元素，在文字流中不换行，只标记其中的一部分。",
+            expectedResult: "第三张卡片的作曲家名字和时期也有了高亮样式。",
+          },
+          {
+            content: "试着复制一张卡片（整个 `<div>` 块），看看它是独占一行还是并排",
+            purpose: "理解 `div` 的块级特性——**每个 div 独占一行**，新卡片会自动换到下一行。",
+            expectedResult: "复制出来的卡片出现在下方新的一行，而不是并排。这就是块级元素的行为。",
+          },
+          {
+            content: "把某个 `<span>` 改成 `<div>`，观察布局变化",
+            purpose: "直接对比块级（`div`）和内联（`span`）的差异——`div` 会打断文字流强制换行，`span` 不会。",
+            expectedResult: "改成 `<div>` 后，原本流畅的文字在中间断开了。这就是块级 vs 内联最直观的区别。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -364,8 +470,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '请在编辑器中：\n1. 在 `<main>` 中再添加一个 `<section>`，里面写"最新评论"\n2. 在 `<nav>` 中添加一个链接（用 `<a>` 标签）\n3. 试着把某个 `<section>` 换成 `<article>`，思考一下：什么情况下用 article 更合适？',
+        content: "在页面结构中添加新内容：",
+        subSteps: [
+          {
+            content: "在 `<main>` 中再添加一个 `<section>`，里面写「最新评论」",
+            purpose: "练习添加语义化区块——`<section>` 表示一个**独立的内容区块**，浏览器和搜索引擎能识别它的含义。",
+            expectedResult: "页面中多了一个名为「最新评论」的区块。注意 `<section>` 默认是块级元素，独占一行。",
+          },
+          {
+            content: "在 `<nav>` 中添加一个链接（用 `<a>` 标签）",
+            purpose: "复习 `<a>` 标签，同时理解 `<nav>` 的语义——**nav 专门用来放导航链接**。",
+            expectedResult: "导航栏里多了一个可点击的链接。",
+          },
+          {
+            content: "试着把某个 `<section>` 换成 `<article>`，思考：什么情况下用 article 更合适？",
+            purpose: "理解 `<section>` 和 `<article>` 的区别：`section` 是页面的一个区块，`article` 是可以**独立分发**的完整内容（如一篇文章、一条评论）。",
+            expectedResult: "换成 `<article>` 后视觉上看不出区别，但这改变了元素的语义身份——搜索引擎会把它当作一篇独立文章来索引。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -419,8 +541,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "请在编辑器中：\n1. 点击预览区中的音频播放器，看看能否播放\n2. 给 `<audio>` 标签加上 `loop` 属性，让音乐循环播放\n3. 尝试修改音频的 `src` 地址（可以搜索一个网上可用的 MP3 链接）\n4. 挑战：在 `<audio>` 下面加一个 `<video>` 标签，找一个在线视频链接试试\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>&lt;audio&gt;</code> 下方添加 <code>&lt;video&gt;</code> 标签：</p><pre><code>&lt;video controls width=400&gt;\n  &lt;source src=https://www.w3schools.com/html/mov_bbb.mp4 type=video/mp4&gt;\n  你的浏览器不支持视频播放\n&lt;/video&gt;</code></pre><p>关键点：<code>controls</code> 显示播放控件，<code>width</code> 控制播放器宽度。<code>&lt;source&gt;</code> 提供视频文件地址和类型，浏览器会选择支持的格式播放。</p></div></details>[[/html]]",
+        content: "让你的网页发出声音：",
+        subSteps: [
+          {
+            content: "点击预览区中的音频播放器，看看能否播放",
+            purpose: "初次体验 `<audio>` 标签——你的网页现在可以播放音乐了。学习编程第一次让网页发出声音，值得纪念！",
+            expectedResult: "点击播放按钮后，音频开始播放。`controls` 属性提供了播放/暂停/音量控件。",
+          },
+          {
+            content: "给 `<audio>` 标签加上 `loop` 属性，让音乐循环播放",
+            purpose: "理解**布尔属性**——`loop` 不需要写值，写上就生效（循环播放），不写就不循环。就像开关：只有开和关两种状态。",
+            expectedResult: "音乐播放到结尾后自动从头开始。去掉 `loop`，播完就停了。",
+          },
+          {
+            content: "尝试修改音频的 `src` 地址，换成你喜欢的音乐链接",
+            purpose: "理解 `src` 属性的通用性——和 `<img>` 的 `src` 一样，它告诉浏览器资源在哪里。",
+            expectedResult: "播放器播放的是你换的新音频。如果没声音，检查链接是否有效。",
+          },
+          {
+            content: "挑战：在 `<audio>` 下面加一个 `<video>` 标签",
+            purpose: "`<video>` 的用法和 `<audio>` 几乎一样（`controls`、`src`、`source`），学会一个就学会了另一个。",
+            expectedResult: "预览区中多了一个视频播放器。点击播放即可观看视频。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -468,8 +611,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '请在编辑器中：\n1. 在表格中添加一行新数据，写你喜欢的作曲家\n2. 在表头再加一列（比如"国家"），每行也加对应的 \`<td>\`\n3. 试试在表格下方加一行 `<tr><td colspan="3">更多作曲家敬请期待</td></tr>` 感受合并效果\n4. 挑战：创建一个新的表格，列出你的"每周练琴计划"（日期、曲目、时长）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在第一个表格下方新建一个表格：</p><pre><code>&lt;h2&gt;每周练琴计划&lt;/h2&gt;\n&lt;table&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;日期&lt;/th&gt;\n      &lt;th&gt;曲目&lt;/th&gt;\n      &lt;th&gt;时长&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周一&lt;/td&gt;\n      &lt;td&gt;巴赫 C大调前奏曲&lt;/td&gt;\n      &lt;td&gt;30 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周三&lt;/td&gt;\n      &lt;td&gt;车尔尼 练习曲&lt;/td&gt;\n      &lt;td&gt;45 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;周五&lt;/td&gt;\n      &lt;td&gt;肖邦 夜曲&lt;/td&gt;\n      &lt;td&gt;60 分钟&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/table&gt;</code></pre><p>这样你就有了两张独立的表格：一张「作曲家速查表」和一张「练琴计划表」。</p></div></details>[[/html]]',
+        content: "完善你的作曲家表格：",
+        subSteps: [
+          {
+            content: "在表格中添加一行新数据，写你喜欢的作曲家",
+            purpose: "练习 `<tr>` + `<td>` 的嵌套——每一行是 `<tr>`，行内每个格子是 `<td>`。",
+            expectedResult: "表格多了一行，显示了新添加的作曲家信息。",
+          },
+          {
+            content: "在表头再加一列（比如「国家」），每行也加对应的 `<td>`",
+            purpose: "理解表格的对齐原则——表头加了几列，数据行也要加几列，否则表格对不齐。",
+            expectedResult: "表格多了一列「国家」列。每行也多了对应的国家信息。",
+          },
+          {
+            content: "试试在表格下方加一行 `<tr><td colspan=\"3\">更多作曲家敬请期待</td></tr>`",
+            purpose: "理解 `colspan`——它让一个单元格跨越多列，像节目单上的中场休息横跨整页。",
+            expectedResult: "表格最后出现了一行横跨三列的提示文字。",
+          },
+          {
+            content: "挑战：创建第二个表格，列出你的「每周练琴计划」（日期、曲目、时长）",
+            purpose: "从零创建表格结构：`<table>` > `<thead>`/`<tbody>` > `<tr>` > `<th>`/`<td>`。",
+            expectedResult: "页面中有两张独立的表格。完成后你已经掌握了表格的完整用法。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -517,8 +681,34 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '请在编辑器中：\n1. 在 `<select>` 中添加两个你喜欢的作曲家选项\n2. 给表单增加一个 `<input type="date">`，让用户选择"最早接触音乐的日期"\n3. 增加一个 `<input type="email">`，让用户填写邮箱\n4. 试试修改 `<textarea>` 的 `rows` 从 `3` 改成 `5`，看看输入框变大\n5. 在预览区中实际填写表单，感受交互体验',
+        content: "丰富你的音乐偏好调查表：",
+        subSteps: [
+          {
+            content: "在 `<select>` 中添加两个你喜欢的作曲家选项",
+            purpose: "练习 `<select>` + `<option>` 的组合——每个 `<option>` 是一个可选项。",
+            expectedResult: "下拉框中多了你添加的选项，点击即可选择。",
+          },
+          {
+            content: "给表单增加一个 `<input type=\"date\">`，让用户选择最早接触音乐的日期",
+            purpose: "理解 `type` 属性的力量——同样是 `<input>`，`type=\"date\"` 会变成日期选择器，浏览器提供日历控件。",
+            expectedResult: "表单中多了一个日期输入框，点击会弹出日历。",
+          },
+          {
+            content: "增加一个 `<input type=\"email\">`，让用户填写邮箱",
+            purpose: "`type=\"email\"` 会触发浏览器的邮箱验证——输入的不是邮箱格式时，提交会报错。",
+            expectedResult: "多了一个邮箱输入框。在移动端，键盘会自动切换到邮箱输入模式。",
+          },
+          {
+            content: "试试修改 `<textarea>` 的 `rows` 从 `3` 改成 `5`，看输入框变大",
+            purpose: "`rows` 控制多行文本框的可见行数，但不限制用户输入更多行。",
+            expectedResult: "文本框变高了。`rows=\"5\"` 显示 5 行高度。",
+          },
+          {
+            content: "在预览区中实际填写表单，感受交互体验",
+            purpose: "表单的意义在于交互——不只是看代码，更重要的是体验用户如何使用你创建的表单。",
+            expectedResult: "你能在预览区中点击、输入、选择、下拉，就像一个真实的网页表单。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -566,8 +756,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '切换到 HTML 标签页，试着：\n1. 给"演奏水平"增加第 4 个选项"大师级"\n2. 给"擅长乐器"增加两个选项（如中提琴、长笛）\n3. 添加一个 `<input type="color">` 选择"最喜欢的音乐色彩"\n4. 挑战：再添加一个 `<fieldset>`，里面用 radio 给"练琴频率"设置 3 个选项（每天、每周、偶尔）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在最后一个 <code>&lt;fieldset&gt;</code> 后面添加：</p><pre><code>&lt;fieldset&gt;\n  &lt;legend&gt;练琴频率&lt;/legend&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=daily&gt;\n    📅 每天\n  &lt;/label&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=weekly&gt;\n    📆 每周\n  &lt;/label&gt;\n  &lt;label class=radio-label&gt;\n    &lt;input type=radio name=frequency value=occasional checked&gt;\n    🎵 偶尔\n  &lt;/label&gt;\n&lt;/fieldset&gt;</code></pre><p>注意所有 radio 的 <code>name</code> 属性必须相同（<code>name=frequency</code>），这样它们才互斥。<code>checked</code> 表示默认选中。</p></div></details>[[/html]]',
+        content: "练习更多 input 类型：",
+        subSteps: [
+          {
+            content: "给「演奏水平」增加第 4 个选项「大师级」",
+            purpose: "radio 的核心规则：同一组 radio，**`name` 属性必须相同**才能互斥（只能选一个）。",
+            expectedResult: "多了一个「大师级」选项，点击它时其他选项自动取消。",
+          },
+          {
+            content: "给「擅长乐器」增加两个选项（如中提琴、长笛）",
+            purpose: "checkbox 与 radio 的区别：checkbox 是**独立开关**，选几个互不影响。",
+            expectedResult: "新增的两个乐器可以独立勾选/取消，不影响已有的选项。",
+          },
+          {
+            content: "添加一个 `<input type=\"color\">` 选择「最喜欢的音乐色彩」",
+            purpose: "了解 `type=\"color\"`——浏览器会自动弹出取色器，提供完整的颜色选择体验。",
+            expectedResult: "表单中出现了一个颜色选择器，点击会弹出取色面板。",
+          },
+          {
+            content: "挑战：再添加一个 `<fieldset>`，用 radio 给「练琴频率」设置 3 个选项",
+            purpose: "从零创建一个 `<fieldset>`——包含 `<legend>` 标题 + 一组 radio 选项。这是表单组件化的基本模式。",
+            expectedResult: "表单中多了一个「练琴频率」分组，里面的三个选项互斥。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -597,8 +808,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "逐步构建你的主页 ✨",
-        content:
-          '编辑器里已经有了一个模板。请按以下步骤完善它：\n**第一步：修改标题和介绍**\n- 把 `<header>` 中的标题改成"XXX的音乐主页"（XXX 是你的名字）\n- 修改 `<nav>` 中的导航项目\n**第二步：修改"关于我"**\n- 在"关于我"区域的 `<p>` 中写下你的音乐故事\n- 可以换一张你喜欢的音乐家图片（修改 `src`）\n**第三步：丰富音乐收藏**\n- 在列表中替换成你喜欢的作曲家或曲目\n- 在表格中添加你真正喜欢的音乐数据\n**第四步：添加你自己的内容**\n- 挑战：在 `<main>` 中新增一个 `<section>`，内容自定\n- 可以是一段推荐曲目、一个聆听列表、或任何你想展示的内容\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>&lt;section class=playlist&gt;</code> 后面新增一个推荐曲目区块：</p><pre><code>&lt;section class=recommend&gt;\n  &lt;h2&gt;本月推荐曲目&lt;/h2&gt;\n  &lt;ol&gt;\n    &lt;li&gt;德彪西《月光》— 印象派的朦胧之美&lt;/li&gt;\n    &lt;li&gt;拉赫玛尼诺夫《第二钢琴协奏曲》— 浪漫与激情的交织&lt;/li&gt;\n    &lt;li&gt;皮亚佐拉《自由探戈》— 古典与爵士的碰撞&lt;/li&gt;\n  &lt;/ol&gt;\n&lt;/section&gt;</code></pre><p>然后在 CSS 中添加对应的样式：</p><pre><code>.recommend ol {\n  padding-left: 20px;\n}\n.recommend li {\n  margin: 8px 0;\n  color: #3D2B1F;\n  line-height: 1.6;\n}</code></pre><p>结构 = <code>&lt;section&gt;</code> + 标题 + 列表，内容自定！</p></div></details>[[/html]]',
+        content: "编辑器里已经有了一个模板。这是第一章的毕业项目，按以下四步完成你自己的个人音乐主页：",
+        subSteps: [
+          {
+            content: "**修改标题和介绍**——把 `<header>` 中的标题改成你的名字，修改 `<nav>` 导航项目",
+            purpose: "页面第一印象来自 header。`<header>` 是页头区域，`<nav>` 是导航——告诉访问者你是谁、这里有什么。",
+            expectedResult: "顶部标题变成了你的名字。导航栏的项目也改成你想展示的内容分类。",
+          },
+          {
+            content: "**修改「关于我」**——在 `<p>` 中写下你的音乐故事，换一张喜欢的音乐家图片",
+            purpose: "`<section>` + `<p>` + `<img>` 组合成内容区块。这是网页中最常见的内容模式。",
+            expectedResult: "「关于我」区域展示了你的个人故事和新图片。`src` 链接正确时，新图片会显示。",
+          },
+          {
+            content: "**丰富音乐收藏**——在列表中替换成你喜欢的作曲家或曲目，在表格中添加你喜欢的音乐数据",
+            purpose: "列表（`<ul>`/`<li>`）和表格（`<table>`）是结构化数据的两种主要方式。本章所有的标签知识都在这一步骤中综合运用。",
+            expectedResult: "列表和表格都变成了你的个性化内容。你不再是一个模板的填写者，而是真正的作者。",
+          },
+          {
+            content: "**挑战：新增自己的区块**——在 `<main>` 中再添加一个 `<section>`，内容自定",
+            purpose: "从零创建一个 `<section>`——从 HTML 标签到 CSS 样式，完全由你决定。这是从「模仿」到「创造」的关键一步。",
+            expectedResult: "页面中多了一个你自己设计的区块。完成之后，这就是你的第一章毕业作品！",
+          },
+        ],
       },
       {
         type: "hint",
@@ -639,7 +871,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "CSS 注释：给样式加标注",
         content:
-          '和 HTML 一样，CSS 也有注释。CSS 注释用 `/*` 开头，`*/` 结尾：\n```css\n/* 这是标题的主色调 */\nh1 {\n  color: #8B2E2E;\n  font-size: 36px;\n}\n/*\n * 多行注释也可以\n * 像这样写\n */\np {\n  color: #6B5A4E;\n}\n```\n注释中的内容不会被浏览器执行——你可以用它来标注每一段样式是干什么的。\n**快捷键：** 选中代码按 `Ctrl + /`（Mac: `Cmd + /`），编辑器自动添加或移除 `/* */` 注释。这个快捷键在 HTML、CSS、JS 中都通用。',
+          '和 HTML 一样，CSS 也有注释。CSS 注释用 `/*` 开头，`*/` 结尾：\n```css\n/* 这是标题的主色调 */\nh1 {\n  color: #8B2E2E;\n  font-size: 36px;\n}\n/*\n * 多行注释也可以\n * 像这样写\n */\np {\n  color: #6B5A4E;\n}\n```注释中的内容不会被浏览器执行——你可以用它来标注每一段样式是干什么的。\n**快捷键：** 选中代码按 `Ctrl + /`（Mac: `Cmd + /`），编辑器自动添加或移除 `/* */` 注释。这个快捷键在 HTML、CSS、JS 中都通用。',
       },
       {
         type: "explain",
@@ -656,8 +888,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，尝试以下操作：\n1. 把 `h1` 的 `color` 改成你喜欢的颜色（试试 `#C9A96E` 金色，或 `#5B8C5A` 绿色）\n2. 把 `font-size` 调大或调小，看看标题怎么变化\n3. 给 `p` 也换一个不同的颜色\n4. 试试用 `/* */` 注释暂时隐藏 `p` 的某条样式，观察效果变化\n就像调配音色一样，试试不同的颜色组合吧！",
+        content: "来调配你的第一个 CSS：",
+        subSteps: [
+          {
+            content: "把 `h1` 的 `color` 改成你喜欢的颜色（试试 `#C9A96E` 金色，或 `#5B8C5A` 绿色）",
+            purpose: "理解 CSS 的基本语法：`属性: 值;`。`color` 改变文字颜色，`#` 开头的是十六进制颜色码。",
+            expectedResult: "标题文字颜色变成了你选的颜色。这就是 CSS 的核心工作方式：选元素，改属性。",
+          },
+          {
+            content: "把 `font-size` 调大（如 `48px`）或调小（如 `20px`），看标题变化",
+            purpose: "`font-size` 控制文字大小。`px` 是像素单位——数字越大，字越大。",
+            expectedResult: "标题明显变大或变小了。这就是排版控制的第一步。",
+          },
+          {
+            content: "给 `p` 也换一个不同的颜色",
+            purpose: "同一个属性可以给不同的选择器设置不同的值——`h1` 和 `p` 可以有各自的颜色。",
+            expectedResult: "段落文字颜色变了。现在标题和段落各有各的颜色。",
+          },
+          {
+            content: "试试用 `/* */` 注释暂时隐藏 `p` 的某条样式，观察效果变化",
+            purpose: "CSS 注释用 `/* */` 包裹，和 HTML 注释 `<!-- -->` 不同。注释在调试时非常有用——不确定某条样式的作用时，注释掉就能看出来。",
+            expectedResult: "被注释的样式失效了，文字回到默认效果。去掉注释，样式又恢复了。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -699,8 +952,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试着：\n1. 把 `.card` 的 `background-color` 换一个颜色（试试 `#F0F8FF` 浅蓝，或 `#FFF8F0` 暖橙）\n2. 把 `border` 的粗细从 `2px` 改成 `4px`，看看边框变粗的效果\n3. 把 `border-radius` 改成 `24px`，让卡片更圆润\n4. 试试把 `solid` 改成 `dashed`，看虚线边框的效果",
+        content: "给卡片换背景和边框：",
+        subSteps: [
+          {
+            content: "把 `.card` 的 `background-color` 换一个颜色（试试 `#F0F8FF` 浅蓝，或 `#FFF8F0` 暖橙）",
+            purpose: "`background-color` 像舞台幕布——改变元素的背景色，营造不同的视觉氛围。",
+            expectedResult: "卡片背景色变了。不同的颜色传达不同的感觉：蓝调冷静，橙调温暖。",
+          },
+          {
+            content: "把 `border` 的粗细从 `2px` 改成 `4px`，看边框变粗",
+            purpose: "`border` 的三个值：粗细、样式、颜色。`2px solid #D4C5A9` 分别对应这三个维度。",
+            expectedResult: "卡片的边框变粗了一倍。边框像画框——越粗越强调，越细越含蓄。",
+          },
+          {
+            content: "把 `border-radius` 改成 `24px`，让卡片更圆润",
+            purpose: "`border-radius` 控制圆角半径——值越大，角越圆。`0` 是直角，`50%` 是圆形。",
+            expectedResult: "卡片四角变得更加圆润。圆角和直角传达完全不同的视觉感受。",
+          },
+          {
+            content: "试试把 `solid` 改成 `dashed`，看虚线边框",
+            purpose: "`border-style` 除了 `solid`（实线）还有 `dashed`（虚线）、`dotted`（点线）等多种样式。",
+            expectedResult: "卡片边框变成了虚线。不同的边框样式适合不同的设计场景。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -742,8 +1016,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试调整：\n1. 把 `.card` 的 `font-family` 改成 `sans-serif`，感受字体变化\n2. 把 `line-height` 从 `1.8` 改成 `1.3` 和 `2.5`，看看行间距的疏密变化\n3. 把 `letter-spacing` 加大到 `0.15em`，感受字间距\n4. 把 `text-align` 改成 `left` 和 `right`，看对齐变化",
+        content: "调整文字的字体与间距：",
+        subSteps: [
+          {
+            content: "把 `.card` 的 `font-family` 改成 `sans-serif`，感受字体变化",
+            purpose: "`font-family` 决定字体风格。`serif`（衬线体）典雅有装饰，`sans-serif`（无衬线体）简洁现代。像选乐器音色——不同的字体传达不同的气质。",
+            expectedResult: "卡片文字从有装饰线的衬线体变成平滑的无衬线体。注意笔画末端的差异。",
+          },
+          {
+            content: "把 `line-height` 从 `1.8` 改成 `1.3` 和 `2.5`，看行间距疏密变化",
+            purpose: "`line-height` 控制行与行之间的距离。值越大行越疏朗，越小行越紧密。合理的行高让文字透气，就像休止符让音乐有呼吸空间。",
+            expectedResult: "`1.3` 时行间距紧凑，`2.5` 时行间距非常疏朗。`1.6~1.8` 通常是正文最舒适的阅读间距。",
+          },
+          {
+            content: "把 `letter-spacing` 加大到 `0.15em`，感受字间距",
+            purpose: "`letter-spacing` 控制字符间距。`em` 是相对单位，相对于当前字体大小。",
+            expectedResult: "字与字之间的距离明显变大了。适当加大字间距可以让标题更有气势。",
+          },
+          {
+            content: "把 `text-align` 改成 `left` 和 `right`，看对齐变化",
+            purpose: "`text-align` 控制文字水平对齐。`center` 居中、`left` 左对齐、`right` 右对齐。",
+            expectedResult: "文字从居中变成左对齐或右对齐。左对齐是最自然的阅读方式。",
+          },
+        ],
       },
       {
         type: "explain",
@@ -797,8 +1092,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，调整这些值看效果：\n1. 把 `.card` 的 `padding` 从 `24px` 改成 `8px`，感受内容变得拥挤\n2. 把 `padding` 改成 `48px`，感受宽松的空间\n3. 把 `margin-bottom` 从 `20px` 改成 `60px`，卡片之间距离变大\n4. 试试给 `h2` 加一个 `margin-top: 0` 消除顶部多余间距",
+        content: "感受盒模型四层空间的差异：",
+        subSteps: [
+          {
+            content: "把 `.card` 的 `padding` 从 `24px` 改成 `8px`，感受内容变得拥挤",
+            purpose: "`padding` 是内容到边框的内部空间。减小 padding，内容和边框贴得很紧——像字写到纸边缘一样挤。",
+            expectedResult: "卡片文字紧贴边框，看起来很局促。这就是 padding 不够的后果。",
+          },
+          {
+            content: "把 `padding` 改成 `48px`，感受宽松的空间",
+            purpose: "增大 padding 给内容更多呼吸空间。padding 越大，内容区和边框之间的距离越远。",
+            expectedResult: "卡片变得非常宽敞。文字四周有大量留白。合适的 padding 让内容看起来更舒服。",
+          },
+          {
+            content: "把 `margin-bottom` 从 `20px` 改成 `60px`，卡片间距变大",
+            purpose: "`margin` 是元素外部的距离。加大 margin-bottom 会让两张卡片离得更远。记住：padding 有背景色（在盒子里），margin 透明（盒子之外）。",
+            expectedResult: "两张卡片之间的间隔明显变大了。这就是 margin 的作用——控制元素之间的距离。",
+          },
+          {
+            content: "试试给 `h2` 加一个 `margin-top: 0` 消除顶部多余间距",
+            purpose: "浏览器会给某些元素默认的 margin。`h2` 默认有上下 margin，有时会显得多余。理解默认样式的存在，才知道为什么要重置它们。",
+            expectedResult: "`h2` 顶部的间距消失了，文字紧贴卡片顶部。这就是为什么很多 CSS 框架会先重置默认样式。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -846,8 +1162,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，尝试：\n1. 把 `.card:nth-child(1)` 的左边框颜色换一个\n2. 给 `.card:hover` 增加 `box-shadow` 属性，让悬浮效果更明显\n3. 试试 `.card:last-child` 选择器，给最后一张卡片特殊的样式\n4. 挑战：添加一张新卡片（第4张），用 `.card:nth-child(4)` 给它设置不同的颜色\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 中三张卡片的最后添加第四张：</p><pre><code>&lt;div class=card&gt;\n  &lt;h2&gt;🎵 肖邦&lt;/h2&gt;\n  &lt;p&gt;浪漫主义的钢琴诗人&lt;/p&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 末尾添加：</p><pre><code>.card:nth-child(4) {\n  border-left: 4px solid #E67E22;\n  background: #FFF5EC;\n}</code></pre><p><code>:nth-child(4)</code> 从父容器中选中第 4 个子元素。</p></div></details>[[/html]]",
+        content: "精确命中不同位置的卡片：",
+        subSteps: [
+          {
+            content: "把 `.card:nth-child(1)` 的左边框颜色换一个",
+            purpose: "`:nth-child(n)` 伪类根据元素位置选中它。`nth-child(1)` = 第一个元素，不用给每张卡片单独加 class。",
+            expectedResult: "第一张卡片的左边框颜色变了。注意 CSS 里的注释告诉你每张卡片当前的颜色是什么。",
+          },
+          {
+            content: "给 `.card:hover` 增加 `box-shadow` 属性，让悬浮效果更明显",
+            purpose: "`:hover` 是交互感的来源——鼠标移到元素上时触发样式变化。`box-shadow` 添加阴影，让卡片看起来浮起来了。",
+            expectedResult: "鼠标悬停时卡片不仅有上浮动画，还多了阴影效果。这是网页中最常见的交互模式。",
+          },
+          {
+            content: "试试 `.card:last-child` 选择器，给最后一张卡片特殊的样式",
+            purpose: "`:last-child` 自动选中最后一个子元素。不用手动数有几张卡片，CSS 会自动定位到最后一张。",
+            expectedResult: "最后一张卡片有了你设定的特殊样式。`:last-child` 的优势：新加卡片后仍自动命中最后一张。",
+          },
+          {
+            content: "挑战：添加一张新卡片（第4张），用 `.card:nth-child(4)` 设置不同的颜色",
+            purpose: "综合练习：在 HTML 中添加新卡片 + 在 CSS 中用 `:nth-child(4)` 给它样式。`n` 从 1 开始计数。",
+            expectedResult: "页面出现第四张卡片，带有你设定的不同颜色强调边框。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -895,8 +1232,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试：\n1. 去掉 `#special` 的 color 样式，看第三条文字变成什么颜色\n2. 给 `.card p.highlight` 的 color 加 `!important`，看效果\n3. 在 DevTools（F12）中查看元素的 Computed 样式，观察被划掉的规则\n4. 挑战：增加一条 `body .card p` 规则（权重 12），写一个颜色的 color，观察谁能赢\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 CSS 中规则 4 的下面添加：</p><pre><code>/* 挑战：权重 1+10+1=12 */\nbody .card p { color: #E67E22; }</code></pre><p>权重分析：<code>body</code>（1）+ <code>.card</code>（10）+ <code>p</code>（1）= 12。<br>对比：<code>.card p</code>（11）被覆盖，<code>.card p.highlight</code>（21）胜出，<code>#special</code>（101）胜出。</p></div></details>[[/html]]",
+        content: "感受 CSS 层叠规则的优先级之战：",
+        subSteps: [
+          {
+            content: "去掉 `#special` 的 color 样式，看第三条文字变成什么颜色",
+            purpose: "理解权重规则：去掉最高权重（101）的 #ID 选择器后，下一条最高权重（21）的 `.card p.highlight` 会生效。",
+            expectedResult: "第三条卡片的文字从金色变成了 `.card p.highlight` 定义的暗红色。",
+          },
+          {
+            content: "给 `.card p.highlight` 的 color 加 `!important`，看效果",
+            purpose: "`!important` 无视权重直接胜出。但这是紧急按钮——一旦用了，后面的覆盖会越来越困难。",
+            expectedResult: "带 `!important` 的规则覆盖了 `#special` 的样式。第二条卡片文字可能也跟着变了颜色。",
+          },
+          {
+            content: "在 DevTools（F12）中查看元素的 Computed 样式，观察被划掉的规则",
+            purpose: "学用 DevTools 诊断层叠冲突——被覆盖的样式会显示为删除线，一眼就能看出谁赢了。",
+            expectedResult: "在 Computed 面板中能看到最终生效的 color 值，以及所有被覆盖的样式。",
+          },
+          {
+            content: "挑战：增加一条 `body .card p` 规则（权重 12），观察它能否覆盖 `.card p`（权重 11）但不能覆盖更高权重的规则",
+            purpose: "用手写实验验证权重计算：`body`(1) + `.card`(10) + `p`(1) = 12。12 > 11，所以覆盖 `.card p`；12 < 21，所以被 `.card p.highlight` 覆盖。",
+            expectedResult: "`body .card p` 覆盖了 `.card p` 的样式，但无法覆盖 `.card p.highlight` 和 `#special`。权重数字精确决定了谁胜出。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -944,8 +1302,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试：\n1. 把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢\n2. 修改 `@keyframes bounce` 中的 `-10px` 改成 `-20px`，让跳动更大\n3. 调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快\n4. 挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 CSS 末尾添加：</p><pre><code>@keyframes spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n.spin-card:hover {\n  animation: spin 0.8s ease-in-out;\n}</code></pre><p>在 HTML 的 <code>&lt;div class=animation-group&gt;</code> 中添加第四张卡片：</p><pre><code>&lt;div class=anim-card spin-card&gt;\n  &lt;span class=card-icon&gt;🌀&lt;/span&gt;\n  &lt;strong&gt;旋转动画&lt;/strong&gt;\n  &lt;p&gt;鼠标移到这里&lt;/p&gt;\n&lt;/div&gt;</code></pre><p><code>from { rotate(0deg) }</code> 到 <code>to { rotate(360deg) }</code> 完成一整圈旋转！</p></div></details>[[/html]]",
+        content: "让页面动起来：",
+        subSteps: [
+          {
+            content: "把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢",
+            purpose: "`transition` 的 `duration`（时长）决定变化快慢。数字越大越慢，越小越快。就像渐强的速度——可以慢慢推，也可以急速推进。",
+            expectedResult: "鼠标悬停时，卡片颜色和大小变化明显变慢了。这就是 transition 的 duration 参数在起作用。",
+          },
+          {
+            content: "修改 `@keyframes bounce` 中的 `-10px` 改成 `-20px`，让跳动更大",
+            purpose: "`@keyframes` 中每个百分比定义了该时刻元素的状态。修改关键帧的值，动画效果也会改变。",
+            expectedResult: "卡片跳动幅度变大了一倍。你直接修改了关键帧的 `translateY` 值。",
+          },
+          {
+            content: "调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快",
+            purpose: "`animation-duration` 控制一个动画周期的时间。改成 `0.5s`（半秒），脉动会快 4 倍。",
+            expectedResult: "第三张卡片的脉动变得非常快。duration 越小，动画越快。",
+          },
+          {
+            content: "挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画",
+            purpose: "从零创建一个 `@keyframes` 动画——`from { rotate(0deg) }` 到 `to { rotate(360deg) }`，然后应用到新卡片上。",
+            expectedResult: "鼠标悬停时，新卡片会旋转一圈。你已经能独立创建 CSS 动画了！",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -987,7 +1366,34 @@ export const lessons: Lesson[] = [
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '切换到 CSS 标签页，试试：\n1. 把 `swing` 动画的 `rotate` 角度从 `3deg` 改成 `8deg`，看摇摆幅度变大\n2. 修改 `fadeInUp` 的 `translateY` 从 `30px` 改成 `60px`——漂移更明显\n3. 给 `heartbeat` 的 `animation-duration` 从 `1.5s` 改成 `0.8s`——心跳更快\n4. 挑战：用 @keyframes 写一个唱片旋转动画（`rotate` + `infinite` + `linear`）\n5. 挑战：把 `fadeInUp` 动画的 `fill-mode` 改成 `forwards` 和 `none`，分别观察结束后的状态\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>挑战1：唱片旋转动画</strong></p><pre><code>@keyframes vinyl-spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n.vinyl {\n  animation: vinyl-spin 3s linear infinite;\n}</code></pre><p>三个关键值：<code>rotate</code> 旋转、<code>linear</code> 匀速、<code>infinite</code> 无限循环。</p><p><strong>挑战2：fill-mode 实验</strong></p><pre><code>/* forwards — 动画结束后停在最后一帧 */\n.fade-card {\n  animation: fadeInUp 1.5s ease-out 1 forwards;\n}\n/* none — 动画结束后回到初始状态（闪回）*/\n.fade-card {\n  animation: fadeInUp 1.5s ease-out 1 none;\n}</code></pre><p>把 <code>infinite</code> 改成 <code>1</code>（只播一次），分别设置 forwards 和 none 观察区别。</p></div></details>[[/html]]',
+        content: '玩转动画参数：',
+        subSteps: [
+          {
+            content: "把 `swing` 动画的 `rotate` 角度从 `3deg` 改成 `8deg`，看摇摆幅度变大",
+            purpose: "修改 `@keyframes` 中关键帧的 `rotate` 值直接改变动画幅度。值越大，摇摆越猛。",
+            expectedResult: "第一张卡片的摇摆幅度明显更大了。动画的幅度由关键帧中的属性值决定。",
+          },
+          {
+            content: "修改 `fadeInUp` 的 `translateY` 从 `30px` 改成 `60px`",
+            purpose: "增加位移距离让动画的轨迹更长。`translateY` 的正值表示向下移动。",
+            expectedResult: "第二张卡片的淡入上浮动画从更远的地方飘过来。修改值让动画效果发生了明显变化。",
+          },
+          {
+            content: "给 `heartbeat` 的 `animation-duration` 从 `1.5s` 改成 `0.8s`",
+            purpose: "`animation-duration` 控制完整周期的时间。改小后心跳更快更急促。",
+            expectedResult: "心跳动画明显加速了。duration 是控制动画节奏最直接的参数。",
+          },
+          {
+            content: "挑战：写一个唱片旋转动画（`rotate` + `infinite` + `linear`）",
+            purpose: "三个关键参数组合：`rotate` 旋转、`linear` 匀速（不是默认的 ease）、`infinite` 无限循环——这就是黑胶唱片的视觉效果。",
+            expectedResult: "元素持续匀速旋转，不会停下。你创造了第一个真正独立的 CSS 动画。",
+          },
+          {
+            content: "挑战：把 `fadeInUp` 的 `fill-mode` 改成 `forwards` 和 `none`，对比差异",
+            purpose: "`animation-fill-mode: forwards` 让动画结束后停在最后一帧；`none` 则回到初始状态。先改 `infinite` 为 `1`（只播一次）才能看出区别。",
+            expectedResult: "`forwards` 时动画结束后元素停在终点位置不闪回；`none` 时播完后会闪回起点。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1029,8 +1435,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试：\n1. 修改 `:root` 中的 `--card-accent` 颜色，看两张卡片的变化\n2. 在 `:root` 中新增一个 `--radius: 8px` 变量，让两张卡片用 `var(--radius)` 替代固定的 `border-radius`\n3. 修改 `.card.dark` 中的变量值，创造你自己的暗色主题色板\n4. 挑战：创建第三张卡片，给它一个 `.warm` 类并定义一套暖橙色调变量\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 第二张卡片（.dark）后面添加第三张：</p><pre><code>&lt;div class=&quot;card warm&quot;&gt;\n  &lt;h2&gt;暖阳主题&lt;/h2&gt;\n  &lt;p&gt;橘色底色，棕红强调色&lt;/p&gt;\n  &lt;span class=&quot;tag&quot;&gt;暖阳&lt;/span&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 的 <code>.card.dark</code> 后面添加暖色主题：</p><pre><code>/* 暖橙主题 */\n.card.warm {\n  --card-bg: #FFF3E0;\n  --card-accent: #E65100;\n  --card-text: #4E342E;\n  --card-sub: #8D6E63;\n}</code></pre><p>在 <code>.card.warm</code> 中重新定义 CSS 变量，这些值只对当前元素及子元素生效——这就是 CSS 变量的作用域。</p></div></details>[[/html]]",
+        content: "体验 CSS 变量「改一处处处变」的威力：",
+        subSteps: [
+          {
+            content: "修改 `:root` 中的 `--card-accent` 颜色，看两张卡片的变化",
+            purpose: "CSS 变量的核心优势：在 `:root` 中改一个颜色值，所有用到 `var(--card-accent)` 的地方都会同步变化。这就是「一次定义，全局共鸣」的含义。",
+            expectedResult: "两张卡片的强调色（标题颜色、左边框、标签背景）全部变成了你改的新颜色。一处修改，处处生效。",
+          },
+          {
+            content: "在 `:root` 中新增一个 `--radius: 8px` 变量，让两张卡片用 `var(--radius)` 替代固定的 `border-radius` 值",
+            purpose: "练习自己定义一个 CSS 变量。以后要统一修改圆角大小，只需要改 `--radius` 一个值——这就是大型网站用变量管理样式的核心原因。",
+            expectedResult: "卡片使用了 `var(--radius)` 后，修改 `--radius` 的值，两张卡片的圆角同时变化。",
+          },
+          {
+            content: "修改 `.card.dark` 中的变量值，创造你自己的暗色主题色板",
+            purpose: "理解 CSS 变量的**作用域**——在 `.card.dark` 中重新定义的变量只对这张卡片生效，` :root` 中的全局值不受影响。这就是局部覆盖。",
+            expectedResult: "暗色卡片变成了你自定义的颜色方案，但浅色卡片保持原来的 `:root` 配色不变。",
+          },
+          {
+            content: "挑战：创建第三张卡片，给它一个 `.warm` 类并定义一套暖橙色调变量",
+            purpose: "从零创建一套主题——在 HTML 中加卡片、在 CSS 中定义变量。通过这个练习，你掌握了用 CSS 变量做多主题切换的完整工作流。",
+            expectedResult: "页面中出现第三张暖橙色主题的卡片，三张卡片各有不同的配色方案，但共享同一套 CSS 规则。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1082,8 +1509,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，尝试以下调整：\n1. 把 `.container` 的 `flex-direction` 改成 `column`，看卡片变成纵向排列\n2. 把 `justify-content` 改成 `space-between` 或 `space-around`\n3. 调整 `gap` 的值，看看卡片间距的变化\n4. 试试去掉某张卡片的 `flex: 1`，看看宽度怎么分配",
+        content: "玩转弹性布局：",
+        subSteps: [
+          {
+            content: "把 `.container` 的 `flex-direction` 改成 `column`，看卡片变成纵向排列",
+            purpose: "理解 `flex-direction`——它决定主轴方向。`row` = 横向排列（默认），`column` = 纵向排列。就像指挥决定声部是横排还是竖排。",
+            expectedResult: "三张卡片变成了上下堆叠排列。主轴方向一变，整个布局就变了。",
+          },
+          {
+            content: "把 `justify-content` 改成 `space-between` 或 `space-around`",
+            purpose: "`justify-content` 控制主轴上的分布方式。`space-between` 首尾贴边中间平均分配，`space-around` 每个元素周围间距相等。",
+            expectedResult: "卡片之间的间距分布方式改变了。`space-between` 时首尾卡片贴边。",
+          },
+          {
+            content: "调整 `gap` 的值，看卡片间距变化",
+            purpose: "`gap` 是 Flexbox 中设置子元素间距的最简单方式。一个值 = 行间距和列间距相同。",
+            expectedResult: "卡片间距变大或变小了。`gap` 越大，卡片之间越疏远。",
+          },
+          {
+            content: "试试去掉某张卡片的 `flex: 1`，看宽度怎么分配",
+            purpose: "`flex: 1` 表示每张卡片平分剩余空间。去掉后该卡片只占用内容所需的最小宽度，其余空间被有 `flex: 1` 的卡片瓜分。",
+            expectedResult: "没有 `flex: 1` 的卡片变窄了，其他卡片变宽了。这就是弹性分配的核心。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1125,8 +1573,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试着调整对齐方式：\n1. 把 `.wrapper` 的 `justify-content` 改成 `flex-start`，看卡片移到左边\n2. 把 `align-items` 改成 `flex-start`，卡片移到顶部\n3. 试试在 `.card` 中添加 `width: 300px`，然后用 `margin: 0 auto` 居中\n4. 把 `.card` 的 `text-align` 改成 `left`，看看文字左对齐的效果",
+        content: "探索各种对齐方式：",
+        subSteps: [
+          {
+            content: "把 `.wrapper` 的 `justify-content` 改成 `flex-start`，看卡片移到左边",
+            purpose: "`justify-content: flex-start` 让元素在主轴起点对齐。Flexbox 默认就是 `flex-start`，所以看起来和没设一样。",
+            expectedResult: "卡片从居中移到了左侧。`center` vs `flex-start` 的差异一目了然。",
+          },
+          {
+            content: "把 `align-items` 改成 `flex-start`，卡片移到顶部",
+            purpose: "`align-items` 控制交叉轴（垂直于主轴）的对齐。在横向排列时，交叉轴是垂直方向。`center` = 垂直居中，`flex-start` = 顶部对齐。",
+            expectedResult: "卡片从垂直居中移到了顶部。`align-items` 控制的就是这个方向。",
+          },
+          {
+            content: "试试在 `.card` 中添加 `width: 300px`，然后用 `margin: 0 auto` 居中",
+            purpose: "`margin: 0 auto` 是传统居中方法——上下 0、左右自动。给块级元素一个固定宽度后，`auto` 会让浏览器自动分配两侧空白。",
+            expectedResult: "卡片有了固定宽度 300px，并且在父容器中水平居中。",
+          },
+          {
+            content: "把 `.card` 的 `text-align` 改成 `left`，看文字左对齐",
+            purpose: "`text-align` 只控制文字和行内元素的对齐，不影响块级元素的布局。`center` = 文字居中，`left` = 文字左对齐。",
+            expectedResult: "卡片内部的文字从居中变成左对齐。卡片的整体位置不变，但内部文字排列方式变了。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1174,8 +1643,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，尝试：\n1. 把 `.soloist` 的 `top` 改成 `50px`，`right` 改成 `50px`，看它移动到哪里\n2. 把 `.player-shift` 的 `left` 从 `20px` 改成 `60px`，看乐手向右偏移\n3. 试试在 `.badge` 中使用 `position: absolute` 和 `top: -8px; right: -8px`\n4. 在预览区滚动（如果内容够多），观察 `sticky` 的行为",
+        content: "移动舞台上的元素：",
+        subSteps: [
+          {
+            content: "把 `.soloist` 的 `top` 改成 `50px`，`right` 改成 `50px`，看它移动到哪里",
+            purpose: "`top`、`right`、`bottom`、`left` 是绝对定位的核心——精确控制元素相对于已定位祖先的位置。数值越大，离该边缘越远。",
+            expectedResult: "独奏者卡片从右上角移到了更靠中间的位置。改变 `top` 和 `right` 的值就改变了它的坐标。",
+          },
+          {
+            content: "把 `.player-shift` 的 `left` 从 `20px` 改成 `60px`",
+            purpose: "`relative` 偏移不影响其他元素的位置——乐手向右移了，但旁边的乐手不会跟过来。",
+            expectedResult: "带有 `relative` 的乐手卡片大幅右移，但其他卡片保持在原位。",
+          },
+          {
+            content: "试试在 `.badge` 中使用 `position: absolute` 和 `top: -8px; right: -8px`",
+            purpose: "`absolute` 的徽章可以溢出父元素边界——负值让元素向外突出。",
+            expectedResult: "徽章移到了卡片外面。`absolute` + 负值让元素可以超出容器边界。",
+          },
+          {
+            content: "在预览区滚动（如果内容够多），观察 `sticky` 的行为",
+            purpose: "`sticky` 在到达阈值前正常流动，到达后固定不动——就像指挥台，滚到顶部就粘住。",
+            expectedResult: "(本示例中内容较短，可能看不到 sticky 效果) 理解概念即可：sticky 是 relative 和 fixed 的混合。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1223,8 +1713,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试：\n1. 把 `grid-template-columns` 从 `repeat(3, 1fr)` 改成 `repeat(2, 1fr)`，观察变成 2 列\n2. 把 `gap` 从 `12px` 改成 `24px`，看卡片间距变大\n3. 修改 `.card:last-child` 的 `grid-column` 改成 `span 3`（2列时跨3无效）\n4. 挑战：用 `grid-template-columns: 1fr 2fr` 创建左窄右宽的两列布局\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>.grid</code> 的 <code>grid-template-columns</code> 改为 1:2 比例：</p><pre><code>.grid {\n  display: grid;\n  grid-template-columns: 1fr 2fr;\n  gap: 12px;\n}</code></pre><p><code>1fr 2fr</code>：第一列占 1 份宽度，第二列占 2 份宽度。<code>fr</code>（fraction）是按比例分配剩余空间的单位。</p></div></details>[[/html]]",
+        content: "玩转网格布局：",
+        subSteps: [
+          {
+            content: "把 `grid-template-columns` 从 `repeat(3, 1fr)` 改成 `repeat(2, 1fr)`，变成 2 列",
+            purpose: "`repeat(3, 1fr)` 和 `repeat(2, 1fr)` 的区别：列数改变了，`fr` 自动按比例分配每一列的宽度。",
+            expectedResult: "卡片从 3 列变成 2 列布局。`repeat()` 让你轻松控制列数。",
+          },
+          {
+            content: "把 `gap` 从 `12px` 改成 `24px`，看卡片间距变大",
+            purpose: "Grid 的 `gap` 与 Flexbox 用法相同——控制网格行列之间的间距。",
+            expectedResult: "卡片之间的间距变大了。`gap` 同时控制行间距和列间距。",
+          },
+          {
+            content: "修改 `.wide-card` 的 `grid-column` 改成 `span 3`，观察效果",
+            purpose: "`grid-column: span 2` 让元素横向跨 2 列。但列数只有 2 时，`span 3` 没有效果（因为没有第 3 列可跨）。",
+            expectedResult: "2 列布局时 `span 3` 没有效果，因为只有 2 列可跨。Grid 不会凭空创建新列。",
+          },
+          {
+            content: "挑战：用 `grid-template-columns: 1fr 2fr` 创建左窄右宽的两列布局",
+            purpose: "`fr` 是按比例分配的弹性单位。`1fr 2fr` 表示第一列占 1 份、第二列占 2 份——第二列是第一列的两倍宽。",
+            expectedResult: "卡片变成左窄右宽的两列布局。`fr` 按比例分配空间的特性在 Grid 中最实用。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1266,8 +1777,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 CSS 标签页，试试：\n1. 调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）\n2. 修改 `640px` 断点为 `500px`，看更早进入两列\n3. 在 `1024px` 断点里给 `.card` 添加 `font-size: 18px`，桌面端文字更大\n4. 挑战：在手机断点（默认）隐藏 `.desktop-only` 元素，在桌面断点显示它\n  提示：`display: none` 隐藏，`@media` 中 `display: block` 显示\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=grid&gt;</code> 前面添加：</p><pre><code>&lt;p class=desktop-only&gt;🖥 你在桌面设备上看到这条消息！&lt;/p&gt;</code></pre><p>在 CSS 中添加：</p><pre><code>/* 手机端默认隐藏 */\n.desktop-only {\n  display: none;\n}\n/* 桌面断点显示 */\n@media (min-width: 1024px) {\n  .desktop-only {\n    display: block;\n    text-align: center;\n    color: #8B2E2E;\n    font-weight: 600;\n    margin-bottom: 16px;\n  }\n}</code></pre><p><code>display: none</code> 让元素在手机端消失，<code>@media (min-width: 1024px)</code> 中 <code>display: block</code> 让它在桌面端重新出现。</p></div></details>[[/html]]",
+        content: "感受响应式的魔力：",
+        subSteps: [
+          {
+            content: "调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）",
+            purpose: "这是响应式设计最重要的体验——同一个页面在不同窗口宽度下自动调整布局。`@media` 查询让 CSS 拥有了判断屏幕尺寸的能力。",
+            expectedResult: "拖动窗口时，卡片从 1 列 → 2 列 → 3 列自动切换。注意观察断点切换的瞬间。",
+          },
+          {
+            content: "修改 `640px` 断点为 `500px`，让两列布局更早出现",
+            purpose: "断点值决定了布局切换的时机。值越小，越早进入大屏布局。",
+            expectedResult: "窗口宽度 500px 时就已经是两列布局了（之前要 640px）。",
+          },
+          {
+            content: "在 `1024px` 断点里给 `.card` 添加 `font-size: 18px`",
+            purpose: "可以在不同断点里修改任意 CSS 属性。大屏字体大一点更舒适，小屏字体小一点省空间。",
+            expectedResult: "窗口宽度 >= 1024px 时，卡片字体变大到 18px。小于 1024px 时恢复默认大小。",
+          },
+          {
+            content: "挑战：在手机断点隐藏 `.desktop-only` 元素，在桌面断点显示它",
+            purpose: "`display: none` 隐藏 + `@media` 条件显示 = 按设备控制元素可见性。这种模式在真实项目中非常常用。",
+            expectedResult: "手机上看到的是隐藏信息，拉宽窗口到桌面尺寸后就出现了。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1297,8 +1829,34 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "逐步构建 ✨",
-        content:
-          '编辑器中已经有一个半成品页面。请完成以下任务：\n**第一步：完善导航栏**\n- 用 `Flexbox` 让导航链接水平排列\n- 给当前页链接加 `.active` 样式\n**第二步：完善节目单网格**\n- 用 `Grid` 把曲目列表排成两列（桌面端）\n- 给每个曲目的 `.time` 设置左对齐、`.piece` 设置右对齐\n**第三步：演奏者卡片**\n- 用 `Flexbox` 让三张卡片水平排列并自动换行\n- 给卡片加 `hover` 上浮效果\n**第四步：底部固定按钮**\n- 用 `position: fixed` 让"购票"按钮始终在右下角\n**第五步：响应式**\n- 在 `@media (max-width: 640px)` 中，把节目单改为单列\n- 把导航栏从横排改为竖排\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>这个页面的大部分样式已经就绪，你只需要完成以下部分：</p><p><strong>第一步：导航栏 Flexbox</strong> — <code>.navbar</code> 已有 <code>display: flex</code> 和居中，只需确保链接间有间距：</p><pre><code>.navbar a { padding: 12px 24px; }</code></pre><p><strong>第二步：节目单 Grid</strong> — <code>.program-grid</code> 已设置 <code>grid-template-columns: 80px 1fr</code>：</p><pre><code>.program-grid .time { text-align: left; }\n.program-grid .piece { text-align: left; }</code></pre><p><strong>第三步：演奏者卡片</strong> — <code>.performer-cards</code> 已有 flex 布局，hover 效果也已写好。</p><p><strong>第四步：固定按钮</strong> — <code>.buy-btn</code> 已有 <code>position: fixed; bottom: 24px; right: 24px</code>。</p><p><strong>第五步：响应式</strong> — 关键部分已写好在 <code>@media (max-width: 640px)</code> 中，看看 <code>grid-template-columns: 1fr</code> 和 <code>flex-direction: column</code> 如何改变布局。关键是理解每个布局属性的作用：Flexbox 做一维排列，Grid 做二维布局，fixed 做固定定位。</p></div></details>[[/html]]',
+        content: "编辑器中已经有一个半成品音乐会页面。请按以下步骤完善：",
+        subSteps: [
+          {
+            content: "**完善导航栏**——用 Flexbox 让导航链接水平排列，给当前页链接加 `.active` 样式",
+            purpose: "导航栏是 Flexbox 最经典的应用场景——横向排列链接，间距均匀，响应式下可切换为竖排。",
+            expectedResult: "导航链接水平排列在页面顶部，当前页标签有高亮下划线。",
+          },
+          {
+            content: "**完善节目单网格**——用 Grid 把曲目列表排成时间+曲名两列，对齐文字",
+            purpose: "节目单是 Grid 的典型案例——行和列都需要对齐。`grid-template-columns: 80px 1fr` 让时间列固定宽度、曲名列弹性填充。",
+            expectedResult: "节目单呈现整洁的两列布局，时间左对齐，曲目名规整排列。",
+          },
+          {
+            content: "**演奏者卡片**——用 Flexbox 让三张卡片水平排列并自动换行，加 hover 上浮效果",
+            purpose: "`flex-wrap: wrap` 让卡片一行放不下时自动换行。hover 效果是用 `:hover` + `transform` + `transition` 组合实现。",
+            expectedResult: "三张卡片横向排列，鼠标悬停时卡片微微上浮。",
+          },
+          {
+            content: "**底部固定按钮**——用 `position: fixed` 让购票按钮始终在右下角",
+            purpose: "`fixed` 定位相对于浏览器窗口，滚动页面也不会移动。常用于 CTA 按钮、回到顶部等需要始终可见的元素。",
+            expectedResult: "无论怎么滚动页面，购票按钮始终固定在右下角。",
+          },
+          {
+            content: "**响应式适配**——在 `@media (max-width: 640px)` 中，节目单改单列，导航栏改竖排",
+            purpose: "移动端屏幕窄，单列布局更合适的。这是移动端优先的设计思路：大屏增强，小屏基础。",
+            expectedResult: "缩小浏览器窗口到 640px 以下时，导航变竖排，节目单变单列，卡片变堆叠。",
+          },
+        ],
       },
       {
         type: "hint",
@@ -1339,7 +1897,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "JS 注释：给自己留备忘",
         content:
-          '代码越写越多以后，你需要给代码加一些说明——这段在做什么、为什么要这样写。JS 有**两种注释**：\n**单行注释 `//`：**\n```js\n// 这是一条注释，浏览器会忽略它\nalert("你好！"); // 行末也可以加注释\n```\n**多行注释 `/* */`：**\n```js\n/*\n * 这里可以写\n * 多行注释内容\n */\nalert("你好！");\n```\n注释不会被浏览器执行——它们只给"人类"看，包括未来的你自己。\n**快捷键：** 选中代码按 `Ctrl + /`（Mac: `Cmd + /`），编辑器自动添加或移除 `//` 注释。这个快捷键在 HTML、CSS、JS 中都通用。',
+          '代码越写越多以后，你需要给代码加一些说明——这段在做什么、为什么要这样写。JS 有**两种注释**：\n**单行注释 `//`：**\n```js\n// 这是一条注释，浏览器会忽略它\nalert("你好！"); // 行末也可以加注释\n```**多行注释 `/* */`：**\n```js\n/*\n * 这里可以写\n * 多行注释内容\n */\nalert("你好！");\n```注释不会被浏览器执行——它们只给"人类"看，包括未来的你自己。\n**快捷键：** 选中代码按 `Ctrl + /`（Mac: `Cmd + /`），编辑器自动添加或移除 `//` 注释。这个快捷键在 HTML、CSS、JS 中都通用。',
       },
       {
         type: "explain",
@@ -1362,8 +1920,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，尝试：\n1. 修改 `alert()` 中的文字，换成你自己的欢迎语\n2. 修改 `console.log()` 中的文字\n3. 试着添加第二行 `console.log()`，输出不同的内容\n4. 按 `F12` 打开浏览器控制台，看看你的输出是否出现了",
+        content: "来写你人生中的第一段 JavaScript：",
+        subSteps: [
+          {
+            content: "修改 `alert()` 中的文字，换成你自己的欢迎语",
+            purpose: "`alert()` 是 JS 最简单的交互方式——弹出一个提示框。体验 JavaScript 与 HTML/CSS 的不同：JS 能让页面做出反应。",
+            expectedResult: "页面刷新后弹出了你自定义的欢迎语。这就是 JS——让页面与用户对话。",
+          },
+          {
+            content: "修改 `console.log()` 中的文字",
+            purpose: "`console.log()` 是开发者的耳朵——输出信息到控制台而不是弹窗。以后调试全靠它。",
+            expectedResult: "控制台中显示了你修改后的文字。控制台只有你（开发者）能看到。",
+          },
+          {
+            content: "试着添加第二行 `console.log()`，输出不同的内容",
+            purpose: "JavaScript 按从上到下的顺序执行。添加第二行，它就按顺序执行两条语句。",
+            expectedResult: "控制台中出现两条输出，按你写的顺序排列。",
+          },
+          {
+            content: "按 `F12` 打开浏览器控制台（Console 标签），看你的输出",
+            purpose: "控制台是 JavaScript 开发最重要的工具。以后每次调试代码，你都会用 F12 → Console。",
+            expectedResult: "在 Console 面板中看到你的输出文字。如果看不到，检查是否切换到了 Console 标签页。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1411,8 +1990,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，试着修改：\n1. 把 `composer` 和 `piece` 改成你喜欢的作曲家和曲目\n2. 修改 `description` 的模板字符串，写一句你自己的话\n3. 试试把 `let` 改成 `const`，效果一样吗？\n4. 试着新增一个变量 `year`，存创作年份",
+        content: "用变量和模板字符串构建信息：",
+        subSteps: [
+          {
+            content: "把 `composer` 和 `piece` 改成你喜欢的作曲家和曲目",
+            purpose: "变量是命名的容器——改一个变量的值，所有用到它的地方自动更新。变量名本身也是一段代码的自注释。",
+            expectedResult: "页面上显示的作曲家和曲目名称都变了。一次改变量值，多处自动生效。",
+          },
+          {
+            content: "修改 `description` 的模板字符串，写一句你自己的话",
+            purpose: "模板字符串用 `` ` `` 包裹，`${}` 插入变量。比用 `+` 拼接字符串清晰得多，更不容易出错。",
+            expectedResult: "描述文字变成了你自定义的内容，变量部分自动替换。",
+          },
+          {
+            content: "试试把 `let` 改成 `const`，效果一样吗？",
+            purpose: "`let` = 可修改的变量，`const` = 不可修改的常量。这里 `composer` 没有重新赋值，所以效果一样。但如果后续代码要改它，`const` 会报错。",
+            expectedResult: "效果一样——因为这些变量没有重新赋值。但如果你尝试给 `const` 变量重新赋值，控制台会报错。",
+          },
+          {
+            content: "挑战：新增一个变量 `year`，存创作年份，并把它也显示在页面上",
+            purpose: "你需要自己添加变量、在 HTML 中加 `<span>` 定位元素、用 `querySelector` + `textContent` 显示。这是第一个完整的数据流练习。",
+            expectedResult: "页面上多了一行显示了创作年份。你独立完成了数据从 JS 到 HTML 的完整流程。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1460,8 +2060,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '切换到 JS 标签页，试试：\n1. 修改 `birthYear` 的值，看周年数自动变化\n2. 用 `typeof` 检查 `isBaroque` 的类型\n3. 试试用 `%` 判断 `birthYear` 是否能被 4 整除（音乐节拍经常是 4 拍）\n4. 挑战：计算"如果一个人出生于 `birthYear` + 20 年，他今年多大"\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 中添加计算逻辑：</p><pre><code>let newBirthYear = birthYear + 20;\nlet newAge = currentYear - newBirthYear;\n// HTML 中添加：&lt;p&gt;&lt;strong&gt;晚生20年则今年：&lt;/strong&gt;&lt;span id=newAge&gt;&lt;/span&gt;&lt;/p&gt;\ndocument.querySelector(&quot;#newAge&quot;).textContent = newAge + &quot; 岁（出生于 &quot; + newBirthYear + &quot; 年）&quot;;</code></pre><p>如果 <code>birthYear = 1685</code>，则 <code>newAge = 2026 - 1705 = 321</code> 岁。</p></div></details>[[/html]]',
+        content: "数据类型和运算符像乐团中的不同乐器——各司其职。下面三个小练习，让你亲手调音：",
+        subSteps: [
+          {
+            content: "修改 `birthYear` 变量的值，比如改成 1756（莫扎特出生年份）或 1810（肖邦出生年份），观察页面上的周年数、整除结果等变化",
+            purpose: "让你体验数据类型的核心概念：修改一个 number 类型的值，所有依赖它的计算会自动更新。就像改变乐谱的速度标记，整首曲子的节奏都跟着变——一处改动，全局响应。",
+            expectedResult: "页面上的周年数、是否整除 4 等所有用到 `birthYear` 的计算结果都会自动变化，无需修改其他任何代码。这就是变量引用的力量。",
+          },
+          {
+            content: "用 `typeof` 运算符检查变量类型。在 JS 中临时添加 `console.log(typeof isBaroque);`，再试试 `typeof birthYear` 和 `typeof composer`，观察控制台输出",
+            purpose: "`typeof` 就像辨认乐器——一听就知道是小提琴还是大提琴。了解每个变量是什么类型，才能知道它能做什么操作：数字可以加减，字符串可以拼接，布尔值可以判断。养成用 `typeof` 检查类型的习惯。",
+            expectedResult: "打开控制台（F12），你会分别看到输出 `\"boolean\"`、`\"number\"`、`\"string\"`——JavaScript 中的三种基本数据类型一目了然。",
+          },
+          {
+            content: "用取模运算符 `%` 判断 `birthYear` 是否能被 4 整除。试试把 birthYear 改成 2024 再改成 2025，观察页面上「能被4整除？」的显示变化",
+            purpose: "`%`（取模）是编程中非常实用的运算符，就像音乐中判断「这个音符在拍子的哪个位置」——`count % 4` 可以知道当前是第 1、2、3 还是第 4 拍。这是后续做循环、判断节拍的基础操作。",
+            expectedResult: "能被 4 整除的年份（如 2024）显示「是」，不能整除的（如 2025）显示「否」。你修改数字后，页面上的答案会实时更新。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1503,8 +2119,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，试试：\n1. 修改已存在的 `createCard()` 调用，把作曲家换成你喜欢的\n2. 新增一行调用，用 `createCard()` 创建第四张卡片，然后用 `+=` 追加到 `html` 中\n3. 试着在函数里增加一个参数，比如 `country`（国籍）",
+        content: "函数是代码的「主题动机」——写好一次，换个参数就能奏出不同的效果。试试下面的练习：",
+        subSteps: [
+          {
+            content: "修改已有的 `createCard()` 调用，把作曲家名字换成你喜欢的作曲家（如把「巴赫」改成「拉赫玛尼诺夫」），同时更新时期和代表作参数",
+            purpose: "让你理解函数调用的核心：同一个函数，传入不同的参数，产生不同的输出。就像同一个旋律动机，用钢琴弹和用提琴拉，效果不同但结构一样——这就是函数的复用之美。",
+            expectedResult: "页面上对应卡片的名字、时期、代表作都变成了你新输入的作曲家信息，其他两张卡片保持不变。函数本身一行都没改，只是换了个「参数」。",
+          },
+          {
+            content: "新增一行 `createCard()` 调用，创建第四张卡片。比如：`html += createCard(\"舒伯特\", \"浪漫主义\", \"未完成交响曲\");`，注意用 `+=` 追加到 html 变量中",
+            purpose: "让你体验「调用一次函数就多一张卡片」的便利——不需要重新写整段 HTML 拼接逻辑，只需一行函数调用。这正是函数的核心价值：封装重复逻辑，一处定义，处处使用。",
+            expectedResult: "页面上从 3 张卡片变成 4 张，新增的卡片和其他卡片样式完全一致，说明函数正确生成了 HTML 结构。你创造了一张全新的卡片！",
+          },
+          {
+            content: "挑战：给 `createCard` 函数增加一个 `country` 参数。先在函数定义的模板字符串中添加一行 `<p>国籍：${country}</p>`，然后在每次调用时传入国籍参数（如 `\"德国\"`、`\"奥地利\"`、`\"法国\"`）",
+            purpose: "练习修改函数定义——增加参数意味着函数的能力增强了。就像给一段旋律加一个变奏：原有的结构不变，但增加了新的表现力。理解「改一处定义，所有调用点都受益」这个设计思想。",
+            expectedResult: "所有卡片都会多出一行国籍信息，而你只需要改函数的定义和调用参数——这就是函数作为「单一真相来源」的力量。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1546,8 +2178,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，试试：\n1. 在预览区点击按钮，看计数器变化\n2. 修改 `display.textContent` 的文字，换一种表达方式\n3. 试着把 `count = count + 1` 改成 `count = count + 5`，每次加 5\n4. 挑战：在 HTML 面板中复制一个按钮（`#resetBtn`），在 JS 中给它加一个点击事件，点击后把 `count` 归零\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=counter-box&gt;</code> 中添加：</p><pre><code>&lt;button id=resetBtn&gt;🔄 归零&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let resetBtn = document.querySelector(&quot;#resetBtn&quot;);\nresetBtn.addEventListener(&quot;click&quot;, function() {\n  count = 0;\n  display.textContent = &quot;计数器已归零&quot;;\n});</code></pre><p>三步走：HTML 加按钮 → querySelector 获取 → addEventListener 绑定事件。</p></div></details>[[/html]]",
+        content: "事件就像乐器对演奏者的响应——按下琴键，声音才会响起。下面的练习让你亲手打造互动体验：",
+        subSteps: [
+          {
+            content: "切换到预览区，反复点击「点我打拍子」按钮，观察计数器从 0 开始逐次增加，感受每一次点击带来的即时响应",
+            purpose: "让你直观感受事件驱动编程的核心模型：用户操作（点击）→ 事件触发 → 执行回调函数 → 更新页面。就像按下琴键 → 琴槌敲弦 → 发出声音——每一步都是对前一步的响应。",
+            expectedResult: "每点击一次按钮，计数器增加 1，页面显示「你点击了 N 次」。这是你第一次写出「能和用户互动」的代码。",
+          },
+          {
+            content: "修改事件回调函数中 `display.textContent` 的显示文字，换一种表达方式。比如改成 `\"节拍计数：第 \" + count + \" 拍\"` 或使用模板字符串自定义",
+            purpose: "让你意识到事件回调函数里的代码和普通 JS 代码完全一样——你可以自由地修改其中的逻辑和显示。事件只是一个触发时机，被触发后执行的代码由你完全掌控。",
+            expectedResult: "点击按钮后，页面显示的文字变成了你自定义的表达方式，但计数功能不受影响。你已经学会定制交互反馈了。",
+          },
+          {
+            content: "把回调函数中的 `count = count + 1` 改成 `count = count + 5`，体验每次点击跳 5 拍的节奏感",
+            purpose: "让你理解核心逻辑的一行改动就能改变整个交互行为。这就是编程的魔力：一个数字的变化，整个节拍器的节奏就完全不一样了。大胆改，看看会发生什么。",
+            expectedResult: "每次点击按钮，计数器跳 5 个数，页面显示「你点击了 5 次」→「你点击了 10 次」→「你点击了 15 次」……节奏明显加快。",
+          },
+          {
+            content: "挑战：添加归零按钮。在 HTML 的 counter-box 容器中添加 `<button id=\"resetBtn\">归零</button>`，在 JS 中用 `querySelector` 获取它，用 `addEventListener` 绑定点击事件，点击后将 `count` 重置为 0 并更新 `display.textContent`",
+            purpose: "从零开始完整走一遍「HTML 加元素 → JS 获取元素 → 绑定事件 → 写回调逻辑」的全流程。这是前端开发中最常见的模式，掌握它就掌握了一大半交互开发的技能。",
+            expectedResult: "点击归零按钮后，计数器回到 0，显示内容也同步更新（如「计数器已归零」）。你在一个页面上同时拥有了「增加」和「归零」两个交互功能，就像节拍器有了开始和停止两个按钮。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1595,8 +2248,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，试试：\n1. 在输入框中打字，观察下方实时显示\n2. 把鼠标移到卡片上再移开，看边框颜色变化\n3. 按回车键，看提示信息\n4. 挑战：给输入框增加 `keydown` 事件，当按 Escape 键时清空输入框内容\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 末尾添加：</p><pre><code>inputEl.addEventListener(&quot;keydown&quot;, function(event) {\n  if (event.key === &quot;Escape&quot;) {\n    inputEl.value = &quot;&quot;;\n    liveText.textContent = &quot;---&quot;;\n    keyHint.textContent = &quot;⌨️ 输入框已清空（你按了 Escape）&quot;;\n    keyHint.style.color = &quot;#8B2E2E&quot;;\n  }\n});</code></pre><p><code>event.key === &quot;Escape&quot;</code> 判断是否按了 Esc 键。<code>inputEl.value = &quot;&quot;</code> 清空输入框。</p></div></details>[[/html]]",
+        content: "事件不只 click 一种——input、mouseenter、keydown 各司其职，就像乐团里每件乐器有独特的弹奏方式。逐一体验：",
+        subSteps: [
+          {
+            content: "切换到预览区，在输入框中打字，观察下方「你输入的是」区域实时同步显示你敲的每一个字符",
+            purpose: "让你体验 `input` 事件的「实时性」——每敲一个字符就触发一次。这不同于点击事件的一次性响应。`event.target.value` 是获取输入内容的「标准姿势」，后续所有输入交互都靠它。",
+            expectedResult: "下方「你输入的是」后面的文字会随着你的打字实时变化，一个字不差地同步显示。松手时它已经显示了全部输入内容。",
+          },
+          {
+            content: "把鼠标移到「鼠标悬停卡片」上再移开，观察边框颜色和背景色的变化——移入时变为金色边框，移出时恢复原状",
+            purpose: "让你感受 `mouseenter` 和 `mouseleave` 这对「成双成对」的事件。它们总是在一起使用——就像音乐的渐强和渐弱，一个进入，一个退出，形成完整的互动闭环。",
+            expectedResult: "鼠标移入卡片时，边框变为金色（#C9A96E），背景也微微泛黄；鼠标移出后恢复原状。这种反馈让用户感觉自己真的在和页面「对话」。",
+          },
+          {
+            content: "按键盘上的任意键，观察页面底部提示文字的实时变化。再试试按回车键（Enter），看是否显示特殊的回车提示信息",
+            purpose: "`keydown` 事件可以精确识别用户按下了哪个键——`event.key` 告诉你键名。配合 `if` 判断，不同键可以做不同的事：回车提交、Escape 取消、空格播放/暂停……这是构建快捷键系统的基础。",
+            expectedResult: "按下任意键，底部提示会显示「你按下了: \"X\"」（X 为键名）。按下回车键则显示特殊提示「你按了回车键！」且颜色变为深红。",
+          },
+          {
+            content: "挑战：给输入框增加 `keydown` 事件监听，当按 Escape 键时清空输入框内容和实时显示。提示：判断 `event.key === \"Escape\"`，然后设置 `inputEl.value = \"\"` 和 `liveText.textContent = \"---\"`",
+            purpose: "综合运用 `keydown` 事件 + `event.key` 判断 + DOM 操作。学会根据特定按键执行特定操作，这是实现「键盘快捷键」的完整模式。",
+            expectedResult: "在输入框中随便打些字，然后按 Escape 键——输入框清空，实时显示也变回「---」，底部提示框中显示清空提示。一个按键完成了清空操作。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1638,8 +2312,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '切换到 JS 标签页，试试：\n1. 在预览区输入"肖邦"点击提交，看正确反馈\n2. 输入别的名字点击提交，看 `else` 分支的反馈\n3. 在 if 中增加一个条件：用 `&&` 同时判断两个输入框\n4. 挑战：增加一个 `else if` 分支，判断是否为空（`=== ""`）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 JS 已有的 <code>else if</code> 后面添加一个新分支：</p><pre><code>// 挑战：判断是否输入了李斯特\n} else if (answer === &quot;李斯特&quot;) {\n  result.style.color = &quot;#8B2E2E&quot;;\n  result.textContent = &quot;李斯特也是一位伟大的钢琴家，但标准答案是肖邦。&quot;;\n}</code></pre><p>完整的 if-else if-else 链：肖邦 → 空值 → 李斯特 → 其他。每个 <code>else if</code> 处理一种情况。</p></div></details>[[/html]]',
+        content: "if/else 让代码有了判断力——就像评委给演奏者打分，根据表现给出不同的评语。来试试这个作曲家竞猜游戏：",
+        subSteps: [
+          {
+            content: "在预览区的输入框中输入「肖邦」，点击「提交答案」，观察反馈信息。再输入一个错误的名字（如「李白」），看反馈有什么不同",
+            purpose: "让你直观感受 `if/else` 的分支逻辑——同样的代码，输入不同，走的路径完全不同。就像音乐比赛评委会根据选手表现给出「晋级」或「淘汰」两种完全不同的结果。",
+            expectedResult: "输入「肖邦」→ 绿色提示「回答正确！」；输入其他名字 → 红色提示「再想想？」。同一段代码根据条件走出了两条不同的路。",
+          },
+          {
+            content: "空着输入框直接点击提交，观察 `else if` 分支给出的特殊提示。理解 `if → else if → else` 的三层判断结构",
+            purpose: "`else if` 让你处理「中间情况」——不是对也不是错，而是「还没输入」。这就像音乐比赛中除了「晋级」和「淘汰」，还有「请先上台」的第三种情况。多层分支是构建复杂决策逻辑的基础。",
+            expectedResult: "空输入时显示金色提示「请先输入一个名字哦 ~」，既不是正确也不是错误，而是第三种专门处理空值的情况。",
+          },
+          {
+            content: "在 if 条件中试试用 `&&` 组合多个判断条件。比如：在正确回答的同时增加额外判断，如 `answer === \"肖邦\" && answer.length > 1`，体会逻辑与的「双重把关」效果",
+            purpose: "`&&`（逻辑与）让你把多个条件「绑在一起」——全部满足才通过。就像「只有既是古典主义时期、又是德国作曲家」才归入某个分类。`&&` 和 `||` 是构建复杂判断的核心工具。",
+            expectedResult: "只有当两个条件都满足时，才执行该分支的代码。如果只满足一个，则跳过这个分支走到下一个判断——逻辑运算符就像层层安检，一道不通过就不放行。",
+          },
+          {
+            content: "挑战：在已有的 if-else if-else 链中增加一个新分支，判断是否输入了「李斯特」。给出区别于正确答案的特殊提示，如「李斯特也是一位伟大的钢琴家，但标准答案是肖邦」",
+            purpose: "练习扩展条件分支——不是简单地加一个 if，而是在 `if → else if → else if → else` 链中找到合适的位置插入。每个分支处理一种特定情况，分支之间互斥。",
+            expectedResult: "输入「李斯特」→ 显示特殊提示（既不是「正确」的绿色，也不是「错误」的红色，而是第三种独特反馈）；输入其他名字 → 显示通用的错误提示。你的判断逻辑更精细了。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1681,8 +2376,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '切换到 JS 标签页，试试：\n1. 在预览区输入框输入"德彪西"点添加，看列表变化\n2. 修改 `.join()` 的分隔符，从 `" · "` 改成 `" | "` 或 `", "`\n3. 修改数组初始值，换成你自己喜欢的作曲家\n4. 挑战：添加一个"删除最后一位"按钮（用 `.pop()` 方法）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=add-row&gt;</code> 中添加：</p><pre><code>&lt;button id=removeBtn&gt;➖ 删除最后&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let removeBtn = document.querySelector(&quot;#removeBtn&quot;);\nremoveBtn.addEventListener(&quot;click&quot;, function() {\n  if (composers.length &gt; 0) {\n    composers.pop();  // .pop() 删除并返回最后一个\n    showList();\n  }\n});</code></pre><p><code>.pop()</code> 删除数组最后一个元素。<code>if (composers.length &gt; 0)</code> 防止空数组时报错。</p></div></details>[[/html]]',
+        content: "数组就像你的曲目单——有序地存储一组数据。下面的练习让你亲身体验数组的增删改查：",
+        subSteps: [
+          {
+            content: "在预览区输入框中输入「德彪西」，点击「添加」按钮，观察列表中是否多出了一位作曲家，分隔符是否正确连接了所有名字",
+            purpose: "让你体验 `.push()` 方法的「增」操作——往数组末尾追加一个元素后，用 `.join()` 重新拼接显示。理解「数组数据变化 → 页面同步更新」这个核心模式，这是所有数据驱动页面的基础思路。",
+            expectedResult: "列表从「巴赫 · 莫扎特 · 贝多芬」变成「巴赫 · 莫扎特 · 贝多芬 · 德彪西」，新增的名字自动出现在末尾，分隔符也正确显示。",
+          },
+          {
+            content: "修改 `.join()` 的分隔符参数，从 `\" · \"` 改成 `\" | \"` 或 `\"、\"`（中文顿号），观察列表显示效果的差异",
+            purpose: "`.join()` 是数组转字符串的最常用方法——分隔符决定了最终的视觉呈现。就像乐谱上可以用空格、逗号或破折号分隔曲目，不同的分隔符传递不同的排版感受。",
+            expectedResult: "列表显示的分隔符从圆点变成了竖线或顿号，整体视觉效果随之改变。你完全不需要修改数组数据本身，只改了一个字符串参数。",
+          },
+          {
+            content: "修改数组初始值（`let composers = [...]` 那一行），替换成你自己喜欢的作曲家名字，保存后刷新页面查看效果",
+            purpose: "让你理解数组初始化的概念——数组的内容由你定义，就像你可以随意编排自己的练习曲目单。同时帮你建立「改数据 → 看效果」的直觉。",
+            expectedResult: "页面上的列表显示变成了你自定义的作曲家名单，列表逻辑和样式完全不受影响——数据和展示逻辑分离，这是好设计的标志。",
+          },
+          {
+            content: "挑战：添加一个「删除最后一位」按钮。在 HTML 中添加 `<button id=\"removeBtn\">删除最后</button>`，在 JS 中用 `composers.pop()` 删除数组最后一项，然后调用 `showList()` 刷新显示。记得加 `if (composers.length > 0)` 防止空数组出错",
+            purpose: "`.pop()` 是 `.push()` 的镜像操作——一个加末尾，一个删末尾。组合增删操作，你就实现了完整的「数据管理」功能。就像排练时可以随时在曲目单上添加或划掉一首曲子。",
+            expectedResult: "点击「删除最后」按钮，列表最后一位作曲家消失。连续点击直到列表为空时也不会报错（因为有了 `length > 0` 的保护）。增加和删除两个功能形成了一个完整的 CRUD 闭环。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1724,8 +2440,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "切换到 JS 标签页，试试：\n1. 在数组中再添加一个作曲家，看循环自动生成新卡片\n2. 把 `forEach` 改成 `for` 循环，实现同样的效果\n3. 修改卡片模板，增加曲目信息（把数组改成二维数组）\n4. 挑战：在 `forEach` 内用 `if` 判断 `name.length > 2`，只显示名字长度大于 2 的项\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 <code>forEach</code> 循环中添加条件判断：</p><pre><code>composers.forEach(function(name, index) {\n  if (name.length &gt; 2) {\n    html += &lt;div class=card&gt;...&lt;/div&gt;;\n  }\n});</code></pre><p><code>name.length</code> 返回名字的字符数。如果数组中有短名如「李」（长度 1），<code>if</code> 会跳过它。</p></div></details>[[/html]]",
+        content: "循环就像节拍器——一拍一拍反复执行，直到乐曲结束。用 forEach 遍历数组，「一首接一首」处理每项数据：",
+        subSteps: [
+          {
+            content: "在 JS 标签页的 `composers` 数组中再添加一个作曲家名字（如「拉赫玛尼诺夫」），观察页面是否自动多出了一张带序号的卡片",
+            purpose: "让你感受循环的「自动化」力量——增加一条数据，无需手动复制 HTML，循环自动为它生成卡片。这就是循环的核心价值：写一次模板逻辑，处理任意数量的数据。从 3 条到 100 条，代码量完全不变。",
+            expectedResult: "页面自动多出一张新卡片，序号正确递增，样式和其他卡片完全一致。你只加了一行数据，一切自动完成。",
+          },
+          {
+            content: "把 `forEach` 循环改成传统的 `for` 循环，实现同样的卡片渲染效果。参考格式：`for (let i = 0; i < composers.length; i++) { let name = composers[i]; ... }`",
+            purpose: "`for` 和 `forEach` 是循环的两种写法——`for` 更底层，让你手动控制索引；`forEach` 更简洁，专注于「对每一项做什么」。理解两种方法后，你能在不同场景下灵活选择。",
+            expectedResult: "页面显示效果和 forEach 完全一样，但你用的是 `for` 循环。通过对比，你理解了两种循环的等价性。",
+          },
+          {
+            content: "修改卡片模板（循环内部的 HTML 字符串），给每张卡片增加更多信息。比如在名字后面加上序号，或者自定义描述文字",
+            purpose: "让你意识到循环内部的模板就是普通的字符串拼接——你可以自由地修改它。每张卡片共享同一个模板结构，但填充的数据各不相同（因为 `name` 和 `index` 每次迭代都会变化）。",
+            expectedResult: "所有卡片的样式统一更新（因为改了同一个模板），但每张卡片显示的内容仍然不同——模板统一，数据多样，这就是循环渲染的精髓。",
+          },
+          {
+            content: "挑战：在 `forEach` 循环内增加 `if` 条件判断，只显示名字长度大于 2 的作曲家（过滤掉单字名）。提示：在循环体内用 `if (name.length > 2)` 包裹 HTML 拼接代码",
+            purpose: "组合循环 + 条件判断——这是数据处理中最常见的模式。「先筛选，再渲染」或「边遍历边判断」，让你瞬间拥有处理复杂数据的能力。就像从曲目单中只挑出长度超过 2 个字的名字来排练。",
+            expectedResult: "只有名字长度大于 2 的作曲家有对应卡片，短名字（如只有一个字的）被跳过不显示。循环和条件判断配合得天衣无缝。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1774,7 +2511,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n1. 修改筛选条件——只显示名字长度 ≥ 6 的作曲家\n2. 用 `.map()` 给每个名字加上"作曲家："前缀\n3. 用 `链式调用` 一步完成筛选+转换（不用中间变量 filtered）\n4. 挑战：在输入框输入字母，只显示名字包含该字母的作曲家（实时筛选）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>这个挑战的答案已经在初始代码中实现了！核心代码：</p><pre><code>document.querySelector("#filterInput").addEventListener("input", function() {\n  updateList(this.value);\n});\nfunction updateList(letter) {\n  let result = composers\n    .filter(function(name) {\n      return name.toLowerCase().includes(letter.toLowerCase());\n    })\n    .map(function(name) {\n      return name.toUpperCase();\n    });\n  outputEl.textContent = result.length &gt; 0 ? result.join(" | ") : "（无匹配）";\n}</code></pre><p>三步链式调用：<code>.filter()</code> 筛选 → <code>.map()</code> 转换 → <code>.join()</code> 拼接。</p></div></details>[[/html]]',
+          "`.filter()` 像从总谱中挑出弦乐声部，`.map()` 像把整首曲子移调——两者都不破坏原谱，而是生成新版本。来亲自指挥：",
+        subSteps: [
+          {
+            content: "修改 `.filter()` 的筛选条件，把「筛选含 a 字母的」改成「只显示名字长度 >= 6 的作曲家」。提示：用 `name.length >= 6` 替换原来的条件",
+            purpose: "让你理解 `.filter()` 的灵活性——筛选条件完全由你定义，任何返回 true/false 的判断都可以作为过滤规则。就像指挥可以根据「声部类型」「音高范围」「演奏难度」任意筛选乐手。",
+            expectedResult: "处理结果区域只显示名字长度 6 个及以上的作曲家（如 Beethoven、Debussy），短名字被过滤掉了。修改一个条件，输出结果完全不同。",
+          },
+          {
+            content: "用 `.map()` 给每个名字加上「作曲家：」前缀，比如 \"Bach\" 变成 \"作曲家：Bach\"。先做完 map 再做 join 拼接显示",
+            purpose: "`.map()` 对数组中每项做「同一种加工」——就像给乐谱每一行加上相同的演奏标记。它是数据转换的核心工具，实际开发中 map 和 filter 经常搭配使用。",
+            expectedResult: "输出区域每个名字前都加上了「作曲家：」前缀，就像给每张卡片统一盖了一个印章。原数组仍然没变——只是生成了新的加工版本。",
+          },
+          {
+            content: "用链式调用把 `.filter()` 和 `.map()` 串联起来，不用中间变量一步完成「筛选 + 转换」。直接在筛选结果后面 `.map()`",
+            purpose: "链式调用是 JavaScript 最优雅的编程风格之一——就像音乐中的「连奏」（legato），一个操作紧接下一个，形成流畅的数据处理流水线。不产生中间变量，代码更简洁清晰。",
+            expectedResult: "一行代码链完成了筛选和转换两个操作，输出效果和分步写完全一样。你体验到了「流水线式」数据处理的优雅。",
+          },
+          {
+            content: "挑战：在输入框中输入字母，实现实时筛选效果。输入「a」，只显示名字中含 a 的作曲家；输入「ch」，只显示含 ch 的。输入框清空时显示全部",
+            purpose: "综合运用 `.filter()` + 事件监听 + DOM 更新——这是一套完整的「搜索过滤」交互模式。理解了这套模式，你就掌握了电商搜索、通讯录查找等常见功能的底层原理。",
+            expectedResult: "输入不同字母，结果实时变化；清空输入框显示全部。数据过滤响应用户操作，实现了真正的交互式数据探索体验。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1817,7 +2576,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 和预览区，试试：\n1. 点击`高亮全部`看效果\n2. 点击`只看弦乐`看过滤效果\n3. 修改 `#showAllBtn` 的逻辑，把 `card.classList.remove("hidden")` 改成移除高亮\n4. 挑战：新增一个按钮`高亮管乐`，只高亮 `class` 包含 `winds` 的卡片\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的 <code>&lt;div class=controls&gt;</code> 中添加按钮：</p><pre><code>&lt;button id=highlightWindsBtn&gt;高亮管乐&lt;/button&gt;</code></pre><p>在 JS 末尾添加：</p><pre><code>let highlightWindsBtn = document.querySelector("#highlightWindsBtn");\nhighlightWindsBtn.addEventListener("click", function() {\n  cards.forEach(function(card) {\n    if (card.classList.contains("winds")) {\n      card.classList.add("highlighted");\n    }\n  });\n});</code></pre><p><code>card.classList.contains("winds")</code> 检查卡片是否有 winds 类。只给管乐卡片添加高亮。</p></div></details>[[/html]]',
+          "`querySelectorAll` 就像指挥对整个弦乐声部做统一手势——一条指令同时操作一群元素。来体验批量操作的力量：",
+        subSteps: [
+          {
+            content: "点击「高亮全部」按钮，观察所有 5 张乐器卡片的边框和阴影同时亮起；再点击「取消高亮」，看它们同时恢复原状",
+            purpose: "让你感受 `querySelectorAll` + `forEach` 组合的「批量操作」威力——一条指令作用于所有匹配元素。就像指挥一挥手，整个弦乐声部同时起弓。这比手动操作每个元素高效得多。",
+            expectedResult: "点击高亮全部 → 5 张卡片同时变为金色边框+阴影（`.highlighted` 类生效）；点击取消 → 全部恢复原状。批量操作一气呵成。",
+          },
+          {
+            content: "点击「只看弦乐」按钮，观察弦乐卡片保持清晰而管乐卡片变半透明；再点击「显示全部」恢复。理解 `classList.add/remove/toggle` 的用法",
+            purpose: "`classList` 是操作元素 CSS 类的标准方式——添加、移除、切换类名比直接改 style 更优雅，因为样式统一在 CSS 中管理。这也是 CSS 和 JS 各司其职的最佳实践：CSS 管外观，JS 管逻辑。",
+            expectedResult: "点击「只看弦乐」→ 弦乐卡片清晰，管乐卡片变半透明（opacity: 0.15）；点击「显示全部」→ 所有卡片恢复。过滤效果通过 toggle 类名实现。",
+          },
+          {
+            content: "修改「显示全部」按钮的事件逻辑，把 `card.classList.remove(\"hidden\")` 改成 `card.classList.remove(\"highlighted\")`，看看点击后变化的是什么效果",
+            purpose: "让你理解 `classList.remove` 的灵活性——移除不同的类名就能实现不同的操作。同一个按钮，改一个字符串就从「显示全部」变成了「取消高亮」。代码逻辑完全一样，只是操作的类名不同。",
+            expectedResult: "先高亮全部→再点击修改后的「显示全部」→所有高亮被取消。你发现这个按钮现在和「取消高亮」功能一样了——类名决定了操作的目标效果。",
+          },
+          {
+            content: "挑战：新增一个「高亮管乐」按钮。在 HTML 中添加按钮，在 JS 中用 `querySelector` 获取，绑定 click 事件，遍历所有卡片，用 `card.classList.contains(\"winds\")` 判断是否是管乐类，只给管乐卡片加 `.highlighted` 类",
+            purpose: "综合运用 querySelectorAll + forEach + classList.contains + classList.add——这四者结合就是前端批量操作的标准模式。从零开始实现「条件筛选 + 批量样式更新」，这是真实项目中最常用的技能。",
+            expectedResult: "点击「高亮管乐」→ 只有小号和长笛两张管乐卡片高亮，弦乐卡片保持不变。你成功地基于元素特征进行了「选择性批量操作」。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1860,7 +2641,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页，试试：\n1. 在对象数组中新增一个作曲家对象\n2. 给每个对象增加 `country` 属性，在卡片模板中显示\n3. 修改某个作曲家的 `period`，看页面自动更新\n4. 挑战：用 `if` 判断，只显示 `period === "浪漫主义"` 的作品家（配合 `.filter()` 或条件判断）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>方法一：在 <code>forEach</code> 中用 <code>if</code> 判断：</p><pre><code>composers.forEach(function(c) {\n  if (c.period === "浪漫主义") {\n    html += `&lt;div class=card&gt;...&lt;/div&gt;`;\n  }\n});</code></pre><p>方法二：先 <code>.filter()</code> 再 <code>.forEach()</code>：</p><pre><code>composers\n  .filter(function(c) { return c.period === "浪漫主义"; })\n  .forEach(function(c) {\n    html += `&lt;div class=card&gt;...&lt;/div&gt;`;\n  });</code></pre><p>通过 <code>c.period === "浪漫主义"</code> 判断时期属性。</p></div></details>[[/html]]',
+          "对象就像音乐家档案——用有名字的键来存取数据，比数组的数字索引更直观。来亲手管理作曲家数据：",
+        subSteps: [
+          {
+            content: "在 `composers` 对象数组中新增一位作曲家对象，参照已有格式添加 `name`、`period`、`piece` 三个属性。比如新增德彪西：`{ name: \"德彪西\", period: \"印象派\", piece: \"月光\" }`",
+            purpose: "对象数组是实际开发中最常见的数据结构——每一条记录都是一个对象，所有记录组成数组。新增一条数据就像给 Excel 表增加一行，属性的键名就是列标题。",
+            expectedResult: "页面多了一张新卡片，显示你新增的作曲家信息，样式和其他卡片完全一致。`forEach` 循环自动处理了新增的数据——你只需关注数据本身。",
+          },
+          {
+            content: "给每个对象增加一个 `country` 属性（如 `country: \"德国\"`），然后在卡片模板字符串中添加一行 `<p>国籍：${c.country}</p>` 来显示国籍信息",
+            purpose: "对象扩展属性非常灵活——随时可以加新字段而不影响已有数据。就像在档案卡上多印一行「国籍」，所有卡片同步更新。但要注意：模板也要同步修改才能显示新字段。",
+            expectedResult: "每张卡片都多出一行国籍信息，格式和位置统一。你体验了「改模板结构 + 补全数据」的完整流程。",
+          },
+          {
+            content: "修改某个作曲家的 `period` 属性值（比如把贝多芬的 `period` 从「古典到浪漫」改成「古典主义」），刷新页面观察该卡片的变化",
+            purpose: "对象属性的修改和变量赋值一样简单——`c.period = \"新值\"` 即可。数据驱动渲染的核心思想是：数据变了，视图自动跟着变。这是所有前端框架（Vue、React）的底层原理。",
+            expectedResult: "贝多芬卡片上的时期标签变成了「古典主义」，其他卡片不受影响。对象之间的独立性让你可以精确修改任何一条记录。",
+          },
+          {
+            content: "挑战：使用 `.filter()` 方法只显示浪漫主义时期的作曲家。在 `forEach` 之前先用 `composers.filter(function(c) { return c.period === \"浪漫主义\" })` 筛选数据",
+            purpose: "对象属性 + 条件判断的组合是数据管理中最强大的模式。通过 `c.period` 访问对象的时期字段，用 `=== \"浪漫主义\"` 做精确匹配，筛选出特定子集。这就像从音乐资料库中调出所有浪漫主义时期的档案。",
+            expectedResult: "只有肖邦（条件符合）的卡片显示在页面上，其他时期的作曲家被过滤掉了。筛选 + 渲染的流水线完美协作。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1903,7 +2706,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到 JS 标签页和预览区，试试：\n1. 在输入框输入内容，点`添加`，看列表增长\n2. 连续点`删除最后`，看列表缩短\n3. 修改 `addItem` 函数，让每个项带上序号\n4. 挑战：给每个项加一个删除按钮（在 `createElement` 时内置一个独立删除功能）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改 JS 的添加逻辑，在每个 <code>plan-item</code> 内嵌入删除按钮：</p><pre><code>addBtn.addEventListener("click", function() {\n  let text = input.value.trim();\n  if (text === "") return;\n  let item = document.createElement("div");\n  item.className = "plan-item";\n  item.style.cssText = "display:flex;justify-content:space-between;align-items:center";\n  let textSpan = document.createElement("span");\n  textSpan.textContent = text;\n  let delBtn = document.createElement("button");\n  delBtn.textContent = "✕";\n  delBtn.style.cssText = "background:none;border:none;color:#C94545;cursor:pointer;font-size:16px";\n  delBtn.addEventListener("click", function() {\n    item.remove();  // 只删除自己所在的 plan-item\n  });\n  item.appendChild(textSpan);\n  item.appendChild(delBtn);\n  list.appendChild(item);\n  input.value = "";\n});</code></pre><p>核心技巧：在 createElement 时就把删除按钮和事件一起创建好。</p></div></details>[[/html]]',
+          "DOM 操作进阶就像即兴演奏——不是在谱子写好的框架内规规矩矩地弹，而是动态创造和删除元素。来打造一个动态练琴计划：",
+        subSteps: [
+          {
+            content: "在输入框输入练习内容（如「哈农练习曲 第1条」），点击「添加」，观察列表中出现新的练习项。连续添加多条，感受列表的动态增长",
+            purpose: "`createElement` + `appendChild` 是动态添加元素的黄金组合——就像在演奏中临时加入一段即兴 solo。页面不再是一成不变的静态文档，而是活的数据容器。",
+            expectedResult: "每次点击添加，列表底部就会多出一行练习内容。输入框清空后可以继续添加下一条。页面元素在动态变化——这就是「动态 DOM」的魔力。",
+          },
+          {
+            content: "连续点击「删除最后」按钮，观察列表从末尾开始逐条缩短，直到完全为空。理解 `querySelectorAll` + `[length-1]` 索引 + `.remove()` 的删除逻辑",
+            purpose: "`.remove()` 直接销毁元素——不留下任何痕迹。配合 `querySelectorAll` 获取所有练习项，取最后一个（`items[items.length - 1]`），实现了精确的「栈式」删除。增加 + 删除的组合让你拥有了完整的数据管理能力。",
+            expectedResult: "每次点击删除，列表最后一项消失。列表可以为空（不会报错），也可以再添加回来。增删自如。",
+          },
+          {
+            content: "修改 `addItem` 函数的逻辑，让每个练习项前面带上序号。提示：在设置 `item.textContent` 时，先获取当前列表的项数（`querySelectorAll` 的 `.length`），然后拼接序号",
+            purpose: "在 `createElement` 时动态计算内容，让你的练习计划更像真实的应用。序号的自动递增体现了「创建时动态赋值」的思想——每次创建时根据当前状态决定元素的内容。",
+            expectedResult: "每个练习项前面出现了序号（如「1. 哈农练习曲」「2. 音阶练习」），即使删除后重新添加，序号也会重新计算。",
+          },
+          {
+            content: "挑战：给每个练习项加一个独立的「删除」按钮。在 `createElement` 时同时创建一个删除按钮子元素，给按钮绑定 click 事件，点击时调用 `item.remove()` 只删除它所属的那一项",
+            purpose: "这挑战综合了 `createElement` + `appendChild` + 事件绑定 + `.remove()` 四项技能。在创建元素时就内嵌删除逻辑，就像在每个音符上标注「可删除」——这比全局的「删除最后」按钮更灵活，每一项都独立可控。",
+            expectedResult: "每个练习项右侧都有一个删除按钮，点击后只删除该项，不影响其他项。你现在拥有了一个完整的 Todo 列表管理功能——可以任意添加和删除任一项。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1946,7 +2771,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "动手试试 ✨",
         content:
-          '切换到预览区和 JS 标签页，试试：\n1. 点击`开始节拍`看计数，点`暂停`看停止\n2. 把 `setInterval` 的时间从 `1000` 改成 `500`，变成更快的 120bpm\n3. 增加一个 `setTimeout` 实现的"3 秒后自动停止"功能\n4. 挑战：让节拍每 4 拍换一个颜色（提示：用 `count % 4 === 0` 判断）\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改 <code>setInterval</code> 中的回调函数：</p><pre><code>let colors = ["#8B2E2E", "#C9A96E", "#5B8C5A", "#E67E22"];\nlet colorIndex = 0;\ntimer = setInterval(function() {\n  count++;\n  if (count % 4 === 1) {\n    colorIndex = (colorIndex + 1) % colors.length;\n  }\n  display.style.color = colors[colorIndex];\n  display.textContent = `节拍 ${count}`;\n}, 1000);</code></pre><p>原理：<code>count % 4</code> 返回 0,1,2,3,0,1,2,3...，<code>=== 1</code> 时换颜色，<code>% colors.length</code> 确保索引不越界。</p></div></details>[[/html]]',
+          "`setInterval` 就像节拍器——设定好速度，它准时触发每一次回调。来打造你的专属节拍器：",
+        subSteps: [
+          {
+            content: "点击「开始节拍」按钮，观察数字每秒自动递增——从 1 到 2 到 3……再点击「暂停」，观察计时停止。然后点击「重置」，数字归零回到初始状态",
+            purpose: "让你感受 `setInterval` 的定时重复执行特性——不需要手动点击，代码自动按时间间隔运行。`clearInterval` 用来停止，`timer = null` 是良好的重置习惯。就像节拍器有「开始」「停止」「重置」三个基本操作。",
+            expectedResult: "点击开始后数字每秒自动 +1；点击暂停后停止递增；点击重置后数字归零。三个按钮各司其职，互不冲突。",
+          },
+          {
+            content: "把 `setInterval` 的间隔时间从 `1000`（1秒，60bpm）改成 `500`（0.5秒，120bpm），体验更快的节奏感。再试试改成 `200`（0.2秒，300bpm）",
+            purpose: "`setInterval` 的第二个参数是毫秒数，决定了执行频率。1000ms = 1秒 = 60bpm（每分钟60拍），500ms = 120bpm。理解时间单位和节拍速度的关系，让你能精确控制动画节奏。",
+            expectedResult: "修改为 500ms 后数字变化速度翻倍；改为 200ms 后飞速递增。一个毫秒数的变化，整个节拍器的「性格」完全不同。",
+          },
+          {
+            content: "在「开始节拍」的回调函数中增加一个 `setTimeout`，设定 3 秒（3000ms）后自动调用 `clearInterval(timer)` 停止计时。实现「自动演奏 3 秒后停止」的效果",
+            purpose: "`setTimeout` 是延迟执行一次，适合做「定时停止」「延迟提示」等操作。和 `setInterval` 配合使用，就像「演奏 3 秒后自动停」——一个控制持续执行，一个控制延迟停止。",
+            expectedResult: "点击开始后节拍自动递增，3 秒后自动停止（数字不再变化）。你不需要手动按暂停——`setTimeout` 帮你做了。",
+          },
+          {
+            content: "挑战：让节拍每 4 拍换一个颜色。在 `setInterval` 的回调函数中用 `count % 4` 判断当前是第几拍，对应不同的颜色。创建一个颜色数组让 4 拍循环不同的颜色",
+            purpose: "综合运用 `setInterval` + 取模运算符 `%` + DOM 样式修改。`count % 4` 循环返回 0,1,2,3,0,1,2,3……这正是音乐中「4/4 拍」的数学本质。这是将数学运算符应用到实际交互的经典案例。",
+            expectedResult: "节拍数字每 4 拍变换一次颜色，4 种颜色循环往复。你的节拍器不仅会数数，还会「变色」——像真正的音乐节拍一样有了视觉节奏感。",
+          },
+        ],
       },
     ],
     starterCode: {
@@ -1977,7 +2824,29 @@ export const lessons: Lesson[] = [
         type: "task",
         title: "逐步构建 ✨",
         content:
-          '编辑器里已经有了一个模板，包含作曲家数组和基础结构。请按以下步骤完善：\n**第一步：理解现有代码**\n- 查看 `JS` 标签页，理解 `composers` 对象数组的结构\n- 查看 `showGallery()` 函数如何用 `forEach` 循环渲染卡片\n**第二步：添加筛选功能**\n- `全部`按钮应显示所有作曲家\n- `浪漫主义`按钮只显示 `period === "浪漫主义"` 的\n- `巴洛克`按钮略...（新增一个按钮和逻辑）\n**第三步：完善`添加`功能**\n- 让`添加`按钮真正把新对象 `push` 到数组中\n- 调用 `showGallery()` 刷新显示\n**第四步：增加你自己的创意**\n- 给卡片加 `hover` 高亮效果\n- 加一个自动播放按钮（用 `setInterval` 定时切换高亮）\n- 任何你想加的功能！\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>第一步：理解代码</strong> — <code>showGallery(list)</code> 接收数组，用 forEach 循环拼接 HTML，设置 <code>gallery.innerHTML</code>。</p><p><strong>第二步：添加巴洛克筛选</strong></p><pre><code>// HTML 中添加：\n&lt;button id="showBaroqueBtn"&gt;巴洛克&lt;/button&gt;\n// JS 中添加：\ndocument.querySelector("#showBaroqueBtn").addEventListener("click", function() {\n  setActive(this);\n  let filtered = composers.filter(function(c) {\n    return c.period === "巴洛克";\n  });\n  showGallery(filtered);\n});</code></pre><p><strong>第三步：完善添加功能</strong> — 让添加按钮恢复所有按钮的激活状态并显示全部：</p><pre><code>document.querySelector("#addBtn").addEventListener("click", function() {\n  if (added &lt; pool.length) {\n    composers.push(pool[added]);\n    added++;\n    // 恢复`全部`按钮激活\n    setActive(document.querySelector("#showAllBtn"));\n    showGallery(composers);\n  }\n});</code></pre><p><strong>第四步：创意扩展</strong> — 自动轮播：</p><pre><code>let autoTimer = null;\nlet highlightIndex = 0;\ndocument.querySelector("#autoBtn").addEventListener("click", function() {\n  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; return; }\n  autoTimer = setInterval(function() {\n    let cards = document.querySelectorAll(".card");\n    cards.forEach(function(c) { c.style.borderColor = "#D4C5A9"; });\n    if (cards[highlightIndex]) cards[highlightIndex].style.borderColor = "#8B2E2E";\n    highlightIndex = (highlightIndex + 1) % cards.length;\n  }, 1000);\n});</code></pre></div></details>[[/html]]',
+          "把第四章学到的所有技能融合起来——变量、函数、条件判断、数组、对象、循环、DOM 操作、事件、定时器——打造一个完整的交互式音乐名片画廊：",
+        subSteps: [
+          {
+            content: "阅读 JS 标签页中的代码，理解三个核心部分：`composers` 对象数组的数据结构、`showGallery(list)` 函数如何用 `forEach` 渲染卡片、`setActive(btn)` 如何切换按钮的高亮状态",
+            purpose: "读懂现有代码是编程中的必修课——就像拿到一份乐谱先理解调性、拍号和结构。理解了数据流向（composers → filter → showGallery → innerHTML），你才能胸有成竹地添加新功能。",
+            expectedResult: "你能用自己的话描述：「composers 数组存了什么数据」「showGallery 函数做了什么」「按下一个筛选按钮后数据经历了怎样的流程」。",
+          },
+          {
+            content: "完成筛选功能：`全部`按钮显示所有作曲家，`浪漫主义`按钮用 `.filter()` 筛选 `period === \"浪漫主义\"` 的作曲家。挑战：新增一个「巴洛克」按钮，筛选巴洛克时期的作曲家",
+            purpose: "综合运用对象属性访问（`c.period`）+ 数组 filter 方法 + DOM 事件绑定。三个筛选按钮共享同一个模式（获取数据 → 筛选 → 渲染），这就是可复用的设计模式。",
+            expectedResult: "点击不同按钮，画廊中的卡片随筛选条件变化。点击「全部」显示所有人，点击「浪漫主义」只显示肖邦和舒曼，点击「巴洛克」只显示巴赫。",
+          },
+          {
+            content: "完善「随机添加」按钮的功能：点击按钮时，从预设的 `pool` 数组中取出下一位作曲家对象，用 `.push()` 添加到 `composers` 数组，然后调用 `showGallery(composers)` 刷新画廊",
+            purpose: "动态数据操作是前端应用的核心——数据变化后重新渲染，用户立刻看到结果。这和之前学过的数组 push + DOM 刷新是一个模式，只是数据更复杂（对象而非字符串）。",
+            expectedResult: "点击「随机添加」按钮，画廊中多出一位新作曲家（柴可夫斯基、海顿或拉威尔）。每次点击增加一位，直到预设数据池用完。筛选功能对新添加的数据同样有效。",
+          },
+          {
+            content: "发挥创意，添加你自己的功能。可以尝试：给卡片增加 hover 高亮动画、添加一个「自动轮播」按钮用 `setInterval` 定时切换高亮的卡片、增加搜索框用实时输入筛选……任何你想到的！",
+            purpose: "这是第四章的毕业作品——没有标准答案。把你学过的变量、函数、循环、条件、数组、对象、事件、定时器自由组合，就像学会所有乐器的演奏者终于可以即兴创作。编程的乐趣就在于创造。",
+            expectedResult: "你的音乐名片画廊有了独一无二的功能——无论是一个小动画、一个新按钮、还是一段自动播放逻辑，这都是你亲手创造的交互体验。恭喜完成 JavaScript 入门篇！",
+          },
+        ],
       },
       {
         type: "hint",
@@ -2025,13 +2894,29 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "两个常用的数学工具",
         content:
-          '在写 JS 交互时，经常需要"随机选一个"。JavaScript 内置了两个好用的数学方法：\n**`Math.random()` — 生成随机数**\n```js\nMath.random(); // 返回 0 到 1 之间的随机小数，比如 0.3847、0.9215\n```\n每次调用都会返回不同的值，就像伸手到袋子里随机摸一颗糖。\n**`Math.floor()` — 向下取整**\n```js\nMath.floor(3.8);  // 结果是 3\nMath.floor(7.1);  // 结果是 7\nMath.floor(0.95); // 结果是 0\n```\n把小数的小数部分直接切掉，只留整数部分。\n**搭配使用 — 获取随机数组索引：**\n```js\nlet arr = ["苹果", "香蕉", "橘子"];\nlet i = Math.floor(Math.random() * arr.length);\n// Math.random()       → 0~1 之间的小数\n// Math.random() * 3   → 0~3 之间的小数（如 1.2、2.8）\n// Math.floor(...)     → 向下取整（如 1.2→1, 2.8→2）\n// 最终 i 是 0、1、2 中的一个（三个索引）\narr[i]; // 随机选中的元素\n```\n这两个方法在后续课程中会经常用到！',
+          '在写 JS 交互时，经常需要"随机选一个"。JavaScript 内置了两个好用的数学方法：\n**`Math.random()` — 生成随机数**\n```js\nMath.random(); // 返回 0 到 1 之间的随机小数，比如 0.3847、0.9215\n```每次调用都会返回不同的值，就像伸手到袋子里随机摸一颗糖。\n**`Math.floor()` — 向下取整**\n```js\nMath.floor(3.8);  // 结果是 3\nMath.floor(7.1);  // 结果是 7\nMath.floor(0.95); // 结果是 0\n```把小数的小数部分直接切掉，只留整数部分。\n**搭配使用 — 获取随机数组索引：**\n```js\nlet arr = ["苹果", "香蕉", "橘子"];\nlet i = Math.floor(Math.random() * arr.length);\n// Math.random()       → 0~1 之间的小数\n// Math.random() * 3   → 0~3 之间的小数（如 1.2、2.8）\n// Math.floor(...)     → 向下取整（如 1.2→1, 2.8→2）\n// 最终 i 是 0、1、2 中的一个（三个索引）\narr[i]; // 随机选中的元素\n```这两个方法在后续课程中会经常用到！',
       },
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个空的起始模板。请按照三段工作流，从零构建一个 **"作曲家名言"卡片**：\n**第一步（HTML）：** 写一个 `<div>`，里面包含一个标题 `<h2>`、一句名言 `<p>`、一个 `<button>`\n**第二步（CSS）：** 给卡片加背景色、圆角、内边距；给按钮加样式让它好看\n**第三步（JS）：** 参考上方"两个常用的数学工具"，准备一个名言数组，让按钮点击后随机换一句名言\n记住：一步一步来！先确保 HTML 在预览中能看到，再写 CSS，最后写 JS。\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>完整代码：</p><pre><code>&lt;!-- HTML --&gt;\n&lt;div class=&quot;quote-card&quot;&gt;\n  &lt;h2&gt;作曲家名言&lt;/h2&gt;\n  &lt;p id=&quot;quote&quot;&gt;音乐是心灵的窗户。&lt;/p&gt;\n  &lt;button id=&quot;changeBtn&quot;&gt;换一句&lt;/button&gt;\n&lt;/div&gt;\n/* CSS */\n.quote-card {\n  background: #FFFAF2;\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n  padding: 32px;\n  text-align: center;\n  max-width: 400px;\n  margin: 40px auto;\n}\n.quote-card h2 { color: #8B2E2E; margin-bottom: 16px; }\n.quote-card p { color: #3D2B1F; font-size: 18px; line-height: 1.8; margin-bottom: 20px; min-height: 40px; }\n#changeBtn {\n  background: #8B2E2E; color: #fff; border: none;\n  padding: 10px 28px; border-radius: 8px; font-size: 15px; cursor: pointer;\n}\n#changeBtn:hover { background: #C94545; }\n// JS\nlet quotes = [\n  &quot;音乐是心灵的窗户。— 贝多芬&quot;,\n  &quot;简洁是智慧的灵魂。— 巴赫&quot;,\n  &quot;音乐应当使人类的精神爆发出火花。— 贝多芬&quot;,\n  &quot;没有音乐，生命将是一个错误。— 尼采&quot;\n];\nlet quoteEl = document.querySelector(&quot;#quote&quot;);\nlet btn = document.querySelector(&quot;#changeBtn&quot;);\nbtn.addEventListener(&quot;click&quot;, function() {\n  let i = Math.floor(Math.random() * quotes.length);\n  quoteEl.textContent = quotes[i];\n});</code></pre><p>三步工作流：HTML 定义结构 → CSS 美化外观 → JS 添加交互。每一步完成后都在预览中确认！</p></div></details>[[/html]]',
+        content: '按照三段工作流，从零构建一张「作曲家名言」卡片：',
+        subSteps: [
+          {
+            content: '写 HTML 结构：创建一个 div 包含 h2 标题、p 名言、button 按钮',
+            purpose: '从结构开始可以让你先确认页面上有哪些元素，就像作曲时先在五线谱上画出音符位置，之后再考虑音色和强弱。建立"先骨架、后装饰"的习惯，是前端开发最重要的纪律。',
+            expectedResult: '预览区能看到标题、名言文字和一个按钮，但样式还很朴素——这很正常，下一步才是 CSS。',
+          },
+          {
+            content: '写 CSS 样式：给卡片加背景色（#FFFAF2）、圆角边框、内边距和居中排版；给按钮加暗红背景、白色文字、圆角和悬停变色效果',
+            purpose: 'CSS 是给 HTML 穿上"衣服"的过程。先确保内容可见，再美化外观，这样你能清楚地分辨"结构问题"和"样式问题"——避免同时调试两个维度。',
+            expectedResult: '卡片有了温暖的米白背景和圆角边框，按钮变成暗红色并在鼠标悬停时变亮——页面看起来像一个真正的卡片了。',
+          },
+          {
+            content: '写 JS 交互：准备一个名言数组，用 querySelector 获取元素，给按钮绑定 click 事件，用 Math.random() 和 Math.floor() 随机选取名言并更新 textContent',
+            purpose: 'JS 是页面的大脑，让静态卡片"活"起来。Math.random() + Math.floor() 的组合是后续大量交互的基础——随机选取、随机排序、随机展示都离不开这两个方法。',
+            expectedResult: '点击"换一句"按钮后，名言文字随机变换成数组中的另一句，每次点击都有不同的结果——你的页面会响应了！',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2068,8 +2953,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器里有一份带规划注释的模板，但代码还没写完。请：\n**第一步：** 阅读三组注释，理解页面结构\n**第二步：** 在每组注释下方，填入对应的 HTML 标签和 CSS 样式\n**第三步：** 在 JS 中也先用注释规划逻辑，再写代码——让顶部大标题点击后变成随机口号\n**第四步（挑战）：** 尝试给卡片区也添加注释规划，然后补充内容\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>在 HTML 的注释区补充内容：</p><pre><code>&lt;!-- ===== 2. 中间卡片列表区 ===== --&gt;\n&lt;!-- 规划：3张卡片，每张包含曲名、作曲家、时期 --&gt;\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 月光&lt;/h3&gt;\n  &lt;p&gt;作曲家：德彪西&lt;/p&gt;\n  &lt;span class=tag&gt;印象派&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 天鹅湖&lt;/h3&gt;\n  &lt;p&gt;作曲家：柴可夫斯基&lt;/p&gt;\n  &lt;span class=tag&gt;浪漫主义&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=card&gt;\n  &lt;h3&gt;🎵 四季·春&lt;/h3&gt;\n  &lt;p&gt;作曲家：维瓦尔第&lt;/p&gt;\n  &lt;span class=tag&gt;巴洛克&lt;/span&gt;\n&lt;/div&gt;</code></pre><p>在 CSS 中补充样式：</p><pre><code>.card {\n  background: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 16px 20px;\n  margin-bottom: 10px;\n}\n.tag {\n  display: inline-block;\n  background: #8B2E2E;\n  color: #fff;\n  padding: 2px 8px;\n  border-radius: 4px;\n  font-size: 11px;\n}</code></pre><p>先写注释规划结构 → 再填具体代码，这个工作流让思路更清晰！</p></div></details>[[/html]]",
+        content: '编辑器里有一份带规划注释的模板，但代码还没写完。请按照先规划再动手的工作流完成页面：',
+        subSteps: [
+          {
+            content: '阅读三组 HTML 注释，理解页面结构（顶部标题区、中间卡片列表区、底部统计区），在每组注释下方填入对应的 HTML 标签',
+            purpose: '读懂别人（或自己以前）写的规划注释是团队协作的基础。就像拿到一份排练笔记，先理解指挥的标注，才知道每个段落该怎么处理。这一步训练你"读注释→写代码"的转换能力。',
+            expectedResult: '页面出现标题、3张音乐卡片和底部统计信息——每个区域对应一组注释，结构清晰可见。',
+          },
+          {
+            content: '在 CSS 中同样用注释分区规划，然后逐一写出顶部标题、卡片区域、底部统计区的样式',
+            purpose: 'CSS 注释帮你区分不同区域的样式，修改时能快速定位。就像在总谱上用不同颜色标注各声部的力度变化——视觉分区减少查找时间。',
+            expectedResult: '标题居中并呈暗红色，卡片有米白背景和圆角边框，底部统计文字居中灰色显示。',
+          },
+          {
+            content: '在 JS 中先用注释规划逻辑步骤（获取元素 → 点击事件 → 随机替换），再填入代码：点击标题时随机切换一句口号',
+            purpose: '在代码之前用注释列好步骤，就像排练前在乐谱上标记"这里渐强""那里放缓"。养成这个习惯后，写复杂逻辑时思路不会断。',
+            expectedResult: '点击顶部标题后，文字从"我的音乐收藏"随机变为"每一段旋律都值得被收藏"等口号之一。',
+          },
+          {
+            content: '（挑战）用 querySelectorAll 获取所有卡片，计算数量并显示在底部统计区',
+            purpose: 'querySelectorAll 返回 NodeList，其 .length 属性可以动态统计页面元素数量。这是数据统计的基础——后续框架中用响应式数据自动统计，底层原理相同。',
+            expectedResult: '底部显示"共 3 首收藏"（数量随着卡片的增减自动变化）。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2106,8 +3012,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器里的代码有 **5 个故意埋下的错误**。请完成以下步骤：\n**第一步：** 运行代码，打开浏览器控制台（F12），查看红色错误信息\n**第二步：** 读第一条错误——它告诉你第几行出了什么错？找到对应代码并修复\n**第三步：** 再次运行，看下一条错误是否出现\n**第四步：** 重复，直到控制台变干净（没有红字），页面正常显示\n提示：错误之间可能互相掩盖——修完一个才能看到下一个。就像调音时，一根弦校准后才能发现另一根弦不准。",
+        content: '编辑器里的代码有 5 个故意埋下的错误。打开控制台，逐个找出并修复它们：',
+        subSteps: [
+          {
+            content: '打开浏览器控制台（F12），查看红色错误信息——第一条错误告诉你第几行出了什么错？',
+            purpose: '学会打开控制台是所有前端调试的第一步。红色错误信息不是惩罚，而是路标——就像调音器告诉你哪根弦不准，它精确地指出错误类型和位置。',
+            expectedResult: '控制台出现红色错误信息，包含错误类型（ReferenceError/TypeError）、文件名和行号。',
+          },
+          {
+            content: '根据第一条错误提示（document 拼写为 docuement），找到对应代码行并修复',
+            purpose: 'ReferenceError 是最常见的错误类型——变量未定义。学会从错误信息中的行号定位代码，而不是盲目猜测，能大幅缩短调试时间。',
+            expectedResult: '修复后再次运行，第一条红色错误消失，第二条错误出现——就像调音时修好一根弦后，下一根弦的问题才被听到。',
+          },
+          {
+            content: '继续修复剩余 4 个错误：querySelector 大小写 → 变量名不一致 → textContent 拼写错误 → innerHTML 大小写',
+            purpose: '错误之间会互相掩盖——一个错误导致后续代码不执行。这就像交响乐中一个声部漏了，后面的乐手没法跟进去。逐个修复错音，直到所有声部和谐共鸣。',
+            expectedResult: '控制台变干净（无红色错误），点击收藏按钮后卡片状态正常切换，消息文字正确显示。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2156,8 +3078,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个"点击计数"页面，点击按钮会增加计数。但它有一个逻辑 bug。\n**第一步：** 先不要修改逻辑。在 `addOne()` 函数中添加 `console.log`，打印每次点击后的 count 值\n**第二步：** 打开控制台，点击几次按钮，观察控制台输出\n**第三步：** 你能发现 count 的值出了什么问题吗？\n**第四步：** 理解问题后，修复这个 bug\n提示：当控制台输出和你预期不一致时，说明你的理解有偏差——这正是 `console.log` 最有用的时刻！',
+        content: '编辑器里有一个"点击计数"页面，点击按钮会增加计数。但它有一个逻辑 bug——用 console.log 来观察并修复它：',
+        subSteps: [
+          {
+            content: '在 addOne() 函数中添加 console.log，分别打印点击前和点击后的 count 值',
+            purpose: 'console.log 是程序员最常用的调试工具——就像排练时录音回放，让你"看到"代码运行过程中每个变量的真实值。在怀疑有问题的地方插 log，比盯着代码瞎猜高效十倍。',
+            expectedResult: '每次点击按钮后，控制台输出类似"点击前 count = 0"和"点击后 count = 0"两条信息——注意值没有变！',
+          },
+          {
+            content: '观察控制台输出：多次点击按钮，count 的值是否每次都在 +1？',
+            purpose: '当控制台输出和预期不一致时，说明你的理解有偏差——这正是 console.log 最有价值的时刻。它能帮你发现"count = count++"这种隐蔽的错误：后缀 ++ 先返回旧值再自增，赋值又把旧值写回去了。',
+            expectedResult: '控制台显示 count 始终为 0，证实 bug 存在。你定位到问题出在 count = count++ 这行。',
+          },
+          {
+            content: '修复 bug：把 count = count++ 改为 count = count + 1（或 count++ 不赋值）',
+            purpose: '理解 count++ 和 count = count + 1 的区别是避坑的关键。后缀 ++ 是一个"先取值、后自增"的操作，赋值给它会覆盖自增效果。这是一个经典的初学者陷阱。',
+            expectedResult: '再次点击按钮，控制台输出从 0、1、2... 递增，计数器功能正常工作了。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2200,7 +3138,29 @@ export const lessons: Lesson[] = [
       {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在预览区的输入框中输入数字，触发 guess() 函数：\n1. 打开 F12 → Sources 面板，在 guess 函数的第一行设置断点\n2. 输入一个数字，观察程序暂停时右侧 Scope 面板中的变量值\n3. 使用 Step Over（F10）逐行执行，观察 score 和 attempts 的变化\n4. 在 num === target 的判断行设置条件断点（num > 80 && num < 90），只在特定范围暂停\n5. 挑战：在 Watch 面板添加表达式 target - num，实时追踪差值\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>操作步骤：</p><p><strong>1.</strong> 在 <code>guess</code> 函数的 <code>if (num &gt; target)</code> 行设置断点</p><p><strong>2.</strong> 在输入框输入一个数字，点击按钮触发 <code>guess()</code>，程序在断点处暂停</p><p><strong>3.</strong> 在右侧 <strong>Watch</strong> 面板中点击 + 添加表达式：<code>target - num</code></p><p><strong>4.</strong> 观察：&gt;0 猜小了，&lt;0 猜大了，=0 答对了</p><p><strong>5.</strong> 还可添加：<code>Math.abs(target - num)</code>（差值绝对值）、<code>score</code>（剩余分数）、<code>attempts</code>（尝试次数）</p></div></details>[[/html]]',
+        content: '在猜数字游戏中练习断点调试，掌握 Sources 面板的使用：',
+        subSteps: [
+          {
+            content: '打开 F12 → Sources 面板，在 guess 函数的第一行（attempts++）设置断点，输入数字并触发 guess()',
+            purpose: '断点是比 console.log 更强大的调试工具——你可以在任意时刻"凝固"程序，查看所有变量的值。就像指挥让乐队在某一小节停下，逐个声部检查每个乐手的状态。',
+            expectedResult: '程序在断点处暂停，右侧 Scope 面板显示 num、target、score、attempts 等所有局部变量和它们的当前值。',
+          },
+          {
+            content: '使用 Step Over（F10）逐行执行，观察 score 和 attempts 如何随每次判断而变化',
+            purpose: '逐行执行让你看到代码的真实执行路径——走到了 if 还是 else if？score 减了没有？就像用慢镜头回放演奏，看清每一个音符的来龙去脉。',
+            expectedResult: '每按一次 F10，代码前进一行，Scope 面板中的变量值实时更新。你能看到 if 分支的跳转逻辑。',
+          },
+          {
+            content: '在 if (num > target) 行设置条件断点，右键行号 → Add conditional breakpoint → 输入 num > 80 && num < 90',
+            purpose: '条件断点只在你指定的条件满足时才暂停。这在调试"第 47 次循环才出错"的问题时是救星——你不用手动跳过 46 次无用的暂停。',
+            expectedResult: '只有当输入 81~89 之间的数字时，程序才会在断点处暂停；其他数字正常执行不停。',
+          },
+          {
+            content: '（挑战）在 Watch 面板添加表达式 target - num 和 Math.abs(target - num)，实时追踪猜测差值',
+            purpose: 'Watch 面板让你监控动态表达式，无需修改代码就能观察数据关系。就像在排练中临时加入一个测量工具，实时显示"当前音高和目标音高的差距"。',
+            expectedResult: 'Watch 面板中 target - num 显示正数（猜小了）或负数（猜大了），帮助你精确调整下一次猜测。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2237,8 +3197,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个功能完整的页面，但所有的命名都非常糟糕——全是用 `a`、`b`、`c`、`x`、`y` 这样的单字母！\n**你的任务：** 不改动任何功能逻辑，只把所有变量名和函数名换成有意义的名字。\n重命名清单：\n- `a` → 存放作曲家名字的数组\n- `b` → 显示作曲家名字的 `<p>` 元素\n- `c` → "换一首"按钮\n- `d` → 显示添加状态的消息区\n- `e` → `添加`按钮\n- `f` → 随机索引\n- `x()` → 随机换一首曲子的函数\n- `y()` → 添加作曲家的函数\n换个好名字后，再读一遍你的代码——是不是清晰了很多？',
+        content: '编辑器里有一个功能完整的页面，但所有变量和函数名都用单字母。不改逻辑，只重命名：',
+        subSteps: [
+          {
+            content: '把 DOM 元素变量重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn',
+            purpose: '给存储 DOM 元素的变量加上 El/Btn 后缀是团队通用的命名约定。好名字让代码自解释——shuffleBtn 一眼就知道是"随机播放"按钮，而 c 需要你来回翻看才知道是什么。',
+            expectedResult: '代码中不再有 b、c、d、e 这样的单字母变量，取而代之的是有意义的名字，阅读时不需要额外注释。',
+          },
+          {
+            content: '把数据变量重命名：a → composers、f → randomIndex',
+            purpose: '数据变量的命名直接反映其内容——composers 明确是作曲家数组，randomIndex 清楚表达它是随机索引。就像乐谱上的标注"mp"比"中等偏弱"更好——精确、简短、无歧义。',
+            expectedResult: 'a 变成 composers，f 变成 randomIndex，变量名准确地描述了它们存储的内容。',
+          },
+          {
+            content: '把函数重命名：x() → showRandom()、y() → addComposer()',
+            purpose: '函数名应该用动词开头来描述它做什么。showRandom() 明确是"随机显示"，addComposer() 明确是"添加作曲家"。好的函数名就是最好的注释——你甚至不需要读函数体就知道它的职责。',
+            expectedResult: '函数名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2281,8 +3257,29 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个"音乐会节目单"页面，但所有代码都塞在 `setupPage()` 这一个函数里，足足 40 多行！\n**你的任务：** 把 `setupPage()` 拆分成几个小函数：\n1. **`renderProgram(list)`** — 负责渲染节目单（接收数组参数，方便筛选后重新渲染）\n2. **`bindFilterButtons()`** — 负责给筛选按钮绑定事件\n3. **`updateCount(count)`** — 负责更新底部统计数字\n4. **`initPage()`** — 只负责调用上面三个函数\n拆分后，当你点击筛选按钮时，可以直接调用 `renderProgram(filtered)` 来刷新显示——代码逻辑清晰了 10 倍！\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>将 <code>setupPage()</code> 替换为以下 4 个函数：</p><pre><code>// 1. 渲染节目单（接收数组参数）\nfunction renderProgram(list) {\n  let html = "";\n  for (let i = 0; i &lt; list.length; i++) {\n    let p = list[i];\n    html += \'&lt;div class="card"&gt;&lt;h3&gt;\' + p.name + \'&lt;/h3&gt;&lt;span class="period"&gt;\' + p.composer + \' · \' + p.period + \'&lt;/span&gt;&lt;/div&gt;\';\n  }\n  listEl.innerHTML = html;\n}\n// 2. 更新底部统计\nfunction updateCount(n) {\n  countEl.textContent = "共 " + n + " 首曲目";\n}\n// 3. 绑定筛选按钮事件\nfunction bindFilterButtons() {\n  function setActive(btn) {\n    document.querySelectorAll(".toolbar button").forEach(function(b) {\n      b.classList.remove("active");\n    });\n    btn.classList.add("active");\n  }\n  document.querySelector("#allBtn").addEventListener("click", function() {\n    setActive(this);\n    renderProgram(pieces);\n    updateCount(pieces.length);\n  });\n  document.querySelector("#baroqueBtn").addEventListener("click", function() {\n    setActive(this);\n    let filtered = pieces.filter(function(p) { return p.period === "巴洛克"; });\n    renderProgram(filtered);\n    updateCount(filtered.length);\n  });\n  document.querySelector("#classicalBtn").addEventListener("click", function() {\n    setActive(this);\n    let filtered = pieces.filter(function(p) { return p.period === "古典主义"; });\n    renderProgram(filtered);\n    updateCount(filtered.length);\n  });\n}\n// 4. 初始化页面\nfunction initPage() {\n  renderProgram(pieces);\n  bindFilterButtons();\n  updateCount(pieces.length);\n}\n// 启动！\ninitPage();</code></pre><p>核心收益：筛选时直接调用 <code>renderProgram(filtered)</code>，不再需要复制粘贴渲染代码。每个函数只做一件事，职责清晰。</p></div></details>[[/html]]',
+        content: '编辑器里有一个"音乐会节目单"页面，所有代码塞在 setupPage() 一个函数里。把它拆分成职责清晰的函数：',
+        subSteps: [
+          {
+            content: '提取 renderProgram(list) 函数：接收数组参数，负责渲染卡片 HTML 到页面',
+            purpose: '渲染函数接收参数是关键设计——筛选后可以调用 renderProgram(filtered) 直接刷新显示，而不是复制粘贴渲染代码。就像写一个可复用的旋律动机，在乐章不同段落变换乐器但仍用同一个主题。',
+            expectedResult: 'renderProgram(pieces) 调用后，页面显示 5 首曲目的卡片列表，与拆分前完全一致。',
+          },
+          {
+            content: '提取 updateCount(n) 函数：接收数字参数，更新底部统计文字',
+            purpose: '将统计逻辑独立出来，任何地方需要更新计数时只需一行 updateCount(n)。这就是函数复用的威力——改一处而全站更新，就像在总谱上改一个速度标记，所有声部的这个段落都受影响。',
+            expectedResult: '底部显示"共 5 首曲目"，切换筛选后数字自动更新为筛选结果的数量。',
+          },
+          {
+            content: '提取 bindFilterButtons() 函数：给三个筛选按钮绑定事件，点击后调用 renderProgram(filtered) 和 updateCount',
+            purpose: '事件绑定和业务逻辑分开后，每个函数只做一件事。筛选按钮的逻辑变得极短：过滤数组 → 调用 renderProgram → 调用 updateCount，一目了然。这就是"单一职责"原则的实际应用。',
+            expectedResult: '点击"巴洛克"显示 2 首巴洛克曲目，点击"古典主义"显示 3 首古典主义曲目，点击"全部"恢复显示 5 首。',
+          },
+          {
+            content: '写出 initPage() 函数：只负责调用 renderProgram、bindFilterButtons、updateCount 三个函数来启动页面',
+            purpose: 'initPage 像交响乐的序奏——不处理任何细节，只负责调度各声部在恰当的时机进入。这是项目启动层的标准写法：一个入口函数，清晰列出初始化步骤。',
+            expectedResult: 'initPage() 调用后页面完整呈现，与原来 setupPage() 效果完全一致，但代码结构清晰了 10 倍。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2319,8 +3316,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器里有一个收藏列表，每次点击按钮会用 innerHTML 重新渲染。\n**你的任务：**\n1. 把 `render()` 改成用 `createElement` + `appendChild` 实现\n2. 给每张卡片绑定点击事件——点击后调用 `classList.toggle('liked')` 切换收藏状态\n3. 确保动态添加的卡片也能点击切换状态\n提示：任务 2 和 3 可以结合事件委托来实现，事半功倍。\n[[html]]<details class=challenge-answer><summary>查看答案</summary><div class=answer-content><pre><code>function render() {\n  listEl.innerHTML = ''\n  for (let i = 0; i < pieces.length; i++) {\n    let card = document.createElement('div')\n    card.className = 'card'\n    let title = document.createElement('h3')\n    title.textContent = pieces[i].name\n    let tag = document.createElement('span')\n    tag.className = 'tag'\n    tag.textContent = pieces[i].period\n    card.appendChild(title)\n    card.appendChild(tag)\n    card.addEventListener('click', function() {\n      this.classList.toggle('liked')\n    })\n    listEl.appendChild(card)\n  }\n}</code></pre></div></details>[[/html]]",
+        content: '编辑器里有一个收藏列表，每次用 innerHTML 重新渲染。把它改成 createElement + appendChild 实现，并加上 classList 交互：',
+        subSteps: [
+          {
+            content: '把 render() 中的 innerHTML 方式改为 createElement + appendChild：创建 div.card、h3、span，用 appendChild 组装后挂载到页面',
+            purpose: 'createElement 比 innerHTML 更精细——每个元素都是独立的 JS 对象，你可以单独修改它、给它绑定事件、甚至随时移除。就像用手工雕刻代替复印机，虽然多写几行代码，但获得了完全的控制权。',
+            expectedResult: '页面显示 3 张卡片的收藏列表，外观与 innerHTML 方式完全一致，但底层是用 createElement 逐个创建的。',
+          },
+          {
+            content: '给每张卡片绑定 click 事件，调用 classList.toggle("liked") 切换选中状态',
+            purpose: 'classList.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个按钮同时控制弱音器的装上和取下——按一下装上，再按一下取下。',
+            expectedResult: '点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。',
+          },
+          {
+            content: '确认动态添加的卡片（点击"添加随机曲目"）也能正常切换收藏状态',
+            purpose: '用 createElement 创建元素并即时绑定事件，新卡片的点击行为与初始卡片完全一致。这就是 createElement 相对于 innerHTML 的优势——事件在创建时就绑定了，不会丢失。',
+            expectedResult: '新增的卡片点击后同样能切换 liked 样式，功能完全一致。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2363,8 +3376,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个收藏列表，每张卡片有"❤ 收藏"按钮。目前用 `forEach` 逐个绑定事件——新添加的卡片没有事件。\n**你的任务：**\n1. 把逐个绑定事件改为事件委托——把 click 事件绑在 `#cardList` 上\n2. 用 `event.target.closest(".like-btn")` 判断点击的是收藏按钮\n3. 确认动态添加的卡片也能正常收藏\n4. （挑战）给每张卡片加一个"删除"按钮，同样用事件委托处理',
+        content: '编辑器中有一个收藏列表，目前用 forEach 逐个绑定事件——新添加的卡片没有事件。改成事件委托：',
+        subSteps: [
+          {
+            content: '移除所有 forEach 逐个绑定的事件，改为在 #cardList 上绑定一个 click 事件',
+            purpose: '事件委托是前端最重要的性能和维护性模式之一——一个事件监听器覆盖所有子元素，无论它们是初始就有还是后来动态添加的。就像指挥用一个手势统领所有乐手，而不需要逐个走过去说"到你吹了"。',
+            expectedResult: '#cardList 上只有一个 click 事件监听器，但所有 3 张初始卡片都能正常切换收藏状态。',
+          },
+          {
+            content: '在事件处理函数中用 event.target.closest(".like-btn") 判断点击的是否为收藏按钮',
+            purpose: 'closest() 方法向上查找最近的匹配祖先元素，这是事件委托的核心技巧。因为 event.target 可能是按钮里的文字节点或更深层元素，closest() 确保你总能找到想要的按钮——就像从演奏者位置顺藤摸瓜找到他所属的声部。',
+            expectedResult: '无论点击按钮的哪个位置（包括按钮内部文字），都能正确触发收藏逻辑。',
+          },
+          {
+            content: '点击"添加随机曲目"按钮，确认新卡片也能正常收藏（不需要任何额外代码）',
+            purpose: '这就是事件委托最让人惊叹的地方——动态添加的元素自动获得事件响应，零额外代码。因为事件注册在父容器上，新元素只是被 appendChild 进这个容器而已。',
+            expectedResult: '新增的卡片点击收藏按钮后，状态正常切换，与初始卡片行为完全一致。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2401,8 +3430,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个"待听列表"页面，用命令式直接操作 DOM。\n**你的任务：**\n1. 把数据提取成一个 `pieces` 数组\n2. 写一个 `render()` 函数，每次调用时清空容器、重新根据 `pieces` 生成 DOM\n3. `添加`按钮改为：push 到 `pieces`，然后调用 `render()`\n4. "清空"按钮改为：`pieces = []`，然后调用 `render()`\n5. 确认添加和清空功能都正常\n完成后你会体会到：修改数据的代码变得非常简洁——所有 DOM 操作都在 `render()` 里，业务逻辑只需要改数据。',
+        content: '编辑器中有一个"待听列表"页面，用命令式直接操作 DOM。把它改成数据驱动模式：',
+        subSteps: [
+          {
+            content: '把数据提取成一个 pieces 数组，写一个 render() 函数：每次调用时清空容器，重新根据 pieces 生成全部 DOM',
+            purpose: 'render() 是数据驱动模式的核心——它把"数据"翻译成"页面"。就像乐队根据总谱演奏音乐，改总谱上的一个音符（改数据），然后重新演奏一遍（调 render），听众听到的就是新版本。',
+            expectedResult: '页面初始显示空列表或预设数据，render() 调用后页面内容与 pieces 数组完全同步。',
+          },
+          {
+            content: '"添加"按钮改为：pieces.push(新曲目)，然后调用 render()——不再直接操作 DOM',
+            purpose: '数据驱动让你摆脱"先创建 div、再设置内容、再挂载"的命令式思维。你只需要想"我要加一条数据"，render 函数自动帮你把 DOM 搞定。这就是后来所有前端框架的核心思想——数据是唯一的真相来源。',
+            expectedResult: '输入曲名点击添加后，列表自动刷新展示新曲目，代码中没有任何 createElement 或 innerHTML 直接操作。',
+          },
+          {
+            content: '"清空"按钮改为：pieces = []，然后调用 render()；同时添加更新计数的逻辑',
+            purpose: '清空操作同样只需改数据——把数组设为空。对比命令式写法 listEl.innerHTML = ""，数据驱动让业务逻辑极简：改数据 → 调 render。理解了这一点，你以后学 Vue/React 时就会发现它们只是把"手动调 render"变成了自动。',
+            expectedResult: '清空按钮点击后列表变为空，计数显示为 0；添加功能在清空后依然正常工作。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2451,8 +3496,24 @@ export const lessons: Lesson[] = [
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "请在右侧编辑器中完成以下练习：\n1. 用**解构赋值**从 `instrument` 对象中取出 `name`、`family`、`range`\n2. 用**箭头函数**重写 `describe` 函数（用模板字符串返回描述）\n3. 用**展开运算符**给 `instrument` 添加一个 `players` 属性\n点击运行，看看你的输出是否和预期一致。",
+        content: '在编辑器中练习 ES6 的三种新语法，用更简洁的方式写出相同的功能：',
+        subSteps: [
+          {
+            content: '用解构赋值 const { name, family, range } = instrument 从对象中取出三个属性',
+            purpose: '解构赋值让你一行代码取出多个属性，避免重复写 instrument.name、instrument.family。就像从谱架上一次取下三本乐谱，而不是一本一本拿——整齐又高效，也让代码意图更清晰。',
+            expectedResult: '控制台输出 name、family、range 三个变量的正确值（小提琴、弦乐、G3-E6）。',
+          },
+          {
+            content: '用箭头函数重写 describe 函数，并用模板字符串（反引号）返回格式化的描述文字',
+            purpose: '箭头函数省略了 function 关键字，代码更短；模板字符串使用反引号和 ${} 插值，告别了繁琐的字符串拼接。这是现代 JavaScript 最常用的两种语法，几乎每一个项目中都会大量使用。',
+            expectedResult: 'describe(instrument) 返回"小提琴 是弦乐器，音域 G3-E6"，输出与原始 function 版本一致。',
+          },
+          {
+            content: '用展开运算符 { ...instrument, players: "40人" } 给 instrument 对象添加新属性',
+            purpose: '展开运算符创建新对象而不修改原对象——这是函数式编程的重要理念：不改变原始数据。就像用一份乐谱复印本做标注，原件保持不变，随时可以回到最初版本。',
+            expectedResult: '新对象包含原 instrument 的所有属性（name, family, range）加上 players 属性，而原 instrument 对象保持不变。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2529,8 +3590,24 @@ console.log('乐器信息：', describe(instrument))`,
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器中有一个不完整的 `safeParse` 函数。请完成以下任务：\n1. 用 `try/catch` 包裹 `JSON.parse` 的调用\n2. 如果解析失败，在 catch 中返回 `{ error: true, message: error.message }`\n3. 如果解析成功，返回解析后的对象\n测试你的函数：分别传入合法 JSON 和非法 JSON，观察输出。",
+        content: '编辑器中有一个不完整的 safeParse 函数。用 try/catch 实现安全的 JSON 解析：',
+        subSteps: [
+          {
+            content: '用 try 包裹 JSON.parse(str) 的调用，将解析结果赋值给一个变量并返回',
+            purpose: 'JSON.parse 是常见的"炸弹"——传入非法字符串就直接报错崩溃。try/catch 就是防爆服：把可能爆炸的代码放在 try 里，一旦炸了，catch 会接住它而不是让整个程序崩溃。',
+            expectedResult: '传入合法 JSON 字符串时，返回解析后的 JS 对象——与直接调用 JSON.parse 的行为一致。',
+          },
+          {
+            content: '在 catch 块中返回 { error: true, message: error.message }——描述发生了什么错误',
+            purpose: 'catch 不只是"吞掉"错误，还可以把错误信息包装成友好的格式返回给调用者。这样调用者不需要 try/catch，直接检查返回值的 error 属性就知道是否出错了。这是"防御性编程"的核心思想。',
+            expectedResult: '传入非法 JSON 字符串时，返回 { error: true, message: "Unexpected token..." } 而不是报错崩溃。',
+          },
+          {
+            content: '分别传入合法 JSON（{"name": "月光", "composer": "贝多芬"}）和非法 JSON（"这不是JSON"），测试两种路径',
+            purpose: '测试两条分支（成功路径和失败路径）是确保 try/catch 正确实现的关键。就像排练时既练习正常演奏流程，也演练弦断了怎么办——两条路径都验证过，你的代码才算可靠。',
+            expectedResult: '控制台分别输出解析成功的对象和包含 error: true 的错误对象，程序没有崩溃。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2585,8 +3662,24 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器里有一个收藏列表页面。和以前一样——刷新后数据就没了。\n**你的任务：给它加上持久化**\n1. 页面启动时，从 localStorage 加载数据（用 `JSON.parse`）\n2. 写一个 `saveData()` 函数，把 `pieces` 数组存入 localStorage（用 `JSON.stringify`）\n3. 每次添加或删除曲目后，调用 `saveData()`\n4. 刷新页面——你的收藏还在！\n验证：添加几首曲目 → 刷新浏览器 → 数据还在。这感觉就像第一次"拥有了"自己写的页面。',
+        content: '编辑器中有一个收藏列表页面，刷新后数据就丢失。用 localStorage 给它加上持久化能力：',
+        subSteps: [
+          {
+            content: '页面启动时从 localStorage 加载数据：用 JSON.parse(localStorage.getItem("myPieces"))，如果为空则用默认数组',
+            purpose: 'localStorage 让页面数据跨越会话存活——就像把乐谱归档保存，下次排练翻出来就能继续。JSON.parse 把字符串还原为真正的数组对象，|| [] 提供了数据不存在时的安全默认值。',
+            expectedResult: '首次打开页面显示默认的 2 首曲目，刷新后数据依然存在（目前还是默认数据，因为还没写保存逻辑）。',
+          },
+          {
+            content: '写一个 saveData() 函数：用 JSON.stringify 把 pieces 数组转成字符串，存入 localStorage',
+            purpose: 'localStorage 只能存字符串，所以需要用 JSON.stringify 把对象"打包"成 JSON 格式。这就像把乐谱装进文件夹再放进档案柜——需要使用时再 JSON.parse 取出来拆包。',
+            expectedResult: 'saveData() 调用后，在浏览器 DevTools → Application → Local Storage 中能看到 myPieces 键和对应的 JSON 字符串。',
+          },
+          {
+            content: '在每次添加和删除曲目后调用 saveData()，刷新页面验证数据不丢',
+            purpose: '关键是"在数据变化的每个地方都调用 saveData()"——添加后、删除后、清空后。漏掉任何一处，数据就会丢失。这就像每次排练修改乐谱后都要归档，不然下次来谱子还是旧的。',
+            expectedResult: '添加几首曲目后刷新浏览器，数据原封不动地显示——你的页面第一次真正"拥有了记忆"。',
+          },
+        ],
       },
     ],
     starterCode: {
@@ -2629,8 +3722,24 @@ console.log('非法 JSON：', safeParse('这不是JSON'))`,
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "请预测以下代码的输出顺序，然后在编辑器中运行验证：\n\```js\nconsole.log('A: 序曲')\nsetTimeout(() => console.log('C: 第二乐章'), 500)\nsetTimeout(() => console.log('D: 第三乐章'), 0)\nconsole.log('B: 第一乐章')\n\```你的预测是什么？实际输出是否一致？想想为什么 D 在 C 之前。\n> 💡 **提示**：代码使用 `console.log` 输出结果，请在预览区**右键 → 检查**（或按 F12），切换到 **Console（控制台）** 面板查看输出。",
+        content: '预测以下代码的输出顺序，然后在编辑器中运行验证。打开控制台（F12 → Console）查看结果：',
+        subSteps: [
+          {
+            content: '阅读代码：console.log("A") → setTimeout(..., 500) → setTimeout(..., 0) → console.log("B")，写下你预测的输出顺序',
+            purpose: '训练对 Event Loop 的直觉理解。新手常以为 setTimeout(fn, 0) 会"立即"执行，但实际上所有同步代码先跑完，异步回调才被队列调度。先预测再验证，加深记忆。',
+            expectedResult: '正确预测顺序为 A → B → D → C。即使 D 的延迟是 0，D 也在 B 之后——因为同步代码优先于所有异步回调。',
+          },
+          {
+            content: '运行代码，打开控制台观察实际输出，与你的预测对比',
+            purpose: '亲手验证比看一百次理论都有效。当预测和实际一致时，你真正理解了 Event Loop；如果不一致，说明认知有偏差——这正是学习的黄金时刻。',
+            expectedResult: '控制台输出顺序为 A → B → D → C，D（0ms 异步）在 C（500ms 异步）之前，因为 D 先进入任务队列。',
+          },
+          {
+            content: '思考：为什么 setTimeout(fn, 0) 的回调排在 console.log("B") 之后？如果你理解了这个，就掌握了 Event Loop 的核心规则',
+            purpose: '理解"同步代码优先于异步回调"这个规则，你就能预测所有 setTimeout/Promise/fetch 的执行顺序。就像理解"指挥先给弦乐起拍"——节奏规则一旦内化，看任何总谱都不会乱。',
+            expectedResult: '你能用自己的话解释：即使 setTimeout(fn, 0)，fn 也要先进任务队列，等调用栈清空后 Event Loop 才会取它执行。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2688,8 +3797,24 @@ console.log('B: 第一乐章')
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '编辑器中有一个模拟的 `searchMusic(keyword)` 函数。请完成：\n1. 调用 `searchMusic(\'月光\')` 返回一个 Promise\n2. 用 `.then()` 处理成功结果\n3. 用 `.catch()` 处理错误\n4. 链式调用：搜索"月光"→ 拿到结果后搜索"贝多芬"（返回新的 Promise）',
+        content: '编辑器中有一个模拟的 searchMusic(keyword) 函数，返回 Promise。学习 .then() 和 .catch() 的用法：',
+        subSteps: [
+          {
+            content: '调用 searchMusic("月光")，用 .then(result => console.log(result)) 处理成功返回的数据',
+            purpose: '.then() 是 Promise 的核心消费方式——它注册一个回调，在异步操作成功后执行。就像你预订了一张音乐会门票后，不需要一直盯着售票窗口，.then() 相当于"有票了通知我"。',
+            expectedResult: '约 800ms 后控制台输出搜索成功的结果对象 { keyword: "月光", results: ["曲目A", "曲目B", "曲目C"] }。',
+          },
+          {
+            content: '在 .then() 后面加 .catch(err => console.log(err))，然后分别测试有效关键词和空字符串',
+            purpose: '.catch() 是 Promise 错误处理的标准方式——链上任何一步失败都会被它捕获。对比回调地狱中每个回调都需要单独处理错误，.catch() 一个地方搞定全链错误，代码简洁十倍。',
+            expectedResult: '传入空字符串时，.catch() 捕获到 Error("搜索关键词不能为空")，而不是程序崩溃。',
+          },
+          {
+            content: '链式调用：searchMusic("月光").then(...) 中 return searchMusic("贝多芬")，然后在下一个 .then() 中打印第二次搜索结果',
+            purpose: 'Promise 链通过 return 传递数据——每个 .then() 返回一个新的 Promise，数据在链上流动。这就像多米诺骨牌：第一张牌推倒第二张，数据从一步传递到下一步，中间无需嵌套。',
+            expectedResult: '控制台先输出第一次搜索"月光"的结果，再输出第二次搜索"贝多芬"的结果，两次调用串行完成。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2753,8 +3878,24 @@ function searchMusic(keyword) {
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器中有一个 `delay(ms)` 工具函数和两个模拟 API。请完成 `loadConcert` 函数：\n1. 用 `async/await` 写法\n2. 先获取演出信息 `fetchConcert()`\n3. 再根据演出 ID 获取曲目单 `fetchProgram(concertId)`\n4. 用 try/catch 处理可能的错误\n5. 返回完整的 `{ concert, program }` 对象",
+        content: '编辑器中有一个 delay() 工具函数和两个模拟 API。用 async/await 实现 loadConcert 函数：',
+        subSteps: [
+          {
+            content: '用 async function 声明 loadConcert，内部用 const concert = await fetchConcert() 获取演出信息',
+            purpose: 'async/await 让异步代码读起来像同步代码——从上到下、从左到右。await 会暂停当前函数的执行等待 Promise 完成，但不阻塞主线程。就像指挥等独奏家完成华彩乐段——整个乐团在等，但不是僵住，而是准备好了随时接上。',
+            expectedResult: 'concert 变量得到 { id: "c001", title: "维也纳新年音乐会", place: "金色大厅" } 对象。',
+          },
+          {
+            content: '用 const program = await fetchProgram(concert.id) 获取曲目单',
+            purpose: 'await 返回的是 Promise 的"兑现值"——不需要 .then() 回调了。这里你会直观地感受到 async/await 相比 Promise 链的优势：数据直接赋值给变量，下一行就能用，逻辑流线性的。',
+            expectedResult: 'program 变量得到 { concertId: "c001", pieces: ["蓝色多瑙河", "拉德茨基进行曲"] } 对象。',
+          },
+          {
+            content: '用 try/catch 包裹 await 调用，出错时返回 null；成功时 return { concert, program }',
+            purpose: 'async/await 让 try/catch 回归——不需要 .catch() 了。try 块里写正常流程，catch 块里处理异常，和同步代码的错误处理方式完全一致。之前学的错误处理知识在此无缝衔接。',
+            expectedResult: 'loadConcert() 调用后返回完整的演出+曲目信息对象，或出错时返回 null，程序不会崩溃。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2831,8 +3972,24 @@ loadConcert().then(data => console.log('结果：', data))`,
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器中有一个公开的测试 API。请完成 `getPosts` 函数：\n1. 用 `fetch` 请求 `https://jsonplaceholder.typicode.com/posts`\n2. 检查 `response.ok`，失败则抛出错误\n3. 用 `response.json()` 解析数据\n4. 只返回前 3 条数据\n> 这是一个免费的测试 API，你可以真实地发送请求！",
+        content: '编辑器中有一个公开的测试 API（jsonplaceholder）。完成 getPosts 函数，发送真实的网络请求：',
+        subSteps: [
+          {
+            content: '用 const response = await fetch(url) 发送 GET 请求到 jsonplaceholder.typicode.com/posts',
+            purpose: 'fetch() 是浏览器内置的网络请求函数——这是你第一次让代码和"外面的世界"对话。它返回一个 Promise，所以需要 await。就像拨通一个电话——你发送请求（拨号），等待服务器响应（对方接听）。',
+            expectedResult: 'response 是一个 Response 对象，包含 status、ok、headers 等属性。如果网络正常，response.ok 为 true。',
+          },
+          {
+            content: '检查 response.ok——如果为 false，throw new Error 抛出错误；对成功的响应调用 response.json() 解析 JSON',
+            purpose: '两个 await 各有职责：第一个等网络传输完成（拿到回应信封），第二个等 JSON 解析完成（拆信封读内容）。先检查 ok 再解析是防御性编程的好习惯——不要解析一个失败的回应。',
+            expectedResult: 'data 是一个包含 100 条帖子的数组，每条有 userId、id、title、body 属性。',
+          },
+          {
+            content: '用 .slice(0, 3) 取前 3 条数据返回，用 try/catch 包裹整个函数',
+            purpose: '网络请求可能失败（断网、服务器宕机、URL 写错），所以必须用 try/catch 保护。这是"与外部世界对话"的基本礼仪——你不知道对方会不会回应，但你要确保自己不崩溃。',
+            expectedResult: '控制台输出前 3 条帖子数据，每条包含 id、title 等信息——这是真实的网络数据！',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2890,8 +4047,19 @@ getPosts()
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器中有一个不完整的 `api` 对象。请完成：\n1. 实现 `api.get(path)` 方法\n2. 请求 `jsonplaceholder.typicode.com/posts`\n3. 返回解析后的 JSON 数据\n4. 用你封装好的 `api.get()` 获取数据，取前 2 条显示",
+        content: '编辑器中有一个不完整的 api 对象。实现 api.get() 方法，封装网络请求：',
+        subSteps: [
+          {
+            content: '实现 api.get(path)：内部用 fetch(BASE_URL + path) 发送请求，检查 response.ok，返回 response.json()',
+            purpose: '封装的核心价值是"写一次，到处用"——所有请求共用一个 BASE_URL、一个错误处理逻辑、一个响应解析流程。就像乐务统一负责所有演出的场地和设备，指挥不需要每次联系不同的人。',
+            expectedResult: 'api.get("/posts") 返回一个 Promise，解析后得到帖子数组。',
+          },
+          {
+            content: '用封装好的 api.get("/posts") 获取数据，调用 .slice(0, 2) 取前 2 条显示',
+            purpose: '封装后的调用只一行代码——对比未封装时需要写 fetch+检查 ok+解析 json 三步，代码量减少 80%。修改 BASE_URL 也只需改一处，所有 api.get() 调用自动生效。',
+            expectedResult: '控制台输出前 2 条帖子数据，与直接用 fetch 的结果完全一致，但代码简洁得多。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -2961,8 +4129,24 @@ test()`,
       {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "编辑器中有一个不完整的 `debounce` 函数。请完成：\n1. 实现 `debounce(fn, delay)`——利用 `setTimeout` 和 `clearTimeout`\n2. 用你的 debounce 包装 `searchAPI`\n3. 在模拟的快速输入场景中验证：多次快速调用只会执行一次",
+        content: '编辑器中有一个不完整的 debounce 函数。实现防抖，并验证多次快速调用只执行一次：',
+        subSteps: [
+          {
+            content: '在 debounce 内部声明 let timer = null（闭包变量），返回的函数中先 clearTimeout(timer)，再 timer = setTimeout(() => fn(...args), delay)',
+            purpose: '防抖利用闭包（Closure）让内层函数记住并访问外层的 timer 变量。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。',
+            expectedResult: 'debounce 返回一个新函数，这个函数在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。',
+          },
+          {
+            content: '用 const debouncedSearch = debounce(searchAPI, 500) 包装搜索函数',
+            purpose: '防抖函数是一个"装饰器"——它接收一个函数，返回一个被"防抖化"的新函数。原函数的功能不变，只是增加了"等待稳定后再执行"的行为。这种包装模式在工程中非常常见。',
+            expectedResult: 'debouncedSearch 的行为与 searchAPI 相同，但连续快速调用时只有最后一次会生效。',
+          },
+          {
+            content: '连续快速调用 debouncedSearch("贝") → debouncedSearch("贝多") → debouncedSearch("贝多芬")，验证控制台只输出一次搜索请求',
+            purpose: '在搜索场景中，用户在输入框快速打字时，debounce 避免了每个字符都发一次网络请求——只在用户停下来 500ms 后才真正搜索。这对节省流量和服务器资源至关重要。',
+            expectedResult: '500ms 后控制台只输出一次 "🔍 发送搜索请求：贝多芬"，前两次调用被取消了。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -3021,13 +4205,29 @@ debouncedSearch('贝多芬')
         type: "example",
         title: "iTunes Search API",
         content:
-          'Apple 提供了免费的音乐搜索 API，无需注册：\n\```https://itunes.apple.com/search?term=贝多芬&limit=10&country=cn\n\```返回的 JSON 结构：\n\```json\n{\n  "resultCount": 10,\n  "results": [\n    {\n      "trackName": "月光奏鸣曲",\n      "artistName": "贝多芬",\n      "artworkUrl100": "封面图片URL",\n      "previewUrl": "试听URL",\n      "collectionName": "专辑名"\n    }\n  ]\n}\n\```',
+          'Apple 提供了免费的音乐搜索 API，无需注册：\n\```\nhttps://itunes.apple.com/search?term=贝多芬&limit=10&country=cn\n\```返回的 JSON 结构：\n\```json\n{\n  "resultCount": 10,\n  "results": [\n    {\n      "trackName": "月光奏鸣曲",\n      "artistName": "贝多芬",\n      "artworkUrl100": "封面图片URL",\n      "previewUrl": "试听URL",\n      "collectionName": "专辑名"\n    }\n  ]\n}\n\```',
       },
       {
         type: "task",
         title: "动手实现 ✨",
-        content:
-          "创建一个新的 HTML 文件（或在编辑器中直接编写），按以下步骤实现音乐搜索器：\n**第一步：封装 API 请求函数**\n\```js\nconst BASE_URL = 'https://itunes.apple.com'\nasync function searchMusic(term) {\n  const url = `${BASE_URL}/search?term=${encodeURIComponent(term)}&limit=10&country=cn`\n  const res = await fetch(url)\n  if (!res.ok) throw new Error(`搜索失败：${res.status}`)\n  const data = await res.json()\n  return data.results\n}\n\```**第二步：实现防抖函数**\n\```js\nfunction debounce(fn, delay = 400) {\n  let timer\n  return function(...args) {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn.apply(this, args), delay)\n  }\n}\n\```在 `<script>` 标签中组合使用：搜索框 + 防抖 + API 调用 + 结果渲染 + 加载状态和错误提示。",
+        content: '整合合奏篇学到的全部技能——Promise、fetch、async/await、防抖——实现一个真实的音乐搜索器：',
+        subSteps: [
+          {
+            content: '封装 API 请求函数 searchMusic(term)：用 fetch 调用 iTunes Search API，处理 response.ok，返回 data.results',
+            purpose: '这是你第一次对接真实的外部 API——iTunes Search API 免费且无需注册。封装成 searchMusic 函数后，调用者只需传入关键词就能获得搜索结果，底层 fetch+JSON 解析的细节被隐藏起来。API 封装是工程化的第一步。',
+            expectedResult: 'searchMusic("贝多芬") 返回一个包含 10 首曲目的数组，每首有 trackName、artistName、artworkUrl100 等字段。',
+          },
+          {
+            content: '实现 debounce 函数（利用闭包 + setTimeout/clearTimeout），包装搜索输入事件',
+            purpose: '防抖让"每次输入都发请求"变成"停止输入 400ms 后才发一次请求"。这是搜索功能的标配——既减少了网络请求次数，又避免了返回顺序错乱的问题（后发的请求可能先返回）。',
+            expectedResult: '快速连续输入"贝"→"多"→"芬"，只在停止输入 400ms 后才触发一次搜索请求。',
+          },
+          {
+            content: '组合搜索框、防抖、API 调用、结果渲染、加载状态、错误提示——形成一个完整的搜索体验',
+            purpose: '这是合奏篇的终曲——你把分散的技巧编织成完整的作品。用户输入 + 防抖等待 + API 调用 + 结果展示，四个环节层层衔接。完成后你会惊讶：自己已经能写出真正有用的功能了。',
+            expectedResult: '输入关键词后，页面展示搜索结果：歌曲名、歌手名、封面图片。网络故障或无结果时显示友好的错误提示。',
+          },
+        ],
       },
       {
         type: "hint",
@@ -3538,11 +4738,37 @@ debouncedSearch('贝多芬')
         content:
           '在工程化项目中，组件就是 `.vue` 文件：\n**定义一个组件 `MusicCard.vue`：**\n\```vue\n<script setup>\ndefineProps(["name", "composer"])\n</script>\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }}</p>\n  </div>\n</template>\n<style scoped>\n.card {\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px;\n}\n</style>\n\```**在 `App.vue` 中使用：**\n\```vue\n<script setup>\nimport MusicCard from \'./components/MusicCard.vue\'\n</script>\n<template>\n  <MusicCard name="夜曲 Op.9 No.2" composer="肖邦" />\n  <MusicCard name="月光" composer="德彪西" />\n</template>\n\```注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。',
       },
-      {
+            {
         type: "task",
         title: "你的任务 ✨",
-        content:
-          '1. 在 `src/components/` 下新建 `HelloMusic.vue`\n2. 写一个简单的组件：显示一句你最喜欢的音乐名言\n3. 在 `App.vue` 中 import 并使用这个组件\n4. 给组件添加 scoped 样式（字体、颜色、边框）\n5. 把 `<style scoped>` 改成 `<style>`（去掉 scoped），观察和之前有什么不同？\n> 💡 scoped 的作用：每个组件的样式只影响自己的模板，不会"泄漏"到其他组件。这是工程化的一大优势。',
+        content: "创建你的第一个 .vue 单文件组件，体验三段式结构：",
+        subSteps: [
+          {
+            content: "在 src/components/ 下新建 HelloMusic.vue 文件",
+            purpose: ".vue 文件是 Vue 工程化的基本组织单元。每个组件一个文件，<template>、<script setup>、<style scoped> 三段式让你的代码结构清晰，容易维护。就像乐团中每个声部有自己的分谱——各司其职，互不干扰。",
+            expectedResult: "项目中出现 src/components/HelloMusic.vue 文件，内含完整的三段式结构。"
+          },
+          {
+            content: "在组件中显示一句你最喜欢的音乐名言",
+            purpose: "组件的内容通过 <template> 中的 HTML 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 DOM。这是声明式编程的核心——你负责描述界面，Vue 负责渲染。",
+            expectedResult: "页面上出现你选择的音乐名言文字。"
+          },
+          {
+            content: "在 App.vue 中 import 并使用 <HelloMusic /> 组件",
+            purpose: "组件之间通过 ES module 的 import 语法相互引用，这是工程化与 CDN 方式最大的不同。import 后，组件名在模板中自动可用，不需要 components 注册步骤。这让你可以像搭积木一样组合页面。",
+            expectedResult: "App.vue 中成功导入 HelloMusic，页面上能看到该组件渲染的内容。"
+          },
+          {
+            content: "给组件添加 scoped 样式（字体、颜色、边框等）",
+            purpose: "<style scoped> 让 CSS 只作用于当前组件，不会「污染」其他组件的样式。这是工程化的核心优势之一——你可以放心地给每个组件写样式，不用担心样式冲突。就像每个声部的排练标记只对该声部生效。",
+            expectedResult: "HelloMusic.vue 中的文字有了自定义的字体、颜色和边框样式。"
+          },
+          {
+            content: "把 <style scoped> 改成 <style>（去掉 scoped），观察变化",
+            purpose: "去掉 scoped 后，这个组件的 CSS 会变成「全局样式」，影响页面上的所有元素。通过对比，你能直观感受到 scoped 的作用——它在编译时给每个元素加上唯一的 data-v-xxx 属性，实现样式隔离。",
+            expectedResult: "去掉 scoped 后，你可能发现 App.vue 中同类型元素的样式也被改变了——这就是样式「泄漏」的效果。"
+          }
+        ],
       },
       {
         type: "hint",
@@ -3590,10 +4816,37 @@ debouncedSearch('贝多芬')
         title: '看例子：一个完整的指令演示',
         content: '下面的代码综合展示了所有主要指令。切换到预览区，实际操作感受：\n\```html\n<!-- 条件渲染：切换 tab -->\n<div :class="[\'tab\', { active: activeTab === \'all\' }]" @click="activeTab = \'all\'">全部</div>\n<!-- 列表渲染：遍历曲目 -->\n<div v-for="track in filteredTracks" :key="track.id" class="track-card">\n  <img :src="track.cover" :alt="track.title">\n  <h3>{{ track.title }}</h3>\n  <p v-if="track.artist">{{ track.artist }}</p>\n  <span :class="[\'tag\', \'tag-\' + track.genre]">{{ track.genre }}</span>\n</div>\n<!-- v-show 切换 -->\n<div v-show="showPlayer" class="player">播放器控件</div>\n\```注意：:class 可以接收对象（{ active: isActive }）或数组（[\'base\', dynamicClass]）。:style 同样支持对象语法。',
       },
-      {
+            {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在编辑器中：\n1. 修改 filterButtons 数组——添加一个印象派筛选选项\n2. 在 tracks 数组中添加两首你自己喜欢的曲目\n3. 用 v-if 添加暂无匹配曲目的空状态提示\n4. 把 v-show 切换按钮改成正在播放的动态显示\n5. 挑战：用 v-for 的索引给每张卡片前加上序号（1. 2. 3. ...），观察为每个 `<li>` 添加唯一的 :key\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改模板中的 <code>v-for</code>：</p><pre><code>&lt;template&gt;\n  &lt;ul&gt;\n    &lt;li v-for="(track, index) in filteredTracks" :key="track.id"&gt;\n      &lt;span class="num"&gt;{{ index + 1 }}.&lt;/span&gt;\n      &lt;strong&gt;{{ track.name }}&lt;/strong&gt;\n      &lt;span&gt;— {{ track.composer }}&lt;/span&gt;\n      &lt;span class="period"&gt;{{ track.period }}&lt;/span&gt;\n    &lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/template&gt;</code></pre><p>关键：<code>v-for="(track, index)"</code> 中 index 从 0 开始；<code>{{ index + 1 }}</code> 显示为 1,2,3...；<code>:key="track.id"</code> 始终用唯一 ID，不要用 index 做 key。</p></div></details>[[/html]]',
+        content: '用 Vue 指令改造一个曲目管理应用，验证指令的核心用法：',
+        subSteps: [
+          {
+            content: '修改 filterButtons 数组——添加一个「印象派」筛选选项',
+            purpose: '模板中的数据驱动一切：修改 JS 中的数组，UI 自动变化。这展示了 Vue 的声明式核心——你只需更改数据，Vue 负责 DOM 更新。通过给数组增加元素，你会看到新按钮自动出现在页面上，无需手动操作 DOM。',
+            expectedResult: '筛选按钮栏中出现一个新按钮「印象派」，点击后能够筛选出对应时期的曲目。'
+          },
+          {
+            content: '在 tracks 数组中添加两首你自己喜欢的曲目',
+            purpose: '数据是 Vue 应用的唯一真相来源。添加数据后，v-for 会自动渲染新条目。这验证了响应式系统的关键特性：列表渲染完全由数据驱动，不需要像以前那样手动调用 createElement 和 appendChild。',
+            expectedResult: '曲目列表底部出现你新添加的两首曲目卡片，格式与已有卡片一致。'
+          },
+          {
+            content: '用 v-if 添加「暂无匹配曲目」的空状态提示',
+            purpose: 'v-if 根据条件决定 DOM 元素是否存在。当筛选结果为空时，显示友好的空状态提示，而不是一片空白——这是用户体验的基本要求。v-if 在条件为 false 时完全移除 DOM 元素，适合状态切换不频繁的场景。',
+            expectedResult: '选择某个没有曲目的时期（如印象派）时，筛选区域显示「暂无匹配曲目」的提示文字。'
+          },
+          {
+            content: '用 v-show 实现一个播放状态切换的指示器',
+            purpose: 'v-show 与 v-if 不同：元素始终存在于 DOM 中，只是通过 CSS display:none 隐藏。适合频繁切换的场景（如播放器控件的显示/隐藏），因为切换开销几乎为零，不会触发重新渲染。',
+            expectedResult: '一个播放状态指示器，可以通过按钮控制显示/隐藏，切换流畅即时。'
+          },
+          {
+            content: '挑战：用 v-for="(track, index)" 给每张卡片前加上序号（1. 2. 3. ...），并为每个元素指定稳定的 :key\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p>修改模板中的 <code>v-for</code>：</p><pre><code>&lt;template&gt;\n  &lt;ul&gt;\n    &lt;li v-for="(track, index) in filteredTracks" :key="track.id"&gt;\n      &lt;span class="num"&gt;{{ index + 1 }}.&lt;/span&gt;\n      &lt;strong&gt;{{ track.name }}&lt;/strong&gt;\n      &lt;span&gt;— {{ track.composer }}&lt;/span&gt;\n      &lt;span class="period"&gt;{{ track.period }}&lt;/span&gt;\n    &lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/template&gt;</code></pre><p>关键：<code>v-for="(track, index)"</code> 中 index 从 0 开始；<code>{{ index + 1 }}</code> 显示为 1,2,3...；<code>:key="track.id"</code> 始终用唯一 ID，不要用 index 做 key。</p></div></details>[[/html]]',
+            purpose: 'v-for 的索引语法 (item, index) 让你同时访问元素和位置。index + 1 显示为人类友好的序号。:key 是 Vue 内部识别列表节点的唯一依据——key 不稳定会导致 DOM 复用错误、状态错乱和过渡动画失效。永远用唯一 ID 做 key，不要用 index。',
+            expectedResult: '每张曲目卡片前显示带有序号的标签（1. 2. 3. ...），修改筛选条件后序号能正确反映新列表顺序。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3635,10 +4888,37 @@ debouncedSearch('贝多芬')
         title: '看例子：生命周期实战',
         content: '下面的代码是一个时钟组件，完整展示了生命周期钩子的使用：\n\```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount, watch } from \'vue\'\nconst time = ref(new Date().toLocaleTimeString())\nconst isRunning = ref(true)\nlet timer = null\nfunction tick() {\n  time.value = new Date().toLocaleTimeString()\n}\nfunction startClock() {\n  isRunning.value = true\n  timer = setInterval(tick, 1000)\n}\nfunction stopClock() {\n  isRunning.value = false\n  clearInterval(timer)\n  timer = null\n}\nonMounted(() => {\n  startClock()\n  console.log(\'🕐 时钟组件已挂载\')\n})\nonBeforeUnmount(() => {\n  clearInterval(timer)\n  console.log(\'🕐 时钟组件已卸载，定时器已清理\')\n})\nwatch(isRunning, (running) => {\n  console.log(\'时钟状态：\', running ? \'运行中\' : \'已暂停\')\n})\n</script>\n\```注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。',
       },
-      {
+            {
         type: 'task',
         title: '动手试试 ✨',
-        content: '请在编辑器中：\n1. 观察时钟组件——打开/关闭它，看控制台的生命周期日志\n2. 修改 onMounted 中的 startClock——让时钟初始显示为 1.5 倍速\n3. 用 watch 监听 time 的变化，在整分钟时打印 🎵\n4. 添加一个计数器（ref），在 onMounted 中启动自增，onBeforeUnmount 中清除\n5. 挑战：用 watchEffect 替代 watch，观察两者的区别\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>watch 的写法：</strong></p><pre><code>import { ref, watch } from "vue";\nconst time = ref(0);\nwatch(time, (newVal, oldVal) =&gt; {\n  if (newVal % 60 === 0 &amp;&amp; newVal !== 0) {\n    console.log("🎵 整分钟到了！");\n  }\n});</code></pre><p><strong>watchEffect 的写法：</strong></p><pre><code>import { ref, watchEffect } from "vue";\nconst time = ref(0);\nwatchEffect(() =&gt; {\n  if (time.value % 60 === 0 &amp;&amp; time.value !== 0) {\n    console.log("🎵 整分钟到了！（watchEffect）");\n  }\n});</code></pre><p><strong>核心区别：</strong><br>• watch 手动指定数据源，可拿到旧值<br>• watchEffect 自动追踪依赖，默认立即执行一次<br>• 需要旧值时用 watch，简单副作用用 watchEffect</p></div></details>[[/html]]',
+        content: '通过一个时钟组件实验，深入理解 Vue 生命周期钩子的触发时机：',
+        subSteps: [
+          {
+            content: '观察时钟组件——打开/关闭它，看控制台的生命周期日志',
+            purpose: '生命周期钩子让你在组件从创建到销毁的特定时间点执行代码。通过观察日志输出的顺序，你可以直观理解 onMounted 在组件挂载后触发、onBeforeUnmount 在销毁前触发。这是理解 Vue 组件运行机制的基础。',
+            expectedResult: '控制台依次输出「时钟组件已挂载」等生命周期日志。'
+          },
+          {
+            content: '修改 onMounted 中的 startClock——让时钟初始以 1.5 倍速运行',
+            purpose: 'onMounted 中的代码在 DOM 就绪后执行。你可以在这里修改初始化参数，比如改变定时器频率来实现不同倍速。这让你体会到 onMounted 是配置组件初始行为的正确位置。',
+            expectedResult: '时钟数字变化速度明显加快（每 667ms 更新一次而非 1000ms）。'
+          },
+          {
+            content: '用 watch 监听 time 的变化，在整分钟时打印 🎵',
+            purpose: 'watch 让你在特定数据变化时执行副作用。监听 time 并在 time % 60 === 0 时输出标记，是 watch 的典型用法——它明确指定监听源，并能拿到新值和旧值。',
+            expectedResult: '控制台在每次整分钟时打印一个 🎵 符号。'
+          },
+          {
+            content: '添加一个计数器（ref），在 onMounted 中启动自增，onBeforeUnmount 中清除',
+            purpose: '成对使用 onMounted 和 onBeforeUnmount 是 Vue 开发的铁律：在 mounted 中创建的资源（定时器、事件监听、订阅），必须在 unmount 中清理。否则组件销毁后资源仍在运行，造成内存泄露。',
+            expectedResult: '页面上出现一个自动增长的数字，关闭组件后数字停止增长（验证定时器已清除）。'
+          },
+          {
+            content: '挑战：用 watchEffect 替代 watch，观察两者的区别\n[[html]]<details class=challenge-answer><summary>💡 查看答案</summary><div class=answer-content><p><strong>watch 的写法：</strong></p><pre><code>import { ref, watch } from "vue";\nconst time = ref(0);\nwatch(time, (newVal, oldVal) => {\n  if (newVal % 60 === 0 && newVal !== 0) {\n    console.log("🎵 整分钟到了！");\n  }\n});</code></pre><p><strong>watchEffect 的写法：</strong></p><pre><code>import { ref, watchEffect } from "vue";\nconst time = ref(0);\nwatchEffect(() => {\n  if (time.value % 60 === 0 && time.value !== 0) {\n    console.log("🎵 整分钟到了！（watchEffect）");\n  }\n});</code></pre><p><strong>核心区别：</strong><br>• watch 手动指定数据源，可拿到旧值<br>• watchEffect 自动追踪依赖，默认立即执行一次<br>• 需要旧值时用 watch，简单副作用用 watchEffect</p></div></details>[[/html]]',
+            purpose: 'watch 需要手动指定数据源，但能拿到新旧值；watchEffect 自动追踪依赖，代码更简洁，但无法访问旧值。通过对比两种写法，你会明白：需要对比新旧值时用 watch，只需执行副作用时用 watchEffect。',
+            expectedResult: 'watchEffect 在初始化时立即执行一次（watch 不执行），之后两者行为类似。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3669,11 +4949,37 @@ debouncedSearch('贝多芬')
         content:
           '`computed` 从其他数据自动推算出一个新值。依赖的数据变了，computed 自动重算。\n\```vue\n<script setup>\nimport { ref, computed } from \'vue\'\nconst pieces = ref([\n  { name: "夜曲", period: "浪漫主义" },\n  { name: "布兰登堡", period: "巴洛克" },\n  { name: "月光", period: "印象派" }\n])\nconst selectedPeriod = ref("全部")\n// 自动筛选\nconst filteredPieces = computed(() => {\n  if (selectedPeriod.value === "全部") return pieces.value\n  return pieces.value.filter(p => p.period === selectedPeriod.value)\n})\n// 自动计数\nconst count = computed(() => filteredPieces.value.length)\n</script>\n<template>\n  <button @click="selectedPeriod = \'巴洛克\'">巴洛克</button>\n  <p>共 {{ count }} 首</p>\n  <div v-for="p in filteredPieces" :key="p.name">\n    {{ p.name }} — {{ p.period }}\n  </div>\n</template>\n\```点击`巴洛克`按钮 → `selectedPeriod` 变了 → `filteredPieces` 自动重算 → `count` 自动重算 → 页面自动更新。三行 computed，替代了原来的手动 `render()` 函数！',
       },
-      {
+            {
         type: "task",
         title: "你的任务 ✨",
-        content:
-          '在你的 `music-collection` 项目中：\n1. 在 `App.vue` 中创建一个曲目数组 `pieces`（ref）\n2. 用 `v-for` 在页面上渲染所有曲目\n3. 添加时期筛选按钮（"全部"、"巴洛克"、"浪漫主义"等）\n4. 用 `computed` 实现自动筛选\n5. 显示 "筛选出 X 首中的 Y 首"\n> 对比你在合奏篇手动 `render()` 的方案——是不是简单了很多？',
+        content: '在你的 music-collection 项目中实现响应式数据驱动的筛选：',
+        subSteps: [
+          {
+            content: '在 App.vue 中创建一个曲目数组 pieces（ref）',
+            purpose: 'ref() 是 Vue 响应式系统的基础。通过 ref 包裹数据，Vue 会追踪所有对该数据的读取和修改，并在数据变化时自动更新 DOM。在组合式 API 中，ref 是你创建响应式数据的第一选择。',
+            expectedResult: '在 <script setup> 中定义了一个响应式的 pieces 数组。'
+          },
+          {
+            content: '用 v-for 在页面上渲染所有曲目',
+            purpose: '将数据绑定到模板，验证响应式渲染。与你在合奏篇中手动调用 render() 函数不同，Vue 的 v-for 在数据变化时自动重新渲染列表——你修改数据，页面自己更新。',
+            expectedResult: '页面上显示了所有曲目的名称、作曲家和时期信息。'
+          },
+          {
+            content: '添加时期筛选按钮（全部、巴洛克、浪漫主义等）',
+            purpose: '用户交互需要改变数据来驱动 UI 变化。点击按钮修改一个响应式变量（如 selectedPeriod），这个变化会传播到所有依赖它的地方。这是 Vue 单向数据流的起点。',
+            expectedResult: '页面上出现筛选按钮，点击后按钮视觉上有选中状态。'
+          },
+          {
+            content: '用 computed 实现自动筛选',
+            purpose: 'computed 是 Vue 最强大的工具之一：它从现有数据自动派生出新值，且带有缓存。当 selectedPeriod 改变时，computed 重新计算筛选结果；依赖没变时不重复计算。这替代了你在合奏篇中手动调用的筛选+渲染两步操作。',
+            expectedResult: '点击不同时期按钮，列表自动过滤，只显示对应时期的曲目。'
+          },
+          {
+            content: '显示「筛选出 X 首中的 Y 首」统计文字',
+            purpose: 'computed 可以链式依赖：一个 computed 计算筛选后的列表，另一个 computed 基于筛选结果计算数量。这展示了声明式编程的优雅——你只需要描述数据之间的关系，Vue 负责在依赖变化时自动更新所有相关值。',
+            expectedResult: '页面上显示类似「筛选出 12 首中的 3 首」的统计信息，切换筛选时数字自动变化。'
+          }
+        ],
       },
       {
         type: "hint",
@@ -3710,11 +5016,37 @@ debouncedSearch('贝多芬')
         content:
           '子组件不能直接修改父组件的数据——它只能"通知"父组件：\n**子组件 `MusicCard.vue`：**\n\```vue\n<script setup>\nconst props = defineProps(["name", "composer", "liked"])\n// 声明"我会发出这些事件"\nconst emit = defineEmits(["toggle-like", "delete"])\n</script>\n<template>\n  <div class="card">\n    <h3>{{ name }}</h3>\n    <button @click="emit(\'toggle-like\')">\n      {{ liked ? \'❤\' : \'🤍\' }}\n    </button>\n    <button @click="emit(\'delete\')">✕</button>\n  </div>\n</template>\n\```**父组件 `App.vue`：**\n\```vue\n<template>\n  <MusicCard\n    v-for="p in pieces"\n    :key="p.id"\n    :name="p.name"\n    :liked="p.liked"\n    @toggle-like="p.liked = !p.liked"\n    @delete="pieces = pieces.filter(item => item.id !== p.id)"\n  />\n</template>\n\```**数据流总结：**\n\```父组件（拥有数据）\n  │\n  │ Props ↓（传数据）\n  │\n子组件（接收数据，展示）\n  │\n  │ Emits ↑（发事件通知）\n  │\n父组件（收到通知，修改自己的数据）\n\```这就是"数据向下，事件向上"——Vue 的核心设计模式。',
       },
-      {
+            {
         type: "task",
         title: "你的任务 ✨",
-        content:
-          "在你的 `music-collection` 项目中：\n1. 创建 `MusicCard.vue` 组件，接收 `name`、`composer`、`period`、`liked` 四个 props\n2. 组件中显示卡片布局（曲名、作曲家、时期标签、收藏按钮）\n3. 添加 `toggle-like` 和 `delete` 两个 emit\n4. 在 `App.vue` 中 import 并使用这个组件\n5. 用 `v-for` 循环渲染多张卡片\n> 💡 这个过程很像你在合奏篇做的组件拆分——但现在是在真正的 `.vue` 文件中，用标准的 props/emits 语法。",
+        content: '创建可复用的 MusicCard 组件，实践 props 向下传递和 emits 向上通知：',
+        subSteps: [
+          {
+            content: '创建 MusicCard.vue 组件，接收 name、composer、period、liked 四个 props',
+            purpose: 'Props 是父组件向子组件传递数据的方式。用 defineProps 声明子组件需要的外部数据，Vue 会验证类型并在模板中自动解包。这让你可以像函数参数一样设计组件的输入接口。',
+            expectedResult: 'MusicCard.vue 文件中有 defineProps 声明，组件可以接收四个属性。'
+          },
+          {
+            content: '组件中显示卡片布局（曲名、作曲家、时期标签、收藏按钮）',
+            purpose: '组件的模板使用接收到的 props 来渲染 UI。{{ name }} 等插值语法在子组件模板中和在父组件中用法完全一致。这展示了组件封装的核心价值：内部实现可以任意复杂，对外只暴露简洁的 props 接口。',
+            expectedResult: '卡片上显示曲名、作曲家名、时期标签和一个收藏按钮。'
+          },
+          {
+            content: '添加 toggle-like 和 delete 两个 emit 事件',
+            purpose: '子组件不能直接修改父组件的数据——这是 Vue 单向数据流的核心规则。defineEmits 声明子组件会触发哪些事件，父组件通过 @toggle-like="..." 监听并处理。数据永远由拥有者（父组件）修改。',
+            expectedResult: '点击收藏按钮触发 toggle-like 事件，点击删除按钮触发 delete 事件。'
+          },
+          {
+            content: '在 App.vue 中 import 并使用 MusicCard 组件',
+            purpose: '工程化项目中的组件导入通过 ES module 的 import 语法完成。<script setup> 中 import 的组件在模板中自动可用，无需注册步骤。这让你可以像搭积木一样组合页面。',
+            expectedResult: 'App.vue 中成功导入并使用 <MusicCard> 标签。'
+          },
+          {
+            content: '用 v-for 循环渲染多张卡片，验证 props 传递和事件处理',
+            purpose: '将组件与 v-for 结合，是 Vue 开发中最常见的模式之一。每个循环项通过 props 接收不同的数据，通过 emits 独立地与父组件交互。验证每张卡片的收藏和删除操作都能正确更新父组件的数据。',
+            expectedResult: '页面上显示多张曲目卡片，点击不同卡片的收藏/删除按钮分别触发对应操作。'
+          }
+        ],
       },
       {
         type: "hint",
@@ -3757,11 +5089,17 @@ debouncedSearch('贝多芬')
         content:
           'Vue 的响应式系统让你专注于数据：\n\```vue\n<script setup>\nimport { ref } from \'vue\'\nconst count = ref(0)  // 响应式数据\nfunction increment() {\n  count.value++  // 修改数据\n  // 无需操作 DOM！页面自动更新\n}\n</script>\n<template>\n  <p>已点赞 {{ count }} 次</p>\n  <button @click="increment">👍 点赞</button>\n</template>\n\```就像 MIDI 键盘：你按键，声音自动发出。你不用管"怎么发声"——那已经被系统处理好了。你只管演奏。',
       },
-      {
+            {
         type: "task",
         title: "反思题 🤔",
-        content:
-          '回顾你在乐理篇和合奏篇中用纯 JS 写的代码（querySelector、innerHTML、appendChild）。现在闭上眼睛想象：如果数据变了页面自动更新，你能省去多少代码？\n这就是 Vue 的价值。接下来的课程会逐步展开这个"魔法"背后的原理，以及如何在实际项目中使用它。',
+        content: '从命令式到声明式：体会 Vue 编程思维的根本转变',
+        subSteps: [
+          {
+            content: '回顾你在乐理篇和合奏篇中用纯 JS 写的代码（querySelector、innerHTML、appendChild）。闭上眼睛想象：如果数据变了页面自动更新，你能省去多少代码？',
+            purpose: '这不是一个需要动手写代码的练习，而是一次思维转变。在乐理篇你每改一个数据就要手动找到 DOM 元素并更新它——这是命令式编程：一步步告诉计算机做什么。Vue 的声明式思维让你只描述「界面应该长什么样」，框架负责实现。就像从逐音给乐手发指令，变成给他们一份总谱。',
+            expectedResult: '你心中清晰地看到：原来需要 10 行 JS 操作的 UI 更新，用 Vue 只需改动一行数据。这就是 Vue 的价值。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3804,11 +5142,22 @@ debouncedSearch('贝多芬')
         content:
           "| 场景 | 用什么 | 为什么 |\n|------|--------|--------|\n| 筛选/排序列表 | computed | 纯计算，需要缓存 |\n| 格式化显示 | computed | 依赖数据 → 派生值 |\n| 数据变了要发请求 | watch | 有副作用 |\n| 数据变了要存 localStorage | watch | 有副作用 |\n| 多个依赖组合判断 | computed | 自动追踪依赖 |\n**口诀：** 需要**返回值**用 computed，需要**做事情**用 watch。",
       },
-      {
+            {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          '在你的 `music-collection` 项目中：\n1. 添加 `computed`：根据用户选择的时期（period）筛选曲目列表\n2. 添加 `watch`：当曲目列表变化时，自动保存到 `localStorage`\n> 这两个功能你在"合奏篇"中用纯 JS 手动实现过。现在用 Vue 的 computed/watch，体会一下代码量的差异。',
+        content: '用 computed 自动筛选 + watch 自动持久化，对比纯 JS 方案：',
+        subSteps: [
+          {
+            content: '添加 computed：根据用户选择的时期（period）筛选曲目列表',
+            purpose: 'computed 从已有数据自动派生出新值并自带缓存。你只需要声明筛选逻辑（filter），Vue 在依赖（曲目列表或选中时期）变化时自动重新计算。这在合奏篇中需要你手动写筛选逻辑 + 手动调用 render——现在一行 computed 搞定。',
+            expectedResult: '选择不同时期，曲目列表自动过滤，只显示匹配的曲目。'
+          },
+          {
+            content: '添加 watch：当曲目列表变化时，自动保存到 localStorage',
+            purpose: 'watch 用于在数据变化时执行副作用（如保存、发请求、操作 DOM）。这里用它监听曲目列表，自动将数据序列化到 localStorage——用户刷新页面后数据不会丢失。在合奏篇中你需要手动在每个修改点调用保存函数，现在只需一个 watch。',
+            expectedResult: '添加/删除曲目后刷新页面，数据仍然存在（自动从 localStorage 恢复）。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3845,11 +5194,27 @@ debouncedSearch('贝多芬')
         content:
           '修饰符让你精确控制 v-model 的行为：\n\```vue\n<!-- .lazy：不在 input 时更新，在 change 时更新 -->\n<input v-model.lazy="name">\n<!-- .number：自动转为数字 -->\n<input v-model.number="age" type="text">\n<!-- .trim：自动去除首尾空格 -->\n<input v-model.trim="title">\n\```这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。',
       },
-      {
+            {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "在你的 `music-collection` 项目中，用 `v-model` 实现：\n1. **添加曲目表单：** 曲名、作曲家、时期——三个输入框都用 v-model\n2. **筛选下拉框：** 用 v-model 绑定选中的时期，配合 computed 筛选列表\n3. **收藏开关：** 用 checkbox + v-model 实现收藏/取消收藏\n完成后，你会发现：没有一行 `addEventListener`、没有一行 `.value = ...`——这就是 Vue 的优雅。",
+        content: '用 v-model 实现表单、筛选和收藏的完整交互：',
+        subSteps: [
+          {
+            content: '添加曲目表单：曲名、作曲家、时期——三个输入框都用 v-model',
+            purpose: 'v-model 是 Vue 提供的双向绑定语法糖：它同时做 v-bind:value（数据->视图）和 v-on:input（视图->数据）。一个指令替代了原来需要手动写的事件监听器和 DOM 操作。表单输入、数据更新、视图刷新——一条龙自动完成。',
+            expectedResult: '在输入框中输入内容，下方实时显示输入的数据；提交后新曲目添加到列表中。'
+          },
+          {
+            content: '筛选下拉框：用 v-model 绑定选中的时期，配合 computed 筛选列表',
+            purpose: 'v-model 不仅适用于文本输入，同样适用于 select 下拉框。选中的值自动同步到响应式变量，配合 computed 属性实现实时筛选。这比手动监听 change 事件再更新 DOM 简洁得多。',
+            expectedResult: '从下拉框选择不同时期，曲目列表自动过滤显示。'
+          },
+          {
+            content: '收藏开关：用 checkbox + v-model 实现收藏/取消收藏',
+            purpose: 'v-model 对 checkbox 的处理很智能：单个 checkbox 绑定布尔值（收藏/未收藏），多个 checkbox 绑定到数组（多选）。这里用单个 checkbox 的 true/false 切换收藏状态，完全不需要手动写 click 事件处理。',
+            expectedResult: '勾选/取消收藏复选框，页面上的收藏状态图标实时切换。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3880,11 +5245,32 @@ debouncedSearch('贝多芬')
         content:
           "| 场景 | 用什么 |\n|------|--------|\n| 传递文本/数字 | props |\n| 传递 HTML 结构 | slot |\n| 传递回调函数 | emits |\n| 组件布局框架 | slot |\n| 简单配置项 | props |\n**口诀：** Props 传数据，Slots 传结构，Emits 传事件。\n就像乐谱上的标记：\n- Props = 音符（数据）\n- Slots = 华彩乐段（留给演奏者填充的内容）\n- Emits = 力度记号（告诉指挥这里要怎么处理）",
       },
-      {
+            {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "在你的 `music-collection` 项目中：\n1. 把曲目卡片提取成 `MusicCard.vue` 组件\n2. 用**默认 slot** 让使用者传入卡片内容\n3. 用**具名 slot**（#header, #footer）分别定义卡片的顶部和底部\n4. 在 App.vue 中使用时，不同的卡片可以有不同的 header 样式\n这样你的组件既保持了结构一致性，又有了内容的灵活性。",
+        content: '用插槽让组件既有统一结构又有灵活内容：',
+        subSteps: [
+          {
+            content: '把曲目卡片提取成 MusicCard.vue 组件（定义基础卡片框架）',
+            purpose: '组件化不仅是为了复用，更是为了统一视觉风格。先定义卡片的外框（边框、圆角、阴影），为后续用 slot 填充内容做好准备。这就像先搭建音乐会舞台的结构，再让不同演奏者在上面自由发挥。',
+            expectedResult: '一个带有统一外框样式的空白卡片组件。'
+          },
+          {
+            content: '用默认 slot 让使用者传入卡片主体内容',
+            purpose: '默认 slot（<slot />）是组件最灵活的扩展点。使用者可以在父组件中向 slot 填入任意 HTML 结构，子组件只负责提供容器和布局。这比纯用 props 传递内容更自由——props 只能传数据，slot 可以传结构。',
+            expectedResult: '不同卡片可以有不同的内部布局（如有的显示封面图，有的不显示），但外框样式一致。'
+          },
+          {
+            content: '用具名 slot（#header, #footer）分别定义卡片的顶部和底部区域',
+            purpose: '具名 slot 让组件可以有多个插槽，分别对应不同的区域。<slot name="header"> 定义顶部区，<slot name="footer"> 定义底部区。使用者通过 <template #header> 语法精确填充每个区域。这让组件在保持结构的同时极度灵活。',
+            expectedResult: '卡片顶部有标题栏（#header），中间是内容区域（默认 slot），底部有操作按钮区（#footer）。'
+          },
+          {
+            content: '在 App.vue 中使用时，不同卡片可以有不同的 header 和 footer 样式',
+            purpose: '插槽的真正威力在于：同一组件框架下，每张卡片可以完全自定义自己的外观和行为。组件提供结构约束，slot 提供内容自由。',
+            expectedResult: '不同卡片虽然使用同一个 MusicCard 组件，但 header 和 footer 的内容和样式各不相同。'
+          }
+        ],
       },
     ],
     starterCode: { html: "", css: "", js: "" },
@@ -3927,11 +5313,27 @@ debouncedSearch('贝多芬')
         content:
           "有时候不能只用 `<router-link>`，需要在 JS 中跳转：\n\```vue\n<script setup>\nimport { useRouter } from 'vue-router'\nconst router = useRouter()\nfunction goToDetail(id) {\n  router.push(\\`/piece/\\${id}\\`)  // 跳转到详情页\n}\nfunction goBack() {\n  router.back()  // 返回上一页\n}\n</script>\n\````router.push()` 就像点击链接，`router.back()` 就像按浏览器的后退键。",
       },
-      {
+            {
         type: "task",
         title: "动手试试 ✨",
-        content:
-          "在你的 `music-collection` 项目中添加路由：\n1. **首页 `/`：** 展示所有曲目（列表 + 筛选）\n2. **详情页 `/piece/:id`：** 展示单个曲目的详细信息\n3. **关于页 `/about`：** 介绍你自己和这个项目\n从列表点击一首曲子 → 跳转到详情页 → 点击返回 → 回到列表。整个流程不刷新页面，体验流畅。",
+        content: '为你的音乐收藏应用添加多页面路由导航：',
+        subSteps: [
+          {
+            content: '首页 /：展示所有曲目（列表 + 筛选）',
+            purpose: '首页是应用的入口。用路由的 path: "/" 映射到 Home 组件，<router-view /> 在 App.vue 中作为内容出口。路由让单页应用有了多页面的体验——URL 变了，内容变了，但页面没有白屏刷新。',
+            expectedResult: '访问根路径 / 时显示曲目列表和筛选功能。'
+          },
+          {
+            content: '详情页 /piece/:id：展示单个曲目的详细信息',
+            purpose: '动态路由 /piece/:id 让 URL 携带参数。通过 route.params.id 获取曲目 ID，根据 ID 查找对应数据并展示详情。同一个路由匹配所有曲目，参数不同内容不同——这就是动态路由的核心价值。',
+            expectedResult: '从列表点击某首曲目，跳转到 /piece/xxx 并显示该曲目的完整信息。'
+          },
+          {
+            content: '关于页 /about：介绍你自己和这个项目',
+            purpose: '静态路由 /about 是最简单的路由形式。它展示了一个完整的应用通常会有哪些页面类型：列表页（数据驱动）、详情页（参数驱动）、静态页（内容固定）。三者组合就是一个完整的 SPA 应用骨架。',
+            expectedResult: '点击导航中的「关于」，显示关于页面的内容，URL 变为 /about。'
+          }
+        ],
       },
       {
         type: "hint",
@@ -3962,11 +5364,57 @@ debouncedSearch('贝多芬')
         content:
           '从乐理篇到现在，你的成长路径：\n| 阶段 | 技能 | 工具 |\n|------|------|------|\n| 乐理篇 | HTML/CSS/JS 基础 | 浏览器、在线编辑器 |\n| 合奏篇 | 工作流、调试、命名、数据驱动 | 浏览器、在线编辑器 |\n| 登台篇 | Node.js、npm、Vite、Vue SFC、组件通信、Git、部署 | **VS Code、终端、GitHub** |\n在乐理篇你写第一个 `<h1>你好世界</h1>` 时，你可能想不到：几个月后，你会在终端里敲 `npm run build`，把一个完整的 Vue 应用部署到互联网上。\n**这就是工程化**——不是学更多语法，而是掌握让代码从"能跑"到"专业"的完整流程。',
       },
-      {
+            {
         type: "task",
         title: "结业项目：音乐收藏管理器 🎵",
-        content:
-          '在你的 `music-collection` 项目中，实现一个完整的**音乐收藏管理器**。功能要求：\n**基础功能（必须完成）：**\n1. 用 `v-for` 展示曲目列表（每首包含曲名、作曲家、时期）\n2. 用 `computed` 实现按时期筛选\n3. 用 `v-model` + 表单实现添加新曲目\n4. 用 `localStorage` 持久化数据（刷新不丢失）\n**进阶功能（建议完成）：**\n5. 把卡片提取成 `MusicCard.vue` 组件（props + emits）\n6. 添加"收藏/取消收藏"功能\n7. 添加删除曲目功能\n8. 用 `Git` 管理版本（至少 3 次 commit）\n9. 部署到 GitHub Pages\n**项目结构参考：**\n\```music-collection/\n├── src/\n│   ├── App.vue              # 主页面（列表 + 筛选 + 表单）\n│   ├── components/\n│   │   ├── MusicCard.vue     # 曲目卡片组件\n│   │   ├── FilterBar.vue     # 筛选按钮组\n│   │   └── AddForm.vue       # 添加曲目表单\n│   └── main.js\n├── package.json\n└── vite.config.js\n\```> 💡 这是你在乐理篇"作品集"中用纯 HTML/CSS/JS 做过的同一个项目。现在用工程化的 Vue 重写它——你会清晰地看到"工程化"带来了什么。',
+        content: '实现一个完整的音乐收藏管理器，综合运用本章所学的所有 Vue 技能：',
+        subSteps: [
+          {
+            content: '【基础1】用 v-for 展示曲目列表（每首包含曲名、作曲家、时期）',
+            purpose: 'v-for 是列表渲染的核心指令。将数据数组中的每一项映射为可视化的卡片，是整个应用的基础骨架。这一步验证你对响应式数据绑定和列表渲染的掌握。',
+            expectedResult: '页面上整齐排列着多张曲目卡片，每张显示曲名、作曲家和时期。'
+          },
+          {
+            content: '【基础2】用 computed 实现按时期筛选',
+            purpose: 'computed 自动从数据派生新值。根据用户选择的时期筛选曲目列表，切换时期时列表自动更新。这是声明式数据处理的核心模式——你描述筛选规则，Vue 自动执行。',
+            expectedResult: '点击不同时期按钮，列表自动过滤，筛选计数同步更新。'
+          },
+          {
+            content: '【基础3】用 v-model + 表单实现添加新曲目',
+            purpose: 'v-model 双向绑定让表单开发变得极其简洁。输入框的值自动同步到数据，提交后新曲目出现在列表中。整个过程不需要一个 addEventListener。',
+            expectedResult: '填写曲名、作曲家、时期后点击添加，新曲目出现在列表中。'
+          },
+          {
+            content: '【基础4】用 localStorage 持久化数据（刷新不丢失）',
+            purpose: 'watch 监听数据变化自动保存到 localStorage，onMounted 时从 localStorage 恢复数据。数据持久化是真实应用的基本需求，watch + localStorage 是最简洁的实现方案。',
+            expectedResult: '添加/删除曲目后刷新页面，数据完整保留。'
+          },
+          {
+            content: '【进阶5】把卡片提取成 MusicCard.vue 组件（props + emits）',
+            purpose: '组件化是 Vue 工程化的核心实践。将卡片逻辑从 App.vue 中提取为独立组件，通过 props 传入数据，通过 emits 回传事件。这验证你对组件通信模式的掌握。',
+            expectedResult: 'MusicCard.vue 组件可复用，通过 props 接收曲目数据，通过 emits 发送事件。'
+          },
+          {
+            content: '【进阶6】添加收藏/取消收藏功能',
+            purpose: 'emit 事件让子组件通知父组件执行数据变更。收藏功能是一个典型的子组件触发、父组件处理的场景，综合运用了 props（传入收藏状态）和 emits（传出切换事件）。',
+            expectedResult: '点击卡片上的收藏按钮，收藏状态切换（❤️/🤍），数据持久化到 localStorage。'
+          },
+          {
+            content: '【进阶7】添加删除曲目功能',
+            purpose: '删除功能验证了你对 Vue 响应式数组操作的理解。使用 filter 返回新数组（而非直接修改原数组），确保响应式系统能正确检测变化并更新 DOM。',
+            expectedResult: '点击删除按钮，对应的曲目从列表中消失，localStorage 同步更新。'
+          },
+          {
+            content: '【进阶8】用 Git 管理版本（至少 3 次 commit）',
+            purpose: '版本管理是专业开发者的基本素养。将项目拆分为有意义的提交（如初始化 Vue 项目、实现曲目列表和筛选、添加持久化功能），每个 commit 都有清晰的描述。这不仅是项目管理的需要，也是展示你工程化思维的窗口。',
+            expectedResult: 'git log 显示至少 3 个有意义的 commit，每个都有清晰的 commit message。'
+          },
+          {
+            content: '【进阶9】部署到 GitHub Pages',
+            purpose: '部署是将代码变成真正的在线应用的最后一步。用 npm run build 构建生产版本，配置 vite.config.js 的 base 路径，推送到 gh-pages 分支。你的作品不再只是本地文件——而是互联网上任何人都能访问的网址。',
+            expectedResult: '在浏览器中访问 GitHub Pages URL，能看到你完整的音乐收藏管理器在线运行。'
+          }
+        ],
       },
       {
         type: "hint",
