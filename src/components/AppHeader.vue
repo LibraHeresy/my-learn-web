@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
+
+const activeTab = computed(() => {
+  if (route.path.startsWith('/quiz')) return 'quiz'
+  return 'learn'
+})
 
 function goHome() {
   router.push('/')
+}
+
+function goQuiz() {
+  router.push('/quiz')
 }
 </script>
 
@@ -15,6 +26,20 @@ function goHome() {
       <span class="header-title">代码乐章</span>
       <span class="header-subtitle">从乐谱到代码</span>
     </div>
+    <nav class="header-nav">
+      <button
+        :class="['nav-tab', { active: activeTab === 'learn' }]"
+        @click="goHome"
+      >
+        📖 学习
+      </button>
+      <button
+        :class="['nav-tab', { active: activeTab === 'quiz' }]"
+        @click="goQuiz"
+      >
+        ✏️ 测验
+      </button>
+    </nav>
   </header>
 </template>
 
@@ -23,6 +48,7 @@ function goHome() {
   height: var(--header-height);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 var(--sp-6);
   background: var(--color-panel);
   border-bottom: 1px solid var(--color-border-light);
@@ -65,5 +91,46 @@ function goHome() {
   color: var(--color-text-light);
   padding-left: var(--sp-2);
   border-left: 2px solid var(--color-gold);
+}
+
+/* ===== 右侧导航 ===== */
+.header-nav {
+  display: flex;
+  gap: var(--sp-1);
+}
+
+.nav-tab {
+  padding: var(--sp-2) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-family: var(--font-heading);
+  color: var(--color-text-light);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--dur-fast);
+}
+
+.nav-tab:hover {
+  color: var(--color-text);
+  background: rgba(201, 169, 110, 0.08);
+}
+
+.nav-tab.active {
+  color: var(--color-accent);
+  background: rgba(201, 169, 110, 0.15);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .header-subtitle {
+    display: none;
+  }
+
+  .nav-tab {
+    padding: var(--sp-1) var(--sp-3);
+    font-size: var(--fs-xs);
+  }
 }
 </style>

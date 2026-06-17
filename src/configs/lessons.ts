@@ -95,7 +95,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '标签 — HTML 的"音符"',
         content:
-          "每一首扬琴曲都写在一张乐谱上——音符告诉你要弹什么，指法告诉你用什么竹法。网页也一样：HTML 像乐谱的音符，告诉浏览器这里放什么内容；CSS 像演奏技法记号，告诉浏览器用什么颜色、多大字号；JavaScript 像你的双手，让网页动起来。\n\n先从最简单的两个标签开始：h1 是页面最大的标题（就像扬琴谱上的大标题《春到清江》），p 标签是段落（就像一个乐句）。\n\nHTML 使用**标签（tag）**来标记内容。每个标签用尖括号 `< >` 包裹：\n- `<h1>` 是大标题，像乐章标题\n- `<p>` 是段落，像乐谱中的乐句\n标签通常成对出现：`<h1>内容</h1>`，就像乐谱的小节线一样，有开始就有结束。",
+          "每一首扬琴曲都写在一张乐谱上——音符告诉你要弹什么，指法告诉你用什么竹法。网页也一样：HTML 像乐谱的音符，告诉浏览器这里放什么内容；CSS 像演奏技法记号，告诉浏览器用什么颜色、多大字号；JavaScript 像你的双手，让网页动起来。\n\n先从最简单的两个标签开始：h1 是页面最大的标题（就像扬琴谱上的大标题《春到清江》），p 标签是段落（就像一个乐句）。\n\n每一首扬琴曲都写在一张乐谱上——音符告诉你要弹什么，指法告诉你用什么竹法。网页也一样：HTML 像乐谱的音符，告诉浏览器这里放什么内容；CSS 像演奏技法记号，告诉浏览器用什么颜色、多大字号；JavaScript 像你的双手，让网页动起来。\n\n先从最简单的两个标签开始：h1 是页面最大的标题（就像扬琴谱上的大标题《春到清江》），p 标签是段落（就像一个乐句）。\n\nHTML 使用**标签（tag）**来标记内容。每个标签用尖括号 `< >` 包裹：\n- `<h1>` 是大标题，像乐章标题\n- `<p>` 是段落，像乐谱中的乐句\n标签通常成对出现：`<h1>内容</h1>`，就像乐谱的小节线一样，有开始就有结束。",
       },
       {
         type: "example",
@@ -193,7 +193,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面就是编辑器中的代码。注意看 `<strong>` 和 `<em>` 标签是如何包裹文字的：\n\```html\n<h1>我的音乐故事</h1>\n<p>我最喜欢的作曲家是<strong>肖邦</strong>。</p>\n<p>他的夜曲<em>优美而忧伤</em>，<br>每次听都让我感动。</p>\n\```你可以看到"肖邦"加粗了，"优美而忧伤"变成斜体了，而且中间还有一个换行。\n**strong 和 b 标签的区别、em 和 i 标签的区别：**\nstrong = 重音记号 >（表示"这个音要突出"，有音乐含义）\nb 标签 = 只是视觉上加粗（没有音乐含义，就像用粗笔写谱子——看上去粗，不代表要用力弹）\nem = 揉弦/颤音（表示"这里要有表情"，有音乐含义）\ni 标签 = 只是视觉上倾斜（没有音乐含义）\n\n练扬琴你就知道：f（强音）和 >（重音）不一样。f 是整段的力度，> 是个别音的重音。strong 就像 >——标记需要突出的重要内容。\n\n错误示范：忘了写 </strong> → 后面的所有文字都会加粗！就像忘了终止线——后面的小节也不知道新乐段从哪开始。',
+          '下面就是编辑器中的代码。注意看 `<strong>` 和 `<em>` 标签是如何包裹文字的：\n\```html\n<h1>我的音乐故事</h1>\n<p>我最喜欢的作曲家是<strong>肖邦</strong>。</p>\n<p>他的夜曲<em>优美而忧伤</em>，<br>每次听都让我感动。</p>\n\```你可以看到"肖邦"加粗了，"优美而忧伤"变成斜体了，而且中间还有一个换行。\n\n---\n\n**strong 和 b 标签的区别、em 和 i 标签的区别：**\nstrong = 重音记号 >（表示"这个音要突出"，有音乐含义）\nb 标签 = 只是视觉上加粗（没有音乐含义，就像用粗笔写谱子——看上去粗，不代表要用力弹）\nem = 揉弦/颤音（表示"这里要有表情"，有音乐含义）\ni 标签 = 只是视觉上倾斜（没有音乐含义）\n\n练扬琴你就知道：f（强音）和 >（重音）不一样。f 是整段的力度，> 是个别音的重音。strong 就像 >——标记需要突出的重要内容。\n\n错误示范：忘了写 </strong> → 后面的所有文字都会加粗！就像忘了终止线——后面的小节也不知道新乐段从哪开始。\n**strong 和 b 标签的区别、em 和 i 标签的区别：**\nstrong = 重音记号 >（表示"这个音要突出"，有音乐含义）\nb 标签 = 只是视觉上加粗（没有音乐含义，就像用粗笔写谱子——看上去粗，不代表要用力弹）\nem = 揉弦/颤音（表示"这里要有表情"，有音乐含义）\ni 标签 = 只是视觉上倾斜（没有音乐含义）\n\n练扬琴你就知道：f（强音）和 >（重音）不一样。f 是整段的力度，> 是个别音的重音。strong 就像 >——标记需要突出的重要内容。\n\n错误示范：忘了写 </strong> → 后面的所有文字都会加粗！就像忘了终止线——后面的小节也不知道新乐段从哪开始。',
       },
       {
         type: "task",
@@ -224,7 +224,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "用列表组织信息",
         content:
-          "当你想列出喜欢的作曲家、曲目或乐器时，就需要用到列表标签：\n- `<ul>` — **无序列表**（unordered list），前面是圆点\n- `<ol>` — **有序列表**（ordered list），前面是数字\n- `<li>` — **列表项**（list item），包在每个项目的外面",
+          "当你想列出喜欢的作曲家、曲目或乐器时，就需要用到列表标签。ul 是无序列表（前面是圆点，先弹哪首都行），ol 是有序列表（前面是数字，顺序不能乱），li 是列表项——每个 li 必须放在 ul 或 ol 里面，就像节目单上的每一行必须属于某张单子。\n\n具体写法：\n- `<ul>` — **无序列表**（unordered list），前面是圆点\n- `<ol>` — **有序列表**（ordered list），前面是数字\n- `<li>` — **列表项**（list item），包在每个项目的外面",
       },
       {
         type: "example",
@@ -347,7 +347,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "为什么需要语义化？",
         content:
-          '之前我们一直用 `<div>` 来分组内容。但 `<div>` 本身没有"含义"——浏览器不知道一个 `<div>` 是导航栏还是文章正文。\n语义化标签用**有名字的标签**来标记不同区域：\n- `<header>` — 页头（Logo + 导航）\n- `<nav>` — 导航菜单\n- `<main>` — 页面主要内容\n- `<section>` — 一个内容区块\n- `<article>` — 一篇独立的文章\n- `<footer>` — 页脚（版权、链接）\n就像总谱中每个声部都有明确的名字，而不是全部标"乐器1、乐器2"。',
+          '之前我们一直用 div 来分组内容。但 div 本身没有"含义"——浏览器不知道一个 div 是导航栏还是文章正文。\n\n语义化标签用有名字的标签来标记不同区域：header 是页头，nav 是导航菜单，main 是页面主体，section 是内容区块，article 是独立文章，footer 是页脚——看名字就知道它是什么。就像你的扬琴每根弦都有固定音名（C3、D3、E3），而不是全部叫"弦1、弦2"。\n\n具体写法：\n- `<header>` — 页头（Logo + 导航）\n- `<nav>` — 导航菜单\n- `<main>` — 页面主要内容\n- `<section>` — 一个内容区块\n- `<article>` — 一篇独立的文章\n- `<footer>` — 页脚（版权、链接）\n就像总谱中每个声部都有明确的名字，而不是全部标"乐器1、乐器2"。',
       },
       {
         type: "explain",
@@ -390,7 +390,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "音频标签",
         content:
-          '用 `<audio>` 标签可以在网页中嵌入音乐播放器：\n\```html\n<audio controls src="音乐文件地址">\n  你的浏览器不支持音频播放\n</audio>\n\```- `controls` — 显示播放/暂停/音量控件\n- `src` — 音频文件的地址\n- `autoplay` — 自动播放（浏览器通常会阻止）\n- `loop` — 循环播放\n标签中间的文字只在浏览器不支持时显示。',
+          'audio 标签可以在网页中嵌入音乐播放器——就像给你的网页装了一个内置扬声器，可以直接播放你录好的扬琴曲。controls 显示播放按钮（布尔属性），src 指定音频文件地址，autoplay 自动播放，loop 循环播放。\n\```html\n<audio controls src="音乐文件地址">\n  你的浏览器不支持音频播放\n</audio>\n\```- `controls` — 显示播放/暂停/音量控件\n- `src` — 音频文件的地址\n- `autoplay` — 自动播放（浏览器通常会阻止）\n- `loop` — 循环播放\n标签中间的文字只在浏览器不支持时显示。',
       },
       {
         type: "explain",
@@ -512,7 +512,7 @@ export const lessons: Lesson[] = [
         type: "example",
         title: "看例子",
         content:
-          '下面的代码创建了一张音乐偏好调查表。包含了文本输入、下拉选择和多行文本框：\n\```html\n<form>\n  <label for="name">你的名字：</label>\n  <input type="text" id="name" placeholder="请输入你的名字">\n  <label for="composer">最喜欢的作曲家：</label>\n  <select id="composer">\n    <option>请选择...</option>\n    <option>巴赫</option>\n    <option>肖邦</option>\n  </select>\n  <label for="comment">想说的话：</label>\n  <textarea id="comment" rows="3"></textarea>\n  <button type="submit">提交</button>\n</form>\n\```切换到预览区，可以和这个表单互动！\n**表单四个最容易搞混的属性**（用一张考级报名表来理解）：\n\nid — 给输入框一个唯一编号（就像老师给每道题编序号：第1题、第2题）\nfor — label 通过 for 指向某个 input 的 id，配对后点击文字就能聚焦输入框（就像"姓名："后面的填空线）\nname — 提交表单时数据标签的名称，radio 同名的互斥（就像报名表上每道题的题目——"姓名""级别""曲目"）\nvalue — 你实际填上去的答案（就像在报名表上写的"张三""中级""春到清江"）\n\n错误示范：label 的 for 和 input 的 id 写得不一样 → 点击"姓名："两个字，输入框没反应！for 和 id 必须一模一样，就像锁和钥匙必须配对。',
+          '下面的代码创建了一张音乐偏好调查表。包含了文本输入、下拉选择和多行文本框：\n\```html\n<form>\n  <label for="name">你的名字：</label>\n  <input type="text" id="name" placeholder="请输入你的名字">\n  <label for="composer">最喜欢的作曲家：</label>\n  <select id="composer">\n    <option>请选择...</option>\n    <option>巴赫</option>\n    <option>肖邦</option>\n  </select>\n  <label for="comment">想说的话：</label>\n  <textarea id="comment" rows="3"></textarea>\n  <button type="submit">提交</button>\n</form>\n\```切换到预览区，可以和这个表单互动！\n\n---\n\n**表单四个最容易搞混的属性**（用一张考级报名表来理解）：\n\nid — 给输入框一个唯一编号（就像老师给每道题编序号：第1题、第2题）\nfor — label 通过 for 指向某个 input 的 id，配对后点击文字就能聚焦输入框（就像"姓名："后面的填空线）\nname — 提交表单时数据标签的名称，radio 同名的互斥（就像报名表上每道题的题目——"姓名""级别""曲目"）\nvalue — 你实际填上去的答案（就像在报名表上写的"张三""中级""春到清江"）\n\n错误示范：label 的 for 和 input 的 id 写得不一样 → 点击"姓名："两个字，输入框没反应！for 和 id 必须一模一样，就像锁和钥匙必须配对。\n**表单四个最容易搞混的属性**（用一张考级报名表来理解）：\n\nid — 给输入框一个唯一编号（就像老师给每道题编序号：第1题、第2题）\nfor — label 通过 for 指向某个 input 的 id，配对后点击文字就能聚焦输入框（就像"姓名："后面的填空线）\nname — 提交表单时数据标签的名称，radio 同名的互斥（就像报名表上每道题的题目——"姓名""级别""曲目"）\nvalue — 你实际填上去的答案（就像在报名表上写的"张三""中级""春到清江"）\n\n错误示范：label 的 for 和 input 的 id 写得不一样 → 点击"姓名："两个字，输入框没反应！for 和 id 必须一模一样，就像锁和钥匙必须配对。',
       },
       {
         type: "task",
@@ -543,7 +543,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "radio — 单选按钮",
         content:
-          '当用户只能**选一个**时用 radio。同一组 radio 的 `name` 属性必须相同：\n\```html\n<fieldset>\n  <legend>你最喜欢的时期：</legend>\n  <input type="radio" id="baroque" name="period" value="baroque">\n  <label for="baroque">巴洛克时期</label>\n  <input type="radio" id="classical" name="period" value="classical">\n  <label for="classical">古典主义时期</label>\n  <input type="radio" id="romantic" name="period" value="romantic">\n  <label for="romantic">浪漫主义时期</label>\n</fieldset>\n\````name` 相同的 radio 互斥——就像单选题，只能圈一个答案。',
+          'input 标签通过 type 属性可以变成单选按钮（radio）、多选按钮（checkbox）、滑块（range）、数字输入（number）、颜色选择器（color）等不同类型。fieldset 和 legend 用来给表单控件分组——就像报名表上"个人信息"外面画的那个框和标题。\n\n当用户只能**选一个**时用 radio。同一组 radio 的 name 属性必须相同：\n\```html\n<fieldset>\n  <legend>你最喜欢的时期：</legend>\n  <input type="radio" id="baroque" name="period" value="baroque">\n  <label for="baroque">巴洛克时期</label>\n  <input type="radio" id="classical" name="period" value="classical">\n  <label for="classical">古典主义时期</label>\n  <input type="radio" id="romantic" name="period" value="romantic">\n  <label for="romantic">浪漫主义时期</label>\n</fieldset>\n\````name` 相同的 radio 互斥——就像单选题，只能圈一个答案。',
       },
       {
         type: "explain",
@@ -682,7 +682,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "背景颜色",
         content:
-          "用 `background-color` 属性可以给元素添加背景色：\n\```css\ndiv {\n  background-color: #FFFAF2;\n}\n\```就像给乐谱选一张暖色调的纸，背景色能改变整个页面的氛围。",
+          "background-color 属性设置元素的背景色，border 设置边框，border-radius 设置圆角，box-shadow 设置阴影。就像给扬琴谱选暖色纸、加装饰边框——让页面更有层次感。\n\```css\ndiv {\n  background-color: #FFFAF2;\n}\n\```",
       },
       {
         type: "explain",
@@ -725,7 +725,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "字体系列",
         content:
-          '`font-family` 决定文字使用什么字体：\n\```css\nh1 {\n  font-family: "Noto Serif SC", serif;\n}\np {\n  font-family: "Noto Sans SC", sans-serif;\n}\n\```两种主要的字体类型：\n- **衬线体（serif）**：笔划末端有装饰，典雅庄重，适合标题\n- **无衬线体（sans-serif）**：笔划均匀，简洁现代，适合正文\n像选乐器一样——你不会用小提琴的音色去吹进行曲。',
+          'font-family 属性设置字体，font-size 设置字号，font-weight 设置粗细，line-height 设置行高，text-align 设置对齐方式。就像扬琴演奏中不同竹法带来不同音色——字体选择决定了文字的「气质」。\n\```css\nh1 {\n  font-family: "Noto Serif SC", serif;\n}\np {\n  font-family: "Noto Sans SC", sans-serif;\n}\n\```两种主要的字体类型：\n- **衬线体（serif）**：笔划末端有装饰，典雅庄重，适合标题\n- **无衬线体（sans-serif）**：笔划均匀，简洁现代，适合正文\n像选乐器一样——你不会用小提琴的音色去吹进行曲。',
       },
       {
         type: "explain",
@@ -921,7 +921,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "transition — 平滑过渡",
         content:
-          "`transition` 让属性变化变得平滑，而不是瞬间跳变：\n\```css\n.card {\n  background: #FFFAF2;\n  transition: all 0.3s ease;\n}\n.card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n\```- `all` — 所有属性都过渡\n- `0.3s` — 过渡耗时 0.3 秒\n- `ease` — 缓动函数（开始快，结束慢）\n就像渐强记号把音量从一个等级平滑带到另一个等级。",
+          "transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。ease 是默认的时间曲线（慢→快→慢），linear 是匀速。就像扬琴曲的渐快或渐慢——不是突然切换速度，而是平滑过渡。\n\```css\n.card {\n  background: #FFFAF2;\n  transition: all 0.3s ease;\n}\n.card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n\```- `all` — 所有属性都过渡\n- `0.3s` — 过渡耗时 0.3 秒\n- `ease` — 缓动函数（开始快，结束慢）\n就像渐强记号把音量从一个等级平滑带到另一个等级。",
       },
       {
         type: "explain",
@@ -1200,7 +1200,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "创建网格",
         content:
-          '用 `display: grid` 创建网格容器，`grid-template-columns` 定义列：\n\```css\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 16px;\n}\n\```- `1fr` — "一份"（fraction），自动分配剩余空间\n- `1fr 1fr 1fr` — 三等分（三列宽度相等）\n- `repeat(3, 1fr)` — 等价写法\n- `gap` — 格子之间的间距\n三列等宽就像三行声部并行推进——每个格子就是一个小节！',
+          'Grid（网格布局）同时控制行和列——display:grid 启用网格，grid-template-columns 定义列宽，gap 设置间距。fr 是 fraction（份数）的缩写，1fr 1fr 1fr 表示三等分。就像交响乐团在舞台上的座次表——有行有列，每个位置都有明确安排。\n\```css\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 16px;\n}\n\```- `1fr` — "一份"（fraction），自动分配剩余空间\n- `1fr 1fr 1fr` — 三等分（三列宽度相等）\n- `repeat(3, 1fr)` — 等价写法\n- `gap` — 格子之间的间距\n三列等宽就像三行声部并行推进——每个格子就是一个小节！',
       },
       {
         type: "explain",
@@ -1572,7 +1572,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "不只是 click — 认识更多事件类型",
         content:
-          '`addEventListener` 的第一个参数是事件**类型**，除了 `"click"`，还有很多常用事件：\n- `"input"` — 输入框内容**每次变化**都触发\n- `"change"` — 输入框内容改变且**失去焦点**时触发\n- `"keydown"` — 键盘**按下**任意键\n- `"mouseenter"` — 鼠标**进入**元素\n- `"mouseleave"` — 鼠标**离开**元素\n- `"submit"` — 表单**提交**时触发\n\```js\ninputEl.addEventListener("input", function() {\n  // 用户每输入一个字就执行\n});\n\```',
+          '除了 click 点击事件外，还有很多常用事件类型：input（输入框内容变化）、keydown（键盘按下）、mouseenter（鼠标移入）、mouseleave（鼠标移出）、submit（表单提交）。addEventListener 的第一个参数是事件类型，除了 `"click"`，还有很多常用事件：\n- `"input"` — 输入框内容**每次变化**都触发\n- `"change"` — 输入框内容改变且**失去焦点**时触发\n- `"keydown"` — 键盘**按下**任意键\n- `"mouseenter"` — 鼠标**进入**元素\n- `"mouseleave"` — 鼠标**离开**元素\n- `"submit"` — 表单**提交**时触发\n\```js\ninputEl.addEventListener("input", function() {\n  // 用户每输入一个字就执行\n});\n\```',
       },
       {
         type: "explain",
@@ -1621,7 +1621,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: 'if 语句 — 代码的"如果"',
         content:
-          '`if` 后面跟一个**条件**（真或假），条件为真时执行花括号里的代码：\n\```js\nlet score = 85;\nif (score >= 80) {\n  console.log("优秀！");\n}\n\```比较运算符：\n- `===` — 等于（推荐）\n- `!==` — 不等于\n- `>` / `<` — 大于/小于\n- `>=` / `<=` — 大于等于/小于等于\n就像评委打分：分数 ≥ 80 才算优秀。',
+          'if/else 条件判断让代码在不同情况下执行不同操作——就像练琴时"如果音准不对就停下来调整，否则继续往下弹"。比较运算符：=== 等于、!== 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于。\n\```js\nlet score = 85;\nif (score >= 80) {\n  console.log("优秀！");\n}\n\```就像评委打分：分数 ≥ 80 才算优秀。',
       },
       {
         type: "explain",
@@ -1707,7 +1707,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "for 循环",
         content:
-          "`for` 循环由三部分组成：初始化、条件、步进：\n\```js\nfor (let i = 0; i < composers.length; i++) {\n  console.log(composers[i]);\n}\n\```- `let i = 0` — 从 0 开始\n- `i < composers.length` — 只要 i 小于数组长度就继续\n- `i++` — 每轮 i 加 1\n`i` 是计数器，第一轮是 0，第二轮是 1... 依次取遍数组中的每一项，就像**节拍器从第 1 拍数到最后 1 拍**。",
+          "for 循环让代码重复执行指定次数——就像节拍器从第 1 拍数到最后 1 拍。循环由三部分组成：let i = 0（从哪里开始）、i < 数组.length（什么时候停）、i++（每轮 i 加 1）。\n\```js\nfor (let i = 0; i < composers.length; i++) {\n  console.log(composers[i]);\n}\n\```",
       },
       {
         type: "explain",
@@ -1750,7 +1750,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: '.map() — 把每个元素"转换"成新值',
         content:
-          '`.map()` 遍历数组中的每一项，执行一个函数，**返回一个新数组**：\n\```js\nlet names = ["bach", "mozart", "beethoven"];\nlet upper = names.map(function(name) {\n  return name.toUpperCase();\n});\n// upper 是 ["BACH", "MOZART", "BEETHOVEN"]\n// names 没变！\n\```就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。',
+          '数组方法让你像整理乐谱一样操作数据——map 对每项做同样处理返回新数组，filter 筛选符合条件的项，reduce 将所有项累积为一个值。.map() 遍历数组中的每一项执行函数后**返回新数组**，原数组不变：\n\```js\nlet names = ["bach", "mozart", "beethoven"];\nlet upper = names.map(function(name) {\n  return name.toUpperCase();\n});\n// upper 是 ["BACH", "MOZART", "BEETHOVEN"]\n// names 没变！\n\```就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。',
       },
       {
         type: "explain",
@@ -1799,7 +1799,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "选中一组元素",
         content:
-          '`querySelectorAll` 返回所有匹配的元素列表（NodeList）：\n\```js\nlet cards = document.querySelectorAll(".card");\n\```NodeList 可以和数组一样用 `forEach` 遍历：\n\```js\ncards.forEach(function(card) {\n  card.style.border = "2px solid gold";\n});\n\```也支持索引：\n\```js\ncards[0].style.background = "#FFFAF2";  // 第一张\ncards[1].style.background = "#F0F8FF";  // 第二张\n\```',
+          'querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像指挥同时命令整个弦乐声部做同一个动作。\n\```js\nlet cards = document.querySelectorAll(".card");\n\```NodeList 可以和数组一样用 `forEach` 遍历：\n\```js\ncards.forEach(function(card) {\n  card.style.border = "2px solid gold";\n});\n\```也支持索引：\n\```js\ncards[0].style.background = "#FFFAF2";  // 第一张\ncards[1].style.background = "#F0F8FF";  // 第二张\n\```',
       },
       {
         type: "explain",
@@ -1885,7 +1885,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "动态创建元素",
         content:
-          '`document.createElement()` 可以凭空创建一个新元素：\n\```js\n// 创建元素\nlet card = document.createElement("div");\ncard.className = "card";         // 设类名\ncard.innerHTML = "<h2>新卡片</h2>";  // 设内容\n// 追加到页面\ndocument.querySelector("#list").appendChild(card);\n\```就像在曲谱的空白处临时加了一行乐句——全新的元素出现在页面上。',
+          'createElement 动态创建 HTML 元素，appendChild 把它添加进页面，remove 移除元素。就像在演奏中临时增加一件乐器——全新的元素出现在页面上。\n\```js\n// 创建元素\nlet card = document.createElement("div");\ncard.className = "card";         // 设类名\ncard.innerHTML = "<h2>新卡片</h2>";  // 设内容\n// 追加到页面\ndocument.querySelector("#list").appendChild(card);\n\```',
       },
       {
         type: "explain",
@@ -1928,7 +1928,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "setInterval — 定时重复",
         content:
-          '`setInterval` 每隔指定毫秒执行一次回调函数：\n\```js\n// 每 1000 毫秒（1 秒）执行一次\nlet timer = setInterval(function() {\n  count++;\n  display.textContent = count;\n  console.log("一秒过去了");\n}, 1000);\n// 停止\nclearInterval(timer);\n\```1000 毫秒 = 1 秒。就像节拍器打在每分钟 60 拍（每拍 1000ms）。',
+          'setInterval 每隔指定时间重复执行（像节拍器持续打拍子），setTimeout 只执行一次（像指挥给出延后进入的提示）。时间单位是毫秒，1000 毫秒 = 1 秒。clearInterval 用来停止定时器。\n\```js\n// 每 1000 毫秒（1 秒）执行一次\nlet timer = setInterval(function() {\n  count++;\n  display.textContent = count;\n  console.log("一秒过去了");\n}, 1000);\n// 停止\nclearInterval(timer);\n\```',
       },
       {
         type: "explain",
@@ -2139,7 +2139,7 @@ export const lessons: Lesson[] = [
         type: "explain",
         title: "console.log 是什么？",
         content:
-          '`console.log()` 是 JavaScript 中最常用的调试工具。它能在控制台中打印出任何你想看的值：\n\```js\nlet composer = "肖邦";\nconsole.log(composer);  // 控制台输出：肖邦\nlet count = 5;\nconsole.log("当前数量：", count);  // 可以同时打印文字和变量\nlet list = ["巴赫", "莫扎特", "贝多芬"];\nconsole.log("列表内容：", list);  // 数组也可以打印\n\```**用法：** 在你怀疑有问题的地方，插入 `console.log(变量名)`，然后打开控制台（F12）查看输出。',
+          'console.log() 是 JavaScript 最常用的调试工具——在控制台中打印出你想检查的值。就像练琴时录下来回听，看哪个音不对。在你怀疑有问题的地方插入 console.log(变量名)，打开控制台（F12）查看输出。\n\```js\nlet composer = "肖邦";\nconsole.log(composer);  // 控制台输出：肖邦\nlet count = 5;\nconsole.log("当前数量：", count);  // 可以同时打印文字和变量\nlet list = ["巴赫", "莫扎特", "贝多芬"];\nconsole.log("列表内容：", list);  // 数组也可以打印\n\```',
       },
       {
         type: "explain",
@@ -2736,7 +2736,7 @@ function searchMusic(keyword) {
         type: "explain",
         title: "async/await 是什么？",
         content:
-          "`async/await` 是 Promise 的\"语法糖\"——底层还是 Promise，但写起来像同步代码。\n\```js\n// Promise 写法\nfunction getMusicInfo() {\n  return fetchUser('小明')\n    .then(user => fetchFavorites(user.id))\n    .then(favs => console.log(favs))\n}\n// async/await 写法\nasync function getMusicInfo() {\n  const user = await fetchUser('小明')\n  const favs = await fetchFavorites(user.id)\n  console.log(favs)\n}\n\````async` 标记函数是异步的，`await` 等待 Promise 的结果。代码从上到下读，逻辑清晰。",
+          "async/await 让异步代码看起来像同步代码——async 声明异步函数，await 等待 Promise 完成再继续。就像指挥等待独奏家完成华彩乐段再继续指挥——表面是同步的等待，实际是异步的完成。\n\```js\n// Promise 写法\nfunction getMusicInfo() {\n  return fetchUser('小明')\n    .then(user => fetchFavorites(user.id))\n    .then(favs => console.log(favs))\n}\n// async/await 写法\nasync function getMusicInfo() {\n  const user = await fetchUser('小明')\n  const favs = await fetchFavorites(user.id)\n  console.log(favs)\n}\n\```",
       },
       {
         type: "example",
@@ -3568,7 +3568,7 @@ debouncedSearch('贝多芬')
       {
         type: 'explain',
         title: 'v-bind — 动态绑定属性',
-        content: '`v-bind` 把 JS 表达式的值绑定到 HTML 属性上。简写是 `:`：\n\```html\n<!-- 完整写法 -->\n<img v-bind:src="imageUrl">\n<a v-bind:href="\'/user/\' + userId">用户</a>\n<div v-bind:class="{ active: isActive }">...</div>\n<!-- 简写（最常用） -->\n<img :src="imageUrl">\n<a :href="\'/user/\' + userId">用户</a>\n<div :class="{ active: isActive }">...</div>\n<div :style="{ color: textColor, fontSize: size + \'px\' }">...</div>\n\```**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上\n\```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src="imageUrl" :alt="imageDesc">\n<button :disabled="isLoading">提交</button>\n\```就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。',
+        content: 'Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑定到属性，v-if/v-show 控制显示隐藏，v-for 循环渲染列表，v-on（简写 @）监听事件，v-model 双向绑定表单。就像扬琴谱上的各种演奏记号，每个指令控制一种行为。v-bind 把 JS 表达式的值绑定到 HTML 属性上，简写是 :：\n\```html\n<!-- 完整写法 -->\n<img v-bind:src="imageUrl">\n<a v-bind:href="\'/user/\' + userId">用户</a>\n<div v-bind:class="{ active: isActive }">...</div>\n<!-- 简写（最常用） -->\n<img :src="imageUrl">\n<a :href="\'/user/\' + userId">用户</a>\n<div :class="{ active: isActive }">...</div>\n<div :style="{ color: textColor, fontSize: size + \'px\' }">...</div>\n\```**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上\n\```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src="imageUrl" :alt="imageDesc">\n<button :disabled="isLoading">提交</button>\n\```就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。',
       },
       {
         type: 'explain',
@@ -3831,7 +3831,7 @@ debouncedSearch('贝多芬')
         type: "explain",
         title: "v-model 的本质",
         content:
-          '`v-model` 是 Vue 中最常用的指令之一。它实际是 `v-bind:value` + `v-on:input` 的语法糖：\n\```vue\n<!-- 这两行等价 -->\n<input v-model="name">\n<input :value="name" @input="name = $event.target.value">\n\```它做了什么？\n1. 把 `name` 的值绑定到 input 的 value（数据 → 视图）\n2. 当用户输入时，自动更新 `name`（视图 → 数据）\n这就是**双向绑定**——数据和视图始终保持同步。',
+          'v-model 是 Vue 最常用的双向绑定指令——它同时做了两件事：把数据绑定到表单元素（v-bind:value），并在用户输入时更新数据（v-on:input）。这就是双向绑定——数据和视图始终保持同步，就像四手联弹时两个演奏者实时呼应。\n\```vue\n<!-- 这两行等价 -->\n<input v-model="name">\n<input :value="name" @input="name = $event.target.value">\n\```',
       },
       {
         type: "example",

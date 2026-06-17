@@ -70,10 +70,15 @@ button:active:not(:disabled) {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: none;
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 0 0 rgba(139, 46, 46, 0.4);
-  animation: pulse-glow 0.6s var(--ease-out) both;
+}
+
+button:disabled,
+[disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
 }
 
 /* ===== 共享 Keyframes ===== */

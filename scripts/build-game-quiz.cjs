@@ -1,0 +1,152 @@
+const fs = require('fs');
+
+let id = 1;
+function q(gem, level, type, diff, question, options, answer, explanation, lessonId) {
+  const l = lessonId ? `, lessonId: '${lessonId}'` : '';
+  return `  { id: ${id++}, gem: '${gem}', level: ${level}, type: '${type}', difficulty: ${diff}${l}, question: '${question.replace(/'/g,"\\'")}', options: ['${options[0].replace(/'/g,"\\'")}','${options[1].replace(/'/g,"\\'")}','${options[2].replace(/'/g,"\\'")}','${options[3].replace(/'/g,"\\'")}'], answer: ${answer}, explanation: '${explanation.replace(/'/g,"\\'")}' }`;
+}
+const Q = [];
+
+// ============ 类型定义区域 ============
+const header = `// 测验题库 — 游戏化关卡 · 18 宝石 · 54 关 · 360 题
+
+export type LevelType = 'normal' | 'elite' | 'boss' | 'achievement-boss'
+export type GemId = 'html-tags' | 'html-ability' | 'css-style' | 'css-layout' | 'js-syntax' | 'js-practice' | 'web-foundation' | 'js-async' | 'engineering' | 'vue-basic' | 'vue-advanced' | 'ai-collab' | 'principles' | 'performance' | 'security' | 'testing' | 'architecture' | 'a11y'
+
+export interface QuizQuestion {
+  id: number
+  gem: GemId
+  level: number        // 1/2/3 within gem
+  type: LevelType
+  difficulty: 1|2|3
+  lessonId?: string
+  question: string
+  options: [string,string,string,string]
+  answer: 0|1|2|3
+  explanation: string
+}
+
+export interface GemDef {
+  id: GemId
+  name: string
+  icon: string
+  achievement: 'junior'|'mid'|'senior'
+  order: number
+  levels: { level: number; type: LevelType; count: number; threshold: number; name: string }[]
+}
+
+export const gems: GemDef[] = [
+  { id:'html-tags', name:'HTML 标签宝石', icon:'🔴', achievement:'junior', order:1, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'认识标签'},
+    {level:2,type:'elite',count:8,threshold:70,name:'场景选择'},
+    {level:3,type:'boss',count:12,threshold:65,name:'结构纠错'}]},
+  { id:'html-ability', name:'HTML 能力宝石', icon:'🟠', achievement:'junior', order:2, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'属性识别'},
+    {level:2,type:'elite',count:7,threshold:70,name:'属性应用'},
+    {level:3,type:'boss',count:8,threshold:65,name:'表单实战'}]},
+  { id:'css-style', name:'CSS 样式宝石', icon:'🟡', achievement:'junior', order:3, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'选择器基础'},
+    {level:2,type:'elite',count:10,threshold:70,name:'盒模型计算'},
+    {level:3,type:'boss',count:15,threshold:60,name:'样式排错'}]},
+  { id:'css-layout', name:'CSS 布局宝石', icon:'🟢', achievement:'junior', order:4, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'布局概念'},
+    {level:2,type:'elite',count:8,threshold:70,name:'Flex/Grid'},
+    {level:3,type:'boss',count:12,threshold:60,name:'响应式实战'}]},
+  { id:'js-syntax', name:'JS 语法宝石', icon:'🔵', achievement:'junior', order:5, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'变量与类型'},
+    {level:2,type:'elite',count:10,threshold:70,name:'条件与循环'},
+    {level:3,type:'boss',count:15,threshold:60,name:'函数与调试'}]},
+  { id:'js-practice', name:'JS 实战宝石', icon:'🟣', achievement:'junior', order:6, levels:[
+    {level:1,type:'normal',count:5,threshold:80,name:'DOM 选择器'},
+    {level:2,type:'elite',count:8,threshold:70,name:'事件与操作'},
+    {level:3,type:'boss',count:12,threshold:60,name:'综合应用'}]},
+  { id:'web-foundation', name:'Web 基石宝石', icon:'⚪', achievement:'junior', order:7, levels:[
+    {level:1,type:'achievement-boss',count:15,threshold:60,name:'初级大决战'}]},
+  { id:'js-async', name:'JS 异步宝石', icon:'🟤', achievement:'mid', order:8, levels:[
+    {level:1,type:'normal',count:5,threshold:70,name:'定时器'},
+    {level:2,type:'elite',count:8,threshold:70,name:'Promise'},
+    {level:3,type:'boss',count:12,threshold:60,name:'async/await 实战'}]},
+  { id:'engineering', name:'工程化宝石', icon:'⚫', achievement:'mid', order:9, levels:[
+    {level:1,type:'normal',count:5,threshold:70,name:'工具认知'},
+    {level:2,type:'elite',count:7,threshold:70,name:'模块与包'},
+    {level:3,type:'boss',count:8,threshold:60,name:'工作流实战'}]},
+  { id:'vue-basic', name:'Vue 基础宝石', icon:'💚', achievement:'mid', order:10, levels:[
+    {level:1,type:'normal',count:5,threshold:70,name:'SFC 与模板'},
+    {level:2,type:'elite',count:8,threshold:70,name:'指令'},
+    {level:3,type:'boss',count:12,threshold:60,name:'响应式实战'}]},
+  { id:'vue-advanced', name:'Vue 进阶宝石', icon:'💙', achievement:'mid', order:11, levels:[
+    {level:1,type:'normal',count:4,threshold:70,name:'路由基础'},
+    {level:2,type:'elite',count:7,threshold:70,name:'状态管理'},
+    {level:3,type:'boss',count:9,threshold:60,name:'组合式实战'}]},
+  { id:'ai-collab', name:'AI 协作宝石', icon:'🤖', achievement:'mid', order:12, levels:[
+    {level:1,type:'normal',count:5,threshold:70,name:'AI 认知'},
+    {level:2,type:'elite',count:7,threshold:70,name:'Prompt 工程'},
+    {level:3,type:'boss',count:8,threshold:60,name:'全流程协作'}]},
+  { id:'principles', name:'原理宝石', icon:'🧠', achievement:'senior', order:13, levels:[
+    {level:1,type:'normal',count:4,threshold:60,name:'浏览器原理'},
+    {level:2,type:'elite',count:7,threshold:60,name:'渲染与重排'},
+    {level:3,type:'boss',count:9,threshold:60,name:'事件循环深入'}]},
+  { id:'performance', name:'性能宝石', icon:'⚡', achievement:'senior', order:14, levels:[
+    {level:1,type:'normal',count:4,threshold:60,name:'性能概念'},
+    {level:2,type:'elite',count:7,threshold:60,name:'加载优化'},
+    {level:3,type:'boss',count:9,threshold:60,name:'运行时优化'}]},
+  { id:'security', name:'安全宝石', icon:'🔒', achievement:'senior', order:15, levels:[
+    {level:1,type:'normal',count:3,threshold:60,name:'安全概念'},
+    {level:2,type:'elite',count:5,threshold:60,name:'常见攻击'},
+    {level:3,type:'boss',count:7,threshold:60,name:'防御实战'}]},
+  { id:'testing', name:'测试宝石', icon:'🧪', achievement:'senior', order:16, levels:[
+    {level:1,type:'normal',count:3,threshold:60,name:'测试概念'},
+    {level:2,type:'elite',count:5,threshold:60,name:'测试类型'},
+    {level:3,type:'boss',count:7,threshold:60,name:'测试策略'}]},
+  { id:'architecture', name:'架构宝石', icon:'🏛️', achievement:'senior', order:17, levels:[
+    {level:1,type:'normal',count:4,threshold:60,name:'设计原则'},
+    {level:2,type:'elite',count:7,threshold:60,name:'设计模式'},
+    {level:3,type:'boss',count:9,threshold:60,name:'架构决策'}]},
+  { id:'a11y', name:'无障碍宝石', icon:'♿', achievement:'senior', order:18, levels:[
+    {level:1,type:'normal',count:3,threshold:60,name:'WCAG 概念'},
+    {level:2,type:'elite',count:5,threshold:60,name:'ARIA 与语义'},
+    {level:3,type:'boss',count:7,threshold:60,name:'实践检测'}]},
+]
+
+export const quizQuestions: QuizQuestion[] = [
+`;
+
+// ============ 🔴 HTML 标签宝石 ============
+const G='html-tags';
+// L1: normal 5题 80%
+Q.push(q(G,1,'normal',1,'下面哪个是单标签，不需要写结束标签？',['<p>','<img>','<div>','<h1>'],1,'<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。'));
+Q.push(q(G,1,'normal',1,'h1~h6 数字越大代表什么？',['字越大','字越小','颜色越深','越重要'],1,'h1 最大（一级标题），h6 最小。数字越大，字号越小。'));
+Q.push(q(G,1,'normal',1,'无序列表用哪个标签？',['<ol>','<list>','<ul>','<dl>'],2,'ul=unordered list，前面是圆点。ol=ordered list，前面是数字。'));
+Q.push(q(G,1,'normal',1,'表格中 <tr> 代表什么？',['表格','表头','一行','一个格子'],2,'tr=table row（表格行）。一个 tr 是一行，里面放 td 或 th。'));
+Q.push(q(G,1,'normal',1,'下面哪个是合法的 HTML 注释？',['// 注释','/* 注释 */','<!-- 注释 -->','# 注释'],2,'HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。'));
+
+// L2: elite 8题 70%
+Q.push(q(G,2,'elite',2,'strong 和 b 都加粗，语义区别？',['完全相同','strong 表示重要内容有语义，b 只是视觉加粗','b 有语义','strong 已废弃'],1,'strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。'));
+Q.push(q(G,2,'elite',2,'article 和 section 什么时候用 article？',['都一样','内容可独立分发复用时用 article','article 更大','section 已废弃'],1,'article 是可独立分发的内容块（如博客文章）。section 是页面内的主题区块。'));
+Q.push(q(G,2,'elite',2,'main 标签一个页面应出现几次？',['任意次数','只应一次','至少两次','只在首页'],1,'main 代表页面主要内容，每个页面只应有一个 main。'));
+Q.push(q(G,2,'elite',2,'thead 和 tbody 分开写的好处？',['没有实际作用','方便分别设置样式，浏览器可逐步渲染','为了 SEO','必须分开'],1,'方便分别设置样式（如表头粘性），浏览器渲染大表格可逐步显示 tbody。'));
+Q.push(q(G,2,'elite',2,'audio 不写 controls 会怎样？',['无法播放','能播放但没有播放/暂停按钮','自动播放','报错'],1,'controls 是布尔属性——写了就有控件，不写就没有。用户无法操作播放。'));
+Q.push(q(G,2,'elite',2,'下面哪个是正确的 ul 嵌套？',['<ul><li>项目</li></ul>','<ul><div>项目</div></ul>','<li><ul>项目</ul></li>','<ol><li>项目</ol></li>'],0,'ul 的直接子元素必须是 li。div 不能直接放在 ul 中。'));
+Q.push(q(G,2,'elite',2,'<p>Hello<br>World</p> 渲染几行？',['1行','2行','3行','报错'],1,'br 在文字中插入换行。Hello 和 World 分两行显示，但在同一个 p 段落内。'));
+Q.push(q(G,2,'elite',2,'<div class="a b c"> 有几个 class？',['1个，名字是"a b c"','3个：a、b、c','语法错误','只有第一个生效'],1,'class 用空格分隔多个类名。"a b c" 是三个独立的类。'));
+
+// L3: boss 12题 65%
+Q.push(q(G,3,'boss',3,'一段纯 div 导航页如何改写为语义化？',['把 class 名改成语义化即可','<div class="header">→<header> 等，换标签','全部换成 section','不需要改'],1,'把 div 换为对应的语义化标签 header/nav/main/footer。语义化让机器（搜索引擎、屏幕阅读器）理解页面结构。'));
+Q.push(q(G,3,'boss',3,'<ul><p>列表项</p></ul> 有什么问题？',['完全没问题','ul 的直接子元素只能是 li 不能是 p','应该用 ol','p 不能放在任何列表里'],1,'ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。'));
+Q.push(q(G,3,'boss',2,'<img src="x.jpg"> 和 <img src="x.jpg" alt=""> 区别？',['完全一样','前者不写 alt 阅读器可能读文件名，后者表示纯装饰阅读器跳过','前者报错','alt 可以不写'],1,'不写 alt 屏幕阅读器可能读文件名。alt="" 表示纯装饰，让阅读器跳过。alt="描述" 提供有意义的替代信息。'));
+Q.push(q(G,3,'boss',3,'<td colspan="2"> 和 rowspan="2" 各做什么？',['colspan 跨行 rowspan 跨列','colspan 水平跨列 rowspan 垂直跨行','两者功能相同','已废弃'],1,'colspan 横向跨越多列，rowspan 纵向跨越多行。值表示跨几个单元格。'));
+Q.push(q(G,3,'boss',2,'如何在一个 audio 中提供 MP3 和 OGG 两种格式？',['写两个 audio','内部用多个 <source> 标签','逗号分隔路径','不支持多格式'],1,'用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。'));
+Q.push(q(G,3,'boss',2,'<br> 和 <p> 都能换行，核心区别？',['br 是段落 p 是换行','br 行内换行无间距，p 段落分隔有间距','完全相同','br 只能在 p 内'],1,'br 在文字内强制换行无段落间距。p 标记完整段落自动在段落间加间距。br 是单标签。'));
+Q.push(q(G,3,'boss',3,'<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？',['嵌套的两个 p','两个并列的 p（p 不能嵌套）','报错','只显示第一段'],1,'p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。'));
+Q.push(q(G,3,'boss',2,'<button disabled> 和普通按钮区别？',['前者灰色不可点击','前者隐藏','没有区别','前者是旧写法'],0,'disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于"条件不满足暂时不能点"。'));
+Q.push(q(G,3,'boss',2,'<input readonly> 和 disabled 区别？',['完全一样','readonly 可选中复制可提交值，disabled 完全不可交互不提交','readonly 更强','disabled 可提交'],1,'readonly 可选中复制，表单提交发送值。disabled 灰色不可交互提交时不发送。'));
+Q.push(q(G,3,'boss',1,'&lt; 在 HTML 中显示为什么？',['<','>','&','报错'],0,'&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。'));
+Q.push(q(G,3,'boss',2,'链接新标签页打开 target 写什么？',['target="new"','target="_blank"','target="blank"','open="new"'],1,'target="_blank" 在新标签页打开。_blank 是标准保留值。'));
+Q.push(q(G,3,'boss',2,'<meta charset="UTF-8"> 不写会怎样？',['页面无法显示','中文可能乱码','无影响','图片加载失败'],1,'charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标"五线谱"还是"简谱"。'));
+
+console.log('Generated', id-1, 'questions so far');
+const footer = '\n]';
+
+// Write
+fs.writeFileSync('src/configs/quiz-questions.ts', header + Q.join(',\n') + footer, 'utf-8');
+console.log('Written quiz-questions.ts with', id-1, 'questions');
