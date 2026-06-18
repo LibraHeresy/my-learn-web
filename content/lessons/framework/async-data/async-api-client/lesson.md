@@ -54,7 +54,8 @@ if (!res.ok) throw new Error('请求失败')
 const data = await res.json()
 // ✅ 封装后：一行搞定
 const data = await api.get('/pieces')
-```封装的好处：
+```
+封装的好处：
 - 代码量减少 80%
 - 修改 BASE_URL 只改一处
 - 错误处理统一，不会遗漏

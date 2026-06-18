@@ -16,7 +16,8 @@ Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑�
 <a :href="'/user/' + userId">用户</a>
 <div :class="{ active: isActive }">...</div>
 <div :style="{ color: textColor, fontSize: size + 'px' }">...</div>
-```**和 {{ }} 文本插值的区别：**
+```
+**和 {{ }} 文本插值的区别：**
 - `{{ expression }}` — 把值插入到**文本内容**中
 - `v-bind:attr="expression"` — 把值绑定到**HTML 属性**上
 ```html
@@ -25,7 +26,8 @@ Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑�
 <!-- 属性绑定：绑定到 HTML 属性 -->
 <img :src="imageUrl" :alt="imageDesc">
 <button :disabled="isLoading">提交</button>
-```就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。
+```
+就像连音线把两个音符连起来——v-bind 把 JS 数据和 DOM 属性连起来。
 ::
 
 ::explain{title="v-if / v-show — 条件渲染"}
@@ -37,10 +39,12 @@ Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑�
 <div v-else>
   <p>{{ result }}</p>
 </div>
-```**v-show：** 根据条件决定是否**显示**元素（元素始终存在，只是切换 display:none）
+```
+**v-show：** 根据条件决定是否**显示**元素（元素始终存在，只是切换 display:none）
 ```html
 <div v-show="isVisible">这段文字可以快速切换显示/隐藏</div>
-```**v-if vs v-show 的选择：**
+```
+**v-if vs v-show 的选择：**
 | | v-if | v-show |
 |------|------|--------|
 | 机制 | 移除/创建 DOM | display: none 切换 |
@@ -69,7 +73,8 @@ Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑�
 </li>
 <!-- 遍历数字范围 -->
 <span v-for="n in 5" :key="n">{{ n }}</span>
-```**`:key` 为什么重要：**
+```
+**`:key` 为什么重要：**
 key 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会导致：
 - 列表更新时出现错误的 DOM 复用
 - 组件状态错乱
@@ -82,14 +87,17 @@ key 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会�
 ```html
 <div v-html="rawHtml"></div>
 <!-- 仅在信任内容来源时使用！用户输入绝不能直接用 v-html -->
-```**v-text：** 等价于 {{ }}，设置元素的文本内容
+```
+**v-text：** 等价于 {{ }}，设置元素的文本内容
 ```html
 <span v-text="message"></span>
 <!-- 等价于 <span>{{ message }}</span> -->
-```**v-once：** 只渲染一次，后续不再响应数据变化（静态内容优化）
+```
+**v-once：** 只渲染一次，后续不再响应数据变化（静态内容优化）
 ```html
 <div v-once>这个标题永远不会变：{{ title }}</div>
-```**v-pre：** 跳过这个元素及其子元素的编译（显示原始 Mustache 语法）
+```
+**v-pre：** 跳过这个元素及其子元素的编译（显示原始 Mustache 语法）
 ```html
 <pre v-pre>{{ 这里不会编译，直接显示 {{ message }} 原文 }}</pre>
 ```
@@ -109,7 +117,8 @@ key 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会�
 </div>
 <!-- v-show 切换 -->
 <div v-show="showPlayer" class="player">播放器控件</div>
-```注意：:class 可以接收对象（{ active: isActive }）或数组（['base', dynamicClass]）。:style 同样支持对象语法。
+```
+注意：:class 可以接收对象（{ active: isActive }）或数组（['base', dynamicClass]）。:style 同样支持对象语法。
 ::
 
 ::task{title="动手试试 ✨"}

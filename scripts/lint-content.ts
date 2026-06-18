@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir, stat, writeFile } from 'node:fs/promises'
 
 type CompiledLesson = {
   contentSchemaVersion: 1
@@ -43,9 +43,162 @@ const projectRoot = path.resolve(__dirname, '..')
 
 const lessonsFile = path.join(projectRoot, 'src', 'generated', 'lessons-index.json')
 const projectsFile = path.join(projectRoot, 'src', 'generated', 'projects-index.json')
+const contentRoot = path.join(projectRoot, 'content')
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message)
+}
+
+function fixMarkdownFences(input: string): { output: string; changed: boolean; fixes: number; appendedClosingFence: boolean } {
+  const normalizedInput = input.replace(/\r\n/g, '\n')
+  const lines = normalizedInput.split('\n')
+  const out: string[] = []
+
+  const knownLang = new Set(['html', 'css', 'js', 'jsx', 'ts', 'tsx', 'vue', 'json', 'yaml', 'yml', 'bash', 'sh', 'text'])
+
+  let inFence = false
+  let fenceLen = 0
+  let openOutIndex = -1
+  let sawContentSinceOpen = false
+  let fixes = 0
+
+  const fenceLine = (len: number) => '`'.repeat(Math.max(3, len))
+
+  for (let i = 0; i < lines.length; i += 1) {
+    const rawLine = lines[i]
+    const match = rawLine.match(/^(\s*)(`{3,})(.*)$/)
+    if (!match) {
+      if (inFence && rawLine.trim() !== '') sawContentSinceOpen = true
+      out.push(rawLine)
+      continue
+    }
+
+    const [, indent, ticks, rest] = match
+    const tickCount = ticks.length
+    const restTrim = rest.trim()
+
+    if (!inFence) {
+      if (restTrim) {
+        const parts = restTrim.split(/\s+/)
+        const first = parts[0]?.toLowerCase()
+        const remainder = restTrim.slice(parts[0].length).trim()
+        if (first && knownLang.has(first) && remainder) {
+          fixes += 1
+          out.push(`${indent}${ticks}${first}`)
+          out.push(`${indent}${remainder}`)
+          inFence = true
+          fenceLen = tickCount
+          openOutIndex = out.length - 2
+          sawContentSinceOpen = remainder.trim() !== ''
+          continue
+        }
+      }
+
+      inFence = true
+      fenceLen = tickCount
+      openOutIndex = out.length
+      sawContentSinceOpen = false
+      out.push(rawLine)
+      continue
+    }
+
+    if (tickCount >= fenceLen) {
+      const normalizedClose = `${indent}${fenceLine(fenceLen)}`
+      if (!restTrim) {
+        inFence = false
+        fenceLen = 0
+        openOutIndex = -1
+        sawContentSinceOpen = false
+
+        if (rawLine !== normalizedClose) {
+          fixes += 1
+          out.push(normalizedClose)
+        } else {
+          out.push(rawLine)
+        }
+
+        const next = lines[i + 1]
+        if (typeof next === 'string') {
+          const nextTrim = next.trim()
+          const nextLang = nextTrim.toLowerCase()
+          if (knownLang.has(nextLang)) {
+            const after = lines[i + 2]
+            const laterHasClose = lines.slice(i + 2, Math.min(lines.length, i + 40)).some((l) => l.trim().startsWith('```'))
+            if (typeof after === 'string' && after.trim() && laterHasClose) {
+              fixes += 1
+              out.push(`${indent}${fenceLine(3)}${nextLang}`)
+              i += 1
+              inFence = true
+              fenceLen = 3
+              openOutIndex = out.length - 1
+              sawContentSinceOpen = false
+            }
+          }
+        }
+        continue
+      }
+
+      fixes += 1
+      inFence = false
+      fenceLen = 0
+      openOutIndex = -1
+      sawContentSinceOpen = false
+      out.push(normalizedClose)
+      out.push(`${indent}${rest.trimStart()}`)
+      continue
+    }
+
+    if (inFence && rawLine.trim() !== '') sawContentSinceOpen = true
+    out.push(rawLine)
+  }
+
+  let appendedClosingFence = false
+  if (inFence) {
+    if (!sawContentSinceOpen && openOutIndex >= 0 && openOutIndex < out.length) {
+      fixes += 1
+      out.splice(openOutIndex, 1)
+    } else {
+      appendedClosingFence = true
+      fixes += 1
+      out.push(fenceLine(fenceLen))
+    }
+  }
+
+  const output = out.join('\n')
+  return { output, changed: output !== normalizedInput, fixes, appendedClosingFence }
+}
+
+async function collectFiles(dir: string): Promise<string[]> {
+  const entries = await readdir(dir, { withFileTypes: true })
+  const out: string[] = []
+  for (const ent of entries) {
+    const p = path.join(dir, ent.name)
+    if (ent.isDirectory()) {
+      out.push(...(await collectFiles(p)))
+      continue
+    }
+    if (ent.isFile() && p.endsWith('.md')) out.push(p)
+  }
+  return out
+}
+
+async function fixContentMarkdown(): Promise<{ filesChanged: number; totalFixes: number; filesWithAppendedFence: number }> {
+  const mdFiles = await collectFiles(contentRoot)
+  let filesChanged = 0
+  let totalFixes = 0
+  let filesWithAppendedFence = 0
+
+  for (const filePath of mdFiles) {
+    const raw = await readFile(filePath, 'utf8')
+    const fixed = fixMarkdownFences(raw)
+    totalFixes += fixed.fixes
+    if (fixed.appendedClosingFence) filesWithAppendedFence += 1
+    if (!fixed.changed) continue
+    filesChanged += 1
+    await writeFile(filePath, fixed.output, 'utf8')
+  }
+
+  return { filesChanged, totalFixes, filesWithAppendedFence }
 }
 
 function validateUniqueIds<T extends { id: string }>(items: T[], label: string) {
@@ -93,6 +246,13 @@ function validateProjectSteps(projects: CompiledProject[]) {
 }
 
 async function main() {
+  if (process.argv.includes('--fix-md')) {
+    const { filesChanged, totalFixes, filesWithAppendedFence } = await fixContentMarkdown()
+    console.log(
+      `Fixed markdown fences under content/: filesChanged=${filesChanged}, fixes=${totalFixes}, appendedClosingFence=${filesWithAppendedFence}`,
+    )
+  }
+
   const [lessonsRaw, projectsRaw] = await Promise.all([
     readFile(lessonsFile, 'utf8'),
     readFile(projectsFile, 'utf8'),
@@ -116,4 +276,3 @@ main().catch((err) => {
   console.error(err)
   process.exitCode = 1
 })
-

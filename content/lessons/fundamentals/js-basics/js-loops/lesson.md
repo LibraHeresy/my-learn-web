@@ -19,7 +19,8 @@ for (let i = 0; i < composers.length; i++) {
 composers.forEach(function(name, index) {
   console.log(`${index + 1}. ${name}`);
 });
-```- `name` — 当前项的值
+```
+- `name` — 当前项的值
 - `index` — 当前项的索引（0 开始）
 ```js
 // 用 forEach 批量生成 HTML
@@ -28,7 +29,8 @@ composers.forEach(function(composer) {
   html += `<li>${composer}</li>`;
 });
 document.querySelector("ul").innerHTML = html;
-````forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。
+```
+forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。
 ::
 
 ::example{title="看例子"}
@@ -45,7 +47,8 @@ composers.forEach(function(name, index) {
   `;
 });
 document.querySelector("#list").innerHTML = html;
-```切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。
+```
+切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。
 ::
 
 ::task{title="动手试试 ✨"}

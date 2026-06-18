@@ -23,7 +23,8 @@ const props = defineProps({
     <span>{{ liked ? '❤' : '🤍' }}</span>
   </div>
 </template>
-```**父组件 `App.vue`：**
+```
+**父组件 `App.vue`：**
 ```vue
 <script setup>
 import { ref } from 'vue'
@@ -40,7 +41,8 @@ const pieces = ref([...])
     :liked="p.liked"
   />
 </template>
-````:name="p.name"` 中的冒号 `:` 是 `v-bind:` 的简写——表示传的是 JS 变量而不是字符串。
+```
+:name="p.name"` 中的冒号 `:` 是 `v-bind:` 的简写——表示传的是 JS 变量而不是字符串。
 ::
 
 ::explain{title="Emits — 子组件通知父组件"}
@@ -61,7 +63,8 @@ const emit = defineEmits(["toggle-like", "delete"])
     <button @click="emit('delete')">✕</button>
   </div>
 </template>
-```**父组件 `App.vue`：**
+```
+**父组件 `App.vue`：**
 ```vue
 <template>
   <MusicCard
@@ -73,7 +76,8 @@ const emit = defineEmits(["toggle-like", "delete"])
     @delete="pieces = pieces.filter(item => item.id !== p.id)"
   />
 </template>
-```**数据流总结：**
+```
+**数据流总结：**
 ```父组件（拥有数据）
   │
   │ Props ↓（传数据）
@@ -83,7 +87,8 @@ const emit = defineEmits(["toggle-like", "delete"])
   │ Emits ↑（发事件通知）
   │
 父组件（收到通知，修改自己的数据）
-```这就是"数据向下，事件向上"——Vue 的核心设计模式。
+```
+这就是"数据向下，事件向上"——Vue 的核心设计模式。
 ::
 
 ::task{title="你的任务 ✨"}
@@ -114,14 +119,16 @@ const emit = defineEmits(["toggle-like", "delete"])
 **数组写法（简单）：**
 ```js
 defineProps(["name", "composer"])
-```**对象写法（带类型，推荐）：**
+```
+**对象写法（带类型，推荐）：**
 ```js
 defineProps({
   name: String,
   count: Number,
   liked: Boolean
 })
-```对象写法让使用你组件的人一眼就知道需要传什么数据。
+```
+对象写法让使用你组件的人一眼就知道需要传什么数据。
 ::
 
 ::listen-to

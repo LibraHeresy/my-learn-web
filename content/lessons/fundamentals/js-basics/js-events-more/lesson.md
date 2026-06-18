@@ -32,7 +32,8 @@ inputEl.addEventListener("input", function(event) {
 document.addEventListener("keydown", function(event) {
   console.log(event.key); // 按下的键名，如 "Enter"、"a"
 });
-````event.target` 是触发事件的元素——就像知道是哪个乐器在发声。
+```
+event.target` 是触发事件的元素——就像知道是哪个乐器在发声。
 ::
 
 ::explain{title="preventDefault — 阻止默认行为"}
@@ -45,7 +46,8 @@ form.addEventListener("submit", function(event) {
   event.preventDefault();  // 阻止页面刷新！
   console.log("表单已提交（但页面不刷新）");
 });
-```这在前端开发中非常常用——表单提交通常用 JS 处理，不需要刷新页面。
+```
+这在前端开发中非常常用——表单提交通常用 JS 处理，不需要刷新页面。
 ::
 
 ::example{title="看例子"}

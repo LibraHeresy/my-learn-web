@@ -43,7 +43,8 @@ console.log 就像在排练中让乐手报一遍自己的音符——能发现�
 for (let i = 0; i < 100; i++) {
   processItem(data[i])
 }
-```**DOM 断点：** 在 Elements 面板中右键一个 DOM 元素 → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个元素被修改、删除或属性变化时，自动跳转到修改它的 JS 代码。
+```
+**DOM 断点：** 在 Elements 面板中右键一个 DOM 元素 → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个元素被修改、删除或属性变化时，自动跳转到修改它的 JS 代码。
 **XHR/Fetch 断点：** 在 Sources 面板右侧的 XHR/fetch Breakpoints 中添加 URL 片段（如 search）。当有请求匹配这个 URL 时自动暂停——调试网络请求的神器。
 ::
 
@@ -66,7 +67,8 @@ function guess(num) {
     return '恭喜！你得分为 ' + score
   }
 }
-```打开 F12 → Sources → 在 return 那行设置断点 → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有变量。
+```
+打开 F12 → Sources → 在 return 那行设置断点 → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有变量。
 ::
 
 ::task{title="动手试试 ✨"}

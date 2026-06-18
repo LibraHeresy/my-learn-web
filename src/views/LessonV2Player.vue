@@ -11,7 +11,7 @@ import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
 import LessonSidebarV2 from '../components/LessonSidebarV2.vue'
-import { getTrackV2, getChapterV2, getChapterOrder } from '../content-v2/taxonomy'
+import { getChapterOrder } from '../content-v2/taxonomy'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
@@ -86,8 +86,6 @@ function computedAsync<T>(factory: () => Promise<T>) {
 
 const currentTrackId = computed(() => lesson.value?.meta.track || 'fundamentals')
 const currentChapterId = computed(() => lesson.value?.meta.chapter)
-const currentTrack = computed(() => getTrackV2(currentTrackId.value))
-const currentChapter = computed(() => getChapterV2(currentChapterId.value))
 
 const orderedLessons = computed(() => {
   return all.value
@@ -166,27 +164,8 @@ watch(lessonId, () => {
 
 <template>
   <div class="lesson-player">
-    <div v-if="lesson && !isMobile" class="lesson-topbar">
-      <div class="topbar-breadcrumb">
-        <button class="topbar-home" @click="router.push('/')">🏠首页</button>
-        <span class="breadcrumb-sep">›</span>
-        <template v-if="isPrologue">
-          <span>🏮 筚路蓝缕</span>
-          <span class="breadcrumb-sep">·</span>
-          <span class="breadcrumb-position">{{ centerLabel }}</span>
-        </template>
-        <template v-else>
-          <span>{{ currentTrack?.icon }} {{ currentTrack?.title || currentTrackId }}</span>
-          <span class="breadcrumb-sep">›</span>
-          <span>{{ currentChapter?.title || currentChapterId }}</span>
-          <span class="breadcrumb-position">{{ centerLabel }}</span>
-        </template>
-      </div>
-    </div>
-
-    <div class="mobile-bar">
-      <button v-if="lesson && !isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
-      <span class="mobile-lesson-title">{{ lesson?.meta.title || lessonId }}</span>
+    <div v-if="lesson && isMobile && !isPrologue" class="mobile-bar">
+      <button class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
     </div>
 
     <Transition name="fade">
@@ -286,52 +265,6 @@ watch(lessonId, () => {
   flex-direction: column;
 }
 
-.lesson-topbar {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  padding: 0 var(--sp-4);
-  background: var(--color-panel);
-  border-bottom: 1px solid var(--color-border-light);
-  flex-shrink: 0;
-  min-height: 36px;
-  font-size: var(--fs-xs);
-  color: var(--color-text-light);
-}
-
-.topbar-home {
-  background: none;
-  color: var(--color-text-light);
-  font-size: var(--fs-xs);
-  padding: 2px 0;
-  flex-shrink: 0;
-}
-
-.topbar-home:hover {
-  color: var(--color-accent);
-}
-
-.topbar-breadcrumb {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: var(--sp-2);
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: var(--fs-xs);
-  color: var(--color-text-light);
-}
-
-.breadcrumb-sep {
-  color: var(--color-border);
-  flex-shrink: 0;
-  font-size: var(--fs-xs);
-}
-
-.breadcrumb-position {
-  color: var(--color-text-light);
-}
-
 .mobile-bar {
   display: none;
   align-items: center;
@@ -348,14 +281,6 @@ watch(lessonId, () => {
   font-size: 1.2rem;
   color: var(--color-text);
   padding: var(--sp-1);
-}
-
-.mobile-lesson-title {
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .sidebar-wrapper {
@@ -434,10 +359,6 @@ watch(lessonId, () => {
 }
 
 @media (max-width: 900px) {
-  .lesson-topbar {
-    display: none;
-  }
-
   .mobile-bar {
     display: flex;
   }

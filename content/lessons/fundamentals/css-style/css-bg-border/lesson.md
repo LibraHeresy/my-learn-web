@@ -20,7 +20,8 @@ div {
   border: 2px solid #D4C5A9;
   border-radius: 12px;
 }
-```- `2px` — 边框粗细
+```
+- `2px` — 边框粗细
 - `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）
 - `#D4C5A9` — 边框颜色
 - `border-radius: 12px` — 圆角半径，值越大越圆
@@ -39,7 +40,8 @@ div {
 .card h2 {
   color: #8B2E2E;
 }
-```切换到 CSS 标签页查看完整代码。
+```
+切换到 CSS 标签页查看完整代码。
 ::
 
 ::task{title="动手试试 ✨"}

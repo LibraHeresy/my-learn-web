@@ -11,7 +11,8 @@ function sayHello() {
   alert("你好！");
 }
 sayHello();  // 调用函数
-```函数的好处：
+```
+函数的好处：
 - **避免重复**：同样的代码不用写很多遍
 - **给代码起名字**：一看函数名就知道它做什么
 - **可以传参数**：像给动机配不同的乐器
@@ -25,7 +26,8 @@ function introduce(composer, piece) {
 }
 let result1 = introduce("肖邦", "夜曲");
 let result2 = introduce("莫扎特", "魔笛");
-```- `composer` 和 `piece` 是**参数**——像函数接收的输入
+```
+- `composer` 和 `piece` 是**参数**——像函数接收的输入
 - `return` 把结果**返回**——像函数给出的输出
 - 同样一个 `introduce` 函数，传入不同的作曲家，得到不同的句子
 > 💡 关于 `this`：在普通函数中，`this` 指向"谁调用了这个函数"。比如 `button.addEventListener("click", handleClick)` 中，`handleClick` 里的 `this` 指向被点击的 `button`。后面学到事件和对象时你会更深入地理解它。
@@ -45,7 +47,8 @@ function createCard(composer, period, piece) {
 }
 let html = createCard("巴赫", "巴洛克", "赋格的艺术");
 let html2 = createCard("德彪西", "印象派", "月光");
-```切换到 JS 标签页看看函数怎么生成页面的三张卡片。
+```
+切换到 JS 标签页看看函数怎么生成页面的三张卡片。
 ::
 
 ::task{title="动手试试 ✨"}

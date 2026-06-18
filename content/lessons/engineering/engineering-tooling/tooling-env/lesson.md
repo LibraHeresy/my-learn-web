@@ -25,7 +25,8 @@ VITE_APP_TITLE=音乐收藏（开发版）
 VITE_API_BASE=https://api.myapp.com
 VITE_DEBUG=false
 VITE_APP_TITLE=音乐收藏
-```**命名规则：** 只有以 VITE_ 开头的变量才会暴露给客户端代码。这是 Vite 的安全措施——防止意外的敏感信息泄露。
+```
+**命名规则：** 只有以 VITE_ 开头的变量才会暴露给客户端代码。这是 Vite 的安全措施——防止意外的敏感信息泄露。
 **注意：** .env 文件**不应该提交到 Git**（把 .env 加入 .gitignore）。敏感信息如 API 密钥永远不要放在前端环境变量中——它们会被打包进 JS 文件，任何人都能看到。
 ::
 
@@ -49,7 +50,8 @@ if (import.meta.env.DEV) {
 if (import.meta.env.PROD) {
   // 生产环境特有的逻辑
 }
-```**Vite 内置的环境变量：**
+```
+**Vite 内置的环境变量：**
 - import.meta.env.MODE — 当前模式（development / production）
 - import.meta.env.DEV — 是否开发模式（boolean）
 - import.meta.env.PROD — 是否生产模式（boolean）
@@ -72,7 +74,8 @@ import { config } from './config.js'
 console.log('当前环境：', import.meta.env.MODE)
 console.log('API 地址：', config.apiBase)
 console.log('调试模式：', config.debug ? '开启' : '关闭')
-```开发时运行 npm run dev，自动读取 .env.development。
+```
+开发时运行 npm run dev，自动读取 .env.development。
 构建时运行 npm run build，自动读取 .env.production。
 ::
 

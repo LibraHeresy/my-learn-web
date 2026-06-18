@@ -27,7 +27,8 @@ const router = createRouter({
   ]
 })
 export default router
-```在 `main.js` 中注册：
+```
+在 `main.js` 中注册：
 ```js
 import { createApp } from 'vue'
 import router from './router'
@@ -48,7 +49,8 @@ createApp(App).use(router).mount('#app')
   <!-- 路由出口：匹配的组件渲染在这里 -->
   <router-view />
 </template>
-``````vue
+```
+```vue
 <!-- Detail.vue — 获取路由参数 -->
 <script setup>
 import { useRoute } from 'vue-router'
@@ -58,7 +60,8 @@ const pieceId = route.params.id  // 来自 /piece/:id
 <template>
   <p>正在查看作品：{{ pieceId }}</p>
 </template>
-````<router-link>` 替代 `<a href>`。`<router-view>` 是页面内容的"插座"。
+```
+<router-link>` 替代 `<a href>`。`<router-view>` 是页面内容的"插座"。
 ::
 
 ::example{title="编程式导航"}
@@ -74,7 +77,8 @@ function goBack() {
   router.back()  // 返回上一页
 }
 </script>
-````router.push()` 就像点击链接，`router.back()` 就像按浏览器的后退键。
+```
+router.push()` 就像点击链接，`router.back()` 就像按浏览器的后退键。
 ::
 
 ::task{title="动手试试 ✨"}

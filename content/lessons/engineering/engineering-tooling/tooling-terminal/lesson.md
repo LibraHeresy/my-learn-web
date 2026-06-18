@@ -19,26 +19,31 @@
 ```bash
 pwd
 # 输出：/Users/xiaomei/my-music-app
-```就像 GPS 告诉你当前位置。
+```
+就像 GPS 告诉你当前位置。
 **2. `ls` — 这里有什么？**（List）
 ```bash
 ls
 # 输出：readme.md
-```列出当前文件夹中的所有文件。
+```
+列出当前文件夹中的所有文件。
 **3. `cd` — 去别的地方**（Change Directory）
 ```bash
 cd my-music-app    # 进入文件夹
 cd ..              # 回到上一级
 cd ~               # 回到家目录
-```**4. `mkdir` — 创建文件夹**（Make Directory）
+```
+**4. `mkdir` — 创建文件夹**（Make Directory）
 ```bash
 mkdir src          # 创建名为 src 的文件夹
 mkdir -p src/components  # 创建嵌套文件夹
-```**5. `echo` / `type nul` — 创建文件**
+```
+**5. `echo` / `type nul` — 创建文件**
 ```bash
 echo "" > index.html     # Mac/Linux：创建空文件
 type nul > index.html    # Windows：创建空文件
-```**6. `code .` — 用 VS Code 打开当前文件夹**
+```
+**6. `code .` — 用 VS Code 打开当前文件夹**
 ```bash
 code .
 # VS Code 会打开当前文件夹

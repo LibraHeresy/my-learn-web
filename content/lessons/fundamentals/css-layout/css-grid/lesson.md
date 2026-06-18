@@ -12,7 +12,8 @@ Grid（网格布局）同时控制行和列——display:grid 启用网格，gri
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
-```- `1fr` — "一份"（fraction），自动分配剩余空间
+```
+- `1fr` — "一份"（fraction），自动分配剩余空间
 - `1fr 1fr 1fr` — 三等分（三列宽度相等）
 - `repeat(3, 1fr)` — 等价写法
 - `gap` — 格子之间的间距
@@ -26,7 +27,8 @@ Grid（网格布局）同时控制行和列——display:grid 启用网格，gri
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto 200px;
 }
-```子元素可以跨越多列或多行：
+```
+子元素可以跨越多列或多行：
 ```css
 .card:first-child {
   grid-column: span 2;  /* 跨 2 列 */
@@ -34,7 +36,8 @@ Grid（网格布局）同时控制行和列——display:grid 启用网格，gri
 .card:last-child {
   grid-column: 1 / 3;   /* 从第1条线到第3条线（也是跨2列） */
 }
-```就像总谱中某个声部的长音符跨越了好几个小节！
+```
+就像总谱中某个声部的长音符跨越了好几个小节！
 ::
 
 ::explain{title="Flexbox vs Grid 怎么选？"}
@@ -59,7 +62,8 @@ Grid（网格布局）同时控制行和列——display:grid 启用网格，gri
 .card:last-child {
   grid-column: span 2;
 }
-```切换到预览区观察网格布局——每张卡片在二维网格中都有精确位置。
+```
+切换到预览区观察网格布局——每张卡片在二维网格中都有精确位置。
 ::
 
 ::task{title="动手试试 ✨"}

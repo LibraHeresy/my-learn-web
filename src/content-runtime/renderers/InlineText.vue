@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { splitInlineCode } from './text'
+import { computed, defineComponent, h } from 'vue'
+import { parseInlineTokens } from './text'
 import { getGlossaryEntry } from '../../content-v2/glossary'
 import TermTip from './TermTip.vue'
 
@@ -8,55 +8,50 @@ const props = defineProps<{
   text: string
 }>()
 
-type Segment =
-  | { type: 'text'; value: string }
-  | { type: 'code'; value: string }
-  | { type: 'term'; key: string; value: string }
+type Token = ReturnType<typeof parseInlineTokens>[number]
 
-function splitTermMarkers(text: string): Segment[] {
-  const result: Segment[] = []
-  const regex = /\{\{term:([^}]+)\}\}/g
-  let lastIndex = 0
+const tokens = computed(() => parseInlineTokens(props.text))
 
-  for (const match of text.matchAll(regex)) {
-    const index = match.index ?? 0
-    if (index > lastIndex) result.push({ type: 'text', value: text.slice(lastIndex, index) })
-    const key = match[1]
-    result.push({ type: 'term', key, value: key })
-    lastIndex = index + match[0].length
-  }
+const InlineToken: any = defineComponent({
+  name: 'InlineToken',
+  props: {
+    token: { type: Object as () => Token, required: true },
+  },
+  setup(p) {
+    return (): any => {
+      const t = p.token
 
-  if (lastIndex < text.length) result.push({ type: 'text', value: text.slice(lastIndex) })
-  return result.length ? result : [{ type: 'text', value: text }]
-}
+      if (t.type === 'br') return h('br')
+      if (t.type === 'code') return h('code', { class: 'inline-code' }, t.value)
 
-const segments = computed<Segment[]>(() => {
-  const base = splitInlineCode(props.text)
-  const out: Segment[] = []
-  for (const seg of base) {
-    if (seg.type === 'code') {
-      out.push({ type: 'code', value: seg.value })
-      continue
+      if (t.type === 'term') {
+        const entry = getGlossaryEntry(t.key)
+        if (entry) {
+          return h(
+            TermTip,
+            { term: t.key, explanation: entry.explanation, analogy: entry.analogy },
+            { default: () => t.value },
+          )
+        }
+        return h('span', t.value)
+      }
+
+      if (t.type === 'strong') {
+        return h('strong', t.children.map((child, i) => h(InlineToken, { token: child, key: i })))
+      }
+
+      if (t.type === 'em') {
+        return h('em', t.children.map((child, i) => h(InlineToken, { token: child, key: i })))
+      }
+
+      return h('span', t.value)
     }
-    out.push(...splitTermMarkers(seg.value))
-  }
-  return out
+  },
 })
 </script>
 
 <template>
-  <template v-for="(segment, index) in segments" :key="index">
-    <code v-if="segment.type === 'code'" class="inline-code">{{ segment.value }}</code>
-    <TermTip
-      v-else-if="segment.type === 'term' && getGlossaryEntry(segment.key)"
-      :term="segment.key"
-      :explanation="getGlossaryEntry(segment.key)!.explanation"
-      :analogy="getGlossaryEntry(segment.key)!.analogy"
-    >
-      {{ segment.value }}
-    </TermTip>
-    <span v-else>{{ segment.value }}</span>
-  </template>
+  <InlineToken v-for="(token, index) in tokens" :key="index" :token="token" />
 </template>
 
 <style scoped>

@@ -18,7 +18,8 @@
 Apple 提供了免费的音乐搜索 API，无需注册：
 ```
 https://itunes.apple.com/search?term=贝多芬&limit=10&country=cn
-```返回的 JSON 结构：
+```
+返回的 JSON 结构：
 ```json
 {
   "resultCount": 10,

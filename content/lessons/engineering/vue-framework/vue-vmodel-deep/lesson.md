@@ -37,7 +37,8 @@ const options = ref([])        // 多选
   </select>
   <p>选中：{{ selected }}</p>
 </template>
-```每种表单元素都能用 `v-model`，Vue 自动处理不同类型的事件。
+```
+每种表单元素都能用 `v-model`，Vue 自动处理不同类型的事件。
 ::
 
 ::example{title="v-model 修饰符"}
@@ -49,7 +50,8 @@ const options = ref([])        // 多选
 <input v-model.number="age" type="text">
 <!-- .trim：自动去除首尾空格 -->
 <input v-model.trim="title">
-```这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。
+```
+这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。
 ::
 
 ::task{title="动手试试 ✨"}

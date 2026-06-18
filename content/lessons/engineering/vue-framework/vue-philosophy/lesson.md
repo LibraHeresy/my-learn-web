@@ -11,7 +11,8 @@
 const title = document.createElement('h1')
 title.textContent = '你好，音乐世界'
 document.getElementById('app').appendChild(title)
-```**声明式（Declarative）：** 描述你想要什么结果。
+```
+**声明式（Declarative）：** 描述你想要什么结果。
 ```vue
 <!-- Vue：声明结果 -->
 <template>
@@ -20,7 +21,8 @@ document.getElementById('app').appendChild(title)
 <script setup>
 const message = '你好，音乐世界'
 </script>
-```命令式像给乐手发微信："左手按G弦第二品，右手拨弦"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。
+```
+命令式像给乐手发微信："左手按G弦第二品，右手拨弦"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。
 ::
 
 ::explain{title="Vue 的核心思想"}
@@ -46,7 +48,8 @@ function increment() {
   <p>已点赞 {{ count }} 次</p>
   <button @click="increment">👍 点赞</button>
 </template>
-```就像 MIDI 键盘：你按键，声音自动发出。你不用管"怎么发声"——那已经被系统处理好了。你只管演奏。
+```
+就像 MIDI 键盘：你按键，声音自动发出。你不用管"怎么发声"——那已经被系统处理好了。你只管演奏。
 ::
 
 ::task{title="反思题 🤔"}

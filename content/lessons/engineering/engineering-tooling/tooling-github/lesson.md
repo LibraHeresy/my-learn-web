@@ -29,14 +29,16 @@ GitHub 会显示一段命令，复制并在 VS Code 终端中运行：
 git remote add origin https://github.com/你的用户名/music-collection.git
 git branch -M main
 git push -u origin main
-```逐行解释：
+```
+逐行解释：
 - `git remote add origin <URL>` — 告诉 Git"远程仓库的地址在这里"，给它起个名叫 `origin`
 - `git branch -M main` — 把当前分支命名为 `main`
 - `git push -u origin main` — 把本地的 `main` 分支推送到远程的 `origin`
 之后每次有新的 commit，只需要：
 ```bash
 git push
-```刷新 GitHub 页面，你的代码就出现在网上了！🎉
+```
+刷新 GitHub 页面，你的代码就出现在网上了！🎉
 ::
 
 ::task{title="你的任务 ✨"}

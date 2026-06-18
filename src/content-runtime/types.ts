@@ -30,6 +30,12 @@ export type TermNode = {
   text: string
 }
 
+export type CodeBlockNode = {
+  type: 'code'
+  language: string
+  code: string
+}
+
 export type BlockType =
   | 'block:music-analogy'
   | 'block:explain'
@@ -57,7 +63,7 @@ export type BlockNode = {
   }>
 }
 
-export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | BlockNode
+export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | BlockNode
 
 export type CompiledLesson = {
   contentSchemaVersion: 1

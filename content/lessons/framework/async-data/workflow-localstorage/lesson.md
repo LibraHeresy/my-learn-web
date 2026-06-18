@@ -34,7 +34,8 @@ localStorage.setItem("myPieces", JSON.stringify(pieces));
 let saved = JSON.parse(localStorage.getItem("myPieces"));
 // saved 现在是真正的数组，可以正常使用！
 console.log(saved[0].name);  // "布兰登堡协奏曲"
-```**常用模式：加载 + 保存**
+```
+**常用模式：加载 + 保存**
 ```js
 // 页面启动时：尝试从 localStorage 加载数据
 let pieces = JSON.parse(localStorage.getItem("myPieces")) || [];
@@ -45,7 +46,8 @@ function saveData() {
 pieces.push(newPiece);
 saveData();
 render(pieces);
-```> 💡 提示：`localStorage.getItem` 返回 `null` 如果 key 不存在，所以用 `|| []` 给一个默认值。
+```
+> 💡 提示：`localStorage.getItem` 返回 `null` 如果 key 不存在，所以用 `|| []` 给一个默认值。
 ::
 
 ::task{title="动手试试 ✨"}

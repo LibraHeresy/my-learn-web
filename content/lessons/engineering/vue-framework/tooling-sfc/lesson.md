@@ -22,7 +22,8 @@ h1 {
   color: #8B2E2E;
 }
 </style>
-```**三段各司其职：**
+```
+**三段各司其职：**
 - `<script setup>` — JavaScript 逻辑（数据、函数、计算属性等）。`setup` 关键词表示使用 Vue 3 的组合式 API 语法
 - `<template>` — HTML 模板（你在之前课程学的所有标签和指令都在这里：`{{ }}`、`v-if`、`v-for`、`@click` 等）
 - `<style scoped>` — CSS 样式。`scoped` 关键词让这些样式只作用于当前组件，不会影响其他组件
@@ -57,7 +58,8 @@ defineProps(["name", "composer"])
   padding: 16px;
 }
 </style>
-```**在 `App.vue` 中使用：**
+```
+**在 `App.vue` 中使用：**
 ```vue
 <script setup>
 import MusicCard from './components/MusicCard.vue'
@@ -66,7 +68,8 @@ import MusicCard from './components/MusicCard.vue'
   <MusicCard name="夜曲 Op.9 No.2" composer="肖邦" />
   <MusicCard name="月光" composer="德彪西" />
 </template>
-```注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。
+```
+注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。
 ::
 
 ::task{title="你的任务 ✨"}

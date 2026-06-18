@@ -10,7 +10,8 @@
 let composer = "肖邦";
 let piece = "夜曲";
 let year = 1830;
-```- `let` — 声明一个变量（可以修改）
+```
+- `let` — 声明一个变量（可以修改）
 - `const` — 声明一个常量（不能修改）
 - `composer` / `piece` — 变量名（你自己起的名字）
 - `"肖邦"` — 字符串（文本），用引号包裹
@@ -22,10 +23,12 @@ let year = 1830;
 ```js
 let composer = "肖邦";
 let sentence = "我最喜欢的作曲家是" + composer;
-```更好的写法是**模板字符串**，用反引号 `` ` `` 包裹，`${}` 插入变量：
+```
+更好的写法是**模板字符串**，用反引号 `` ` `` 包裹，`${}` 插入变量：
 ```js
 let sentence = `我最喜欢的作曲家是${composer}`;
-```就像把两个乐句连接成一个完整的乐段！
+```
+就像把两个乐句连接成一个完整的乐段！
 ::
 
 ::explain{title="document.querySelector — 找到页面中的元素"}
@@ -33,7 +36,8 @@ let sentence = `我最喜欢的作曲家是${composer}`;
 ```js
 let el = document.querySelector("h1");
 el.textContent = "新的标题";
-```就像指挥家用手势指定"现在看这里"，`querySelector` 帮你指向页面中的元素。
+```
+就像指挥家用手势指定"现在看这里"，`querySelector` 帮你指向页面中的元素。
 ::
 
 ::example{title="看例子"}
@@ -45,7 +49,8 @@ let description = `${composer}的代表作之一是《${piece}》。`;
 document.querySelector("#composer").textContent = composer;
 document.querySelector("#piece").textContent = piece;
 document.querySelector("#description").textContent = description;
-```切换到 JS 标签页查看完整代码。运行后，JavaScript 会自动把信息填入页面。
+```
+切换到 JS 标签页查看完整代码。运行后，JavaScript 会自动把信息填入页面。
 ::
 
 ::task{title="动手试试 ✨"}

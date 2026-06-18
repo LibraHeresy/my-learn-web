@@ -15,18 +15,6 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 
 <template>
   <article class="content-doc">
-    <header class="doc-header">
-      <p class="doc-meta">
-        <span>{{ lesson.meta.track }}</span>
-        <span class="doc-meta-sep">/</span>
-        <span>{{ lesson.meta.chapter }}</span>
-        <span class="doc-meta-sep">/</span>
-        <span>{{ lesson.meta.mode }}</span>
-      </p>
-      <h1 class="doc-title">{{ lesson.meta.title }}</h1>
-      <p class="doc-subtitle">{{ lesson.meta.estimatedMinutes }} 分钟</p>
-    </header>
-
     <div class="doc-body">
       <template v-for="(node, index) in lesson.body" :key="`${node.type}-${index}`">
         <component
@@ -45,6 +33,8 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
           {{ node.text }}
         </p>
 
+        <pre v-else-if="node.type === 'code'" class="code-block"><code :class="`language-${node.language}`" v-text="node.code" /></pre>
+
         <component
           :is="resolveBlockComponent(node.name)"
           v-else
@@ -62,40 +52,10 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
   padding: var(--sp-6);
 }
 
-.doc-header {
-  padding-bottom: var(--sp-5);
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.doc-meta {
-  display: flex;
-  gap: var(--sp-2);
-  color: var(--color-text-light);
-  font-size: var(--fs-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.doc-meta-sep {
-  color: var(--color-border);
-}
-
-.doc-title {
-  margin-top: var(--sp-2);
-  font-size: var(--fs-2xl);
-}
-
-.doc-subtitle {
-  margin-top: var(--sp-2);
-  color: var(--color-text-light);
-  font-size: var(--fs-sm);
-}
-
 .doc-body {
   display: flex;
   flex-direction: column;
   gap: var(--sp-5);
-  padding-top: var(--sp-5);
 }
 
 .doc-heading {
@@ -109,5 +69,19 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
   line-height: 1.8;
   color: var(--color-text);
 }
-</style>
 
+.code-block {
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  background: var(--color-editor-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: var(--font-code);
+  font-size: 0.95em;
+  color: var(--color-editor-text);
+  white-space: pre;
+}
+</style>

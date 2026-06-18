@@ -8,12 +8,14 @@
 querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像指挥同时命令整个弦乐声部做同一个动作。
 ```js
 let cards = document.querySelectorAll(".card");
-```NodeList 可以和数组一样用 `forEach` 遍历：
+```
+NodeList 可以和数组一样用 `forEach` 遍历：
 ```js
 cards.forEach(function(card) {
   card.style.border = "2px solid gold";
 });
-```也支持索引：
+```
+也支持索引：
 ```js
 cards[0].style.background = "#FFFAF2";  // 第一张
 cards[1].style.background = "#F0F8FF";  // 第二张
@@ -31,7 +33,8 @@ let cards = document.querySelectorAll(".card");
 cards.forEach(function(card) {
   card.classList.add("highlighted");
 });
-```然后 CSS 中定义 `.highlighted` 的样式即可——JS 负责逻辑，CSS 负责外观，各司其职。
+```
+然后 CSS 中定义 `.highlighted` 的样式即可——JS 负责逻辑，CSS 负责外观，各司其职。
 ::
 
 ::example{title="看例子"}
@@ -46,7 +49,8 @@ cards.forEach(function(card) {
 cards.forEach(function(card) {
   card.classList.toggle("hidden", !card.classList.contains("strings"));
 });
-```切换到 JS 标签页查看完整代码，预览区点击按钮试试批量效果。
+```
+切换到 JS 标签页查看完整代码，预览区点击按钮试试批量效果。
 ::
 
 ::task{title="动手试试 ✨"}

@@ -16,7 +16,8 @@ transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐�
   color: #fff;
   transform: scale(1.05);
 }
-```- `all` — 所有属性都过渡
+```
+- `all` — 所有属性都过渡
 - `0.3s` — 过渡耗时 0.3 秒
 - `ease` — 缓动函数（开始快，结束慢）
 就像渐强记号把音量从一个等级平滑带到另一个等级。
@@ -31,7 +32,8 @@ transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐�
 .card:hover {
   transform: translateY(-4px) scale(1.02);
 }
-```多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！
+```
+多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！
 ::
 
 ::explain{title="@keyframes — 关键帧动画"}
@@ -45,7 +47,8 @@ transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐�
 .card {
   animation: pulse 2s ease-in-out infinite;
 }
-```- `pulse` — 动画名称（自己命名）
+```
+- `pulse` — 动画名称（自己命名）
 - `2s` — 一个周期 2 秒
 - `ease-in-out` — 缓入缓出
 - `infinite` — 无限循环
@@ -68,7 +71,8 @@ transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐�
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-```切换到预览区，把鼠标移到卡片上试试！
+```
+切换到预览区，把鼠标移到卡片上试试！
 ::
 
 ::task{title="动手试试 ✨"}

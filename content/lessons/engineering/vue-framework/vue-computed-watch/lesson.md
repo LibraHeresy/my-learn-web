@@ -26,7 +26,8 @@ const classicalPieces = computed(() => {
     <li v-for="p in classicalPieces" :key="p.name">{{ p.name }}</li>
   </ul>
 </template>
-````classicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**缓存**——不依赖的值没变，不会重复计算。
+```
+classicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**缓存**——不依赖的值没变，不会重复计算。
 ::
 
 ::example{title="computed vs 普通函数"}
@@ -40,7 +41,8 @@ function getClassical() {
 const classicalPieces = computed(() => {
   return pieces.value.filter(p => p.period === '古典主义')
 })
-```就像乐谱翻页：函数式每次都从头到尾唱一遍来找古典曲目；computed 像在谱子上贴了标签——曲目单不变就不用重新翻。
+```
+就像乐谱翻页：函数式每次都从头到尾唱一遍来找古典曲目；computed 像在谱子上贴了标签——曲目单不变就不用重新翻。
 ::
 
 ::example{title="watch — 观察变化，执行操作"}
@@ -60,7 +62,8 @@ watch(searchKeyword, async (newVal, oldVal) => {
   results.value = await searchAPI(newVal)
 })
 </script>
-````watch` 适合：
+```
+watch` 适合：
 - 保存数据到 localStorage
 - 搜索/筛选触发 API 请求
 - 某个值变化时更新页面标题

@@ -33,7 +33,8 @@ el.classList.toggle('active')
 if (el.classList.contains('card')) {
   console.log('这是一张卡片')
 }
-````classList` 的优势：
+```
+classList` 的优势：
 - `className = 'xxx'` 会覆盖所有已有 class
 - `classList.add()` 只追加，不影响已有 class
 - `classList.toggle()` 一行搞定开关效果

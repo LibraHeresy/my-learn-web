@@ -43,7 +43,8 @@
   border: 2px solid;    /* 又额外增加 4px */
   /* 实际占用宽度 = 100% + 48px + 4px → 溢出了！ */
 }
-```解决方案是使用 `box-sizing: border-box`：
+```
+解决方案是使用 `box-sizing: border-box`：
 ```css
 .card {
   box-sizing: border-box;  /* width 包含 content + padding + border */
@@ -51,12 +52,14 @@
   padding: 24px;
   border: 2px solid;
 }
-```推荐在所有项目中加上这段 CSS reset，让所有元素都使用 `border-box`：
+```
+推荐在所有项目中加上这段 CSS reset，让所有元素都使用 `border-box`：
 ```css
 *, *::before, *::after {
   box-sizing: border-box;
 }
-```> 🎵 类比：`content-box` 像只算舞台面积，不算幕布和墙壁；`border-box` 像算整个音乐厅的占地面积——一次性算清。
+```
+> 🎵 类比：`content-box` 像只算舞台面积，不算幕布和墙壁；`border-box` 像算整个音乐厅的占地面积——一次性算清。
 ::
 
 ::example{title="看例子"}

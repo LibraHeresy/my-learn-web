@@ -15,7 +15,8 @@ let composer = "巴赫";        // string
 let birthYear = 1685;         // number
 let isBaroque = true;         // boolean
 let encore = null;            // null（故意为空）
-```用 `typeof` 查看类型：
+```
+用 `typeof` 查看类型：
 ```js
 console.log(typeof "巴赫");   // "string"
 console.log(typeof 1685);     // "number"
@@ -34,7 +35,8 @@ console.log(a * b);  // 30  乘法
 console.log(a / b);  // 3.333... 除法
 console.log(a % b);  // 1   取余数（模运算）
 console.log(a ** 2); // 100 幂运算
-````%`（取余）特别实用——判断奇偶：`n % 2 === 0` 就是偶数。
+```
+%`（取余）特别实用——判断奇偶：`n % 2 === 0` 就是偶数。
 字符串的 `+` 是拼接：`"Bach" + " " + "1685"` → `"Bach 1685"`
 ::
 
@@ -47,7 +49,8 @@ console.log(5 === 5); // true（等于）
 console.log(5 !== 3); // true（不等于）
 console.log(5 >= 5);  // true
 console.log(5 <= 3);  // false
-```比较结果常用于 `if` 条件判断中——这就是下一节课要学的！
+```
+比较结果常用于 `if` 条件判断中——这就是下一节课要学的！
 ::
 
 ::example{title="看例子"}

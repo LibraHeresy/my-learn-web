@@ -8,7 +8,8 @@
 数组用 `[]` 创建，每个值用逗号分隔：
 ```js
 let composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];
-```- `composers[0]` — 第 1 项（"巴赫"），索引从 0 开始
+```
+- `composers[0]` — 第 1 项（"巴赫"），索引从 0 开始
 - `composers[2]` — 第 3 项（"贝多芬"）
 - `composers.length` — 数组长度（4）
 就像曲目单上第一首是 0 号，不是 1 号——这是编程的习惯。
@@ -25,7 +26,8 @@ composers.push("肖邦");  // 末尾追加
 // composers 现在是 ["巴赫", "莫扎特", "肖邦"]
 let text = composers.join(" | ");
 // text 是 "巴赫 | 莫扎特 | 肖邦"
-````.join()` 特别实用——把一个数组变成页面上的文字！
+```
+.join()` 特别实用——把一个数组变成页面上的文字！
 ::
 
 ::example{title="看例子"}
@@ -39,7 +41,8 @@ display.textContent = text;
 composers.push("肖邦");
 text = composers.join(" · ");
 display.textContent = text;
-```切换到 JS 标签页，输入一个名字点击添加，看列表实时更新。
+```
+切换到 JS 标签页，输入一个名字点击添加，看列表实时更新。
 ::
 
 ::task{title="动手试试 ✨"}

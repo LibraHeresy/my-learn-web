@@ -19,7 +19,8 @@ onUpdated() → DOM 已更新
 onBeforeUnmount() → 组件即将销毁 ✅ 常用
   ↓
 onUnmounted() → 组件已销毁
-```**你只需要了解最常用的三个就够了：**
+```
+**你只需要了解最常用的三个就够了：**
 - onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）
 - onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听）
 - watch / watchEffect — 响应式数据变化时自动执行
@@ -42,7 +43,8 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)  // 绑定全局事件
 })
 </script>
-```**onMounted 的常见用途：**
+```
+**onMounted 的常见用途：**
 - 获取初始数据（调用 API）
 - 操作 DOM 元素（聚焦、滚动、初始化第三方库）
 - 启动定时器 / 订阅事件
@@ -66,7 +68,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)  // 移除事件监听——不然会内存泄露
 })
 </script>
-```**清理清单：**
+```
+**清理清单：**
 - clearInterval / clearTimeout — 清除定时器
 - removeEventListener — 移除全局事件监听
 - 取消未完成的 fetch 请求（用 AbortController）
@@ -98,13 +101,15 @@ watch(user, (newUser) => {
   console.log('用户信息变化了', newUser)
 }, { deep: true })
 </script>
-```**watchEffect：** 自动追踪内部用到的响应式数据，任意一个变化就重新执行
+```
+**watchEffect：** 自动追踪内部用到的响应式数据，任意一个变化就重新执行
 ```js
 watchEffect(() => {
   console.log(keyword.value, category.value)
   document.title = keyword.value || '音乐收藏'
 })
-```**watch vs watchEffect：**
+```
+**watch vs watchEffect：**
 - watch — 明确知道要监听什么，可以获取旧值
 - watchEffect — 不需要指定依赖，自动追踪，更简洁
 ::
@@ -141,7 +146,8 @@ watch(isRunning, (running) => {
   console.log('时钟状态：', running ? '运行中' : '已暂停')
 })
 </script>
-```注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。
+```
+注意：如果不清除定时器，组件销毁后 setInterval 仍在运行——这就是内存泄露。
 ::
 
 ::task{title="动手试试 ✨"}

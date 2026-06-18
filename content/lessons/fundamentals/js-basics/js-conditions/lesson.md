@@ -11,7 +11,8 @@ let score = 85;
 if (score >= 80) {
   console.log("优秀！");
 }
-```就像评委打分：分数 ≥ 80 才算优秀。
+```
+就像评委打分：分数 ≥ 80 才算优秀。
 ::
 
 ::explain{title="else 与 else if — 多分岔路"}
@@ -27,7 +28,8 @@ if (score >= 90) {
 } else {
   console.log("继续努力！");
 }
-```逻辑运算符：
+```
+逻辑运算符：
 - `&&` — 并且（两个条件都成立）
 - `||` — 或者（任意一个成立）
 ```js
@@ -46,7 +48,8 @@ if (answer === "肖邦") {
 } else {
   display.textContent = "✗ 再想想？提示：他是波兰人";
 }
-```切换到 JS 标签页，看 submit 按钮的点击事件中完整的 if/else 逻辑。
+```
+切换到 JS 标签页，看 submit 按钮的点击事件中完整的 if/else 逻辑。
 ::
 
 ::task{title="动手试试 ✨"}

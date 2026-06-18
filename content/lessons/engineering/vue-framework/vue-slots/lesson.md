@@ -23,7 +23,8 @@
     </div>
   </div>
 </template>
-``````vue
+```
+```vue
 <!-- App.vue — 使用组件，填入内容 -->
 <template>
   <Card>

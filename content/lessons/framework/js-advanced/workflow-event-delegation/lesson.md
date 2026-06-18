@@ -19,7 +19,8 @@ let newCard = document.createElement("div");
 newCard.classList.add("card");
 listEl.appendChild(newCard);
 // ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在
-```这是一个很常见的 bug：**动态添加的元素不会自动继承之前绑定的事件**。
+```
+这是一个很常见的 bug：**动态添加的元素不会自动继承之前绑定的事件**。
 ::
 
 ::explain{title="解决方案：把事件绑在父容器上"}
@@ -36,7 +37,8 @@ listEl.addEventListener("click", function(event) {
   }
 });
 // 之后动态添加的卡片也会自动响应，因为事件绑在父容器上！
-```这就是**事件委托**——把事件交给父容器代理，不管子元素是初始就有还是后来加的，都能响应。
+```
+这就是**事件委托**——把事件交给父容器代理，不管子元素是初始就有还是后来加的，都能响应。
 ::
 
 ::explain{title="关键 API：closest() 和 matches()"}
@@ -44,16 +46,19 @@ listEl.addEventListener("click", function(event) {
 **`.closest("选择器")`** — 从当前元素向上查找最近的匹配祖先
 ```js
 event.target.closest(".card");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span
-```**`.matches("选择器")`** — 判断当前元素是否匹配选择器
+```
+**`.matches("选择器")`** — 判断当前元素是否匹配选择器
 ```js
 if (event.target.matches("button")) {
   // 点击的是按钮
 }
-```**常见模式：用 data 属性区分不同元素**
+```
+**常见模式：用 data 属性区分不同元素**
 ```html
 <button data-action="delete">删除</button>
 <button data-action="like">收藏</button>
-``````js
+```
+```js
 let action = event.target.dataset.action;  // "delete" 或 "like"
 ```
 ::

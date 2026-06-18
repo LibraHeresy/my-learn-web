@@ -13,11 +13,13 @@ let composer = {
   country: "波兰",
   birthYear: 1810
 };
-```访问属性有两种方式：
+```
+访问属性有两种方式：
 ```js
 composer.name       // "肖邦"（点号）
 composer["period"]  // "浪漫主义"（方括号）
-```修改或新增：
+```
+修改或新增：
 ```js
 composer.famousPiece = "夜曲";  // 新增
 composer.birthYear = 1809;      // 修正（肖邦实际生于 1810）
@@ -36,7 +38,8 @@ let composers = [
 composers.forEach(function(c) {
   console.log(`${c.name} — ${c.period}`);
 });
-```这才是实际开发中最常见的数据形式——数组里包着对象，每个对象代表一条记录。就像 Excel 表格：每一行是数组的一项，每一列是对象的属性！
+```
+这才是实际开发中最常见的数据形式——数组里包着对象，每个对象代表一条记录。就像 Excel 表格：每一行是数组的一项，每一列是对象的属性！
 ::
 
 ::example{title="看例子"}
@@ -57,7 +60,8 @@ composers.forEach(function(c) {
     </div>
   `;
 });
-```切换到 JS 标签页查看完整代码——对象数据的结构和用途一目了然。
+```
+切换到 JS 标签页查看完整代码——对象数据的结构和用途一目了然。
 ::
 
 ::task{title="动手试试 ✨"}

@@ -28,7 +28,8 @@ setTimeout(function() {
 // 取消（在还没执行前）
 let timer = setTimeout(fn, 5000);
 clearTimeout(timer);  // 不执行了
-```就像乐谱上的延长音记号——在某个音符上停留指定时长，然后继续演奏下一个音符。
+```
+就像乐谱上的延长音记号——在某个音符上停留指定时长，然后继续演奏下一个音符。
 `setInterval` 适合：自动轮播、倒计时、节拍器
 `setTimeout` 适合：延迟提示、debounce、定时检查
 ::
@@ -49,7 +50,8 @@ function stopMetronome() {
   clearInterval(timer);
   timer = null;
 }
-```切换到预览区，点击"开始节拍"看数字每秒递增。
+```
+切换到预览区，点击"开始节拍"看数字每秒递增。
 ::
 
 ::task{title="动手试试 ✨"}

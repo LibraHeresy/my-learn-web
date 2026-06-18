@@ -11,7 +11,8 @@
 音乐收藏_v2_最终版.html
 音乐收藏_v2_真的最终版.html
 音乐收藏_v3_备份.html
-```Git 解决了这个混乱。有了 Git：
+```
+Git 解决了这个混乱。有了 Git：
 - 不需要"v1""v2""最终版"这种命名
 - 每次修改后 `git commit`，自动记录快照
 - 任何时候可以回到之前的版本
@@ -24,19 +25,22 @@
 ```bash
 cd music-collection
 git init
-```这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。
+```
+这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。
 **2. `git add` + `git commit` — 保存快照**
 ```bash
 git add .                    # 把所有修改加入"暂存区"
 git commit -m "初始化项目"    # 创建一次提交（存档）
-```每次 commit 需要一条消息（`-m "..."`），说明这次改了什么。
+```
+每次 commit 需要一条消息（`-m "..."`），说明这次改了什么。
 - `-m` = message（消息）
 **3. `.gitignore` — 告诉 Git 忽略什么**
 创建 `.gitignore` 文件（注意文件名前面有个点）：
 ```node_modules/
 dist/
 .DS_Store
-```这些文件和文件夹不会被 Git 追踪：
+```
+这些文件和文件夹不会被 Git 追踪：
 - `node_modules/` — 太大了，而且别人可以通过 `npm install` 重新下载
 - `dist/` — 构建产物，不是源码
 - `.DS_Store` — Mac 系统文件，和项目无关

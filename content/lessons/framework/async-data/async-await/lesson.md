@@ -36,7 +36,8 @@ async function loadMusicData() {
     // 可以在这里显示友好的错误提示
   }
 }
-```这就是为什么学错误处理（上一章）很重要——async/await 中 try/catch 是最佳实践。
+```
+这就是为什么学错误处理（上一章）很重要——async/await 中 try/catch 是最佳实践。
 ::
 
 ::example{title="并行 vs 串行"}
@@ -50,7 +51,8 @@ const [result1, result2] = await Promise.all([
   fetchOne(),
   fetchTwo()
 ])
-````Promise.all()` 就像指挥同时给弦乐和管乐起拍——一起开始，一起等。
+```
+Promise.all()` 就像指挥同时给弦乐和管乐起拍——一起开始，一起等。
 ::
 
 ::task{title="动手试试 ✨"}

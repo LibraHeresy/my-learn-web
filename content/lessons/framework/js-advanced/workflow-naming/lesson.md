@@ -15,7 +15,8 @@ d.addEventListener("click", function() {
   let f = Math.floor(Math.random() * a.length);
   b.textContent = a[f];
 });
-```**✅ 好命名（任何人都看得懂）：**
+```
+**✅ 好命名（任何人都看得懂）：**
 ```js
 let composers = ["巴赫", "莫扎特", "贝多芬"];
 let displayEl = document.querySelector("#composerDisplay");
@@ -24,7 +25,8 @@ shuffleBtn.addEventListener("click", function() {
   let randomIndex = Math.floor(Math.random() * composers.length);
   displayEl.textContent = composers[randomIndex];
 });
-```两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**
+```
+两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**
 ::
 
 ::explain{title="命名规则速查表"}

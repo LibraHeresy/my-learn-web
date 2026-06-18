@@ -21,7 +21,8 @@ function addOne() {
   <p>作曲家：{{ composer }}</p>
   <button @click="addOne">+1</button>
 </template>
-```**规则不变：JS 中用 `.value`，模板中不用。**
+```
+**规则不变：JS 中用 `.value`，模板中不用。**
 但是写法更简洁了：在 `<script setup>` 中，变量和函数**自动暴露给模板**——不需要像 CDN 方式那样 `return { count, addOne }`！
 ::
 
@@ -51,7 +52,8 @@ const count = computed(() => filteredPieces.value.length)
     {{ p.name }} — {{ p.period }}
   </div>
 </template>
-```点击`巴洛克`按钮 → `selectedPeriod` 变了 → `filteredPieces` 自动重算 → `count` 自动重算 → 页面自动更新。三行 computed，替代了原来的手动 `render()` 函数！
+```
+点击`巴洛克`按钮 → `selectedPeriod` 变了 → `filteredPieces` 自动重算 → `count` 自动重算 → 页面自动更新。三行 computed，替代了原来的手动 `render()` 函数！
 ::
 
 ::task{title="你的任务 ✨"}

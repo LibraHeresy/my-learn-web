@@ -15,7 +15,8 @@
 h1 { color: #8B2E2E; }        /* 所有 h1 */
 .card { background: #FFFAF2; } /* 所有带 class="card" 的 */
 #title { font-size: 2rem; }    /* 只有 id="title" 那个 */
-```**类选择器最常用**——一个类可以给多个元素，一个元素也可以有多个类。
+```
+**类选择器最常用**——一个类可以给多个元素，一个元素也可以有多个类。
 ::
 
 ::explain{title="组合与后代"}
@@ -27,7 +28,8 @@ h1 { color: #8B2E2E; }        /* 所有 h1 */
 ```css
 .card h2 { color: #8B2E2E; }       /* card 内的所有 h2 */
 .card.featured { border-color: gold; } /* 只有 featured 的那张卡片 */
-```就像指挥可以指向"弦乐组中的第一小提琴"或"整个管乐声部"。
+```
+就像指挥可以指向"弦乐组中的第一小提琴"或"整个管乐声部"。
 ::
 
 ::explain{title="伪类选择器 — 状态触发的魔法"}
@@ -40,7 +42,8 @@ h1 { color: #8B2E2E; }        /* 所有 h1 */
 .card:hover { transform: translateY(-2px); }
 .card:first-child { border-color: #8B2E2E; }
 .card:nth-child(2) { border-color: #C9A96E; }
-````:hover` 是交互感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！
+```
+:hover` 是交互感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！
 ::
 
 ::example{title="看例子"}
@@ -64,7 +67,8 @@ h1 { color: #8B2E2E; }        /* 所有 h1 */
 .card:nth-child(1) { border-left: 4px solid #8B2E2E; }
 .card:nth-child(2) { border-left: 4px solid #C9A96E; }
 .card:nth-child(3) { border-left: 4px solid #5B8C5A; }
-```试试把鼠标移到卡片上，看它们微微上浮的效果！
+```
+试试把鼠标移到卡片上，看它们微微上浮的效果！
 ::
 
 ::task{title="动手试试 ✨"}

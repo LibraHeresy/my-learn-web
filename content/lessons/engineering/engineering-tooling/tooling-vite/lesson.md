@@ -16,7 +16,8 @@ Vite（法语"快"的意思，读作 /viːt/）是一个**前端构建工具**�
 在终端中运行：
 ```bash
 npm create vite@latest music-collection -- --template vue
-```这条命令做了什么？
+```
+这条命令做了什么？
 - `npm create` — npm 的"创建项目"功能
 - `vite@latest` — 使用最新版 Vite 脚手架
 - `music-collection` — 项目名称（也是文件夹名）
@@ -26,7 +27,8 @@ npm create vite@latest music-collection -- --template vue
 cd music-collection   # 进入项目文件夹
 npm install           # 安装依赖（Vue、Vite 等）
 npm run dev           # 启动开发服务器
-```浏览器会自动打开 `http://localhost:5173`，你会看到一个 Vue 的欢迎页面！
+```
+浏览器会自动打开 `http://localhost:5173`，你会看到一个 Vue 的欢迎页面！
 **项目结构一览：**
 ```music-collection/
 ├── index.html          # 入口 HTML

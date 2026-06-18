@@ -15,7 +15,8 @@ getUser(id, (user) => {
     })
   })
 })
-```Promise 用链式调用拉平了结构：
+```
+Promise 用链式调用拉平了结构：
 ```js
 // Promise 链式调用 ✨
 getUser(id)
@@ -23,7 +24,8 @@ getUser(id)
   .then(orders => getDetails(orders[0].id))
   .then(details => console.log(details))
   .catch(err => console.log('出错了：', err))
-```就像从复杂的多声部对位变成了清晰的主旋律加伴奏。
+```
+就像从复杂的多声部对位变成了清晰的主旋律加伴奏。
 ::
 
 ::example{title="Promise 的三种状态"}
@@ -58,7 +60,8 @@ fetchUserId('小明')
   .then(info => fetchFavorites(info))  // 再返回新 Promise
   .then(favs => console.log('喜欢的曲子：', favs))
   .catch(err => console.log('某一步失败了：', err))
-```关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。
+```
+关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。
 ::
 
 ::task{title="动手试试 ✨"}

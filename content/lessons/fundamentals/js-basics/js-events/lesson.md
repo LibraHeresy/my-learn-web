@@ -15,7 +15,8 @@ let btn = document.querySelector("#myBtn");
 btn.addEventListener("click", function() {
   alert("你点击了按钮！");
 });
-```就像给按钮装了一只耳朵，它时刻听着有没有"点击"这件事发生。
+```
+就像给按钮装了一只耳朵，它时刻听着有没有"点击"这件事发生。
 ::
 
 ::explain{title="事件处理函数"}
@@ -27,7 +28,8 @@ btn.addEventListener("click", function() {
   // 点击后执行的代码写在这里
   document.querySelector("h1").textContent = "标题变了！";
 });
-```事件处理函数就像一个"回响"——你按下琴键（触发事件），琴声响起（执行函数）。
+```
+事件处理函数就像一个"回响"——你按下琴键（触发事件），琴声响起（执行函数）。
 ::
 
 ::example{title="看例子"}
@@ -40,7 +42,8 @@ btn.addEventListener("click", function() {
   count = count + 1;
   display.textContent = `你点击了 ${count} 次`;
 });
-```切换到 JS 标签页和预览区，试试点击按钮！
+```
+切换到 JS 标签页和预览区，试试点击按钮！
 ::
 
 ::task{title="动手试试 ✨"}

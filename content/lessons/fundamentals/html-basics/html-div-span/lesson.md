@@ -44,7 +44,8 @@ class 属性可以给它们贴上分类标签（🌐全局属性——所有标�
   <h2><span class="name">巴赫</span></h2>
   <p>时期：<span class="name">巴洛克</span></p>
 </div>
-```注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。
+```
+注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。
 ::
 
 ::task{title="动手试试 ✨"}

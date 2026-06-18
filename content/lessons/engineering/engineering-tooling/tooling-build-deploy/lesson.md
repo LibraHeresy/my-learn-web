@@ -19,14 +19,16 @@
 **命令：**
 ```bash
 npm run build
-```运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。
+```
+运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。
 ```dist/
 ├── index.html        # 入口页面
 ├── assets/
 │   ├── index-abc123.js   # 打包后的 JS
 │   └── index-def456.css  # 打包后的 CSS
 └── ...
-```> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的"产品"。
+```
+> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的"产品"。
 ::
 
 ::explain{title="部署到 GitHub Pages"}
@@ -35,7 +37,8 @@ GitHub Pages 是 GitHub 提供的免费静态网站托管服务。你可以把 `
 1. 在项目中安装 `gh-pages` 包：
 ```bash
 npm install -D gh-pages
-```2. 在 `package.json` 中添加部署脚本：
+```
+2. 在 `package.json` 中添加部署脚本：
 ```json
 {
   "scripts": {
@@ -44,7 +47,8 @@ npm install -D gh-pages
     "deploy": "gh-pages -d dist"
   }
 }
-```3. 在 `vite.config.js` 中添加 base 配置：
+```
+3. 在 `vite.config.js` 中添加 base 配置：
 ```js
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -52,11 +56,13 @@ export default defineConfig({
   plugins: [vue()],
   base: '/music-collection/'  // 你的仓库名
 })
-```4. 构建并部署：
+```
+4. 构建并部署：
 ```bash
 npm run build
 npm run deploy
-```等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉
+```
+等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉
 ::
 
 ::task{title="你的任务 ✨"}

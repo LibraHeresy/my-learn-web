@@ -21,7 +21,8 @@ document.querySelector("#list").appendChild(card);
 ```js
 let card = document.querySelector("#card3");
 card.remove();  // 没了！
-```配合 `createElement` 实现增删：
+```
+配合 `createElement` 实现增删：
 ```js
 function addCard(title) {
   let card = document.createElement("div");
@@ -34,7 +35,8 @@ function removeLast() {
   let last = cards[cards.length - 1];
   if (last) last.remove();
 }
-```增删改查——完整的数据操作闭环！
+```
+增删改查——完整的数据操作闭环！
 ::
 
 ::example{title="看例子"}
@@ -52,7 +54,8 @@ function removeLast() {
   let last = items[items.length - 1];
   if (last) last.remove();
 }
-```切换到预览区，输入内容点添加，再点删除试试——页面元素在动态变化！
+```
+切换到预览区，输入内容点添加，再点删除试试——页面元素在动态变化！
 ::
 
 ::task{title="动手试试 ✨"}

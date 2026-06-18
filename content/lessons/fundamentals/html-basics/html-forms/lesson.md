@@ -29,7 +29,8 @@
 <input type="text" placeholder="请输入你的名字">
 <input type="email" placeholder="请输入邮箱">
 <input type="date">
-```不同的 type 就像不同的乐器，各有各的用途！
+```
+不同的 type 就像不同的乐器，各有各的用途！
 ::
 
 ::explain{title="下拉框与多行文本"}
@@ -40,10 +41,12 @@
   <option>莫扎特</option>
   <option>肖邦</option>
 </select>
-````<textarea>` 创建多行文本输入框，用 `rows` 设置行数：
+```
+<textarea>` 创建多行文本输入框，用 `rows` 设置行数：
 ```html
 <textarea rows="3" placeholder="请写下你的感想..."></textarea>
-````<label>` 的 `for` 属性对应 `<input>` 的 `id`，点击标签文字时输入框会自动获得焦点——就像节目单上"独奏者："后面跟着一条填空线。
+```
+`<label>` 的 `for` 属性对应 `<input>` 的 `id`，点击标签文字时输入框会自动获得焦点——就像节目单上"独奏者："后面跟着一条填空线。
 ::
 
 ::example{title="看例子"}
@@ -62,7 +65,8 @@
   <textarea id="comment" rows="3"></textarea>
   <button type="submit">提交</button>
 </form>
-```切换到预览区，可以和这个表单互动！
+```
+切换到预览区，可以和这个表单互动！
 
 ---
 

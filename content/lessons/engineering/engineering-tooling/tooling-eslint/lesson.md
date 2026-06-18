@@ -23,7 +23,8 @@ ESLint 是 JS/TS 生态中最主流的代码检查工具。它定义了一套规
 npm init @eslint/config
 # 按提示选择：Vue、TypeScript、ESM 等
 # 会在项目根目录生成 eslint.config.js
-```**常见规则举例：**
+```
+**常见规则举例：**
 ```js
 // eslint.config.js
 export default [
@@ -36,7 +37,8 @@ export default [
     }
   }
 ]
-```**VSCode 集成：** 安装 ESLint 插件后，错误会在编辑器中直接标红下划线，保存时自动修复部分问题。
+```
+**VSCode 集成：** 安装 ESLint 插件后，错误会在编辑器中直接标红下划线，保存时自动修复部分问题。
 > 🎯 ESLint 就像排练时的指挥——等一下，第二小提琴，你这里有个音不准（变量未定义），重来。
 ::
 
@@ -45,7 +47,8 @@ Prettier 是一个有强迫症的代码格式化工具——它不检查 bug，�
 **安装：**
 ```bash
 npm install -D prettier
-```**配置文件 .prettierrc：**
+```
+**配置文件 .prettierrc：**
 ```json
 {
   "semi": false,
@@ -54,7 +57,8 @@ npm install -D prettier
   "trailingComma": "es5",
   "printWidth": 100
 }
-```保存文件时，Prettier 自动把：
+```
+保存文件时，Prettier 自动把：
 ```js
 // 格式化前
 const x=1;const y=2;function foo(a,b){return a+b}
@@ -64,7 +68,8 @@ const y = 2
 function foo(a, b) {
   return a + b
 }
-```**让 ESLint 和 Prettier 和平共处：**
+```
+**让 ESLint 和 Prettier 和平共处：**
 安装 eslint-config-prettier，关闭 ESLint 中与 Prettier 冲突的规则。
 > 📐 Prettier 就像乐谱排版师——音符是对的（ESLint 验证过了），但间距、对齐、换行要美观统一。
 ::
@@ -93,7 +98,8 @@ export default [
     "source.fixAll.eslint": true
   }
 }
-```配置完成后，每次保存文件：Prettier 先格式化，ESLint 再检查和自动修复。你的代码会像印刷出来的乐谱一样整齐。
+```
+配置完成后，每次保存文件：Prettier 先格式化，ESLint 再检查和自动修复。你的代码会像印刷出来的乐谱一样整齐。
 ::
 
 ::task{title="动手试试 ✨"}

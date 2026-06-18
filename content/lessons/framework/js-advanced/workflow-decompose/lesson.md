@@ -17,7 +17,8 @@ function handleEverything() {
   // 保存记录
   // …… 100 行代码
 }
-```问题：
+```
+问题：
 1. **难读懂** — 你需要从头到尾理解才能修改其中一步
 2. **难调试** — 出错时不知道是哪一步的问题
 3. **难复用** — 如果另一个地方也需要"渲染页面"，你没法单独调用
@@ -31,7 +32,8 @@ function initPage() {
 function loadData() { /* 只负责获取数据 */ }
 function renderCards(list) { /* 只负责渲染 */ }
 function bindEvents() { /* 只负责绑定事件 */ }
-```每个函数**只做一件事**，函数名准确描述它做什么。这就是"单一职责"——编程最重要的组织原则之一。
+```
+每个函数**只做一件事**，函数名准确描述它做什么。这就是"单一职责"——编程最重要的组织原则之一。
 ::
 
 ::explain{title="什么时候该拆分？"}
@@ -63,7 +65,8 @@ function setupMusicPage() {
   let total = pieces.length;
   statsEl.textContent = "共 " + total + " 首曲目";
 }
-```**拆分后（三个函数各司其职）：**
+```
+**拆分后（三个函数各司其职）：**
 ```js
 function initPage() {
   renderCards(pieces);
@@ -73,7 +76,8 @@ function initPage() {
 function renderCards(list) { /* 只负责渲染 */ }
 function bindFilter() { /* 只负责筛选逻辑 */ }
 function showStats(list) { /* 只负责显示统计 */ }
-```现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新渲染——这就是拆分的威力！
+```
+现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新渲染——这就是拆分的威力！
 ::
 
 ::task{title="动手试试 ✨"}

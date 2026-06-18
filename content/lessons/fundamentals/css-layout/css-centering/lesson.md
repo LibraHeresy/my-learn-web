@@ -9,10 +9,12 @@
 **水平居中（文字）：**
 ```css
 text-align: center;
-```**水平居中（块级元素）：**
+```
+**水平居中（块级元素）：**
 ```css
 margin: 0 auto;
-```**Flexbox 一键居中（最强方法）：**
+```
+**Flexbox 一键居中（最强方法）：**
 ```css
 .container {
   display: flex;

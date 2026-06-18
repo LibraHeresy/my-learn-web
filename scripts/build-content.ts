@@ -176,7 +176,7 @@ function injectTerms(text: string, termKeys: string[]): string {
   if (!text) return text
   if (!termKeys.length) return text
 
-  const protectRegex = /```[\s\S]*?```|`[^`]*`|\[[^\]]+\]\([^)]+\)/g
+  const protectRegex = /```[\s\S]*?```|`[^`\n]*`|\[[^\]]+\]\([^)]+\)/g
   const protectedParts: Array<{ start: number; end: number; value: string }> = []
 
   for (const match of text.matchAll(protectRegex)) {
@@ -201,7 +201,8 @@ function injectTermsInPlain(text: string, termKeys: string[]): string {
   let out = text
   for (const key of termKeys) {
     const escaped = escapeTermKey(key)
-    const regex = new RegExp(`\\b${escaped}\\b`, 'g')
+    const useWordBoundary = /^[A-Za-z0-9_]+$/.test(key)
+    const regex = useWordBoundary ? new RegExp(`\\b${escaped}\\b`, 'g') : new RegExp(escaped, 'g')
     out = out.replace(regex, `{{term:${key}}}`)
   }
   return out
@@ -216,6 +217,7 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
     }
     if (node.type === 'heading') return node
     if (node.type === 'term') return node
+    if (node.type === 'code') return node
 
     const next: BlockNode = {
       ...node,
@@ -275,6 +277,36 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
       continue
     }
 
+    const fence = line.match(/^```\s*([\w-]+)?\s*$/)
+    if (fence) {
+      const language = fence[1] || 'text'
+      i += 1
+      const codeLines: string[] = []
+      while (i < lines.length && !lines[i].trim().startsWith('```')) {
+        codeLines.push(lines[i])
+        i += 1
+      }
+      if (i >= lines.length) throw new Error('Unclosed ``` code fence')
+      body.push({
+        type: 'code',
+        language,
+        code: codeLines.join('\n').trimEnd(),
+      })
+      i += 1
+      continue
+    }
+
+    const singleLineCode = lines[i].trim().match(/^`([^`]+)`$/) ?? lines[i].trim().match(/^``([^`]+)``$/)
+    if (singleLineCode) {
+      const raw = singleLineCode[1].trim()
+      const langMatch = raw.match(/^(html|css|js|ts|tsx|jsx|json|yaml|yml|bash|sh)\s+(.*)$/i)
+      const language = langMatch ? langMatch[1].toLowerCase() : 'text'
+      const code = langMatch ? langMatch[2] : raw
+      body.push({ type: 'code', language, code })
+      i += 1
+      continue
+    }
+
     const heading = line.match(/^(#{1,6})\s+(.+)$/)
     if (heading) {
       body.push({
@@ -307,7 +339,13 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
 
     const paragraphLines = [lines[i].trim()]
     i += 1
-    while (i < lines.length && lines[i].trim() && !lines[i].trim().startsWith('::') && !lines[i].trim().startsWith('#')) {
+    while (
+      i < lines.length &&
+      lines[i].trim() &&
+      !lines[i].trim().startsWith('::') &&
+      !lines[i].trim().startsWith('#') &&
+      !lines[i].trim().startsWith('```')
+    ) {
       paragraphLines.push(lines[i].trim())
       i += 1
     }
@@ -365,9 +403,10 @@ async function collectLessonDirs(root: string): Promise<string[]> {
 
 async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
   const metaPath = path.join(lessonDir, 'meta.yaml')
+  const lessonPath = path.join(lessonDir, 'lesson.md')
   const [metaRaw, lessonRaw] = await Promise.all([
     readFile(metaPath, 'utf8'),
-    readFile(path.join(lessonDir, 'lesson.md'), 'utf8'),
+    readFile(lessonPath, 'utf8'),
   ])
 
   let meta: ContentMeta
@@ -377,7 +416,13 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
     const msg = e instanceof Error ? e.message : String(e)
     throw new Error(`Failed to parse ${path.relative(projectRoot, metaPath)}: ${msg}`)
   }
-  const body = parseLessonMarkdown(lessonRaw)
+  let body: ContentBodyNode[]
+  try {
+    body = parseLessonMarkdown(lessonRaw)
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e)
+    throw new Error(`Failed to parse ${path.relative(projectRoot, lessonPath)}: ${msg}`)
+  }
 
   let html = ''
   let css = ''
