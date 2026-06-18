@@ -1,0 +1,9 @@
+id: js-array-methods
+title: 数组方法进阶 — 像筛选乐谱一样处理数据
+track: fundamentals
+chapter: js-basics
+order: 10
+mode: sandbox
+musicAnalogy: `.map()` 就像**移调**——把整首曲子每个音都升高一度，返回一个新的版本；`.filter()` 就像从总谱中**挑出所有弦乐声部**——只保留符合条件的部分。两者都不破坏原谱（原数组），而是生成一份新的。
+listenTo: 巴赫《勃兰登堡协奏曲》No.3 — 各声部轮流演奏同一主题（map），然后只留下弦乐组对话（filter），现代 Web 开发中用 map/filter 处理数据就像听巴赫一样行云流水。
+estimatedMinutes: 0

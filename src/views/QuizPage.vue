@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useQuizStore } from '../stores/quiz'
 import { gems, type QuizQuestion, type GemDef } from '../configs/quiz-questions'
 
-const router = useRouter()
 const store = useQuizStore()
 
 type Page = 'home' | 'level' | 'result'
@@ -100,7 +98,6 @@ function startWrongReview() {
 
 const typeLabel = (t: string) => ({ 'normal': '🟢 普通关', 'elite': '🔵 精英关', 'boss': '🟣 Boss 关', 'achievement-boss': '🔴 成就 Boss' }[t] || t)
 const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '#2196F3', 'boss': '#9C27B0', 'achievement-boss': 'var(--color-error)' }[t] || '#999')
-function goLesson(id?: string) { if (id) router.push(`/lesson/${id}`) }
 </script>
 
 <template>

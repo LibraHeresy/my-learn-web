@@ -1,0 +1,9 @@
+id: js-events
+title: 点击事件 — 让按钮响应用户
+track: fundamentals
+chapter: js-basics
+order: 5
+mode: sandbox
+musicAnalogy: 事件就像**乐器对演奏者的响应**——按下琴键（点击），琴槌敲击琴弦发出声音（执行代码）。没有演奏者的动作，乐器不会自己发出声音；没有事件，代码不会自动执行。
+listenTo: "普罗科菲耶夫《彼得与狼》— 每个角色有特定主题，在故事的不同时间点\"出场\"（触发），就像页面中不同元素在不同事件触发时才响应。"
+estimatedMinutes: 0

@@ -1,0 +1,9 @@
+id: vue-philosophy
+title: "Vue 的思维方式 — 从\"操作 DOM\"到\"声明结果\""
+track: engineering
+chapter: vue-framework
+order: 6
+mode: local
+musicAnalogy: "在此之前，你写 JS 操作 DOM 就像逐音给乐手指令：\"第一小提琴第二拍拉G\"。而 Vue 像指挥给总谱——你描述\"这里要有弦乐主题\"，Vue 负责让弦乐在正确的时间出声。这是从**命令式**到**声明式**的思维转变。"
+listenTo: "巴赫《赋格的艺术》— 赋格是一种\"声明式\"作曲法：你声明一个主题，对位规则自动生成各声部的进入与呼应。Vue 的响应式系统也是如此——声明数据与模板的关系，框架自动处理同步。"
+estimatedMinutes: 0

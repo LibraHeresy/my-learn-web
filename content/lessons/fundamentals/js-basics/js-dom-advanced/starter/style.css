@@ -1,0 +1,52 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.plan-box {
+  max-width: 460px;
+  margin: 20px auto;
+}
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+#itemInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.add-row button {
+  padding: 10px 16px;
+  background: #8B2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.add-row button:hover {
+  background: #C94545;
+}
+#removeBtn {
+  background: #6B5A4E;
+}
+#removeBtn:hover {
+  background: #C94545;
+}
+#list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.plan-item {
+  background: #FFFAF2;
+  border: 1px solid #E8DDCC;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #3D2B1F;
+}

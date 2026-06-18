@@ -1,0 +1,9 @@
+id: js-es6-syntax
+title: "ES6 新语法 — 让代码更优雅的\"新乐器\""
+track: framework
+chapter: js-advanced
+order: 11
+mode: sandbox
+musicAnalogy: "就像现代音乐加入了电声乐器让表现力更丰富，ES6（ECMAScript 2015）为 JavaScript 带来了更简洁、更强大的语法。用这些新\"乐器\"，你可以用更少的音符写出更丰富的旋律。"
+listenTo: 德彪西《意象集》— 印象派用新的和声语言打破了传统规则，正如 ES6 用新语法改变了 JavaScript 的写法。
+estimatedMinutes: 0

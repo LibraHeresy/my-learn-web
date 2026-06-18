@@ -1,0 +1,9 @@
+id: html-forms
+title: 表单 — 收集你的音乐信息
+track: fundamentals
+chapter: html-basics
+order: 12
+mode: sandbox
+musicAnalogy: "表单就像**报名表**或**节目征集单**——听众填写他们的音乐偏好，就像演奏者在报名表上写下自己的声部。`<input>` 是填空格，`<label>` 是问题，`<button>` 是\"提交\"按钮。"
+listenTo: 小约翰·施特劳斯《蓝色多瑙河》— 圆舞曲的互动性就像表单与用户的对话，你来我往，优雅流畅。
+estimatedMinutes: 0

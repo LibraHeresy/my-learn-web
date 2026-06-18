@@ -1,0 +1,9 @@
+id: html-audio-video
+title: 音频与视频 — 让网页发出声音
+track: fundamentals
+chapter: html-basics
+order: 10
+mode: sandbox
+musicAnalogy: 这是离音乐最近的一节课！`<audio>` 标签让你的网页**播放音乐**，`<video>` 标签让你的网页**播放视频**。作为音乐学的学生，你会发现这比 `<p>` 和 `<div>` 有趣多了！
+listenTo: 这一课不需要推荐——直接在编辑器里放一段你喜欢的音乐吧！用 `<audio>` 标签让它响起来。
+estimatedMinutes: 0

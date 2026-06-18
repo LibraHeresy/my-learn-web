@@ -6,6 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "build:content": "node --experimental-strip-types scripts/build-content.ts",
+    "lint:content": "node --experimental-strip-types scripts/lint-content.ts",
+    "migrate:lessons": "node --experimental-strip-types scripts/migrate-lessons-to-content.ts",
+    "migrate:projects": "node --experimental-strip-types scripts/migrate-projects-to-content.ts",
+    "migrate:prologues": "node --experimental-strip-types scripts/migrate-prologues-to-content.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

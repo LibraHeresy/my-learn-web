@@ -1,0 +1,9 @@
+id: workflow-debugger
+title: 断点调试 — 用 Sources 面板听诊代码
+track: framework
+chapter: js-advanced
+order: 5
+mode: sandbox
+musicAnalogy: console.log 就像在排练中让乐手报一遍自己的音符——能发现问题，却看不清全局。断点调试则像指挥让乐队在某一个小节停下来，逐个声部检查：长笛吹的是什么音？定音鼓在这个拍点上的力度对吗？你可以在任意时刻凝固住整个程序，查看所有变量的值，然后一行一行地执行，观察数据如何流动。
+listenTo: 贝多芬《第九交响曲》排练录音 — 任何一位指挥在排练时都会反复停下、纠正、重来。断点调试就是你在代码中的排练指挥棒——发现不和谐的音（bug），停下来，找到原因，修正好，再继续。
+estimatedMinutes: 0

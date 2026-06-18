@@ -1,0 +1,44 @@
+:root {
+  --card-bg: #FFFAF2;
+  --card-accent: #8B2E2E;
+  --card-text: #3D2B1F;
+  --card-sub: #6B5A4E;
+}
+h1 {
+  color: #8B2E2E;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.card {
+  background: var(--card-bg);
+  border-left: 4px solid var(--card-accent);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+.card h2 {
+  color: var(--card-accent);
+  margin: 0 0 8px 0;
+}
+.card p {
+  color: var(--card-sub);
+  margin: 0 0 12px 0;
+  font-size: 14px;
+}
+.tag {
+  display: inline-block;
+  background: var(--card-accent);
+  color: var(--card-bg);
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+/* 暗色主题 */
+.card.dark {
+  --card-bg: #3D2B1F;
+  --card-accent: #C9A96E;
+  --card-text: #FFFAF2;
+  --card-sub: #B8A898;
+}

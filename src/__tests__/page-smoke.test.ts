@@ -2,9 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import { lessons } from '../configs/lessons'
-import { prologueLessons } from '../configs/prologues'
-import { projects } from '../configs/projects'
+import { getAllLessonsV2 } from '../content-v2/lessons'
+import { getAllProjectsV2 } from '../content-v2/projects'
 
 // ============================================================
 // 第三层：页面冒烟测试
@@ -47,28 +46,16 @@ describe('页面冒烟测试', () => {
     })
   })
 
-  // ---- LessonPlayer：遍历所有课程 ----
-  describe('LessonPlayer', () => {
-    it.each(lessons.map(l => ({ id: l.id, title: l.title })))(
+  // ---- LessonV2Player：遍历所有课程 ----
+  describe('LessonV2Player', () => {
+    const lessons = getAllLessonsV2()
+    it.each(lessons.map(l => ({ id: l.id, title: l.meta.title })))(
       '课程 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
       async ({ id }) => {
         const router = await setupRoute(`/lesson/${id}`)
-        const { default: LessonPlayer } = await import('../views/LessonPlayer.vue')
-        const wrapper = mount(LessonPlayer, {
-          global: { plugins: [router, createPinia()] },
-        })
-        expect(wrapper.find('.lesson-player').exists()).toBe(true)
-      }
-    )
-
-    it.each(prologueLessons.map(l => ({ id: l.id, title: l.title })))(
-      '序言 "$title" 页面渲染不崩溃',
-      { timeout: 10000 },
-      async ({ id }) => {
-        const router = await setupRoute(`/lesson/${id}`)
-        const { default: LessonPlayer } = await import('../views/LessonPlayer.vue')
-        const wrapper = mount(LessonPlayer, {
+        const { default: LessonV2Player } = await import('../views/LessonV2Player.vue')
+        const wrapper = mount(LessonV2Player, {
           global: { plugins: [router, createPinia()] },
         })
         expect(wrapper.find('.lesson-player').exists()).toBe(true)
@@ -76,15 +63,16 @@ describe('页面冒烟测试', () => {
     )
   })
 
-  // ---- ProjectPlayer：遍历所有项目 ----
-  describe('ProjectPlayer', () => {
-    it.each(projects.map(p => ({ id: p.id, title: p.title })))(
+  // ---- ProjectV2Player：遍历所有项目 ----
+  describe('ProjectV2Player', () => {
+    const projects = getAllProjectsV2()
+    it.each(projects.map(p => ({ id: p.id, title: p.meta.title })))(
       '项目 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
       async ({ id }) => {
         const router = await setupRoute(`/project/${id}`)
-        const { default: ProjectPlayer } = await import('../views/ProjectPlayer.vue')
-        const wrapper = mount(ProjectPlayer, {
+        const { default: ProjectV2Player } = await import('../views/ProjectV2Player.vue')
+        const wrapper = mount(ProjectV2Player, {
           global: { plugins: [router, createPinia()] },
         })
         expect(wrapper.find('.project-player').exists()).toBe(true)
@@ -94,13 +82,13 @@ describe('页面冒烟测试', () => {
 
   // ---- 关键组件 ----
   describe('关键组件', () => {
-    it('LessonContent 渲染', async () => {
-      const lesson = lessons[0]
-      const { default: LessonContent } = await import('../components/LessonContent.vue')
-      const wrapper = mount(LessonContent, {
+    it('DocumentRenderer 渲染', async () => {
+      const lesson = getAllLessonsV2()[0]
+      const { default: DocumentRenderer } = await import('../content-runtime/renderers/DocumentRenderer.vue')
+      const wrapper = mount(DocumentRenderer, {
         props: { lesson },
       })
-      expect(wrapper.find('.content-panel').exists()).toBe(true)
+      expect(wrapper.find('.content-doc').exists()).toBe(true)
     })
 
     it('PlayerFooter 渲染', async () => {

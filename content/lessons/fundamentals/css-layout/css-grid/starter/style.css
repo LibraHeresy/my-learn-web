@@ -1,0 +1,32 @@
+h1 {
+  color: #8B2E2E;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+.card h2 {
+  color: #8B2E2E;
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+.card p {
+  color: #6B5A4E;
+  margin: 0;
+  font-size: 12px;
+}
+.wide-card {
+  grid-column: span 2;
+  background: #FFF8F0;
+  border-color: #C9A96E;
+}

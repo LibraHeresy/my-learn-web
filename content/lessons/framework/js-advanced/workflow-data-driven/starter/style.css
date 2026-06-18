@@ -1,0 +1,76 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+#pieceList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 16px auto;
+  min-height: 60px;
+}
+.piece-item {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8B2E2E;
+  font-weight: 500;
+}
+.piece-item button {
+  background: transparent;
+  color: #C94545;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.piece-item button:hover {
+  background: #C94545;
+  color: white;
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+  align-items: center;
+}
+#nameInput {
+  padding: 8px 12px;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 180px;
+  color: #3D2B1F;
+  background: #FFFAF2;
+}
+.toolbar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+#addBtn {
+  background: #8B2E2E;
+  color: white;
+}
+#addBtn:hover {
+  background: #C94545;
+}
+#clearBtn {
+  background: #6B5A4E;
+  color: white;
+}
+.stats {
+  text-align: center;
+  color: #6B5A4E;
+  margin-top: 12px;
+  font-size: 14px;
+}

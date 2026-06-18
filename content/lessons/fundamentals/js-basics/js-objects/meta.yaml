@@ -1,0 +1,9 @@
+id: js-objects
+title: 对象 — 结构化你的音乐数据
+track: fundamentals
+chapter: js-basics
+order: 12
+mode: sandbox
+musicAnalogy: "对象就像**音乐家档案**——用键值对（key-value）组织信息：姓名、时期、代表作、国籍。不像数组用数字索引，对象用**有名字的键**来存取数据，就像档案上的标签：\"姓名____、时期____\"。"
+listenTo: 拉威尔《波莱罗》— 配器总谱上标注了每一件乐器的详细信息（乐器名、调性、进入小节），就像对象中结构化的键值对数据。
+estimatedMinutes: 0

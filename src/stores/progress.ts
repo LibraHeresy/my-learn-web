@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { LessonProgress } from '../types'
-import { lessons } from '../configs/lessons'
+import { getAllLessonsV2 } from '../content-v2/lessons'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码
@@ -81,15 +81,15 @@ export const useProgressStore = defineStore('progress', () => {
 
   // 章节已完成课程数
   function getChapterCompletedCount(chapterId: string): number {
-    return lessons
-      .filter(l => l.chapterId === chapterId)
-      .filter(l => isCompleted(l.id))
+    return getAllLessonsV2()
+      .filter((l) => l.meta.chapter === chapterId)
+      .filter((l) => isCompleted(l.id))
       .length
   }
 
   // 章节总课程数
   function getChapterLessonCount(chapterId: string): number {
-    return lessons.filter(l => l.chapterId === chapterId).length
+    return getAllLessonsV2().filter((l) => l.meta.chapter === chapterId).length
   }
 
   // 初始化加载

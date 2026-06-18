@@ -1,0 +1,9 @@
+id: js-error-handling
+title: "错误处理 — 给代码上\"保险\""
+track: framework
+chapter: js-advanced
+order: 12
+mode: sandbox
+musicAnalogy: "演奏中难免出错（碰错音、进错拍），好乐手知道如何处理——继续演奏而不是停下来。编程也一样：错误一定会发生，关键是优雅地处理它们，而不是让整个程序\"戛然而止\"。"
+listenTo: "爵士乐即兴演奏 — 爵士乐手最擅长的就是在\"错误\"中找到新的旋律。一个\"错音\"可以被变成经过音，编程中的错误也可以被优雅地化解。"
+estimatedMinutes: 0

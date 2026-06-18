@@ -1,0 +1,9 @@
+id: vue-computed-watch
+title: "computed 与 watch — 自动跟进的\"伴奏\""
+track: engineering
+chapter: vue-framework
+order: 7
+mode: local
+musicAnalogy: "乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（computed——自动计算，有缓存）；一种是鼓手听到变换后才改变节奏型（watch——观察变化，执行副作用）。两者各有用途，选对工具让你的\"演奏\"更流畅。"
+listenTo: "舒伯特《鳟鱼五重奏》— 五个乐器各有角色：钢琴提供和声基础（computed），低音提琴时而拨弦时而拉弓（watch 到主旋律变化时改变奏法）。听这首歌时想一下：谁在\"计算\"，谁在\"观察\"？"
+estimatedMinutes: 0

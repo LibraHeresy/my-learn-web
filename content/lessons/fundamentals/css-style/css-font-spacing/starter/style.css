@@ -1,0 +1,18 @@
+h1 {
+  font-family: "Noto Serif SC", serif;
+  text-align: center;
+  color: #3D2B1F;
+}
+.card {
+  font-family: "Noto Serif SC", serif;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  text-align: center;
+  background-color: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 12px;
+  padding: 24px;
+}
+.card h2 {
+  color: #8B2E2E;
+}

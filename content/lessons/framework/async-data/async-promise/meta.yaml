@@ -1,0 +1,9 @@
+id: async-promise
+title: "Promise — 给异步操作一个\"承诺\""
+track: framework
+chapter: async-data
+order: 3
+mode: sandbox
+musicAnalogy: "你预订了一张音乐会门票——你拿到了一个\"承诺\"（Promise）。这个承诺可能兑现（拿到票），也可能落空（售罄）。在结果出来之前，你可以继续做其他事。Promise 就是 JavaScript 给异步操作的结果打的\"包票\"。"
+listenTo: "舒伯特《未完成交响曲》— 这部作品只有两个乐章，却\"完成\"了震撼人心的表达。Promise 也有三种状态——进行中（pending）、兑现（fulfilled）、拒绝（rejected），每一种都是合理的。"
+estimatedMinutes: 0

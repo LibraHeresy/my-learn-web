@@ -1,0 +1,87 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+  margin-bottom: 12px;
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.toolbar button {
+  padding: 8px 20px;
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #3D2B1F;
+  transition: all 0.2s;
+}
+.toolbar button:hover {
+  background: #8B2E2E;
+  color: #fff;
+}
+.toolbar button.active {
+  background: #8B2E2E;
+  color: #fff;
+  border-color: #8B2E2E;
+}
+#gallery {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 80px;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  min-width: 150px;
+  transition: all 0.3s;
+}
+.card:hover {
+  border-color: #C9A96E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(61, 43, 31, 0.1);
+}
+.card h2 {
+  color: #8B2E2E;
+  margin: 0 0 6px 0;
+  font-size: 17px;
+}
+.card .period {
+  color: #C9A96E;
+  font-size: 12px;
+  font-weight: 600;
+}
+.card p {
+  color: #6B5A4E;
+  margin: 4px 0 0 0;
+  font-size: 13px;
+}
+.add-bar {
+  text-align: center;
+  margin-top: 20px;
+}
+.add-bar .hint {
+  color: #C9A96E;
+  font-size: 13px;
+  margin-right: 8px;
+}
+.add-bar button {
+  padding: 10px 24px;
+  background: #8B2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.add-bar button:hover {
+  background: #C94545;
+}

@@ -1,0 +1,9 @@
+id: js-capstone
+title: 综合项目 — 交互式音乐名片生成器
+track: fundamentals
+chapter: js-basics
+order: 15
+mode: sandbox
+musicAnalogy: 一场完整的**交响音乐会**需要乐谱（HTML）、演奏法（CSS）和指挥家（JS）三者协作。这节综合课把前 11 节课的知识融合在一起：用变量存储数据、用数组和对象组织信息、用循环批量渲染、用条件判断做决策、用事件和定时器让一切互动起来。
+listenTo: "贝多芬《第九交响曲》第四乐章\"欢乐颂\"— 乐队与人声完美融合，所有乐器组协作奏出壮丽的终章，就像 HTML、CSS、JS 合力构建出完整的交互体验。"
+estimatedMinutes: 0

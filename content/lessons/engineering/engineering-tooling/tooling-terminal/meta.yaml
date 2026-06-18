@@ -1,0 +1,9 @@
+id: tooling-terminal
+title: "用命令行\"指挥\"电脑"
+track: engineering
+chapter: engineering-tooling
+order: 3
+mode: local
+musicAnalogy: 指挥家用一个手势让整个乐团起奏——这是**效率**。命令行也是如此：敲几个字母，电脑就完成一项任务。不需要鼠标点来点去，不需要在文件夹里翻找。几个命令，一切就绪。
+listenTo: 贝多芬《第五交响曲》第一乐章 — 指挥的一个下拍，整个乐团爆发。命令行就是你的指挥棒——`npm run dev` 一行命令，开发服务器立刻启动。
+estimatedMinutes: 0

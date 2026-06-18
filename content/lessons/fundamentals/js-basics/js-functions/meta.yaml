@@ -1,0 +1,9 @@
+id: js-functions
+title: 函数 — 封装你的音乐逻辑
+track: fundamentals
+chapter: js-basics
+order: 4
+mode: sandbox
+musicAnalogy: "函数就像**乐曲的主题动机**——一段可重复使用的旋律片段。贝多芬第五交响曲的\"当当当当\"动机在全曲中反复出现、变形、发展。函数也是：写好一次，到处调用。"
+listenTo: "贝多芬《第五交响曲》第一乐章 — \"命运\"四音动机贯穿始终，同样的核心在弦乐、管乐、全奏中不断重现，就像函数被不同参数调用。"
+estimatedMinutes: 0

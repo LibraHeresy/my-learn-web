@@ -1,0 +1,48 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.list-box {
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 440px;
+  margin: 20px auto;
+}
+#display {
+  font-size: 18px;
+  color: #3D2B1F;
+  text-align: center;
+  min-height: 30px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #E8DDCC;
+}
+.add-row {
+  display: flex;
+  gap: 8px;
+}
+#nameInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+}
+#addBtn {
+  padding: 10px 20px;
+  background: #8B2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#addBtn:hover {
+  background: #C94545;
+}

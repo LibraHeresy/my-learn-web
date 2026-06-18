@@ -1,0 +1,9 @@
+id: workflow-data-driven
+title: 数据驱动思维 — 改数据就是改页面
+track: framework
+chapter: js-advanced
+order: 10
+mode: sandbox
+musicAnalogy: "总谱是\"数据\"，演奏是\"渲染\"。指挥在总谱上改一个音符，所有乐手下一遍就按新谱子演奏——不需要每个人单独通知。这就是**数据驱动**：你只需要修改数据，然后调用一次渲染函数，页面自动跟上。"
+listenTo: "菲利普·格拉斯《玻璃工厂》— 极简主义音乐的核心是\"重复的动机在缓慢变化中演化\"。每次迭代基于同样的模式（同一个渲染函数），但数据在变——就像渲染循环不断根据新数据刷新页面。"
+estimatedMinutes: 0

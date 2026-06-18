@@ -1,0 +1,35 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+p {
+  text-align: center;
+  color: #6B5A4E;
+}
+.counter-box {
+  text-align: center;
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 360px;
+  margin: 24px auto;
+}
+#display {
+  font-size: 24px;
+  font-weight: 700;
+  color: #8B2E2E;
+  margin-bottom: 20px;
+}
+#countBtn {
+  padding: 12px 32px;
+  font-size: 18px;
+  background: #8B2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#countBtn:hover {
+  background: #C94545;
+}

@@ -1,0 +1,39 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+#card {
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.card-title {
+  color: #8B2E2E;
+  margin-bottom: 8px;
+}
+.card-desc {
+  color: #6B5A4E;
+  margin-bottom: 16px;
+}
+#likeBtn {
+  background: #8B2E2E;
+  color: white;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+#likeBtn:hover {
+  background: #C94545;
+}
+#msg {
+  text-align: center;
+  color: #C9A96E;
+  margin-top: 16px;
+  font-weight: 600;
+}

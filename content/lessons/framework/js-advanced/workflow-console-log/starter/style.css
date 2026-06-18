@@ -1,0 +1,53 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.counter-box {
+  text-align: center;
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 300px;
+  margin: 20px auto;
+}
+.label {
+  color: #6B5A4E;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+.number {
+  font-size: 48px;
+  font-weight: 700;
+  color: #8B2E2E;
+  margin: 0 0 20px 0;
+  font-family: "Fira Code", monospace;
+}
+.buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.buttons button {
+  padding: 10px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#addBtn {
+  background: #8B2E2E;
+  color: white;
+}
+#addBtn:hover {
+  background: #C94545;
+}
+#resetBtn {
+  background: #6B5A4E;
+  color: white;
+}
+.message {
+  color: #C9A96E;
+  margin-top: 16px;
+  font-weight: 600;
+}

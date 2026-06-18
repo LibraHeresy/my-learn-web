@@ -1,0 +1,9 @@
+id: workflow-decompose
+title: 拆分函数 — 把大段乐谱分成清晰的乐章
+track: framework
+chapter: js-advanced
+order: 7
+mode: sandbox
+musicAnalogy: 一首 40 分钟的交响曲会分成几个乐章，每个乐章又有自己的主题和发展。如果全部堆在一起，演奏者和听众都会迷失。同样，**当你的函数超过 20 行，就该考虑拆分了**。每个函数只做一件事，就像每个乐章有一个主题。
+listenTo: 贝多芬《第五交响曲》— 四个乐章各有独立的性格和主题，但合在一起又是一个完整的作品。好的代码也是如此：每个函数独立清晰，合在一起完成复杂任务。
+estimatedMinutes: 0

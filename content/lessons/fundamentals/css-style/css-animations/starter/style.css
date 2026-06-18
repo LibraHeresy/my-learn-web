@@ -1,0 +1,28 @@
+h1 { text-align: center; color: #8B2E2E; margin-bottom: 24px; }
+.stage { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.anim-card { background: #FFFAF2; border: 1px solid #D4C5A9; border-radius: 12px; padding: 28px 24px; text-align: center; width: 180px; }
+.card-icon { font-size: 40px; display: block; margin-bottom: 8px; }
+.anim-card strong { display: block; color: #3D2B1F; font-size: 16px; margin-bottom: 4px; }
+.anim-card p { color: #6B5A4E; font-size: 12px; margin: 0; }
+@keyframes swing {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.swing-card { animation: swing 2s ease-in-out infinite; transform-origin: center top; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-card { animation: fadeInUp 1.5s ease-out infinite; }
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+  60% { transform: scale(1); }
+}
+.heart-card { animation: heartbeat 1.5s ease-in-out infinite; }
+.controls { text-align: center; margin-top: 28px; }
+#pauseBtn { padding: 10px 24px; background: #8B2E2E; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+#pauseBtn:hover { background: #C94545; }
+.stage.paused .anim-card { animation-play-state: paused; }

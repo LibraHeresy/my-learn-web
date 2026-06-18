@@ -1,0 +1,49 @@
+h1 {
+  color: #8B2E2E;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.hint {
+  text-align: center;
+  color: #C9A96E;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+/* 手机：单列（默认） */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+.card h2 {
+  color: #8B2E2E;
+  margin: 0 0 4px 0;
+}
+.card p {
+  color: #6B5A4E;
+  margin: 0;
+  font-size: 14px;
+}
+/* 平板：两列 */
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* 桌面：三列 */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    padding: 28px;
+  }
+}

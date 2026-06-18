@@ -1,0 +1,55 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.toolbar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.toolbar button {
+  padding: 8px 20px;
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #3D2B1F;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.toolbar button:hover {
+  background: #8B2E2E;
+  color: #fff;
+}
+.toolbar button.active {
+  background: #8B2E2E;
+  color: #fff;
+  border-color: #8B2E2E;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card h3 {
+  margin: 0;
+  color: #8B2E2E;
+  font-size: 16px;
+}
+.card .period {
+  color: #C9A96E;
+  font-size: 12px;
+  font-weight: 600;
+}
+.stats {
+  text-align: center;
+  color: #6B5A4E;
+  margin-top: 16px;
+  font-size: 14px;
+}

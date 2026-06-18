@@ -1,0 +1,44 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.card {
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: border-color 0.3s;
+}
+.card h2 {
+  color: #8B2E2E;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+}
+.card p {
+  color: #6B5A4E;
+  margin: 0;
+}
+#nameInput {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  margin-bottom: 12px;
+}
+.live-display {
+  font-size: 18px;
+  font-weight: 600;
+  color: #8B2E2E !important;
+}
+#keyHint {
+  text-align: center;
+  color: #C9A96E;
+  font-size: 13px;
+  margin-top: 12px;
+}

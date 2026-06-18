@@ -1,0 +1,9 @@
+id: css-variables
+title: CSS 变量 — 一次定义，全局共鸣
+track: fundamentals
+chapter: css-style
+order: 9
+mode: sandbox
+musicAnalogy: CSS 变量就像乐谱开头的**调号（key signature）**——升 fa 升 do 写一次，全曲所有的 fa 和 do 都跟着自动升。用 `--main-color` 定义一种颜色，全站所有用到它的地方一起改变。这个网站本身就在大量使用 CSS 变量！
+listenTo: 巴赫《十二平均律》— 24 个大小调各写一首前奏曲与赋格，每个调性有不同的色彩和性格，就像 CSS 变量为不同的主题定义不同的色板，一键切换整个氛围。
+estimatedMinutes: 0

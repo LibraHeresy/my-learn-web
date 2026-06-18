@@ -1,0 +1,26 @@
+h1 {
+  color: #8B2E2E;
+  margin-bottom: 20px;
+}
+/* 规则 1：权重 1 */
+p { color: #999; }
+/* 规则 2：权重 11 */
+.card p { color: #3D2B1F; }
+/* 规则 3：权重 21 */
+.card p.highlight { color: #8B2E2E; }
+/* 规则 4：权重 101 */
+#special { color: #C9A96E; font-weight: 700; }
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.note {
+  font-size: 13px;
+  color: #6B5A4E;
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+}

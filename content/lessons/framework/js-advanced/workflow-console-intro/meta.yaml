@@ -1,0 +1,9 @@
+id: workflow-console-intro
+title: "读懂浏览器的\"错音提示\" — 开发者控制台入门"
+track: framework
+chapter: js-advanced
+order: 3
+mode: sandbox
+musicAnalogy: "每个音乐家都有一位\"调音师\"朋友——音不准时，调音器会告诉你偏差了多少。浏览器的**开发者工具控制台（Console）**就是你的调音器——代码出错时，它会精确告诉你哪一行、出了什么错。学会读错误信息，你就再也不怕\"报错\"了。"
+listenTo: 巴赫《赋格的艺术》— 赋格中每一个声部的进入和退出都有精确的时间点，就像控制台报出的每一行错误——精确、清晰、可追溯。当你逐个解决错误时，就像分析赋格声部一样，一次专注一个问题。
+estimatedMinutes: 0

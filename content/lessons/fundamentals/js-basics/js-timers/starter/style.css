@@ -1,0 +1,43 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.metronome-box {
+  text-align: center;
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 380px;
+  margin: 20px auto;
+}
+#display {
+  font-size: 36px;
+  font-weight: 700;
+  color: #8B2E2E;
+  min-height: 50px;
+  margin-bottom: 20px;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.controls button {
+  padding: 10px 20px;
+  background: #8B2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.controls button:hover {
+  background: #C94545;
+}
+#stopBtn {
+  background: #6B5A4E;
+}
+#resetBtn {
+  background: #C9A96E;
+}

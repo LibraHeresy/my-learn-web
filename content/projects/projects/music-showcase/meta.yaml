@@ -1,0 +1,12 @@
+id: music-showcase
+title: 音乐家名片页
+subtitle: 用 HTML 和 CSS 制作你的第一张音乐家数字名片
+icon: 🎵
+track: projects
+order: 1
+mode: sandbox
+musicAnalogy: "就像第一次登上舞台演奏一首简单的练习曲——不需要复杂的技巧，只需要把每一个音符（标签）和表情记号（样式）准确地呈现出来。完成后，你就拥有了第一张属于自己的\"音乐数字名片\"。"
+listenTo: 巴赫《G大调小步舞曲》— 简单、优雅、结构清晰，正如你即将写下的第一张网页。
+prerequisiteTrackIds:
+  - fundamentals
+estimatedMinutes: 0

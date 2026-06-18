@@ -1,0 +1,9 @@
+id: workflow-three-step
+title: 三段工作流 — HTML → CSS → JS 的正确顺序
+track: framework
+chapter: js-advanced
+order: 1
+mode: sandbox
+musicAnalogy: 作曲家从不一开始就写满整份总谱。通常先写旋律线（HTML），再配和声与配器（CSS），最后标注强弱与速度变化（JS）。写网页也一样——**永远先写结构，再写样式，最后写交互**。跳过任何一步都会让后面的工作变得混乱。
+listenTo: "拉威尔《波莱罗》— 从一支长笛的简单旋律开始，逐步加入更多乐器，最后整个乐团爆发出磅礴的声响。这就是\"先骨架、再装饰、后互动\"的完美音乐示范。"
+estimatedMinutes: 0

@@ -1,0 +1,9 @@
+id: tooling-modules
+title: JS 模块化 — 把代码分成声部管理
+track: engineering
+chapter: engineering-tooling
+order: 4
+mode: local
+musicAnalogy: 管弦乐总谱不会把所有音符挤在一行——第一小提琴、第二小提琴、中提琴、大提琴各有自己的谱表。模块化就是给你的代码分声部：一个文件管搜索（search.js），一个文件管渲染（render.js），一个文件管数据（store.js）。每个模块有自己的职责，通过 import/export 像不同声部之间的对话一样协作。
+listenTo: 本杰明·布里顿《青少年管弦乐队指南》— 一段主题由不同乐器组依次演奏，每个乐器组（模块）独立展示自己的音色（功能），最后由整个乐队合奏（import 整合）。完美的模块化示范！
+estimatedMinutes: 0

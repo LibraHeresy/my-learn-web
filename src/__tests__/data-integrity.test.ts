@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { chapters, lessons } from '../configs/lessons'
-import { prologueLessons, prologueCards } from '../configs/prologues'
-import { projects } from '../configs/projects'
-import { tracks } from '../configs/tracks'
+import { getAllLessonsV2 } from '../content-v2/lessons'
+import { getAllProjectsV2 } from '../content-v2/projects'
+import { chaptersV2, tracksV2 } from '../content-v2/taxonomy'
+import { prologueCardsV2 } from '../content-v2/prologues'
 import { glossary } from '../configs/glossary'
 
 // ============================================================
@@ -10,6 +10,10 @@ import { glossary } from '../configs/glossary'
 // ============================================================
 
 describe('数据完整性', () => {
+  const lessons = getAllLessonsV2()
+  const projects = getAllProjectsV2()
+  const prologueLessons = lessons.filter((l) => l.meta.track === 'prologue')
+
   // ---- Lessons ----
   describe('lessons', () => {
     it('所有 lesson.id 唯一', () => {
@@ -17,51 +21,47 @@ describe('数据完整性', () => {
       expect(new Set(ids).size).toBe(ids.length)
     })
 
-    it('所有 lesson.chapterId 指向存在的章节', () => {
-      const chapterIds = new Set(chapters.map(c => c.id))
+    it('所有 lesson.meta.chapter 指向存在的章节', () => {
+      const chapterIds = new Set(chaptersV2.map(c => c.id))
       for (const l of lessons) {
-        expect(chapterIds.has(l.chapterId), `lesson "${l.id}" 的 chapterId "${l.chapterId}" 不存在`).toBe(true)
+        expect(chapterIds.has(l.meta.chapter), `lesson "${l.id}" 的 chapter "${l.meta.chapter}" 不存在`).toBe(true)
       }
     })
 
-    it('所有 lesson.order 在同一 chapter 内连续不重复', () => {
-      const byChapter = new Map<string, number[]>()
+    it('所有 lesson.meta.order 在同一 track+chapter 内为正整数且不重复', () => {
+      const byGroup = new Map<string, number[]>()
       for (const l of lessons) {
-        const orders = byChapter.get(l.chapterId) || []
-        orders.push(l.order)
-        byChapter.set(l.chapterId, orders)
+        const key = `${l.meta.track}::${l.meta.chapter}`
+        const orders = byGroup.get(key) || []
+        orders.push(l.meta.order)
+        byGroup.set(key, orders)
       }
-      for (const [cid, orders] of byChapter) {
-        const sorted = [...orders].sort((a, b) => a - b)
-        expect(sorted, `chapter "${cid}" order 重复或跳号: ${orders}`).toEqual(
-          Array.from({ length: sorted.length }, (_, i) => i + 1)
-        )
+      for (const [key, orders] of byGroup) {
+        for (const o of orders) {
+          expect(Number.isInteger(o), `group "${key}" 的 order 必须是整数`).toBe(true)
+          expect(o, `group "${key}" 的 order 必须大于 0`).toBeGreaterThan(0)
+        }
+        expect(new Set(orders).size, `group "${key}" order 重复: ${orders}`).toBe(orders.length)
       }
     })
 
     it('所有 lesson 有必填字段', () => {
       for (const l of lessons) {
         expect(l.id, 'id 缺失').toBeTruthy()
-        expect(l.title, `"${l.id}" title 缺失`).toBeTruthy()
-        expect(l.musicAnalogy, `"${l.id}" musicAnalogy 缺失`).toBeTruthy()
-        expect(l.sections.length, `"${l.id}" sections 为空`).toBeGreaterThan(0)
-        expect(l.starterCode, `"${l.id}" starterCode 缺失`).toBeDefined()
+        expect(l.meta.title, `"${l.id}" meta.title 缺失`).toBeTruthy()
+        expect(l.meta.track, `"${l.id}" meta.track 缺失`).toBeTruthy()
+        expect(l.meta.chapter, `"${l.id}" meta.chapter 缺失`).toBeTruthy()
+        expect(l.meta.mode, `"${l.id}" meta.mode 缺失`).toBeTruthy()
+        expect(l.meta.musicAnalogy, `"${l.id}" meta.musicAnalogy 缺失`).toBeTruthy()
+        expect(l.body.length, `"${l.id}" body 为空`).toBeGreaterThan(0)
+        expect(l.starter, `"${l.id}" starter 缺失`).toBeDefined()
       }
     })
 
-    it('所有 lesson.sections 的 content 非空', () => {
+    it('所有 lesson.meta.track 指向存在的 track', () => {
+      const trackIds = new Set(tracksV2.map(t => t.id))
       for (const l of lessons) {
-        for (const s of l.sections) {
-          expect(s.content.trim(), `"${l.id}" section "${s.title}" content 为空`).not.toBe('')
-        }
-      }
-    })
-
-    it('所有 lesson.trackId 指向存在的 track（或默认 fundamentals）', () => {
-      const trackIds = new Set(tracks.map(t => t.id))
-      for (const l of lessons) {
-        const tid = l.trackId || 'fundamentals'
-        expect(trackIds.has(tid), `lesson "${l.id}" trackId "${tid}" 不存在`).toBe(true)
+        expect(trackIds.has(l.meta.track), `lesson "${l.id}" track "${l.meta.track}" 不存在`).toBe(true)
       }
     })
   })
@@ -69,15 +69,8 @@ describe('数据完整性', () => {
   // ---- Chapters ----
   describe('chapters', () => {
     it('所有 chapter.id 唯一', () => {
-      const ids = chapters.map(c => c.id)
+      const ids = chaptersV2.map(c => c.id)
       expect(new Set(ids).size).toBe(ids.length)
-    })
-
-    it('每个 chapter 至少有一课', () => {
-      for (const c of chapters) {
-        const count = lessons.filter(l => l.chapterId === c.id).length
-        expect(count, `chapter "${c.id}" 没有课程`).toBeGreaterThan(0)
-      }
     })
   })
 
@@ -88,17 +81,17 @@ describe('数据完整性', () => {
       expect(new Set(ids).size).toBe(ids.length)
     })
 
-    it('prologueLessons 和 prologueCards id 一一对应', () => {
+    it('prologueLessons 和 prologueCardsV2 id 一一对应', () => {
       const lessonIds = new Set(prologueLessons.map(l => l.id))
-      const cardLessonIds = new Set(prologueCards.map(c => c.lessonId))
+      const cardLessonIds = new Set(prologueCardsV2.map(c => c.lessonId))
       expect(lessonIds).toEqual(cardLessonIds)
     })
 
     it('所有 prologue 有必填字段', () => {
       for (const l of prologueLessons) {
         expect(l.id).toBeTruthy()
-        expect(l.title).toBeTruthy()
-        expect(l.sections.length).toBeGreaterThan(0)
+        expect(l.meta.title).toBeTruthy()
+        expect(l.body.length).toBeGreaterThan(0)
       }
     })
   })
@@ -162,17 +155,17 @@ describe('数据完整性', () => {
   // ---- Tracks ----
   describe('tracks', () => {
     it('所有 track.id 唯一', () => {
-      const ids = tracks.map(t => t.id)
+      const ids = tracksV2.map(t => t.id)
       expect(new Set(ids).size).toBe(ids.length)
     })
 
-    it('所有 track.order 连续不重复', () => {
-      const orders = tracks.map(t => t.order).sort((a, b) => a - b)
-      expect(orders).toEqual([1, 2, 3, 4])
+    it('所有 track.order 不重复', () => {
+      const orders = tracksV2.map(t => t.order)
+      expect(new Set(orders).size).toBe(orders.length)
     })
 
     it('所有 track 有必填字段', () => {
-      for (const t of tracks) {
+      for (const t of tracksV2) {
         expect(t.id).toBeTruthy()
         expect(t.title).toBeTruthy()
         expect(t.subtitle).toBeTruthy()

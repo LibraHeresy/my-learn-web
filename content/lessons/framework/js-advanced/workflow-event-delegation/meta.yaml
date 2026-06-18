@@ -1,0 +1,9 @@
+id: workflow-event-delegation
+title: "事件委托 — 让\"指挥\"替你监听每一个\"乐手\""
+track: framework
+chapter: js-advanced
+order: 9
+mode: sandbox
+musicAnalogy: "指挥不需要跑到每一位演奏者面前单独说\"到你吹了\"——演奏者自己看总谱、听音乐，知道什么时候进入。**事件委托**就是这个道理：你不用给每一个元素单独绑定事件，而是把事件绑在父容器上，由父容器来判断\"触发者是谁\"，做出相应的反应。"
+listenTo: "斯特拉文斯基《春之祭》— 庞大的乐队编制中，指挥通过一个手势就能让不同乐器组做出反应。事件委托就像指挥的总览——一个事件绑定覆盖所有动态变化的\"乐手\"。"
+estimatedMinutes: 0

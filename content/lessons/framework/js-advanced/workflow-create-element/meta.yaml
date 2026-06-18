@@ -1,0 +1,9 @@
+id: workflow-create-element
+title: DOM 渲染进阶 — innerHTML 对比与 classList 操控
+track: framework
+chapter: js-advanced
+order: 8
+mode: sandbox
+musicAnalogy: "用 `innerHTML` 像\"复印一整页乐谱\"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像\"一个音符一个音符地写\"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。"
+listenTo: 巴赫《音乐的奉献》— 这首作品中的每一行都是独立的声部线条，精确编织在一起。createElement 就像在五线谱上逐个添加音符——每个音符都可以独立地定位、装饰、甚至移除。
+estimatedMinutes: 0

@@ -1,0 +1,72 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+#cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 16px auto;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+.card.liked {
+  background: #FFF0F0;
+  border-color: #C94545;
+}
+.card-info h3 {
+  margin: 0 0 4px 0;
+  color: #8B2E2E;
+  font-size: 16px;
+}
+.tag {
+  color: #C9A96E;
+  font-size: 12px;
+  font-weight: 600;
+}
+.like-btn {
+  background: transparent;
+  border: 1px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6B5A4E;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.like-btn:hover {
+  background: #C94545;
+  color: white;
+  border-color: #C94545;
+}
+.card.liked .like-btn {
+  background: #C94545;
+  color: white;
+  border-color: #C94545;
+}
+.add-bar {
+  text-align: center;
+  margin-top: 16px;
+}
+#addBtn {
+  padding: 10px 24px;
+  background: #8B2E2E;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+#addBtn:hover {
+  background: #C94545;
+}

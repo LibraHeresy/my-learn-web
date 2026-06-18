@@ -1,0 +1,51 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.card {
+  text-align: center;
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 380px;
+  margin: 20px auto;
+}
+.card p:first-of-type {
+  font-size: 24px;
+  color: #8B2E2E;
+  font-weight: 600;
+  min-height: 40px;
+  margin-bottom: 20px;
+}
+.buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.buttons button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#shuffleBtn {
+  background: #8B2E2E;
+  color: white;
+}
+#shuffleBtn:hover {
+  background: #C94545;
+}
+#addBtn {
+  background: #C9A96E;
+  color: white;
+}
+#addBtn:hover {
+  background: #B8944D;
+}
+#msg {
+  color: #C9A96E;
+  margin-top: 16px;
+  font-weight: 600;
+}

@@ -1,0 +1,9 @@
+id: async-capstone
+title: 异步篇结业 — 音乐搜索器
+track: framework
+chapter: async-data
+order: 8
+mode: local
+musicAnalogy: "合奏篇的最后一课：把你学到的所有\"合奏技能\"——Promise、async/await、fetch、错误处理、防抖——整合成一个完整的作品。就像一场室内乐的终曲，每个人都要把自己的声部完美地融入合奏。"
+listenTo: "维瓦尔第《四季·春》— 一个完整的协奏曲乐章，独奏与合奏交替，结构清晰、旋律优美。你的音乐搜索器也应该有这种\"完整感\"——输入、搜索、展示，一气呵成。"
+estimatedMinutes: 0

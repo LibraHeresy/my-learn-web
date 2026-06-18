@@ -1,0 +1,9 @@
+id: tooling-capstone
+title: 登台篇结业 — 你的第一个工程化作品
+track: engineering
+chapter: vue-framework
+order: 11
+mode: local
+musicAnalogy: 独奏会的时间到了。你已经从认识乐器（乐理篇）、学会合奏（合奏篇）、掌握了演出流程（登台篇）——现在，**在真正的音乐厅里，用专业的方式，演奏你自己的作品。**
+listenTo: 贝多芬《第九交响曲》第四乐章 — 这不仅是音乐的巅峰，也是工程化的杰作：独唱、合唱、管弦乐队在精确的指挥下协作。你的结业项目也是如此：Vue 组件（声部）+ Vite 构建（指挥）+ Git 版本管理（排练记录）+ GitHub Pages 部署（音乐厅公演）。
+estimatedMinutes: 0

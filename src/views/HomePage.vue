@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { chapters, lessons } from "../configs/lessons";
-import { tracks } from "../configs/tracks";
-import { projects } from "../configs/projects";
+import { getAllLessonsV2 } from "../content-v2/lessons";
+import { getAllProjectsV2 } from "../content-v2/projects";
 import { useProgressStore } from "../stores/progress";
 import { parseInline } from "../utils/markdown";
-import { prologueCards, prologueLessons } from "../configs/prologues";
+import { tracksV2, chaptersV2, getChapterV2 } from "../content-v2/taxonomy";
+import { prologueCardsV2 } from "../content-v2/prologues";
 
 const router = useRouter();
 const progressStore = useProgressStore();
@@ -14,6 +14,30 @@ const progressStore = useProgressStore();
 const expandedTrack = ref<string | null>(null);
 const showStickyNav = ref(false);
 const homeRef = ref<HTMLElement | null>(null);
+
+const journeyTracks = computed(() =>
+  tracksV2
+    .filter((t) =>
+      ["fundamentals", "framework", "engineering", "ai-collaboration"].includes(t.id),
+    )
+    .slice()
+    .sort((a, b) => a.order - b.order),
+);
+const lessonsV2 = computed(() => getAllLessonsV2());
+const projectsV2 = computed(() =>
+  getAllProjectsV2()
+    .slice()
+    .sort((a, b) => a.meta.order - b.meta.order)
+    .map((p) => ({
+      id: p.id,
+      title: p.meta.title,
+      subtitle: p.meta.subtitle,
+      icon: p.meta.icon,
+      musicAnalogy: p.meta.musicAnalogy,
+      listenTo: p.meta.listenTo,
+      steps: p.steps,
+    })),
+);
 
 function onScroll() {
   const el = homeRef.value;
@@ -33,23 +57,20 @@ onBeforeUnmount(() => {
 });
 
 function getTrackLessonCount(trackId: string): number {
-  if (trackId === "projects") return projects.length;
-  return lessons.filter((l) => (l.trackId || "fundamentals") === trackId)
-    .length;
+  if (trackId === "projects") return projectsV2.value.length;
+  return lessonsV2.value.filter((l) => l.meta.track === trackId).length;
 }
 
 function getTrackCompletedCount(trackId: string): number {
   if (trackId === "projects") return 0;
-  return lessons
-    .filter((l) => (l.trackId || "fundamentals") === trackId)
+  return lessonsV2.value
+    .filter((l) => l.meta.track === trackId)
     .filter((l) => progressStore.isCompleted(l.id)).length;
 }
 
 function getTrackChapters(trackId: string) {
-  return chapters.filter((ch) =>
-    lessons.some(
-      (l) => l.chapterId === ch.id && (l.trackId || "fundamentals") === trackId,
-    ),
+  return chaptersV2.filter((ch) =>
+    lessonsV2.value.some((l) => l.meta.chapter === ch.id && l.meta.track === trackId),
   );
 }
 
@@ -60,12 +81,12 @@ const resumeLesson = computed(() => {
     .sort((a, b) => (b.lastVisited || 0) - (a.lastVisited || 0))
   if (entries.length === 0) return null
   const lastId = entries[0].lessonId
-  return [...lessons, ...prologueLessons].find(l => l.id === lastId) || null
+  return lessonsV2.value.find(l => l.id === lastId) || null
 })
 
 const resumeChapter = computed(() => {
   if (!resumeLesson.value) return null
-  return chapters.find(ch => ch.id === resumeLesson.value!.chapterId) || null
+  return getChapterV2(resumeLesson.value.meta.chapter)
 })
 
 function toggleTrack(trackId: string) {
@@ -123,7 +144,7 @@ function goToProject(projectId: string) {
         <span class="resume-chapter" v-if="resumeChapter">{{ resumeChapter.icon }} {{ resumeChapter.title }}</span>
       </div>
       <button class="resume-btn" @click="goToLesson(resumeLesson.id)">
-        {{ resumeLesson.title }} →
+        {{ resumeLesson.meta.title }} →
       </button>
     </div>
 
@@ -157,7 +178,7 @@ function goToProject(projectId: string) {
 
       <div class="track-cards">
         <div
-          v-for="track in tracks"
+          v-for="track in journeyTracks"
           :key="track.id"
           :id="`track-${track.id}`"
           :class="[
@@ -249,10 +270,10 @@ function goToProject(projectId: string) {
                     <span>{{ chapter.title }}</span>
                   </div>
                   <button
-                    v-for="lesson in lessons.filter(
+                    v-for="lesson in lessonsV2.filter(
                       (l) =>
-                        l.chapterId === chapter.id &&
-                        (l.trackId || 'fundamentals') === track.id,
+                        l.meta.chapter === chapter.id &&
+                        l.meta.track === track.id,
                     )"
                     :key="lesson.id"
                     :class="[
@@ -264,14 +285,14 @@ function goToProject(projectId: string) {
                     <span class="track-lesson-dot">{{
                       progressStore.isCompleted(lesson.id) ? "✓" : "·"
                     }}</span>
-                    <span class="track-lesson-title">{{ lesson.title }}</span>
+                    <span class="track-lesson-title">{{ lesson.meta.title }}</span>
                     <span class="track-lesson-arrow">→</span>
                   </button>
                 </div>
               </template>
               <template v-if="track.id === 'projects'">
                 <button
-                  v-for="project in projects"
+                  v-for="project in projectsV2"
                   :key="project.id"
                   class="track-lesson-item"
                   @click.stop="goToProject(project.id)"
@@ -299,7 +320,7 @@ function goToProject(projectId: string) {
 
       <div class="project-cards">
         <div
-          v-for="project in projects"
+          v-for="project in projectsV2"
           :key="project.id"
           :class="['project-card', { draft: project.steps.length === 0 }]"
         >
@@ -354,7 +375,7 @@ function goToProject(projectId: string) {
       </p>
       <div class="prologue-grid">
         <div
-          v-for="card in prologueCards"
+          v-for="card in prologueCardsV2"
           :key="card.id"
           class="prologue-card"
           @click="goToLesson(card.lessonId)"

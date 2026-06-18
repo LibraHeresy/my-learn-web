@@ -1,0 +1,48 @@
+h1 {
+  color: #8B2E2E;
+  margin-bottom: 20px;
+}
+.stage {
+  position: relative;
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 260px;
+}
+.soloist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #FFF8F0;
+  border: 2px solid #C9A96E;
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  color: #8B2E2E;
+}
+.badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  font-size: 20px;
+}
+.player {
+  background: #fff;
+  border: 1px solid #E8DDCC;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  color: #3D2B1F;
+}
+.player-shift {
+  position: relative;
+  left: 20px;
+  border-color: #C9A96E;
+}
+.note {
+  font-size: 12px;
+  color: #C9A96E;
+  margin-left: 12px;
+}

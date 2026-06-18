@@ -1,0 +1,55 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+#cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 16px auto;
+}
+.card {
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.card:hover {
+  border-color: #C9A96E;
+}
+.card.liked {
+  background: #FFF0E8;
+  border-color: #C94545;
+}
+.card h3 {
+  margin: 0;
+  color: #8B2E2E;
+  font-size: 16px;
+}
+.card .tag {
+  color: #C9A96E;
+  font-size: 12px;
+  font-weight: 600;
+}
+.add-bar {
+  text-align: center;
+  margin-top: 16px;
+}
+#addBtn {
+  padding: 10px 24px;
+  background: #8B2E2E;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+#addBtn:hover {
+  background: #C94545;
+}

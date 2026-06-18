@@ -1,0 +1,13 @@
+id: music-collection-v1
+title: 音乐收藏库 · 纯手工版
+subtitle: 用 HTML、CSS、JS 打造你的第一个音乐作品
+icon: 🎵
+track: projects
+order: 2
+mode: local
+musicAnalogy: 就像亲手抄写一份乐谱——每一个音符（标签）、每一个表情记号（样式）、每一个演奏指令（脚本）都由你亲手写下。完成后，你就拥有了一份独一无二的手稿。
+listenTo: 巴赫《无伴奏大提琴组曲》— 单一乐器展现完整世界，正如纯 HTML/CSS/JS 不依赖任何框架
+prerequisiteTrackIds:
+  - fundamentals
+  - framework
+estimatedMinutes: 0

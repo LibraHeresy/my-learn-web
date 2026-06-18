@@ -1,0 +1,9 @@
+id: css-position
+title: Position 定位 — 控制元素的舞台位置
+track: fundamentals
+chapter: css-layout
+order: 3
+mode: sandbox
+musicAnalogy: 定位属性就像**舞台上不同角色的站位规则**：`relative` 像乐团成员，在自己的座位范围内微调；`absolute` 像**独奏者**站在舞台的特定坐标上；`fixed` 像**舞台灯光**，无论观众视角如何都锁定在固定位置；`sticky` 像**指挥台**，滚动到一定位置就固定住。
+listenTo: "穆索尔斯基《图画展览会》— \"漫步\"主题在每一段之间出现，画面切换时它始终在那里，就像 `sticky` 元素在滚动中时隐时现。"
+estimatedMinutes: 0

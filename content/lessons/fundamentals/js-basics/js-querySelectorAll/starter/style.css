@@ -1,0 +1,50 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+  margin-bottom: 12px;
+}
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.controls button {
+  padding: 8px 16px;
+  background: #FFFAF2;
+  border: 1px solid #D4C5A9;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #3D2B1F;
+  transition: all 0.2s;
+}
+.controls button:hover {
+  background: #8B2E2E;
+  color: #fff;
+  border-color: #8B2E2E;
+}
+.orchestra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.card {
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 15px;
+  color: #3D2B1F;
+  transition: all 0.3s;
+  cursor: default;
+}
+.card.highlighted {
+  background: #FFF8F0;
+  border-color: #C9A96E;
+  box-shadow: 0 4px 12px rgba(201, 169, 110, 0.3);
+}
+.card.hidden {
+  opacity: 0.15;
+}

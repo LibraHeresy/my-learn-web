@@ -11,18 +11,28 @@ const router = createRouter({
     {
       path: '/lesson/:lessonId',
       name: 'lesson',
-      component: () => import('../views/LessonPlayer.vue')
+      component: () => import('../views/LessonV2Player.vue')
+    },
+    {
+      path: '/lesson-v2/:lessonId',
+      name: 'lesson-v2',
+      redirect: (to) => ({ name: 'lesson', params: { lessonId: to.params.lessonId } }),
     },
     {
       path: '/project/:projectId',
       name: 'project',
-      component: () => import('../views/ProjectPlayer.vue')
+      component: () => import('../views/ProjectV2Player.vue')
+    },
+    {
+      path: '/project-v2/:projectId',
+      name: 'project-v2',
+      redirect: (to) => ({ name: 'project', params: { projectId: to.params.projectId } }),
     },
     {
       path: '/quiz',
       name: 'quiz',
       component: () => import('../views/QuizPage.vue')
-    }
+    },
   ]
 })
 

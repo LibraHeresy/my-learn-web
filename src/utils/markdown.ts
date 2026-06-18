@@ -150,7 +150,7 @@ function extractTables(text: string, placeholders: string[]): string {
   })
 }
 
-// 共享的内联处理管道：行内代码 → 链接 → 术语 → 转义 → 还原 → 粗体/斜体
+// 共享的内联处理管道：行内代码 → 链接 → 自动链接裸 URL → 术语 → 转义 → 还原 → 粗体/斜体
 function applyInlinePipeline(text: string, placeholders: string[]): string {
   // 1. 提取行内代码
   let html = text.replace(/`([^`]+)`/g, (_, code) => {
@@ -162,13 +162,13 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
   // 2. 提取 Markdown 链接
   html = extractLinks(html, placeholders)
 
-  // 3. 包裹术语
-  html = wrapTerms(html, placeholders)
-
-  // 4. 自动链接裸 URL（必须在 escapeHtml 和 restorePlaceholders 之前：此时代码块等
+  // 3. 自动链接裸 URL（必须在 escapeHtml 和 restorePlaceholders 之前：此时代码块等
   //    块级元素仍为占位符，其中的 URL 不会被误匹配；生成的 <a> 标签存入占位符数组，
   //    由 restorePlaceholders 统一还原，不会被 escapeHtml 转义）
   html = autoLinkUrls(html, placeholders)
+
+  // 4. 包裹术语（放在自动链接之后，避免把 https/http 等协议片段误当术语导致 URL 无法链接）
+  html = wrapTerms(html, placeholders)
 
   // 5. 转义 HTML
   html = escapeHtml(html)

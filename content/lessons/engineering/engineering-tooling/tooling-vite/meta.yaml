@@ -1,0 +1,9 @@
+id: tooling-vite
+title: 创建第一个 Vue 项目 — Vite 登场
+track: engineering
+chapter: engineering-tooling
+order: 6
+mode: local
+musicAnalogy: "排练一场交响乐需要准备场地、谱架、乐器、灯光……但如果有一个\"排练厅管家\"帮你一次性搞定所有配置呢？**Vite 就是这个管家**——一条命令，给你搭好整个项目框架：文件夹结构、配置文件、开发服务器，全部就位。你只需要开始写代码。"
+listenTo: 拉威尔《波莱罗》— 从一个几乎听不见的军鼓节奏开始，逐渐叠加乐器层，最终汇聚成辉煌的合奏。Vite 创建项目也是如此：一个空模板开始，逐渐加入组件、路由、数据……
+estimatedMinutes: 0

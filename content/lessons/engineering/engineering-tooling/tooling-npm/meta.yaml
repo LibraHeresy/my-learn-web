@@ -1,0 +1,9 @@
+id: tooling-npm
+title: "包管理器 — 你的\"乐谱图书馆\""
+track: engineering
+chapter: engineering-tooling
+order: 5
+mode: local
+musicAnalogy: "作曲家不需要从零发明每一个和弦——他们在已有的音乐体系上创作。**npm 就是编程世界的音乐图书馆**：全球开发者共享了超过 200 万个\"包\"，你只需要 `npm install`，就能把别人写好的功能直接拿来用。"
+listenTo: "莫扎特《安魂曲》K.626 — 莫扎特在这部作品中引用了亨德尔、海顿等前辈的音乐元素。好的作曲家善于\"复用\"前人的精华。npm 让你站在全球开发者的肩膀上——不需要重新发明轮子。"
+estimatedMinutes: 0

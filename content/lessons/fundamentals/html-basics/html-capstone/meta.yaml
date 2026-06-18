@@ -1,0 +1,9 @@
+id: html-capstone
+title: 综合项目 — 制作你的个人音乐主页
+track: fundamentals
+chapter: html-basics
+order: 14
+mode: sandbox
+musicAnalogy: 一场完整的音乐会需要节目单（列表）、演奏者介绍（标题/段落）、演出照片（图片）、曲目链接（链接）、舞台分区（div/span）、声部标注（语义化标签）、曲目表（表格）。现在把这些元素组合起来，就像指挥把各个声部合成一部完整的交响乐。
+listenTo: "贝多芬《第九交响曲》\"合唱\"第四乐章 — 一部交响曲的终章，人声与乐队完美融合，所有元素汇聚成壮丽的音乐大厦，就像你即将完成的个人主页。"
+estimatedMinutes: 0

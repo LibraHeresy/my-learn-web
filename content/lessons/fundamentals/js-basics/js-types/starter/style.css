@@ -1,0 +1,25 @@
+h1 {
+  text-align: center;
+  color: #8B2E2E;
+}
+.card {
+  background: #FFFAF2;
+  border: 2px solid #D4C5A9;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 440px;
+  margin: 16px auto;
+}
+.card p {
+  color: #6B5A4E;
+  margin: 10px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #EDE5D5;
+  padding-bottom: 8px;
+}
+.card p:last-child {
+  border-bottom: none;
+}
+.card strong {
+  color: #8B2E2E;
+}
