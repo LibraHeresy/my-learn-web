@@ -1,0 +1,9 @@
+id: html-intro
+title: 认识 HTML — 你的第一行代码
+track: fundamentals
+chapter: html-basics
+order: 1
+mode: sandbox
+musicAnalogy: HTML 就像五线谱，它决定了页面上有什么内容。五线谱告诉演奏者弹什么音，HTML 告诉浏览器显示什么内容。
+listenTo: 巴赫《C大调前奏曲》BWV 846 — 结构清晰、简单纯粹，就像你即将写下的第一行 HTML。
+estimatedMinutes: 0

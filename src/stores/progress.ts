@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { LessonProgress } from '../types'
-import { getAllLessonsV2 } from '../content-v2/lessons'
+import { getAllLessonsV2 } from '../content-loaders/lessons'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码

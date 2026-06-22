@@ -1,0 +1,278 @@
+# JS 实战宝石
+
+gem:
+  id: js-practice
+  name: JS 实战宝石
+  icon: 🔧
+  achievement: junior
+  order: 6
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 80
+    name: DOM 选择器
+    questions:
+      - id: 131
+        difficulty: 1
+        question: querySelector 返回什么？
+        options:
+          - 所有匹配元素
+          - 第一个匹配元素(null 无匹配)
+          - 数组
+          - HTML 字符串
+        answer: 1
+        explanation: 返回第一个匹配元素或 null。想获取所有用 querySelectorAll。
+      - id: 132
+        difficulty: 1
+        question: querySelectorAll 返回？
+        options:
+          - 数组
+          - NodeList(类数组)
+          - 单个元素
+          - HTMLCollection
+        answer: 1
+        explanation: 返回 NodeList——类数组可用 forEach 遍历有 length。不是真正的 Array(缺少 map/filter 等方法)。
+      - id: 133
+        difficulty: 1
+        question: getElementById 返回？
+        options:
+          - 元素对象或 null
+          - 字符串
+          - 数组
+          - HTML 源码
+        answer: 0
+        explanation: "通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\"#id\")稍快。"
+      - id: 134
+        difficulty: 1
+        question: addEventListener 做什么？
+        options:
+          - 修改 CSS
+          - 绑定事件监听器当用户操作时执行函数
+          - 创建元素
+          - 删除元素
+        answer: 1
+        explanation: "给元素绑定事件监听器：element.addEventListener(\"click\",callback)。"
+      - id: 135
+        difficulty: 1
+        question: "[1,2,3].includes(2) 返回？"
+        options:
+          - true
+          - false
+          - 2
+          - 报错
+        answer: 0
+        explanation: includes 判断数组是否含某值返回 true/false。
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 事件与操作
+    questions:
+      - id: 136
+        difficulty: 2
+        question: addEventListener 和 element.onclick 区别？
+        options:
+          - 相同
+          - addEventListener 可绑多个函数 onclick 只能一个
+          - onclick 更灵活
+          - addEventListener 已废弃
+        answer: 1
+        explanation: onclick 是属性只能赋值一个函数(后面覆盖前面)。addEventListener 可加多个监听器。推荐始终用 addEventListener。
+      - id: 137
+        difficulty: 2
+        question: 事件冒泡是什么？stopPropagation()？
+        options:
+          - 事件只在当前元素触发
+          - 事件从子元素向上传播到父。stopPropagation()阻止继续冒泡
+          - 冒泡已废弃
+          - stopPropagation 加速事件
+        answer: 1
+        explanation: 点击子元素→事件冒泡到父→祖父。stopPropagation()阻止传播。事件委托正是利用冒泡。
+      - id: 138
+        difficulty: 2
+        question: innerHTML 和 textContent 区别和安全？
+        options:
+          - 相同
+          - innerHTML 解析 HTML 有 XSS 风险；textContent 只设纯文本安全
+          - textContent 更快
+          - innerHTML 已废弃
+        answer: 1
+        explanation: innerHTML 会解析 HTML 标签(有 XSS 风险勿把用户输入直接给 innerHTML)。textContent 始终视为纯文本。
+      - id: 139
+        difficulty: 2
+        question: createElement+appendChild 流程？
+        options:
+          - 直接写 HTML
+          - "let el=document.createElement(\"div\")→设置属性内容→parent.appendChild(el)"
+          - 只能创建 div
+          - appendChild 已废弃
+        answer: 1
+        explanation: 三步：1.createElement 创建 2.设属性/内容 3.appendChild 添加到父元素。
+      - id: 140
+        difficulty: 2
+        question: classList.add/remove/toggle/contains 各做什么？
+        options:
+          - 全部相同
+          - add=添加类/remove=移除/toggle=切换(有删无加)/contains=判断
+          - 已废弃
+          - 只用于 ID
+        answer: 1
+        explanation: classList 操作元素 class 的推荐方式比直接改 className 更好。
+      - id: 141
+        difficulty: 2
+        question: map 和 forEach 区别？
+        options:
+          - 相同
+          - map 返回新数组 forEach 返回 undefined
+          - forEach 返回新数组
+          - map 已废弃
+        answer: 1
+        explanation: map 对每项执行函数返回新数组(不修改原数组)。forEach 无返回值用于副作用。
+      - id: 142
+        difficulty: 2
+        question: filter 做什么？
+        options:
+          - 过滤数组返回满足条件的元素组成新数组
+          - 修改原数组
+          - 和 map 一样
+          - 已废弃
+        answer: 0
+        explanation: filter 对每项执行条件函数保留返回 true 的项→新数组。原数组不变。
+      - id: 143
+        difficulty: 2
+        question: 事件委托是什么？为什么动态元素需要？
+        options:
+          - 委托别人写代码
+          - 把事件绑在父元素利用冒泡处理子元素事件。新加子元素自动被覆盖
+          - 委托不是前端概念
+          - 已废弃
+        answer: 1
+        explanation: 不在每个子元素绑事件而在父元素绑通过 e.target 判断点击哪个。新添加子元素自动继承事件。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 综合应用
+    questions:
+      - id: 144
+        difficulty: 3
+        question: splice 和 slice 区别？
+        options:
+          - 相同
+          - splice 删除/插入改原数组；slice 截取子数组不修改原数组
+          - slice 修改原数组
+          - 都不修改
+        answer: 1
+        explanation: "splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。"
+      - id: 145
+        difficulty: 3
+        question: push/pop 和 shift/unshift 区别？
+        options:
+          - 全部操作末尾
+          - push/pop 末尾(快)；unshift/shift 开头(慢需移动所有元素)
+          - push 操作开头
+          - 无区别
+        answer: 1
+        explanation: push(末尾添加)/pop(末尾删)/unshift(开头添加)/shift(开头删)。push/pop 类似栈操作快。
+      - id: 146
+        difficulty: 3
+        question: "[1,2,3].join(\"-\") 和 \"a,b,c\".split(\",\") 各返回？"
+        options:
+          - join 返回数组 split 返回字符串
+          - "join 返回\"1-2-3\"数组→字符串；split 返回[\"a\",\"b\",\"c\"]字符串→数组"
+          - 都返回字符串
+          - 都返回数组
+        answer: 1
+        explanation: join(分隔符)：数组→字符串。split(分隔符)：字符串→数组。互为逆操作。
+      - id: 147
+        difficulty: 3
+        question: 点击按钮新增 li 到 ul 末尾→用 createElement 还是 innerHTML？
+        options:
+          - innerHTML 更简单
+          - createElement 更安全精确。innerHTML 会重置已有元素的事件
+          - 两者相同
+          - 无法实现
+        answer: 1
+        explanation: "innerHTML+=\"...\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。"
+      - id: 148
+        difficulty: 3
+        question: e.target 和 e.currentTarget 区别？
+        options:
+          - 完全相同
+          - target=实际触发元素(最深层)；currentTarget=绑定事件的元素
+          - currentTarget 已废弃
+          - target 只能是按钮
+        answer: 1
+        explanation: 冒泡时 target 是点击的最深层元素不变。currentTarget 是绑定事件监听的元素(随冒泡变化)。
+      - id: 149
+        difficulty: 2
+        question: find 和 filter 区别？
+        options:
+          - 相同
+          - find 返回第一个满足条件的元素；filter 返回所有满足条件的数组
+          - filter 返回单个
+          - find 已废弃
+        answer: 1
+        explanation: find 返回第一个匹配项(单个值或 undefined)。filter 返回所有匹配项的数组。
+      - id: 150
+        difficulty: 2
+        question: some 和 every 区别？
+        options:
+          - 相同
+          - some=至少一个满足→true；every=全部满足→true
+          - every=至少一个
+          - some 已废弃
+        answer: 1
+        explanation: "[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。"
+      - id: 151
+        difficulty: 3
+        question: 如何在事件处理函数中阻止 a 标签默认跳转？
+        options:
+          - 无法阻止
+          - e.preventDefault()阻止默认行为
+          - return false
+          - 删除 href
+        answer: 1
+        explanation: preventDefault()阻止浏览器默认行为(链接跳转/表单提交)。stopPropagation()阻止冒泡。
+      - id: 152
+        difficulty: 3
+        question: 如何把 NodeList 转成数组？
+        options:
+          - 无法转换
+          - "[...nodeList]或 Array.from(nodeList)"
+          - .toArray()
+          - .array()
+        answer: 1
+        explanation: "扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。"
+      - id: 153
+        difficulty: 2
+        question: "\"hello\".slice(1,3) 返回？"
+        options:
+          - "\"el\""
+          - "\"ell\""
+          - "\"h\""
+          - "\"lo\""
+        answer: 0
+        explanation: "slice(1,3)截取索引[1,3)=\"el\"。索引从 0 开始。"
+      - id: 154
+        difficulty: 2
+        question: "\"hello\".replace(\"h\",\"H\") 返回？"
+        options:
+          - "\"Hello\""
+          - "\"hello\""
+          - "\"HELLO\""
+          - "[\"Hello\"]"
+        answer: 0
+        explanation: "replace 替换第一个匹配项。\"hello\".replace(\"l\",\"L\")→\"heLlo\"。"
+      - id: 155
+        difficulty: 2
+        question: "[1,2,3].indexOf(4) 返回？"
+        options:
+          - 4
+          - -1(未找到)
+          - 0
+          - undefined
+        answer: 1
+        explanation: indexOf 返回首次出现索引未找到返回-1。includes 直接返回 true/false 更语义化。
+

@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLessonsV2 } from '../content-v2/lessons'
-import { getAllProjectsV2 } from '../content-v2/projects'
-import { chaptersV2, tracksV2 } from '../content-v2/taxonomy'
-import { prologueCardsV2 } from '../content-v2/prologues'
-import { glossary } from '../configs/glossary'
+import { getAllLessonsV2 } from '../content-loaders/lessons'
+import { getAllProjectsV2 } from '../content-loaders/projects'
+import { chaptersV2, tracksV2 } from '../content-loaders/taxonomy'
+import { prologueCardsV2 } from '../content-loaders/prologues'
+import { getGlossaryTuples } from '../content-loaders/glossary'
+const glossary = getGlossaryTuples()
 
 // ============================================================
 // 第一层：数据完整性测试

@@ -1,0 +1,178 @@
+# 测试宝石
+
+gem:
+  id: testing
+  name: 测试宝石
+  icon: 🧪
+  achievement: senior
+  order: 16
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 60
+    name: 测试概念
+    questions:
+      - id: 335
+        difficulty: 1
+        question: 测试金字塔的三层？
+        options:
+          - 前端/后端/数据库
+          - 单元测试(多)→集成测试(中)→E2E 测试(少)。底层快稳定上层慢脆弱
+          - 快/中/慢
+          - 简单/中等/困难
+        answer: 1
+        explanation: 金字塔：大量单元测试(低成本高速度)→适量集成测试→少量 E2E 测试(高成本易碎)。
+      - id: 336
+        difficulty: 1
+        question: 单元测试测什么？
+        options:
+          - 整个应用
+          - 测试单个函数/组件的独立行为。输入→函数→断言输出符合预期
+          - 用户操作
+          - 网络请求
+        answer: 1
+        explanation: 单元测试=隔离测试最小可测单元(纯函数/组件)。mock 外部依赖(API/数据库)。快且稳定。
+      - id: 337
+        difficulty: 1
+        question: E2E 测试测什么？
+        options:
+          - 单个函数
+          - 模拟真实用户操作测试完整的用户流程(如注册→登录→购买)
+          - CSS
+          - npm 包
+        answer: 1
+        explanation: E2E=端到端测试。用 Playwright/Cypress 模拟真实用户在浏览器中操作整个应用。最接近真实场景但最慢最脆弱。
+
+  - level: 2
+    type: elite
+    threshold: 60
+    name: 测试类型
+    questions:
+      - id: 338
+        difficulty: 2
+        question: TDD(测试驱动开发)的核心循环？
+        options:
+          - 写代码→测试→部署
+          - 红(写失败测试)→绿(写最简代码通过)→重构(优化代码)。先写测试再写代码
+          - 测试→通过→上线
+          - 写代码→写测试
+        answer: 1
+        explanation: TDD=先写测试(红)→写代码让测试通过(绿)→重构代码保持测试通过。强迫从使用者角度思考设计。
+      - id: 339
+        difficulty: 2
+        question: 什么代码应该测？什么可以不测？
+        options:
+          - 全部测
+          - 应测：核心业务逻辑/边界条件/易出bug处。可不测：第三方库内部/纯样式变化/简单 getter/setter
+          - 只测复杂代码
+          - 完全不测
+        answer: 1
+        explanation: 测核心业务逻辑和容易出错的地方。不测第三方库(它们有自己的测试)。不测 trivial 的代码(如简单的属性访问)。
+      - id: 340
+        difficulty: 2
+        question: 快照测试(Snapshot Testing)做什么？
+        options:
+          - 拍屏幕照片
+          - 对比组件渲染输出和之前保存的快照。不匹配→要么是预期变化(更新快照)要么是 bug
+          - 数据库快照
+          - 代码备份
+        answer: 1
+        explanation: 快照=组件渲染输出的序列化版本。下次测试对比快照自动发现 UI 意外变化。不能替代行为测试(只检测变化不判断对错)。
+      - id: 341
+        difficulty: 2
+        question: "测试覆盖率 100% 是好目标吗？"
+        options:
+          - 是必须
+          - 不是——追求覆盖率数字导致写无意义测试。重要的代码都被测试覆盖即可
+          - 越高越好
+          - 不需要覆盖率
+        answer: 1
+        explanation: "100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。"
+      - id: 342
+        difficulty: 2
+        question: Mock/Stub/Spy 的区别？
+        options:
+          - 完全相同
+          - Mock=模拟对象记录调用并验证行为；Stub=只提供预设返回值不验证；Spy=包装真实对象记录调用
+          - Stub 更强
+          - Mock 已废弃
+        answer: 1
+        explanation: Stub 简单替代(只返回值)。Mock 更强大(预设期望+验证是否按预期调用)。Spy 不改变行为只记录(如是否被调用过)。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 测试策略
+    questions:
+      - id: 343
+        difficulty: 3
+        question: 测试组件时如何处理 API 调用？
+        options:
+          - 真实发请求
+          - Mock API 返回预设数据。不要依赖真实网络保持测试快速稳定
+          - 跳过测试
+          - 用特殊 API
+        answer: 1
+        explanation: 用 vi.mock/msw 模拟 API 返回。测试关注组件对 API 响应数据的处理而非网络本身。真实请求慢且不稳定。
+      - id: 344
+        difficulty: 3
+        question: 测试异步代码要注意什么？
+        options:
+          - 直接测试
+          - 等异步操作完成再断言。用 async/await 或 waitFor(测试框架提供)。确保测试覆盖 resolve 和 reject
+          - 异步不测
+          - 只测同步
+        answer: 1
+        explanation: 用 async/await 等待 Promise。测试 reject 路径(错误处理是否正常)。用 waitFor 等待 UI 更新(Vue 异步更新)。
+      - id: 345
+        difficulty: 3
+        question: 何时写 E2E 测试而非单元测试？
+        options:
+          - 总是 E2E
+          - 核心用户流程(登录/购买等关键路径)→E2E。大量交互细节→单元/组件测试
+          - E2E 更好
+          - 不写 E2E
+        answer: 1
+        explanation: E2E 测试关键用户路径确保整个系统协同工作。成本高易碎→只测最重要流程。大量细节用单元和组件测试覆盖。
+      - id: 346
+        difficulty: 3
+        question: 测试命名规范为什么重要？
+        options:
+          - 不重要
+          - "好测试名=被测对象+场景+期望结果。\"点击提交按钮且表单为空应显示错误信息\""
+          - 随便命名
+          - 命名无所谓
+        answer: 1
+        explanation: 测试名应描述被测什么、在什么条件下、应该发生什么。让测试成为活文档别人读测试名就能理解系统行为。
+      - id: 347
+        difficulty: 3
+        question: 测试的好处：除了找 bug 还有什么？
+        options:
+          - 只有找 bug
+          - 代码质量(强迫写可测试的代码)→活文档(测试即规格)→重构信心(改代码不怕破坏功能)→更快 Onboarding
+          - 没有其他好处
+          - 省时间
+        answer: 1
+        explanation: 测试驱动好的代码设计(难测的代码通常设计有问题)。测试是活文档。重构时有安全网不担心破坏已有功能。新同事看测试理解系统。
+      - id: 348
+        difficulty: 3
+        question: 前端测试工具链：Vitest + Vue Test Utils 分别做什么？
+        options:
+          - 相同
+          - Vitest=测试运行器(执行测试/断言/覆盖率)。Vue Test Utils=Vue 组件测试工具(挂载组件/模拟props/触发事件)
+          - Vitest 替代 Vue
+          - 只用一个
+        answer: 1
+        explanation: Vitest(类 Jest)负责运行测试和提供断言 API。Vue Test Utils 提供 mount()挂载组件模拟 props 触发事件等 Vue 特定功能。
+      - id: 349
+        difficulty: 3
+        question: 什么情况下测试维护成本过高→可以考虑减少测试？
+        options:
+          - 所有情况
+          - 频繁变化的不稳定 UI 细节；纯原型/一次性代码；第三方库的内部实现细节
+          - 永远不减
+          - 测试免费
+        answer: 1
+        explanation: 快速迭代的原型/UI 细节不稳定时过度测试导致大量时间更新测试。测试稳定接口和核心逻辑减少琐碎测试。
+

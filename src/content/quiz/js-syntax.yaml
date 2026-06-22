@@ -1,0 +1,328 @@
+# JS 语法宝石
+
+gem:
+  id: js-syntax
+  name: JS 语法宝石
+  icon: 📝
+  achievement: junior
+  order: 5
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 80
+    name: 变量与类型
+    questions:
+      - id: 101
+        difficulty: 1
+        question: let 和 const 区别？
+        options:
+          - let 可重新赋值 const 不可；默认用 const
+          - 完全相同
+          - const 更快
+          - let 已废弃
+        answer: 0
+        explanation: const 声明常量不可重新赋值。let 可重新赋值。最佳实践：默认 const，确定需改值时用 let。
+      - id: 102
+        difficulty: 1
+        question: JS 有哪些基础数据类型？
+        options:
+          - string/number/boolean/undefined/null/symbol/bigint
+          - 只有 string 和 number
+          - 全部是 object
+          - 只有 3 种
+        answer: 0
+        explanation: "7 种基本类型。typeof null 返回\"object\"(历史 bug)。函数 typeof 返回\"function\"(object 子类型)。"
+      - id: 103
+        difficulty: 1
+        question: "`\"Hello\"+\" \"+\"World\"` 结果？"
+        options:
+          - Hello World
+          - "\"Hello World\""
+          - HelloWorld
+          - 报错
+        answer: 1
+        explanation: "+ 用于字符串拼接：三个字符串连成 \"Hello World\"。"
+      - id: 104
+        difficulty: 1
+        question: "`let x; console.log(typeof x)` 输出？"
+        options:
+          - "\"null\""
+          - "\"undefined\""
+          - "\"object\""
+          - 报错
+        answer: 1
+        explanation: "声明了但没赋值的变量值为 undefined，typeof undefined 返回 \"undefined\"。"
+      - id: 105
+        difficulty: 1
+        question: "`\"abc\".toUpperCase()` 结果？"
+        options:
+          - "\"abc\""
+          - "\"ABC\""
+          - "\"Abc\""
+          - 报错
+        answer: 1
+        explanation: "toUpperCase() 将所有字母转为大写。\"abc\"→\"ABC\"。toLowerCase() 反向操作。"
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 条件与循环
+    questions:
+      - id: 106
+        difficulty: 2
+        question: "\"5\"+3 和 \"5\"-3 结果？"
+        options:
+          - 53 和 2
+          - 8 和 2
+          - "\"53\"和\"53\""
+          - 报错
+        answer: 0
+        explanation: "+遇字符串拼接：\"5\"+3=\"53\"。-只用于数字，先把\"5\"转数字再减：5-3=2。隐式类型转换。"
+      - id: 107
+        difficulty: 2
+        question: 0==false 和 0===false 结果？
+        options:
+          - true 和 false
+          - true 和 true
+          - false 和 false
+          - false 和 true
+        answer: 0
+        explanation: == 做类型转换 0→false→true。=== 严格比较 0(number)≠false(boolean)→false。推荐始终用===。
+      - id: 108
+        difficulty: 2
+        question: "`if(0){console.log(\"yes\")}` 会输出吗？"
+        options:
+          - 会
+          - 不会 0 是 falsy
+          - 报错
+          - 输出 undefined
+        answer: 1
+        explanation: "0/\"\"/null/undefined/NaN/false 都是 falsy 值条件判断中视为 false。"
+      - id: 109
+        difficulty: 2
+        question: "`for(let i=0;i<3;i++){console.log(i)}` 输出？"
+        options:
+          - "0,1,2"
+          - "1,2,3"
+          - "0,1,2,3"
+          - "1,2"
+        answer: 0
+        explanation: 循环 3 次 i=0/1/2。i<3 时成立，i=3 时退出。
+      - id: 110
+        difficulty: 2
+        question: "`[1,2,3].forEach(n=>console.log(n*2))` 输出？"
+        options:
+          - "1,2,3"
+          - "2,4,6"
+          - "[2,4,6]"
+          - 报错
+        answer: 1
+        explanation: "forEach 对每个元素执行回调打印 n*2。不返回新数组(返回 undefined)。"
+      - id: 111
+        difficulty: 2
+        question: "`let score=85;score>=60?\"及格\":\"不及格\"` 结果？"
+        options:
+          - "\"及格\""
+          - "\"不及格\""
+          - 85
+          - 报错
+        answer: 0
+        explanation: "三元运算符：条件?真值:假值。85>=60 为 true→\"及格\"。"
+      - id: 112
+        difficulty: 2
+        question: "`if(\"false\"){console.log(\"yes\")}` 会输出？"
+        options:
+          - 会非空字符串是 truthy
+          - "不会\"false\"是 falsy"
+          - 报错
+          - undefined
+        answer: 0
+        explanation: "非空字符串(含\"false\")是 truthy→执行 if 块。只有空字符串\"\"是 falsy。"
+      - id: 113
+        difficulty: 2
+        question: "`10%3` 结果？"
+        options:
+          - 3
+          - 1(取余)
+          - 0
+          - 10
+        answer: 1
+        explanation: "%=取余数(mod)。10÷3=3 余 1。常用于判断奇偶(n%2===0 偶数)。"
+      - id: 114
+        difficulty: 2
+        question: "`3>2 && 2>1` 结果？"
+        options:
+          - true
+          - false
+          - 3
+          - 报错
+        answer: 0
+        explanation: "&&=逻辑与(且)。两边都 true 结果 true。||=逻辑或(或)。!=逻辑非(取反)。"
+      - id: 115
+        difficulty: 2
+        question: "`const arr=[1,2,3];arr.push(4)` 会报错吗？"
+        options:
+          - 会 const 不能改
+          - 不会 const 保护引用数组内容可改
+          - 取决于浏览器
+          - push 对 const 无效
+        answer: 1
+        explanation: const 锁定变量绑定(不能 arr=新数组)，但数组/对象内容可修改。完全冻结用 Object.freeze()。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 函数与调试
+    questions:
+      - id: 116
+        difficulty: 3
+        question: function 不写 return 返回什么？
+        options:
+          - null
+          - undefined
+          - 报错
+          - 0
+        answer: 1
+        explanation: "无 return 函数隐式返回 undefined。箭头函数一行表达式无{}时自动返回。"
+      - id: 117
+        difficulty: 3
+        question: "箭头函数 `(a,b)=>a+b` 等价什么？"
+        options:
+          - "function(a,b){return a+b}"
+          - let a+b
+          - "a=>b"
+          - "function a(b){}"
+        answer: 0
+        explanation: "箭头函数是 function 简写。单行可省略{}和 return。"
+      - id: 118
+        difficulty: 3
+        question: var 和 let 作用域区别？
+        options:
+          - 相同
+          - "var 函数作用域有提升，let 块级作用域({}内)无提升"
+          - let 函数作用域
+          - var 已废弃
+        answer: 1
+        explanation: "var 函数作用域有变量提升。let 块级作用域{}内有效无提升。推荐用 let/const 避免 var 混乱。"
+      - id: 119
+        difficulty: 3
+        question: "闭包是什么？`function o(){let x=1;return function(){return x}}` 内函数能访问 x？"
+        options:
+          - 不能
+          - "能内部函数\"记住\"外部变量=闭包"
+          - 只有外部函数运行时才能
+          - 报错
+        answer: 1
+        explanation: "闭包=函数+它访问的外部变量。内函数\"捕获\"了 x，即使外部函数执行完毕 x 仍能被内函数访问。"
+      - id: 120
+        difficulty: 3
+        question: "`typeof null` 返回？为什么？"
+        options:
+          - "\"null\""
+          - "\"object\"——JS 早期实现 bug 为兼容保留至今"
+          - "\"undefined\""
+          - "\"nullpointer\""
+        answer: 1
+        explanation: "typeof null===\"object\"是 JS 最早实现的 bug。null 的类型标记是 000 和对象相同。为兼容未修复。"
+      - id: 121
+        difficulty: 3
+        question: "`let a,b=5;console.log(a,b)` 输出？"
+        options:
+          - "5,5"
+          - "undefined,5"
+          - 报错
+          - "null,5"
+        answer: 1
+        explanation: "let a,b=5 中只有 b 被赋值为 5，a 只声明未赋值=undefined。"
+      - id: 122
+        difficulty: 3
+        question: "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)` 顺序？"
+        options:
+          - "1,2,3"
+          - "1,3,2"
+          - "2,1,3"
+          - "3,2,1"
+        answer: 1
+        explanation: 同步代码先执行 1→3。setTimeout 虽延迟 0 仍入任务队列等同步代码跑完才执行→2。事件循环。
+      - id: 123
+        difficulty: 3
+        question: try/catch 基本语法和作用？
+        options:
+          - "try{}else{}"
+          - "try{}catch(e){}"
+          - "catch{}try{}"
+          - "try{}error{}"
+        answer: 1
+        explanation: try 块放可能出错代码，catch(e)处理错误(程序不崩溃)。finally 块可选总是在最后执行。
+      - id: 124
+        difficulty: 3
+        question: "`Cannot read property xxx of null` 什么错误？怎么修？"
+        options:
+          - 电脑坏了
+          - 访问 null 的属性。先判 if(el)再操作或检查选择器是否正确
+          - 正常警告
+          - 重启浏览器
+        answer: 1
+        explanation: 最常因 querySelector 没找到元素返回 null→对 null 操作。修法：检查选择器拼写或先判 if(el)。
+      - id: 125
+        difficulty: 2
+        question: "`!true` 结果？"
+        options:
+          - true
+          - false
+          - undefined
+          - 报错
+        answer: 1
+        explanation: "!=逻辑非(取反)。!true=false !false=true。!!值可转布尔型。"
+      - id: 126
+        difficulty: 3
+        question: "`let x=5;x=10` vs `const x=5;x=10` 区别？"
+        options:
+          - 都成功
+          - 前者成功 x=10；后者报错 TypeError
+          - 都报错
+          - 后者静默失败
+        answer: 1
+        explanation: let 可重新赋值。const 不可重新赋值→TypeError。
+      - id: 127
+        difficulty: 3
+        question: "`\" hello \".trim().toUpperCase()` 结果？"
+        options:
+          - "\" HELLO \""
+          - "\"HELLO\""
+          - "\"hello\""
+          - 报错
+        answer: 1
+        explanation: "trim()去两端空白→\"hello\"，toUpperCase()转大写→\"HELLO\"。方法链从左到右执行。"
+      - id: 128
+        difficulty: 2
+        question: "`[3,10,1,20].sort()` 结果？为什么？"
+        options:
+          - "[1,3,10,20]"
+          - "[1,10,20,3]——sort 默认按字符串排序"
+          - "[3,10,1,20]"
+          - 报错
+        answer: 1
+        explanation: "sort()默认转字符串按字典序排序→\"10\"<\"3\"因为\"1\"<\"3\"。数字排序需(a,b)=>a-b。"
+      - id: 129
+        difficulty: 3
+        question: "`const{name,age}=person` 是什么语法？"
+        options:
+          - 错误
+          - 解构赋值——从对象中提取 name 和 age 属性
+          - 创建新对象
+          - TypeScript 特有
+        answer: 1
+        explanation: 对象解构：等价于 const name=person.name;const age=person.age;。简化代码。
+      - id: 130
+        difficulty: 2
+        question: "`let name=\"小明\";let Name=\"小红\";console.log(name)` 输出？"
+        options:
+          - 小明(JS 区分大小写)
+          - 小红
+          - 报错
+          - undefined
+        answer: 0
+        explanation: JS 变量名区分大小写。name 和 Name 是两个不同的变量。
+

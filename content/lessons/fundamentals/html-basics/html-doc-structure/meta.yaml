@@ -1,9 +1,0 @@
-id: html-doc-structure
-title: "HTML 文档结构 — 了解网页的\"乐谱格式\""
-track: fundamentals
-chapter: html-basics
-order: 3
-mode: sandbox
-musicAnalogy: "每份乐谱都有固定的格式：左上角写曲名、右上角标速度、第一行是谱号调号、最后画终止线。HTML 文档也有标准结构——`<!DOCTYPE>` 是\"这是乐谱\"的声明、`<head>` 是页面的\"调号信息\"、`<body>` 是\"乐谱正文\"。了解这个结构，你才算真正看懂了一份网页\"乐谱\"。"
-listenTo: 巴赫《哥德堡变奏曲》咏叹调 — 开篇的 Aria 像 `<head>` 宣布主题框架，随后的 30 段变奏像 `<body>` 承载着丰富变化的内容，最终回到 Aria 就像 `</html>` 的闭环。每一份乐谱都有开端和终结——歌德堡的结构严谨清晰，正如一份标准的 HTML 文档。
-estimatedMinutes: 0

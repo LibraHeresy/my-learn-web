@@ -43,7 +43,7 @@ const projectRoot = path.resolve(__dirname, '..')
 
 const lessonsFile = path.join(projectRoot, 'src', 'generated', 'lessons-index.json')
 const projectsFile = path.join(projectRoot, 'src', 'generated', 'projects-index.json')
-const contentRoot = path.join(projectRoot, 'content')
+const contentRoot = path.join(projectRoot, 'src', 'content')
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message)

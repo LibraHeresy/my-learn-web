@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLessonsV2 } from '../content-v2/lessons'
-import { getChapterOrder } from '../content-v2/taxonomy'
+import { getAllLessonsV2 } from '../content-loaders/lessons'
+import { getChapterOrder } from '../content-loaders/taxonomy'
 
 // ============================================================
 // 导航标签集成测试（使用真实课程数据）

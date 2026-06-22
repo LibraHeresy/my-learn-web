@@ -1,0 +1,178 @@
+# 安全宝石
+
+gem:
+  id: security
+  name: 安全宝石
+  icon: 🔒
+  achievement: senior
+  order: 15
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 60
+    name: 安全概念
+    questions:
+      - id: 320
+        difficulty: 1
+        question: XSS 是什么？
+        options:
+          - CSS 框架
+          - 跨站脚本攻击——攻击者向网页注入恶意脚本
+          - 新 CSS 特性
+          - 服务器漏洞
+        answer: 1
+        explanation: XSS=Cross-Site Scripting。攻击者将恶意 JS 注入页面→窃取用户数据/cookie/重定向。防御：输入校验+输出转义。
+      - id: 321
+        difficulty: 1
+        question: CSRF 是什么？
+        options:
+          - 新协议
+          - 跨站请求伪造——诱导用户点击链接以用户身份执行非预期操作
+          - CSS 框架
+          - JS 库
+        answer: 1
+        explanation: CSRF 攻击者诱导用户点击恶意链接→以用户已登录的身份向目标网站发请求(如转账)。防御：CSRF Token+SameSite Cookie。
+      - id: 322
+        difficulty: 1
+        question: HTTPS 的作用？
+        options:
+          - 加速网站
+          - 加密浏览器和服务器之间的通信防窃听和篡改
+          - 压缩文件
+          - SEO 优化
+        answer: 1
+        explanation: "HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\"不安全\"。"
+
+  - level: 2
+    type: elite
+    threshold: 60
+    name: 常见攻击
+    questions:
+      - id: 323
+        difficulty: 2
+        question: innerHTML 设置用户输入为什么危险？
+        options:
+          - 不危险
+          - "用户输入 <script>alert(1)</script> 会被执行→XSS 攻击。用 textContent 或 DOMPurify 清理"
+          - 只有 IE 危险
+          - innerHTML 已废弃
+        answer: 1
+        explanation: "innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。"
+      - id: 324
+        difficulty: 2
+        question: CSP(Content Security Policy)做什么？
+        options:
+          - 样式框架
+          - 声明允许加载的资源来源限制内联脚本防范 XSS。浏览器按策略拦截违规资源
+          - JS 库
+          - 协议
+        answer: 1
+        explanation: CSP 通过 HTTP 头或 meta 标签限制可执行的脚本来源。默认禁止内联脚本→即使攻击者注入 script 也无法执行。
+      - id: 325
+        difficulty: 2
+        question: SameSite Cookie 属性做什么？
+        options:
+          - 设置样式
+          - 控制跨站请求时是否发送 Cookie。SameSite=Strict/Lax/None 防 CSRF
+          - 存储数据
+          - 加速
+        answer: 1
+        explanation: SameSite=Strict 跨站不发送 Cookie。Lax 允许 GET 导航发送。None 总是发送(需 Secure)。防 CSRF。
+      - id: 326
+        difficulty: 2
+        question: 输入校验应该在哪做？
+        options:
+          - 只前端
+          - 前端(用户体验)+后端(安全防线)。前端校验可绕过必须后端二次验证
+          - 只后端
+          - 不校验
+        answer: 1
+        explanation: 前端校验提升用户体验(即时反馈)。后端必须再次校验因为前端校验可绕过(关掉 JS 或用 curl 直接发送)。
+      - id: 327
+        difficulty: 2
+        question: 用户上传文件→前端需要注意哪些安全问题？
+        options:
+          - 不管
+          - 限制类型(检查 MIME 而非扩展名)+限制大小+不信任文件名+服务端病毒扫描
+          - 只检查扩展名
+          - 只限制大小
+        answer: 1
+        explanation: 文件类型检查 MIME type 而非仅扩展名。限制大小防止 DOS。文件名不可信(可能含路径穿越)。服务端扫描病毒。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 防御实战
+    questions:
+      - id: 328
+        difficulty: 3
+        question: "以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`"
+        options:
+          - 无问题
+          - 若服务端将 name 参数直接输出到 HTML→反射型 XSS。应转义 HTML 实体
+          - URL 太长
+          - 参数名错误
+        answer: 1
+        explanation: "反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。"
+      - id: 329
+        difficulty: 3
+        question: JWT Token 存在 localStorage 有什么风险？如何改进？
+        options:
+          - 无风险
+          - XSS 可读取 localStorage→泄露 Token→攻击者冒充用户。改进：httpOnly Cookie 存储 JS 无法访问
+          - localStorage 安全
+          - JWT 不需存储
+        answer: 1
+        explanation: localStorage 可被 XSS 读取。httpOnly Cookie 设置后 JS 无法读取→XSS 无法窃取 Token。配合 Secure(仅HTTPS)+SameSite。
+      - id: 330
+        difficulty: 3
+        question: 第三方 npm 包有什么安全风险？如何防范？
+        options:
+          - 无风险
+          - 可能含恶意代码/已知漏洞/过度收集数据。防范：审查包质量(下载量/维护频率)+npm audit 检查漏洞+锁定版本
+          - npm 官方审核
+          - 不会有事
+        answer: 1
+        explanation: npm 供应链攻击：恶意包名伪装/依赖漏洞。定期 npm audit 检查+审查包的维护状况+使用 package-lock.json 锁定版本+避免过多依赖。
+      - id: 331
+        difficulty: 3
+        question: 点击劫持(Clickjacking)是什么？怎么防御？
+        options:
+          - 鼠标故障
+          - 在透明 iframe 上诱导用户点击实际点击的是下层页面。防御：X-Frame-Options 头禁止被嵌入
+          - CSS 问题
+          - 无法防御
+        answer: 1
+        explanation: "攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。"
+      - id: 332
+        difficulty: 3
+        question: 前端密码传输安全？明文 vs 哈希？
+        options:
+          - 明文 OK
+          - 至少 HTTPS 加密传输。前端哈希意义不大(JS 可见哈希算法)。正确做法：HTTPS+服务端哈希(bcrypt)存储
+          - 前端哈希即可
+          - 不传输密码
+        answer: 1
+        explanation: HTTPS 加密传输确保中间人无法窃听。前端哈希不能替代服务端安全存储(攻击者可获取哈希值离线破解)。服务端用 bcrypt/argon2 哈希存储密码。
+      - id: 333
+        difficulty: 3
+        question: eval() 为什么不安全？
+        options:
+          - eval 没问题
+          - eval 执行任意字符串代码→若含用户输入→代码注入。始终避免 eval 用其他安全替代
+          - eval 更快
+          - eval 已废弃
+        answer: 1
+        explanation: eval 将字符串作为 JS 代码执行。若字符串包含用户输入→攻击者注入恶意代码。Function()同理。替代：JSON.parse 解析数据。
+      - id: 334
+        difficulty: 3
+        question: 前端安全最佳实践速记？
+        options:
+          - 不管安全
+          - 输入校验+输出转义+CSP+HTTPS+httpOnly Cookie+避免 eval/innerHTML+定期审计依赖
+          - 只后端管安全
+          - 安全不关前端事
+        answer: 1
+        explanation: 前端安全六要：转义输出防 XSS、校验输入(配合后端)、HTTPS 加密、httpOnly Cookie、CSP 头、避免 eval/innerHTML 直接拼接用户输入。
+

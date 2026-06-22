@@ -1,0 +1,278 @@
+# Vue 基础宝石
+
+gem:
+  id: vue-basic
+  name: Vue 基础宝石
+  icon: 💚
+  achievement: mid
+  order: 10
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 70
+    name: SFC 与模板
+    questions:
+      - id: 216
+        difficulty: 1
+        question: .vue 文件三段式结构？
+        options:
+          - HTML/CSS/JS
+          - template(模板)/script(逻辑)/style(样式)
+          - header/body/footer
+          - 一个区域
+        answer: 1
+        explanation: SFC 单文件组件=template+script setup+style scoped。
+      - id: 217
+        difficulty: 1
+        question: "{{ }}在 Vue 模板中做什么？"
+        options:
+          - 注释
+          - 文本插值——显示 JS 表达式的值
+          - 属性绑定
+          - 条件判断
+        answer: 1
+        explanation: "{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。"
+      - id: 218
+        difficulty: 1
+        question: v-bind 的作用和简写？
+        options:
+          - 条件渲染
+          - "动态绑定 HTML 属性简写为 :"
+          - 循环渲染
+          - 事件监听
+        answer: 1
+        explanation: "v-bind:src=\"url\"等价于 :src=\"url\"。把 JS 表达式的值绑定到 HTML 属性上。"
+      - id: 219
+        difficulty: 1
+        question: v-on 的作用和简写？
+        options:
+          - 属性绑定
+          - "事件监听简写为 @"
+          - 条件渲染
+          - 循环
+        answer: 1
+        explanation: "v-on:click=\"fn\"等价于 @click=\"fn\"。监听 DOM 事件执行对应方法。"
+      - id: 220
+        difficulty: 1
+        question: ref() 作用？
+        options:
+          - 创建普通变量
+          - 创建响应式数据。JS 中读写用.value，template 中自动解包不用.value
+          - 定义 CSS
+          - 定义路由
+        answer: 1
+        explanation: ref()创建响应式引用。script中用.value读写，template中Vue自动解包直接用变量名。
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 指令
+    questions:
+      - id: 221
+        difficulty: 2
+        question: v-if 和 v-show 区别？DOM层面？
+        options:
+          - 完全相同
+          - "v-if 移除/创建 DOM；v-show 始终存在只是 display:none"
+          - v-show 更强
+          - v-if 已废弃
+        answer: 1
+        explanation: v-if=false元素从DOM移除(切换开销大)。v-show=false仍存于DOM只切CSS(切换快)。频繁切用v-show条件少变用v-if。
+      - id: 222
+        difficulty: 2
+        question: "v-for 为什么需要 :key？用 index 做 key的问题？"
+        options:
+          - 性能优化
+          - key 帮助 Vue 识别每个节点做高效 diff。用 index 做 key 在列表重排时导致错误复用和状态错乱
+          - key 是装饰
+          - 不需要 key
+        answer: 1
+        explanation: key 是虚拟 DOM diff 的标识。列表增删重排时 index 会变→Vue 错误复用节点→组件状态错乱。始终用稳定唯一 id 做 key。
+      - id: 223
+        difficulty: 2
+        question: v-model 实质是什么？
+        options:
+          - 魔法
+          - "v-bind:value + v-on:input 的语法糖"
+          - v-if+v-show
+          - v-for+v-bind
+        answer: 1
+        explanation: "v-model=\"name\"等价于:value=\"name\" @input=\"name=$event.target.value\"。双向绑定=数据→视图+视图→数据。"
+      - id: 224
+        difficulty: 2
+        question: computed 和 method 区别？
+        options:
+          - 完全相同
+          - computed 有缓存依赖不变不重新计算；method 每次调用都执行
+          - method 更快
+          - computed 已废弃
+        answer: 1
+        explanation: computed 自动追踪依赖缓存结果。依赖不变时直接返回缓存值。method 每次都执行不缓存。
+      - id: 225
+        difficulty: 2
+        question: computed 和 watch 区别？
+        options:
+          - 相同
+          - computed=派生数据(有缓存)；watch=监听变化执行副作用(如发请求存localStorage)
+          - watch 更快
+          - computed 已废弃
+        answer: 1
+        explanation: computed：基于已有数据计算新值(自动追踪依赖缓存)。watch：值变化时执行回调(无返回值用于副作用)。
+      - id: 226
+        difficulty: 2
+        question: Props 的作用和数据流向？
+        options:
+          - 子传父
+          - 父组件向子组件传递数据。单向数据流：父→子
+          - 双向
+          - 兄弟互传
+        answer: 1
+        explanation: 父组件通过 props 向子组件传递数据。数据单向从父流向子。子不能直接修改 props(只读)。
+      - id: 227
+        difficulty: 2
+        question: Emits 的作用？
+        options:
+          - 父传子
+          - "子组件向父组件发送事件通知(如\"我完成了\")"
+          - 双向绑定
+          - 定义样式
+        answer: 1
+        explanation: 子组件通过 emit 向父组件发送事件。父组件监听事件执行处理函数。数据流：props 向下 emits 向上。
+      - id: 228
+        difficulty: 2
+        question: scoped 样式作用？不加会怎样？
+        options:
+          - 无区别
+          - scoped 让 CSS 只作用于当前组件。不加 scoped 样式泄漏到全局影响其他组件
+          - 更快
+          - 已废弃
+        answer: 1
+        explanation: "<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。"
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 响应式实战
+    questions:
+      - id: 229
+        difficulty: 3
+        question: ref 和 reactive 区别？什么时候用哪个？
+        options:
+          - 完全相同
+          - ref 包装基本类型需.value；reactive 包装对象直接访问属性。ref 更通用推荐
+          - reactive 已废弃
+          - ref 已废弃
+        answer: 1
+        explanation: ref 可包装任何类型(基本类型/对象)需.value访问。reactive 只包装对象直接访问。推荐用 ref(统一写法)。
+      - id: 230
+        difficulty: 3
+        question: "以下 Vue 代码问题在哪？`<div v-for=\"item in list\">{{item}}</div>`"
+        options:
+          - 语法错
+          - "缺少 :key 属性"
+          - v-for 不能用
+          - 没问题
+        answer: 1
+        explanation: "v-for 应始终加 :key=\"唯一标识\"。Vue 用 key 追踪每个节点的身份以高效更新。"
+      - id: 231
+        difficulty: 3
+        question: v-model 修饰符 .lazy .number .trim 各做什么？
+        options:
+          - 无作用
+          - lazy=change 事件而非 input；number=转数字；trim=去空白
+          - 只用于 input
+          - 已废弃
+        answer: 1
+        explanation: .lazy 在 change 时更新(失焦后)而非每次输入。.number 自动转数字。.trim 自动去首尾空白。
+      - id: 232
+        difficulty: 3
+        question: 以下关于 Props 的说法哪个正确？
+        options:
+          - 子组件可修改 props
+          - Props 只读，子组件不能直接修改。想改通过 emit 通知父组件改
+          - Props 是双向的
+          - Props 是可选的
+        answer: 1
+        explanation: Props 从父流向子只读。子组件不能直接修改 props。需要修改时 emit 事件让父组件更新。
+      - id: 233
+        difficulty: 3
+        question: "`<div :class=\"{active:isActive}\">` 中 active 什么时候生效？"
+        options:
+          - 总是生效
+          - isActive 为 true 时
+          - isActive 为 false 时
+          - 永不生效
+        answer: 1
+        explanation: "对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\"[base,dynamic]\"。"
+      - id: 234
+        difficulty: 3
+        question: "Vue 模板中 {{}} 和 v-text 的区别？"
+        options:
+          - 完全相同
+          - "{{}}可能闪烁(未编译前显示花括号)；v-text 不会。功能等价"
+          - v-text 更快
+          - "{{}} 已废弃"
+        answer: 1
+        explanation: "功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。"
+      - id: 235
+        difficulty: 3
+        question: computed 的缓存何时失效？
+        options:
+          - 永不失效
+          - 当它依赖的响应式数据发生变化时
+          - 每次 render 都失效
+          - 手动刷新
+        answer: 1
+        explanation: computed 自动追踪依赖数据。依赖不变→返回缓存值→不重新计算。依赖变了→自动重新计算→更新缓存。
+      - id: 236
+        difficulty: 3
+        question: "`watch(x,(newVal,oldVal)=>{...})` 参数是什么？"
+        options:
+          - 无参数
+          - newVal=变化后的值 oldVal=变化前的值
+          - 只有 newVal
+          - 只有 oldVal
+        answer: 1
+        explanation: "watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。"
+      - id: 237
+        difficulty: 3
+        question: 以下哪项是 Vue 的单向数据流？
+        options:
+          - 数据在父子间自由流动
+          - 父→子(props)向下传数据；子→父(emits)向上发事件。数据始终从父流向子
+          - 子可随意改父数据
+          - 没有数据流
+        answer: 1
+        explanation: 数据流：父通过 props 传数据给子(向下)。子不能直接改 props，通过 emits 通知父(向上发事件)。父收到事件自行更新数据。
+      - id: 238
+        difficulty: 3
+        question: v-if/v-else-if/v-else 链必须紧邻吗？
+        options:
+          - 不一定
+          - 必须紧邻不能插入其他元素
+          - 随意排列
+          - 不需要 else
+        answer: 1
+        explanation: v-if/v-else-if/v-else 必须作为相邻的兄弟元素不能有其他元素插入其间否则链断裂。
+      - id: 239
+        difficulty: 3
+        question: "<script setup> 和普通 <script> 区别？"
+        options:
+          - 完全相同
+          - setup 中顶层变量/函数自动暴露给模板无需 return。更简洁
+          - 普通 script 更快
+          - setup 已废弃
+        answer: 1
+        explanation: "<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。"
+      - id: 240
+        difficulty: 3
+        question: "`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？"
+        options:
+          - 会
+          - 不会——v-once 只渲染一次后续不再响应数据变化
+          - 部分更新
+          - 报错
+        answer: 1
+        explanation: v-once 让元素/组件只渲染一次后续数据变化时不重新渲染。用于静态内容优化性能。
+

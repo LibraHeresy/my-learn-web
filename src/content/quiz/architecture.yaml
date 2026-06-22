@@ -1,0 +1,228 @@
+# 架构宝石
+
+gem:
+  id: architecture
+  name: 架构宝石
+  icon: 🏛️
+  achievement: senior
+  order: 17
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 60
+    name: 设计原则
+    questions:
+      - id: 350
+        difficulty: 1
+        question: SOLID 的 S(单一职责)在前端指什么？
+        options:
+          - 一个函数做所有事
+          - 一个组件/函数只负责一件事。做多件事→拆分
+          - 写更少代码
+          - 复杂化
+        answer: 1
+        explanation: 单一职责=每个模块/组件/函数只做一件事做好。一个组件既管状态又管样式又管请求→拆分。
+      - id: 351
+        difficulty: 1
+        question: 组件拆分的原则？
+        options:
+          - 越大越好
+          - 一个组件做一件事；可复用提取；变化频率不同的部分分开；层级不超过 3-4 层
+          - 全部拆成小组件
+          - 不拆分
+        answer: 1
+        explanation: 按职责拆分。复用的提取为独立组件。经常变化的部分和稳定的部分分离。避免过度拆分(组件碎片化)。
+      - id: 352
+        difficulty: 1
+        question: 什么是技术债？怎么管理？
+        options:
+          - 借钱买服务器
+          - 为快速交付做的妥协(复制代码/跳过测试/硬编码)积累后降低开发速度。定期偿还重构
+          - 新技术
+          - 不需要管
+        answer: 1
+        explanation: 技术债=短期妥协积累的代码质量问题。像金融债：越拖利息越高。定期安排重构时间偿还。
+      - id: 353
+        difficulty: 1
+        question: MVC/MVVM 是什么？在前端怎么体现？
+        options:
+          - 数据库概念
+          - MVC=Model-View-Controller。MVVM=Model-View-ViewModel(Vue/React 是 MVVM 变体)
+          - CSS 框架
+          - 构建工具
+        answer: 1
+        explanation: Model(数据)→View(界面)→ViewModel(连接层处理逻辑)。Vue 中：data/model=Model，template=View，组件逻辑=ViewModel。
+
+  - level: 2
+    type: elite
+    threshold: 60
+    name: 设计模式
+    questions:
+      - id: 354
+        difficulty: 2
+        question: 状态管理方案怎么选？ref/reactive vs Pinia vs provide/inject？
+        options:
+          - 全用 Pinia
+          - 组件内部状态→ref/reactive；跨组件共享→Pinia；深层嵌套传递→provide/inject(轻量场景)
+          - 全用 ref
+          - 全用 provide
+        answer: 1
+        explanation: ref/reactive 适合组件内状态。Pinia 适合跨组件共享的全局状态。provide/inject 适合祖先传后代(如主题/语言)。
+      - id: 355
+        difficulty: 2
+        question: 项目目录结构原则？
+        options:
+          - 随便放
+          - 按功能/领域分(而非按文件类型)：features/user/ components/ stores/。相关文件放一起
+          - 全放 src
+          - 按类型分(components/pages/stores)
+        answer: 1
+        explanation: 推荐按功能领域组织：features/user/(components+stores+api)。小型项目可按类型分。关键是相关文件靠近。
+      - id: 356
+        difficulty: 2
+        question: 什么时候该重构？重构的安全网是什么？
+        options:
+          - 随时改
+          - 代码异味(重复/过长/难理解)→重构。安全网=测试(确保重构不破坏功能)。没测试先补测试再重构
+          - 永远不重构
+          - 重构=重写
+        answer: 1
+        explanation: 识别代码异味(复制代码/函数过长/命名混乱)→小步重构。有测试覆盖才能安全重构。每步改完跑测试→绿色→继续。
+      - id: 357
+        difficulty: 2
+        question: 观察者模式(Observer)在前端的体现？
+        options:
+          - 没用
+          - 事件监听(addEventListener)和响应式系统(Vue 的 watch/computed)都是观察者模式。主题变化→通知所有观察者
+          - 后端模式
+          - 已废弃
+        answer: 1
+        explanation: 发布-订阅变体。Subject(主题)维护观察者列表状态变化时通知所有观察者。addEventListener 和 Vue 响应式都是此模式的实例。
+      - id: 358
+        difficulty: 2
+        question: DRY vs WET vs AHA 原则？
+        options:
+          - 一样
+          - DRY=Don't Repeat Yourself 别复制代码。WET=Write Everything Twice 可接受两次。AHA=Avoid Hasty Abstractions 别过早抽象
+          - WET 最好
+          - DRY 已废弃
+        answer: 1
+        explanation: 不要过早抽象(AHA)：等到确实有共同模式再提取。两处相似不一定同一抽象(可能只是巧合)。过度 DRY 导致紧耦合。
+      - id: 359
+        difficulty: 2
+        question: 单例模式(Singleton)在前端的应用？
+        options:
+          - 没用
+          - 全局唯一实例：Pinia store、EventBus、全局配置对象。确保整个应用共享同一个实例
+          - 只有后端用
+          - 已废弃
+        answer: 1
+        explanation: 单例=全局唯一实例。Pinia store 创建后整个应用共享一个实例。避免重复创建(如多个 Axios 实例配置不一致)。
+      - id: 360
+        difficulty: 2
+        question: 前端项目从单体到微前端的演进？
+        options:
+          - 一开始就微前端
+          - 小项目→单体(一个 Vite 应用)。大到多团队协作→微前端(Module Federation/iframe/Web Components)。不早优化
+          - 微前端总更好
+          - 单体已废弃
+        answer: 1
+        explanation: 小项目单体架构最简。多团队独立开发部署→微前端独立子应用。大多数项目不需要微前端从单体开始够用。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 架构决策
+    questions:
+      - id: 361
+        difficulty: 3
+        question: 技术选型的考量因素？
+        options:
+          - 哪个流行用哪个
+          - 团队熟悉度+社区生态+包大小+维护频率+许可协议+和现有技术栈匹配度
+          - 只看性能
+          - 只看知名度
+        answer: 1
+        explanation: 选技术栈综合考量：团队学习成本、社区活跃度(问题好解决)、包大小(影响性能)、维护状况(是否持续更新)、许可协议。
+      - id: 362
+        difficulty: 3
+        question: 组件通信方案选择：props/emits vs provide/inject vs Pinia vs EventBus？
+        options:
+          - 全 props
+          - 父子→props+emits；深层传递→provide/inject；全局状态→Pinia；EventBus 不推荐(难追踪)
+          - 全 Pinia
+          - 全 EventBus
+        answer: 1
+        explanation: 默认用 props/emits 传递。隔多代→provide/inject。跨组件共享→Pinia。避免 EventBus(事件满天飞难以调试)。
+      - id: 363
+        difficulty: 3
+        question: 前端错误监控方案？
+        options:
+          - 不管错误
+          - 全局错误捕获(window.onerror)+Promise 未捕获+框架错误边界+上报到 Sentry/LogRocket 等平台
+          - 前端不处理错误
+          - console.log
+        answer: 1
+        explanation: window.onerror 捕获运行时错误。unhandledrejection 捕获未处理 Promise。Sentry 等平台收集分析线上错误。
+      - id: 364
+        difficulty: 3
+        question: YAGNI(You Aren't Gonna Need It)原则？
+        options:
+          - 不要写代码
+          - 不要实现当前不需要的功能。为未来需求写代码=浪费。需要时再实现
+          - 所有功能都要提前做
+          - 只写一半
+        answer: 1
+        explanation: "YAGNI=不要提前实现\"将来可能需要\"的功能。需求会变→提前做的可能用不上。等需求明确时再实现更高效。"
+      - id: 365
+        difficulty: 3
+        question: "KISS(Keep It Simple, Stupid)在前端的体现？"
+        options:
+          - 简单就是简陋
+          - 优先最简单的解决方案。能用 CSS 不用 JS；能用标准库不引入第三方包；能用纯函数不用复杂模式
+          - 越复杂越好
+          - KISS 已过时
+        answer: 1
+        explanation: "简单方案 > 炫技。能用 HTML/CSS 解决不用 JS。能用浏览器 API 不引入库。复杂度随需求增长而非提前设计。"
+      - id: 366
+        difficulty: 3
+        question: 前端项目从 0 到 1 的架构决策清单？
+        options:
+          - 直接写代码
+          - 技术栈选型→目录结构→路由设计→状态管理方案→API 层封装→错误处理→权限→测试→部署
+          - 只要写代码
+          - 架构不重要
+        answer: 1
+        explanation: 1.框架/工具选型 2.目录结构 3.路由设计 4.状态管理 5.API 封装 6.错误处理 7.权限 8.测试策略 9.CI/CD。不贪大从关键决策开始。
+      - id: 367
+        difficulty: 3
+        question: 多页面应用 vs 单页面应用(SPA)→如何选择？
+        options:
+          - SPA 总更好
+          - 内容为主(博客/文档)→多页面/SSG；交互为主(后台/工具)→SPA；电商/社交→根据场景混合
+          - 多页面过时
+          - 多页面更快
+        answer: 1
+        explanation: 内容型网站(SEO 重要)→多页面或 SSG(如博客)。强交互应用(后台/工具)→SPA(Vue/React)。混合：首屏 SSR+后续 SPA。
+      - id: 368
+        difficulty: 3
+        question: 前端代码审查(Code Review)重点看什么？
+        options:
+          - 格式
+          - "逻辑正确性>安全(XSS/注入)>性能(不必要的重渲染)>可维护性(命名/结构)>可访问性>测试"
+          - 只检查格式
+          - 不需要审查
+        answer: 1
+        explanation: 审查优先级：逻辑错误和安全问题最严重。其次性能陷阱和不必要的复杂度。代码可读性和测试也是重要维度。
+      - id: 369
+        difficulty: 3
+        question: Feature Flag(功能开关)在前端的应用？
+        options:
+          - 没用
+          - 通过配置开关控制新功能是否对用户可见。灰度发布→小范围测试→全量。出问题可迅速关闭
+          - 后端概念
+          - 已废弃
+        answer: 1
+        explanation: "Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。"
+

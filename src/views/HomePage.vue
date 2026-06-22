@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { getAllLessonsV2 } from "../content-v2/lessons";
-import { getAllProjectsV2 } from "../content-v2/projects";
+import { getAllLessonsV2 } from "../content-loaders/lessons";
+import { getAllProjectsV2 } from "../content-loaders/projects";
 import { useProgressStore } from "../stores/progress";
 import { parseInline } from "../utils/markdown";
-import { tracksV2, chaptersV2, getChapterV2 } from "../content-v2/taxonomy";
-import { prologueCardsV2 } from "../content-v2/prologues";
+import { tracksV2, chaptersV2, getChapterV2 } from "../content-loaders/taxonomy";
+import { prologueCardsV2 } from "../content-loaders/prologues";
 
 const router = useRouter();
 const progressStore = useProgressStore();

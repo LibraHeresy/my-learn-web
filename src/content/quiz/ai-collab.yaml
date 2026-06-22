@@ -1,0 +1,228 @@
+# AI 协作宝石
+
+gem:
+  id: ai-collab
+  name: AI 协作宝石
+  icon: 🤖
+  achievement: mid
+  order: 12
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 70
+    name: AI 认知
+    questions:
+      - id: 261
+        difficulty: 1
+        question: AI(LLM)本质是什么？它能思考吗？
+        options:
+          - 像人思考
+          - 预测下一个最可能 token 的统计模型。不是真正思考是概率计算
+          - 有自我意识
+          - 能创造知识
+        answer: 1
+        explanation: "大语言模型本质\"下一个词预测器\"。根据训练数据和上下文计算每个可能 token 的概率。"
+      - id: 262
+        difficulty: 1
+        question: 什么是 AI 幻觉(Hallucination)？
+        options:
+          - AI 看到幻觉
+          - AI 自信给出看似合理但实际错误的答案(编造不存在的 API/库)
+          - AI 创意模式
+          - 新功能
+        answer: 1
+        explanation: 幻觉：AI 编造不存在的事实、函数、库但语气非常自信。应对：质疑、验证、查官方文档。
+      - id: 263
+        difficulty: 1
+        question: AI 训练数据有截止日期→这对问技术问题意味什么？
+        options:
+          - 没关系
+          - AI 不知道训练截止后的新技术/新版本 API。问前沿技术时需注意时效性
+          - AI 会自动更新
+          - AI 总能查到最新资料
+        answer: 1
+        explanation: AI 知识截止于训练日期。问最近发布的新框架或 API 变更时可能给出过时答案。
+      - id: 264
+        difficulty: 1
+        question: 好 Prompt 应该包含哪些要素？
+        options:
+          - 随便一句话
+          - 角色+上下文+任务描述+格式要求(+示例)
+          - 只写关键词
+          - 越长越好
+        answer: 1
+        explanation: "角色(\"你是前端专家\")+上下文(\"我在做音乐教学网站\")+任务(\"写一个 CSS 动画\")+格式约束(\"输出完整代码\")。"
+      - id: 265
+        difficulty: 1
+        question: AI 写的代码能直接复制粘贴用吗？
+        options:
+          - 完全可以
+          - 需要审查和测试——AI 可能有 bug、用旧 API、或不安全的写法
+          - 绝对不能
+          - 简单代码可以直接用
+        answer: 1
+        explanation: "AI 生成的代码像\"初稿\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。"
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: Prompt 工程
+    questions:
+      - id: 266
+        difficulty: 2
+        question: 为什么第一次 Prompt 不完美不能放弃？
+        options:
+          - AI 能力有限
+          - 迭代对话——第一次 Prompt 不完美很正常通过对话逐步澄清和细化需求
+          - AI 不会改进
+          - 重新开始更好
+        answer: 1
+        explanation: AI 对话是迭代过程。第一次结果不理想→补充说明→限制范围→给示例→逐步接近目标。好结果来自多轮对话。
+      - id: 267
+        difficulty: 2
+        question: 给 AI 看报错信息时应包含什么？
+        options:
+          - 只贴报错
+          - 报错全文+相关代码片段+你的意图(你想做什么)
+          - 只贴代码
+          - 不需要贴报错
+        answer: 1
+        explanation: "三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\"我想让按钮点击后变色\")。"
+      - id: 268
+        difficulty: 2
+        question: AI 擅长什么前端任务？不擅长什么？
+        options:
+          - 样样精通
+          - 擅长CSS属性/标准算法/正则；不擅长复杂业务逻辑/大项目架构/安全审查
+          - 不擅长 CSS
+          - 只擅长 JS
+        answer: 1
+        explanation: AI 强项：标准实现(CSS 属性值/简单函数/正则)。弱项：复杂业务逻辑(多步骤状态管理)/大项目架构设计/安全相关判断。
+      - id: 269
+        difficulty: 2
+        question: 用 AI 调试的流程是什么？
+        options:
+          - 直接让 AI 修好
+          - 描述问题→贴代码和报错→AI 分析可能原因→验证方案→不行的迭代
+          - 放弃重写
+          - 查 Google
+        answer: 1
+        explanation: 1.描述症状 2.贴代码+报错 3.AI 给分析→尝试修复 4.还不行→贴新报错继续对话。AI 调试是对话不是一锤子买卖。
+      - id: 270
+        difficulty: 2
+        question: 让 AI 解释代码 vs 让 AI 写代码→Prompt 有什么不同？
+        options:
+          - 完全相同
+          - "解释代码：给代码+问\"这段代码在做什么\"。写代码：给需求+约束+示例"
+          - 解释代码不能用 AI
+          - 写代码不能用 AI
+        answer: 1
+        explanation: 解释：喂代码+问含义(如教学生)。生成：描述需求+约束(语言/框架/格式)+示例。方向不同 Prompt 侧重点不同。
+      - id: 271
+        difficulty: 2
+        question: AI 对话中为什么不能一次塞太多无关内容？
+        options:
+          - AI 记性好
+          - "上下文窗口有限→无关内容挤占空间→AI\"忘记\"前面的重要信息。保持对话聚焦"
+          - AI 能处理任意长度
+          - 多给 AI 数据更好
+        answer: 1
+        explanation: AI 上下文窗口有限。无关信息占用宝贵空间导致 AI 忽略重要约束。一个对话聚焦一个主题效果最好。
+      - id: 272
+        difficulty: 2
+        question: 如何判断 AI 给的技术方案是否合理？
+        options:
+          - AI 说的都对
+          - 用自己知识验证+查阅官方文档+小范围测试
+          - AI 不可信
+          - 问另一个 AI
+        answer: 1
+        explanation: AI 可能给出看似合理但实际不可行的方案。用已有知识判断查阅文档确认在小范围测试代码。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 全流程协作
+    questions:
+      - id: 273
+        difficulty: 3
+        question: 从需求到产品的 AI 协作完整流程？
+        options:
+          - 一步让 AI 生成全部
+          - 需求分析→方案设计→AI 辅助搭脚手架→分组件实现→AI 辅助写每个组件→测试→部署。人做决策 AI 做执行
+          - 不需要人参与
+          - AI 只写代码
+        answer: 1
+        explanation: AI 辅助全流程但人始终做决策和审查。AI 做执行(写代码/查文档/解释错误)。人是导演 AI 是演员。
+      - id: 274
+        difficulty: 3
+        question: AI 说了一个听起来对但实际错的答案→你该怎么做？
+        options:
+          - 接受
+          - 保持质疑→用自己知识判断→查阅官方文档验证→指出 AI 的错误让它修正
+          - 忽略
+          - 换一个 AI
+        answer: 1
+        explanation: "不盲信 AI。用已有知识质疑查阅权威来源(官方文档/MDN)验证。告诉 AI\"你错了因为...\"可能让它修正。"
+      - id: 275
+        difficulty: 3
+        question: AI 辅助项目规划→Prompt 应包含什么？
+        options:
+          - "\"帮我做一个项目\""
+          - 功能列表+目标用户+技术栈偏好+时间约束+期望输出格式
+          - 只写项目名
+          - 越长越好
+        answer: 1
+        explanation: 详细描述需求：功能清单/用户群体/技术栈偏好/时间预算/期望输出(需求文档/技术方案/任务拆解)。
+      - id: 276
+        difficulty: 3
+        question: AI 生成 5 个组件→如何控制质量和一致性？
+        options:
+          - 一次全部生成
+          - 逐个组件生成→每个组件审查通过后再下一个。保持统一的 Prompt 模板定义共享规范
+          - AI 会自动保持一致
+          - 不需要审查
+        answer: 1
+        explanation: 不要一次让 AI 生成所有组件。逐个生成每个审查通过后再下一个。用统一 Prompt 模板(设计规范/命名约定)保持一致性。
+      - id: 277
+        difficulty: 3
+        question: 以下关于 AI 辅助开发的说法哪个最正确？
+        options:
+          - AI 可替代程序员
+          - AI 是强力助手但人始终是决策者：定义需求/审查代码/保证质量/承担最终责任
+          - AI 只适用于初学者
+          - AI 只在写 CSS 时有帮助
+        answer: 1
+        explanation: AI 加速执行(写代码/查文档)但人负责决策(架构/安全/取舍)。AI 是工具不是替代品。最终代码质量和责任在人。
+      - id: 278
+        difficulty: 3
+        question: 用 AI 学习前端 vs 用传统教程学习→各自的优势？
+        options:
+          - AI 完胜
+          - AI 可即时问答个性化解释；传统教程结构完整体系化。最佳：两者结合——教程打基础 AI 做答疑和实践辅助
+          - 传统方式更好
+          - AI 不适合学习
+        answer: 1
+        explanation: 教程提供系统知识结构 AI 提供即时答疑和个性化解释。用教程学框架用 AI 理解具体代码和排错。
+      - id: 279
+        difficulty: 3
+        question: AI 时代前端工程师的核心竞争力是什么？
+        options:
+          - 会用 AI 写 Prompt
+          - 理解原理+架构设计+安全审查+性能优化+需求沟通+AI 输出质量把关
+          - 会写代码
+          - 会用工具
+        answer: 1
+        explanation: AI 能写代码但不能替代判断。核心竞争力：理解技术原理(知道AI给的方案对不对)、需求分析、架构设计、质量把关。
+      - id: 280
+        difficulty: 3
+        question: 一个合格的前端用 AI 和一个不合格的用 AI→产出的区别在于？
+        options:
+          - 无区别 AI 抹平差距
+          - 审查能力——合格者能发现 AI 的错误和不合理之处修正后产出高质量代码；不合格者直接复制低质量代码
+          - 只是速度不同
+          - 只是代码量不同
+        answer: 1
+        explanation: AI 输出质量取决于使用者的审查能力。合格者能发现幻觉/安全问题/不合理设计修正后提升质量。不合格者盲从 AI 产出有隐患的代码。
+

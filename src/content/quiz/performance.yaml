@@ -1,0 +1,228 @@
+# 性能宝石
+
+gem:
+  id: performance
+  name: 性能宝石
+  icon: ⚡
+  achievement: senior
+  order: 14
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 60
+    name: 性能概念
+    questions:
+      - id: 300
+        difficulty: 1
+        question: Core Web Vitals 三个核心指标？
+        options:
+          - 加载速度
+          - LCP(最大内容绘制)/FID(首次输入延迟)/CLS(累计布局偏移)
+          - 代码行数
+          - 请求数
+        answer: 1
+        explanation: LCP=最大可见元素加载时间<2.5s。FID=首次交互响应时间<100ms。CLS=视觉稳定性分数<0.1。
+      - id: 301
+        difficulty: 1
+        question: 首屏优化最有效的手段？
+        options:
+          - 加更多 JS
+          - 代码分割+懒加载+压缩资源+CDN。用户只下载当前需要的代码
+          - 更大服务器
+          - 多写 CSS
+        answer: 1
+        explanation: 关键：减少首屏需要下载和执行的代码量。代码分割按路由拆分组件懒加载非首屏内容。
+      - id: 302
+        difficulty: 1
+        question: 图片优化方法？
+        options:
+          - 更大尺寸
+          - WebP/AVIF 格式+响应式图片(srcset)+懒加载(loading=lazy)+合适尺寸
+          - 只用 PNG
+          - 不优化也行
+        answer: 1
+        explanation: "WebP/AVIF 比 JPEG/PNG 小 30-50%。srcset 根据屏幕选合适尺寸。loading=lazy 延迟加载屏幕外图片。"
+      - id: 303
+        difficulty: 1
+        question: 代码分割(Code Splitting)是什么？
+        options:
+          - 删除代码
+          - 将 JS 拆成多个小块按需加载而非一次性加载全部
+          - 压缩代码
+          - 格式化代码
+        answer: 1
+        explanation: 动态 import()将代码按路由/功能拆成多个 chunk。用户访问时只加载需要的部分减少首屏体积。
+
+  - level: 2
+    type: elite
+    threshold: 60
+    name: 加载优化
+    questions:
+      - id: 304
+        difficulty: 2
+        question: 防抖(debounce)和节流(throttle)区别？
+        options:
+          - 相同
+          - 防抖=连续触发只执行最后一次；节流=固定时间间隔执行一次
+          - 节流更强
+          - 防抖已废弃
+        answer: 1
+        explanation: 搜索框用防抖(用户停止输入后再发请求)。滚动事件用节流(每 200ms 最多执行一次)。
+      - id: 305
+        difficulty: 2
+        question: 懒加载(Lazy Loading)实现方式？
+        options:
+          - JavaScript 异步
+          - 图片：loading=lazy 或 Intersection Observer。组件：动态 import()。列表：虚拟滚动
+          - CSS 动画
+          - 服务器配置
+        answer: 1
+        explanation: "图片：原生 loading=\"lazy\"属性或 IntersectionObserver 监听进入视口。路由组件：()=>import(\"./X.vue\")。大列表：虚拟列表只渲染可见行。"
+      - id: 306
+        difficulty: 2
+        question: 浏览器缓存的常见策略？
+        options:
+          - 不缓存
+          - 强缓存(Cache-Control)+协商缓存(ETag)。静态资源文件名哈希实现长效缓存
+          - 只缓存图片
+          - 缓存让页面变慢
+        answer: 1
+        explanation: "强缓存：Cache-Control:max-age=31536000。文件内容变化→改文件名(hash)→新 URL 无缓存→下载。协商缓存：ETag/Last-Modified 向服务器确认是否变化。"
+      - id: 307
+        difficulty: 2
+        question: CLS(累计布局偏移)是什么？怎么避免？
+        options:
+          - 代码错误
+          - 页面加载时元素位置意外移动。避免：给图片/广告预留尺寸；不在已有内容上方插入内容
+          - JS 错误
+          - 不需要关心
+        answer: 1
+        explanation: CLS 测量视觉不稳定性。图片不设宽高→加载后撑开页面→内容下移→CLS 差。始终给图片/嵌入式内容预留尺寸。
+      - id: 308
+        difficulty: 2
+        question: 虚拟列表(Virtual List)原理？
+        options:
+          - 全部渲染
+          - 只渲染视口内可见的少量 DOM 节点。滚动时动态替换渲染节点。大幅减少 DOM 数量提升性能
+          - 服务器渲染
+          - 分页
+        answer: 1
+        explanation: 只渲染可见区域的元素(约 10-20 个)而非全部(可能数万个)。滚动时计算新可见区域替换渲染。DOM 节点数大幅减少→性能提升。
+      - id: 309
+        difficulty: 2
+        question: WebP/AVIF 格式的优势？兼容性怎么处理？
+        options:
+          - 和 JPEG 一样
+          - "体积比 JPEG 小 30-50%质量相当。用 <picture>+<source> 提供多种格式回退"
+          - 不支持
+          - 不用考虑兼容
+        answer: 1
+        explanation: "<picture><source srcset=\"x.webp\" type=\"image/webp\"><img src=\"x.jpg\"></picture>。浏览器选第一个支持的格式。"
+      - id: 310
+        difficulty: 2
+        question: 什么情况下需要手动取消防抖/节流？
+        options:
+          - 不需要
+          - 组件销毁时仍在等待的定时器→内存泄漏。onBeforeUnmount 中 clearTimeout
+          - 只在 Vue 中
+          - 只在 React 中
+        answer: 1
+        explanation: 组件已销毁但 setTimeout 还在等待→回调访问已销毁的组件状态→报错。onBeforeUnmount 清除所有定时器。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 运行时优化
+    questions:
+      - id: 311
+        difficulty: 3
+        question: 首屏时间 5 秒→从哪些方面排查和优化？
+        options:
+          - 不管
+          - Network 面板看资源加载→Coverage 看未使用代码→Lighthouse 审计→针对性优化
+          - 重写全部
+          - 换服务器
+        answer: 1
+        explanation: 1.Chrome DevTools→Network 看加载瀑布图找瓶颈。2.Coverage 面板找未使用的 JS/CSS。3.Lighthouse 生成优化建议。逐步优化。
+      - id: 312
+        difficulty: 3
+        question: 打包体积过大→分析和优化手段？
+        options:
+          - 删代码
+          - 分析工具(rollup-plugin-visualizer)→看哪个包大→tree-shaking→按需引入→拆分 chunk
+          - 不管
+          - 加服务器
+        answer: 1
+        explanation: 用打包分析工具可视化各模块体积。大库改为按需引入。重复依赖去重。大型库考虑更轻替代品。
+      - id: 313
+        difficulty: 3
+        question: 骨架屏(Skeleton Screen)的作用？
+        options:
+          - 装饰
+          - "在内容加载前显示灰色占位图形。让用户感知\"正在加载\"比空白或转圈更好"
+          - 加速加载
+          - SEO
+        answer: 1
+        explanation: "骨架屏=页面结构的灰色占位。给用户\"内容马上就来\"的感觉减少跳出。比空白页面或 spinner 体验更好。"
+      - id: 314
+        difficulty: 3
+        question: SSR(服务端渲染)的优势和代价？
+        options:
+          - 没有代价
+          - 优势：更快首屏+SEO 友好。代价：服务器压力大+开发复杂度高+需要 Node.js 服务器
+          - SEO 无用
+          - SSR 已废弃
+        answer: 1
+        explanation: SSR 在服务器生成 HTML 返回浏览器→首屏快利于 SEO。需要 Node.js 服务器增加运维成本。静态网站可用 SSG。
+      - id: 315
+        difficulty: 3
+        question: 以下哪项是正确的性能监控方式？
+        options:
+          - 只看 Lighthouse 一次
+          - Lighthouse+Core Web Vitals+真实用户监控(RUM)=多方面持续监控
+          - 不管性能
+          - 只看首屏
+        answer: 1
+        explanation: Lighthouse 模拟测试→发现问题。CrUX 真实用户数据→看实际表现。自定义 RUM→持续监控线上性能。
+      - id: 316
+        difficulty: 3
+        question: 为什么 3G 网络下页面加载慢但 WiFi 下正常？
+        options:
+          - 手机差
+          - 资源总体积过大→慢网络下载时间长。优化：缩小资源体积+代码分割+压缩+CDN
+          - 3G 不支持
+          - 浏览器不同
+        answer: 1
+        explanation: 慢网络下大文件下载时间长。用代码分割减少首屏体积懒加载非关键资源。CDN 让资源离用户更近。
+      - id: 317
+        difficulty: 3
+        question: CSS 阻塞渲染但 JS 阻塞解析→如何利用这个顺序优化加载？
+        options:
+          - 没办法
+          - 关键 CSS 内联在 head 中快速渲染；非关键 CSS 异步加载。JS 用 async/defer 不阻塞解析
+          - 不管顺序
+          - CSS 放底部
+        answer: 1
+        explanation: "内联关键 CSS(首屏需要的样式)在 head 优先渲染。非关键 CSS 用 media=\"print\" onload 异步加载。JS 用 defer 延迟执行不阻塞 HTML 解析。"
+      - id: 318
+        difficulty: 3
+        question: HTTP/2 多路复用对前端性能的影响？
+        options:
+          - 无影响
+          - 同一连接可并行传输多个资源→无需合并雪碧图/拼接 JS→可保留模块化结构
+          - 服务器配置
+          - 前端不用管
+        answer: 1
+        explanation: HTTP/1.1 每连接一个请求(有并发限制)。HTTP/2 多路复用→同一连接可同时传输多个文件→减少连接开销。
+      - id: 319
+        difficulty: 3
+        question: 前端性能优化黄金法则？
+        options:
+          - 多写代码
+          - 减少需要下载和执行的代码量：压缩/分割/懒加载/缓存/CDN
+          - 用更多 JS
+          - 更快服务器
+        answer: 1
+        explanation: 核心原则：让用户尽可能少下载和执行代码。压缩体积+按需加载+缓存复用+就近分发(CDN)。
+

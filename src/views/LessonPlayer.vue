@@ -1,52 +1,34 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watchEffect, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { lessons, chapters } from '../configs/lessons'
-import { tracks } from '../configs/tracks'
-import { prologueLessons } from '../configs/prologues'
+import { getAllLessonsV2, getLessonV2 } from '../content-loaders/lessons'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import type { UserCode } from '../types'
-import LessonContent from '../components/LessonContent.vue'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
-import LessonSidebar from '../components/LessonSidebar.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
+import LessonSidebar from '../components/LessonSidebar.vue'
+import { getChapterOrder, getTrackV2, getChapterV2 } from '../content-loaders/taxonomy'
+import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
 const router = useRouter()
 const progressStore = useProgressStore()
 
-const allLessons = computed(() => [...lessons, ...prologueLessons])
-
 const lessonId = computed(() => route.params.lessonId as string)
-const lesson = computed(() => allLessons.value.find(l => l.id === lessonId.value))
+const lessonState = computedAsync(() => getLessonV2(lessonId.value))
+const all = computed(() => getAllLessonsV2())
+const userCode = ref<UserCode>({ html: '', css: '', js: '' })
+const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
-// 登台篇课程使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
-const isLocalMode = computed(() => lesson.value?.mode === 'local')
+const lesson = computed(() => lessonState.value.value)
+const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
+const isLocalMode = computed(() => lesson.value?.meta.mode === 'local')
+const isPrologue = computed(() => lesson.value?.meta.track === 'prologue')
 
-// ===== 当前位置信息 =====
-const currentTrackId = computed(() => lesson.value?.trackId || 'fundamentals')
-const currentChapterId = computed(() => lesson.value?.chapterId)
-const currentChapter = computed(() => chapters.find(ch => ch.id === currentChapterId.value))
-const currentTrack = computed(() => tracks.find(t => t.id === currentTrackId.value))
-const currentChapterLessons = computed(() =>
-  lessons.filter(l => l.chapterId === currentChapterId.value)
-)
-const positionInChapter = computed(() =>
-  currentChapterLessons.value.findIndex(l => l.id === lessonId.value) + 1
-)
-const totalInChapter = computed(() => currentChapterLessons.value.length)
-
-const centerLabel = computed(() => {
-  if (isPrologue.value) return `第 ${currentIndex.value + 1}/${prologueLessons.length} 篇`
-  if (positionInChapter.value > 0) return `第 ${positionInChapter.value}/${totalInChapter.value} 课`
-  return ''
-})
-
-// ===== 侧边栏状态（统一管理桌面端折叠/展开 & 移动端隐藏/显示） =====
 const windowWidth = ref(window.innerWidth)
 function onResize() { windowWidth.value = window.innerWidth }
 onMounted(() => window.addEventListener('resize', onResize))
@@ -54,7 +36,6 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
 const sidebarExpanded = ref(false)
 const isMobile = computed(() => windowWidth.value < 901)
-
 const sidebarVariant = computed(() => {
   if (isMobile.value) return 'mobile'
   return sidebarExpanded.value ? 'expanded' : 'collapsed'
@@ -64,90 +45,133 @@ function toggleSidebar() {
   sidebarExpanded.value = !sidebarExpanded.value
 }
 
-// 用户代码不持久化，每次刷新/切换课程均从 starterCode 开始
-const userCode = ref<UserCode>({ html: '', css: '', js: '' })
-
-// ===== 面板拖动缩放 =====
-const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-panel-widths', 2)
-
-// 手动预览
-const { previewSrc, triggerPreview } = useCodePreview(userCode)
-
-watch(lessonId, (id) => {
-  const l = allLessons.value.find(l => l.id === id)
-  if (l) {
-    progressStore.currentLessonId = id
-    userCode.value = { ...l.starterCode }
+watchEffect(() => {
+  const l = lesson.value
+  if (!l) return
+  progressStore.currentLessonId = l.id
+  if (l.meta.mode === 'sandbox') {
+    userCode.value = { ...l.starter }
     triggerPreview()
-    if (playerMainRef.value) {
-      playerMainRef.value.scrollTop = 0
-    }
   }
-}, { immediate: true })
+})
 
 function onCodeChange(code: UserCode) {
   userCode.value = code
 }
 
-function selectLesson(id: string) {
-  if (isMobile.value) {
-    sidebarExpanded.value = false
-  }
-  router.push(`/lesson/${id}`)
+function computedAsync<T>(factory: () => Promise<T>) {
+  const state = ref<T | null>(null)
+  const loading = ref(true)
+  const error = ref<unknown>(null)
+
+  watchEffect(async () => {
+    loading.value = true
+    error.value = null
+    try {
+      state.value = await factory()
+    } catch (e) {
+      error.value = e
+      state.value = null
+    } finally {
+      loading.value = false
+    }
+  })
+
+  return computed(() => ({
+    value: state.value,
+    loading: loading.value,
+    error: error.value,
+  }))
 }
 
-const isPrologue = computed(() => lesson.value?.chapterId === 'web-history')
+const currentTrackId = computed(() => lesson.value?.meta.track || 'fundamentals')
+const currentChapterId = computed(() => lesson.value?.meta.chapter)
 
-const navList = computed(() => isPrologue.value ? prologueLessons : lessons)
+const orderedLessons = computed(() => {
+  return all.value
+    .filter((l) => l.meta.track === currentTrackId.value)
+    .slice()
+    .sort((a, b) => {
+      const ai = getChapterOrder(a.meta.chapter)
+      const bi = getChapterOrder(b.meta.chapter)
+      if (ai !== bi) return ai - bi
+      return a.meta.order - b.meta.order
+    })
+})
 
-const currentIndex = computed(() =>
-  navList.value.findIndex(l => l.id === lessonId.value)
-)
-
-const prevLesson = computed(() =>
-  currentIndex.value > 0 ? navList.value[currentIndex.value - 1] : null
-)
-
+const currentIndex = computed(() => orderedLessons.value.findIndex((l) => l.id === lessonId.value))
+const prevLesson = computed(() => (currentIndex.value > 0 ? orderedLessons.value[currentIndex.value - 1] : null))
 const nextLesson = computed(() =>
-  currentIndex.value < navList.value.length - 1 ? navList.value[currentIndex.value + 1] : null
+  currentIndex.value >= 0 && currentIndex.value < orderedLessons.value.length - 1 ? orderedLessons.value[currentIndex.value + 1] : null,
 )
 
-function goPrev() {
-  if (prevLesson.value) {
-    router.push(`/lesson/${prevLesson.value.id}`)
-  }
-}
+const currentChapterLessons = computed(() => {
+  if (!currentChapterId.value) return []
+  return orderedLessons.value.filter((l) => l.meta.chapter === currentChapterId.value)
+})
 
-function goNext() {
-  if (nextLesson.value) {
-    router.push(`/lesson/${nextLesson.value.id}`)
-  }
-}
+const positionInChapter = computed(() => currentChapterLessons.value.findIndex((l) => l.id === lessonId.value) + 1)
+const totalInChapter = computed(() => currentChapterLessons.value.length)
+
+const centerLabel = computed(() => {
+  if (positionInChapter.value <= 0) return ''
+  if (isPrologue.value) return `第 ${positionInChapter.value}/${totalInChapter.value} 篇`
+  return `第 ${positionInChapter.value}/${totalInChapter.value} 课`
+})
+
+const currentTrack = computed(() => getTrackV2(currentTrackId.value))
+const currentChapter = computed(() => getChapterV2(currentChapterId.value))
 
 const prevLabel = computed(() => {
-  if (isPrologue.value) return '上一篇'
-  return (prevLesson.value && prevLesson.value.chapterId !== lesson.value?.chapterId) ? '上一章' : '上一课'
+  if (isPrologue.value) return prevLesson.value ? '上一篇' : ''
+  if (!prevLesson.value) return '上一课'
+  return prevLesson.value.meta.chapter !== currentChapterId.value ? '上一章' : '上一课'
 })
 
 const nextLabel = computed(() => {
-  if (isPrologue.value) return '下一篇'
-  return (nextLesson.value && nextLesson.value.chapterId !== lesson.value?.chapterId) ? '下一章' : '下一课'
+  if (isPrologue.value) return nextLesson.value ? '下一篇' : ''
+  if (!nextLesson.value) return '下一课'
+  return nextLesson.value.meta.chapter !== currentChapterId.value ? '下一章' : '下一课'
 })
 
-const prevNavTitle = computed(() => prevLesson.value?.title ?? '')
-const nextNavTitle = computed(() => nextLesson.value?.title ?? '')
-
+const prevNavTitle = computed(() => isPrologue.value ? '' : (prevLesson.value?.meta.title ?? ''))
+const nextNavTitle = computed(() => isPrologue.value ? '' : (nextLesson.value?.meta.title ?? ''))
 const prevDisabled = computed(() => !prevLesson.value)
 const nextDisabled = computed(() => !nextLesson.value)
+
+function goPrev() {
+  if (prevLesson.value) router.push(`/lesson/${prevLesson.value.id}`)
+}
+
+function goNext() {
+  if (nextLesson.value) router.push(`/lesson/${nextLesson.value.id}`)
+}
 
 function markComplete() {
   progressStore.markComplete(lessonId.value)
 }
 
+function selectLesson(id: string) {
+  if (isMobile.value) sidebarExpanded.value = false
+  router.push(`/lesson/${id}`)
+}
+
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('v2-code-score-panel-widths', 1)
+
+watch(lessonId, () => {
+  if (playerMainRef.value) {
+    playerMainRef.value.scrollTop = 0
+  }
+}, { immediate: true })
 </script>
 
 <template>
   <div class="lesson-player">
+    <div v-if="lesson && isMobile" class="mobile-bar">
+      <button v-if="!isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
+      <span class="mobile-lesson-title">{{ lesson.meta.title }}</span>
+    </div>
+
     <!-- 桌面端顶部面包屑导航 -->
     <div v-if="lesson && !isMobile" class="lesson-topbar">
       <div class="topbar-breadcrumb">
@@ -167,23 +191,14 @@ function markComplete() {
       </div>
     </div>
 
-    <!-- 移动端顶部条 -->
-    <div class="mobile-bar">
-      <button v-if="!isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
-      <span class="mobile-lesson-title">{{ lesson?.title }}</span>
-    </div>
-
-    <!-- 侧边栏遮罩（仅移动端） -->
     <Transition name="fade">
       <div v-if="isMobile && sidebarExpanded" class="sidebar-overlay" @click="sidebarExpanded = false" />
     </Transition>
 
-    <!-- 主内容区（侧栏 + 内容并排） -->
     <div class="player-layout">
-      <!-- 侧边栏（筚路蓝缕课程不展示。移动端关闭时不渲染，桌面端始终渲染） -->
       <Transition name="sidebar-slide">
         <div
-          v-if="!isPrologue && (!isMobile || sidebarExpanded)"
+          v-if="lesson && !isPrologue && (!isMobile || sidebarExpanded)"
           :class="['sidebar-wrapper', {
             visible: !isMobile,
             collapsed: sidebarVariant === 'collapsed'
@@ -193,6 +208,7 @@ function markComplete() {
             :variant="sidebarVariant"
             :current-lesson-id="lessonId"
             :track-id="currentTrackId"
+            :lessons="all"
             :current-position="{ lessonIndex: positionInChapter, totalLessons: totalInChapter }"
             @select="selectLesson"
             @close="sidebarExpanded = false"
@@ -206,21 +222,19 @@ function markComplete() {
         ref="playerMainRef"
         :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
       >
-        <!-- 左面板：教学内容 -->
         <div
           class="panel-content"
           :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
         >
-          <Transition name="slide-fade" mode="out-in">
-            <LessonContent :key="lessonId" :lesson="lesson" @complete="markComplete" />
-          </Transition>
+          <div class="v2-content-panel">
+            <Transition name="slide-fade" mode="out-in">
+              <DocumentRenderer :key="lessonId" :lesson="lesson" />
+            </Transition>
+          </div>
         </div>
 
-        <template v-if="!isLocalMode">
-          <!-- 分隔线 1：内容 ↔ 编辑器 -->
+        <template v-if="!isLocalMode && isSandboxMode">
           <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
-
-          <!-- 中面板：代码编辑器 -->
           <div
             class="panel-editor"
             :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
@@ -233,10 +247,7 @@ function markComplete() {
             />
           </div>
 
-          <!-- 分隔线 2：编辑器 ↔ 预览 -->
           <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
-
-          <!-- 右面板：实时预览 -->
           <div
             class="panel-preview"
             :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
@@ -246,14 +257,12 @@ function markComplete() {
         </template>
       </div>
 
-      <!-- 未找到课程 -->
       <div v-else class="lesson-not-found">
         <p>课程未找到</p>
         <button @click="router.push('/')">返回首页</button>
       </div>
     </div>
 
-    <!-- 底部导航 -->
     <PlayerFooter
       v-if="lesson"
       :prev-label="prevLabel"
@@ -274,12 +283,11 @@ function markComplete() {
 
 <style scoped>
 .lesson-player {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-/* ===== 桌面端顶部面包屑 ===== */
 .lesson-topbar {
   display: flex;
   align-items: center;
@@ -326,7 +334,6 @@ function markComplete() {
   color: var(--color-text-light);
 }
 
-/* ===== 移动端顶栏 ===== */
 .mobile-bar {
   display: none;
   align-items: center;
@@ -346,14 +353,15 @@ function markComplete() {
 }
 
 .mobile-lesson-title {
-  font-size: var(--fs-sm);
-  font-weight: 600;
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text);
 }
 
-/* ===== 侧边栏容器 ===== */
 .sidebar-wrapper {
   display: none;
 }
@@ -365,7 +373,6 @@ function markComplete() {
   z-index: 199;
 }
 
-/* 移动端侧边栏滑入/滑出动画 */
 .sidebar-slide-enter-active,
 .sidebar-slide-leave-active {
   transition: transform var(--dur-normal) var(--ease-out);
@@ -376,7 +383,6 @@ function markComplete() {
   transform: translateX(-100%);
 }
 
-/* ===== 主布局：侧栏 + 内容并排 ===== */
 .player-layout {
   flex: 1;
   display: flex;
@@ -384,7 +390,6 @@ function markComplete() {
   min-height: 0;
 }
 
-/* ===== 主面板布局 ===== */
 .player-main {
   flex: 1;
   display: flex;
@@ -395,7 +400,6 @@ function markComplete() {
   pointer-events: none;
 }
 
-/* local 模式：纯教程内容，全宽滚动 */
 .player-main.is-local {
   display: block;
   overflow-y: auto;
@@ -418,7 +422,14 @@ function markComplete() {
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ===== 课程未找到 ===== */
+.v2-content-panel {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
+  background: var(--color-panel);
+}
+
 .lesson-not-found {
   flex: 1;
   display: flex;
@@ -428,16 +439,7 @@ function markComplete() {
   gap: var(--sp-4);
 }
 
-/* ===== 响应式 ===== */
 @media (max-width: 900px) {
-  .lesson-player {
-    width: 100vw;
-  }
-
-  .lesson-topbar {
-    display: none;
-  }
-
   .mobile-bar {
     display: flex;
   }
@@ -491,5 +493,15 @@ function markComplete() {
     display: block;
     height: 100%;
   }
+}
+
+.v2-editor {
+  flex: 1;
+  min-height: 320px;
+}
+
+.v2-preview {
+  flex: 1;
+  min-height: 360px;
 }
 </style>

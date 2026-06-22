@@ -1,0 +1,278 @@
+# JS 异步宝石
+
+gem:
+  id: js-async
+  name: JS 异步宝石
+  icon: ⏳
+  achievement: mid
+  order: 8
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 70
+    name: 定时器
+    questions:
+      - id: 171
+        difficulty: 1
+        question: setTimeout 中 1000 的单位？
+        options:
+          - 秒
+          - 毫秒
+          - 帧
+          - 微秒
+        answer: 1
+        explanation: setTimeout/setInterval 时间单位是毫秒(ms)。1000ms=1 秒。
+      - id: 172
+        difficulty: 1
+        question: setInterval 和 setTimeout 核心区别？
+        options:
+          - 相同
+          - setInterval 重复执行 setTimeout 执行一次
+          - setInterval 更快
+          - setTimeout 重复
+        answer: 1
+        explanation: setInterval 每隔指定时间重复执行(需 clearInterval 停止)。setTimeout 只执行一次。
+      - id: 173
+        difficulty: 1
+        question: clearTimeout 做什么？
+        options:
+          - 清除所有定时器
+          - 取消指定的 setTimeout
+          - 重启定时器
+          - 加速定时器
+        answer: 1
+        explanation: clearTimeout(id)取消尚未执行的 setTimeout。clearInterval(id)同理。
+      - id: 174
+        difficulty: 1
+        question: Promise 的三种状态？
+        options:
+          - 开始/进行中/结束
+          - pending/fulfilled/rejected
+          - 成功/失败/重试
+          - 创建/执行/销毁
+        answer: 1
+        explanation: pending(进行中)→fulfilled(成功)或 rejected(失败)。状态一旦改变不可逆。
+      - id: 175
+        difficulty: 1
+        question: "fetch(\"/api\")返回什么？"
+        options:
+          - 数据对象
+          - Promise 对象
+          - JSON 字符串
+          - 原始数据
+        answer: 1
+        explanation: fetch()返回 Promise resolve 后得 Response 对象。需.json()或.text()提取数据。
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: Promise
+    questions:
+      - id: 176
+        difficulty: 2
+        question: then 和 catch 分别处理什么？
+        options:
+          - then 失败 catch 成功
+          - then 成功 catch 失败
+          - 都处理成功
+          - 都处理失败
+        answer: 1
+        explanation: then 处理 fulfilled 状态。catch 处理 rejected 状态。finally 不论成败都执行。
+      - id: 177
+        difficulty: 2
+        question: Promise 链式调用 then 返回值怎么传？
+        options:
+          - 无法传递
+          - 每个 then 返回的值会自动传为下一个 then 的参数
+          - 用全局变量
+          - 用闭包
+        answer: 1
+        explanation: then 回调的返回值被包装为 Promise 传为下一个 then 的参数。这是链式调用的核心。
+      - id: 178
+        difficulty: 2
+        question: async 函数返回什么？
+        options:
+          - 原始值
+          - 始终返回 Promise
+          - undefined
+          - 取决于内部
+        answer: 1
+        explanation: "async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。"
+      - id: 179
+        difficulty: 2
+        question: await 只能在什么函数中使用？
+        options:
+          - 任何
+          - async 函数
+          - 箭头函数
+          - 普通函数
+        answer: 1
+        explanation: await 只能在 async 函数内使用。顶层 await 在某些环境(ES模块)中也支持。
+      - id: 180
+        difficulty: 2
+        question: fetch 返回 404 会进 catch 吗？
+        options:
+          - 会
+          - 不会 404 仍是成功的 HTTP 响应只有网络错误才进 catch
+          - 有时会
+          - 一定会
+        answer: 1
+        explanation: fetch 只有网络故障(断网 DNS 失败)时 reject。404/500 等 HTTP 错误仍 resolve 需手动检查 res.ok。
+      - id: 181
+        difficulty: 2
+        question: "Promise.all([p1,p2,p3])何时 resolve？"
+        options:
+          - 第一个完成
+          - 全部完成
+          - 任何一个 reject
+          - B 和 C
+        answer: 3
+        explanation: 全部 resolve→返回所有结果数组。任何一个 reject→立即 reject。
+      - id: 182
+        difficulty: 2
+        question: "try{await fetch(url)}catch(e){} 能捕获什么？"
+        options:
+          - HTTP 404
+          - 网络错误(断网等)
+          - 所有 JS 错误
+          - A 和 B
+        answer: 1
+        explanation: 只能捕获网络错误。HTTP 404 不是异常不触发 catch。需手动检查 response.ok。
+      - id: 183
+        difficulty: 2
+        question: 回调地狱是什么？怎么解决？
+        options:
+          - 性能问题
+          - 多层嵌套回调难以阅读和维护→用 Promise 或 async/await 解决
+          - JS 引擎 bug
+          - 一种设计模式
+        answer: 1
+        explanation: "回调嵌套导致代码横向增长(\"金字塔\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。"
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: async/await 实战
+    questions:
+      - id: 184
+        difficulty: 3
+        question: async/await 如何做错误处理？
+        options:
+          - 无法处理
+          - 用 try/catch 包裹 await
+          - 用 .catch()
+          - 自动处理
+        answer: 1
+        explanation: "try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。"
+      - id: 185
+        difficulty: 3
+        question: 多个独立 await 可以并行吗？怎么提高性能？
+        options:
+          - 不能
+          - 用 Promise.all 同时发起而非串行 await
+          - 自动并行
+          - 并行会出错
+        answer: 1
+        explanation: "const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。"
+      - id: 186
+        difficulty: 3
+        question: 防抖(debounce)是什么？什么时候用？
+        options:
+          - 防代码崩溃
+          - 连续触发只执行最后一次。搜索框输入时减少请求次数
+          - 加密技术
+          - 防止重复提交
+        answer: 1
+        explanation: "用户输入\"贝多芬\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。"
+      - id: 187
+        difficulty: 3
+        question: "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？"
+        options:
+          - "1,2,3"
+          - "1,3,2"
+          - "2,1,3"
+          - "3,2,1"
+        answer: 1
+        explanation: "同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。"
+      - id: 188
+        difficulty: 3
+        question: "`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？"
+        options:
+          - 1 和 2
+          - 只有 1(Promise 状态一旦改变不可逆)
+          - 只有 2
+          - 报错
+        answer: 1
+        explanation: Promise 状态一旦从 pending→fulfilled 就不可再变。第二次 r(2)被忽略。
+      - id: 189
+        difficulty: 3
+        question: "`fetch(url).then(r=>r.json())`为什么需要两步？"
+        options:
+          - 设计缺陷
+          - 第一步得 Response 对象第二步解析 JSON 体(异步)
+          - 可以直接一步
+          - json()是同步的
+        answer: 1
+        explanation: fetch 先返回 Response(含状态码头信息)再调用.json()(本身返回 Promise)解析响应体。
+      - id: 190
+        difficulty: 3
+        question: async 函数中不加 await 会怎样？
+        options:
+          - 报错
+          - Promise 不会等待直接返回 Promise 对象而非结果
+          - 自动 await
+          - 函数同步执行
+        answer: 1
+        explanation: 不加 await 拿到的是 Promise 对象而非实际值。常见错误：以为拿到了数据实际拿到了 Promise。
+      - id: 191
+        difficulty: 3
+        question: "`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？"
+        options:
+          - 能
+          - 不能——延迟是最小等待时间实际可能更长(取决于事件队列)
+          - 只在 Chrome 准时
+          - 1000ms 误差±1ms
+        answer: 1
+        explanation: setTimeout 的延迟是最小等待时间。如果主线程忙(有长时间同步任务)fn 会延后执行。
+      - id: 192
+        difficulty: 3
+        question: 用 setTimeout 模拟 setInterval 有什么好处？
+        options:
+          - 无区别
+          - 避免回调堆积：前一个没执行完后一个已经到时间→用 setTimeout 递归可确保执行完再设下一次
+          - setTimeout 更快
+          - 不需要 clear
+        answer: 1
+        explanation: setInterval 不管回调是否执行完到时间就触发→可能堆积。用 setTimeout 递归：每次执行完再设下一个。
+      - id: 193
+        difficulty: 3
+        question: 事件循环：宏任务和微任务哪个先执行？
+        options:
+          - 宏任务
+          - 微任务(如 Promise.then)在当前宏任务结束后立即执行优先于下一个宏任务
+          - 同时执行
+          - 随机
+        answer: 1
+        explanation: 每轮事件循环：执行一个宏任务→清空所有微任务队列→渲染→下一轮宏任务。微任务优先于下一个宏任务。
+      - id: 194
+        difficulty: 3
+        question: 为什么 JS 是单线程却可以处理异步？
+        options:
+          - JS 不是单线程
+          - 事件循环+Web API(定时器/网络)在浏览器其他线程执行完成后回调入 JS 线程
+          - JS 多线程
+          - 异步是假的
+        answer: 1
+        explanation: JS 引擎单线程但浏览器提供 Web API(定时器/网络请求等)在其他线程执行。完成后回调推入 JS 任务队列等执行。
+      - id: 195
+        difficulty: 3
+        question: "addEventListener(\"click\",async(e)=>{await fetch(...)})这样写对吗？"
+        options:
+          - 对回调可以是 async
+          - 错 addEventListener 不支持 async
+          - 对但 e 不能传
+          - 必须用.then
+        answer: 0
+        explanation: 事件回调可以是 async 函数。但需要注意：如果用户快速多次点击会有多个并发 fetch。可能需要防抖。
+

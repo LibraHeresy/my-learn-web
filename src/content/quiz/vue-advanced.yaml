@@ -1,0 +1,228 @@
+# Vue 进阶宝石
+
+gem:
+  id: vue-advanced
+  name: Vue 进阶宝石
+  icon: 💙
+  achievement: mid
+  order: 11
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 70
+    name: 路由基础
+    questions:
+      - id: 241
+        difficulty: 1
+        question: Vue Router 作用？
+        options:
+          - 管理 CSS
+          - "前端路由——切换\"页面\"不刷新浏览器"
+          - 状态管理
+          - 构建工具
+        answer: 1
+        explanation: Vue Router 实现 SPA 页面切换不刷新浏览器。不同 URL 路径显示不同组件。
+      - id: 242
+        difficulty: 1
+        question: "<router-link> 和 <a> 区别？"
+        options:
+          - 完全相同
+          - router-link 无刷新跳转；a 标签会整页刷新
+          - a 更快
+          - router-link 已废弃
+        answer: 1
+        explanation: router-link 是 Vue Router 提供的组件点击时无刷新切换路由。普通 a 标签会刷新整页。
+      - id: 243
+        difficulty: 1
+        question: "动态路由 /user/:id 怎么获取 id？"
+        options:
+          - 从 URL 手动解析
+          - useRoute().params.id
+          - 从 props 获取
+          - 无法获取
+        answer: 1
+        explanation: const route=useRoute();route.params.id。在 setup 中用 useRoute 访问当前路由信息。
+      - id: 244
+        difficulty: 1
+        question: Pinia 解决什么问题？
+        options:
+          - 路由
+          - 组件间共享状态(全局数据)替代 Vuex
+          - 样式
+          - 构建
+        answer: 1
+        explanation: Pinia=Vue 的状态管理库。在组件间共享响应式数据(用户信息/购物车等)不通过 props 逐层传递。
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 状态管理
+    questions:
+      - id: 245
+        difficulty: 2
+        question: onMounted 何时执行？能访问 DOM 吗？
+        options:
+          - 组件创建前
+          - 组件挂载到 DOM 后执行。可安全访问 DOM 和 ref 元素
+          - 任何时候
+          - 销毁时
+        answer: 1
+        explanation: onMounted 在组件首次渲染挂载到 DOM 后调用。可安全操作 DOM/ref 绑定的元素。常在此发初始数据请求。
+      - id: 246
+        difficulty: 2
+        question: Slot(插槽)的作用？默认vs具名？
+        options:
+          - 定义 props
+          - 让父组件向子组件传递模板内容。默认插槽=一个；具名插槽=多个指定位置插入
+          - 定义事件
+          - 样式隔离
+        answer: 1
+        explanation: "slot 让组件接收\"模板内容\"而非数据。子组件留\"空位\"，父组件填充内容。具名插槽有多个名称不同的空位。"
+      - id: 247
+        difficulty: 2
+        question: composable(组合函数)是什么？举例
+        options:
+          - CSS 函数
+          - 复用逻辑的 JS 函数通常以 use 开头如 useMouse()。将响应式逻辑从组件中提取
+          - Vue 插件
+          - 指令
+        answer: 1
+        explanation: composable=将组件逻辑提取到可复用函数中(useXxx)。类似 React Hooks。遵循组合优于继承。
+      - id: 248
+        difficulty: 2
+        question: Pinia store 的基本结构？
+        options:
+          - 只有 state
+          - state(数据)+getters(计算属性)+actions(方法)
+          - 只有 actions
+          - 只有 getters
+        answer: 1
+        explanation: "store=defineStore(\"name\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。"
+      - id: 249
+        difficulty: 2
+        question: ref 和 reactive 的区别？解构 reactive 会怎样？
+        options:
+          - 相同
+          - ref 包装值需.value；reactive 包装对象。解构 reactive 会丢失响应性→需 toRefs()
+          - ref 更快
+          - reactive 已废弃
+        answer: 1
+        explanation: "const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。"
+      - id: 250
+        difficulty: 2
+        question: onBeforeUnmount 用途？
+        options:
+          - 初始化
+          - 清理资源：清除定时器/取消事件监听/取消请求。防止内存泄漏
+          - 创建组件
+          - 无用途
+        answer: 1
+        explanation: 组件销毁前清理：clearInterval(timer)取消 addEventListener 取消未完成的 fetch 请求。
+      - id: 251
+        difficulty: 2
+        question: router.push 和 router.replace 区别？
+        options:
+          - 相同
+          - push 新增一条历史记录可返回；replace 替换当前记录不可返回
+          - replace 更快
+          - push 已废弃
+        answer: 1
+        explanation: push=添加新历史记录(用户可点后退)。replace=替换当前记录(后退不会回到这一页)。登录后常用 replace 防止回退到登录页。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 组合式实战
+    questions:
+      - id: 252
+        difficulty: 3
+        question: provide/inject 作用和使用场景？
+        options:
+          - 替代 props
+          - 跨层级传递数据不经过中间组件。适合深层嵌套组件共享数据(如主题/语言)
+          - 替代 emit
+          - 替代 store
+        answer: 1
+        explanation: provide 在祖先提供数据 inject 在任意后代注入。避免 props 逐层传递(prop drilling)。但不如 Pinia 功能强。
+      - id: 253
+        difficulty: 3
+        question: 路由导航守卫 beforeEach 做什么？
+        options:
+          - 定义路由
+          - 全局前置守卫——每次路由跳转前执行。可用于权限检查、登录验证
+          - 渲染页面
+          - 存储状态
+        answer: 1
+        explanation: "router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。"
+      - id: 254
+        difficulty: 3
+        question: "`<style scoped>` 的原理？"
+        options:
+          - 随机数
+          - Vue 给组件元素加唯一属性(data-v-xxx)CSS 选择器追加该属性选择器
+          - CSS in JS
+          - PostCSS
+        answer: 1
+        explanation: "Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。"
+      - id: 255
+        difficulty: 3
+        question: "`<script setup>` 中如何声明 props 和 emits？"
+        options:
+          - 无法声明
+          - "defineProps({...})和 defineEmits([...])"
+          - 用 this.$props
+          - 在 template 中声明
+        answer: 1
+        explanation: 编译器宏：defineProps 和 defineEmits 在 script setup 中直接使用无需导入。自动暴露给模板。
+      - id: 256
+        difficulty: 3
+        question: Composition API 和 Options API 区别？为什么推荐前者？
+        options:
+          - Options 更好
+          - Composition 逻辑按功能聚合更易复用；Options 按选项分散(data/methods/computed)
+          - 无区别
+          - Composition 已废弃
+        answer: 1
+        explanation: Options API 把逻辑分散在 data/methods/computed 不同选项中不易维护。Composition API 把相关逻辑写在一起更清晰更易抽取 composable。
+      - id: 257
+        difficulty: 3
+        question: Pinia 和 Vuex 的区别？
+        options:
+          - 完全相同
+          - Pinia 更简洁(无 mutations)+TS 友好+模块化更好。Vuex 是上一代
+          - Vuex 更快
+          - Pinia 已废弃
+        answer: 1
+        explanation: Pinia=Vue 官方推荐的状态管理(替代 Vuex)。setup 风格 store 和组件写法一致。无 mutations 概念更简单。
+      - id: 258
+        difficulty: 3
+        question: Vue Router 的懒加载怎么做？
+        options:
+          - 无法实现
+          - "component:()=>import(\"./View.vue\")——路由被访问时才加载组件代码"
+          - 手动加载
+          - 自动加载
+        answer: 1
+        explanation: 动态 import()返回 Promise。Vue Router 在路由被访问时才下载对应组件代码→减少首屏加载体积。
+      - id: 259
+        difficulty: 3
+        question: toRefs() 的作用？
+        options:
+          - 创建新 ref
+          - 将 reactive 对象的每个属性转成独立的 ref 保持响应性。用于解构 reactive
+          - 替代 ref
+          - 已废弃
+        answer: 1
+        explanation: "const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。"
+      - id: 260
+        difficulty: 3
+        question: "`<KeepAlive>` 组件做什么？"
+        options:
+          - 缓存路由
+          - 缓存被切换走的组件实例不销毁保留其状态。切回来时恢复之前的状态
+          - 加速渲染
+          - 存储数据
+        answer: 1
+        explanation: KeepAlive 包裹动态组件/路由视图缓存被切走的组件。用户回到该组件时之前的状态(滚动位置/输入内容/数据)仍在。
+

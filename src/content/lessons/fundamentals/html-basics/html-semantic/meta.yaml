@@ -1,0 +1,9 @@
+id: html-semantic
+title: 语义化标签 — 给页面一个清晰的结构
+track: fundamentals
+chapter: html-basics
+order: 7
+mode: sandbox
+musicAnalogy: "语义化标签就像**总谱上的声部标注**——第一小提琴、第二小提琴、中提琴、大提琴……每个乐器组有自己的位置和身份。同样，`<header>`、`<main>`、`<footer>` 等标签告诉浏览器和搜索引擎\"这是什么部分\"。"
+listenTo: 拉威尔《波莱罗》配器总谱 — 每一行谱表标注了乐器名称，清晰的声部结构就像语义化的 HTML。
+estimatedMinutes: 0

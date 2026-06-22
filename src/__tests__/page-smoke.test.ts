@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import { getAllLessonsV2 } from '../content-v2/lessons'
-import { getAllProjectsV2 } from '../content-v2/projects'
+import { getAllLessonsV2 } from '../content-loaders/lessons'
+import { getAllProjectsV2 } from '../content-loaders/projects'
 
 // ============================================================
 // 第三层：页面冒烟测试
@@ -46,16 +46,16 @@ describe('页面冒烟测试', () => {
     })
   })
 
-  // ---- LessonV2Player：遍历所有课程 ----
-  describe('LessonV2Player', () => {
+  // ---- LessonPlayer：遍历所有课程 ----
+  describe('LessonPlayer', () => {
     const lessons = getAllLessonsV2()
     it.each(lessons.map(l => ({ id: l.id, title: l.meta.title })))(
       '课程 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
       async ({ id }) => {
         const router = await setupRoute(`/lesson/${id}`)
-        const { default: LessonV2Player } = await import('../views/LessonV2Player.vue')
-        const wrapper = mount(LessonV2Player, {
+        const { default: LessonPlayer } = await import('../views/LessonPlayer.vue')
+        const wrapper = mount(LessonPlayer, {
           global: { plugins: [router, createPinia()] },
         })
         expect(wrapper.find('.lesson-player').exists()).toBe(true)
@@ -63,16 +63,16 @@ describe('页面冒烟测试', () => {
     )
   })
 
-  // ---- ProjectV2Player：遍历所有项目 ----
-  describe('ProjectV2Player', () => {
+  // ---- ProjectPlayer：遍历所有项目 ----
+  describe('ProjectPlayer', () => {
     const projects = getAllProjectsV2()
     it.each(projects.map(p => ({ id: p.id, title: p.meta.title })))(
       '项目 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
       async ({ id }) => {
         const router = await setupRoute(`/project/${id}`)
-        const { default: ProjectV2Player } = await import('../views/ProjectV2Player.vue')
-        const wrapper = mount(ProjectV2Player, {
+        const { default: ProjectPlayer } = await import('../views/ProjectPlayer.vue')
+        const wrapper = mount(ProjectPlayer, {
           global: { plugins: [router, createPinia()] },
         })
         expect(wrapper.find('.project-player').exists()).toBe(true)

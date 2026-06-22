@@ -1,0 +1,278 @@
+# CSS 布局宝石
+
+gem:
+  id: css-layout
+  name: CSS 布局宝石
+  icon: 📐
+  achievement: junior
+  order: 4
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 80
+    name: 布局概念
+    questions:
+      - id: 76
+        difficulty: 1
+        question: "display:flex 写在哪？"
+        options:
+          - 子元素
+          - 父容器
+          - 两者都要
+          - html 上
+        answer: 1
+        explanation: "display:flex 写在父元素(容器)上，其直接子元素自动变弹性项目。"
+      - id: 77
+        difficulty: 1
+        question: justify-content 控制什么方向？
+        options:
+          - 垂直
+          - 主轴方向
+          - 对角线
+          - 文字方向
+        answer: 1
+        explanation: "默认 flex-direction:row 时主轴是横向，justify-content 控制横向对齐。column 时主轴变纵向。"
+      - id: 78
+        difficulty: 1
+        question: position 有哪五种值？
+        options:
+          - top/right/bottom/left/center
+          - static/relative/absolute/fixed/sticky
+          - flex/grid/block/inline/float
+          - px/em/rem/vw/vh
+        answer: 1
+        explanation: static(默认)/relative(相对自身)/absolute(相对祖先)/fixed(相对视口)/sticky(滚动吸附)。
+      - id: 79
+        difficulty: 1
+        question: "grid-template-columns:1fr 2fr 1fr 含义？"
+        options:
+          - "三列宽比 1:2:1"
+          - 四列等宽
+          - 语法错误
+          - 两列
+        answer: 0
+        explanation: "fr=fraction 份数。三列宽比 1:2:1，总 4 份，每列占 25%/50%/25%。"
+      - id: 80
+        difficulty: 1
+        question: "@media 的作用？"
+        options:
+          - 设置动画
+          - 根据屏幕条件应用不同样式(响应式)
+          - 定义变量
+          - 引入字体
+        answer: 1
+        explanation: "@media 媒体查询根据屏幕宽度等条件应用不同样式，实现响应式设计。"
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: Flex/Grid
+    questions:
+      - id: 81
+        difficulty: 2
+        question: "flex-direction:column 改变什么？"
+        options:
+          - 什么也不变
+          - 主轴变纵向，justify-content 和 align-items 轴向互换
+          - 元素消失
+          - 文字方向改变
+        answer: 1
+        explanation: column 让主轴由横向变纵向，justify-content 控制纵向对齐，align-items 控制横向对齐。
+      - id: 82
+        difficulty: 2
+        question: "flex:1 意思？"
+        options:
+          - 宽度 1px
+          - 占据剩余空间中 1 份
+          - 唯一元素时用
+          - 已废弃
+        answer: 1
+        explanation: "flex:1=flex-grow:1;flex-shrink:1;flex-basis:0 简写。两子元素 flex:1 和 flex:2 宽比 1:2。"
+      - id: 83
+        difficulty: 2
+        question: space-between vs space-around vs space-evenly？
+        options:
+          - 完全相同
+          - between=贴两端均分/around=项两侧半倍间距/evenly=全部等距
+          - between 已废弃
+          - evenly 只用于 Grid
+        answer: 1
+        explanation: between 首尾贴边中间均分。around 每项左右有间距(两端间距是中间一半)。evenly 所有间隙完全相等。
+      - id: 84
+        difficulty: 2
+        question: Grid 和 Flexbox 核心区别？
+        options:
+          - 完全相同
+          - Grid 二维(行列)适合页面布局，Flexbox 一维(行或列)适合组件排列
+          - Flexbox 更好
+          - Grid 已废弃
+        answer: 1
+        explanation: Grid 同时控制行和列=二维适合整体布局。Flexbox 只控制一个方向=一维适合组件内部排列。两者互补。
+      - id: 85
+        difficulty: 2
+        question: relative 相对谁定位？absolute 呢？
+        options:
+          - relative 相对视口
+          - relative 相对自身原位置，absolute 相对最近定位祖先
+          - 都相对父元素
+          - 都相对视口
+        answer: 1
+        explanation: relative 相对自身原位置偏移(原空间保留)。absolute 脱离流相对最近 position 非 static 的祖先。
+      - id: 86
+        difficulty: 2
+        question: gap 属性做什么？Flexbox 和 Grid 都支持吗？
+        options:
+          - 只用于 Grid
+          - 设置子元素间距，两者都支持
+          - 只用于 Flexbox
+          - 设置边框
+        answer: 1
+        explanation: gap 设置行列间距。早期 Flexbox 不支持 gap 但现在两者都支持。
+      - id: 87
+        difficulty: 2
+        question: "@media(max-width:768px)匹配什么？"
+        options:
+          - 宽度≥768px
+          - 宽度≤768px(手机/小平板)
+          - 所有设备
+          - 只匹配手机
+        answer: 1
+        explanation: "max-width 表示\"宽度≤此值时应用\"=通常匹配手机。min-width 表示\"宽度≥此值时应用\"=通常匹配桌面。"
+      - id: 88
+        difficulty: 2
+        question: 导航栏左边 Logo 右边链接→Flexbox 写法？
+        options:
+          - 全 float
+          - "nav{display:flex;justify-content:space-between}"
+          - "用 position:absolute"
+          - 不可能实现
+        answer: 1
+        explanation: "display:flex+space-between。左边元素自然靠左，右边元素靠右，中间空白自动填充。"
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 响应式实战
+    questions:
+      - id: 89
+        difficulty: 3
+        question: transition 需要哪些要素？
+        options:
+          - 只需属性名
+          - 属性+时长(至少)
+          - 必须 4 个值
+          - 只需时长
+        answer: 1
+        explanation: transition 至少需要：transition-property(哪个属性)+transition-duration(多久)。可选：timing-function(曲线)+delay(延迟)。
+      - id: 90
+        difficulty: 3
+        question: transition 和 animation 核心区别？
+        options:
+          - 完全相同
+          - transition 需触发(如hover)只两态；animation 自动播放可多帧
+          - animation 更简单
+          - transition 已废弃
+        answer: 1
+        explanation: "transition 被触发(hover等)只 A→B 过渡。animation 主动播放通过@keyframes 定义任意多帧可循环。"
+      - id: 91
+        difficulty: 2
+        question: ease/linear/ease-in/ease-out 区别？
+        options:
+          - 完全相同
+          - ease 慢快慢(默认)/linear 匀速/ease-in 慢→快/ease-out 快→慢
+          - ease 已废弃
+          - linear 只用于 rotate
+        answer: 1
+        explanation: ease 默认最自然。linear 全程匀速。ease-in 慢速开始。ease-out 慢速结束。
+      - id: 92
+        difficulty: 3
+        question: "animation-fill-mode:forwards vs none？"
+        options:
+          - forwards 停最后一帧 none 回初始(闪回)
+          - 完全相同
+          - forwards 已废弃
+          - none 不播放
+        answer: 0
+        explanation: forwards 动画结束后保持最后一帧样式。none 回到动画前初始状态(会闪回)。backwards 开始前就应用第一帧。
+      - id: 93
+        difficulty: 3
+        question: "无限旋转动画 @keyframes 怎么写？"
+        options:
+          - "@keyframes s{from{rotate:0}to{rotate:360deg}}"
+          - "@keyframes s{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}"
+          - "keyframes s{transform:spin}"
+          - "@keyframes s{0%{rotate:0}100%{rotate:1turn}}"
+        answer: 1
+        explanation: "animation:s 2s linear infinite 配合使用。"
+      - id: 94
+        difficulty: 3
+        question: 为什么做动画优先用 transform 而非 left/top？
+        options:
+          - 无区别
+          - transform 只触发合成(GPU加速)；left/top 触发重排性能差
+          - transform 更简单
+          - left/top 已废弃
+        answer: 1
+        explanation: 浏览器渲染：重排→重绘→合成。left/top 触发重排最贵。transform 只触发合成 GPU 处理性能最好。
+      - id: 95
+        difficulty: 2
+        question: animation-duration 单位？1.5s=1500ms？
+        options:
+          - s 和 ms，1.5s=1500ms 等价
+          - 只能用 s
+          - 只能用 ms
+          - 1.5s=150ms
+        answer: 0
+        explanation: 可用 s(秒)或 ms(毫秒)。1s=1000ms，1.5s=1500ms 完全等价。
+      - id: 96
+        difficulty: 2
+        question: 响应式是什么？怎么做？
+        options:
+          - 一种布局模式
+          - "让网页在不同屏幕都好看。用 @media 断点+弹性单位"
+          - 只能用 Grid
+          - 用 JS 判断屏幕
+        answer: 1
+        explanation: "响应式=不同屏幕不同布局。核心：@media 媒体查询+弹性单位(%,vw,fr)+flex/grid 弹性布局+移动优先。"
+      - id: 97
+        difficulty: 3
+        question: "animation-direction:alternate 效果？"
+        options:
+          - 反向播放
+          - 奇数遍正向偶数遍反向来回交替
+          - 加速播放
+          - 只播放反向
+        answer: 1
+        explanation: "alternate 奇数遍(1,3,5)正向偶数遍(2,4,6)反向。配合 infinite 做来回效果。"
+      - id: 98
+        difficulty: 2
+        question: flex-wrap 做什么？
+        options:
+          - 控制对齐
+          - 是否允许子元素换行
+          - 设置间距
+          - 已废弃
+        answer: 1
+        explanation: "nowrap(默认)不换行子元素被压缩。wrap 允许换行。通常配合 flex-wrap:wrap 实现自适应布局。"
+      - id: 99
+        difficulty: 3
+        question: sticky 定位的效果？使用条件？
+        options:
+          - 固定在视口
+          - 滚动到指定位置后固定吸附。需设 top/left 等值
+          - 和 fixed 完全一样
+          - 已废弃
+        answer: 1
+        explanation: "sticky=滚动时先正常排列，到达阈值(如 top:0)后吸附固定。常用于吸顶导航栏。父元素不能设 overflow:hidden。"
+      - id: 100
+        difficulty: 2
+        question: "repeat(3,1fr) 和 1fr 1fr 1fr 等价吗？"
+        options:
+          - 等价
+          - 不等价 repeat 更慢
+          - 1fr 1fr 1fr 语法错
+          - repeat 已废弃
+        answer: 0
+        explanation: "完全等价。repeat(次数,值)是简写。repeat(3,1fr)=1fr 1fr 1fr。repeat(auto-fill,minmax(200px,1fr))更强大。"
+

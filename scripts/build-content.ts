@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type {
@@ -16,13 +16,24 @@ import type {
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '..')
-const lessonsRoot = path.join(projectRoot, 'content', 'lessons')
-const projectsRoot = path.join(projectRoot, 'content', 'projects')
+const lessonsRoot = path.join(projectRoot, 'src', 'content', 'lessons')
+const prologueRoot = path.join(projectRoot, 'src', 'content', 'prologue')
+const projectsRoot = path.join(projectRoot, 'src', 'content', 'projects')
 const generatedDir = path.join(projectRoot, 'src', 'generated')
 const generatedFile = path.join(generatedDir, 'lessons-index.json')
 const generatedProjectsFile = path.join(generatedDir, 'projects-index.json')
-const glossarySourceFile = path.join(projectRoot, 'content', 'glossary', 'terms.yaml')
+const generatedTaxonomyFile = path.join(generatedDir, 'taxonomy.json')
+const glossarySourceFile = path.join(projectRoot, 'src', 'content', 'glossary', 'terms.yaml')
 const glossaryGeneratedFile = path.join(generatedDir, 'glossary.json')
+const taxonomySourceFile = path.join(projectRoot, 'src', 'content', 'taxonomy.yaml')
+const quizSourceDir = path.join(projectRoot, 'src', 'content', 'quiz')
+const generatedQuizFile = path.join(generatedDir, 'quiz.json')
+
+async function atomicWriteFile(filePath: string, data: string): Promise<void> {
+  const tmpPath = filePath + '.tmp'
+  await writeFile(tmpPath, data, 'utf8')
+  await rename(tmpPath, filePath)
+}
 
 const allowedModes = new Set(['sandbox', 'local'])
 const allowedBlockNames = new Set<BlockName>([
@@ -153,11 +164,11 @@ function parseGlossaryYaml(input: string): GlossaryEntry[] {
 function parseAttrs(raw?: string): Record<string, string | string[]> | undefined {
   if (!raw) return undefined
   const attrs: Record<string, string | string[]> = {}
-  const regex = /([A-Za-z][\w-]*)="([^"]*)"|([A-Za-z][\w-]*)='([^']*)'/g
+  const regex = /([A-Za-z][\w-]*)="((?:[^"\\]|\\.)*)"|([A-Za-z][\w-]*)='((?:[^'\\]|\\.)*)'/g
 
   for (const match of raw.matchAll(regex)) {
     const key = (match[1] || match[3]) as string
-    const value = (match[2] || match[4] || '').trim()
+    const value = (match[2] || match[4] || '').trim().replace(/\\(.)/g, '$1')
     if (value.includes(',')) {
       attrs[key] = value.split(',').map((item) => item.trim()).filter(Boolean)
     } else {
@@ -176,7 +187,7 @@ function injectTerms(text: string, termKeys: string[]): string {
   if (!text) return text
   if (!termKeys.length) return text
 
-  const protectRegex = /```[\s\S]*?```|`[^`\n]*`|\[[^\]]+\]\([^)]+\)/g
+  const protectRegex = /\{\{term:[^}]+\}\}|```[\s\S]*?```|`[^`\n]*`|\[[^\]]+\]\([^)]+\)/g
   const protectedParts: Array<{ start: number; end: number; value: string }> = []
 
   for (const match of text.matchAll(protectRegex)) {
@@ -198,12 +209,38 @@ function injectTerms(text: string, termKeys: string[]): string {
 }
 
 function injectTermsInPlain(text: string, termKeys: string[]): string {
+  // Sort by length descending: process longer keys first to minimize nesting
+  const sorted = [...termKeys].sort((a, b) => b.length - a.length)
+
+  // Protected regions: {{term:...}} markers and backtick code
+  const markerRegex = /\{\{term:[^}]+\}\}|`[^`\n]*`/g
+
+  function replaceInUnprotected(input: string, regex: RegExp, replacement: string): string {
+    const markers: Array<{ start: number; end: number }> = []
+    for (const m of input.matchAll(markerRegex)) {
+      markers.push({ start: m.index!, end: m.index! + m[0].length })
+    }
+    let out = ''
+    let cursor = 0
+    for (const mk of markers) {
+      if (mk.start > cursor) {
+        out += input.slice(cursor, mk.start).replace(regex, replacement)
+      }
+      out += input.slice(mk.start, mk.end)
+      cursor = mk.end
+    }
+    if (cursor < input.length) {
+      out += input.slice(cursor).replace(regex, replacement)
+    }
+    return out
+  }
+
   let out = text
-  for (const key of termKeys) {
+  for (const key of sorted) {
     const escaped = escapeTermKey(key)
     const useWordBoundary = /^[A-Za-z0-9_]+$/.test(key)
     const regex = useWordBoundary ? new RegExp(`\\b${escaped}\\b`, 'g') : new RegExp(escaped, 'g')
-    out = out.replace(regex, `{{term:${key}}}`)
+    out = replaceInUnprotected(out, regex, `{{term:${key}}}`)
   }
   return out
 }
@@ -524,7 +561,266 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
   }
 }
 
-async function main() {
+// ---------- Taxonomy ----------
+
+type TaxonomyTrack = { id: string; title: string; subtitle: string; icon: string; order: number }
+type TaxonomyChapter = { id: string; title: string; subtitle: string; icon: string; order: number }
+type Taxonomy = { tracks: TaxonomyTrack[]; chapters: TaxonomyChapter[] }
+
+function parseTaxonomyYaml(input: string): Taxonomy {
+  const tracks: TaxonomyTrack[] = []
+  const chapters: TaxonomyChapter[] = []
+  let target: 'tracks' | 'chapters' | null = null
+  let current: Partial<TaxonomyTrack> | null = null
+
+  function commitCurrent() {
+    if (!current?.id) return
+    const item = { id: String(current.id), title: String(current.title || ''), subtitle: String(current.subtitle || ''), icon: String(current.icon || ''), order: Number(current.order || 0) }
+    if (target === 'tracks') tracks.push(item)
+    else if (target === 'chapters') chapters.push(item)
+    current = null
+  }
+
+  for (const line of input.split(/\r?\n/)) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith('#')) continue
+
+    if (trimmed === 'tracks:') {
+      if (current?.id) commitCurrent()
+      target = 'tracks'
+      continue
+    }
+    if (trimmed === 'chapters:') {
+      if (current?.id) commitCurrent()
+      target = 'chapters'
+      continue
+    }
+
+    if (trimmed.startsWith('- id:')) {
+      if (current?.id) commitCurrent()
+      current = { id: trimmed.replace(/- id:\s*/, '').trim() }
+      continue
+    }
+
+    if (current) {
+      const fm = trimmed.match(/^(\w+):\s*(.+)/)
+      if (fm) {
+        const [, key, value] = fm
+        if (key === 'order') current.order = parseInt(value.trim(), 10)
+        else (current as any)[key] = value.trim()
+      }
+    }
+  }
+
+  if (current?.id) commitCurrent()
+
+  return { tracks, chapters }
+}
+
+async function buildTaxonomy(): Promise<void> {
+  let taxonomy: Taxonomy
+  try {
+    const raw = await readFile(taxonomySourceFile, 'utf8')
+    taxonomy = parseTaxonomyYaml(raw)
+  } catch {
+    taxonomy = { tracks: [], chapters: [] }
+  }
+  await atomicWriteFile(generatedTaxonomyFile, JSON.stringify(taxonomy, null, 2) + '\n')
+}
+
+// ---------- Quiz ----------
+
+type CompiledGem = {
+  id: string
+  name: string
+  icon: string
+  achievement: string
+  order: number
+  levels: CompiledQuizLevel[]
+}
+
+type CompiledQuizLevel = {
+  level: number
+  type: string
+  threshold: number
+  name: string
+  questions: CompiledQuizQuestion[]
+}
+
+type CompiledQuizQuestion = {
+  id: number
+  difficulty: number
+  question: string
+  options: string[]
+  answer: number
+  explanation: string
+}
+
+async function compileQuiz(): Promise<void> {
+  const gems: CompiledGem[] = []
+
+  let entries: string[]
+  try {
+    entries = await readdir(quizSourceDir)
+  } catch {
+    // No quiz dir — skip
+    await atomicWriteFile(generatedQuizFile, JSON.stringify({ gems: [], questions: [] }, null, 2) + '\n')
+    return
+  }
+
+  for (const entry of entries.sort()) {
+    if (!entry.endsWith('.yaml')) continue
+    const raw = await readFile(path.join(quizSourceDir, entry), 'utf8')
+
+    // Parse gem metadata from YAML header (before "levels:")
+    const header = raw.split('levels:')[0] || ''
+    const gemMeta: Record<string, string | number> = {}
+    let inGem = false
+    for (const rawLine of header.split(/\r?\n/)) {
+      const line = rawLine.trim()
+      if (!line || line.startsWith('#')) continue
+      if (line === 'gem:') { inGem = true; continue }
+      if (!inGem) continue
+      const m = line.match(/^(\w+):\s*(.*)/)
+      if (m) {
+        const val = m[2].trim()
+        gemMeta[m[1]] = m[1] === 'order' ? parseInt(val, 10) : val.replace(/^"(.*)"$/, '$1')
+      }
+    }
+
+    const gem: CompiledGem = {
+      id: String(gemMeta.id || entry.replace('.yaml', '')),
+      name: String(gemMeta.name || ''),
+      icon: String(gemMeta.icon || ''),
+      achievement: String(gemMeta.achievement || ''),
+      order: Number(gemMeta.order || 0),
+      levels: [],
+    }
+
+    // Parse levels from the structured YAML
+    const levelBlocks = raw.split(/\n  - level:/).slice(1)
+    for (const block of levelBlocks) {
+      const lines = block.split(/\r?\n/)
+      // First line after split is the level number
+      const levelNumber = parseInt(lines[0].trim(), 10)
+      const levelData: Record<string, any> = { level: levelNumber }
+      let inQuestions = false
+      let currentQ: Record<string, any> = {}
+      const questions: CompiledQuizQuestion[] = []
+      let optionsList: string[] = []
+
+      for (let li = 1; li < lines.length; li++) {
+        const rawLine = lines[li]
+        const line = rawLine.trim()
+        if (!line || line.startsWith('#')) continue
+
+        // Parse level metadata
+        if (!inQuestions && !line.startsWith('questions:')) {
+          const m = line.match(/^(\w+):\s*(.*)/)
+          if (m) {
+            const [, key, value] = m
+            if (key === 'threshold') levelData[key] = parseInt(value, 10)
+            else levelData[key] = value.trim()
+          }
+          continue
+        }
+
+        if (line.startsWith('questions:')) {
+          inQuestions = true
+          continue
+        }
+
+        // Parse question entries
+        if (inQuestions) {
+          if (line.startsWith('- id:')) {
+            if (currentQ.id !== undefined) {
+              questions.push({
+                id: Number(currentQ.id),
+                difficulty: Number(currentQ.difficulty || 1),
+                question: String(currentQ.question || ''),
+                options: [...optionsList],
+                answer: Number(currentQ.answer || 0),
+                explanation: String(currentQ.explanation || ''),
+              })
+              optionsList = []
+            }
+            currentQ = { id: parseInt(line.replace('- id:', '').trim(), 10) }
+            continue
+          }
+
+          if (line.startsWith('- ') && !line.startsWith('- id:')) {
+            // This is an option value
+            const optVal = line.replace(/^\s*-\s*/, '').trim()
+            // Remove YAML quotes if present
+            optionsList.push(optVal.replace(/^"(.*)"$/, '$1'))
+            continue
+          }
+
+          const m = line.match(/^(\w+):\s*(.*)/)
+          if (m) {
+            const [, key, value] = m
+            if (key === 'difficulty') currentQ[key] = parseInt(value, 10)
+            else if (key === 'answer') currentQ[key] = parseInt(value, 10)
+            else if (key === 'question') {
+              // Multi-line question (block scalar indicator)
+              currentQ[key] = value === '|' ? '' : value.trim()
+            } else if (key === 'explanation') {
+              currentQ[key] = value === '|' ? '' : value.trim()
+            } else {
+              currentQ[key] = value.trim()
+            }
+          } else if (currentQ.question === '' || currentQ.explanation === '') {
+            // Continuation of multi-line value
+            const trimmedLine = rawLine.replace(/^\s+/, '')
+            if (currentQ.question === '') currentQ.question = trimmedLine
+            else if (currentQ.explanation === '') currentQ.explanation = trimmedLine
+            else {
+              // Append to whichever was last set to empty
+              if (currentQ._lastField === 'question') currentQ.question += '\n' + trimmedLine
+              else currentQ.explanation += '\n' + trimmedLine
+            }
+          }
+        }
+      }
+
+      // Push last question
+      if (currentQ.id !== undefined) {
+        questions.push({
+          id: Number(currentQ.id),
+          difficulty: Number(currentQ.difficulty || 1),
+          question: String(currentQ.question || ''),
+          options: [...optionsList],
+          answer: Number(currentQ.answer || 0),
+          explanation: String(currentQ.explanation || ''),
+        })
+      }
+
+      gem.levels.push({
+        level: Number(levelData.level || 1),
+        type: String(levelData.type || 'normal'),
+        threshold: Number(levelData.threshold || 60),
+        name: String(levelData.name || ''),
+        count: questions.length,
+        questions,
+      })
+    }
+
+    gems.push(gem)
+  }
+
+  gems.sort((a, b) => a.order - b.order)
+
+  // Flatten questions for backward compatibility — add gem/level fields
+  const allQuestions = gems.flatMap(g =>
+    g.levels.flatMap(l => l.questions.map(q => ({ ...q, gem: g.id, level: l.level })))
+  )
+
+  await atomicWriteFile(generatedQuizFile, JSON.stringify({ gems, questions: allQuestions }, null, 2) + '\n')
+}
+
+// ---------- Main ----------
+
+export async function main() {
   let glossary: GlossaryEntry[] = []
   try {
     const glossaryRaw = await readFile(glossarySourceFile, 'utf8')
@@ -534,8 +830,12 @@ async function main() {
   }
   const termKeys = glossary.map((g) => g.key).filter(Boolean)
 
-  const lessonDirs = await collectLessonDirs(lessonsRoot)
-  const compiledRaw = await Promise.all(lessonDirs.map((dir) => compileLesson(dir)))
+  const [lessonDirs, prologueDirs] = await Promise.all([
+    collectLessonDirs(lessonsRoot),
+    collectLessonDirs(prologueRoot).catch(() => [] as string[]),
+  ])
+  const allLessonDirs = [...lessonDirs, ...prologueDirs]
+  const compiledRaw = await Promise.all(allLessonDirs.map((dir) => compileLesson(dir)))
   const compiled = compiledRaw.map((lesson) => ({
     ...lesson,
     body: applyGlossaryToBody(lesson.body, termKeys),
@@ -558,15 +858,23 @@ async function main() {
   compiledProjects.sort((a, b) => a.meta.order - b.meta.order)
 
   await mkdir(generatedDir, { recursive: true })
-  await writeFile(generatedFile, `${JSON.stringify(compiled, null, 2)}\n`, 'utf8')
-  await writeFile(generatedProjectsFile, `${JSON.stringify(compiledProjects, null, 2)}\n`, 'utf8')
-  await writeFile(glossaryGeneratedFile, `${JSON.stringify(glossary, null, 2)}\n`, 'utf8')
+  await Promise.all([
+    atomicWriteFile(generatedFile, `${JSON.stringify(compiled, null, 2)}\n`),
+    atomicWriteFile(generatedProjectsFile, `${JSON.stringify(compiledProjects, null, 2)}\n`),
+    atomicWriteFile(glossaryGeneratedFile, `${JSON.stringify(glossary, null, 2)}\n`),
+    buildTaxonomy(),
+    compileQuiz(),
+  ])
+  const quizData = JSON.parse(await readFile(generatedQuizFile, 'utf8'))
   console.log(
-    `Compiled ${compiled.length} lesson(s), ${compiledProjects.length} project(s) to ${path.relative(projectRoot, generatedDir)}`,
+    `Compiled ${compiled.length} lesson(s), ${compiledProjects.length} project(s), ${quizData.gems?.length || 0} quiz gem(s) to ${path.relative(projectRoot, generatedDir)}`,
   )
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+const isDirectRun = process.argv[1]?.replace(/\\/g, '/').endsWith('scripts/build-content.ts')
+if (isDirectRun) {
+  main().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}

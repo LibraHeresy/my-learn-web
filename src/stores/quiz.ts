@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { quizQuestions, gems, type QuizQuestion, type GemDef } from '../configs/quiz-questions'
+import { getAllQuestions, getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
+const gems = getGems()
+const quizQuestions = getAllQuestions()
 
 const STORAGE_KEY = 'code-score-quiz-v2'
 

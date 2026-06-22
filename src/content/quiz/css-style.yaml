@@ -1,0 +1,328 @@
+# CSS 样式宝石
+
+gem:
+  id: css-style
+  name: CSS 样式宝石
+  icon: 🎨
+  achievement: junior
+  order: 3
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 80
+    name: 选择器基础
+    questions:
+      - id: 46
+        difficulty: 1
+        question: 类选择器写法？
+        options:
+          - .class名
+          - "#class名"
+          - class名
+          - "<class名>"
+        answer: 0
+        explanation: "类选择器用 .开头：.card 选中所有 class=\"card\" 的元素。"
+      - id: 47
+        difficulty: 1
+        question: ID 选择器写法？
+        options:
+          - .id名
+          - "#id名"
+          - id名
+          - "<id名>"
+        answer: 1
+        explanation: "ID 选择器用 #开头：#title 选中 id=\"title\" 的元素。"
+      - id: 48
+        difficulty: 1
+        question: 下面哪个 CSS 声明写法正确？
+        options:
+          - "color: red"
+          - color = red
+          - "color: \"red\""
+          - color; red
+        answer: 0
+        explanation: "CSS 声明格式：属性: 值; 如 color: red;。不能用等号，值通常不加引号。"
+      - id: 49
+        difficulty: 1
+        question: CSS 注释怎么写？
+        options:
+          - // 注释
+          - "<!-- 注释 -->"
+          - "/* 注释 */"
+          - "# 注释"
+        answer: 2
+        explanation: "CSS 用 /* 注释 */。// 是 JS 注释在 CSS 中无效。"
+      - id: 50
+        difficulty: 1
+        question: "color: #f00 和 red 等价吗？"
+        options:
+          - 等价都是红色
+          - 不等价
+          - "#f00 更暗"
+          - red 已废弃
+        answer: 0
+        explanation: "#f00=#ff0000=red，都是纯红色完全等价。#f00 是 #ff0000 的缩写。"
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 盒模型计算
+    questions:
+      - id: 51
+        difficulty: 2
+        question: "`.card.highlight` 和 `.card .highlight` 区别？"
+        options:
+          - 完全相同
+          - 前者选中同时有两个类的元素，后者选中 card 内后代有 highlight 的元素
+          - 语法错误
+          - 后者选中 card 自己
+        answer: 1
+        explanation: 无空格=同时拥有两个类。有空格=后代关系。空格是关键！
+      - id: 52
+        difficulty: 2
+        question: 选择器权重怎么算？
+        options:
+          - 后面覆盖前面
+          - "ID(100)>类(10)>元素(1)"
+          - 按字母顺序
+          - "!important 不算"
+        answer: 1
+        explanation: "权重：(ID数,类数,元素数)。如 #header .nav a=(1,1,1)。!important 强制覆盖一切。内联 style=1000。"
+      - id: 53
+        difficulty: 2
+        question: 盒模型从外到内四层顺序？
+        options:
+          - padding→border→margin→content
+          - margin→border→padding→content
+          - border→padding→margin→content
+          - content→padding→border→margin
+        answer: 1
+        explanation: margin(外边距)→border(边框)→padding(内边距)→content(内容区)。
+      - id: 54
+        difficulty: 2
+        question: width 默认设置哪一层的宽度？
+        options:
+          - margin
+          - border
+          - padding
+          - content
+        answer: 3
+        explanation: "box-sizing:content-box(默认)时 width 只设置 content 区域宽度。padding 和 border 额外增加总宽。"
+      - id: 55
+        difficulty: 2
+        question: "box-sizing:border-box 改变什么？"
+        options:
+          - 什么也不变
+          - width 包含 content+padding+border 总宽
+          - border-box 已废弃
+          - 只改变高度
+        answer: 1
+        explanation: "border-box 让 width=content+padding+border 总宽，更直观。推荐全局设置 *{box-sizing:border-box}。"
+      - id: 56
+        difficulty: 2
+        question: em 和 rem 的区别？
+        options:
+          - em 相对屏幕 rem 相对父元素
+          - em 相对父元素字号，rem 相对根元素(html)字号
+          - 完全相同
+          - em 已废弃
+        answer: 1
+        explanation: em 相对父元素 font-size 会逐层叠加。rem 相对根元素 html 字号全局统一。全局间距用 rem，组件内部用 em。
+      - id: 57
+        difficulty: 2
+        question: padding 和 margin 的区别？
+        options:
+          - padding 在外 margin 在内
+          - padding 内边距(边框内)，margin 外边距(边框外)
+          - 完全相同
+          - margin 只能用于 div
+        answer: 1
+        explanation: padding=元素内容与边框之间的空白(盒内泡沫)。margin=边框与相邻元素之间的空白(盒外距离)。
+      - id: 58
+        difficulty: 2
+        question: "width:100% 和 width:100vw 区别？"
+        options:
+          - 完全一样
+          - "100%相对父元素宽度，100vw相对视口宽度(含滚动条)"
+          - 100vw 更小
+          - "100% 已废弃"
+        answer: 1
+        explanation: "100%相对于父容器 content 宽度。100vw 是整个视口宽度(含滚动条)。有滚动条时100vw>100%。"
+      - id: 59
+        difficulty: 2
+        question: 相邻元素上下 margin 会怎样？
+        options:
+          - 相加
+          - 取较大值(折叠 margin collapse)
+          - 相互抵消
+          - 没有特殊行为
+        answer: 1
+        explanation: 两个相邻块级元素上下 margin 会折叠取较大值而非相加。左右不折叠。
+      - id: 60
+        difficulty: 2
+        question: "!important 为什么尽量不用？"
+        options:
+          - 提高性能
+          - 破坏正常优先级体系难以调试
+          - 它是 CSS4 特性
+          - 已废弃
+        answer: 1
+        explanation: "!important 强制覆盖一切但滥用会导致难以调试和覆盖——形成恶性循环。应通过提高选择器权重而非!important。"
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 样式排错
+    questions:
+      - id: 61
+        difficulty: 3
+        question: "h1 同时被 `h1{color:red}` 和 `.title{color:blue}` 选中且 class=\"title\"→什么颜色？"
+        options:
+          - 红元素选择器优先
+          - "蓝类选择器权重(10)>元素(1)"
+          - 紫两者混合
+          - 取决于文件顺序
+        answer: 1
+        explanation: "类选择器权重(0,1,0)>元素选择器(0,0,1)，.title 胜出。"
+      - id: 62
+        difficulty: 3
+        question: "div 设 width:200px;padding:20px;border:5px→实际总宽？"
+        options:
+          - 200px
+          - 250px=200+40+10
+          - 210px
+          - 230px
+        answer: 1
+        explanation: content-box：总宽=width(200)+padding(20×2)+border(5×2)=250px。
+      - id: 63
+        difficulty: 3
+        question: "同上改为 box-sizing:border-box，实际总宽？"
+        options:
+          - 250px
+          - 200px(width 已含 padding+border)
+          - 210px
+          - 取决于浏览器
+        answer: 1
+        explanation: border-box：width(200)已含 padding 和 border，总宽=200px，内容区自动缩小。
+      - id: 64
+        difficulty: 3
+        question: "margin:10px 20px 30px 三个值各对应哪边？"
+        options:
+          - 上10/左右20/下30
+          - 上10/右20/下30/左20
+          - 上10/下20/左30
+          - 全部10
+        answer: 0
+        explanation: 三值=上 左右 下。上10px、左右20px、下30px。
+      - id: 65
+        difficulty: 3
+        question: "子元素设 margin-top:50px 为什么父元素也跟着下移？怎么修？"
+        options:
+          - 不可能发生
+          - "margin 折叠穿透。给父元素加 overflow:hidden 或 padding:1px"
+          - 这是浏览器 bug
+          - margin-top 只能用于 body
+        answer: 1
+        explanation: "子元素 margin-top 会\"穿透\"父元素(margin collapse)。修法：父设 overflow:hidden/padding:1px/border:1px/flex 布局。"
+      - id: 66
+        difficulty: 3
+        question: a 标签的 LVHA 推荐顺序？
+        options:
+          - "a/a:hover/a:visited/a:active"
+          - "a:link→a:visited→a:hover→a:active"
+          - 顺序无所谓
+          - "a:active→a:hover→a:link→a:visited"
+        answer: 1
+        explanation: "LVHA=LoVe HAte。:link→:visited→:hover→:active 必须按此顺序否则某些状态被覆盖。"
+      - id: 67
+        difficulty: 3
+        question: "`div p` 和 `div > p` 区别？"
+        options:
+          - 完全相同
+          - 前者所有后代 p，后者仅直接子元素 p
+          - 后者选中所有后代
+          - 语法错误
+        answer: 1
+        explanation: "空格=所有层级后代。>=只直接子元素不包含更深层的 p。"
+      - id: 68
+        difficulty: 3
+        question: "`h1,h2,h3{color:red}` 选中什么？"
+        options:
+          - h1 内嵌套的 h2 和 h3
+          - 所有 h1、所有 h2、所有 h3
+          - 只 h1
+          - 语法错误
+        answer: 1
+        explanation: "逗号=分组选择器表示\"或\"。选中所有 h1、所有 h2、所有 h3。"
+      - id: 69
+        difficulty: 2
+        question: "opacity:0.5 和 opacity:50% 等价吗？"
+        options:
+          - 等价
+          - "不等价 50% 语法错"
+          - "50%=0.05"
+          - 取决于浏览器
+        answer: 0
+        explanation: "CSS 支持百分比：opacity:50% 等于 opacity:0.5 完全等价。"
+      - id: 70
+        difficulty: 2
+        question: "display:none 和 visibility:hidden 核心区别？"
+        options:
+          - 完全相同
+          - 前者不占空间(从布局移除)，后者占空间(不可见)
+          - 前者只隐藏文字
+          - 后者不占空间
+        answer: 1
+        explanation: "display:none 元素从布局中移除不占空间。visibility:hidden 元素不可见但保持原空间。"
+      - id: 71
+        difficulty: 3
+        question: 为什么推荐用 class 而尽量不用 ID 选择器？
+        options:
+          - ID 更快
+          - class 可复用权重更低更好维护，ID 权重过高难覆盖
+          - ID 已废弃
+          - 没有区别
+        answer: 1
+        explanation: ID 权重(100)过高难覆盖且不可复用。class 权重(10)适中可复用更好维护。推荐用 class 做样式。
+      - id: 72
+        difficulty: 2
+        question: font-family 多个值的作用？
+        options:
+          - 全部同时生效
+          - 从左到右作为回退方案
+          - 只有第一个生效
+          - 语法错误
+        answer: 1
+        explanation: "font-family:\"Microsoft YaHei\",sans-serif——优先用第一个字体，没有安装则回退到下一个。"
+      - id: 73
+        difficulty: 2
+        question: "overflow:hidden/scroll/auto 区别？"
+        options:
+          - 全部一样
+          - hidden=裁剪隐藏/scroll=始终滚动条/auto=需要时滚动条
+          - hidden 删除内容
+          - scroll 已废弃
+        answer: 1
+        explanation: hidden=溢出裁剪。scroll=始终有滚动条。auto=溢出时才出现滚动条。visible(默认)=溢出可见。
+      - id: 74
+        difficulty: 3
+        question: "h1 权重对决：!important vs 内联 style vs #id vs .class vs div→排序？"
+        options:
+          - "!important>内联>#id>.class>div"
+          - "#id>!important>内联>.class>div"
+          - "内联>!important>#id>.class>div"
+          - ".class>#id>内联>!important>div"
+        answer: 0
+        explanation: "优先级链：!important(无视一切)>内联 style(1000)>ID(100)>类(10)>元素(1)。"
+      - id: 75
+        difficulty: 2
+        question: outline 和 border 区别？outline 占空间吗？
+        options:
+          - 完全相同
+          - outline 不占空间在 border 之外；border 占空间
+          - outline 已废弃
+          - outline 在 border 里面
+        answer: 1
+        explanation: "outline 绘制在 border 之外不占盒模型空间不影响布局。常用于 :focus 焦点指示器不会导致元素抖动。"
+

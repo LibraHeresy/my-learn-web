@@ -83,7 +83,24 @@ function parseInlineText(text: string): InlineToken[] {
     }
 
     if (next.type === 'term') {
-      const end = text.indexOf('}}', i)
+      // Find matching }} — skip over nested {{term:...}} markers
+      let depth = 1
+      let end = -1
+      let pos = i + '{{term:'.length
+      while (pos < text.length) {
+        if (text.startsWith('{{term:', pos)) {
+          depth++
+          pos += '{{term:'.length
+          continue
+        }
+        if (text.startsWith('}}', pos)) {
+          depth--
+          if (depth === 0) { end = pos; break }
+          pos += 2
+          continue
+        }
+        pos++
+      }
       if (end === -1) {
         out.push({ type: 'text', value: text.slice(i) })
         break

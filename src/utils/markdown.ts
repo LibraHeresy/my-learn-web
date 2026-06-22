@@ -1,4 +1,4 @@
-import { glossary } from '../configs/glossary'
+import { getGlossaryTuples } from '../content-loaders/glossary'
 
 // 转义 HTML 特殊字符
 function escapeHtml(text: string): string {
@@ -17,6 +17,7 @@ function restorePlaceholders(text: string, placeholders: string[]): string {
 // 包裹已知术语为 tooltip span（在转义前调用，术语列表按长度降序）
 function wrapTerms(text: string, placeholders: string[]): string {
   let html = text
+  const glossary = getGlossaryTuples()
   for (const [key] of glossary) {
     const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     const regex = new RegExp(escaped, 'g')
@@ -183,9 +184,15 @@ function applyInlinePipeline(text: string, placeholders: string[]): string {
   return html
 }
 
+// 预处理：将 {{term:key}} 还原为纯文本 key，交由后续 wrapTerms 统一处理
+function stripTermMarkers(text: string): string {
+  return text.replace(/\{\{term:([^}]+)\}\}/g, '$1')
+}
+
 // 轻量内联 Markdown → HTML，不包裹 <p>
 export function parseInline(text: string): string {
   const placeholders: string[] = []
+  text = stripTermMarkers(text)
 
   // 提取代码块 + 引用块 + 表格 + 列表
   let html = extractCodeFences(text, placeholders, false)
@@ -248,6 +255,7 @@ function parseTable(text: string): string {
 export function parseContent(text: string): string {
   const placeholders: string[] = []
   const htmlBlocks: string[] = []
+  text = stripTermMarkers(text)
 
   // 0. 提取 [[html]] 块（单独存储，避开后续的 \n → <br> 处理）
   let html = text.replace(/\[\[html\]\]([\s\S]*?)\[\[\/html\]\]/g, (_, raw) => {

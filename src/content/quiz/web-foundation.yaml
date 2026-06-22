@@ -1,0 +1,166 @@
+# Web 基石宝石
+
+gem:
+  id: web-foundation
+  name: Web 基石宝石
+  icon: ⭐
+  achievement: junior
+  order: 7
+
+levels:
+  - level: 1
+    type: achievement-boss
+    threshold: 60
+    name: 初级大决战
+    questions:
+      - id: 156
+        difficulty: 3
+        question: HTML+CSS 混合：给一个导航栏需求(左边logo右边链接)，最合适的标签和CSS？
+        options:
+          - "<div>+float"
+          - "<nav>+display:flex+space-between"
+          - "<table>布局"
+          - "<header>+position:absolute"
+        answer: 1
+        explanation: 语义化 nav 包裹+flex 布局是现代标准做法。
+      - id: 157
+        difficulty: 3
+        question: HTML+CSS：一个表单 label 点击没反应→可能原因？
+        options:
+          - JS 没加载
+          - label 的 for 和 input 的 id 不匹配
+          - CSS 样式问题
+          - 浏览器版本太旧
+        answer: 1
+        explanation: label for 必须等于 input id——这对钥匙锁必须一模一样才会生效。
+      - id: 158
+        difficulty: 3
+        question: HTML+CSS：以下哪项能实现三列等宽布局？
+        options:
+          - "<table>"
+          - "display:grid;grid-template-columns:repeat(3,1fr)"
+          - "float:left;width:33%"
+          - 以上都可以
+        answer: 3
+        explanation: 三种都能实现三列等宽布局。Grid 最现代，Flexbox 也可，table 过时但不影响效果。
+      - id: 159
+        difficulty: 3
+        question: HTML+CSS：图片加载失败不显示裂图图标应设置什么？
+        options:
+          - "style=\"hide-on-error\""
+          - "alt=\"\"且设置 onerror 替换"
+          - 无法实现
+          - "display:none"
+        answer: 1
+        explanation: "alt=\"\"不让阅读器读文件名。CSS/JS 可监听 error 事件隐藏或替换裂图。"
+      - id: 160
+        difficulty: 3
+        question: HTML+CSS：移动端页面在手机上缩放异常最常见原因？
+        options:
+          - JS 错误
+          - "缺少 <meta name=\"viewport\" content=\"width=device-width\">"
+          - CSS 太多
+          - 图片太大
+        answer: 1
+        explanation: viewport meta 标签告诉手机浏览器按设备宽度渲染页面并禁止默认缩放。
+      - id: 161
+        difficulty: 3
+        question: "JS：querySelector(\".card\")返回 null 最可能原因？"
+        options:
+          - CSS 没加载
+          - JS 在 DOM 之前执行或选择器写错
+          - 浏览器不支持
+          - HTML 错误
+        answer: 1
+        explanation: JS 在 DOM 元素创建前执行→找不到。解法：script 放 body 底部或用 DOMContentLoaded 事件。
+      - id: 162
+        difficulty: 3
+        question: "JS：addEventListener(\"click\",handler)→点击没反应可能原因？"
+        options:
+          - 元素未创建时绑事件
+          - "事件名拼错(如\"clik\")或 handler 未定义"
+          - 绑定在了父元素上
+          - 以上都可能
+        answer: 3
+        explanation: 三个都可能。检查：元素存在？名字拼对？函数定义了？控制台有报错吗？
+      - id: 163
+        difficulty: 3
+        question: "JS：innerHTML+=\"<div>新内容</div>\"有什么隐藏问题？"
+        options:
+          - 没有
+          - 已有元素的绑定事件和状态会被重置
+          - 更快
+          - 不会添加内容
+        answer: 1
+        explanation: innerHTML+=会重新解析整个 HTML→已有元素被重建→之前绑的事件丢失。用 createElement+appendChild 保护已有状态。
+      - id: 164
+        difficulty: 3
+        question: "JS：[1,2,3,4,5]中筛选>2且×2→结果？"
+        options:
+          - "[3,4,5]"
+          - "[6,8,10]"
+          - 报错
+          - "[6,8]"
+        answer: 1
+        explanation: "[1,2,3,4,5].filter(x=>x>2)得[3,4,5]→.map(x=>x*2)得[6,8,10]。方法链！"
+      - id: 165
+        difficulty: 3
+        question: HTML+CSS+JS 综合：一个按钮点击应变色但没变→从哪里开始排查？
+        options:
+          - 重写代码
+          - F12 控制台看报错→检查元素是否被选中→检查事件是否绑定→检查 CSS 是否正确
+          - 换浏览器
+          - 重启电脑
+        answer: 1
+        explanation: 调试流程：1.控制台报错？2.querySelector 拿到了元素？3.addEventListener 执行了？4.CSS 选择器权重够吗？
+      - id: 166
+        difficulty: 3
+        question: HTML+CSS+JS 综合：表单提交不刷新页面用什么？
+        options:
+          - "action=\"#\""
+          - e.preventDefault()阻止默认提交
+          - "method=\"POST\""
+          - 无法阻止
+        answer: 1
+        explanation: 监听 form 的 submit 事件调用 e.preventDefault()阻止浏览器默认刷新行为。然后用 JS/fetch 自己处理数据。
+      - id: 167
+        difficulty: 3
+        question: HTML+CSS+JS 综合：从 API 获取数据渲染列表→数据格式不是预期→怎么调试？
+        options:
+          - 换 API
+          - console.log(data)查看实际结构→根据结构调整代码
+          - 放弃
+          - 猜结构
+        answer: 1
+        explanation: 先打印数据看实际结构→根据结构写对应代码。API 返回格式经常与预期不同看文档或打印确认。
+      - id: 168
+        difficulty: 3
+        question: HTML+CSS+JS 综合：以下关于前端三件套说法哪个正确？
+        options:
+          - JS 可以替代 HTML
+          - HTML 负责结构 CSS 负责样式 JS 负责交互，三者各司其职
+          - CSS 可以替代 JS
+          - HTML 可以替代 CSS
+        answer: 1
+        explanation: HTML=骨架，CSS=皮肤，JS=肌肉。三者各有职责不可互相替代。
+      - id: 169
+        difficulty: 3
+        question: "HTML+CSS+JS 综合：以下哪项属于\"语义化\"的最佳实践？"
+        options:
+          - 全部用 div
+          - header/nav/main/footer 等有含义标签+正确的 heading 层级+alt 属性
+          - 只用 span
+          - 语义化不重要
+        answer: 1
+        explanation: 语义化=用有含义的标签和属性让机器(搜索引擎屏幕阅读器)理解页面结构。不只对 SEO 有用对无障碍也重要。
+      - id: 170
+        difficulty: 3
+        question: HTML+CSS+JS 综合：以下关于响应式设计的说法哪个正确？
+        options:
+          - 只做手机版
+          - "同一套 HTML 通过 CSS @media 适配不同屏幕+弹性单位+灵活布局"
+          - 为每种设备各写一套 HTML
+          - 响应式=自适应
+        answer: 1
+        explanation: 响应式=同一套 HTML 通过 CSS 媒体查询和弹性单位在不同屏幕呈现合适布局。不是为每种设备写一套 HTML。
+

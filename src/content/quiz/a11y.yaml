@@ -1,0 +1,178 @@
+# 无障碍宝石
+
+gem:
+  id: a11y
+  name: 无障碍宝石
+  icon: ♿
+  achievement: senior
+  order: 18
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 60
+    name: WCAG 概念
+    questions:
+      - id: 370
+        difficulty: 1
+        question: WCAG 四原则？
+        options:
+          - 快/好/省/美
+          - 可感知/可操作/可理解/健壮(POUR)
+          - 加载/渲染/交互/反馈
+          - 设计/开发/测试/部署
+        answer: 1
+        explanation: Perceivable 可感知(能被看到听到)。Operable 可操作(键盘可用)。Understandable 可理解。Robust 健壮(兼容各种设备)。
+      - id: 371
+        difficulty: 1
+        question: alt 属性对无障碍的重要性？
+        options:
+          - 不重要
+          - "屏幕阅读器读出 alt 文字让视障用户\"看到\"图片。没有 alt→用户不知道图片内容"
+          - 只影响 SEO
+          - 只装饰图片需要
+        answer: 1
+        explanation: "alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\"\"让阅读器跳过。"
+      - id: 372
+        difficulty: 1
+        question: 键盘导航为什么重要？
+        options:
+          - 不重要
+          - 运动障碍用户无法用鼠标只能键盘操作。所有交互元素应可通过 Tab 访问 Enter/Space 激活
+          - 只有高级用户用键盘
+          - 键盘太慢
+        answer: 1
+        explanation: 许多用户依赖键盘(运动障碍/视障/习惯)。确保所有可交互元素可通过 Tab 键到达并可通过键盘操作(Enter/Esc/方向键)。
+
+  - level: 2
+    type: elite
+    threshold: 60
+    name: ARIA 与语义
+    questions:
+      - id: 373
+        difficulty: 2
+        question: 语义化 HTML 如何帮助无障碍？
+        options:
+          - 无帮助
+          - 原生语义标签(button/input/a)自带键盘交互和 ARIA 角色。用 div 模拟按钮需手动加所有功能
+          - 只帮助 SEO
+          - 语义化过时
+        answer: 1
+        explanation: "<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\"...\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。"
+      - id: 374
+        difficulty: 2
+        question: ARIA 的作用？什么时候需要？
+        options:
+          - 替代 HTML
+          - "当 HTML 原生语义不够用时补充无障碍信息。如 role=\"tab\" aria-selected=\"true\"。能用原生就不用 ARIA"
+          - 不需要
+          - 总需要
+        answer: 1
+        explanation: ARIA 补充 HTML 语义不足。但能用原生 HTML 标签就不用 ARIA。错误 ARIA 比没有更差。第一条 ARIA 规则：不用 ARIA 当 HTML 已够用。
+      - id: 375
+        difficulty: 2
+        question: 颜色对比度标准？
+        options:
+          - 无所谓
+          - "WCAG AA:正文 4.5:1 大文字 3:1。WCAG AAA:7:1。可用 Chrome DevTools 检查对比度"
+          - 只影响美观
+          - 越鲜艳越好
+        answer: 1
+        explanation: 对比度不够→低视力用户看不清文字。浅灰文字在白色背景上→对比度可能不及格。工具：Chrome DevTools 颜色选择器显示对比度分数。
+      - id: 376
+        difficulty: 2
+        question: focus 样式为什么不能去掉？
+        options:
+          - "可以去掉:focus{outline:none}"
+          - 键盘用户靠 focus 指示器知道当前位置。去掉→键盘用户不知道该操作哪个元素
+          - focus 不好看
+          - 去掉提升美观
+        answer: 1
+        explanation: "永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。"
+      - id: 377
+        difficulty: 2
+        question: aria-label 和 aria-labelledby 区别？
+        options:
+          - 完全相同
+          - aria-label=直接用字符串提供标签。aria-labelledby=引用其他元素 ID 作为标签
+          - aria-labelledby 更快
+          - aria-label 已废弃
+        answer: 1
+        explanation: "aria-label=\"关闭\"直接在元素上设标签。aria-labelledby=\"id1\"引用页面已有元素的内容作为标签(避免重复文本)。"
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 实践检测
+    questions:
+      - id: 378
+        difficulty: 3
+        question: "以下 tab 顺序有问题吗？`<input><button style=\"position:absolute;left:-999px\">隐藏</button><input>`"
+        options:
+          - 没问题
+          - "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\"消失了\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)"
+          - 隐藏元素自动跳过
+          - "position:absolute 自动移除"
+        answer: 1
+        explanation: "视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。"
+      - id: 379
+        difficulty: 3
+        question: 动态内容更新(如 AJAX 加载)如何让屏幕阅读器知晓？
+        options:
+          - 自动知晓
+          - "用 aria-live 区域(如 aria-live=\"polite\")播报内容变化。重要消息用 assertive"
+          - 刷新页面
+          - 不需要通知
+        answer: 1
+        explanation: 屏幕阅读器不会自动感知动态内容变化。用 aria-live 属性让浏览器在指定区域内容变化时通知阅读器。polite=等当前操作完成播报。
+      - id: 380
+        difficulty: 3
+        question: 以下 modal 对话框缺少什么无障碍特性？
+        options:
+          - 不缺
+          - "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\"true\"；body 滚动锁定"
+          - 只需 ESC
+          - 只需关闭按钮
+        answer: 1
+        explanation: 完整 modal 无障碍：1.焦点陷阱(Tab 在 modal 内循环)2.ESC 关闭 3.aria-modal 标识 4.背景不可滚动 5.关闭后焦点回到触发元素。
+      - id: 381
+        difficulty: 3
+        question: 表单错误信息如何让屏幕阅读器感知？
+        options:
+          - 只显示红色
+          - "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\"alert\""
+          - 不需要
+          - 颜色区分即可
+        answer: 1
+        explanation: "仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\"true\"标记无效输入。role=\"alert\"自动播报。"
+      - id: 382
+        difficulty: 3
+        question: 前端无障碍检查清单(简版)？
+        options:
+          - 不管
+          - 1.语义标签 2.图片 alt 3.键盘可操作 4.focus 可见 5.颜色对比度 6.表单标签关联 7.ARIA 正确使用 8.动态内容 aria-live
+          - 无障碍不重要
+          - 只需测 Chrome
+        answer: 1
+        explanation: 8 项快速检查：正确的 HTML 标签→图片有 alt→键盘可操作→focus 可见→颜色对比够→表单 label 关联→ARIA 不过度→动态内容可感知。
+      - id: 383
+        difficulty: 3
+        question: 使用 icon font 图标需要注意什么无障碍问题？
+        options:
+          - 没问题
+          - 纯图标按钮没有文字→屏幕阅读器不知道这是什么。给图标加 aria-label 或放入隐藏文字
+          - 图标自动可访问
+          - 不需要处理
+        answer: 1
+        explanation: "<button><i class=\"icon-close\"></i></button>→阅读器读出\"按钮\"但不知道做什么。加 aria-label=\"关闭\"或用 visually-hidden 文字。"
+      - id: 384
+        difficulty: 3
+        question: 无障碍(ARIA)的第一条规则？
+        options:
+          - 总用 ARIA
+          - 不要使用 ARIA 如果能用原生 HTML 替代。错误 ARIA 比没有更差
+          - ARIA 总是好的
+          - ARIA 已废弃
+        answer: 1
+        explanation: "ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\"button\"好一万倍。滥用 ARIA 降低可访问性。"
+

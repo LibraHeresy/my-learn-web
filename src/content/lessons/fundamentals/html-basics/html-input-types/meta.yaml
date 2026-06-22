@@ -1,0 +1,9 @@
+id: html-input-types
+title: "更多输入类型 — 表单的\"乐器编配\""
+track: fundamentals
+chapter: html-basics
+order: 11
+mode: sandbox
+musicAnalogy: "`<input>` 不止能输入文字——就像乐团不只是弦乐。`type=\"radio\"` 像**单选问答**（只有一个正确答案），`type=\"checkbox\"` 像**多选编配**（可以同时选弦乐和管乐），`type=\"range\"` 像**滑音控制**（连续变化的数值）。每个 input 类型都是乐队中的一种\"声部\"，组合使用才能构成完整的音乐表单。"
+listenTo: "拉威尔《波莱罗》配器分析 — 整部作品用不同乐器依次演奏同一旋律（每种乐器就是一种 input 类型），从长笛到单簧管到巴松管到萨克斯，每一种\"输入方式\"都给主题带来新的色彩。"
+estimatedMinutes: 0

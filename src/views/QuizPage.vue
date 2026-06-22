@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useQuizStore } from '../stores/quiz'
-import { gems, type QuizQuestion, type GemDef } from '../configs/quiz-questions'
+import { getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
+const gems = getGems()
 
 const store = useQuizStore()
 

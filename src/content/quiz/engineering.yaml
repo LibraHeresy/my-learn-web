@@ -1,0 +1,228 @@
+# 工程化宝石
+
+gem:
+  id: engineering
+  name: 工程化宝石
+  icon: 🏗️
+  achievement: mid
+  order: 9
+
+levels:
+  - level: 1
+    type: normal
+    threshold: 70
+    name: 工具认知
+    questions:
+      - id: 196
+        difficulty: 1
+        question: Node.js 是什么？
+        options:
+          - 浏览器插件
+          - 让 JS 脱离浏览器在电脑上独立运行的环境
+          - JS 框架
+          - 数据库
+        answer: 1
+        explanation: Node.js 是 JS 运行环境使 JS 可在服务器/本地运行不依赖浏览器。有了它才能用 npm/Vite。
+      - id: 197
+        difficulty: 1
+        question: npm 全称和作用？
+        options:
+          - Node Package Manager 管理 JS 包的下载依赖
+          - New Project Maker
+          - Network Protocol
+          - Node Program
+        answer: 0
+        explanation: npm 用来安装第三方包管理项目依赖运行脚本。
+      - id: 198
+        difficulty: 1
+        question: import/export 作用？
+        options:
+          - 装饰代码
+          - 模块化：拆分代码到不同文件通过 import 引入 export 导出
+          - 提升性能
+          - 语法糖
+        answer: 1
+        explanation: ES6 模块系统。export 导出供其他文件使用 import 引入其他文件的导出。
+      - id: 199
+        difficulty: 1
+        question: Git 是什么？
+        options:
+          - 代码编辑器
+          - 分布式版本控制系统记录代码修改历史
+          - 编程语言
+          - 部署工具
+        answer: 1
+        explanation: Git 记录代码每次修改可随时回到历史版本。是程序员的基本工具。
+      - id: 200
+        difficulty: 1
+        question: npm run dev 和 npm run build 区别？
+        options:
+          - 相同
+          - dev 启动开发服务器(热更新不压缩)，build 生产构建(压缩优化)
+          - build 更快
+          - dev 已废弃
+        answer: 1
+        explanation: dev=开发模式(热更新不压缩方便调试)。build=生产构建(压缩 tree-shaking 输出到 dist)。
+
+  - level: 2
+    type: elite
+    threshold: 70
+    name: 模块与包
+    questions:
+      - id: 201
+        difficulty: 2
+        question: npm install 做了什么？
+        options:
+          - 删除 node_modules
+          - 读取 package.json 下载所有依赖到 node_modules
+          - 发布项目
+          - 初始化 Git
+        answer: 1
+        explanation: npm install 根据 package.json 中的 dependencies 和 devDependencies 从 npm 仓库下载包。
+      - id: 202
+        difficulty: 2
+        question: dependencies 和 devDependencies 区别？
+        options:
+          - 相同
+          - dependencies=运行时需要；devDependencies=只开发时需要(如 Vite)
+          - dev 更快
+          - dependencies 已废弃
+        answer: 1
+        explanation: dependencies：项目运行时必需的包(如 Vue)。devDependencies：只开发时需要(如 Vite/ESLint 构建工具)。
+      - id: 203
+        difficulty: 2
+        question: ES6 import 和 CommonJS require 区别？
+        options:
+          - 完全相同
+          - import 静态编译时加载可 tree-shaking；require 运行时动态加载
+          - require 更新
+          - import 已废弃
+        answer: 1
+        explanation: import 是 ES6 标准编译时确定依赖支持 tree-shaking。require 是 Node 传统方式运行时加载。
+      - id: 204
+        difficulty: 2
+        question: git add/commit/push 各做什么？
+        options:
+          - add=保存 commit=上传 push=删除
+          - add=暂存到Stage commit=提交到本地仓库 push=推送到远程
+          - 全部上传
+          - add 是 commit 的别名
+        answer: 1
+        explanation: add→暂存区(Stage)。commit→本地仓库记录快照。push→推送到远程(GitHub)。
+      - id: 205
+        difficulty: 2
+        question: .gitignore 作用？node_modules 该在里面吗？
+        options:
+          - 记录 Git 配置
+          - 指定不纳入版本控制的文件。node_modules 必须加进去
+          - 记录依赖
+          - 不重要的文件
+        answer: 1
+        explanation: node_modules 体积大且可通过 npm install 还原→不应提交到 Git。必须写入.gitignore。
+      - id: 206
+        difficulty: 2
+        question: 默认导出 vs 命名导出区别？
+        options:
+          - 相同
+          - "默认导出 import xx from；命名导出 import{xx}from。一个模块可多个命名导出但只能一个默认导出"
+          - 默认导出更多
+          - 命名导出已废弃
+        answer: 1
+        explanation: "export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。"
+      - id: 207
+        difficulty: 2
+        question: Git branch 的作用？
+        options:
+          - 备份文件
+          - 创建独立开发线不影响主线可并行开发后合并
+          - 删除文件
+          - 替代 commit
+        answer: 1
+        explanation: 分支=代码的独立开发线。在主分支外创建分支开发新功能不影响主线完成后合并(merge)回去。
+
+  - level: 3
+    type: boss
+    threshold: 60
+    name: 工作流实战
+    questions:
+      - id: 208
+        difficulty: 3
+        question: git pull 和 git fetch 区别？
+        options:
+          - 相同
+          - pull=fetch+merge(拉取并合并)；fetch 只拉取不合并
+          - fetch 更强
+          - pull 已废弃
+        answer: 1
+        explanation: fetch 从远程下载最新代码但不修改本地工作区。pull=fetch+merge 一步完成可能产生冲突。
+      - id: 209
+        difficulty: 3
+        question: npm install -g 和普通 install 区别？
+        options:
+          - 完全相同
+          - -g=全局安装(命令行工具如 create-vite)可在任何目录使用
+          - -g 更快
+          - -g 已废弃
+        answer: 1
+        explanation: 普通安装→当前项目 node_modules。-g 全局安装→系统级供命令行直接调用。
+      - id: 210
+        difficulty: 3
+        question: Vite 做了什么？和直接打开 .html 文件有什么区别？
+        options:
+          - 无区别
+          - Vite 提供开发服务器+模块热更新+打包。直接打开文件无法用 import/处理路径
+          - Vite 只是打包工具
+          - Vite 代替浏览器
+        answer: 1
+        explanation: Vite 开发服务器处理模块解析/HMR/TypeScript 编译。直接打开 .html 无法用 import 模块。
+      - id: 211
+        difficulty: 3
+        question: tree-shaking 是什么？前提条件？
+        options:
+          - 删除文件
+          - 打包时移除未使用的代码。需要 ES6 模块(静态分析)
+          - 压缩图片
+          - 优化 CSS
+        answer: 1
+        explanation: 构建工具分析 import/export 静态依赖移除未被引用的代码减小包体积。前提是 ES6 模块(编译时确定依赖)。
+      - id: 212
+        difficulty: 3
+        question: 合并冲突(merge conflict)怎么处理？
+        options:
+          - 忽略
+          - 手动编辑冲突文件选择保留哪部分→标记已解决→commit
+          - 自动解决
+          - 删除文件重来
+        answer: 1
+        explanation: "Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。"
+      - id: 213
+        difficulty: 3
+        question: 部署到 GitHub Pages 基本流程？
+        options:
+          - 复制粘贴文件
+          - npm run build→配置 base→推送 gh-pages 分支或设置 GitHub Actions
+          - 直接上传 HTML
+          - 自动部署
+        answer: 1
+        explanation: 1.设 base 路径 2.npm run build 3.将 dist 推送到 gh-pages 分支 4.GitHub Settings 开启 Pages。
+      - id: 214
+        difficulty: 3
+        question: npx 和 npm 的区别？
+        options:
+          - 完全相同
+          - npx 可直接运行 npm 包中的命令不必全局安装
+          - npx 更快
+          - npx 已废弃
+        answer: 1
+        explanation: npm 安装包。npx 临时执行包中的命令(如 npx create-vite)不必先全局安装。
+      - id: 215
+        difficulty: 2
+        question: package.json 的 scripts 字段做什么？
+        options:
+          - 记录作者信息
+          - 定义可通过 npm run 执行的快捷命令
+          - 存储配置
+          - 已废弃
+        answer: 1
+        explanation: "scripts 定义项目常用命令如\"dev\":\"vite\"→npm run dev 执行 vite。可自定义任意脚本。"
+

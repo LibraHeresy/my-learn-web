@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { projects } from '../configs/projects'
+import { getAllProjectsV2, getProjectV2 } from '../content-loaders/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { parseInline, parseContent } from '../utils/markdown'
 import type { UserCode } from '../types'
+import type { CompiledProject } from '../content-runtime/types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
@@ -15,20 +16,22 @@ const route = useRoute()
 const router = useRouter()
 
 const projectId = computed(() => route.params.projectId as string)
-const project = computed(() => projects.find(p => p.id === projectId.value))
+const project = ref<CompiledProject | null>(null)
+const projectLoading = ref(true)
+const projectError = ref<unknown>(null)
+const projectState = computed(() => ({
+  value: project.value,
+  loading: projectLoading.value,
+  error: projectError.value,
+}))
+const allProjects = computed(() => getAllProjectsV2())
 
 const currentStep = ref(0)
-const contentPanelRef = ref<HTMLElement | null>(null)
-
-// 切换步骤时自动回到内容区顶部
 watch(currentStep, () => {
   nextTick(() => {
-    const el = contentPanelRef.value
-    if (el) {
-      // 优先找内部滚动容器 .step-body，找不到则用面板本身
-      const scrollEl = el.querySelector('.step-body') || el
-      scrollEl.scrollTop = 0
-    }
+    if (!playerMainRef.value) return
+    const scrollEl = playerMainRef.value.querySelector('.step-body') || playerMainRef.value.querySelector('.panel-content')
+    if (scrollEl) (scrollEl as HTMLElement).scrollTop = 0
   })
 })
 
@@ -47,35 +50,45 @@ function loadStepCode(stepIndex: number) {
   triggerPreview()
 }
 
-watch(projectId, (id) => {
-  const p = projects.find(p => p.id === id)
-  if (p) {
+watch(
+  projectId,
+  async (id) => {
+    projectLoading.value = true
+    projectError.value = null
+    project.value = null
     currentStep.value = 0
-    loadStepCode(0)
-  }
-}, { immediate: true })
+
+    try {
+      project.value = await getProjectV2(id)
+    } catch (e) {
+      projectError.value = e
+      project.value = null
+    } finally {
+      projectLoading.value = false
+    }
+
+    if (project.value?.steps?.length) {
+      loadStepCode(0)
+    } else {
+      userCode.value = { ...emptyCode }
+    }
+  },
+  { immediate: true },
+)
 
 function onCodeChange(code: UserCode) {
   userCode.value = code
 }
 
 const totalSteps = computed(() => project.value?.steps.length || 0)
+const currentStepData = computed(() => project.value?.steps[currentStep.value] || null)
 
-const currentStepData = computed(() => {
-  const p = project.value
-  if (!p) return null
-  return p.steps[currentStep.value] || null
-})
-
-// 登台篇项目使用 local 模式——不显示编辑器/预览，引导学习者在本地 IDE 操作
-const isLocalMode = computed(() => project.value?.mode === 'local')
-
+const isLocalMode = computed(() => project.value?.meta.mode === 'local')
 const hasCode = computed(() => {
   const code = currentStepData.value?.starterCode
   if (!code) return false
   return code.html !== '' || code.css !== '' || code.js !== ''
 })
-
 const showEditor = computed(() => !isLocalMode.value && hasCode.value)
 
 function goToStep(index: number) {
@@ -88,38 +101,25 @@ function goHome() {
   router.push('/')
 }
 
-// 项目间导航
-const currentProjectIndex = computed(() =>
-  projects.findIndex(p => p.id === projectId.value)
-)
-const prevProject = computed(() =>
-  currentProjectIndex.value > 0 ? projects[currentProjectIndex.value - 1] : null
-)
-const nextProject = computed(() =>
-  currentProjectIndex.value < projects.length - 1 ? projects[currentProjectIndex.value + 1] : null
-)
+const orderedProjects = computed(() => allProjects.value.slice().sort((a, b) => a.meta.order - b.meta.order))
+const currentProjectIndex = computed(() => orderedProjects.value.findIndex((p) => p.id === projectId.value))
+const prevProject = computed(() => currentProjectIndex.value > 0 ? orderedProjects.value[currentProjectIndex.value - 1] : null)
+const nextProject = computed(() => currentProjectIndex.value >= 0 && currentProjectIndex.value < orderedProjects.value.length - 1 ? orderedProjects.value[currentProjectIndex.value + 1] : null)
 
 const isFirstStep = computed(() => currentStep.value === 0)
 const isLastStep = computed(() => currentStep.value >= totalSteps.value - 1)
 
-const prevLabel = computed(() => {
-  if (isFirstStep.value && prevProject.value) return '上个项目'
-  return '上一步'
-})
-
-const nextLabel = computed(() => {
-  if (isLastStep.value && nextProject.value) return '下个项目'
-  return '下一步'
-})
+const prevLabel = computed(() => (isFirstStep.value && prevProject.value) ? '上个项目' : '上一步')
+const nextLabel = computed(() => (isLastStep.value && nextProject.value) ? '下个项目' : '下一步')
 
 const prevNavTitle = computed(() => {
-  if (isFirstStep.value && prevProject.value) return prevProject.value.title
+  if (isFirstStep.value && prevProject.value) return prevProject.value.meta.title
   if (!isFirstStep.value) return project.value?.steps[currentStep.value - 1]?.title ?? ''
   return ''
 })
 
 const nextNavTitle = computed(() => {
-  if (isLastStep.value && nextProject.value) return nextProject.value.title
+  if (isLastStep.value && nextProject.value) return nextProject.value.meta.title
   if (!isLastStep.value) return project.value?.steps[currentStep.value + 1]?.title ?? ''
   return ''
 })
@@ -140,86 +140,85 @@ function goFooterNext() {
   }
 }
 
-
-// ===== 面板拖动缩放 =====
-const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-panel-widths', 1)
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-project-panel-widths', 2)
 </script>
 
 <template>
   <div class="project-player">
-    <!-- 顶栏：步骤指示器 -->
     <div class="project-header">
       <button class="back-btn" @click="goHome" title="返回首页">← 返回</button>
       <div class="project-header-center">
-        <span class="project-header-title">{{ project?.title }}</span>
+        <span class="project-header-title">{{ project?.meta.title }}</span>
         <span class="project-header-step">第 {{ currentStep + 1 }}/{{ totalSteps }} 步</span>
       </div>
       <div class="step-dots">
         <button
-          v-for="(_, i) in totalSteps"
-          :key="i"
-          :class="['step-dot', {
-            active: i === currentStep,
-            done: i < currentStep
-          }]"
-          @click="goToStep(i)"
-          :title="project?.steps[i]?.title"
+          v-for="stepNumber in totalSteps"
+          :key="stepNumber"
+          :class="[
+            'step-dot',
+            {
+              active: stepNumber - 1 === currentStep,
+              done: stepNumber - 1 < currentStep,
+            },
+          ]"
+          @click="goToStep(stepNumber - 1)"
+          :title="project?.steps[stepNumber - 1]?.title"
         >
-          {{ i < currentStep ? '✓' : i + 1 }}
+          {{ stepNumber - 1 < currentStep ? '✓' : stepNumber }}
         </button>
       </div>
     </div>
 
-    <!-- 主面板 -->
+    <div v-if="projectState.loading" class="project-not-found">
+      <p>加载中…</p>
+    </div>
+    <div v-else-if="projectState.error" class="project-not-found">
+      <p>加载失败</p>
+      <button @click="router.push('/')">返回首页</button>
+    </div>
+
     <div
-      v-if="project && currentStepData"
+      v-else-if="project && currentStepData"
       ref="playerMainRef"
       :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode, 'no-code': !hasCode }]"
     >
-      <!-- 左面板：步骤指引 -->
       <div
-        ref="contentPanelRef"
         class="panel-content"
         :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
         <Transition name="slide-fade" mode="out-in">
           <div :key="currentStep" class="step-panel">
             <div class="step-body">
-            <h3 class="step-title">{{ currentStepData.title }}</h3>
-            <div class="step-content" v-html="parseContent(currentStepData.content)" />
-            <div class="step-task">
-              <span class="step-task-label">你的任务</span>
-              <p v-html="parseInline(currentStepData.task)" />
-            </div>
-            <div v-if="currentStepData.purpose" class="purpose-box">
-              <span class="purpose-label">这一步的目的</span>
-              <div class="purpose-content" v-html="parseContent(currentStepData.purpose)" />
-            </div>
-            <div v-if="currentStepData.expectedResult" class="expected-box">
-              <span class="expected-label">完成后你应该看到</span>
-              <div class="expected-content" v-html="parseContent(currentStepData.expectedResult)" />
-            </div>
-            <div v-if="currentStepData.hint" class="step-hint-wrap">
-              <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
-                💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
-              </button>
-              <p v-if="hintExpanded" class="step-hint" v-html="parseInline(currentStepData.hint)" />
+              <h3 class="step-title">{{ currentStepData.title }}</h3>
+              <div class="step-content" v-html="parseContent(currentStepData.content)" />
+              <div class="step-task">
+                <span class="step-task-label">你的任务</span>
+                <p v-html="parseInline(currentStepData.task)" />
+              </div>
+              <div v-if="currentStepData.purpose" class="purpose-box">
+                <span class="purpose-label">这一步的目的</span>
+                <div class="purpose-content" v-html="parseContent(currentStepData.purpose)" />
+              </div>
+              <div v-if="currentStepData.expectedResult" class="expected-box">
+                <span class="expected-label">完成后你应该看到</span>
+                <div class="expected-content" v-html="parseContent(currentStepData.expectedResult)" />
+              </div>
+              <div v-if="currentStepData.hint" class="step-hint-wrap">
+                <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
+                  💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
+                </button>
+                <p v-if="hintExpanded" class="step-hint" v-html="parseInline(currentStepData.hint)" />
+              </div>
             </div>
           </div>
-
-        </div>
         </Transition>
       </div>
 
       <template v-if="showEditor">
-        <!-- 分隔线 1：内容 ↔ 编辑器 -->
         <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
 
-        <!-- 中面板：代码编辑器 -->
-        <div
-          class="panel-editor"
-          :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
-        >
+        <div class="panel-editor" :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }">
           <CodeEditor
             :key="projectId + '-' + currentStep"
             :model-value="userCode"
@@ -228,35 +227,29 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
           />
         </div>
 
-        <!-- 分隔线 2：编辑器 ↔ 预览 -->
         <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
 
-        <!-- 右面板：实时预览 -->
-        <div
-          class="panel-preview"
-          :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
-        >
+        <div class="panel-preview" :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }">
           <LivePreview :srcdoc="previewSrc" />
         </div>
       </template>
     </div>
 
-    <!-- 项目未找到 -->
     <div v-else class="project-not-found">
       <p>项目未找到</p>
-      <button @click="goHome">返回首页</button>
+      <button @click="router.push('/')">返回首页</button>
     </div>
 
-    <!-- 底部导航 -->
     <PlayerFooter
       v-if="project"
       :prev-label="prevLabel"
       :next-label="nextLabel"
       :prev-nav-title="prevNavTitle"
       :next-nav-title="nextNavTitle"
-      :prev-disabled="isFirstStep && !prevProject"
-      :next-disabled="isLastStep && !nextProject"
-      :center-label="'步骤 ' + (currentStep + 1) + ' / ' + totalSteps"
+      :prev-disabled="!prevProject && isFirstStep"
+      :next-disabled="!nextProject && isLastStep"
+      :center-label="`第 ${currentStep + 1}/${totalSteps} 步`"
+      :show-complete="false"
       @prev="goFooterPrev"
       @next="goFooterNext"
     />
@@ -405,6 +398,8 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
 .step-body {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
   padding: var(--sp-4);
 }
 
@@ -421,6 +416,13 @@ const { panelWidths, dragging, startDrag } = usePanelResize('code-score-project-
   line-height: 1.8;
   color: var(--color-text);
   margin-bottom: var(--sp-4);
+  overflow-wrap: break-word;
+}
+
+:deep(.step-content pre) {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 :deep(.step-content strong) {

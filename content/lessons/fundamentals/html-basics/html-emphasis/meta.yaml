@@ -1,9 +1,0 @@
-id: html-emphasis
-title: 文本与强调 — 描述你的音乐故事
-track: fundamentals
-chapter: html-basics
-order: 4
-mode: sandbox
-musicAnalogy: `<strong>` 标签像乐谱中的**强音记号（f）**，强调重要内容；`<em>` 像**连音线**，让文字更富感情。
-listenTo: 贝多芬《第五交响曲》第一乐章 — 感受强弱对比带来的戏剧性，就像文字中的强调与语气。
-estimatedMinutes: 0

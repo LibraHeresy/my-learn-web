@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, defineComponent, h } from 'vue'
 import { parseInlineTokens } from './text'
-import { getGlossaryEntry } from '../../content-v2/glossary'
+import { getGlossaryEntry } from '../../content-loaders/glossary'
 import TermTip from './TermTip.vue'
 
 const props = defineProps<{
