@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, computed } from 'vue'
-import { chaptersV2 } from '../content-loaders/taxonomy'
+import { chapters } from '../content-loaders/taxonomy'
 import { useProgressStore } from '../stores/progress'
 import type { CompiledLesson } from '../content-runtime/types'
 
@@ -23,7 +23,7 @@ const emit = defineEmits<{
 }>()
 
 const progressStore = useProgressStore()
-const chapterMap = computed(() => new Map(chaptersV2.map((c) => [c.id, c])))
+const chapterMap = computed(() => new Map(chapters.map((c) => [c.id, c])))
 
 const filteredLessons = computed(() =>
   props.lessons
@@ -37,8 +37,8 @@ const visibleChapters = computed(() => {
   const ordered = chapterIds
     .slice()
     .sort((a, b) => {
-      const ai = chaptersV2.findIndex((c) => c.id === a)
-      const bi = chaptersV2.findIndex((c) => c.id === b)
+      const ai = chapters.findIndex((c) => c.id === a)
+      const bi = chapters.findIndex((c) => c.id === b)
       return (ai === -1 ? Number.MAX_SAFE_INTEGER : ai) - (bi === -1 ? Number.MAX_SAFE_INTEGER : bi)
     })
   return ordered.map((id) => {

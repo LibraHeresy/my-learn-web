@@ -12,12 +12,12 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 </script>
 
 <template>
-  <section class="explain-block">
-    <h3 v-if="typeof node.attrs?.title === 'string'" class="block-title">{{ node.attrs.title }}</h3>
+  <section class="hint-block">
+    <h4 v-if="typeof node.attrs?.title === 'string'" class="hint-title">💡 {{ node.attrs.title }}</h4>
     <template v-for="(seg, i) in segments" :key="i">
       <pre v-if="seg.type === 'code'" class="code-block"><code :class="`language-${seg.language}`" v-text="seg.code" /></pre>
       <hr v-else-if="seg.type === 'hr'" class="block-hr" />
-      <p v-else class="block-text">
+      <p v-else class="hint-text">
         <InlineText :text="seg.text" />
       </p>
     </template>
@@ -25,38 +25,41 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 </template>
 
 <style scoped>
-.explain-block {
+.hint-block {
+  padding: var(--sp-3) var(--sp-4);
+  background: #fef9e7;
+  border: 1px solid #f0d77b;
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-2);
+  gap: var(--sp-1);
 }
 
-.block-title {
-  font-size: var(--fs-base);
-  color: var(--color-accent);
-  padding-bottom: var(--sp-1);
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.block-text {
+.hint-title {
   font-size: var(--fs-sm);
-  line-height: 1.8;
-  color: var(--color-text);
+  font-weight: 600;
+  color: #8b7d3c;
+  margin: 0;
+}
+
+.hint-text {
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--color-text-light);
 }
 
 .code-block {
   margin: 0;
-  padding: var(--sp-3);
-  border-radius: var(--radius-md);
-  background: var(--color-editor-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.04);
   overflow-x: auto;
 }
 
 .code-block code {
   font-family: var(--font-code);
-  font-size: var(--fs-xs);
-  color: var(--color-editor-text);
+  font-size: 0.9em;
+  color: var(--color-text);
   white-space: pre;
 .block-hr {
   border: none;

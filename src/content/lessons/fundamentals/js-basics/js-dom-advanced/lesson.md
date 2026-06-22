@@ -43,16 +43,18 @@ function removeLast() {
 下面的代码有一个输入框和`添加`"删除最后"两个按钮，可以动态维护一张练琴计划列表：
 ```js
 function addItem() {
+  // createElement：创建一个新的 HTML 元素
   let item = document.createElement("div");
-  item.className = "plan-item";
-  item.textContent = input.value;
-  list.appendChild(item);
-  input.value = "";
+  item.className = "plan-item";       // 给它加 CSS 类名
+  item.textContent = input.value;     // 设置它的文字内容
+  list.appendChild(item);             // appendChild：把新元素加到页面上
+  input.value = "";                   // 清空输入框
 }
 function removeLast() {
+  // querySelectorAll：找到所有匹配的元素，返回一个列表
   let items = document.querySelectorAll(".plan-item");
-  let last = items[items.length - 1];
-  if (last) last.remove();
+  let last = items[items.length - 1]; // 取最后一个
+  if (last) last.remove();            // remove()：从页面上删除这个元素
 }
 ```
 切换到预览区，输入内容点添加，再点删除试试——页面元素在动态变化！

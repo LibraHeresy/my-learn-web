@@ -130,7 +130,7 @@ export const useQuizStore = defineStore('quiz', () => {
   })
 
   return {
-    data, gems, quizQuestions, wrongCount, overallAccuracy,
+    data, wrongCount, overallAccuracy,
     juniorProgress, juniorTotal, juniorAchievement,
     midProgress, midTotal, midAchievement,
     seniorProgress, seniorTotal, seniorAchievement,

@@ -80,7 +80,7 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 
 .code-block code {
   font-family: var(--font-code);
-  font-size: 0.95em;
+  font-size: var(--fs-xs);
   color: var(--color-editor-text);
   white-space: pre;
 }

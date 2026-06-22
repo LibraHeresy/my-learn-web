@@ -32,13 +32,13 @@ div {
 下面的代码创建了一张"作曲家卡片"，有暖色背景、细边框和圆角：
 ```css
 .card {
-  background-color: #FFFAF2;
-  border: 2px solid #D4C5A9;
-  border-radius: 12px;
-  padding: 20px;
+  background-color: #FFFAF2; /* 背景色：暖白，像旧乐谱的颜色 */
+  border: 2px solid #D4C5A9; /* 边框：粗细 样式 颜色 */
+  border-radius: 12px;       /* 圆角：让卡片四角变圆 */
+  padding: 20px;             /* 内边距：内容到边框的距离 */
 }
 .card h2 {
-  color: #8B2E2E;
+  color: #8B2E2E;            /* 文字颜色：暗红，像古典乐谱标题 */
 }
 ```
 切换到 CSS 标签页查看完整代码。

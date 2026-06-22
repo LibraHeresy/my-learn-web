@@ -40,11 +40,14 @@ if (score >= 80 && score < 90) {
 ::example{title="看例子"}
 下面的代码是一个作曲家答题器。输入答案后点击提交，JS 判断你的答案是否正确：
 ```js
+// 获取输入框里用户写的内容
 let answer = document.querySelector("#answer").value;
-if (answer === "肖邦") {
-  display.textContent = "✓ 回答正确！";
+
+// if/else：条件判断——"如果...就...否则..."
+if (answer === "肖邦") {                              // === 比较是否相等
+  display.textContent = "✓ 回答正确！";              // 条件成立走这里
 } else {
-  display.textContent = "✗ 再想想？提示：他是波兰人";
+  display.textContent = "✗ 再想想？提示：他是波兰人"; // 条件不成立走这里
 }
 ```切换到 JS 标签页，看 submit 按钮的点击事件中完整的 if/else 逻辑。
 ::

@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import { getAllLessonsV2 } from '../content-loaders/lessons'
-import { getAllProjectsV2 } from '../content-loaders/projects'
+import { getAllLessons } from '../content-loaders/lessons'
+import { getAllProjects } from '../content-loaders/projects'
 
 // ============================================================
 // 第三层：页面冒烟测试
@@ -48,7 +48,7 @@ describe('页面冒烟测试', () => {
 
   // ---- LessonPlayer：遍历所有课程 ----
   describe('LessonPlayer', () => {
-    const lessons = getAllLessonsV2()
+    const lessons = getAllLessons()
     it.each(lessons.map(l => ({ id: l.id, title: l.meta.title })))(
       '课程 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
@@ -65,7 +65,7 @@ describe('页面冒烟测试', () => {
 
   // ---- ProjectPlayer：遍历所有项目 ----
   describe('ProjectPlayer', () => {
-    const projects = getAllProjectsV2()
+    const projects = getAllProjects()
     it.each(projects.map(p => ({ id: p.id, title: p.meta.title })))(
       '项目 "$title" 页面渲染不崩溃',
       { timeout: 10000 },
@@ -83,7 +83,7 @@ describe('页面冒烟测试', () => {
   // ---- 关键组件 ----
   describe('关键组件', () => {
     it('DocumentRenderer 渲染', async () => {
-      const lesson = getAllLessonsV2()[0]
+      const lesson = getAllLessons()[0]
       const { default: DocumentRenderer } = await import('../content-runtime/renderers/DocumentRenderer.vue')
       const wrapper = mount(DocumentRenderer, {
         props: { lesson },

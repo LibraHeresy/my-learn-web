@@ -1,8 +1,8 @@
-export type InlineSegment =
+type InlineSegment =
   | { type: 'text'; value: string }
   | { type: 'code'; value: string }
 
-export function splitInlineCode(text: string): InlineSegment[] {
+function splitInlineCode(text: string): InlineSegment[] {
   const segments: InlineSegment[] = []
   let i = 0
 
@@ -160,18 +160,10 @@ export function parseInlineTokens(text: string): InlineToken[] {
   return out.length ? out : [{ type: 'text', value: text }]
 }
 
-export function parseCodeFence(content: string): { language: string; code: string } | null {
-  const match = content.match(/^```\s*([\w-]+)?\s*\n([\s\S]*?)\n```\s*$/)
-  if (!match) return null
-  return {
-    language: match[1] || 'text',
-    code: match[2],
-  }
-}
-
 export type BlockContentSegment =
   | { type: 'text'; text: string }
   | { type: 'code'; language: string; code: string }
+  | { type: 'hr' }
 
 export function splitFencedCodeBlocks(content: string): BlockContentSegment[] {
   const normalized = content.replace(/\r\n/g, '\n')
@@ -189,6 +181,14 @@ export function splitFencedCodeBlocks(content: string): BlockContentSegment[] {
   while (i < lines.length) {
     const line = lines[i]
     const trimmed = line.trim()
+    // Horizontal rule: --- alone on a line
+    if (trimmed === '---') {
+      flushText()
+      out.push({ type: 'hr' })
+      i += 1
+      continue
+    }
+
     const open = trimmed.match(/^```\s*([\w-]+)?\s*$/)
     if (!open) {
       textBuf.push(line)

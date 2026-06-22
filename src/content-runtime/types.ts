@@ -81,7 +81,7 @@ export type ProjectMeta = {
   listenTo?: string
 }
 
-export type ProjectStepV2 = {
+export type ProjectStep = {
   title: string
   content: string
   task: string
@@ -94,5 +94,5 @@ export type ProjectStepV2 = {
 export type CompiledProject = {
   id: string
   meta: ProjectMeta
-  steps: ProjectStepV2[]
+  steps: ProjectStep[]
 }

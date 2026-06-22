@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLessonsV2 } from '../content-loaders/lessons'
+import { getAllLessons } from '../content-loaders/lessons'
 import { getChapterOrder } from '../content-loaders/taxonomy'
 
 // ============================================================
@@ -36,7 +36,7 @@ function computeLabels(
 }
 
 function orderedTrackLessons(trackId: string) {
-  const lessons = getAllLessonsV2()
+  const lessons = getAllLessons()
     .filter((l) => l.meta.track === trackId)
     .slice()
     .sort((a, b) => {

@@ -45,6 +45,7 @@ composers.forEach(function(c) {
 ::example{title="看例子"}
 下面的代码用对象数组存储了作曲家信息，用 `forEach` 遍历并生成卡片：
 ```js
+// 对象数组：每个 {} 是一个对象，用 .属性名 访问里面的值
 let composers = [
   { name: "巴赫", period: "巴洛克", piece: "赋格的艺术" },
   { name: "莫扎特", period: "古典主义", piece: "魔笛" },
@@ -54,9 +55,9 @@ let html = "";
 composers.forEach(function(c) {
   html += `
     <div class="card">
-      <h2>${c.name}</h2>
-      <p>时期：${c.period}</p>
-      <p>代表作：《${c.piece}》</p>
+      <h2>${c.name}</h2>           <!-- c.name：访问对象的 name 属性 -->
+      <p>时期：${c.period}</p>     <!-- c.period：访问 period 属性 -->
+      <p>代表作：《${c.piece}》</p> <!-- c.piece：访问 piece 属性 -->
     </div>
   `;
 });

@@ -7,7 +7,7 @@ export interface PrologueCard {
   thumbnailSvg: string
 }
 
-export const prologueCardsV2: PrologueCard[] = [
+export const prologueCards: PrologueCard[] = [
   {
     id: 'dawn-era',
     lessonId: 'dawn-era',

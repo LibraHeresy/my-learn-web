@@ -3,10 +3,10 @@ import type { CompiledLesson } from '../content-runtime/types'
 
 const compiledLessons = generatedLessons as CompiledLesson[]
 
-export function getAllLessonsV2(): CompiledLesson[] {
+export function getAllLessons(): CompiledLesson[] {
   return compiledLessons
 }
 
-export function getLessonV2(lessonId: string): CompiledLesson | null {
+export function getLesson(lessonId: string): CompiledLesson | null {
   return compiledLessons.find((lesson) => lesson.id === lessonId) ?? null
 }

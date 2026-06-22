@@ -1,22 +1,26 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { BlockNode } from '../types'
-import { parseCodeFence } from './text'
+import { splitFencedCodeBlocks } from './text'
+import InlineText from './InlineText.vue'
 
 const props = defineProps<{
   node: BlockNode
 }>()
 
-const codeFence = computed(() => parseCodeFence(props.node.content || ''))
+const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 </script>
 
 <template>
   <section class="example-block">
     <h3 v-if="typeof node.attrs?.title === 'string'" class="block-title">{{ node.attrs.title }}</h3>
-    <div class="code-shell">
-      <div class="code-meta">{{ codeFence?.language || 'text' }}</div>
-      <pre class="code-block"><code>{{ codeFence?.code || node.content }}</code></pre>
-    </div>
+    <template v-for="(seg, i) in segments" :key="i">
+      <pre v-if="seg.type === 'code'" class="code-block"><code :class="`language-${seg.language}`" v-text="seg.code" /></pre>
+      <hr v-else-if="seg.type === 'hr'" class="block-hr" />
+      <p v-else class="block-text">
+        <InlineText :text="seg.text" />
+      </p>
+    </template>
   </section>
 </template>
 
@@ -35,28 +39,31 @@ const codeFence = computed(() => parseCodeFence(props.node.content || ''))
   color: var(--color-accent);
 }
 
-.code-shell {
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  background: var(--color-editor-bg);
-}
-
-.code-meta {
-  padding: var(--sp-2) var(--sp-3);
-  font-size: var(--fs-xs);
-  color: var(--color-gold);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  text-transform: uppercase;
+.block-text {
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text);
 }
 
 .code-block {
   margin: 0;
-  padding: var(--sp-3) var(--sp-4);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  background: var(--color-editor-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow-x: auto;
+}
+
+.code-block code {
   font-family: var(--font-code);
   font-size: var(--fs-xs);
-  line-height: 1.7;
   color: var(--color-editor-text);
+  white-space: pre;
+}
+
+.block-hr {
+  border: none;
+  border-top: 1px solid var(--color-gold-light);
+  margin: var(--sp-1) 0;
 }
 </style>
-

@@ -36,16 +36,19 @@ forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。
 ::example{title="看例子"}
 下面的代码用 `forEach` 遍历作曲家数组，把每一项渲染成 HTML 卡片：
 ```js
-let composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"];
-let html = "";
+let composers = ["巴赫", "莫扎特", "贝多芬", "肖邦"]; // 数组：方括号包裹，逗号分隔
+let html = "";                                        // 空字符串，准备拼接 HTML
+
+// forEach：遍历数组的每个元素——"对每一项都做同样的事"
 composers.forEach(function(name, index) {
-  html += `
+  html += `                               // += 是拼接，每次循环追加一段 HTML
     <div class="card">
-      <span class="num">${index + 1}</span>
-      ${name}
+      <span class="num">${index + 1}</span>  // index 从 0 开始，+1 变成 1、2、3...
+      ${name}                                // 当前这一项的作曲家名字
     </div>
   `;
 });
+// innerHTML：把拼接好的 HTML 字符串插入页面
 document.querySelector("#list").innerHTML = html;
 ```
 切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。

@@ -10,7 +10,7 @@ import type {
   ContentBodyNode,
   ContentMeta,
   ProjectMeta,
-  ProjectStepV2,
+  ProjectStep,
 } from '../src/content-runtime/types'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -70,6 +70,15 @@ function createBlockNode(
 function parseScalar(value: string): string | number {
   const trimmed = value.trim()
   if (/^-?\d+$/.test(trimmed)) return Number(trimmed)
+  // Handle YAML double-quoted strings: strip quotes, unescape \" \\ \n
+  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
+    const inner = trimmed.slice(1, -1)
+    return inner.replace(/\\(.)/g, (_, c: string) => {
+      if (c === 'n') return '\n'
+      if (c === 't') return '\t'
+      return c
+    })
+  }
   return trimmed
 }
 
@@ -533,7 +542,7 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
     throw new Error(`Failed to parse ${path.relative(projectRoot, metaPath)}: ${msg}`)
   }
 
-  const parsed = JSON.parse(jsonRaw) as { steps?: ProjectStepV2[] }
+  const parsed = JSON.parse(jsonRaw) as { steps?: ProjectStep[] }
   if (!Array.isArray(parsed.steps)) {
     throw new Error(`Invalid project.json: missing steps array in ${path.relative(projectRoot, jsonPath)}`)
   }
@@ -623,6 +632,7 @@ type CompiledQuizLevel = {
   type: string
   threshold: number
   name: string
+  count: number
   questions: CompiledQuizQuestion[]
 }
 

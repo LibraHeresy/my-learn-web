@@ -43,9 +43,14 @@ el.textContent = "新的标题";
 ::example{title="看例子"}
 下面的代码用变量存储了作曲家信息，然后用 `querySelector` 把它们显示在页面上：
 ```js
+// let：声明一个可以修改的变量
 let composer = "弗雷德里克·肖邦";
 let piece = "降E大调夜曲 Op.9 No.2";
+
+// 模板字符串：用反引号 `` 包裹，${} 里面放变量名
 let description = `${composer}的代表作之一是《${piece}》。`;
+
+// querySelector：找到 HTML 元素；textContent：修改它的文字内容
 document.querySelector("#composer").textContent = composer;
 document.querySelector("#piece").textContent = piece;
 document.querySelector("#description").textContent = description;

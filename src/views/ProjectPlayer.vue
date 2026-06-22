@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getAllProjectsV2, getProjectV2 } from '../content-loaders/projects'
+import { getAllProjects, getProject } from '../content-loaders/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { parseInline, parseContent } from '../utils/markdown'
@@ -19,12 +19,7 @@ const projectId = computed(() => route.params.projectId as string)
 const project = ref<CompiledProject | null>(null)
 const projectLoading = ref(true)
 const projectError = ref<unknown>(null)
-const projectState = computed(() => ({
-  value: project.value,
-  loading: projectLoading.value,
-  error: projectError.value,
-}))
-const allProjects = computed(() => getAllProjectsV2())
+const allProjects = computed(() => getAllProjects())
 
 const currentStep = ref(0)
 watch(currentStep, () => {
@@ -59,7 +54,7 @@ watch(
     currentStep.value = 0
 
     try {
-      project.value = await getProjectV2(id)
+      project.value = await getProject(id)
     } catch (e) {
       projectError.value = e
       project.value = null
@@ -170,10 +165,10 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
       </div>
     </div>
 
-    <div v-if="projectState.loading" class="project-not-found">
+    <div v-if="projectLoading" class="project-not-found">
       <p>加载中…</p>
     </div>
-    <div v-else-if="projectState.error" class="project-not-found">
+    <div v-else-if="projectError" class="project-not-found">
       <p>加载失败</p>
       <button @click="router.push('/')">返回首页</button>
     </div>
@@ -562,6 +557,10 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 @media (max-width: 900px) {
   .project-player {
     width: 100vw;
+  }
+
+  :deep(.resizer) {
+    display: none;
   }
 
   .project-header {

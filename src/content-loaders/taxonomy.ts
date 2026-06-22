@@ -1,6 +1,6 @@
 import taxonomyJson from '../generated/taxonomy.json' with { type: 'json' }
 
-export type TrackV2 = {
+export type Track = {
   id: string
   title: string
   subtitle: string
@@ -8,7 +8,7 @@ export type TrackV2 = {
   order: number
 }
 
-export type ChapterV2 = {
+export type Chapter = {
   id: string
   title: string
   subtitle: string
@@ -16,20 +16,20 @@ export type ChapterV2 = {
   order: number
 }
 
-const taxonomy = taxonomyJson as { tracks: TrackV2[]; chapters: ChapterV2[] }
+const taxonomy = taxonomyJson as { tracks: Track[]; chapters: Chapter[] }
 
-export const tracksV2: TrackV2[] = taxonomy.tracks
-export const chaptersV2: ChapterV2[] = taxonomy.chapters
+export const tracks: Track[] = taxonomy.tracks
+export const chapters: Chapter[] = taxonomy.chapters
 
-export function getTrackV2(trackId: string): TrackV2 | null {
-  return tracksV2.find((t) => t.id === trackId) ?? null
+export function getTrack(trackId: string): Track | null {
+  return tracks.find((t) => t.id === trackId) ?? null
 }
 
-export function getChapterV2(chapterId: string | null | undefined): ChapterV2 | null {
+export function getChapter(chapterId: string | null | undefined): Chapter | null {
   if (!chapterId) return null
-  return chaptersV2.find((c) => c.id === chapterId) ?? null
+  return chapters.find((c) => c.id === chapterId) ?? null
 }
 
 export function getChapterOrder(chapterId: string): number {
-  return chaptersV2.find((c) => c.id === chapterId)?.order ?? Number.MAX_SAFE_INTEGER
+  return chapters.find((c) => c.id === chapterId)?.order ?? Number.MAX_SAFE_INTEGER
 }

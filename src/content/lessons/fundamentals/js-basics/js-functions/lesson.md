@@ -36,8 +36,9 @@ let result2 = introduce("莫扎特", "魔笛");
 ::example{title="看例子"}
 下面的代码定义了一个 `createCard` 函数，它接收作曲家信息并返回 HTML 字符串：
 ```js
+// function：定义一个函数，像"乐谱模板"——给参数就能生成结果
 function createCard(composer, period, piece) {
-  return `
+  return `                         // return：把结果"返回"给调用者
     <div class="card">
       <h2>${composer}</h2>
       <p>时期：${period}</p>
@@ -45,6 +46,7 @@ function createCard(composer, period, piece) {
     </div>
   `;
 }
+// 调用函数：传入不同的参数，得到不同的卡片
 let html = createCard("巴赫", "巴洛克", "赋格的艺术");
 let html2 = createCard("德彪西", "印象派", "月光");
 ```

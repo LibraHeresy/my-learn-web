@@ -317,3 +317,67 @@ describe('useCodePreview 错误映射', () => {
     }
   })
 })
+
+// ============================================================
+// splitFencedCodeBlocks — 分隔线解析
+// ============================================================
+import { splitFencedCodeBlocks } from '../content-runtime/renderers/text'
+
+describe('splitFencedCodeBlocks', () => {
+  it('普通文本不产生 hr', () => {
+    const result = splitFencedCodeBlocks('这是普通文本')
+    expect(result).toEqual([{ type: 'text', text: '这是普通文本' }])
+  })
+
+  it('单独的 --- 产生 hr 段', () => {
+    const result = splitFencedCodeBlocks('上面\n---\n下面')
+    expect(result).toHaveLength(3)
+    expect(result[0]).toEqual({ type: 'text', text: '上面' })
+    expect(result[1]).toEqual({ type: 'hr' })
+    expect(result[2]).toEqual({ type: 'text', text: '下面' })
+  })
+
+  it('连续多个 hr', () => {
+    const result = splitFencedCodeBlocks('A\n---\nB\n---\nC')
+    expect(result).toHaveLength(5)
+    expect(result.filter(r => r.type === 'hr')).toHaveLength(2)
+  })
+
+  it('代码块内的 --- 不被识别为 hr', () => {
+    const result = splitFencedCodeBlocks('```html\n<h1>---</h1>\n```\n下面')
+    expect(result).toHaveLength(2)
+    expect(result[0]).toMatchObject({ type: 'code', language: 'html' })
+    expect(result[1]).toEqual({ type: 'text', text: '下面' })
+  })
+})
+
+// ============================================================
+// useAsyncComputed — 同步/异步工厂
+// ============================================================
+import { useAsyncComputed } from '../composables/useAsyncComputed'
+import { ref } from 'vue'
+
+describe('useAsyncComputed', () => {
+  it('同步工厂返回的值正确', async () => {
+    const dep = ref(1)
+    const state = useAsyncComputed(() => dep.value * 2)
+    // wait for watchEffect
+    await new Promise(r => setTimeout(r, 10))
+    expect(state.value.value).toBe(2)
+    expect(state.value.loading).toBe(false)
+    expect(state.value.error).toBeNull()
+  })
+
+  it('异步工厂返回的值正确', async () => {
+    const state = useAsyncComputed(() => Promise.resolve('hello'))
+    await new Promise(r => setTimeout(r, 10))
+    expect(state.value.value).toBe('hello')
+  })
+
+  it('工厂抛错时 error 非 null', async () => {
+    const state = useAsyncComputed(() => { throw new Error('fail') })
+    await new Promise(r => setTimeout(r, 10))
+    expect(state.value.value).toBeNull()
+    expect(state.value.error).toBeInstanceOf(Error)
+  })
+})

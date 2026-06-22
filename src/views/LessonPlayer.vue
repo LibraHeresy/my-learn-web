@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getAllLessonsV2, getLessonV2 } from '../content-loaders/lessons'
+import { getAllLessons, getLesson } from '../content-loaders/lessons'
 import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
+import { useAsyncComputed } from '../composables/useAsyncComputed'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
-import { getChapterOrder, getTrackV2, getChapterV2 } from '../content-loaders/taxonomy'
+import { getChapterOrder, getTrack, getChapter } from '../content-loaders/taxonomy'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
@@ -19,8 +20,8 @@ const router = useRouter()
 const progressStore = useProgressStore()
 
 const lessonId = computed(() => route.params.lessonId as string)
-const lessonState = computedAsync(() => getLessonV2(lessonId.value))
-const all = computed(() => getAllLessonsV2())
+const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
+const all = computed(() => getAllLessons())
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
 const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
@@ -59,31 +60,6 @@ function onCodeChange(code: UserCode) {
   userCode.value = code
 }
 
-function computedAsync<T>(factory: () => T | Promise<T>) {
-  const state = ref<T | null>(null)
-  const loading = ref(true)
-  const error = ref<unknown>(null)
-
-  watchEffect(async () => {
-    loading.value = true
-    error.value = null
-    try {
-      state.value = await factory()
-    } catch (e) {
-      error.value = e
-      state.value = null
-    } finally {
-      loading.value = false
-    }
-  })
-
-  return computed(() => ({
-    value: state.value,
-    loading: loading.value,
-    error: error.value,
-  }))
-}
-
 const currentTrackId = computed(() => lesson.value?.meta.track || 'fundamentals')
 const currentChapterId = computed(() => lesson.value?.meta.chapter)
 
@@ -119,8 +95,8 @@ const centerLabel = computed(() => {
   return `第 ${positionInChapter.value}/${totalInChapter.value} 课`
 })
 
-const currentTrack = computed(() => getTrackV2(currentTrackId.value))
-const currentChapter = computed(() => getChapterV2(currentChapterId.value))
+const currentTrack = computed(() => getTrack(currentTrackId.value))
+const currentChapter = computed(() => getChapter(currentChapterId.value))
 
 const prevLabel = computed(() => {
   if (isPrologue.value) return prevLesson.value ? '上一篇' : ''
@@ -156,7 +132,7 @@ function selectLesson(id: string) {
   router.push(`/lesson/${id}`)
 }
 
-const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('v2-code-score-panel-widths', 1)
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-panel-widths', 1)
 
 watch(lessonId, () => {
   if (playerMainRef.value) {
@@ -226,11 +202,9 @@ watch(lessonId, () => {
           class="panel-content"
           :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
         >
-          <div class="v2-content-panel">
-            <Transition name="slide-fade" mode="out-in">
-              <DocumentRenderer :key="lessonId" :lesson="lesson" />
-            </Transition>
-          </div>
+          <Transition name="slide-fade" mode="out-in">
+            <DocumentRenderer :key="lessonId" :lesson="lesson" />
+          </Transition>
         </div>
 
         <template v-if="!isLocalMode && isSandboxMode">
@@ -408,9 +382,14 @@ watch(lessonId, () => {
 .player-main.is-local .panel-content {
   max-width: 860px;
   margin: 0 auto;
+  overflow: visible;
 }
 
-.panel-content,
+.panel-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .panel-editor,
 .panel-preview {
   overflow: hidden;
@@ -420,14 +399,6 @@ watch(lessonId, () => {
 .panel-editor {
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.v2-content-panel {
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  min-width: 0;
-  background: var(--color-panel);
 }
 
 .lesson-not-found {
@@ -457,6 +428,10 @@ watch(lessonId, () => {
     width: 100vw;
   }
 
+  :deep(.resizer) {
+    display: none;
+  }
+
   .player-main {
     flex-direction: column;
     overflow-y: auto;
@@ -474,6 +449,7 @@ watch(lessonId, () => {
 
   .panel-content {
     border-bottom: 1px solid var(--color-border-light);
+    overflow: visible;
   }
 
   .panel-editor {
@@ -495,13 +471,4 @@ watch(lessonId, () => {
   }
 }
 
-.v2-editor {
-  flex: 1;
-  min-height: 320px;
-}
-
-.v2-preview {
-  flex: 1;
-  min-height: 360px;
-}
 </style>

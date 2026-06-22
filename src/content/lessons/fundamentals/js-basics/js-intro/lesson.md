@@ -55,7 +55,10 @@ console.log("这段文字会出现在控制台");
 ::example{title="看例子"}
 下面的代码就是编辑器中你看到的。一个 `alert` 欢迎你，一个 `console.log` 输出信息：
 ```js
+// alert()：弹出提示框，让页面和用户"说话"
 alert("欢迎来到音乐编程之旅！");
+
+// console.log()：在控制台输出信息，只有开发者能看到
 console.log("页面加载完成，准备就绪！");
 ```
 试试修改 `alert` 和 `console.log` 中的文字。

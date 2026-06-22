@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
-import { getAllLessonsV2 } from "../content-loaders/lessons";
-import { getAllProjectsV2 } from "../content-loaders/projects";
+import { getAllLessons } from "../content-loaders/lessons";
+import { getAllProjects } from "../content-loaders/projects";
 import { useProgressStore } from "../stores/progress";
 import { parseInline } from "../utils/markdown";
-import { tracksV2, chaptersV2, getChapterV2 } from "../content-loaders/taxonomy";
-import { prologueCardsV2 } from "../content-loaders/prologues";
+import { tracks, chapters, getChapter } from "../content-loaders/taxonomy";
+import { prologueCards } from "../content-loaders/prologues";
 
 const router = useRouter();
 const progressStore = useProgressStore();
@@ -16,16 +16,16 @@ const showStickyNav = ref(false);
 const homeRef = ref<HTMLElement | null>(null);
 
 const journeyTracks = computed(() =>
-  tracksV2
+  tracks
     .filter((t) =>
       ["fundamentals", "framework", "engineering", "ai-collaboration"].includes(t.id),
     )
     .slice()
     .sort((a, b) => a.order - b.order),
 );
-const lessonsV2 = computed(() => getAllLessonsV2());
-const projectsV2 = computed(() =>
-  getAllProjectsV2()
+const lessons = computed(() => getAllLessons());
+const projects = computed(() =>
+  getAllProjects()
     .slice()
     .sort((a, b) => a.meta.order - b.meta.order)
     .map((p) => ({
@@ -57,20 +57,20 @@ onBeforeUnmount(() => {
 });
 
 function getTrackLessonCount(trackId: string): number {
-  if (trackId === "projects") return projectsV2.value.length;
-  return lessonsV2.value.filter((l) => l.meta.track === trackId).length;
+  if (trackId === "projects") return projects.value.length;
+  return lessons.value.filter((l) => l.meta.track === trackId).length;
 }
 
 function getTrackCompletedCount(trackId: string): number {
   if (trackId === "projects") return 0;
-  return lessonsV2.value
+  return lessons.value
     .filter((l) => l.meta.track === trackId)
     .filter((l) => progressStore.isCompleted(l.id)).length;
 }
 
 function getTrackChapters(trackId: string) {
-  return chaptersV2.filter((ch) =>
-    lessonsV2.value.some((l) => l.meta.chapter === ch.id && l.meta.track === trackId),
+  return chapters.filter((ch) =>
+    lessons.value.some((l) => l.meta.chapter === ch.id && l.meta.track === trackId),
   );
 }
 
@@ -81,12 +81,12 @@ const resumeLesson = computed(() => {
     .sort((a, b) => (b.lastVisited || 0) - (a.lastVisited || 0))
   if (entries.length === 0) return null
   const lastId = entries[0].lessonId
-  return lessonsV2.value.find(l => l.id === lastId) || null
+  return lessons.value.find(l => l.id === lastId) || null
 })
 
 const resumeChapter = computed(() => {
   if (!resumeLesson.value) return null
-  return getChapterV2(resumeLesson.value.meta.chapter)
+  return getChapter(resumeLesson.value.meta.chapter)
 })
 
 function toggleTrack(trackId: string) {
@@ -270,7 +270,7 @@ function goToProject(projectId: string) {
                     <span>{{ chapter.title }}</span>
                   </div>
                   <button
-                    v-for="lesson in lessonsV2.filter(
+                    v-for="lesson in lessons.filter(
                       (l) =>
                         l.meta.chapter === chapter.id &&
                         l.meta.track === track.id,
@@ -292,7 +292,7 @@ function goToProject(projectId: string) {
               </template>
               <template v-if="track.id === 'projects'">
                 <button
-                  v-for="project in projectsV2"
+                  v-for="project in projects"
                   :key="project.id"
                   class="track-lesson-item"
                   @click.stop="goToProject(project.id)"
@@ -320,7 +320,7 @@ function goToProject(projectId: string) {
 
       <div class="project-cards">
         <div
-          v-for="project in projectsV2"
+          v-for="project in projects"
           :key="project.id"
           :class="['project-card', { draft: project.steps.length === 0 }]"
         >
@@ -375,7 +375,7 @@ function goToProject(projectId: string) {
       </p>
       <div class="prologue-grid">
         <div
-          v-for="card in prologueCardsV2"
+          v-for="card in prologueCards"
           :key="card.id"
           class="prologue-card"
           @click="goToLesson(card.lessonId)"

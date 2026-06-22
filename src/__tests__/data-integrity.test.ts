@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLessonsV2 } from '../content-loaders/lessons'
-import { getAllProjectsV2 } from '../content-loaders/projects'
-import { chaptersV2, tracksV2 } from '../content-loaders/taxonomy'
-import { prologueCardsV2 } from '../content-loaders/prologues'
+import { getAllLessons } from '../content-loaders/lessons'
+import { getAllProjects } from '../content-loaders/projects'
+import { chapters, tracks } from '../content-loaders/taxonomy'
+import { prologueCards } from '../content-loaders/prologues'
 import { getGlossaryTuples } from '../content-loaders/glossary'
 const glossary = getGlossaryTuples()
 
@@ -11,8 +11,8 @@ const glossary = getGlossaryTuples()
 // ============================================================
 
 describe('数据完整性', () => {
-  const lessons = getAllLessonsV2()
-  const projects = getAllProjectsV2()
+  const lessons = getAllLessons()
+  const projects = getAllProjects()
   const prologueLessons = lessons.filter((l) => l.meta.track === 'prologue')
 
   // ---- Lessons ----
@@ -23,7 +23,7 @@ describe('数据完整性', () => {
     })
 
     it('所有 lesson.meta.chapter 指向存在的章节', () => {
-      const chapterIds = new Set(chaptersV2.map(c => c.id))
+      const chapterIds = new Set(chapters.map(c => c.id))
       for (const l of lessons) {
         expect(chapterIds.has(l.meta.chapter), `lesson "${l.id}" 的 chapter "${l.meta.chapter}" 不存在`).toBe(true)
       }
@@ -60,7 +60,7 @@ describe('数据完整性', () => {
     })
 
     it('所有 lesson.meta.track 指向存在的 track', () => {
-      const trackIds = new Set(tracksV2.map(t => t.id))
+      const trackIds = new Set(tracks.map(t => t.id))
       for (const l of lessons) {
         expect(trackIds.has(l.meta.track), `lesson "${l.id}" track "${l.meta.track}" 不存在`).toBe(true)
       }
@@ -70,7 +70,7 @@ describe('数据完整性', () => {
   // ---- Chapters ----
   describe('chapters', () => {
     it('所有 chapter.id 唯一', () => {
-      const ids = chaptersV2.map(c => c.id)
+      const ids = chapters.map(c => c.id)
       expect(new Set(ids).size).toBe(ids.length)
     })
   })
@@ -82,9 +82,9 @@ describe('数据完整性', () => {
       expect(new Set(ids).size).toBe(ids.length)
     })
 
-    it('prologueLessons 和 prologueCardsV2 id 一一对应', () => {
+    it('prologueLessons 和 prologueCards id 一一对应', () => {
       const lessonIds = new Set(prologueLessons.map(l => l.id))
-      const cardLessonIds = new Set(prologueCardsV2.map(c => c.lessonId))
+      const cardLessonIds = new Set(prologueCards.map(c => c.lessonId))
       expect(lessonIds).toEqual(cardLessonIds)
     })
 
@@ -156,17 +156,17 @@ describe('数据完整性', () => {
   // ---- Tracks ----
   describe('tracks', () => {
     it('所有 track.id 唯一', () => {
-      const ids = tracksV2.map(t => t.id)
+      const ids = tracks.map(t => t.id)
       expect(new Set(ids).size).toBe(ids.length)
     })
 
     it('所有 track.order 不重复', () => {
-      const orders = tracksV2.map(t => t.order)
+      const orders = tracks.map(t => t.order)
       expect(new Set(orders).size).toBe(orders.length)
     })
 
     it('所有 track 有必填字段', () => {
-      for (const t of tracksV2) {
+      for (const t of tracks) {
         expect(t.id).toBeTruthy()
         expect(t.title).toBeTruthy()
         expect(t.subtitle).toBeTruthy()

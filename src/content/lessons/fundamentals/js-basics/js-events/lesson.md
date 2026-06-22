@@ -35,12 +35,14 @@ btn.addEventListener("click", function() {
 ::example{title="看例子"}
 下面的代码有一个按钮和一个显示区域。每次点击按钮，计数器就会加 1：
 ```js
-let count = 0;
-let btn = document.querySelector("#countBtn");
-let display = document.querySelector("#display");
+let count = 0;                                    // 计数器，从 0 开始
+let btn = document.querySelector("#countBtn");    // 找到按钮元素
+let display = document.querySelector("#display"); // 找到显示区域
+
+// addEventListener：给按钮绑定"点击事件"，第二个参数是点击后要执行的函数
 btn.addEventListener("click", function() {
-  count = count + 1;
-  display.textContent = `你点击了 ${count} 次`;
+  count = count + 1;                              // 计数器 +1
+  display.textContent = `你点击了 ${count} 次`;   // 更新页面上的数字
 });
 ```
 切换到 JS 标签页和预览区，试试点击按钮！
