@@ -7,7 +7,6 @@
     "dev": "npm run build:content && vite",
     "build": "vue-tsc -b && vite build",
     "build:content": "node --experimental-strip-types scripts/build-content.ts",
-    "lint:content": "node --experimental-strip-types scripts/lint-content.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

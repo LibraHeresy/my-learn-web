@@ -51,14 +51,22 @@ function onMessage(e: MessageEvent) {
   }
 }
 
+let prevUrl: string | null = null
+
 function loadPreview(doc: string) {
   if (!iframeRef.value) return
   const iframe = iframeRef.value
+  // Revoke previous blob URL to prevent memory leaks on rapid updates
+  if (prevUrl) {
+    URL.revokeObjectURL(prevUrl)
+    prevUrl = null
+  }
   const blob = new Blob([doc], { type: 'text/html' })
-  const url = URL.createObjectURL(blob)
-  iframe.src = url
+  prevUrl = URL.createObjectURL(blob)
+  iframe.src = prevUrl
   iframe.onload = () => {
-    URL.revokeObjectURL(url)
+    if (prevUrl) URL.revokeObjectURL(prevUrl)
+    prevUrl = null
   }
 }
 

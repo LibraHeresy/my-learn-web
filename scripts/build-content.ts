@@ -43,11 +43,6 @@ const allowedBlockNames = new Set<BlockName>([
   'task',
   'hint',
   'listen-to',
-  'callout',
-  'tabs',
-  'compare',
-  'code-group',
-  'file-tree',
 ])
 
 function isBlockName(value: string): value is BlockName {
@@ -413,8 +408,6 @@ function toMeta(data: Record<string, string | number | string[]>): ContentMeta {
     mode: data.mode as ContentMeta['mode'],
     musicAnalogy: String(data.musicAnalogy),
     listenTo: typeof data.listenTo === 'string' ? data.listenTo : undefined,
-    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    estimatedMinutes: typeof data.estimatedMinutes === 'number' ? data.estimatedMinutes : 0,
   }
 }
 
@@ -473,7 +466,6 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
   }
 
   return {
-    contentSchemaVersion: 1,
     id: meta.id,
     meta,
     body,
@@ -482,7 +474,6 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
       css,
       js,
     },
-    assets: {},
   }
 }
 function toProjectMeta(data: Record<string, string | number | string[]>): ProjectMeta {
@@ -492,10 +483,6 @@ function toProjectMeta(data: Record<string, string | number | string[]>): Projec
   }
   if (typeof data.order !== 'number') throw new Error('project meta.order must be a number')
   if (typeof data.mode !== 'string' || !allowedModes.has(data.mode)) throw new Error('project meta.mode must be sandbox or local')
-
-  const prerequisiteTrackIds = Array.isArray(data.prerequisiteTrackIds)
-    ? data.prerequisiteTrackIds.map(String)
-    : []
 
   return {
     id: String(data.id),
@@ -507,8 +494,6 @@ function toProjectMeta(data: Record<string, string | number | string[]>): Projec
     mode: data.mode as ProjectMeta['mode'],
     musicAnalogy: String(data.musicAnalogy),
     listenTo: typeof data.listenTo === 'string' ? data.listenTo : undefined,
-    prerequisiteTrackIds,
-    estimatedMinutes: typeof data.estimatedMinutes === 'number' ? data.estimatedMinutes : 0,
   }
 }
 
@@ -554,7 +539,6 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
   }
 
   return {
-    contentSchemaVersion: 1,
     id: meta.id,
     meta,
     steps: parsed.steps,
@@ -618,13 +602,8 @@ function parseTaxonomyYaml(input: string): Taxonomy {
 }
 
 async function buildTaxonomy(): Promise<void> {
-  let taxonomy: Taxonomy
-  try {
-    const raw = await readFile(taxonomySourceFile, 'utf8')
-    taxonomy = parseTaxonomyYaml(raw)
-  } catch {
-    taxonomy = { tracks: [], chapters: [] }
-  }
+  const raw = await readFile(taxonomySourceFile, 'utf8')
+  const taxonomy = parseTaxonomyYaml(raw)
   await atomicWriteFile(generatedTaxonomyFile, JSON.stringify(taxonomy, null, 2) + '\n')
 }
 

@@ -9,8 +9,6 @@ export type ContentMeta = {
   mode: LessonMode
   musicAnalogy: string
   listenTo?: string
-  tags: string[]
-  estimatedMinutes: number
 }
 
 export type HeadingNode = {
@@ -43,11 +41,6 @@ export type BlockType =
   | 'block:task'
   | 'block:hint'
   | 'block:listen-to'
-  | 'block:callout'
-  | 'block:tabs'
-  | 'block:compare'
-  | 'block:code-group'
-  | 'block:file-tree'
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 
@@ -66,7 +59,6 @@ export type BlockNode = {
 export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | BlockNode
 
 export type CompiledLesson = {
-  contentSchemaVersion: 1
   id: string
   meta: ContentMeta
   body: ContentBodyNode[]
@@ -75,7 +67,6 @@ export type CompiledLesson = {
     css: string
     js: string
   }
-  assets: Record<string, string>
 }
 
 export type ProjectMeta = {
@@ -88,8 +79,6 @@ export type ProjectMeta = {
   mode: LessonMode
   musicAnalogy: string
   listenTo?: string
-  prerequisiteTrackIds: string[]
-  estimatedMinutes: number
 }
 
 export type ProjectStepV2 = {
@@ -103,7 +92,6 @@ export type ProjectStepV2 = {
 }
 
 export type CompiledProject = {
-  contentSchemaVersion: 1
   id: string
   meta: ProjectMeta
   steps: ProjectStepV2[]

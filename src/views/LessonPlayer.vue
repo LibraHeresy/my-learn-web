@@ -59,7 +59,7 @@ function onCodeChange(code: UserCode) {
   userCode.value = code
 }
 
-function computedAsync<T>(factory: () => Promise<T>) {
+function computedAsync<T>(factory: () => T | Promise<T>) {
   const state = ref<T | null>(null)
   const loading = ref(true)
   const error = ref<unknown>(null)
@@ -162,7 +162,7 @@ watch(lessonId, () => {
   if (playerMainRef.value) {
     playerMainRef.value.scrollTop = 0
   }
-}, { immediate: true })
+})
 </script>
 
 <template>

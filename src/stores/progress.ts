@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import type { LessonProgress } from '../types'
-import { getAllLessonsV2 } from '../content-loaders/lessons'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码
@@ -10,13 +9,6 @@ const DATA_VERSION = 5
 export const useProgressStore = defineStore('progress', () => {
   const lessonProgress = ref<Record<string, LessonProgress>>({})
   const currentLessonId = ref('')
-
-  // 已完成课程列表
-  const completedLessons = computed(() =>
-    Object.values(lessonProgress.value)
-      .filter(p => p.completed)
-      .map(p => p.lessonId)
-  )
 
   // 从 localStorage 加载
   function loadProgress() {
@@ -79,30 +71,13 @@ export const useProgressStore = defineStore('progress', () => {
     return lessonProgress.value[lessonId]?.completed ?? false
   }
 
-  // 章节已完成课程数
-  function getChapterCompletedCount(chapterId: string): number {
-    return getAllLessonsV2()
-      .filter((l) => l.meta.chapter === chapterId)
-      .filter((l) => isCompleted(l.id))
-      .length
-  }
-
-  // 章节总课程数
-  function getChapterLessonCount(chapterId: string): number {
-    return getAllLessonsV2().filter((l) => l.meta.chapter === chapterId).length
-  }
-
   // 初始化加载
   loadProgress()
 
   return {
     lessonProgress,
     currentLessonId,
-    completedLessons,
     markComplete,
     isCompleted,
-    loadProgress,
-    getChapterCompletedCount,
-    getChapterLessonCount
   }
 })

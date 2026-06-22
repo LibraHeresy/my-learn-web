@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, defineComponent, h } from 'vue'
-import { parseInlineTokens } from './text'
+import { computed, defineComponent, h, type VNode } from 'vue'
+import { parseInlineTokens, type InlineToken as InlineTokenType } from './text'
 import { getGlossaryEntry } from '../../content-loaders/glossary'
 import TermTip from './TermTip.vue'
 
@@ -8,17 +8,17 @@ const props = defineProps<{
   text: string
 }>()
 
-type Token = ReturnType<typeof parseInlineTokens>[number]
-
 const tokens = computed(() => parseInlineTokens(props.text))
+</script>
 
-const InlineToken: any = defineComponent({
+<script lang="ts">
+const InlineToken = defineComponent({
   name: 'InlineToken',
   props: {
-    token: { type: Object as () => Token, required: true },
+    token: { type: Object as () => InlineTokenType, required: true },
   },
   setup(p) {
-    return (): any => {
+    return (): VNode | null => {
       const t = p.token
 
       if (t.type === 'br') return h('br')

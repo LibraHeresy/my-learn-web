@@ -24,6 +24,12 @@ const gemOrdered = computed(() => {
   return { junior: jr, mid, senior: sr }
 })
 
+const tiers = computed(() => [
+  { key: 'junior', title: '🏅 初级前端工程师', gems: gemOrdered.value.junior, requiredAchievement: null as null | boolean },
+  { key: 'mid', title: '🏅 中级前端工程师', gems: gemOrdered.value.mid, requiredAchievement: store.juniorAchievement },
+  { key: 'senior', title: '🏅 高级前端工程师', gems: gemOrdered.value.senior, requiredAchievement: store.midAchievement },
+])
+
 const curQ = computed(() => questions.value[currentIdx.value] || null)
 const progress = computed(() => questions.value.length ? (currentIdx.value / questions.value.length * 100) : 0)
 const isLast = computed(() => currentIdx.value >= questions.value.length - 1)
@@ -124,55 +130,13 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
         </div>
       </div>
 
-      <!-- 初级宝石路径 -->
-      <div class="tier-section">
-        <h3 class="tier-title">🏅 初级前端工程师</h3>
+      <div v-for="tier in tiers" :key="tier.key" class="tier-section">
+        <h3 class="tier-title">
+          {{ tier.title }}
+          <span v-if="tier.requiredAchievement === false" class="tier-lock">🔒 需上一级成就</span>
+        </h3>
         <div class="gem-path">
-          <template v-for="(g, i) in gemOrdered.junior" :key="g.id">
-            <span v-if="i > 0" class="path-line">━</span>
-            <button
-              :class="['gem-node', {
-                locked: !store.isGemUnlocked(g),
-                complete: store.isGemComplete(g.id),
-                active: activeGem?.id === g.id
-              }]"
-              :disabled="!store.isGemUnlocked(g)"
-              @click="selectGem(g)"
-            >
-              <span class="gem-icon">{{ g.icon }}</span>
-              <span class="gem-label">{{ g.name.replace('宝石','') }}</span>
-            </button>
-          </template>
-        </div>
-      </div>
-
-      <!-- 中级宝石路径 -->
-      <div class="tier-section" v-if="store.juniorAchievement || true">
-        <h3 class="tier-title">🏅 中级前端工程师 <span v-if="!store.juniorAchievement" class="tier-lock">🔒 需初级成就</span></h3>
-        <div class="gem-path">
-          <template v-for="(g, i) in gemOrdered.mid" :key="g.id">
-            <span v-if="i > 0" class="path-line">━</span>
-            <button
-              :class="['gem-node', {
-                locked: !store.isGemUnlocked(g),
-                complete: store.isGemComplete(g.id),
-                active: activeGem?.id === g.id
-              }]"
-              :disabled="!store.isGemUnlocked(g)"
-              @click="selectGem(g)"
-            >
-              <span class="gem-icon">{{ g.icon }}</span>
-              <span class="gem-label">{{ g.name.replace('宝石','') }}</span>
-            </button>
-          </template>
-        </div>
-      </div>
-
-      <!-- 高级宝石路径 -->
-      <div class="tier-section">
-        <h3 class="tier-title">🏅 高级前端工程师 <span v-if="!store.midAchievement" class="tier-lock">🔒 需中级成就</span></h3>
-        <div class="gem-path">
-          <template v-for="(g, i) in gemOrdered.senior" :key="g.id">
+          <template v-for="(g, i) in tier.gems" :key="g.id">
             <span v-if="i > 0" class="path-line">━</span>
             <button
               :class="['gem-node', {

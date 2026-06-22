@@ -1,6 +1,5 @@
 [
   {
-    "contentSchemaVersion": 1,
     "id": "music-showcase",
     "meta": {
       "id": "music-showcase",
@@ -11,11 +10,7 @@
       "order": 1,
       "mode": "sandbox",
       "musicAnalogy": "\"就像第一次登上舞台演奏一首简单的练习曲——不需要复杂的技巧，只需要把每一个音符（标签）和表情记号（样式）准确地呈现出来。完成后，你就拥有了第一张属于自己的\\\"音乐数字名片\\\"。\"",
-      "listenTo": "巴赫《G大调小步舞曲》— 简单、优雅、结构清晰，正如你即将写下的第一张网页。",
-      "prerequisiteTrackIds": [
-        "fundamentals"
-      ],
-      "estimatedMinutes": 0
+      "listenTo": "巴赫《G大调小步舞曲》— 简单、优雅、结构清晰，正如你即将写下的第一张网页。"
     },
     "steps": [
       {
@@ -73,7 +68,6 @@
     ]
   },
   {
-    "contentSchemaVersion": 1,
     "id": "music-collection-v1",
     "meta": {
       "id": "music-collection-v1",
@@ -84,12 +78,7 @@
       "order": 2,
       "mode": "local",
       "musicAnalogy": "就像亲手抄写一份乐谱——每一个音符（标签）、每一个表情记号（样式）、每一个演奏指令（脚本）都由你亲手写下。完成后，你就拥有了一份独一无二的手稿。",
-      "listenTo": "巴赫《无伴奏大提琴组曲》— 单一乐器展现完整世界，正如纯 HTML/CSS/JS 不依赖任何框架",
-      "prerequisiteTrackIds": [
-        "fundamentals",
-        "framework"
-      ],
-      "estimatedMinutes": 0
+      "listenTo": "巴赫《无伴奏大提琴组曲》— 单一乐器展现完整世界，正如纯 HTML/CSS/JS 不依赖任何框架"
     },
     "steps": [
       {
@@ -168,7 +157,6 @@
     ]
   },
   {
-    "contentSchemaVersion": 1,
     "id": "music-searcher",
     "meta": {
       "id": "music-searcher",
@@ -179,12 +167,7 @@
       "order": 3,
       "mode": "local",
       "musicAnalogy": "打开窗户，聆听世界的声音——你的应用第一次与互联网上的真实数据对话。就像从独奏练习室走到音乐图书馆，你可以搜索任何一位作曲家、任何一首曲子。",
-      "listenTo": "雷斯庇基《罗马的松树》— 作曲家通过音乐描绘远方的风景，正如你通过 API 获取远方的数据。一个请求，带回整个世界的音乐。",
-      "prerequisiteTrackIds": [
-        "fundamentals",
-        "framework"
-      ],
-      "estimatedMinutes": 0
+      "listenTo": "雷斯庇基《罗马的松树》— 作曲家通过音乐描绘远方的风景，正如你通过 API 获取远方的数据。一个请求，带回整个世界的音乐。"
     },
     "steps": [
       {
@@ -250,7 +233,6 @@
     ]
   },
   {
-    "contentSchemaVersion": 1,
     "id": "music-collection-v2",
     "meta": {
       "id": "music-collection-v2",
@@ -261,13 +243,7 @@
       "order": 4,
       "mode": "local",
       "musicAnalogy": "独奏者已经熟练了曲子——现在是时候加入乐团了。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。",
-      "listenTo": "拉威尔《波莱罗舞曲》— 同一段旋律在不同乐器组之间传递、叠加、变奏。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。",
-      "prerequisiteTrackIds": [
-        "fundamentals",
-        "framework",
-        "engineering"
-      ],
-      "estimatedMinutes": 0
+      "listenTo": "拉威尔《波莱罗舞曲》— 同一段旋律在不同乐器组之间传递、叠加、变奏。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。"
     },
     "steps": [
       {
@@ -372,7 +348,6 @@
     ]
   },
   {
-    "contentSchemaVersion": 1,
     "id": "music-collection-v3",
     "meta": {
       "id": "music-collection-v3",
@@ -383,13 +358,7 @@
       "order": 5,
       "mode": "local",
       "musicAnalogy": "从排练厅走上音乐厅的舞台——Git 版本控制是你的排练记录，CI/CD 是你的演出流程，云端部署就是座无虚席的音乐厅。",
-      "listenTo": "\"贝多芬《第九交响曲\\\"合唱\\\"》第四乐章 — 从器乐到人声，从个体到群体，所有力量汇聚成《欢乐颂》的洪流。Git、GitHub、CI/CD 就是你的乐团、音乐厅和全球巡演。\"",
-      "prerequisiteTrackIds": [
-        "fundamentals",
-        "framework",
-        "engineering"
-      ],
-      "estimatedMinutes": 0
+      "listenTo": "\"贝多芬《第九交响曲\\\"合唱\\\"》第四乐章 — 从器乐到人声，从个体到群体，所有力量汇聚成《欢乐颂》的洪流。Git、GitHub、CI/CD 就是你的乐团、音乐厅和全球巡演。\""
     },
     "steps": [
       {

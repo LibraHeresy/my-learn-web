@@ -14,7 +14,7 @@ describe('Progress Store', () => {
 
   it('初始状态无任何完成记录', () => {
     const store = useProgressStore()
-    expect(store.completedLessons).toEqual([])
+    expect(store.isCompleted('html-intro')).toBe(false)
   })
 
   it('markComplete 后 isCompleted 返回 true', () => {
@@ -23,12 +23,12 @@ describe('Progress Store', () => {
     expect(store.isCompleted('html-intro')).toBe(true)
   })
 
-  it('markComplete 后 completedLessons 包含该 id', () => {
+  it('markComplete 后 isCompleted 对该 id 返回 true', () => {
     const store = useProgressStore()
     store.markComplete('html-intro')
     store.markComplete('css-intro')
-    expect(store.completedLessons).toContain('html-intro')
-    expect(store.completedLessons).toContain('css-intro')
+    expect(store.isCompleted('html-intro')).toBe(true)
+    expect(store.isCompleted('css-intro')).toBe(true)
   })
 
   it('未标记的课程 isCompleted 返回 false', () => {
@@ -48,8 +48,8 @@ describe('Progress Store', () => {
   it('localStorage 数据损坏时能容错', () => {
     localStorage.setItem('code-score-progress', '{invalid json')
     const store = useProgressStore()
-    // 不应抛出异常，completedLessons 应为空
-    expect(() => store.completedLessons).not.toThrow()
+    // 不应抛出异常
+    expect(() => store.isCompleted('any-id')).not.toThrow()
   })
 })
 

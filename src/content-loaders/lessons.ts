@@ -7,10 +7,6 @@ export function getAllLessonsV2(): CompiledLesson[] {
   return compiledLessons
 }
 
-export function hasLessonV2(lessonId: string): boolean {
-  return compiledLessons.some((lesson) => lesson.id === lessonId)
-}
-
-export async function getLessonV2(lessonId: string): Promise<CompiledLesson | null> {
+export function getLessonV2(lessonId: string): CompiledLesson | null {
   return compiledLessons.find((lesson) => lesson.id === lessonId) ?? null
 }
