@@ -17,6 +17,8 @@ import type {
   ContentMeta,
   ProjectMeta,
   ProjectStep,
+  TaskBlockNode,
+  TaskStep,
 } from '../src/content-runtime/types'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -249,15 +251,24 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
     if (node.type === 'term') return node
     if (node.type === 'code') return node
 
+    // 判别联合展开：保留 discriminant 并更新文本字段，用类型断言维持联合兼容性
+    if (node.type === 'block:task') {
+      const taskNode = node as TaskBlockNode
+      const next: TaskBlockNode = {
+        ...taskNode,
+        content: injectTerms(taskNode.content, termKeys),
+        steps: taskNode.steps.map((step) => ({
+          ...step,
+          content: injectTerms(step.content, termKeys),
+          purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
+          expected: step.expected ? injectTerms(step.expected, termKeys) : undefined,
+        })),
+      }
+      return next
+    }
     const next: BlockNode = {
-      ...node,
-      content: typeof node.content === 'string' ? injectTerms(node.content, termKeys) : node.content,
-      steps: node.steps?.map((step) => ({
-        ...step,
-        content: injectTerms(step.content, termKeys),
-        purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
-        expected: step.expected ? injectTerms(step.expected, termKeys) : undefined,
-      })),
+      ...(node as Exclude<BlockNode, TaskBlockNode>),
+      content: injectTerms(node.content, termKeys),
     }
     return next
   })
@@ -281,9 +292,9 @@ function nodeSource(src: string, node: { position?: { start: { offset?: number }
  * remark-directive 对 :::task 内多个 ::::step 的嵌套有 bug（只嵌入第一个步骤）。
  * 此函数直接从原始文本（已经剥去 :::task{...} 开头和 ::: 结尾）手工解析步骤。
  */
-function parseTaskSteps(rawInner: string): { content: string; steps: Array<{ content: string; purpose?: string; expected?: string }> } {
+function parseTaskSteps(rawInner: string): { content: string; steps: TaskStep[] } {
   const lines = rawInner.split('\n')
-  const steps: Array<{ content: string; purpose?: string; expected?: string }> = []
+  const steps: TaskStep[] = []
   const nonStepLines: string[] = []
   let i = 0
 
@@ -403,12 +414,14 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
         .map((c: any) => nodeSource(modified, c))
         .join('\n\n')
         .trim()
+      // bname 此处绝不是 'task'（task 块已在正则预提取阶段处理），
+      // toBlockType 返回值涵盖 BlockType 联合，TypeScript 无法自动收窄，故用类型断言。
       body.push({
         type: toBlockType(bname),
         name: bname,
         attrs: blockAttrs,
         content,
-      })
+      } as Exclude<BlockNode, TaskBlockNode>)
     }
   }
 

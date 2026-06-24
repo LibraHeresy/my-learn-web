@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAllLessons, getLesson } from '../content-loaders/lessons'
 import { useProgressStore } from '../stores/progress'
@@ -8,7 +8,9 @@ import { usePanelResize } from '../composables/usePanelResize'
 import { useAsyncComputed } from '../composables/useAsyncComputed'
 import { useLessonNavigation } from '../composables/useLessonNavigation'
 import type { UserCode } from '../types'
-import CodeEditor from '../components/CodeEditor.vue'
+// CodeEditor 按需加载：只在 sandbox 模式课程中使用，
+// 延迟加载可将 @codemirror/* 从主 bundle 拆分为独立 chunk（约 -500KB gzip）
+const CodeEditor = defineAsyncComponent(() => import('../components/CodeEditor.vue'))
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
@@ -30,7 +32,7 @@ const lessonId = computed(() => route.params.lessonId as string)
 const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
 const all = computed(() => getAllLessons())
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
-const { previewSrc, triggerPreview } = useCodePreview(userCode)
+const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode)
 
 const lesson = computed(() => lessonState.value.value)
 const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
@@ -181,7 +183,7 @@ watch(lessonId, () => {
       >
         <div
           class="panel-content"
-          :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 4px)' }"
+          :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 5.33px)' }"
         >
           <Transition name="slide-fade" mode="out-in">
             <DocumentRenderer :key="lessonId" :lesson="lesson" />
@@ -192,13 +194,15 @@ watch(lessonId, () => {
           <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
           <div
             class="panel-editor"
-            :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
+            :style="{ width: 'calc(' + panelWidths.editor + '% - 5.33px)' }"
           >
             <CodeEditor
               :key="lessonId"
               :model-value="userCode"
               :show-reset="true"
+              :live-preview="livePreviewMode"
               @update:model-value="onCodeChange"
+              @update:live-preview="livePreviewMode = $event"
               @run="triggerPreview"
               @reset="resetCode"
             />
@@ -207,7 +211,7 @@ watch(lessonId, () => {
           <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
           <div
             class="panel-preview"
-            :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
+            :style="{ width: 'calc(' + panelWidths.preview + '% - 5.33px)' }"
           >
             <LivePreview :srcdoc="previewSrc" />
           </div>
@@ -351,6 +355,7 @@ watch(lessonId, () => {
   flex: 1;
   display: flex;
   overflow: hidden;
+  min-height: 0; /* flex 链必备：防止水平排列时高度被内容撑大 */
 }
 
 .player-main.is-dragging * {
@@ -418,6 +423,7 @@ watch(lessonId, () => {
   .player-main {
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden; /* 防止移动端意外横向滚动 */
     flex: 1;
     width: 100vw;
   }

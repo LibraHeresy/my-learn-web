@@ -11,12 +11,14 @@ import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
 const props = defineProps<{
   modelValue: { html: string; css: string; js: string }
   showReset?: boolean
+  livePreview?: boolean
 }>()
 
 const emit = defineEmits<{
   'update:modelValue': [value: { html: string; css: string; js: string }]
   run: []
   reset: []
+  'update:livePreview': [value: boolean]
 }>()
 
 type Tab = 'html' | 'css' | 'js'
@@ -62,8 +64,11 @@ function createEditorView(code: { html: string; css: string; js: string }, tab: 
         ...(code[tab].trim() === '' ? [placeholder(tabLabels[tab])] : []),
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
+            // 使用 props.modelValue 而非闭包变量 code：
+            // 切换课程时 code 是旧课程的快照，而 props.modelValue 始终是最新值，
+            // 避免将过时的 CSS/JS 混入当前 HTML 更新导致预览丢失样式。
             emit('update:modelValue', {
-              ...code,
+              ...props.modelValue,
               [tab]: update.state.doc.toString()
             })
           }
@@ -143,6 +148,18 @@ onBeforeUnmount(() => {
       <button v-if="showReset" class="editor-reset-btn" @click="emit('reset')" title="重置为初始代码">
         ↺ 重置
       </button>
+
+      <!-- 实时预览开关 -->
+      <div
+        class="live-toggle-wrap"
+        :title="livePreview ? '实时预览：开（编辑后自动刷新预览）' : '实时预览：关（需手动点击运行）'"
+        @click="emit('update:livePreview', !livePreview)"
+      >
+        <span :class="['live-label', { 'live-label--on': livePreview }]">实时</span>
+        <div :class="['live-toggle', { 'live-toggle--on': livePreview }]">
+          <span class="live-toggle-thumb" />
+        </div>
+      </div>
     </div>
     <div ref="editorHost" class="editor-host" />
   </div>
@@ -222,6 +239,69 @@ onBeforeUnmount(() => {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===== 实时预览开关 ===== */
+.live-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 var(--sp-3);
+  cursor: pointer;
+  user-select: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.live-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: var(--font-code);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.live-label--on {
+  color: var(--color-gold-light);
+}
+
+.live-toggle-wrap:hover .live-label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.live-toggle-wrap:hover .live-label--on {
+  color: var(--color-gold-light);
+}
+
+.live-toggle {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.live-toggle--on {
+  background: var(--color-gold);
+  border-color: transparent;
+}
+
+.live-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.live-toggle--on .live-toggle-thumb {
+  transform: translateX(13px);
+  background: #fff;
 }
 
 .editor-host {

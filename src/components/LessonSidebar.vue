@@ -268,6 +268,8 @@ function expandToCurrent() {
 }
 
 .sidebar-body {
+  flex: 1;          /* 充充剩余空间，使 overflow-y 生效 */
+  min-height: 0;    /* flex column 必须，允许元素收缩至内容高度以下 */
   overflow-y: auto;
   padding: var(--sp-3);
   display: flex;
