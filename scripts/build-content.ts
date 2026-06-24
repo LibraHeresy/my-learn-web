@@ -35,6 +35,7 @@ const projectsOutDir = path.join(generatedDir, 'projects')
 const legacyLessonsIndex = path.join(generatedDir, 'lessons-index.json')
 const legacyProjectsIndex = path.join(generatedDir, 'projects-index.json')
 const generatedTaxonomyFile = path.join(generatedDir, 'taxonomy.json')
+const searchIndexFile = path.join(generatedDir, 'search-index.json')
 const glossarySourceFile = path.join(projectRoot, 'src', 'content', 'glossary', 'terms.yaml')
 const glossaryGeneratedFile = path.join(generatedDir, 'glossary.json')
 const taxonomySourceFile = path.join(projectRoot, 'src', 'content', 'taxonomy.yaml')
@@ -772,7 +773,6 @@ export async function main() {
   } else {
     // 增量：只重编译有变化的课程
     const dirtyCompiled = await Promise.all(dirtyLessonDirs.map((dir) => compileLesson(dir)))
-    const dirtyMap = new Map(dirtyCompiled.map((l) => [l.id, l]))
 
     // 读取没有变化的课程（从已生成 JSON 加载）
     const unchangedDirs = allLessonDirs.filter((dir) => {
@@ -801,7 +801,7 @@ export async function main() {
     ]
 
     // 更新有变化课程的 hash
-    dirtyLessonDirs.forEach((dir, i) => {
+    dirtyLessonDirs.forEach((dir) => {
       newCache.lessons[path.relative(projectRoot, dir)] = lessonHashes[allLessonDirs.indexOf(dir)]
     })
 
@@ -872,7 +872,7 @@ export async function main() {
     )
 
     compiledProjects = [...dirtyMapped, ...unchangedProjectsLoaded.filter(Boolean)]
-    dirtyProjectDirs.forEach((dir, i) => {
+    dirtyProjectDirs.forEach((dir) => {
       newCache.projects[path.relative(projectRoot, dir)] = projectHashes[projectDirs.indexOf(dir)]
     })
 
@@ -893,6 +893,28 @@ export async function main() {
     rm(legacyProjectsIndex, { force: true }),
   ])
 
+  // --- 生成搜索索引 ---
+  function extractBodyText(body: any[]): string {
+    const parts: string[] = []
+    for (const node of body) {
+      if (node.text) parts.push(node.text)
+      if (node.content && typeof node.content === 'string') {
+        // 去採 {{term:xxx}} 标记
+        parts.push(node.content.replace(/\{\{term:[^}]+\}\}/g, (m: string) => m.slice(7, -2)))
+      }
+      if (node.attrs?.title) parts.push(node.attrs.title)
+    }
+    return parts.join(' ').slice(0, 600)
+  }
+
+  const searchIndex = compiled.map((l: any) => ({
+    id: l.id,
+    title: l.meta.title,
+    track: l.meta.track,
+    chapter: l.meta.chapter,
+    bodyText: extractBodyText(l.body || []),
+  }))
+
   await Promise.all([
     atomicWriteFile(lessonsMetaFile, `${JSON.stringify(lessonsMeta, null, 2)}\n`),
     ...compiled.map((l: any) =>
@@ -903,6 +925,7 @@ export async function main() {
       writeFile(path.join(projectsOutDir, `${p.id}.json`), `${JSON.stringify(p, null, 2)}\n`),
     ),
     atomicWriteFile(glossaryGeneratedFile, `${JSON.stringify(glossary, null, 2)}\n`),
+    atomicWriteFile(searchIndexFile, `${JSON.stringify(searchIndex, null, 2)}\n`),
     buildTaxonomy(),
     compileQuiz(),
   ])

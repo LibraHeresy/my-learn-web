@@ -41,8 +41,7 @@ HTML 提供丰富的输入类型，浏览器会自动优化交互方式：
 - `<input type="range" min="0" max="100">` — 滑块，适合选音量、评分
 - `<input type="number" min="1" max="10">` — 数字输入，带增减箭头
 - `<input type="color">` — 颜色选择器
-- `<!-- date 类型：弹出日历选择器 -->
-<input type="date">` — 日期选择器
+- `<input type="date">` — 日期选择器
 - `<input type="time">` — 时间选择器
 - `<input type="file">` — 文件上传
 - `<input type="search">` — 搜索框（带清除按钮）

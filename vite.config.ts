@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { VitePWA } from 'vite-plugin-pwa'
 import { watch, type FSWatcher } from 'node:fs'
 import { resolve } from 'node:path'
 import { spawn, type ChildProcess } from 'node:child_process'
@@ -60,7 +61,34 @@ function contentWatchPlugin(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/my-learn-web/',
-  plugins: [vue(), contentWatchPlugin()],
+  plugins: [
+    vue(),
+    contentWatchPlugin(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest: {
+        name: '代码乐章',
+        short_name: '代码乐章',
+        description: '从乐谱到代码，用音乐思维学 Web 开发',
+        theme_color: '#c9a96e',
+        background_color: '#faf7f0',
+        display: 'standalone',
+        icons: [
+          { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml' },
+        ],
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        runtimeCaching: [
+          {
+            urlPattern: /\/src\/generated\//,
+            handler: 'NetworkFirst',
+            options: { cacheName: 'generated-content' },
+          },
+        ],
+      },
+    }),
+  ],
   test: {
     environment: 'jsdom',
     globals: true,

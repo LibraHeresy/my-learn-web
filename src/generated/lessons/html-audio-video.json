@@ -19,7 +19,7 @@
     {
       "type": "block:music-analogy",
       "name": "music-analogy",
-      "content": "这是离音乐最近的一节课！`<!-- {{term:audio}}：嵌入音频播放器 -->\r\n<{{term:audio}}>` 标签让你的网页**播放音乐**，`<{{term:video}}>` 标签让你的网页**播放视频**。作为音乐学的学生，你会发现这比 `<p>` 和 `<{{term:div}}>` 有趣多了！"
+      "content": "这是离音乐最近的一节课！`<audio>` {{term:标签}}让你的网页**播放音乐**，`<video>` {{term:标签}}让你的网页**播放视频**。作为音乐学的学生，你会发现这比 `<p>` 和 `<div>` 有趣多了！"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "视频标签"
       },
-      "content": "`<video>` {{term:标签}}的用法和 `<!-- {{term:audio}}：嵌入音频播放器 -->\r\n<{{term:audio}}>` 非常相似：\n\n```html\r\n<video controls width=\"400\" src=\"视频地址\">\r\n  你的浏览器不支持视频播放\r\n</video>\r\n```- `controls` — 显示播放控件\r\n- `width` / `height` — 设置播放器尺寸\r\n- 同样支持 `<source>` 提供多种格式\r\n现在你的网页可以像一个音乐播放器一样工作了！"
+      "content": "`<video>` {{term:标签}}的用法和 `<audio>` 非常相似：\n\n```html\r\n<video controls width=\"400\" src=\"视频地址\">\r\n  你的浏览器不支持视频播放\r\n</video>\r\n```- `controls` — 显示播放控件\r\n- `width` / `height` — 设置播放器尺寸\r\n- 同样支持 `<source>` 提供多种格式\r\n现在你的网页可以像一个音乐播放器一样工作了！"
     },
     {
       "type": "block:example",
@@ -67,10 +67,15 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": "::::step{purpose=\"初次体验 `<!-- {{term:audio}}：嵌入音频播放器 -->\n<{{term:audio}}>` 标签——你的网页现在可以播放音乐了。学习编程第一次让网页发出声音，值得纪念！\" expected=\"点击播放按钮后，音频开始播放。`{{term:controls}}` {{term:属性}}提供了播放/暂停/音量控件。\"}\r\n点击预览区中的音频播放器，看看能否播放\r\n::::\n\r\n\r\n\r\n::::step{purpose=\"`<video>` 的用法和 `<!-- {{term:audio}}：嵌入音频播放器 -->\n<{{term:audio}}>` 几乎一样（`{{term:controls}}`、`{{term:src}}`、`{{term:source}}`），学会一个就学会了另一个。\" expected=\"预览区中多了一个视频播放器。点击播放即可观看视频。\"}\r\n挑战：在 `<!-- {{term:audio}}：嵌入音频播放器 -->\r\n<{{term:audio}}>` 下面加一个 `<{{term:video}}>` {{term:标签}}\r\n::::",
+      "content": "",
       "steps": [
         {
-          "content": "给 `<!-- {{term:audio}}：嵌入音频播放器 -->\r\n<{{term:audio}}>` 标签加上 `{{term:loop}}` {{term:属性}}，让音乐循环播放",
+          "content": "点击预览区中的音频播放器，看看能否播放",
+          "purpose": "初次体验 `<audio>` {{term:标签}}——你的网页现在可以播放音乐了。学习编程第一次让网页发出声音，值得纪念！",
+          "expected": "点击播放按钮后，音频开始播放。`controls` {{term:属性}}提供了播放/暂停/音量控件。"
+        },
+        {
+          "content": "给 `<audio>` {{term:标签}}加上 `loop` {{term:属性}}，让音乐循环播放",
           "purpose": "理解**{{term:布尔属性}}**——`loop` 不需要写值，写上就生效（循环播放），不写就不循环。就像开关：只有开和关两种状态。",
           "expected": "音乐播放到结尾后自动从头开始。去掉 `loop`，播完就停了。"
         },
@@ -78,13 +83,18 @@
           "content": "尝试修改音频的 `src` 地址，换成你喜欢的音乐链接",
           "purpose": "理解 `src` {{term:属性}}的通用性——和 `<img>` 的 `src` 一样，它告诉浏览器资源在哪里。",
           "expected": "播放器播放的是你换的新音频。如果没声音，检查链接是否有效。"
+        },
+        {
+          "content": "挑战：在 `<audio>` 下面加一个 `<video>` {{term:标签}}",
+          "purpose": "`<video>` 的用法和 `<audio>` 几乎一样（`controls`、`src`、`source`），学会一个就学会了另一个。",
+          "expected": "预览区中多了一个视频播放器。点击播放即可观看视频。"
         }
       ]
     },
     {
       "type": "block:listen-to",
       "name": "listen-to",
-      "content": "这一课不需要推荐——直接在编辑器里放一段你喜欢的音乐吧！用 `<!-- {{term:audio}}：嵌入音频播放器 -->\r\n<{{term:audio}}>` {{term:标签}}让它响起来。"
+      "content": "这一课不需要推荐——直接在编辑器里放一段你喜欢的音乐吧！用 `<audio>` {{term:标签}}让它响起来。"
     }
   ],
   "starter": {

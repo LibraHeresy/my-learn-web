@@ -96,6 +96,7 @@ export const useProgressStore = defineStore('progress', () => {
   // 注意：使用属性赋值而非替换整个对象，避免触发 watchEffect 重新执行
   function saveUserCode(lessonId: string, code: UserCode) {
     const entry = ensureProgress(lessonId)
+
     entry.userCode = { ...code }
     entry.lastVisited = Date.now()
 

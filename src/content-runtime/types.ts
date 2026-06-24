@@ -110,7 +110,7 @@ export type ListenToBlockNode = {
 /**
  * 课程正文中的块节点（判别联合）。
  * 通过 `.type` 或 `.name` 字段收窄后可获得精确类型，例如：
- * `if (node.type === 'block:task') { node.steps /* TaskStep[] */ }`
+ * `if (node.type === 'block:task') { node.steps // TaskStep[] }`
  */
 export type BlockNode =
   | MusicAnalogyBlockNode

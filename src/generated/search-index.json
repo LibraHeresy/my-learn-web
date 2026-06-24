@@ -1,0 +1,716 @@
+[
+  {
+    "id": "ai-what-is",
+    "title": "AI 能做什么、不能做什么",
+    "track": "ai-collaboration",
+    "chapter": "ai-basics",
+    "bodyText": "AI 能做什么、不能做什么 「AI 是你的乐团，但指挥棒在你手里——它演奏技巧一流，但不知道下一段该进入哪个调。」 你打开 ChatGPT 或 Claude，输入一句话，它回复一段文字。你很容易觉得它在\"思考\"。但它在做的事情本质上很简单：**预测下一个最可能的词。**\r\n给它\"今天天气真\"，它预测\"好\"（而不是\"坏\"，因为语料库里\"天气真好\"比\"天气真坏\"常见得多）。给它十万个词的上下文，它预测下一个词。然后把这个词加入上下文，再预测下一个。就像滚雪球——一个词接一个词，滚出一段话。\r\n这个机制叫\"自回归语言模型\"。它没有真正的理解、没有意识、没有判断力。它是人类所有公开文本的统计魔镜——你说一句话，它反射出互联网上最可能的续写。\r\n**这意味着什么？** 它生成的代码是\"统计上最像正确答案的东西\"，但不一定是正确答案。就像你让一百万个程序员投票决定这段代码怎么写——大概率是对的，但不是绝对。 一、大语言模型本质上是什么 理解了它的本质，你就能理解它的强项和弱点。\r\n**第一，生成样板代码。** \"写一个 Vue 组件，包含一个按钮和一个计数器\"——这种有标准答案、已经被写了几百万次的任务，AI 做得又快又好。因为它的训练数据里有一百万个类似的例子。\r\n**第二，解释已有代码。** 你把一段看不懂的代码贴给它：\"这段代码在干什么？\"它擅长从模式中提取意图。因为\"解释代码\"这件事在"
+  },
+  {
+    "id": "ai-html",
+    "title": "用 AI 写结构和语义",
+    "track": "ai-collaboration",
+    "chapter": "ai-frontend",
+    "bodyText": "用 AI 写结构和语义 「AI 能把音符写下来，但只有懂乐理的人才知道这段旋律该配什么和弦。」 你在第一章手写了 HTML——标签、嵌套、语义化。现在试试让 AI 写。\r\n打开 AI 工具，试试这个 Prompt：\n\n> 我在做一个个人博客。请生成一个文章列表页面的 HTML 结构。每篇文章包含：标题（h2）、摘要（p）、作者名、发布日期、标签列表、一个\"阅读更多\"链接。要求：使用语义化标签（article、header、main、footer 等），结构清晰，class 命名用 BEM 风格。\r\nAI 会生成一段 HTML。现在——**用你在第一章学到的知识审查它：**\n\n- 用了 `<article>` 还是 `<div class=\"article\">`？\r\n- `<header>` 和 `<footer>` 的位置对吗？\r\n- 标签列表用了 `<ul>` 还是几个 `<span>` 挤在一起？\r\n- class 命名真的符合 BEM 吗？有没有叫 `red-text` 这种和表现相关的名字？\r\n- 有没有遗漏任何你要求的内容？\r\n你会发现：AI 的结构通常是合理的，但总有那么一两处不够语义化、不够干净。**这正是你的用武之地。** 一、让 AI 生成 HTML 结构 通过审查大量 AI 生成的 HTML，你会发现几个反复出现的模式：\r\n**问题一：div 泛滥。** AI "
+  },
+  {
+    "id": "ai-plan",
+    "title": "用 AI 做项目规划",
+    "track": "ai-collaboration",
+    "chapter": "ai-project",
+    "bodyText": "用 AI 做项目规划 「作曲之前，先想清楚你要写交响曲还是小步舞曲。AI 能帮你展开配器，但决定写什么——是你。」 假设你接到一个需求：\"我要一个番茄钟应用。\"\r\n你不会立刻开始写代码。你至少要思考：\n\n- 它长什么样？（UI 设计）\r\n- 有哪些功能？（功能拆解）\r\n- 数据怎么流转？（状态管理）\r\n- 用什么技术栈？（技术选型）\r\n- 怎么做成组件？（组件划分）\r\n在 AI 时代之前，这一步是你自己在纸上画或在脑中想。现在，你可以用 AI 加速这一步。但**加速不等于跳过**——AI 帮你展开思路，你来判断方向。\r\n试试这个 Prompt：\n\n> 我需要做一个番茄钟 Web 应用。帮我做项目规划：\r\n> 1. 列出核心功能清单\r\n> 2. 建议技术栈（我熟悉 Vue 3 + Vite）\r\n> 3. 拆分成组件树\r\n> 4. 设计数据流（哪些数据是全局状态，哪些是组件内部状态）\r\n> 5. 列出开发步骤（按优先级排序）\r\n拿到 AI 的规划后，不要直接开始写代码。**先审查规划本身。** 一、拿到一个需求，怎么做？ AI 的项目规划有一个经典毛病：**功能膨胀。**\r\n你说\"番茄钟\"，AI 的规划里可能出现：用户注册登录、云端同步、统计图表、社交分享、自定义主题、桌面通知、PWA 离线支持、多语言国际化……\r\n这些功能本身没有错，但你在做一个学习项目，不是创业产品。功能膨胀的代价"
+  },
+  {
+    "id": "tooling-nodejs",
+    "title": "安装你的\"乐器\"：Node.js",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "安装你的\"乐器\"：Node.js 学音乐之前，你得先有一件乐器。学前端工程化之前，你得先有 **Node.js**——它不是用来写代码的，而是用来**运行工具的**。就像钢琴本身不演奏，但有了它你才能弹出所有曲子。 到目前为止，你的 JavaScript 都运行在**浏览器**里。Node.js 让 JavaScript 可以运行在**你的电脑**上——就像以前只能在音乐教室弹钢琴，现在你家里也有了一台。\r\n有了 Node.js，你才能使用：\n\n- **npm** — 包管理器（相当于一个巨大的乐谱库）\r\n- **Vite** — 构建工具（自动搭建排练厅）\r\n- **终端命令** — 用文字指挥电脑\n\n> 💡 不要被\"安装\"吓到。这就像第一次调音——看起来很专业，但其实只是拧几个旋钮。 Node.js 是什么？ 1. 打开浏览器，访问 **nodejs.org**\r\n2. 下载 **LTS 版本**（长期支持版，偶数是版本号，如 20.x）\r\n   - LTS = Long Term Support，最稳定的版本\r\n   - 不要下载\"Current\"版本——那是给尝鲜的人用的\r\n3. 运行安装程序，一路点\"Next\"（全部默认选项即可）\r\n4. 安装完成后，打开终端验证：\r\n**Windows：** 按 `Win + R`，输入 `cmd`，回车\r\n**Mac：** 按 `C"
+  },
+  {
+    "id": "tooling-sfc",
+    "title": "单文件组件 — .vue 文件的三段式",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "单文件组件 — .vue 文件的三段式 一份完整的乐器分谱包含三个部分：**乐谱内容**（template，演奏什么）、**演奏标记**（script，怎么演奏——强弱、速度）、**声部说明**（style，这个声部的音色特征）。Vue 的单文件组件（`.vue` 文件）恰好也是三段：`<template>`、`<script setup>`、`<style scoped>`——合在一起，就是一个独立的、可复用的组件。 打开 `src/App.vue`，你会看到：\n\n```vue\r\n<script setup>\r\n// 1. 逻辑区 — 数据和函数\r\nimport { ref } from 'vue'\r\nconst message = ref(\"你好，Vue！\")\r\n</script>\r\n<template>\r\n  <!-- 2. 模板区 — HTML 结构 -->\r\n  <h1>{{ message }}</h1>\r\n</template>\r\n<style scoped>\r\n/* 3. 样式区 — CSS */\r\nh1 {\r\n  color: #8B2E2E;\r\n}\r\n</style>\r\n```\n\n**三段各司其职：**\n\n- `<script setup>` — JavaScript 逻辑（数据、函数、计算属性等）。`setup` 关键词表示使用 Vue 3 的组合式 API "
+  },
+  {
+    "id": "workflow-localstorage",
+    "title": "localStorage — 给数据一个\"永久的家\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "localStorage — 给数据一个\"永久的家\" 每次排练结束后，乐谱不会消失——它被归档保存，下次排练时翻出来继续用。**localStorage** 就是浏览器的\"归档柜\"：你把数据存进去，刷新页面、关闭浏览器、甚至重启电脑后，数据还在那里等你。 目前你写的所有页面都有一个共同的问题：**刷新页面后，所有数据都丢失了**。\r\n收藏的曲目？没了。输入的列表？清空了。计数器？归零了。\r\n这是因为 JavaScript 变量只存在于**当前页面会话**中。刷新页面等于重新开始——所有变量重新初始化。\r\n`localStorage` 解决的就是这个问题：它把数据存在浏览器里，和页面会话无关。\n\n```js\r\n// 存数据\r\nlocalStorage.setItem(\"userName\", \"小雅\");\r\n// 取数据（刷新页面后依然能读到！）\r\nlet name = localStorage.getItem(\"userName\");  // \"小雅\"\r\n// 删数据\r\nlocalStorage.removeItem(\"userName\");\r\n// 清空全部\r\nlocalStorage.clear();\r\n``` 为什么需要 localStorage？ localStorage 只能存储**字符串**。如果你要存数组或对象，需要用 JSON 转换：\n\n```js\r\n// 存对象/数"
+  },
+  {
+    "id": "workflow-three-step",
+    "title": "三段工作流 — HTML → CSS → JS 的正确顺序",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "三段工作流 — HTML → CSS → JS 的正确顺序 作曲家从不一开始就写满整份总谱。通常先写旋律线（HTML），再配和声与配器（CSS），最后标注强弱与速度变化（JS）。写网页也一样——**永远先写结构，再写样式，最后写交互**。跳过任何一步都会让后面的工作变得混乱。 在乐理篇中，你已经学会了三门\"乐器\"：\n\n- **HTML**（HyperText Markup Language，超文本标记语言）— 页面的骨架\r\n- **CSS**（Cascading Style Sheets，层叠样式表）— 页面的外观\r\n- **JS / JavaScript** — 页面的\"大脑\"，让它能听你的指令做出反应\r\n但从零开始构建一个页面时，**按什么顺序写**比写什么更重要。\r\n标准的三段工作流：\r\n**第一步：HTML 结构** — 把页面上所有内容先用标签写出来\r\n- 标题、段落、图片、按钮……先全部摆上去\r\n- 不关心颜色、大小、位置\r\n- 就像先把音符写在五线谱上\r\n**第二步：CSS 样式** — 给每个元素穿上合适的\"衣服\"\r\n- 颜色、字体、间距、背景……\r\n- 从外到内，从大到小\r\n- 就像给旋律配上和声与音色\r\n**第三步：JS（JavaScript）交互** — 让页面\"动起来\"\r\n- 点击按钮会发生什么？\r\n- 用户输入后如何响应？\r\n- 就像指挥标注演奏法：这里渐"
+  },
+  {
+    "id": "css-flexbox",
+    "title": "Flexbox 入门 — 灵活排列你的内容",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "Flexbox 入门 — 灵活排列你的内容 Flexbox 是 CSS 中的布局利器，就像**指挥安排乐队座位**——可以横向排（木管在前，铜管在后），也可以纵向排（第一小提琴在左，第二小提琴在右）。 Flexbox（弹性盒子）让元素排列变得简单。只需在**父元素**上设置 `display: flex`，子元素就会自动排列：\n\n```css\r\n.container {\r\n  display: flex;\r\n}\r\n```\n\n默认情况下，子元素会**横向排列**（就像乐团的乐器按行排开）。 什么是 Flexbox？ `flex-direction` 决定排列方向：\n\n- `row`（默认）— 横向排列，从左到右，像乐团的一排\r\n- `column` — 纵向排列，从上到下，像总谱的各声部\r\n乐团排练时指挥说\"弦乐坐左边，管乐坐右边\"——在 CSS 中，`flex-direction` 就是你的指挥棒！ 主轴方向 `justify-content` 控制主轴上的对齐方式：\n\n- `flex-start` — 靠左/靠上\r\n- `center` — 居中\r\n- `space-between` — 两端对齐，中间均匀分布\r\n- `space-around` — 每个元素周围有相同间距\r\n就像合唱团在舞台上排开——可以挤在中间，也可以均匀分布。 间距分配 下面的代码用 Flexbox 把三张"
+  },
+  {
+    "id": "css-intro",
+    "title": "CSS 入门 — 改变文字的颜色和大小",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "CSS 入门 — 改变文字的颜色和大小 如果说 HTML 是乐谱上的音符，CSS 就是**演奏法记号**。它告诉浏览器：这个音符应该用什么力度（颜色）、多大音量（字号）来演奏。 CSS（Cascading Style Sheets，层叠样式表）负责网页的外观。HTML 决定了\"有什么\"，CSS 决定了\"长什么样\"。\r\n一句 CSS 规则由三部分组成：\n\n```css\r\nh1 {\r\n  color: #8B2E2E;\r\n  font-size: 32px;\r\n}\r\n```\n\n- `h1` 是**选择器**——选中文档中的 `<h1>` 元素\r\n- `color` 和 `font-size` 是**属性**——你想改变什么\r\n- `#8B2E2E` 和 `32px` 是**值**——改成什么 什么是 CSS？ 和 HTML 一样，CSS 也有注释。CSS 注释用 `/*` 开头，`*/` 结尾：\n\n```css\r\n/* 这是标题的主色调 */\r\nh1 {\r\n  color: #8B2E2E;\r\n  font-size: 36px;\r\n}\r\n/*\r\n * 多行注释也可以\r\n * 像这样写\r\n */\r\np {\r\n  color: #6B5A4E;\r\n}\r\n```\n\n注释中的内容不会被浏览器执行——你可以用它来标注每一段样式是干什么的。\r\n**快捷键：** 选中代码按 `Ctrl + /`（"
+  },
+  {
+    "id": "html-intro",
+    "title": "认识 HTML — 你的第一行代码",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "认识 HTML — 你的第一行代码 HTML 就像五线谱，它决定了页面上有什么内容。五线谱告诉演奏者弹什么音，HTML 告诉浏览器显示什么内容。 HTML 是网页的骨架。想象一下：**五线谱上有音符，网页上有内容。**\r\n打开任何网页，你看到的所有文字、图片、链接，都是用 HTML 写出来的。就像作曲家把音符写在五线谱上，开发者把内容写在 HTML 里。 什么是 HTML？ :::explain{{{term:title}}=\"{{term:标签}} — {{term:HTML}} 的\\\"音符\\\"\"}\n每一首扬琴曲都写在一张乐谱上——音符告诉你要弹什么，指法告诉你用什么竹法。网页也一样：{{term:HTML}} 像乐谱的音符，告诉浏览器这里放什么内容；{{term:CSS}} 像演奏技法记号，告诉浏览器用什么颜色、多大字号；{{term:JavaScript}} 像你的双手，让网页动起来。 先从最简单的两个{{term:标签}}开始：{{term:h1}} 是页面最大的标题（就像扬琴谱上的大标题《春到清江》），{{term:p 标签}}是段落（就像一个乐句）。 {{term:HTML}} 使用**{{term:标签}}（{{term:tag}}）**来标记内容。每个{{term:标签}}用尖括号 `< >` 包裹： 下面这段代码就是编辑器中你看到的代码。一个 `<h1>` 大标题"
+  },
+  {
+    "id": "js-intro",
+    "title": "认识 JavaScript — 给页面注入生命",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "认识 JavaScript — 给页面注入生命 如果 HTML 是乐谱、CSS 是演奏法记号，那么 JavaScript 就是**指挥家**——它让静态的乐谱动起来，控制演奏的节奏、顺序和互动。 HTML 决定了页面上\"有什么\"，CSS 决定了\"长什么样\"，而 JavaScript（简称 JS）决定了\"能做什么\"。\r\n有了 JavaScript，网页可以：\n\n- 响应用户的点击和输入\r\n- 动态改变内容和样式\r\n- 播放音乐和动画\r\n- 记住用户的操作\r\n就像一个指挥家让乐团从静止的乐器变成流动的音乐！ 什么是 JavaScript？ 代码越写越多以后，你需要给代码加一些说明——这段在做什么、为什么要这样写。JS 有**两种注释**：\r\n**单行注释 `//`：**\n\n```js\r\n// 这是一条注释，浏览器会忽略它\r\nalert(\"你好！\"); // 行末也可以加注释\r\n```\n\n**多行注释 `/* */`：**\n\n```js\r\n/*\r\n * 这里可以写\r\n * 多行注释内容\r\n */\r\nalert(\"你好！\");\r\n```\n\n注释不会被浏览器执行——它们只给\"人类\"看，包括未来的你自己。\r\n**快捷键：** 选中代码按 `Ctrl + /`（Mac: `Cmd + /`），编辑器自动添加或移除 `//` 注释。这个快捷键在 HTML、CSS、JS 中都通用。 JS 注释：给自"
+  },
+  {
+    "id": "dawn-era",
+    "title": "诞生——从 0 到 1",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "诞生——从 0 到 1 「最早的网页没有颜色，就像最早的歌没有和声——但一切伟大的事物，都始于简单。」 1989 年，瑞士日内瓦。CERN（欧洲核子研究中心）的一间办公室里，Tim Berners-Lee 面对着三台互不兼容的电脑。他是牛津物理系毕业的软件顾问，不是科班的计算机科学家——这个背景很重要，因为他思考问题的方式更像物理学家：找到最简模型，解释最大范围的现象。\r\n当时 CERN 有一万多名科学家，来自几十个国家。每个人用不同的电脑、不同的软件、不同的数据格式。一篇论文存在这台机器上，另一篇在隔壁办公室的磁盘里。信息散落在孤岛中，互相看不见。\r\n这不是 Tim 第一次想解决这个问题。1980 年他刚来 CERN 时，就写了一个叫 Enquire 的私人工具，用超文本链接把文档串在一起。但他离开 CERN 时，存在 8 英寸软盘里的代码被遗忘了。九年后，他重新拾起这个想法。\r\n他拿起笔记本，写了一份提案：《Information Management: A Proposal》。上司 Mike Sendall 说不够具体，让他再写一版。第二版加了更多技术细节。Sendall 终于批了，在封面上写了五个字：\r\n\"Vague but exciting.\"\r\n模糊，但令人兴奋。这五个字，是万维网的第一张准生证。Sendall 后来承认，他当时完全没意识到自己在批准什么。CERN 的文"
+  },
+  {
+    "id": "ai-mindset",
+    "title": "编程思维的进化",
+    "track": "ai-collaboration",
+    "chapter": "ai-basics",
+    "bodyText": "编程思维的进化 「手写汇编像敲击每一根琴弦——精准但低效。高级语言像看谱演奏——更快但依赖乐谱。Prompt 像指挥——你不演奏，但你知道应该是什么声音。」 编程的历史，是一部\"抽象层次不断上升\"的历史。每一次上升，都让你离机器的思维方式更远，离人类的思维方式更近。\r\n**第一层：机器码 / 汇编（1940s-1950s）。** 你需要告诉 CPU 把哪个寄存器的值挪到哪个内存地址。写一个\"Hello World\"要十几行指令。你像手工打磨零件的工匠——每一刀都在掌控之中，但一天只能做一件活。\r\n**第二层：高级语言（1960s-2010s）。** FORTRAN、C、Java、Python、JavaScript——这些语言把\"机器指令\"抽象成了\"人类可读的逻辑\"。你写 `print(\"Hello\")`，编译器把它翻译成几百条机器指令。效率提升了几百倍。你从工匠变成了工程师。\r\n**第三层：Prompt（2020s）。** 你写\"帮我写一段 JS 代码，从 API 取数据，显示成列表，加上加载状态和错误处理\"。AI 生成完整的实现。你从写代码的人变成了描述需求的人。\r\n**每一次抽象，都在做同一件事：把你从\"怎么做\"中解放出来，让你专注于\"做什么\"和\"为什么\"。** 一、编程的三次抽象飞跃 在前八章，你学了怎么写 HTML、CSS、JS、Vue。那是让你**成为第二层的专家**——"
+  },
+  {
+    "id": "ai-css",
+    "title": "用 AI 写样式和布局",
+    "track": "ai-collaboration",
+    "chapter": "ai-frontend",
+    "bodyText": "用 AI 写样式和布局 「AI 能调出正确的音符，但只有你的耳朵知道这段音乐是太闹了还是太静了。」 AI 在 CSS 上有两个极端表现：\r\n**好的一面：** 属性值记得很全。你想要渐变、阴影、动画——AI 能准确地写出 `linear-gradient(135deg, #667eea 0%, #764ba2 100%)`。这些标准写法在它的训练数据里有几百万次重复。\r\n**坏的一面：** 没有设计品味。AI 把颜色调成什么取决于\"统计上最常见的蓝色\"，而不是\"这个蓝色在这个页面上好不好看\"。AI 不知道\"留白\"的美感，不知道`line-height: 1.6`比`1.2`在长文章里的阅读体验好在哪里。\r\n**核心差异：** CSS 有两部分——\"怎么写\"（语法）和\"该写成什么样\"（设计判断）。AI 擅长前者，完全不会后者。后者是你的事。 一、AI 写 CSS 的特点 当你拿到一段 AI 生成的 CSS 时，检查这四个问题：\r\n**1. 冗余。** AI 倾向于重复声明。同一个 `margin: 0; padding: 0;` 在 8 个选择器里出现。你应该抽成公共样式或使用 CSS 变量。\r\n**2. 响应式缺失。** AI 默认生成桌面端样式。如果你没说\"移动端适配\"，它不会自动加媒体查询。而真实项目中移动端流量往往过半。\r\n**3. 硬编码数值。** `width: 320p"
+  },
+  {
+    "id": "ai-scaffold",
+    "title": "用 AI 搭项目脚手架",
+    "track": "ai-collaboration",
+    "chapter": "ai-project",
+    "bodyText": "用 AI 搭项目脚手架 「乐团已经就座，乐器已经调好——现在只需要你的第一个手势。」 在第七章你学会了用 Vite 创建项目——`npm create vite@latest`，选择模板，安装依赖，配置。每一步都手动操作。\r\n现在试试让 AI 指导你：\n\n> 我需要在本地创建一个 Vue 3 + Vite 项目。请一步步告诉我：\r\n> 1. 用什么命令创建项目\r\n> 2. 初始目录结构是什么\r\n> 3. 需要安装哪些额外依赖\r\n> 4. 如何清理默认的模板代码\r\n> 5. 创建项目的基本文件夹结构（components、composables、assets 等）\r\nAI 会给你详细的步骤。但你需要注意：**AI 的建议不一定适用于你当前的 Node.js 版本、操作系统、网络环境。** 如果某个命令报错了，把错误喂回去，让 AI 帮你调整。\r\n脚手架搭好之后，你有了一个干净的项目骨架。接下来，让 AI 帮你创建第一个组件。 一、从零到有，五分钟 AI 在\"搭项目\"这件事上有一个特有的问题：**幻觉出不存在的库或过时的 API。**\r\n它可能告诉你装一个叫 `vue-tomato-timer` 的包——这个包并不存在，但名字\"听起来合理\"，于是 AI 编了一个。\r\n它可能用 Vue 2 的语法写 Vue 3 的项目。因为它的训练数据里 Vue 2 的内容比 Vue 3 多。\r\n它可能"
+  },
+  {
+    "id": "tooling-vscode",
+    "title": "认识你的\"乐谱架\"：VS Code",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "认识你的\"乐谱架\"：VS Code 音乐家有谱架，程序员有编辑器。**VS Code** 不是普通的记事本——它就像智能谱架：自动帮你对齐音符、标记错误、提示下一个和弦。全世界绝大多数前端开发者每天都在用它。 你可能用记事本写过代码——那种感觉就像在餐巾纸上写乐谱。VS Code 给你的是：\r\n| 功能 | 类比 |\r\n|------|------|\r\n| 语法高亮 | 不同类型的音符用不同颜色标记 |\r\n| 自动补全 | 你哼一个音，它就帮你找到后面的旋律 |\r\n| 错误提示 | 弹错音时，调音器立刻报警 |\r\n| 内置终端 | 谱架下面藏着一台节拍器 |\r\n| 文件管理 | 所有乐谱按声部分类放好 |\r\n| 插件市场 | 各种\"效果器\"任你挑选 |\n\n> 💡 VS Code 是微软开发的，完全免费，Windows/Mac/Linux 都能用。 为什么需要专业的代码编辑器？ 1. 打开浏览器，访问 **code.visualstudio.com**\r\n2. 下载并安装 VS Code\r\n3. 启动 VS Code\r\n**界面导览：**\n\n- **左侧活动栏** — 最左侧的图标列（文件、搜索、Git、插件、...）\r\n- **文件资源管理器** — 显示项目文件夹结构（快捷键 `Ctrl+Shift+E` / `Cmd+Shift+E`）\r\n- **编辑区** — 中间最大的区"
+  },
+  {
+    "id": "vue-directives",
+    "title": "Vue 指令 — 模板的演奏记号",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "Vue 指令 — 模板的演奏记号 乐谱上有各种演奏记号——f 代表强奏、p 代表弱奏、tr 是颤音、反复记号指定哪些小节要重复。Vue 指令就是模板中的演奏记号：v-if 是此处休止（这个声部不奏）、v-show 是加弱音器（还在但静默）、v-for 是反复记号（同一乐句重复多次）、v-bind 是连音线（把数据和 DOM 属性连起来）、v-html 是即兴华彩段（直接插入内容，但需谨慎）。 Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑定到属性，v-if/v-show 控制显示隐藏，v-for 循环渲染列表，v-on（简写 @）监听事件，v-model 双向绑定表单。就像扬琴谱上的各种演奏记号，每个指令控制一种行为。v-bind 把 JS 表达式的值绑定到 HTML 属性上，简写是 :：\n\n```html\r\n<!-- 完整写法 -->\r\n<img v-bind:src=\"imageUrl\">\r\n<a v-bind:href=\"'/user/' + userId\">用户</a>\r\n<div v-bind:class=\"{ active: isActive }\">...</div>\r\n<!-- 简写（最常用） -->\r\n<img :src=\"imageUrl\">\r\n<a :href=\"'/user/' + userId\">用户</a>\r\n<div :cla"
+  },
+  {
+    "id": "async-event-loop",
+    "title": "事件循环 — JavaScript 的\"指挥家\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "事件循环 — JavaScript 的\"指挥家\" 交响乐团的指挥决定了哪个声部何时进入——小提琴先起，然后木管加入，最后铜管收尾。JavaScript 也有一个\"指挥家\"叫 Event Loop（事件循环），它决定了代码的执行顺序：谁先上场，谁等着，谁最后谢幕。 :::explain{{{term:title}}=\"{{term:JavaScript}} 是\\\"单线程\\\"的\"}\n{{term:JavaScript}} 一次只能做一件事（单线程），就像你一个人没法同时弹钢琴和拉小提琴。\r\n但浏览器不是只有 {{term:JS}} 引擎——它还有 Web {{term:API}}（定时器、网络{{term:请求}}等）。{{term:JS}} 把耗时任务\"外包\"给 Web {{term:API}}，自己继续执行后面的代码。\r\n任务完成后，Web {{term:API}} 把{{term:回调}}{{term:函数}}放进**任务队列**，Event Loop 检查主线程空闲了，就把队列里的任务取出来执行。\r\n**直观流程：** ::: :::example{{{term:title}}=\"{{term:setTimeout}} 不是\\\"暂停\\\"\"}\n看这段代码的执行顺序："
+  },
+  {
+    "id": "workflow-plan-first",
+    "title": "先规划再动手 — 用注释画出你的\"乐谱草稿\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "先规划再动手 — 用注释画出你的\"乐谱草稿\" 指挥家在排练前一定会先通读总谱，标出曲式结构、调性变化和难点段落。写代码也一样——**先用注释画出\"草图\"，再填入真正的代码**。这就像排练前做案头工作：标注呈示部、展开部、再现部。先看清大局，再动手处理细节。 :::explain{{{term:title}}=\"注释是你的\\\"排练笔记\\\"\"}\n你已经学过 {{term:HTML}}、{{term:CSS}}、{{term:JS}} 的三种注释写法（`<!-- -->`、`/* */`、`//`）。现在我们要用注释做更重要的事——**规划代码结构**。\r\n当你面对一个空白页面时，不要急着写代码。先写注释： ::: 动手试试 ✨ 马勒《第二交响曲》第一乐章 — 长达20分钟的乐章，如果没有清晰的段落标记和结构规划，指挥根本无法驾驭如此庞大的编制。好的规划让复杂变得可控。"
+  },
+  {
+    "id": "css-centering",
+    "title": "居中与对齐 — 让页面更专业",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "居中与对齐 — 让页面更专业 页面居中对齐就像**指挥站在舞台中央**——视觉焦点集中、平衡和谐。而对齐方式的选择，就像决定乐团的排列：对称式、扇形、还是弧形分布。 在网页布局中，居中对齐是最常用的技巧之一：\r\n**水平居中（文字）：**\n\n```css\r\ntext-align: center;\r\n```\n\n**水平居中（块级元素）：**\n\n```css\r\nmargin: 0 auto;\r\n```\n\n**Flexbox 一键居中（最强方法）：**\n\n```css\r\n.container {\r\n  display: flex;\r\n  justify-content: center;  /* 水平居中 */\r\n  align-items: center;      /* 垂直居中 */\r\n}\r\n``` 水平居中与垂直居中 `align-items` 控制**交叉轴**（垂直于主轴的方向）上的对齐：\n\n- `stretch`（默认）— 拉伸填满\r\n- `center` — 交叉轴居中\r\n- `flex-start` — 交叉轴起点\r\n- `flex-end` — 交叉轴终点\r\n在横向排列（row）时，交叉轴就是垂直方向。用 `align-items: center` 可以让所有卡片在垂直方向居中对齐，即使它们高度不同。 align-items 交叉轴对齐 下面的代码创建了一个居中的\"演奏"
+  },
+  {
+    "id": "css-bg-border",
+    "title": "背景与边框 — 为卡片增添层次",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "背景与边框 — 为卡片增添层次 背景颜色像**舞台的幕布**，边框像**画框**，它们为内容营造氛围和层次感——就像不同颜色的幕布会影响观众对乐曲的第一印象。 background-color 属性设置元素的背景色，border 设置边框，border-radius 设置圆角，box-shadow 设置阴影。就像给扬琴谱选暖色纸、加装饰边框——让页面更有层次感。\n\n```css\r\ndiv {\r\n  background-color: #FFFAF2;\r\n}\r\n``` 背景颜色 `border` 给元素加上边框，`border-radius` 让边角变圆滑：\n\n```css\r\ndiv {\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 12px;\r\n}\r\n```\n\n- `2px` — 边框粗细\r\n- `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）\r\n- `#D4C5A9` — 边框颜色\r\n- `border-radius: 12px` — 圆角半径，值越大越圆\r\n圆角让卡片更柔和，就像乐谱中圆润的连音线。 边框与圆角 下面的代码创建了一张\"作曲家卡片\"，有暖色背景、细边框和圆角：\n\n```css\r\n.card {\r\n  background-color: #FFFAF2; /* 背景色：暖白，像旧乐谱的"
+  },
+  {
+    "id": "html-doc-structure",
+    "title": "HTML 文档结构 — 了解网页的\"乐谱格式\"",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "HTML 文档结构 — 了解网页的\"乐谱格式\" 每份乐谱都有固定的格式：左上角写曲名、右上角标速度、第一行是谱号调号、最后画终止线。HTML 文档也有标准结构——`<!DOCTYPE>` 是\"这是乐谱\"的声明、`<head>` 是页面的\"调号信息\"、`<body>` 是\"乐谱正文\"。了解这个结构，你才算真正看懂了一份网页\"乐谱\"。 :::explain{{{term:title}}=\"每个网页都有一副\\\"骨架\\\"\"}\n就像扬琴谱有固定的格式——调号、拍号写在最前面，然后是音符正文。{{term:HTML}} 页面也有自己的骨架结构。 在认识骨架之前，先记住几个关键{{term:标签}}的名字和角色：{{term:DOCTYPE html}} 声明文档类型（告诉浏览器\"这是 HTML5 页面\"），{{term:html}} 是整个页面的根{{term:元素}}，{{term:head}} 存放幕后配置信息，{{term:body}} 存放所有可见内容。 ::: 写代码时经常想给自己留个记号——这段是干什么的、为什么这样写——但又不想让它显示在页面上。\r\nHTML 提供了**注释（Comment）**：\n\n```html\r\n<!-- 这是注释，不会显示在页面上 -->\r\n<p>这行会正常显示</p>\r\n```注释以 `<!--` 开头，以 `-->` 结尾，中间的内容会被浏览器完全忽略"
+  },
+  {
+    "id": "js-variables",
+    "title": "变量与字符串 — 存储你的音乐信息",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "变量与字符串 — 存储你的音乐信息 变量就像**反复记号**——把一段内容存起来，想用的时候随时调用。变量名就像乐谱上的段落标记（A段、B段），方便你指代和引用。 变量是一个**有名字的容器**，用来存储数据。你可以把任何东西放进去，然后用名字来取用：\n\n```js\r\nlet composer = \"肖邦\";\r\nlet piece = \"夜曲\";\r\nlet year = 1830;\r\n```\n\n- `let` — 声明一个变量（可以修改）\r\n- `const` — 声明一个常量（不能修改）\r\n- `composer` / `piece` — 变量名（你自己起的名字）\r\n- `\"肖邦\"` — 字符串（文本），用引号包裹\r\n- `1830` — 数字，不需要引号 什么是变量？ 用 `+` 号可以把字符串和变量拼接在一起：\n\n```js\r\nlet composer = \"肖邦\";\r\nlet sentence = \"我最喜欢的作曲家是\" + composer;\r\n```\n\n更好的写法是**模板字符串**，用反引号 `` ` `` 包裹，`${}` 插入变量：\n\n```js\r\nlet sentence = `我最喜欢的作曲家是${composer}`;\r\n```\n\n就像把两个乐句连接成一个完整的乐段！ 拼接字符串 `document.querySelector()` 可以找到页面上的 HTM"
+  },
+  {
+    "id": "browser-war",
+    "title": "混战——浏览器战争",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "混战——浏览器战争 「十天生出 JavaScript，就像即兴哼出的旋律成了传世经典。」 1995 年 4 月，Netscape 的程序员 Brendan Eich 接到一个任务：给浏览器做一门脚本语言。上司 Marc Andreessen 告诉他：\"给你十天。\"\r\n不是比喻，是字面意义的十天。Netscape 要在五月底发布新版本，他们需要一门语言让网页能\"动\"起来——表单验证、弹出窗口、响应点击。当时有两个选择：直接用 Java（太重了，适合写应用，不适合写\"检查邮箱是不是空的\"这种小脚本），或者自己做一门。\r\n做 Java 的是 Sun Microsystems，当时硅谷最炙手可热的公司。Netscape 和 Sun 达成合作：Netscape 浏览器内置 Java 支持，同时自己开发一门轻量脚本语言，名字蹭 Java 的热度——叫 JavaScript。\r\nBrendan Eich 在 1995 年 5 月的十天里几乎没怎么睡觉。最初叫 Mocha，发布前改成 LiveScript，最后改成 JavaScript。这门语言跟他被给的时间一样粗糙——没有真正的类（用原型链冒充）、类型转换诡异（`[] + {}` 和 `{} + []` 结果不一样）、全局变量满天飞。但它有一个致命的优势：**它在那里。** 每一个 Netscape 用户打开浏览器，JavaScript 就在那"
+  },
+  {
+    "id": "ai-prompt-basics",
+    "title": "写好 Prompt 的核心原则",
+    "track": "ai-collaboration",
+    "chapter": "ai-basics",
+    "bodyText": "写好 Prompt 的核心原则 「好的指挥不需要说出每一个音符——只需要指出方向、速度、情绪，乐团就知道怎么演奏。好的 Prompt 也一样。」 坏 Prompt 像一个模糊的需求单：\"帮我写个按钮。\"\r\nAI 被迫猜。它猜你要什么颜色、什么大小、什么文案、什么功能。猜错的概率极高。\r\n好 Prompt：\n\n> 写一个 Vue 3 `<template>` 中的 icon 按钮组件。圆角 8px，背景浅蓝 #E8F0FE，文字深蓝 #1A73E8，hover 时背景变为 #D2E3FC。按钮内容是一个带 emoji 和短文本的组合，通过 prop 传入。尺寸 small（padding 6px 12px）和 medium（padding 10px 20px）两档，通过 prop 控制。\r\n四种信息的密度完全不同：\n\n- 坏 Prompt：6 个词的模糊需求\r\n- 好 Prompt：明确了技术栈、样式参数、交互行为、组件接口、尺寸变体\r\n**原则：把 AI 当成一个很能干但完全不了解你项目的新同事。** 你不说清楚，它一定猜错。你给的上下文越具体，它的输出越接近你要的东西。 一、原则一：具体，再具体 AI 不知道你的项目是用 React 还是 Vue，不知道你的 CSS 是用 Tailwind 还是原生 CSS，不知道你的团队有没有命名规范。你必须告诉它。\r\n对比：\r\n**没有上下文"
+  },
+  {
+    "id": "ai-js",
+    "title": "用 AI 写逻辑",
+    "track": "ai-collaboration",
+    "chapter": "ai-frontend",
+    "bodyText": "用 AI 写逻辑 「AI 能即兴一段 solo，但只有你才知道这段 solo 该在哪个和弦进行里出现。」 JavaScript 逻辑是最容易出\"看起来对、实际有 bug\"的地方。\r\n**AI 擅长：** 标准算法的实现（排序、去重、日期格式化）、正则表达式、API 请求模板、标准的设计模式实现。\r\n**AI 容易出错的地方：**\n\n- **异步时序。** AI 生成的 async/await 代码在正常网络下运行良好，但网络慢、请求失败、竞态条件——这些边界情况经常被忽略。\r\n- **类型混乱。** `\"5\" + 3` 和 `\"5\" - 3` 的结果不一样——AI 生成的 JS 可能在某些路径上产生意外的类型转换。\r\n- **状态副作用。** AI 可能直接修改传入的参数（mutate），而不是返回一个新对象。这就造成了隐蔽的 bug。\r\n- **缺少错误处理。** AI 默认假设一切顺利。`try/catch`、API 错误处理、空值检查——经常被省略。\r\n**核心原则：AI 生成的 JS 代码你必须能看懂。** 不是\"大概看懂\"，是\"每一行都知道它在干什么\"。如果有一段你看不懂的 AI 代码跑了你的生产环境，你就是在闭着眼睛开飞机。 一、AI 写 JS 的优势与陷阱 拿到 AI 生成的 JS 代码后，按这个顺序检查：\r\n**第 1 步：读逻辑。** 代码做的是你让它做的事吗？逐"
+  },
+  {
+    "id": "ai-component",
+    "title": "用 AI 实现组件",
+    "track": "ai-collaboration",
+    "chapter": "ai-project",
+    "bodyText": "用 AI 实现组件 「每个乐手都有自己的谱子——你的任务是确保所有谱子合在一起是一首完整的曲子，而不是四个声部各演各的。」 项目规划做好了，脚手架搭起来了，现在开始写组件。\r\n不要在一个对话里让 AI 生成所有组件。原因是：(1) AI 的上下文窗口有限，后面的组件会忘记前面的设计决策；(2) 你无法逐个审查和验证。\r\n**正确做法：每个组件一个对话，或每 2-3 个紧密相关的组件一个对话。**\r\n示例流程（以番茄钟为例）：\r\n**对话 1：** \"写一个 TimerDisplay 组件。显示倒计时时间，格式 MM:SS。接收 `seconds` prop，当时间小于 60 秒时数字变红。\"\r\n→ 生成 → 你审查 → 修改 → 确认没问题 → 下一个组件。\r\n**对话 2：** \"写一个 TimerControls 组件。包含三个按钮：开始、暂停、重置。通过 emit 向父组件发送 'start'、'pause'、'reset' 事件。开始和暂停是同一个按钮——当前状态是运行中时显示'暂停'，否则显示'开始'。\"\r\n**对话 3：** \"在 App.vue 中组合 TimerDisplay 和 TimerControls。用 `useTimer` composable 管理倒计时逻辑。TimerDisplay 接收剩余秒数，TimerControls 的按钮控制计时的启动、暂停和"
+  },
+  {
+    "id": "tooling-terminal",
+    "title": "用命令行\"指挥\"电脑",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "用命令行\"指挥\"电脑 指挥家用一个手势让整个乐团起奏——这是**效率**。命令行也是如此：敲几个字母，电脑就完成一项任务。不需要鼠标点来点去，不需要在文件夹里翻找。几个命令，一切就绪。 前端工程化的几乎每一步都在命令行里完成：\n\n- 创建项目：`npm create vite@latest`\r\n- 安装依赖：`npm install`\r\n- 启动开发服务器：`npm run dev`\r\n- 构建生产版本：`npm run build`\r\n- Git 版本管理：`git add` / `git commit`\r\n你不需要成为命令行专家，只需要掌握 6 个最常用的命令。 为什么要学命令行？ **1. `pwd` — 我在哪里？**（Print Working Directory）\n\n```bash\r\npwd\r\n# 输出：/Users/xiaomei/my-music-app\r\n```\n\n就像 GPS 告诉你当前位置。\r\n**2. `ls` — 这里有什么？**（List）\n\n```bash\r\nls\r\n# 输出：readme.md\r\n```\n\n列出当前文件夹中的所有文件。\r\n**3. `cd` — 去别的地方**（Change Directory）\n\n```bash\r\ncd my-music-app    # 进入文件夹\r\ncd ..              # 回到上一级\r\ncd ~"
+  },
+  {
+    "id": "vue-lifecycle",
+    "title": "Vue 生命周期 — 组件的乐章结构",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "Vue 生命周期 — 组件的乐章结构 每首乐曲都有固定的结构——序奏呈示主题、展开部发展变化、再现部回归、尾声收束。Vue 组件也有自己的乐章结构（生命周期）：创建（setup）→ 挂载到 DOM（onMounted）→ 数据更新（onUpdated）→ 即将销毁（onBeforeUnmount）→ 已销毁（onUnmounted）。每个阶段都有对应的钩子函数，让你在正确的时间点执行正确的代码。 每个 Vue 组件从创建到销毁，会经历一系列阶段。Vue 在每个阶段提供了**钩子函数（hooks）**，让你在特定时机执行代码：\n\n```setup() → 创建响应式状态\r\n  ↓\r\nonBeforeMount() → 即将挂载（很少用）\r\n  ↓\r\nonMounted() → 已挂载到 DOM ✅ 常用\r\n  ↓\r\nonBeforeUpdate() → 数据变了，DOM 即将更新\r\n  ↓\r\nonUpdated() → DOM 已更新\r\n  ↓\r\nonBeforeUnmount() → 组件即将销毁 ✅ 常用\r\n  ↓\r\nonUnmounted() → 组件已销毁\r\n```\n\n**你只需要了解最常用的三个就够了：**\n\n- onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）\r\n- onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听"
+  },
+  {
+    "id": "async-promise",
+    "title": "Promise — 给异步操作一个\"承诺\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "Promise — 给异步操作一个\"承诺\" 你预订了一张音乐会门票——你拿到了一个\"承诺\"（Promise）。这个承诺可能兑现（拿到票），也可能落空（售罄）。在结果出来之前，你可以继续做其他事。Promise 就是 JavaScript 给异步操作的结果打的\"包票\"。 如果用传统的回调嵌套处理多个异步操作，代码会变成\"金字塔\"：\n\n```js\r\n// 回调地狱 💀\r\ngetUser(id, (user) => {\r\n  getOrders(user.id, (orders) => {\r\n    getDetails(orders[0].id, (details) => {\r\n      console.log(details)\r\n    })\r\n  })\r\n})\r\n```\n\nPromise 用链式调用拉平了结构：\n\n```js\r\n// Promise 链式调用 ✨\r\ngetUser(id)\r\n  .then(user => getOrders(user.id))\r\n  .then(orders => getDetails(orders[0].id))\r\n  .then(details => console.log(details))\r\n  .catch(err => console.log('出错了：', err))\r\n```\n\n就像从复杂的多声部对位变成了清晰的主旋律加伴奏。 "
+  },
+  {
+    "id": "workflow-console-intro",
+    "title": "读懂浏览器的\"错音提示\" — 开发者控制台入门",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "读懂浏览器的\"错音提示\" — 开发者控制台入门 每个音乐家都有一位\"调音师\"朋友——音不准时，调音器会告诉你偏差了多少。浏览器的**开发者工具控制台（Console）**就是你的调音器——代码出错时，它会精确告诉你哪一行、出了什么错。学会读错误信息，你就再也不怕\"报错\"了。 写代码一定会遇到错误。即便是工作了 20 年的工程师，也天天看报错信息。区别在于：他们不慌张，而是**先看控制台**。\r\n当你的 JS 不工作时，第一个动作不是盯着代码瞎猜——**先打开浏览器控制台**：\n\n- Windows：按 `F12`，点击 \"Console\"（控制台）标签\r\n- Mac：按 `Cmd + Option + J`\r\n- 或者右键页面 → \"检查\" → \"Console\"\r\n红色文字就是错误信息。**红色不可怕，可怕的是不读红字。** 就像一个音不准时你的耳朵会告诉你——控制台就是代码的\"听力训练\"。 错误不是失败，是路标 每条错误通常包含三部分信息：\r\n**1. 错误类型** — 告诉你\"出了什么问题\"：\n\n- `ReferenceError: xxx is not defined` — 变量没声明就用了\r\n- `TypeError: xxx is not a function` — 把不是函数的东西当函数调用了\r\n- `SyntaxError: Unexpected token` — "
+  },
+  {
+    "id": "css-position",
+    "title": "Position 定位 — 控制元素的舞台位置",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "Position 定位 — 控制元素的舞台位置 定位属性就像**舞台上不同角色的站位规则**：`relative` 像乐团成员，在自己的座位范围内微调；`absolute` 像**独奏者**站在舞台的特定坐标上；`fixed` 像**舞台灯光**，无论观众视角如何都锁定在固定位置；`sticky` 像**指挥台**，滚动到一定位置就固定住。 所有元素默认都是 `position: static`（正常文档流，位置由 HTML 顺序决定）。\r\n`position: relative` 让元素可以**相对于自己原来的位置**偏移：\n\n```css\r\n.box {\r\n  position: relative;\r\n  top: 10px;    /* 下移 10px */\r\n  left: 20px;   /* 右移 20px */\r\n}\r\n```\n\n- 元素仍然占据原来的空间（别人不会顶上来）\r\n- 就像乐团成员在自己的座位上微微调整姿势，不影响旁边的乐手 static 与 relative `position: absolute` 让元素脱离正常文档流，相对于**最近的已定位祖先**定位：\n\n```css\r\n.stage {\r\n  position: relative;  /* 祖先必须有定位 */\r\n}\r\n.soloist {\r\n  position: absolute;\r\n  to"
+  },
+  {
+    "id": "css-font-spacing",
+    "title": "字体与间距 — 让文字更优雅",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "字体与间距 — 让文字更优雅 字体选择像**不同乐器的音色**——衬线体如小提琴般优雅，无衬线体如长笛般清晰。而 `letter-spacing` 和 `line-height` 则像音符间的**时值与呼吸**，决定了阅读的节奏。 font-family 属性设置字体，font-size 设置字号，font-weight 设置粗细，line-height 设置行高，text-align 设置对齐方式。就像扬琴演奏中不同竹法带来不同音色——字体选择决定了文字的「气质」。\n\n```css\r\nh1 {\r\n  font-family: \"Noto Serif SC\", serif;\r\n}\r\np {\r\n  font-family: \"Noto Sans SC\", sans-serif;\r\n}\r\n```\n\n两种主要的字体类型：\n\n- **衬线体（serif）**：笔划末端有装饰，典雅庄重，适合标题\r\n- **无衬线体（sans-serif）**：笔划均匀，简洁现代，适合正文\r\n像选乐器一样——你不会用小提琴的音色去吹进行曲。 字体系列 三个重要的间距属性：\n\n- `letter-spacing` — 字母/汉字间距，像音符间的疏密\r\n- `line-height` — 行高，像乐谱中行与行的距离\r\n- `text-align` — 文字对齐（`left` / `center` / `right"
+  },
+  {
+    "id": "html-emphasis",
+    "title": "文本与强调 — 描述你的音乐故事",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "文本与强调 — 描述你的音乐故事 `<strong>` 标签像乐谱中的**强音记号（f）**，强调重要内容；`<em>` 像**连音线**，让文字更富感情。 上一节课我们学会了写标题和段落。但这就像只有一种力度的音乐——太平淡了。\n\n现在我们来学习三个新标签，让文字也有\"强弱变化\"：strong 标签加粗强调重要内容（就像重音记号 >），em 标签斜体强调语气（就像揉弦/颤音——不是更大声，而是更有韵味），br 标签在文字中换行（就像换气记号，是单标签，不需要结束标签）。\n\n具体写法：\n\n- `<strong>` — **加粗强调**，像强音记号 **f**\r\n- `<em>` — *斜体强调*，像连音线，让语气更柔和\r\n- `<br>` — 换行，像乐谱中的呼吸记号 让文字更有表现力 下面就是编辑器中的代码。注意看 `<strong>` 和 `<em>` 标签是如何包裹文字的：\n\n```html\r\n<!-- strong：加粗强调，像重音记号 f -->\r\n<h1>我的音乐故事</h1>\r\n<p>我最喜欢的作曲家是<strong>肖邦</strong>。</p>\r\n<!-- em：斜体强调，像连音线 -->\r\n<p>他的夜曲<em>优美而忧伤</em>，<br>每次听都让我感动。</p>\r\n```\n\n你可以看到\"肖邦\"加粗了，\"优美而忧伤\"变成斜体了，而且中间还有一个换行。\n\n*"
+  },
+  {
+    "id": "js-types",
+    "title": "数据类型与运算符 — 认识代码的\"音色\"",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "数据类型与运算符 — 认识代码的\"音色\" 不同乐器有不同音色：小提琴清亮、大提琴深沉、定音鼓有力。编程中也一样——**number** 是节奏数、**boolean** 是音符有无、**string** 是旋律走向。了解数据类型，就像认识乐团中的每一件乐器。 JavaScript 有几种基础数据类型，就像乐团中的乐器分类：\n\n- **string（字符串）** — 文字，用引号包裹 `\"巴赫\"`\r\n- **number（数字）** — 数值，可运算 `1685`, `3.14`\r\n- **boolean（布尔值）** — 只有 `true` 或 `false`，像二分音符的\"有/无\"\r\n- **null / undefined** — \"空\"值，表示没有内容\n\n```js\r\nlet composer = \"巴赫\";        // string\r\nlet birthYear = 1685;         // number\r\nlet isBaroque = true;         // boolean\r\nlet encore = null;            // null（故意为空）\r\n```\n\n用 `typeof` 查看类型：\n\n```js\r\nconsole.log(typeof \"巴赫\");   // \"string\"\r\nconsole.log(typeof 1"
+  },
+  {
+    "id": "ajax-web20",
+    "title": "破冰——从停滞到 Ajax",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "破冰——从停滞到 Ajax 「Ajax 让网页学会了呼吸——不需要刷新就能和世界对话。」 2004 年 4 月 1 日，Google 发布了一款新产品。所有人都以为是愚人节玩笑。1GB 免费邮箱？当时 Hotmail 给你 2MB。Yahoo Mail 给你 4MB。Google 说：1GB。500 倍。而且免费。\r\n但真正让开发者世界炸锅的，不是容量。\r\n是你点开一封邮件。页面顶部不变，侧边栏不变，只有中间的内容区域——刷新了。没有白屏，没有浏览器转圈，没有从头加载整个页面。**这是开发者第一次看到\"一个网页应用可以像桌面软件一样丝滑\"。**\r\n背后的技术，就是微软五年前在 IE5 里实现的 XMLHttpRequest。这个 API 在浏览器里沉睡了五年，几乎没有人碰过它。Google 的工程师不是发明了它——他们是第一个想清楚\"这个东西到底能用来做什么\"的人。\r\nGmail 团队做了一件在当时是架构突破的事：把整个应用拆成\"需要刷新的部分\"和\"不需要刷新的部分\"。导航栏、侧边栏不刷新，只有邮件列表和正文区域在后台悄悄更新。这个拆分的思路——**前后端分离**——后来成了所有 Web 应用的标准架构。\r\n同一年，Google Maps 上线。你可以拖拽地图，周边自动加载——不刷新。这在 2004 年是一种近乎魔法的体验。人们第一次感觉到：网页不是一个\"页面\"了，它是一个\"应用\""
+  },
+  {
+    "id": "ai-prompt-iterate",
+    "title": "Prompt 迭代与对话",
+    "track": "ai-collaboration",
+    "chapter": "ai-basics",
+    "bodyText": "Prompt 迭代与对话 「好的演奏不是第一遍就完美——是指挥说'这里弱一点、那里慢一点'，乐团长反复练习，直到找到最好的那个版本。」 新手最常见的错误：写一个 Prompt，看到 AI 的回复不满意，就认为\"AI 不行\"。\r\n这就像你找一个新同事干活，第一次交代需求没说清楚，他做的和你想的不一样。你不会直接开了他——你会补充信息、纠正理解、重新沟通。\r\nAI 协作的核心不是\"写出完美的第一个 Prompt\"，而是**\"写 Prompt → 看输出 → 找差距 → 修正 Prompt → 再看输出\"**的循环。\r\n一个真实案例：\n\n> **第 1 个 Prompt：** \"写一个导航栏。\"\r\n> **AI 输出：** 一个水平排列的链接列表，样式普通。\r\n> **你的判断：** 不是我要的。我需要响应式的——手机上变成汉堡菜单。还有，当前页面要高亮。\r\n>\r\n> **第 2 个 Prompt：** \"改进：需要响应式，移动端用汉堡菜单，当前页面链接高亮。\"\r\n> **AI 输出：** 加上了媒体查询和 active class，但汉堡菜单的 JS 逻辑写得有点啰嗦。\r\n> **你的判断：** 功能对了，但代码太冗长。让它用 Vue 的响应式重写。\r\n>\r\n> **第 3 个 Prompt：** \"代码冗余。用 Vue 3 Composition API 重写，用 ref 管理菜单开"
+  },
+  {
+    "id": "ai-debug",
+    "title": "用 AI 调试和解释错误",
+    "track": "ai-collaboration",
+    "chapter": "ai-frontend",
+    "bodyText": "用 AI 调试和解释错误 「好的排练不是不犯错——是每次犯错都知道为什么，然后下次不再犯。」 传统的调试流程：看到报错 → 看报错信息 → 看不懂 → 复制报错到搜索引擎 → 看 StackOverflow → 试三个方案 → 修好。\r\nAI 时代的调试流程：看到报错 → 把报错+相关代码一起贴给 AI → \"帮我分析为什么报这个错，怎么修\" → AI 解释原因并给出修复方案 → 你验证。\r\n节省的时间不只是在\"搜索\"环节。更重要的是：**AI 把\"答案\"和\"解释\"一起给了你。** StackOverflow 的答案经常是\"试试这个\"——能修好但不知道原因。AI 能告诉你这个错误是怎么产生的、为什么这个修复有效、以及怎么避免以后再犯。\r\n这就是 AI 调试最革命性的地方：**每一次 debug 都是一节一对一的编程课。** 你的调试能力在每次对话中都在增长。 一、AI 是你的调试搭档 不要只贴报错信息。报错信息只有\"什么错了\"，缺少\"在哪里错、在什么上下文中错\"。\r\n**最小有效信息：**\n\n1. **报错信息（完整）**——不要截取，TypeError 的前半句和后半句都重要\r\n2. **相关代码（不是全部代码）**——报错涉及的函数或组件\r\n3. **你在做什么**——\"用户点击提交按钮后\" 或 \"页面加载时\" 或 \"调用 API 后\"\r\n4. **预期行为 vs 实际行为**"
+  },
+  {
+    "id": "ai-capstone",
+    "title": "完整项目：从 Prompt 到产品",
+    "track": "ai-collaboration",
+    "chapter": "ai-project",
+    "bodyText": "完整项目：从 Prompt 到产品 「最后一课——上台。没有指挥台，没有乐谱架。你和你的 AI 乐团，面对空白的观众席。灯光亮了。」 从以下三个项目中选择一个（或提出你自己的项目想法）：\r\n**选项 A：音乐备忘录。** 一个可以记录音乐灵感的单页应用。用户可以写下一段旋律描述、心情、调性、可能的风格方向，保存到列表，可以编辑和删除。数据存到 localStorage。\r\n**选项 B：练琴计时器。** 为音乐学习者设计的练习计时工具。设置多个练习段（如\"音阶 15 分钟\"\"练习曲 20 分钟\"\"休息 5 分钟\"），按顺序计时，每段结束提醒。可以保存常用的练习计划。\r\n**选项 C：乐谱搜索器。** 搜索公开的乐谱 API 或使用本地模拟数据。输入作曲家或曲名，显示匹配结果列表。可以按时期、乐器筛选。用学过的异步请求来处理数据。\r\n选好后，**全程用 AI 协助你完成**——从规划、脚手架，到每个组件，到调试。但每一步都由你做最终决定。 一、你的结业项目 在开发过程中，保持一个简单的项目日记。不需要格式，不需要每天写——只在关键节点记一笔：\n\n> Day 1：让 AI 做了项目规划，初始规划太复杂了，我砍掉了一半功能（去掉用户系统和云端同步）。现在的范围是一周能做完的。\r\n>\r\n> Day 2：AI 帮我搭了 Vite + Vue 3 脚手架。它建议我装一个不存在的包，还好我去 n"
+  },
+  {
+    "id": "tooling-modules",
+    "title": "JS 模块化 — 把代码分成声部管理",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "JS 模块化 — 把代码分成声部管理 管弦乐总谱不会把所有音符挤在一行——第一小提琴、第二小提琴、中提琴、大提琴各有自己的谱表。模块化就是给你的代码分声部：一个文件管搜索（search.js），一个文件管渲染（render.js），一个文件管数据（store.js）。每个模块有自己的职责，通过 import/export 像不同声部之间的对话一样协作。 早期的网页开发中，所有 JS 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n\n- 变量名冲突（两个函数都想用 name 这个变量）\r\n- 代码难以维护（找一个 bug 要翻几千行）\r\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\r\n模块化解决了这些问题：\n\n```text\r\n// 之前：一个巨大的 script.js\r\nscript.js (800 行)\r\n// 之后：按职责分成小文件\r\nutils.js        ← 工具函数（格式化日期、编码等）\r\napi.js          ← 网络请求\r\nrender.js       ← 渲染页面\r\napp.js          ← 主入口，引入其他模块\r\n```\n\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。 为什么需要模块化？ ES Modules 提供两种导出方式：\r"
+  },
+  {
+    "id": "tooling-ref-reactive",
+    "title": "响应式数据 — ref 与 computed 的真实写法",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "响应式数据 — ref 与 computed 的真实写法 在乐理篇和合奏篇，你每次修改数据后都要手动调用 `render()` 更新页面——就像每次排练后手动重新整理乐谱。Vue 的 `ref` 和 `computed` 让这一切自动化：数据就像被施了魔法，你改一个值，所有用到它的地方自动更新。**你只需要关注数据本身，不用管 DOM。** 在 `<script setup>` 中，用 `ref()` 创建响应式数据：\n\n```vue\r\n<script setup>\r\nimport { ref } from 'vue'\r\nconst count = ref(0)\r\nconst composer = ref(\"贝多芬\")\r\nconst pieces = ref([\"夜曲\", \"月光\", \"春\"])\r\nfunction addOne() {\r\n  count.value++  // JS 中读写用 .value\r\n}\r\n</script>\r\n<template>\r\n  <p>计数：{{ count }}</p>        <!-- 模板中不需要 .value！ -->\r\n  <p>作曲家：{{ composer }}</p>\r\n  <button @click=\"addOne\">+1</button>\r\n</template>\r\n```\n\n**规则不变：JS 中用 `.value`"
+  },
+  {
+    "id": "async-await",
+    "title": "async/await — 让异步代码\"看起来同步\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "async/await — 让异步代码\"看起来同步\" Promise 的 `.then()` 链条就像看乐谱上的分谱——你要顺着每个声部找下去。而 async/await 就像看总谱——所有声部一目了然，从上到下顺序阅读，但实际演奏是同时发生的。 async/await 让异步代码看起来像同步代码——async 声明异步函数，await 等待 Promise 完成再继续。就像指挥等待独奏家完成华彩乐段再继续指挥——表面是同步的等待，实际是异步的完成。\n\n```js\r\n// Promise 写法\r\nfunction getMusicInfo() {\r\n  return fetchUser('小明')\r\n    .then(user => fetchFavorites(user.id))\r\n    .then(favs => console.log(favs))\r\n}\r\n// async/await 写法\r\nasync function getMusicInfo() {\r\n  const user = await fetchUser('小明')\r\n  const favs = await fetchFavorites(user.id)\r\n  console.log(favs)\r\n}\r\n``` async/await 是什么？ 用 async/await 时，错误处理回到了熟悉的 try"
+  },
+  {
+    "id": "workflow-console-log",
+    "title": "console.log — 你的\"排练监听器\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "console.log — 你的\"排练监听器\" 排练时，指挥会让某个声部单独演奏，以便听清楚每个音符。`console.log()` 就是你的\"排练监听\"——它让你在任何时刻、查看任何变量的值。当你不确定代码在做什么时，用 `console.log()` 看个究竟。 console.log() 是 JavaScript 最常用的调试工具——在控制台中打印出你想检查的值。就像练琴时录下来回听，看哪个音不对。在你怀疑有问题的地方插入 console.log(变量名)，打开控制台（F12）查看输出。\n\n```js\r\nlet composer = \"肖邦\";\r\nconsole.log(composer);  // 控制台输出：肖邦\r\nlet count = 5;\r\nconsole.log(\"当前数量：\", count);  // 可以同时打印文字和变量\r\nlet list = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nconsole.log(\"列表内容：\", list);  // 数组也可以打印\r\n``` console.log 是什么？ 最常见的调试模式是**在函数开头和关键位置加 console.log**，追踪代码执行到了哪里：\n\n```js\r\nfunction playMusic(piece) {\r\n  console.log(\"=== playMusic 被调用了 ===\")"
+  },
+  {
+    "id": "css-grid",
+    "title": "Grid 布局 — 二维排布你的元素",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "Grid 布局 — 二维排布你的元素 Grid 就像**总谱的声部排列**——行是声部（第一小提琴、第二小提琴、中提琴、大提琴），列是小节。每个音符都有精确的\"行/列\"坐标，Grid 让你同时控制横向和纵向布局。 Grid（网格布局）同时控制行和列——display:grid 启用网格，grid-template-columns 定义列宽，gap 设置间距。fr 是 fraction（份数）的缩写，1fr 1fr 1fr 表示三等分。就像交响乐团在舞台上的座次表——有行有列，每个位置都有明确安排。\n\n```css\r\n.container {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr 1fr;\r\n  gap: 16px;\r\n}\r\n```\n\n- `1fr` — \"一份\"（fraction），自动分配剩余空间\r\n- `1fr 1fr 1fr` — 三等分（三列宽度相等）\r\n- `repeat(3, 1fr)` — 等价写法\r\n- `gap` — 格子之间的间距\r\n三列等宽就像三行声部并行推进——每个格子就是一个小节！ 创建网格 `grid-template-rows` 定义行高：\n\n```css\r\n.container {\r\n  grid-template-columns: repeat(3, 1fr);\r\n  grid-te"
+  },
+  {
+    "id": "css-box-model",
+    "title": "盒模型 — 理解元素的空间",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "盒模型 — 理解元素的空间 每个 HTML 元素都是一个\"盒子\"，就像**音乐厅的声学布局**：\n\n- `content`（内容）— 演奏区，音乐家所在的地方\r\n- `padding`（内边距）— 舞台到墙壁的距离\r\n- `border`（边框）— 音乐厅的墙壁\r\n- `margin`（外边距）— 音乐厅之间的间隔 从内到外，每个元素有四层空间：\r\n[[html]]\n\n<div class=\"box-model-demo\">\r\n  <div class=\"bm-margin\"><span class=\"bm-label\">margin 外边距</span>\r\n    <div class=\"bm-border\"><span class=\"bm-label\">border 边框</span>\r\n      <div class=\"bm-padding\"><span class=\"bm-label\">padding 内边距</span>\r\n        <div class=\"bm-content\">content（内容）</div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n[[/html]]\r\n最外层 `margin`（外边距），往里一层 `border`（边框），再往里 `padding`（内边距），最里面是 `content`（"
+  },
+  {
+    "id": "html-lists",
+    "title": "列表 — 你喜欢的作曲家",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "列表 — 你喜欢的作曲家 列表就像**乐章目录**或**曲目单**——把信息有序地组织起来，让人一目了然。 当你想列出喜欢的作曲家、曲目或乐器时，就需要用到列表标签。ul 是无序列表（前面是圆点，先弹哪首都行），ol 是有序列表（前面是数字，顺序不能乱），li 是列表项——每个 li 必须放在 ul 或 ol 里面，就像节目单上的每一行必须属于某张单子。\n\n具体写法：\n\n- `<ul>` — **无序列表**（unordered list），前面是圆点\r\n- `<ol>` — **有序列表**（ordered list），前面是数字\r\n- `<li>` — **列表项**（list item），包在每个项目的外面 用列表组织信息 下面就是编辑器中的代码。一个无序列表列出作曲家，一个有序列表排出练琴顺序：\n\n```html\r\n<h1>我的音乐收藏</h1>\r\n<p>这里是我喜欢的音乐作品：</p>\r\n<h2>我喜欢的作曲家</h2>\r\n<!-- 无序列表：圆点标记，顺序不重要 -->\r\n<ul>\r\n  <li>巴赫</li>\r\n  <li>莫扎特</li>\r\n  <li>肖邦</li>\r\n</ul>\r\n<h2>我的练琴顺序</h2>\r\n<!-- 有序列表：数字标记，顺序很重要 -->\r\n<ol>\r\n  <li>音阶练习</li>\r\n  <li>练习曲</li>\r\n  <li>乐曲演奏"
+  },
+  {
+    "id": "js-functions",
+    "title": "函数 — 封装你的音乐逻辑",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "函数 — 封装你的音乐逻辑 函数就像**乐曲的主题动机**——一段可重复使用的旋律片段。贝多芬第五交响曲的\"当当当当\"动机在全曲中反复出现、变形、发展。函数也是：写好一次，到处调用。 函数是一段**有名字的代码块**，把一组操作封装起来，需要时调用：\n\n```js\r\nfunction sayHello() {\r\n  alert(\"你好！\");\r\n}\r\nsayHello();  // 调用函数\r\n```\n\n函数的好处：\n\n- **避免重复**：同样的代码不用写很多遍\r\n- **给代码起名字**：一看函数名就知道它做什么\r\n- **可以传参数**：像给动机配不同的乐器 什么是函数？ 函数可以接收**参数**（输入），然后根据参数做不同的事：\n\n```js\r\nfunction introduce(composer, piece) {\r\n  return `${composer}创作了《${piece}》。`;\r\n}\r\nlet result1 = introduce(\"肖邦\", \"夜曲\");\r\nlet result2 = introduce(\"莫扎特\", \"魔笛\");\r\n```\n\n- `composer` 和 `piece` 是**参数**——像函数接收的输入\r\n- `return` 把结果**返回**——像函数给出的输出\r\n- 同样一个 `introduce` 函数，传入不同的作曲家，得"
+  },
+  {
+    "id": "framework-spring",
+    "title": "爆发——JavaScript 成为平台",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "爆发——JavaScript 成为平台 「V8 引擎如同管弦乐团的指挥——让每一个音符都在正确的时间响起。」 2008 年 9 月，Google 发布了一本漫画书。38 页，没有代码，全是插画。这本漫画书宣布了一件事：Google 要做自己的浏览器——Chrome。\r\n当时所有人都觉得 Google 疯了。IE 占 70%，Firefox 占 25%，浏览器市场已经\"满\"了。而且微软 2001 年就停止了浏览器创新——整整七年，这个领域没有任何值得关注的竞争。为什么 Google 要跳进来？\r\n答案在那本漫画书的第 2 页：**\"我们需要一个更快的平台来运行 Web 应用。\"** Google 的核心收入来自搜索广告，而搜索广告的前提是用户花大量时间在 Web 上。如果 Web 太慢、太难用，用户就会回到桌面软件。Google 做浏览器不是为了和微软打架，是为了**让 Web 成为真正的应用平台**——Gmail、Google Docs、Google Maps 需要浏览器跑得和桌面软件一样快。\r\n为此，Google 在丹麦买下了一个小团队，他们的产品叫 V8——一个全新的 JavaScript 引擎。V8 不像之前的引擎那样逐行解释执行 JS，而是**直接编译成机器码再执行**。结果：JS 的执行速度提升了一个数量级。之前 JS 慢是共识，之后 JS 快成了可能。\r\n更重要的是，G"
+  },
+  {
+    "id": "tooling-npm",
+    "title": "包管理器 — 你的\"乐谱图书馆\"",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "包管理器 — 你的\"乐谱图书馆\" 作曲家不需要从零发明每一个和弦——他们在已有的音乐体系上创作。**npm 就是编程世界的音乐图书馆**：全球开发者共享了超过 200 万个\"包\"，你只需要 `npm install`，就能把别人写好的功能直接拿来用。 npm（Node Package Manager）是 Node.js 自带的包管理器。它做三件事：\n\n1. **下载别人的代码** — `npm install 包名`\r\n2. **管理依赖关系** — 记录你的项目用了哪些包（`package.json`）\r\n3. **运行脚本** — `npm run 脚本名`\r\n**npm 和 pip/brew 类比：**\n\n- 如果你学过 Python：npm = pip\r\n- 如果你用 Mac：npm = Homebrew\r\n- 如果你用手机：npm = 应用商店\n\n> 💡 每次你 `npm install` 一个包，代码被下载到 `node_modules/` 文件夹。这个文件夹通常很大——所以一般不上传到 Git。 npm 做了什么？ :::explain{{{term:title}}=\"{{term:package.json}} — 项目的\\\"身份证\\\"\"}\n每个前端项目都有一个 `package.json` 文件，它记录了："
+  },
+  {
+    "id": "tooling-props-emits",
+    "title": "组件通信 — Props 向下，Emits 向上",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "组件通信 — Props 向下，Emits 向上 在乐团中，**指挥把总谱发给各声部**（Props，父→子），而**各声部首席向指挥反馈准备就绪**（Emits，子→父）。数据总是向下流动，事件总是向上传递——这个\"单向数据流\"原则让复杂的应用变得可预测。 **子组件 `MusicCard.vue`：**\n\n```vue\r\n<script setup>\r\n// 声明\"我需要这些数据\"\r\nconst props = defineProps({\r\n  name: String,\r\n  composer: String,\r\n  period: String,\r\n  liked: Boolean\r\n})\r\n</script>\r\n<template>\r\n  <div class=\"card\">\r\n    <h3>{{ name }}</h3>\r\n    <p>{{ composer }} · {{ period }}</p>\r\n    <span>{{ liked ? '❤' : '🤍' }}</span>\r\n  </div>\r\n</template>\r\n```\n\n**父组件 `App.vue`：**\n\n```vue\r\n<script setup>\r\nimport { ref } from 'vue'\r\nimport MusicCard from './components/MusicC"
+  },
+  {
+    "id": "async-fetch",
+    "title": "fetch — 与\"外面的世界\"对话",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "fetch — 与\"外面的世界\"对话 至此你的音乐都在自己的琴房里。现在，打开窗户——听听外面的音乐，或者把你的琴声传出去。**fetch()** 就是这扇窗户：让 JavaScript 能和互联网上的服务器\"对话\"。 每次你打开网页，浏览器都在发 HTTP 请求：\n\n- **GET**：获取数据（\"请给我这份乐谱\"）\r\n- **POST**：提交数据（\"这是我新写的曲子，请保存\"）\r\n- **PUT/PATCH**：更新数据（\"修改第三小节的音符\"）\r\n- **DELETE**：删除数据（\"删掉这首练习曲\"）\r\n`fetch()` 是浏览器内置的函数，用来发送这些请求。它返回一个 Promise，所以可以和 async/await 配合使用。 什么是 HTTP 请求？ ```js\r\n// GET 请求：获取数据\r\nasync function getPieces() {\r\n  const response = await fetch('https://api.example.com/pieces')\r\n  if (!response.ok) {\r\n    throw new Error('请求失败：' + response.status)\r\n  }\r\n  const data = await response.json()  // 把 JSON 转成 JS 对象\r\n  conso"
+  },
+  {
+    "id": "workflow-debugger",
+    "title": "断点调试 — 用 Sources 面板听诊代码",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "断点调试 — 用 Sources 面板听诊代码 console.log 就像在排练中让乐手报一遍自己的音符——能发现问题，却看不清全局。断点调试则像指挥让乐队在某一个小节停下来，逐个声部检查：长笛吹的是什么音？定音鼓在这个拍点上的力度对吗？你可以在任意时刻凝固住整个程序，查看所有变量的值，然后一行一行地执行，观察数据如何流动。 你一直在用 console.log 来调试代码——这在简单场景下确实管用。但当你遇到复杂问题时：\n\n- 变量在 5 个地方被修改，不知道是谁改错了\r\n- 循环 100 次，不知道第 47 次为什么出问题\r\n- 异步代码的执行顺序让人困惑\r\n- 想看某个时刻**所有**变量的值，而不是只 log 一个\r\n这时候你需要断点（breakpoint）——在代码的某一行设置一个暂停标记，程序运行到这里就会停下来，你可以慢慢检查一切。\r\n**打开 DevTools Sources 面板：**\n\n1. 按 F12 打开开发者工具\r\n2. 切换到 Sources（源代码）面板\r\n3. 左侧找到你的 JS 文件\r\n4. 点击行号设置断点（出现蓝色箭头标记）\r\n5. 刷新页面或触发事件——程序在断点处暂停！ console.log 不够用了吗？ 程序暂停后，你可以使用以下控制按钮（像指挥的不同手势）：\r\n| 按钮 | 快捷键 | 作用 |\r\n|------|--------|-"
+  },
+  {
+    "id": "css-responsive",
+    "title": "响应式设计 — 适配不同的屏幕",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "响应式设计 — 适配不同的屏幕 响应式设计就像**为不同规模的乐团改编同一首曲子**——大型交响乐团（桌面端）和钢琴独奏（手机）都能演绎同一首作品，区别只在于呈现方式。用 `@media` 查询就像为每种编制写一份适配的谱子。 响应式设计让同一个网页在桌面、平板、手机上都有良好的体验。核心工具是 `@media` 查询：\n\n```css\r\n/* 手机端（默认） */\r\n.card { width: 100%; }\r\n/* 平板（≥600px） */\r\n@media (min-width: 600px) {\r\n  .card { width: 48%; }\r\n}\r\n/* 桌面（≥900px） */\r\n@media (min-width: 900px) {\r\n  .card { width: 30%; }\r\n}\r\n```\n\n@media` 后面跟着一个\"条件\"——当条件满足时，里面的样式才生效。\r\n**移动端优先（推荐）**：先写手机样式作为默认，再用 `min-width` 逐步增强大屏。 什么是响应式设计？ 三个常用的响应式断点：\r\n| 断点 | 设备 | 典型宽度 |\r\n|------|------|----------|\r\n| 小屏 | 手机 | < 640px（默认） |\r\n| 中屏 | 平板 | 640px ~ 1024px |\r\n| 大屏 | 桌面 | > 1024px "
+  },
+  {
+    "id": "css-selectors",
+    "title": "CSS 选择器 — 精确指向你的元素",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "CSS 选择器 — 精确指向你的元素 选择器就像**指挥的手势**——指向特定的乐器组（元素），告诉它们该怎么演奏。`.class` 像指挥说\"弦乐组\"，`#id` 像说\"首席小提琴手\"，`:hover` 像说\"当我指向你的时候...\" 选择器告诉 CSS\"对谁生效\"。三种最基础的选择器：\r\n| 选择器 | 写法 | 含义 |\r\n|--------|------|------|\r\n| 元素选择器 | `h1` | 选中所有 `<h1>` |\r\n| 类选择器 | `.card` | 选中所有 `class=\"card\"` 的元素 |\r\n| ID选择器 | `#title` | 选中 `id=\"title\"` 的元素 |\n\n```css\r\nh1 { color: #8B2E2E; }        /* 所有 h1 */\r\n.card { background: #FFFAF2; } /* 所有带 class=\"card\" 的 */\r\n#title { font-size: 2rem; }    /* 只有 id=\"title\" 那个 */\r\n```\n\n**类选择器最常用**——一个类可以给多个元素，一个元素也可以有多个类。 基础选择器 选择器可以组合使用，精确指定层级关系：\n\n- `.card h2` — **后代选择器**，`.card` 内部的所有 `<h2>`\r\n- `.car"
+  },
+  {
+    "id": "html-images-links",
+    "title": "图片与链接 — 丰富你的音乐卡片",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "图片与链接 — 丰富你的音乐卡片 `<img>` 像**乐谱中的插图**，为页面增添视觉元素；`<a>` 链接像**反复记号**，指向另一个地方。 纯文字太单调了——就像一份只有音符没有指法的谱子。img 标签可以在网页中插入图片，它是单标签——不需要结束标签，就像单击泛音，竹头点一下弦面立刻离开。\n\nsrc 属性告诉浏览器图片在哪里（📍特有属性，只有 img/audio/video 等需要\"资源文件\"的标签才有），alt 属性在图片显示不出来时显示替代文字（📍特有属性——就像给一首没有录音的扬琴新作写一段文字描述）。\n\n```html\r\n<img src=\"图片地址\" alt=\"图片描述\">\r\n```- `src` — 图片的地址（可以是网上链接）\r\n- `alt` — 图片加载不出来时显示的文字\r\n\r\n错误示范：如果 src 地址写错了 → 图片显示不出来，页面显示 alt 文字。如果连 alt 都不写 → 屏幕阅读器什么都读不出来，就像乐谱没有曲名。 添加图片 a 标签可以创建超链接——点击后跳转到另一个页面（内联元素，在文字流中不换行）。href 属性指定跳转的目标地址（📍特有属性，必须写完整网址含 https://）。就像乐谱上的反复记号 D.C.——指向另一个位置，告诉演奏者\"跳过去\"。\n\n```html\r\n<a href=\"网址\">点击这里</a>\r\n```- "
+  },
+  {
+    "id": "js-events",
+    "title": "点击事件 — 让按钮响应用户",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "点击事件 — 让按钮响应用户 事件就像**乐器对演奏者的响应**——按下琴键（点击），琴槌敲击琴弦发出声音（执行代码）。没有演奏者的动作，乐器不会自己发出声音；没有事件，代码不会自动执行。 在 JavaScript 中，**事件**是发生在 HTML 元素上的\"事情\"：\n\n- `click` — 用户点击了一个元素\r\n- `input` — 用户在输入框中输入了文字\r\n- `mouseenter` — 鼠标移入了一个元素\r\n用 `addEventListener` 可以\"监听\"这些事件：\n\n```js\r\nlet btn = document.querySelector(\"#myBtn\");\r\nbtn.addEventListener(\"click\", function() {\r\n  alert(\"你点击了按钮！\");\r\n});\r\n```\n\n就像给按钮装了一只耳朵，它时刻听着有没有\"点击\"这件事发生。 什么是事件？ `addEventListener` 接收两个参数：\n\n1. 事件类型（`\"click\"`）\r\n2. 事件处理函数——事件发生时执行的代码\n\n```js\r\nbtn.addEventListener(\"click\", function() {\r\n  // 点击后执行的代码写在这里\r\n  document.querySelector(\"h1\").textContent = \""
+  },
+  {
+    "id": "component-revolution",
+    "title": "工程化——从手艺到工业",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "工程化——从手艺到工业 「工程化是把乐谱交给每个乐手，让他们各自精彩。」 2012 年，微软的一个小团队发布了一个叫 TypeScript 的语言。领头人是 Anders Hejlsberg——Turbo Pascal、Delphi、C# 之父，世界上最好的编程语言设计师之一。\r\nTypeScript 做的事情说起来很简单：给 JavaScript 加上类型系统。你在写 `function add(a, b)` 时，可以写 `function add(a: number, b: number): number`。这在 2012 年被很多人嘲笑：\"JavaScript 的优点就是灵活，加类型是在开倒车。\"\r\n但 Anders Hejlsberg 看到了别人看不到的东西：**随着应用规模变大，灵活不再是优点，而是债务。** 一个不加类型的 JS 项目，三个月后你自己写的代码你自己都不知道参数该传什么。类型系统不是给机器看的（编译后类型全被擦除了），是给你看的——它是活的文档，是不可违反的契约。\r\n到 2016-2018 年，TypeScript 开始被大规模采用。Angular 2 用 TypeScript 重写，React 社区开始大量迁移，Vue 3 用 TypeScript 重写了内核。类型检查能在编译阶段发现大量 bug——那些在运行时才暴露的 `undefined is no"
+  },
+  {
+    "id": "tooling-vite",
+    "title": "创建第一个 Vue 项目 — Vite 登场",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "创建第一个 Vue 项目 — Vite 登场 排练一场交响乐需要准备场地、谱架、乐器、灯光……但如果有一个\"排练厅管家\"帮你一次性搞定所有配置呢？**Vite 就是这个管家**——一条命令，给你搭好整个项目框架：文件夹结构、配置文件、开发服务器，全部就位。你只需要开始写代码。 Vite（法语\"快\"的意思，读作 /viːt/）是一个**前端构建工具**。它做了三件关键的事：\n\n1. **开发服务器** — 运行 `npm run dev`，自动在浏览器打开你的页面，修改代码后页面**瞬时更新**（热更新 HMR）\r\n2. **构建打包** — 运行 `npm run build`，把你的代码压缩优化成可以部署到服务器上的文件\r\n3. **项目脚手架** — 运行 `npm create vite@latest`，自动生成项目文件夹结构\n\n> 💡 \"构建\"这个词可能陌生。想象你把散落的乐谱整理成一本精美的节目单——构建就是把你的源代码变成最终产品。 Vite 是什么？ 在终端中运行：\n\n```bash\r\nnpm create vite@latest music-collection -- --template vue\r\n```\n\n这条命令做了什么？\n\n- `npm create` — npm 的\"创建项目\"功能\r\n- `vite@latest` — 使用最新版 Vite 脚手架\r\n-"
+  },
+  {
+    "id": "vue-philosophy",
+    "title": "Vue 的思维方式 — 从\"操作 DOM\"到\"声明结果\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "Vue 的思维方式 — 从\"操作 DOM\"到\"声明结果\" 在此之前，你写 JS 操作 DOM 就像逐音给乐手指令：\"第一小提琴第二拍拉G\"。而 Vue 像指挥给总谱——你描述\"这里要有弦乐主题\"，Vue 负责让弦乐在正确的时间出声。这是从**命令式**到**声明式**的思维转变。 **命令式（Imperative）：** 一步步告诉计算机怎么做。\n\n```js\r\n// 纯 JS：操作 DOM\r\nconst title = document.createElement('h1')\r\ntitle.textContent = '你好，音乐世界'\r\ndocument.getElementById('app').appendChild(title)\r\n```\n\n**声明式（Declarative）：** 描述你想要什么结果。\n\n```vue\r\n<!-- Vue：声明结果 -->\r\n<template>\r\n  <h1>{{ message }}</h1>\r\n</template>\r\n<script setup>\r\nconst message = '你好，音乐世界'\r\n</script>\r\n```\n\n命令式像给乐手发微信：\"左手按G弦第二品，右手拨弦\"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。 命令式 vs 声明式 Vue 的三个核心理念：\n\n1. **响应式数据："
+  },
+  {
+    "id": "async-api-client",
+    "title": "封装 API 客户端 — 打造你的\"专属乐务\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "封装 API 客户端 — 打造你的\"专属乐务\" 专业乐团有乐务（stage manager），负责处理所有后勤——联系场地、安排排练、协调乐器。你不会让指挥跑去订盒饭。同样，把所有的 fetch 逻辑封装到专门的 API 模块中，让代码各司其职。 之前我们把 fetch 直接写在业务逻辑里。随着项目变大，问题来了：\n\n- 每个接口都要重复写 `fetch(BASE_URL + '/...')`\r\n- 每个请求都要重复检查 `response.ok`\r\n- 基础 URL 改了要改几十处\r\n- 没有统一的错误处理\r\n**解决方式：** 创建一个 `apiClient` 模块，统一管理所有请求。 为什么需要封装？ ```js\r\n// api.js — 你的\"乐务\"\r\nconst BASE_URL = 'https://api.example.com'\r\nasync function request(path, options = {}) {\r\n  const url = BASE_URL + path\r\n  const response = await fetch(url, {\r\n    headers: {\r\n      'Content-Type': 'application/json',\r\n      ...options.headers  // 合并自定义 headers\r\n  "
+  },
+  {
+    "id": "workflow-naming",
+    "title": "命名就像给音符标注指法 — 让代码自己说话",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "命名就像给音符标注指法 — 让代码自己说话 乐谱上标注的指法标记让演奏者一眼就知道用哪个手指。同样，**好的变量名和类名让阅读代码的人（包括一个月后的你自己）一眼就知道这段代码在做什么**。命名是程序员最被低估的技能——它不改变功能，但能让你写代码的速度快 10 倍。 来看一组对比：\r\n**❌ 坏命名（你一个月后根本看不懂）：**\n\n```js\r\nlet a = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nlet b = document.querySelector(\"#c\");\r\nlet d = document.querySelector(\"#e\");\r\nd.addEventListener(\"click\", function() {\r\n  let f = Math.floor(Math.random() * a.length);\r\n  b.textContent = a[f];\r\n});\r\n```\n\n**✅ 好命名（任何人都看得懂）：**\n\n```js\r\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nlet displayEl = document.querySelector(\"#composerDisplay\");\r\nlet shuffleBtn = document.querySelector(\"#shuffleBtn\");\r\nshuff"
+  },
+  {
+    "id": "css-layout-capstone",
+    "title": "综合项目 — 设计一场音乐会的宣传页",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "bodyText": "综合项目 — 设计一场音乐会的宣传页 一场音乐会的海报需要精心布局：标题在顶端（header）、节目单在中央（main content）、赞助商在侧边栏（sidebar）、时间地点在底部（footer）。用 CSS 布局把这些元素安排在合适的位置，就像舞台监督把每个声部安排在正确的位置。 这个项目综合使用了前面学过的所有布局技能：\n\n- **Flexbox** — 导航栏、演奏者卡片排列\r\n- **Grid** — 页面整体结构、节目单网格\r\n- **Position** — 售票按钮固定在视口右下角\r\n- **居中** — 标题区域垂直居中\r\n- **响应式** — 移动端和桌面端两套布局\r\n就像指挥把弦乐、管乐、打击乐协调在一起——每种布局技术各司其职。 综合运用你学过的布局技巧 逐步构建 ✨ - Grid 结构：`grid-template-columns: 120px 1fr;` 让时间和曲目名宽度不同\r\n- `position: fixed; bottom: 20px; right: 20px;` 实现右下角浮按钮\r\n- `flex-wrap: wrap;` 让卡片自动换行\r\n- 用 `@media` 做断点切换——移动端 `flex-direction: column`、`grid-template-columns: 1fr` 提示 穆索尔斯基《图画展览会》— 每一段音"
+  },
+  {
+    "id": "css-cascade",
+    "title": "层叠与优先级 — 当多个规则\"打架\"时谁说了算？",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "层叠与优先级 — 当多个规则\"打架\"时谁说了算？ CSS 的\"C\"代表 **Cascading**（层叠）。当指挥给木管组一个整体指示、同时又给长笛手一个特别指示时，长笛手听谁？当然是**更具体的那个**。CSS 也一样——当多个规则都指向同一个元素时，浏览器按照一套\"乐谱排演规则\"来决定谁生效：编号越精确的规则优先级越高。 多条 CSS 规则都指向同一个元素时，浏览器按以下顺序决定：\r\n**1. 来源与 `!important`**\n\n- 作者样式 > 用户样式 > 浏览器默认样式\r\n- `!important` 标记**强行跳过优先级计算**（慎用！）\r\n**2. 选择器权重（Specificity）**\r\n- **内联 style** = 1000 分\r\n- **ID 选择器** `#title` = 100 分\r\n- **类/伪类/属性** `.card`, `:hover` = 10 分\r\n- **元素/伪元素** `h1`, `::before` = 1 分\r\n**3. 书写顺序**\r\n- 权重相同时，**后写的覆盖先写的**\r\n- 就像一部交响曲——最后奏出的主题留在耳中 三条规则决定谁胜出 看这几个例子，理解权重怎么算：\n\n```css\r\nh1 { color: red; }                     /* 权重: 1 */\r\n.card h1 { c"
+  },
+  {
+    "id": "html-div-span",
+    "title": "div 与 span — 块级与内联元素",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "div 与 span — 块级与内联元素 `<div>` 像**小节线**，把内容划分成独立的段落，每个段落独占一行；`<span>` 像**连音线**，在句子内部连接和标记某些词语，不打断句子的流动。 :::explain{{{term:title}}=\"两种最基本的\\\"容器\\\"\"}\n{{term:div}} 和 {{term:span}} 本身不添加任何{{term:样式}}，它们是用来把内容分组的——{{term:div}} 是{{term:块级元素}}（独占一行，就像独奏段落独占舞台中央），{{term:span}} 是{{term:内联元素}}（在文字流中不换行，就像装饰音/加花）。 {{term:class}} {{term:属性}}可以给它们贴上分类{{term:标签}}（🌐{{term:全局属性}}——所有{{term:标签}}都能用）。{{term:class}} 就像给琴竹分类——\"这批是硬竹\"\"这批是软竹\"，同一类竹法可以给多根弦用，同一个 {{term:class}} 可以给多个{{term:元素}}用。 具体写法： ::: **用 `<div>` 当你要：**\n\n- 创建一个卡片、面板、区块\r\n- 把一组元素包在一起\r\n- 需要块级布局（独占一行）\r\n**用 `<span>` 当你要：**\r\n- 高亮句子中的某个词\r\n- 给行内文字加特殊样式\r\n- 不改"
+  },
+  {
+    "id": "js-events-more",
+    "title": "更多事件 — 倾听用户的每一种动作",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "更多事件 — 倾听用户的每一种动作 乐器不只有\"敲击\"一个动作——钢琴有按键(click)、弦乐有揉弦(input)、管乐有换气(change)、定音鼓有滚奏(keydown)。`addEventListener` 可以监听用户的各种动作，就像指挥同时关注每个声部的进入。 除了 click 点击事件外，还有很多常用事件类型：input（输入框内容变化）、keydown（键盘按下）、mouseenter（鼠标移入）、mouseleave（鼠标移出）、submit（表单提交）。addEventListener 的第一个参数是事件类型，除了 `\"click\"`，还有很多常用事件：\n\n- `\"input\"` — 输入框内容**每次变化**都触发\r\n- `\"change\"` — 输入框内容改变且**失去焦点**时触发\r\n- `\"keydown\"` — 键盘**按下**任意键\r\n- `\"mouseenter\"` — 鼠标**进入**元素\r\n- `\"mouseleave\"` — 鼠标**离开**元素\r\n- `\"submit\"` — 表单**提交**时触发\n\n```js\r\ninputEl.addEventListener(\"input\", function() {\r\n  // 用户每输入一个字就执行\r\n});\r\n``` 不只是 click — 认识更多事件类型 :::explain{{{term:"
+  },
+  {
+    "id": "ai-era",
+    "title": "AI 时代——从写代码到写 Prompt",
+    "track": "prologue",
+    "chapter": "web-history",
+    "bodyText": "AI 时代——从写代码到写 Prompt 「最快的工具不是跑得最快，而是知道什么时候该跑。」 2016 年 3 月，韩国首尔。AlphaGo 对阵李世石九段。五局三胜制，AI 赢了四局。全世界在看这场比赛——不是围棋爱好者，是普通人。因为这是第一次，一个\"会思考的机器\"打败了人类顶尖智力选手。AI 这个词第一次从学术论文走进了大众视野。\r\n但真正改变编程世界的，是另一件事。\r\n2017 年，Google 的一个研究团队发表了一篇论文：《Attention is All You Need》。标题像摇滚专辑名，内容是提出了一个叫 **Transformer** 的神经网络架构。它用了一种叫\"自注意力机制\"的方法，让机器第一次能\"理解上下文\"——不是看一个词前面的几个词，而是同时看整个段落的所有词。\r\n这篇论文的八位作者，后来全部离开了 Google。他们各自创办或加入了不同的 AI 公司，有些互相竞争，有些后来合并。一篇论文，八个人，像种子一样散到整个行业，长成了今天你能看到的几乎所有大语言模型。\r\n2018 年，OpenAI 发布 GPT-1。1.17 亿参数——在今天的标准下是玩具，但它是\"用 Transformer 预测下一个词\"这个思路的第一次验证。2019 年，GPT-2 发布，15 亿参数，能写连贯的段落。OpenAI 一度拒绝开源，理由是\"太危险了\"——这在当时被群嘲，但"
+  },
+  {
+    "id": "tooling-eslint",
+    "title": "ESLint 与 Prettier — 代码的调音师",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "ESLint 与 Prettier — 代码的调音师 乐团上台前需要调音——每把乐器校准到标准音高 A=440Hz。代码也需要调音：ESLint 是音准仪——检查有没有错音（语法错误、不良模式）；Prettier 是节拍器——确保节奏统一（缩进、引号、分号风格一致）。两个工具配合使用，让你的代码像专业乐团一样整齐统一。 你有没有遇到过这些问题：\n\n- 队友用 2 空格缩进，你用 4 空格——代码合并时满屏冲突\r\n- 有人用单引号，有人用双引号——整个项目风格混乱\r\n- 定义了一个变量但从未使用，自己都没注意到\r\n- console.log 忘记删就提交了\r\n团队协作时，代码风格的统一比个人偏好重要得多。就像交响乐团——每个乐手可以有不同的演奏风格，但在同一个乐队里，必须听指挥的统一调度。\r\n**ESLint** 负责代码质量（有没有 bug）\r\n**Prettier** 负责代码格式（好不好看）\r\n两者配合使用：ESLint 抓错误，Prettier 管风格。 为什么需要代码规范？ ESLint 是 JS/TS 生态中最主流的代码检查工具。它定义了一套规则，不符合规则就报错或警告。\r\n**安装与初始化：**\n\n```bash\r\nnpm init @eslint/config\r\n# 按提示选择：Vue、TypeScript、ESM 等\r\n# 会在项目根目录生成 eslint.conf"
+  },
+  {
+    "id": "vue-computed-watch",
+    "title": "computed 与 watch — 自动跟进的\"伴奏\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "computed 与 watch — 自动跟进的\"伴奏\" 乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（computed——自动计算，有缓存）；一种是鼓手听到变换后才改变节奏型（watch——观察变化，执行副作用）。两者各有用途，选对工具让你的\"演奏\"更流畅。 当某个值可以由其他数据**推导**出来时，用 `computed`：\n\n```vue\r\n<script setup>\r\nimport { ref, computed } from 'vue'\r\nconst pieces = ref([\r\n  { name: '月光', period: '古典主义' },\r\n  { name: '夜曲', period: '浪漫主义' },\r\n  { name: '春', period: '巴洛克' },\r\n  { name: '致爱丽丝', period: '古典主义' },\r\n])\r\n// computed：自动计算，有缓存\r\nconst classicalPieces = computed(() => {\r\n  return pieces.value.filter(p => p.period === '古典主义')\r\n})\r\n</script>\r\n<template>\r\n  <p>古典主义曲目：{{ classicalPieces.length }} 首</p>\r\n  <ul>\r"
+  },
+  {
+    "id": "async-search-debounce",
+    "title": "防抖与搜索 — 别让\"乐团\"累坏了",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "防抖与搜索 — 别让\"乐团\"累坏了 如果指挥每半秒就给乐团一个新指令，乐团会疯掉的。好的指挥一定会等前一个乐句结束再给下一个指示。**防抖（debounce）** 就是这个\"等待稳定再行动\"的智慧——用户在输入框打字时，不要每个字母都发请求，而是等用户停下来再发。 场景：搜索框。用户输入\"贝多芬\"，来数数会触发几次请求：\n\n```贝 → 请求1\r\n贝多 → 请求2\r\n贝多芬 → 请求3\r\n```如果每个字都发 API 请求：\r\n- 浪费网络资源\r\n- 服务器压力大\r\n- 返回顺序可能错乱（后发的请求可能先返回）\r\n**防抖：** 用户停止输入 N 毫秒后，才发一次请求。 为什么需要防抖？ 防抖的核心：每次触发时清除上一个定时器，重新计时。\n\n```js\r\nfunction debounce(fn, delay = 300) {\r\n  let timer = null\r\n  return function(...args) {\r\n    clearTimeout(timer)            // 清除上次的定时器\r\n    timer = setTimeout(() => {     // 重新计时\r\n      fn.apply(this, args)\r\n    }, delay)\r\n  }\r\n}\r\n// 使用\r\nconst search = debounce(async "
+  },
+  {
+    "id": "workflow-decompose",
+    "title": "拆分函数 — 把大段乐谱分成清晰的乐章",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "拆分函数 — 把大段乐谱分成清晰的乐章 一首 40 分钟的交响曲会分成几个乐章，每个乐章又有自己的主题和发展。如果全部堆在一起，演奏者和听众都会迷失。同样，**当你的函数超过 20 行，就该考虑拆分了**。每个函数只做一件事，就像每个乐章有一个主题。 看看这个\"做了一切\"的函数：\n\n```js\r\nfunction handleEverything() {\r\n  // 获取数据\r\n  // 验证数据\r\n  // 渲染页面\r\n  // 绑定事件\r\n  // 处理点击\r\n  // 更新显示\r\n  // 保存记录\r\n  // …… 100 行代码\r\n}\r\n```\n\n问题：\n\n1. **难读懂** — 你需要从头到尾理解才能修改其中一步\r\n2. **难调试** — 出错时不知道是哪一步的问题\r\n3. **难复用** — 如果另一个地方也需要\"渲染页面\"，你没法单独调用\r\n**好代码的样子：**\n\n```js\r\nfunction initPage() {\r\n  let data = loadData();\r\n  renderCards(data);\r\n  bindEvents();\r\n}\r\nfunction loadData() { /* 只负责获取数据 */ }\r\nfunction renderCards(list) { /* 只负责渲染 */ }\r\nfunction bindEvents("
+  },
+  {
+    "id": "css-transitions",
+    "title": "过渡与动画 — 让页面流动起来",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "过渡与动画 — 让页面流动起来 动画就像音乐中的**渐强渐弱**（crescendo/diminuendo）——让变化平滑而自然。`transition` 像渐强记号，从 pp 到 ff 缓缓过渡；`@keyframes` 像精确的 **rubato**（弹性速度），自定义每个时间点的状态。 transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。ease 是默认的时间曲线（慢→快→慢），linear 是匀速。就像扬琴曲的渐快或渐慢——不是突然切换速度，而是平滑过渡。\n\n```css\r\n.card {\r\n  background: #FFFAF2;\r\n  transition: all 0.3s ease;\r\n}\r\n.card:hover {\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n  transform: scale(1.05);\r\n}\r\n```\n\n- `all` — 所有属性都过渡\r\n- `0.3s` — 过渡耗时 0.3 秒\r\n- `ease` — 缓动函数（开始快，结束慢）\r\n就像渐强记号把音量从一个等级平滑带到另一个等级。 transition — 平滑过渡 `transform` 可以改变元素的形状和位置，配合 `transition` 效果最佳：\n\n- `translateY(-4px)` "
+  },
+  {
+    "id": "html-semantic",
+    "title": "语义化标签 — 给页面一个清晰的结构",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "语义化标签 — 给页面一个清晰的结构 语义化标签就像**总谱上的声部标注**——第一小提琴、第二小提琴、中提琴、大提琴……每个乐器组有自己的位置和身份。同样，`<header>`、`<main>`、`<footer>` 等标签告诉浏览器和搜索引擎\"这是什么部分\"。 之前我们一直用 div 来分组内容。但 div 本身没有\"含义\"——浏览器不知道一个 div 是导航栏还是文章正文。\n\n语义化标签用有名字的标签来标记不同区域：header 是页头，nav 是导航菜单，main 是页面主体，section 是内容区块，article 是独立文章，footer 是页脚——看名字就知道它是什么。就像你的扬琴每根弦都有固定音名（C3、D3、E3），而不是全部叫\"弦1、弦2\"。\n\n具体写法：\n\n- `<header>` — 页头（Logo + 导航）\r\n- `<nav>` — 导航菜单\r\n- `<main>` — 页面主要内容\r\n- `<section>` — 一个内容区块\r\n- `<article>` — 一篇独立的文章\r\n- `<footer>` — 页脚（版权、链接）\r\n就像总谱中每个声部都有明确的名字，而不是全部标\"乐器1、乐器2\"。 为什么需要语义化？ ```html\r\n<body>\r\n  <!-- 页头：放网站标题和导航 -->\r\n<header>\r\n    <h1>网站标题</h1"
+  },
+  {
+    "id": "js-conditions",
+    "title": "条件判断 — 代码的分岔路口",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "条件判断 — 代码的分岔路口 `if/else` 就像乐谱中的**反复记号**——满足条件就跳转，不满足就继续。也像**评委打分**：如果音准正确就给通过，否则请再练一遍。条件判断让代码有了\"决策能力\"。 :::explain{{{term:title}}=\"if 语句 — 代码的\\\"如果\\\"\"}\n{{term:if/else}} 条件判断让代码在不同情况下执行不同操作——就像练琴时\"如果音准不对就停下来调整，否则继续往下弹\"。比较运算符：=== 等于、!== 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于。 ::: 下面的代码是一个作曲家答题器。输入答案后点击提交，JS 判断你的答案是否正确：\n\n```js\r\n// 获取输入框里用户写的内容\r\nlet answer = document.querySelector(\"#answer\").value;\r\n\r\n// if/else：条件判断——\"如果...就...否则...\"\r\nif (answer === \"肖邦\") {                              // === 比较是否相等\r\n  display.textContent = \"✓ 回答正确！\";              // 条件成立走这里\r\n} else {\r\n  display.textContent = \"✗ 再想想？提示：他是波兰"
+  },
+  {
+    "id": "tooling-git-init",
+    "title": "Git — 你的\"乐谱版本管理器\"",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "Git — 你的\"乐谱版本管理器\" 作曲家写一部作品，通常会经历多个版本：草稿、修改稿、定稿、修订版……每一个版本都可能需要回头查看。**Git 就是这个\"版本档案柜\"**——你每完成一步就\"存档\"一次，随时可以回到任何历史版本，也随时知道\"谁在什么时候改了什么\"。 你可能经历过这种情况：\n\n```音乐收藏_v1.html\r\n音乐收藏_v2.html\r\n音乐收藏_v2_最终版.html\r\n音乐收藏_v2_真的最终版.html\r\n音乐收藏_v3_备份.html\r\n```\n\nGit 解决了这个混乱。有了 Git：\n\n- 不需要\"v1\"\"v2\"\"最终版\"这种命名\r\n- 每次修改后 `git commit`，自动记录快照\r\n- 任何时候可以回到之前的版本\r\n- 清楚地看到每次改了什么（`git diff`）\r\n程序员用 Git，就像作曲家保留每一版草稿——只是更优雅。 为什么需要 Git？ **1. `git init` — 初始化仓库**\n\n```bash\r\ncd music-collection\r\ngit init\r\n```\n\n这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。\r\n**2. `git add` + `git commit` — 保存快照**\n\n```bash\r\ngit add .                    # 把所有修改加"
+  },
+  {
+    "id": "vue-vmodel-deep",
+    "title": "v-model 深入 — 双向绑定的\"默契\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "v-model 深入 — 双向绑定的\"默契\" 在四手联弹中，两位演奏者需要完美默契：一个人弹主旋律，另一个人同时配合，两人互相倾听、即时响应。`v-model` 就是数据和表单之间的\"四手联弹\"——用户输入，数据更新；数据变化，表单自动显示。 v-model 是 Vue 最常用的双向绑定指令——它同时做了两件事：把数据绑定到表单元素（v-bind:value），并在用户输入时更新数据（v-on:input）。这就是双向绑定——数据和视图始终保持同步，就像四手联弹时两个演奏者实时呼应。\n\n```vue\r\n<!-- 这两行等价 -->\r\n<input v-model=\"name\">\r\n<input :value=\"name\" @input=\"name = $event.target.value\">\r\n``` v-model 的本质 ```vue\r\n<script setup>\r\nimport { ref } from 'vue'\r\nconst text = ref('')          // 文本输入\r\nconst checked = ref(false)     // 复选框\r\nconst selected = ref('')      // 单选/下拉\r\nconst options = ref([])        // 多选\r\n</script>\r\n<template>\r\n "
+  },
+  {
+    "id": "async-capstone",
+    "title": "异步篇结业 — 音乐搜索器",
+    "track": "framework",
+    "chapter": "async-data",
+    "bodyText": "异步篇结业 — 音乐搜索器 合奏篇的最后一课：把你学到的所有\"合奏技能\"——Promise、async/await、fetch、错误处理、防抖——整合成一个完整的作品。就像一场室内乐的终曲，每个人都要把自己的声部完美地融入合奏。 我们来做一个**音乐搜索器**，整合合奏篇学到的全部技能：\n\n1. 用户输入搜索关键词\r\n2. 调用 iTunes Search API（免费公开 API）\r\n3. 用防抖优化搜索体验\r\n4. 展示搜索结果（歌曲名、歌手、封面）\r\n5. 错误处理（网络故障、无结果）\n\n> 🎯 这是你在\"合奏篇\"旅程的终点。你会惊喜地发现：你已经能写出真正有用的功能了。 我们做什么 Apple 提供了免费的音乐搜索 API，无需注册：\n\n```\r\nhttps://itunes.apple.com/search?term=贝多芬&limit=10&country=cn\r\n```\n\n返回的 JSON 结构：\n\n```json\r\n{\r\n  \"resultCount\": 10,\r\n  \"results\": [\r\n    {\r\n      \"trackName\": \"月光奏鸣曲\",\r\n      \"artistName\": \"贝多芬\",\r\n      \"artworkUrl100\": \"封面图片URL\",\r\n      \"previewUrl\": \"试听URL\",\r\n      \""
+  },
+  {
+    "id": "workflow-create-element",
+    "title": "DOM 渲染进阶 — innerHTML 对比与 classList 操控",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "DOM 渲染进阶 — innerHTML 对比与 classList 操控 用 `innerHTML` 像\"复印一整页乐谱\"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像\"一个音符一个音符地写\"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。 回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建元素。现在我们来深入对比这两种方式，理解什么时候该用哪个：\r\n| 特性 | innerHTML | createElement |\r\n|------|-----------|---------------|\r\n| 速度 | 一次性替换，批量操作快 | 逐个创建，精细控制快 |\r\n| 事件保留 | 替换后旧事件丢失 | 事件绑定在元素上，不受影响 |\r\n| 安全性 | 容易 XSS 注入 | textContent 天然安全 |\r\n| 精细度 | 只能整体替换 | 可以单独修改任一元素 |\r\n| 代码量 | 代码少 | 代码多 |\r\n**经验法则：**\n\n- 初始化页面、展示静态数据用 `innerHTML` 更简洁\r\n- 需要绑定事件、频繁更新、处理用户输入用 `createElement` 更安全灵活\r\n就像排练新曲子：第一次通读可以直接复印"
+  },
+  {
+    "id": "css-animations",
+    "title": "CSS 动画深入 — 让页面充满律动",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "CSS 动画深入 — 让页面充满律动 如果说 transition 是渐强记号（从 pp 平滑到 ff），那么 @keyframes 就是一段完整的节奏型——精确控制每个时间点的状态。animation 属性像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。 :::explain{{{term:title}}=\"{{term:@keyframes}} — 定义动画的\\\"节奏型\\\"\"}\n还记得 {{term:transition}} 吗？它只能在两个状态之间平滑过渡（比如 {{term:hover}} 前 → {{term:hover}} 后）。{{term:@keyframes}} 让你定义**任意多个关键帧**，创建更复杂的动画："
+  },
+  {
+    "id": "html-audio-video",
+    "title": "音频与视频 — 让网页发出声音",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "音频与视频 — 让网页发出声音 这是离音乐最近的一节课！`<audio>` 标签让你的网页**播放音乐**，`<video>` 标签让你的网页**播放视频**。作为音乐学的学生，你会发现这比 `<p>` 和 `<div>` 有趣多了！ audio 标签可以在网页中嵌入音乐播放器——就像给你的网页装了一个内置扬声器，可以直接播放你录好的扬琴曲。controls 显示播放按钮（布尔属性），src 指定音频文件地址，autoplay 自动播放，loop 循环播放。\n\n```html\r\n<!-- audio：嵌入音频播放器 -->\r\n<audio controls src=\"音乐文件地址\">\r\n  你的浏览器不支持音频播放\r\n</audio>\r\n```- `controls` — 显示播放/暂停/音量控件\r\n- `src` — 音频文件的地址\r\n- `autoplay` — 自动播放（浏览器通常会阻止）\r\n- `loop` — 循环播放\r\n标签中间的文字只在浏览器不支持时显示。 音频标签 不同的浏览器支持不同的音频格式（MP3、OGG、WAV 等）。为了保证所有浏览器都能播放，可以用 `<source>` 标签提供多种格式：\n\n```html\r\n<!-- audio：嵌入音频播放器 -->\r\n<audio <!-- controls：显示播放/暂停/音量按钮 -->\r\ncontrols>\r"
+  },
+  {
+    "id": "js-arrays",
+    "title": "数组 — 存储你的曲目列表",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "数组 — 存储你的曲目列表 数组就像一张**歌单/曲目列表**——把多个相关的值按顺序组织在一起。`[\"巴赫\", \"莫扎特\", \"贝多芬\"]` 就像写在纸上的三首曲目，用 `[0]` 可以取第一首，用 `.push()` 可以在末尾添加新曲目。 数组用 `[]` 创建，每个值用逗号分隔：\n\n```js\r\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\", \"肖邦\"];\r\n```\n\n- `composers[0]` — 第 1 项（\"巴赫\"），索引从 0 开始\r\n- `composers[2]` — 第 3 项（\"贝多芬\"）\r\n- `composers.length` — 数组长度（4）\r\n就像曲目单上第一首是 0 号，不是 1 号——这是编程的习惯。 创建和访问数组 数组有一套强大的操作方法：\n\n- `.push(\"德彪西\")` — 在末尾添加一项\r\n- `.pop()` — 移除末尾一项\r\n- `.join(\"、\")` — 用指定分隔符拼接为字符串\n\n```js\r\nlet composers = [\"巴赫\", \"莫扎特\"];\r\ncomposers.push(\"肖邦\");  // 末尾追加\r\n// composers 现在是 [\"巴赫\", \"莫扎特\", \"肖邦\"]\r\nlet text = composers.join(\" | \");\r\n// text 是 \"巴"
+  },
+  {
+    "id": "tooling-github",
+    "title": "GitHub — 把你的作品\"发布到音乐厅\"",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "GitHub — 把你的作品\"发布到音乐厅\" 到目前为止，你的乐谱（代码）只存在于自己的电脑上。**GitHub 就像是把乐谱出版发行**——你的作品有了一个公开的地址，别人可以看到、使用、甚至贡献。它也是程序员界的\"LinkedIn\"——你的 GitHub 主页就是你的技术名片。 这是初学者最容易混淆的概念：\r\n| | Git | GitHub |\r\n|------|-----|--------|\r\n| 是什么 | 版本管理工具 | 代码托管网站 |\r\n| 装在哪里 | 你的电脑 | 互联网上的服务器 |\r\n| 能做什么 | 记录版本、回退历史 | 存储代码、协作、展示作品 |\r\n| 类比 | 你书房里的乐谱档案柜 | 公开图书馆的乐谱收藏室 |\r\n**Git 不需要 GitHub 也能用**——但 GitHub 让你的代码有了\"线上备份\"和\"公开展示\"的能力。 Git 和 GitHub 的区别 **第一步：在 GitHub 上创建仓库**\n\n1. 打开 [github.com](https://github.com)，注册/登录账号\r\n2. 点击右上角的 ➕ → \"New repository\"\r\n3. 仓库名填写 `music-collection`\r\n4. 设置为 **Public**（公开）\r\n5. **不要勾选** \"Add a README file\"（因为本地已有项"
+  },
+  {
+    "id": "vue-slots",
+    "title": "插槽（Slots）— 组件的\"自由声部\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "插槽（Slots）— 组件的\"自由声部\" 协奏曲中有华彩乐段（Cadenza）——作曲家留出空白，由独奏者自由发挥。**Slot（插槽）** 就是组件的\"华彩乐段\"：组件定义框架，使用者在 Slot 中填入自定义内容。这让组件既统一又灵活。 之前你学的 props 让组件接收**数据**。Slot 让组件接收**模板内容**。\n\n```vue\r\n<!-- Card.vue — 定义组件，留出 Slot -->\r\n<template>\r\n  <div class=\"card\">\r\n    <div class=\"card-header\">\r\n      <slot name=\"header\">默认标题</slot>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <slot>默认内容</slot>  <!-- 默认 Slot -->\r\n    </div>\r\n    <div class=\"card-footer\">\r\n      <slot name=\"footer\">\r\n        <button>确定</button>  <!-- 默认 footer -->\r\n      </slot>\r\n    </div>\r\n  </div>\r\n</template>\r\n```\n\n```vue\r\n<!-- App.vue — 使用组件，填"
+  },
+  {
+    "id": "workflow-event-delegation",
+    "title": "事件委托 — 让\"指挥\"替你监听每一个\"乐手\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "事件委托 — 让\"指挥\"替你监听每一个\"乐手\" 指挥不需要跑到每一位演奏者面前单独说\"到你吹了\"——演奏者自己看总谱、听音乐，知道什么时候进入。**事件委托**就是这个道理：你不用给每一个元素单独绑定事件，而是把事件绑在父容器上，由父容器来判断\"触发者是谁\"，做出相应的反应。 上一节课你学会了用 `createElement` 动态创建元素。但这里有一个棘手的问题：\n\n```js\r\n// 页面初始有 3 张卡片，每张绑定了点击事件\r\nlet cards = document.querySelectorAll(\".card\");\r\ncards.forEach(function(card) {\r\n  card.addEventListener(\"click\", function() {\r\n    alert(\"点击了卡片！\");\r\n  });\r\n});\r\n// 后来动态添加了一张新卡片\r\nlet newCard = document.createElement(\"div\");\r\nnewCard.classList.add(\"card\");\r\nlistEl.appendChild(newCard);\r\n// ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在\r\n```\n\n这是一个很常见的 bug：**动态添加的元素不会自动继承之前绑定的事件**。 问题：动态"
+  },
+  {
+    "id": "css-variables",
+    "title": "CSS 变量 — 一次定义，全局共鸣",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "bodyText": "CSS 变量 — 一次定义，全局共鸣 CSS 变量就像乐谱开头的**调号（key signature）**——升 fa 升 do 写一次，全曲所有的 fa 和 do 都跟着自动升。用 `--main-color` 定义一种颜色，全站所有用到它的地方一起改变。这个网站本身就在大量使用 CSS 变量！ CSS 变量以 `--` 开头，在 `var()` 中引用：\n\n```css\r\n:root {\r\n  --main-color: #8B2E2E;\r\n  --card-bg: #FFFAF2;\r\n  --spacing: 16px;\r\n}\r\n.card {\r\n  color: var(--main-color);\r\n  background: var(--card-bg);\r\n  padding: var(--spacing);\r\n}\r\n```\n\n- `:root` — 全局作用域（相当于 `<html>`），在这里定义的变量全站可用\r\n- 变量名大小写敏感：`--mainColor` ≠ `--maincolor`\r\n- `var(--name, fallback)` — 第二个参数是备用值\r\n想看实际应用？打开 `src/styles/variables.css`——这个网站的每个颜色、间距、字体都定义在那里。 定义和使用变量 变量可以在任意元素上重新定义，子元素继承新值：\n\n```"
+  },
+  {
+    "id": "html-tables",
+    "title": "表格 — 整理你的音乐数据",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "表格 — 整理你的音乐数据 表格就像一张**曲目单**或**节目表**——用行列分明的结构组织信息。每一行是一个条目，每一列是一种属性，就像节目中第一列是作曲家、第二列是曲目、第三列是时长。 表格由外到内有三层标签：\n\n- `<table>` — 整个表格的容器\r\n- `<tr>` — **表行**（table row），一行\r\n-`<td>` — **表单元格**（table data），一个格子\n\n```html\r\n<!-- table：创建表格 -->\r\n<table>\r\n  <!-- tr：表格的一行 -->\r\n<tr>\r\n    <!-- td：表格数据单元格 -->\r\n<td>巴赫</td>\r\n    <!-- td：表格数据单元格 -->\r\n<td>巴洛克</td>\r\n    <!-- td：表格数据单元格 -->\r\n<td>德国</td>\r\n  </tr>\r\n  <!-- tr：表格的一行 -->\r\n<tr>\r\n    <!-- td：表格数据单元格 -->\r\n<td>肖邦</td>\r\n    <!-- td：表格数据单元格 -->\r\n<td>浪漫主义</td>\r\n    <!-- td：表格数据单元格 -->\r\n<td>波兰</td>\r\n  </tr>\r\n</table>\r\n```每一对 `<tr></tr>` 是一行，里面每个`<td></td>` 是一个格子。"
+  },
+  {
+    "id": "js-loops",
+    "title": "循环 — 让代码反复执行的节拍器",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "循环 — 让代码反复执行的节拍器 循环就像**固定音型（ostinato）**——一段模式反复执行，每次略有不同。也像**节拍器**，一拍一拍反复，直到乐曲结束。用 `for` 或 `forEach` 遍历数组中的每一项，对每一首都执行相同的操作。 for 循环让代码重复执行指定次数——就像节拍器从第 1 拍数到最后 1 拍。循环由三部分组成：let i = 0（从哪里开始）、i < 数组.length（什么时候停）、i++（每轮 i 加 1）。\n\n```js\r\nfor (let i = 0; i < composers.length; i++) {\r\n  console.log(composers[i]);\r\n}\r\n``` for 循环 `forEach` 是专门为数组设计的循环方法：\n\n```js\r\ncomposers.forEach(function(name, index) {\r\n  console.log(`${index + 1}. ${name}`);\r\n});\r\n```\n\n- `name` — 当前项的值\r\n- `index` — 当前项的索引（0 开始）\n\n```js\r\n// 用 forEach 批量生成 HTML\r\nlet html = \"\";\r\ncomposers.forEach(function(composer) {\r\n  html += `<li>${c"
+  },
+  {
+    "id": "tooling-build-deploy",
+    "title": "构建与部署 — 让全世界看到你的作品",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "构建与部署 — 让全世界看到你的作品 排练结束（开发完成），最后一步是：**正式演出**（部署）。你把排练时的草稿整理成精美的节目单（构建），然后打开音乐厅的大门，让观众进场（部署到服务器）。从此你的作品有了一个公开的网址，任何人都可以访问。 在开发过程中，Vite 的开发服务器做了很多\"方便你开发\"的事：\n\n- 热更新（修改代码页面自动刷新）\r\n- 不压缩代码（方便调试）\r\n- 源码映射（报错时能看到原始代码位置）\r\n但当你准备发布时，需要\"构建\"——把代码变成**适合用户访问的最终版本**：\r\n- 代码压缩（去掉空格、缩短变量名）\r\n- 文件合并（减少 HTTP 请求次数）\r\n- 去除开发调试代码\r\n**类比：**\r\n- 开发 = 排练时的笔记，潦草但你能看懂\r\n- 构建 = 正式演出的节目单，印刷精美，观众能看懂\r\n**命令：**\n\n```bash\r\nnpm run build\r\n```\n\n运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。\n\n```dist/\r\n├── index.html        # 入口页面\r\n├── assets/\r\n│   ├── index-abc123.js   # 打包后的 JS\r\n│   └── index-def456.css  # 打包后的 CSS\r\n└── ...\r\n```\n\n> 💡 `dist`"
+  },
+  {
+    "id": "vue-router-intro",
+    "title": "Vue Router — 给你的应用\"翻页\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "Vue Router — 给你的应用\"翻页\" 一本乐谱有目录，你可以翻到任何一页。交响乐有四个乐章，听众知道\"现在在第几乐章\"。单页应用（SPA）的多页面体验就靠 **Vue Router** ——它让 URL 变化时页面切换，就像翻乐谱一样自然。 至此你的 Vue 应用只有一个页面。但实际上，一个完整的应用通常有：\n\n- 首页（作品列表）\r\n- 详情页（单个作品详情）\r\n- 关于页\r\n- 404 页面\r\nVue Router 让你在不刷新页面的情况下切换\"页面\"——URL 变了，内容变了，但页面没有白屏刷新。这就是**单页应用（SPA）**。 为什么需要 Router？ ```js\r\n// src/router/index.js\r\nimport { createRouter, createWebHistory } from 'vue-router'\r\nimport Home from '../views/Home.vue'\r\nimport Detail from '../views/Detail.vue'\r\nconst router = createRouter({\r\n  history: createWebHistory(),\r\n  routes: [\r\n    { path: '/', component: Home },\r\n    { path: '/piece/:id',"
+  },
+  {
+    "id": "workflow-data-driven",
+    "title": "数据驱动思维 — 改数据就是改页面",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "数据驱动思维 — 改数据就是改页面 总谱是\"数据\"，演奏是\"渲染\"。指挥在总谱上改一个音符，所有乐手下一遍就按新谱子演奏——不需要每个人单独通知。这就是**数据驱动**：你只需要修改数据，然后调用一次渲染函数，页面自动跟上。 你在前面几节课中接触过两种操作页面的方式：\r\n**方式一：命令式（Imperative）—— 直接告诉 DOM \"做什么\"**\n\n```js\r\n// 添加一项：创建元素、设置内容、挂载到页面\r\nlet card = document.createElement(\"div\");\r\ncard.textContent = \"肖邦夜曲\";\r\nlistEl.appendChild(card);\r\n// 删除一项：找到元素、调用 remove()\r\ndocument.querySelector(\"#card-3\").remove();\r\n// 修改一项：找到元素、修改内容\r\ndocument.querySelector(\"#card-2 h3\").textContent = \"新曲名\";\r\n```\n\n每一步都要精确操作 DOM。简单直接，但程序复杂时很容易混乱——你需要同时记住\"数据在哪\"和\"DOM 在哪\"。\r\n**方式二：声明式（Declarative）—— 告诉程序 \"我想要什么\"，然后调用渲染函数**\n\n```js\r\nlet pieces = [{ name: \"肖"
+  },
+  {
+    "id": "html-forms",
+    "title": "表单 — 收集你的音乐信息",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "表单 — 收集你的音乐信息 表单就像**报名表**或**节目征集单**——听众填写他们的音乐偏好，就像演奏者在报名表上写下自己的声部。`<input>` 是填空格，`<label>` 是问题，`<button>` 是\"提交\"按钮。 你在网上填过的所有东西——考级报名、搜索曲谱、写留言——都是表单（form）。form 是整张表单的容器，input 是填空线（单标签），label 是填空线前面的标题，select 是下拉选择框（内含 option 选项），textarea 是多行文本框，button 是提交按钮。\n\n就像扬琴考级报名表——一张纸上包含所有要填写的信息。\n\n表单的核心标签：\n\n- `<form>` — 整个表单的容器\r\n- `<input>` — 输入框，最常用的表单元素\r\n- `<label>` — 标签，描述输入框的用途\r\n- `<textarea>` — 多行文本输入框\r\n- `<select>` + `<option>` — 下拉选择框\r\n- `<button>` — 提交按钮 什么是表单？ `<input>` 标签通过 `type` 属性可以变成不同类型的输入框：\n\n- `type=\"text\"` — 普通文本输入\r\n- `type=\"email\"` — 邮箱地址输入\r\n- `type=\"password\"` — 密码输入（显示为圆点）\r\n- `type=\"d"
+  },
+  {
+    "id": "js-array-methods",
+    "title": "数组方法进阶 — 像筛选乐谱一样处理数据",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "数组方法进阶 — 像筛选乐谱一样处理数据 `.map()` 就像**移调**——把整首曲子每个音都升高一度，返回一个新的版本；`.filter()` 就像从总谱中**挑出所有弦乐声部**——只保留符合条件的部分。两者都不破坏原谱（原数组），而是生成一份新的。 :::explain{{{term:title}}=\".{{term:map}}() — 把每个{{term:元素}}\\\"转换\\\"成新值\"}\n{{term:数组}}方法让你像整理乐谱一样操作数据——{{term:map}} 对每项做同样处理返回新{{term:数组}}，{{term:filter}} 筛选符合条件的项，{{term:reduce}} 将所有项累积为一个值。.{{term:map}}() 遍历{{term:数组}}中的每一项执行{{term:函数}}后**返回新{{term:数组}}**，原{{term:数组}}不变： ::: 动手试试 ✨ 巴赫《勃兰登堡协奏曲》No.3 — 各声部轮流演奏同一主题（map），然后只留下弦乐组对话（filter），现代 Web 开发中用 map/filter 处理数据就像听巴赫一样行云流水。"
+  },
+  {
+    "id": "tooling-env",
+    "title": "环境变量 — 给不同的舞台不同的配置",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "bodyText": "环境变量 — 给不同的舞台不同的配置 同一首曲子，在排练室演奏和在金色大厅演奏，需要的配置不同——排练室用小型 PA 系统，音乐厅有专业的声学设计和混音台。开发环境和生产环境也是两个不同的舞台：开发时 API 指向本地服务器，上线后指向真实 API。环境变量让你在每个舞台上自动切换正确的配置，不需要手动改代码。 在真实项目中，你经常会遇到不同环境用不同值的场景：\r\n| 场景 | 开发环境 | 生产环境 |\r\n|------|----------|----------|\r\n| API 地址 | http://localhost:3000/api | https://api.myapp.com |\r\n| 调试模式 | 开启（显示 log、调试面板） | 关闭 |\r\n| 分析工具 | 禁用 | 启用 |\r\n如果没有环境变量，你需要**每次部署前手动改代码**——繁琐且容易出错。环境变量让这些值外置到配置文件中，根据运行环境自动切换。 为什么需要环境变量？ Vite 项目默认支持 .env 文件（通过 dotenv）：\n\n```bash\r\n# .env.development  — 开发时自动加载\r\nVITE_API_BASE=http://localhost:3000/api\r\nVITE_DEBUG=true\r\nVITE_APP_TITLE=音乐收藏（开发版）\r\n# .env.produ"
+  },
+  {
+    "id": "tooling-capstone",
+    "title": "登台篇结业 — 你的第一个工程化作品",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "bodyText": "登台篇结业 — 你的第一个工程化作品 独奏会的时间到了。你已经从认识乐器（乐理篇）、学会合奏（合奏篇）、掌握了演出流程（登台篇）——现在，**在真正的音乐厅里，用专业的方式，演奏你自己的作品。** 从乐理篇到现在，你的成长路径：\r\n| 阶段 | 技能 | 工具 |\r\n|------|------|------|\r\n| 乐理篇 | HTML/CSS/JS 基础 | 浏览器、在线编辑器 |\r\n| 合奏篇 | 工作流、调试、命名、数据驱动 | 浏览器、在线编辑器 |\r\n| 登台篇 | Node.js、npm、Vite、Vue SFC、组件通信、Git、部署 | **VS Code、终端、GitHub** |\r\n在乐理篇你写第一个 `<h1>你好世界</h1>` 时，你可能想不到：几个月后，你会在终端里敲 `npm run build`，把一个完整的 Vue 应用部署到互联网上。\r\n**这就是工程化**——不是学更多语法，而是掌握让代码从\"能跑\"到\"专业\"的完整流程。 回顾你学会了什么 结业项目：音乐收藏管理器 🎵 - **忘了 ref 怎么用？** → 回顾第 2 课\r\n- **忘了 props/emits？** → 回顾第 3 课\r\n- **忘了怎么部署？** → 回顾第 8 课\r\n- **localStorage 读写：** `localStorage.setItem(\"key\","
+  },
+  {
+    "id": "js-es6-syntax",
+    "title": "ES6 新语法 — 让代码更优雅的\"新乐器\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "ES6 新语法 — 让代码更优雅的\"新乐器\" 就像现代音乐加入了电声乐器让表现力更丰富，ES6（ECMAScript 2015）为 JavaScript 带来了更简洁、更强大的语法。用这些新\"乐器\"，你可以用更少的音符写出更丰富的旋律。 在 JS 基础篇中，你学会了用 `var` 声明变量、用 `function` 定义函数。但 JavaScript 一直在进化——2015 年发布的 ES6 是一次\"革命性升级\"。\r\nES6 引入了：\n\n- `let` 和 `const`：替代 `var`，更安全\r\n- 箭头函数：更简洁的函数写法\r\n- 解构赋值：优雅地从对象/数组中取值\r\n- 模板字符串：用反引号（[[html]]<code class=\"inline-code\">`</code>[[/html]]）拼接字符串\r\n- 展开运算符：`...` 展开数组和对象\r\n这些新语法让代码**更短、更清晰、更不容易出错**。 为什么需要新语法？ :::example{{{term:title}}=\"解构赋值 — 从\\\"抽屉\\\"里取东西\"}\n想象你有一个乐谱夹，里面有多首曲子。以前你要一首一首拿："
+  },
+  {
+    "id": "html-input-types",
+    "title": "更多输入类型 — 表单的\"乐器编配\"",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "更多输入类型 — 表单的\"乐器编配\" `<input>` 不止能输入文字——就像乐团不只是弦乐。`type=\"radio\"` 像**单选问答**（只有一个正确答案），`type=\"checkbox\"` 像**多选编配**（可以同时选弦乐和管乐），`type=\"range\"` 像**滑音控制**（连续变化的数值）。每个 input 类型都是乐队中的一种\"声部\"，组合使用才能构成完整的音乐表单。 input 标签通过 type 属性可以变成单选按钮（radio）、多选按钮（checkbox）、滑块（range）、数字输入（number）、颜色选择器（color）等不同类型。fieldset 和 legend 用来给表单控件分组——就像报名表上\"个人信息\"外面画的那个框和标题。\n\n当用户只能**选一个**时用 radio。同一组 radio 的 name 属性必须相同：\n\n```html\r\n<fieldset>\r\n  <legend>你最喜欢的时期：</legend>\r\n  <input type=\"radio\" id=\"baroque\" name=\"period\" value=\"baroque\">\r\n  <label for=\"baroque\">巴洛克时期</label>\r\n  <input type=\"radio\" id=\"classical\" name=\"period\" value"
+  },
+  {
+    "id": "js-querySelectorAll",
+    "title": "批量 DOM 操作 — 指挥整个声部",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "批量 DOM 操作 — 指挥整个声部 `querySelector` 指一个元素就像指挥指向**一位独奏者**，而 `querySelectorAll` 就像指挥同时对**整个弦乐声部**做统一手势——用一条指令同时操作一群元素。 querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像指挥同时命令整个弦乐声部做同一个动作。\n\n```js\r\nlet cards = document.querySelectorAll(\".card\");\r\n```\n\nNodeList 可以和数组一样用 `forEach` 遍历：\n\n```js\r\ncards.forEach(function(card) {\r\n  card.style.border = \"2px solid gold\";\r\n});\r\n```\n\n也支持索引：\n\n```js\r\ncards[0].style.background = \"#FFFAF2\";  // 第一张\r\ncards[1].style.background = \"#F0F8FF\";  // 第二张\r\n``` 选中一组元素 `classList` 比直接操作 `style` 更优雅，配合 CSS 类使用：\n\n- `.classList.add(\"active\")` — 添加类\r\n- `.class"
+  },
+  {
+    "id": "js-error-handling",
+    "title": "错误处理 — 给代码上\"保险\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "bodyText": "错误处理 — 给代码上\"保险\" 演奏中难免出错（碰错音、进错拍），好乐手知道如何处理——继续演奏而不是停下来。编程也一样：错误一定会发生，关键是优雅地处理它们，而不是让整个程序\"戛然而止\"。 在之前的学习中，你可能遇到过这些情况：\n\n- 点击按钮没反应（JS 报错了，后面的代码不执行）\r\n- 页面白屏（一个错误导致整个脚本崩溃）\r\n- 数据加载失败（网络问题、API 挂了）\r\n就像一个乐团的定音鼓手突然缺席，指挥需要有后备方案。程序中，我们用 **try/catch** 来应对。 什么会出错？ :::example{{{term:title}}=\"{{term:try/catch}} — \\\"排练一下，看看会不会出错\\\"\"}\n基本结构： ::: 爵士乐即兴演奏 — 爵士乐手最擅长的就是在\"错误\"中找到新的旋律。一个\"错音\"可以被变成经过音，编程中的错误也可以被优雅地化解。"
+  },
+  {
+    "id": "html-capstone",
+    "title": "综合项目 — 制作你的个人音乐主页",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "bodyText": "综合项目 — 制作你的个人音乐主页 一场完整的音乐会需要节目单（列表）、演奏者介绍（标题/段落）、演出照片（图片）、曲目链接（链接）、舞台分区（div/span）、声部标注（语义化标签）、曲目表（表格）。现在把这些元素组合起来，就像指挥把各个声部合成一部完整的交响乐。 回顾一下你学过的所有标签。下面按\"你想做什么\"分类，方便查找：\r\n**我想在页面上写文字：**\r\nh1~h6（标题，数字越小字越大）| p（段落）| strong（加粗强调）| em（斜体强调）| br（换行，单标签）\r\n**我想列一个清单：**\r\nul（无序列表，前面是圆点）| ol（有序列表，前面是数字）\r\nul 和 ol 里面必须放 li（列表项），就像曲目单上的每一行必须属于某张单子\r\n**我想放图片或链接：**\r\nimg（图片，单标签）+ src 属性（图片地址）+ alt 属性（替代文字）\r\na 标签（超链接）+ href 属性（跳转地址，必须写 https://）\r\n**我想把内容分组：**\r\ndiv（块级容器，独占一行）| span（内联容器，不换行）\r\n通过 class 属性给它们贴标签分组，通过 id 属性给某个元素唯一编号\r\n**我想搭页面结构：**\r\nheader（页头）| nav（导航）| main（主体）| section（区块）| article（文章）| footer（页脚）\r\n**我"
+  },
+  {
+    "id": "js-objects",
+    "title": "对象 — 结构化你的音乐数据",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "对象 — 结构化你的音乐数据 对象就像**音乐家档案**——用键值对（key-value）组织信息：姓名、时期、代表作、国籍。不像数组用数字索引，对象用**有名字的键**来存取数据，就像档案上的标签：\"姓名____、时期____\"。 对象用 `{}` 创建，包含多组键值对：\n\n```js\r\nlet composer = {\r\n  name: \"肖邦\",\r\n  period: \"浪漫主义\",\r\n  country: \"波兰\",\r\n  birthYear: 1810\r\n};\r\n```\n\n访问属性有两种方式：\n\n```js\r\ncomposer.name       // \"肖邦\"（点号）\r\ncomposer[\"period\"]  // \"浪漫主义\"（方括号）\r\n```\n\n修改或新增：\n\n```js\r\ncomposer.famousPiece = \"夜曲\";  // 新增\r\ncomposer.birthYear = 1809;      // 修正（肖邦实际生于 1810）\r\n``` 创建和访问对象 对象最强大的用法是和数组结合——**对象数组**：\n\n```js\r\nlet composers = [\r\n  { name: \"巴赫\", period: \"巴洛克\", country: \"德国\" },\r\n  { name: \"莫扎特\", period: \"古典主义\", country: \"奥地"
+  },
+  {
+    "id": "js-dom-advanced",
+    "title": "DOM 操作进阶 — 动态创建与删除元素",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "DOM 操作进阶 — 动态创建与删除元素 DOM 操作进阶就像**即兴演奏**——不是在谱子写好的框架内规规矩矩地弹，而是在演奏过程中根据灵感动态创造新的乐句（元素），或者删除某个声部。`createElement` 是创作新乐句，`remove()` 是撤掉一个声部。 createElement 动态创建 HTML 元素，appendChild 把它添加进页面，remove 移除元素。就像在演奏中临时增加一件乐器——全新的元素出现在页面上。\n\n```js\r\n// 创建元素\r\nlet card = document.createElement(\"div\");\r\ncard.className = \"card\";         // 设类名\r\ncard.innerHTML = \"<h2>新卡片</h2>\";  // 设内容\r\n// 追加到页面\r\ndocument.querySelector(\"#list\").appendChild(card);\r\n``` 动态创建元素 `.remove()` 直接删除元素：\n\n```js\r\nlet card = document.querySelector(\"#card3\");\r\ncard.remove();  // 没了！\r\n```\n\n配合 `createElement` 实现增删：\n\n```js\r\nfunction addCard(title) "
+  },
+  {
+    "id": "js-timers",
+    "title": "定时器 — 让代码跟随节拍",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "定时器 — 让代码跟随节拍 `setInterval` 就像**节拍器**——设定每分钟 60 拍，它每拍准时触发一次回调函数。`setTimeout` 则像乐谱中的**延长音记号（fermata）**——等一段时间，然后继续演奏。两者结合，你就可以在页面上创造节奏和时序。 setInterval 每隔指定时间重复执行（像节拍器持续打拍子），setTimeout 只执行一次（像指挥给出延后进入的提示）。时间单位是毫秒，1000 毫秒 = 1 秒。clearInterval 用来停止定时器。\n\n```js\r\n// 每 1000 毫秒（1 秒）执行一次\r\nlet timer = setInterval(function() {\r\n  count++;\r\n  display.textContent = count;\r\n  console.log(\"一秒过去了\");\r\n}, 1000);\r\n// 停止\r\nclearInterval(timer);\r\n``` setInterval — 定时重复 `setTimeout` 等待指定时间后执行**一次**：\n\n```js\r\n// 3 秒后弹出提示\r\nsetTimeout(function() {\r\n  alert(\"3 秒到了！\");\r\n}, 3000);\r\n// 取消（在还没执行前）\r\nlet timer = setTimeout(fn, 5"
+  },
+  {
+    "id": "js-capstone",
+    "title": "综合项目 — 交互式音乐名片生成器",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "bodyText": "综合项目 — 交互式音乐名片生成器 一场完整的**交响音乐会**需要乐谱（HTML）、演奏法（CSS）和指挥家（JS）三者协作。这节综合课把前 11 节课的知识融合在一起：用变量存储数据、用数组和对象组织信息、用循环批量渲染、用条件判断做决策、用事件和定时器让一切互动起来。 回顾 JavaScript 入门篇你学过的所有技能：\r\n| 技能 | 知识点 |\r\n|------|--------|\r\n| 变量 | `let`, `const`, 字符串, 模板字符串 |\r\n| 函数 | `function`, 参数, `return` |\r\n| 条件判断 | `if/else`, `===`, `&&`, `> <` |\r\n| 数组 | `[]`, `.push()`, `.join()`, `.length` |\r\n| 循环 | `forEach`, `for` |\r\n| DOM 选择 | `querySelector`, `querySelectorAll` |\r\n| DOM 操作 | `.textContent`, `.innerHTML`, `createElement`, `.remove()` |\r\n| 事件 | `addEventListener(\"click\", ...)` |\r\n| 样式控制 | `.style`, `.classList` |\r\n| 定时器 | `se"
+  }
+]

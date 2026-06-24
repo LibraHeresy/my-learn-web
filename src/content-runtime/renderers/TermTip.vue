@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   term: string
   explanation: string
   analogy?: string
@@ -18,7 +18,6 @@ const GAP = 10
 function onMouseEnter() {
   if (!termRef.value) return
   const rect = termRef.value.getBoundingClientRect()
-  // 水平居中对齐术语，clamp 防止超出视口
   const raw = rect.left + rect.width / 2
   popX.value = Math.max(POPOVER_WIDTH / 2 + 8, Math.min(window.innerWidth - POPOVER_WIDTH / 2 - 8, raw))
   popY.value = rect.bottom + GAP
@@ -40,8 +39,7 @@ function onMouseLeave() {
     <slot />
     <Teleport to="body">
       <Transition name="term-pop">
-        <span
-          v-if="visible"
+        <span v-if="visible"
           class="term-popover"
           :style="{ top: popY + 'px', left: popX + 'px' }"
         >
@@ -75,7 +73,7 @@ function onMouseLeave() {
   border-radius: 8px;
   padding: 12px 14px;
   box-shadow: var(--shadow-lg);
-  pointer-events: none;
+  pointer-events: auto;
   z-index: 9999;
 }
 

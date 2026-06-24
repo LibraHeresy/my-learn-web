@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import type { GemDef, QuizQuestion } from '../content-loaders/quiz'
 
 // ---------- Mock quiz loader ----------
 // vi.mock 会被提升到文件顶部，在模块加载前执行
-const mockGems = [
+const mockGems: GemDef[] = [
   {
     id: 'html-tags',
     name: 'HTML 标签',
@@ -11,8 +12,8 @@ const mockGems = [
     achievement: 'junior',
     order: 1,
     levels: [
-      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3, questions: [] },
-      { level: 2, type: 'normal', threshold: 70, name: '第二关', count: 3, questions: [] },
+      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3 },
+      { level: 2, type: 'normal', threshold: 70, name: '第二关', count: 3 },
     ],
   },
   {
@@ -22,7 +23,7 @@ const mockGems = [
     achievement: 'junior',
     order: 2,
     levels: [
-      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3, questions: [] },
+      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3 },
     ],
   },
   {
@@ -32,12 +33,12 @@ const mockGems = [
     achievement: 'mid',
     order: 3,  // mid 层次宝石全局序号不为 1，避免触发“第一宝石始终解锁”逻辑
     levels: [
-      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3, questions: [] },
+      { level: 1, type: 'normal', threshold: 60, name: '第一关', count: 3 },
     ],
   },
 ]
 
-const mockQuestions = [
+const mockQuestions: QuizQuestion[] = [
   { id: 1, gem: 'html-tags', level: 1, difficulty: 1, question: 'Q1', options: ['A', 'B', 'C', 'D'], answer: 0, explanation: 'E1' },
   { id: 2, gem: 'html-tags', level: 1, difficulty: 1, question: 'Q2', options: ['A', 'B', 'C', 'D'], answer: 1, explanation: 'E2' },
   { id: 3, gem: 'css-style', level: 1, difficulty: 1, question: 'Q3', options: ['A', 'B', 'C', 'D'], answer: 0, explanation: 'E3' },

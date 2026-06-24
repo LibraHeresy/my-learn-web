@@ -1,103 +1,115 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps<{
-  srcdoc: string
-}>()
+  srcdoc: string;
+  isMaximized?: boolean; // Wave 1.4: 外部控制全屏状态
+}>();
 
-const iframeRef = ref<HTMLIFrameElement>()
+const emit = defineEmits<{
+  maximize: []; // Wave 1.4
+  "preview-error": [info: { lineno: number; message: string }]; // Wave 2.3
+}>();
+
+const iframeRef = ref<HTMLIFrameElement>();
 
 function goBack() {
-  iframeRef.value?.contentWindow?.history.back()
+  iframeRef.value?.contentWindow?.history.back();
 }
 
 function goForward() {
-  iframeRef.value?.contentWindow?.history.forward()
+  iframeRef.value?.contentWindow?.history.forward();
 }
 
 function refresh() {
   if (props.srcdoc) {
-    loadPreview(props.srcdoc)
+    loadPreview(props.srcdoc);
   }
 }
 
 const errorState = ref<{
-  message: string
-  lineno: number
-  hint: string
-  typeLabel: string
-} | null>(null)
+  message: string;
+  lineno: number;
+  hint: string;
+  typeLabel: string;
+} | null>(null);
 
-const errorExpanded = ref(false)
+const errorExpanded = ref(false);
 
 function getErrorType(msg: string): string {
-  if (msg.includes('ReferenceError')) return '引用错误'
-  if (msg.includes('SyntaxError')) return '语法错误'
-  if (msg.includes('TypeError')) return '类型错误'
-  if (msg.includes('RangeError')) return '范围错误'
-  return '运行时错误'
+  if (msg.includes("ReferenceError")) return "引用错误";
+  if (msg.includes("SyntaxError")) return "语法错误";
+  if (msg.includes("TypeError")) return "类型错误";
+  if (msg.includes("RangeError")) return "范围错误";
+  return "运行时错误";
 }
 
 function onMessage(e: MessageEvent) {
-  if (e.data && e.data.type === 'code-error') {
-    const err = e.data.error
+  if (e.data && e.data.type === "code-error") {
+    const err = e.data.error;
     errorState.value = {
       message: err.message,
       lineno: err.lineno,
-      hint: err.hint || '',
-      typeLabel: getErrorType(err.message)
-    }
-    errorExpanded.value = false
+      hint: err.hint || "",
+      typeLabel: getErrorType(err.message),
+    };
+    errorExpanded.value = false;
+    // Wave 2.3: 通知父组件错误行号，用于编辑器高亮
+    emit("preview-error", { lineno: err.lineno, message: err.message });
   }
 }
 
-let prevUrl: string | null = null
+let prevUrl: string | null = null;
 
 function loadPreview(doc: string) {
-  if (!iframeRef.value) return
-  const iframe = iframeRef.value
+  if (!iframeRef.value) return;
+  const iframe = iframeRef.value;
   // Revoke previous blob URL to prevent memory leaks on rapid updates
   if (prevUrl) {
-    URL.revokeObjectURL(prevUrl)
-    prevUrl = null
+    URL.revokeObjectURL(prevUrl);
+    prevUrl = null;
   }
-  const blob = new Blob([doc], { type: 'text/html' })
-  prevUrl = URL.createObjectURL(blob)
-  iframe.src = prevUrl
+  const blob = new Blob([doc], { type: "text/html" });
+  prevUrl = URL.createObjectURL(blob);
+  iframe.src = prevUrl;
   iframe.onload = () => {
-    if (prevUrl) URL.revokeObjectURL(prevUrl)
-    prevUrl = null
-  }
+    if (prevUrl) URL.revokeObjectURL(prevUrl);
+    prevUrl = null;
+  };
 }
 
 onMounted(() => {
-  window.addEventListener('message', onMessage)
+  window.addEventListener("message", onMessage);
   // 初始加载：watch immediate 在挂载前触发，那时 iframeRef 还不存在，所以 onMounted 补一次
   if (props.srcdoc) {
-    loadPreview(props.srcdoc)
+    loadPreview(props.srcdoc);
   }
-})
+});
 
 onBeforeUnmount(() => {
-  window.removeEventListener('message', onMessage)
-})
+  window.removeEventListener("message", onMessage);
+});
 
 watch(
   () => props.srcdoc,
   (doc) => {
     // 每次更新源码时清除旧错误
-    errorState.value = null
-    errorExpanded.value = false
+    errorState.value = null;
+    errorExpanded.value = false;
 
-    loadPreview(doc)
+    loadPreview(doc);
   },
-  { immediate: true }
-)
+  { immediate: true },
+);
 </script>
 
 <template>
   <div class="preview-panel">
     <div class="preview-header">
+      <div class="preview-header-right">
+        <span v-if="errorState" class="error-indicator">⚠ 有错误</span>
+        <span class="preview-label">预览</span>
+      </div>
       <div class="preview-nav-btns">
         <button class="preview-nav-btn" @click="goBack" title="后退">
           <span class="nav-icon">←</span>
@@ -111,10 +123,14 @@ watch(
           <span class="nav-icon">↻</span>
           <span class="nav-text">刷新</span>
         </button>
-      </div>
-      <div class="preview-header-right">
-        <span v-if="errorState" class="error-indicator">⚠ 有错误</span>
-        <span class="preview-label">预览</span>
+        <!-- Wave 1.4: 全屏按钮 -->
+        <button
+          class="preview-nav-btn"
+          :title="isMaximized ? '退出全屏 (Esc)' : '全屏预览'"
+          @click="emit('maximize')"
+        >
+          {{ isMaximized ? "↙️ 退出全屏" : "↗️ 全屏" }}
+        </button>
       </div>
     </div>
     <div class="preview-frame-wrap">
@@ -128,12 +144,21 @@ watch(
 
     <!-- 可展开的错误面板 -->
     <Transition name="error-slide">
-      <div v-if="errorState" :class="['error-panel', { expanded: errorExpanded }]">
+      <div
+        v-if="errorState"
+        :class="['error-panel', { expanded: errorExpanded }]"
+      >
         <div class="error-summary" @click="errorExpanded = !errorExpanded">
           <span class="error-type-badge">{{ errorState.typeLabel }}</span>
           <span class="error-msg-preview">{{ errorState.message }}</span>
-          <span class="error-expand-icon">{{ errorExpanded ? '▾' : '▸' }}</span>
-          <button class="error-dismiss" @click.stop="errorState = null" title="关闭">✕</button>
+          <span class="error-expand-icon">{{ errorExpanded ? "▾" : "▸" }}</span>
+          <button
+            class="error-dismiss"
+            @click.stop="errorState = null"
+            title="关闭"
+          >
+            ✕
+          </button>
         </div>
 
         <div v-if="errorExpanded" class="error-detail">
@@ -164,7 +189,7 @@ watch(
 }
 
 .preview-header {
-  padding: var(--sp-2) var(--sp-3);
+  padding: var(--sp-1) var(--sp-3);
   border-bottom: 1px solid var(--color-border-light);
   flex-shrink: 0;
   display: flex;
@@ -180,11 +205,10 @@ watch(
 }
 
 .preview-nav-btn {
-  height: 26px;
   display: flex;
   align-items: center;
   gap: 3px;
-  padding: 0 8px;
+  padding: var(--sp-1) var(--sp-2);
   font-size: var(--fs-xs);
   color: var(--color-text-light);
   background: transparent;
@@ -228,16 +252,30 @@ watch(
   flex-shrink: 0;
 }
 
+.preview-maximize-btn {
+  padding: 0 4px;
+  font-size: 14px;
+  color: var(--color-text-light);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
 .error-indicator {
   font-size: var(--fs-xs);
-  color: #D4534A;
+  color: #d4534a;
   font-weight: 600;
   animation: error-blink 1.5s ease-in-out 3;
 }
 
 @keyframes error-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
 
 .preview-frame-wrap {
@@ -255,8 +293,8 @@ watch(
 /* ===== 错误面板 ===== */
 .error-panel {
   flex-shrink: 0;
-  border-top: 1px solid #D4534A;
-  background: #3D1F1F;
+  border-top: 1px solid #d4534a;
+  background: #3d1f1f;
   cursor: pointer;
   user-select: none;
 }
@@ -272,7 +310,7 @@ watch(
 .error-type-badge {
   font-size: 11px;
   font-weight: 700;
-  background: #D4534A;
+  background: #d4534a;
   color: #fff;
   padding: 1px 8px;
   border-radius: 3px;
@@ -283,7 +321,7 @@ watch(
 .error-msg-preview {
   flex: 1;
   font-size: 12px;
-  color: #F0C0B8;
+  color: #f0c0b8;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -292,14 +330,14 @@ watch(
 
 .error-expand-icon {
   font-size: 12px;
-  color: #C08078;
+  color: #c08078;
   flex-shrink: 0;
 }
 
 .error-dismiss {
   background: none;
   border: none;
-  color: #C08078;
+  color: #c08078;
   font-size: 14px;
   cursor: pointer;
   padding: 0 4px;
@@ -308,7 +346,7 @@ watch(
 }
 
 .error-dismiss:hover {
-  color: #F0C0B8;
+  color: #f0c0b8;
 }
 
 .error-detail {
@@ -328,14 +366,14 @@ watch(
 .error-label {
   font-size: 11px;
   font-weight: 600;
-  color: #C08078;
+  color: #c08078;
   flex-shrink: 0;
   min-width: 56px;
 }
 
 .error-code {
   font-size: 12px;
-  color: #F0C0B8;
+  color: #f0c0b8;
   font-family: var(--font-code);
   word-break: break-all;
   background: rgba(0, 0, 0, 0.2);
@@ -345,7 +383,7 @@ watch(
 
 .error-value {
   font-size: 12px;
-  color: #E8DCC8;
+  color: #e8dcc8;
   font-family: var(--font-code);
 }
 
@@ -355,7 +393,7 @@ watch(
 
 .error-hint {
   font-size: 12px;
-  color: #FFD580;
+  color: #ffd580;
   line-height: 1.5;
 }
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { ProjectListItem } from '../../content-runtime/types'
 import { parseInline } from '../../utils/markdown'
 
 defineProps<{

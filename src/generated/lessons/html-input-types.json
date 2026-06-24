@@ -43,7 +43,7 @@
       "attrs": {
         "title": "更多实用 input 类型"
       },
-      "content": "{{term:HTML}} 提供丰富的输入类型，浏览器会自动优化{{term:交互}}方式：\n\n- `<input type=\"range\" min=\"0\" max=\"100\">` — 滑块，适合选音量、评分\r\n- `<input type=\"number\" min=\"1\" max=\"10\">` — 数字输入，带增减箭头\r\n- `<input type=\"color\">` — 颜色{{term:选择器}}\r\n- `<!-- {{term:date}} 类型：弹出日历{{term:选择器}} -->\r\n<{{term:input}} {{term:type}}=\"{{term:date}}\">` — 日期{{term:选择器}}\r\n- `<input type=\"time\">` — 时间{{term:选择器}}\r\n- `<input type=\"file\">` — 文件上传\r\n- `<input type=\"search\">` — 搜索框（带清除按钮）\r\n`<fieldset>` + `<legend>` 用来分组：\n\n```html\r\n<fieldset>\r\n  <legend>个人信息</legend>\r\n  <!-- 相关字段放一起 -->\r\n</fieldset>\r\n```"
+      "content": "{{term:HTML}} 提供丰富的输入类型，浏览器会自动优化{{term:交互}}方式：\n\n- `<input type=\"range\" min=\"0\" max=\"100\">` — 滑块，适合选音量、评分\r\n- `<input type=\"number\" min=\"1\" max=\"10\">` — 数字输入，带增减箭头\r\n- `<input type=\"color\">` — 颜色{{term:选择器}}\r\n- `<input type=\"date\">` — 日期{{term:选择器}}\r\n- `<input type=\"time\">` — 时间{{term:选择器}}\r\n- `<input type=\"file\">` — 文件上传\r\n- `<input type=\"search\">` — 搜索框（带清除按钮）\r\n`<fieldset>` + `<legend>` 用来分组：\n\n```html\r\n<fieldset>\r\n  <legend>个人信息</legend>\r\n  <!-- 相关字段放一起 -->\r\n</fieldset>\r\n```"
     },
     {
       "type": "block:example",
