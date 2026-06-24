@@ -27,7 +27,7 @@
       "attrs": {
         "title": "什么是 Slot？"
       },
-      "content": "之前你学的 {{term:props}} 让{{term:组件}}接收**数据**。Slot 让{{term:组件}}接收**模板内容**。\n```vue\n<!-- Card.vue — 定义组件，留出 Slot -->\n<template>\n  <div class=\"card\">\n    <div class=\"card-header\">\n      <slot name=\"header\">默认标题</slot>\n    </div>\n    <div class=\"card-body\">\n      <slot>默认内容</slot>  <!-- 默认 Slot -->\n    </div>\n    <div class=\"card-footer\">\n      <slot name=\"footer\">\n        <button>确定</button>  <!-- 默认 footer -->\n      </slot>\n    </div>\n  </div>\n</template>\n```\n```vue\n<!-- App.vue — 使用组件，填入内容 -->\n<template>\n  <Card>\n    <template #header>\n      <h2>🎵 月光奏鸣曲</h2>\n    </template>\n    <p>作曲：贝多芬</p>\n    <p>时期：古典主义</p>\n    <template #footer>\n      <button @click=\"like\">❤️ 收藏</button>\n    </template>\n  </Card>\n</template>\n```"
+      "content": "之前你学的 {{term:props}} 让{{term:组件}}接收**数据**。Slot 让{{term:组件}}接收**模板内容**。\n\n```vue\r\n<!-- Card.vue — 定义组件，留出 Slot -->\r\n<template>\r\n  <div class=\"card\">\r\n    <div class=\"card-header\">\r\n      <slot name=\"header\">默认标题</slot>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <slot>默认内容</slot>  <!-- 默认 Slot -->\r\n    </div>\r\n    <div class=\"card-footer\">\r\n      <slot name=\"footer\">\r\n        <button>确定</button>  <!-- 默认 footer -->\r\n      </slot>\r\n    </div>\r\n  </div>\r\n</template>\r\n```\n\n```vue\r\n<!-- App.vue — 使用组件，填入内容 -->\r\n<template>\r\n  <Card>\r\n    <template #header>\r\n      <h2>🎵 月光奏鸣曲</h2>\r\n    </template>\r\n    <p>作曲：贝多芬</p>\r\n    <p>时期：古典主义</p>\r\n    <template #footer>\r\n      <button @click=\"like\">❤️ 收藏</button>\r\n    </template>\r\n  </Card>\r\n</template>\r\n```"
     },
     {
       "type": "block:example",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "Slot vs Props：选择指南"
       },
-      "content": "| 场景 | 用什么 |\n|------|--------|\n| 传递文本/数字 | {{term:props}} |\n| 传递 {{term:HTML}} 结构 | {{term:slot}} |\n| 传递{{term:回调}}{{term:函数}} | {{term:emits}} |\n| {{term:组件}}布局{{term:框架}} | {{term:slot}} |\n| 简单配置项 | {{term:props}} |\n**口诀：** Props 传数据，Slots 传结构，Emits 传{{term:事件}}。\n就像乐谱上的标记：\n- Props = 音符（数据）\n- Slots = 华彩乐段（留给演奏者填充的内容）\n- Emits = 力度记号（告诉指挥这里要怎么处理）"
+      "content": "| 场景 | 用什么 |\r\n|------|--------|\r\n| 传递文本/数字 | {{term:props}} |\r\n| 传递 {{term:HTML}} 结构 | {{term:slot}} |\r\n| 传递{{term:回调}}{{term:函数}} | {{term:emits}} |\r\n| {{term:组件}}布局{{term:框架}} | {{term:slot}} |\r\n| 简单配置项 | {{term:props}} |\r\n**口诀：** Props 传数据，Slots 传结构，Emits 传{{term:事件}}。\r\n就像乐谱上的标记：\n\n- Props = 音符（数据）\r\n- Slots = 华彩乐段（留给演奏者填充的内容）\r\n- Emits = 力度记号（告诉指挥这里要怎么处理）"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:组件}}化不仅是为了复用，更是为了统一视觉风格。先定义卡片的外框（边框、圆角、阴影），为后续用 {{term:slot}} 填充内容做好准备。这就像先搭建音乐会舞台的结构，再让不同演奏者在上面自由发挥。\" expected=\"一个带有统一外框{{term:样式}}的空白卡片{{term:组件}}。\"}\n把曲目卡片提取成 MusicCard{{term:.vue}} {{term:组件}}（定义基础卡片{{term:框架}}）\n:::\n\n:::step{purpose=\"默认 {{term:slot}}（<{{term:slot}} />）是{{term:组件}}最灵活的扩展点。使用者可以在父{{term:组件}}中向 {{term:slot}} 填入任意 {{term:HTML}} 结构，子{{term:组件}}只负责提供容器和布局。这比纯用 {{term:props}} 传递内容更自由——{{term:props}} 只能传数据，{{term:slot}} 可以传结构。\" expected=\"不同卡片可以有不同的内部布局（如有的显示封面图，有的不显示），但外框{{term:样式}}一致。\"}\n用默认 {{term:slot}} 让使用者传入卡片主体内容\n:::\n\n:::step{purpose=\"具名 {{term:slot}} 让{{term:组件}}可以有多个插槽，分别对应不同的区域。<{{term:slot}} {{term:name}}=\\\"{{term:header}}\\\"> 定义顶部区，<{{term:slot}} {{term:name}}=\\\"{{term:footer}}\\\"> 定义底部区。使用者通过 <{{term:template}} #{{term:header}}> 语法精确填充每个区域。这让{{term:组件}}在保持结构的同时极度灵活。\" expected=\"卡片顶部有标题栏（#{{term:header}}），中间是内容区域（默认 {{term:slot}}），底部有操作按钮区（#{{term:footer}}）。\"}\n用具名 {{term:slot}}（#{{term:header}}, #{{term:footer}}）分别定义卡片的顶部和底部区域\n:::\n\n:::step{purpose=\"插槽的真正威力在于：同一{{term:组件}}{{term:框架}}下，每张卡片可以完全自定义自己的外观和行为。{{term:组件}}提供结构约束，{{term:slot}} 提供内容自由。\" expected=\"不同卡片虽然使用同一个 MusicCard {{term:组件}}，但 {{term:header}} 和 {{term:footer}} 的内容和{{term:样式}}各不相同。\"}\n在 App{{term:.vue}} 中使用时，不同卡片可以有不同的 {{term:header}} 和 {{term:footer}} {{term:样式}}\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把曲目卡片提取成 MusicCard{{term:.vue}} {{term:组件}}（定义基础卡片{{term:框架}}）",

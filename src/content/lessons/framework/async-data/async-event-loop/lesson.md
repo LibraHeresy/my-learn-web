@@ -1,10 +1,10 @@
 # 事件循环 — JavaScript 的"指挥家"
 
-::music-analogy
+:::music-analogy
 交响乐团的指挥决定了哪个声部何时进入——小提琴先起，然后木管加入，最后铜管收尾。JavaScript 也有一个"指挥家"叫 Event Loop（事件循环），它决定了代码的执行顺序：谁先上场，谁等着，谁最后谢幕。
-::
+:::
 
-::explain{title="JavaScript 是\"单线程\"的"}
+:::explain{title="JavaScript 是\"单线程\"的"}
 JavaScript 一次只能做一件事（单线程），就像你一个人没法同时弹钢琴和拉小提琴。
 但浏览器不是只有 JS 引擎——它还有 Web API（定时器、网络请求等）。JS 把耗时任务"外包"给 Web API，自己继续执行后面的代码。
 任务完成后，Web API 把回调函数放进**任务队列**，Event Loop 检查主线程空闲了，就把队列里的任务取出来执行。
@@ -15,9 +15,9 @@ JavaScript 一次只能做一件事（单线程），就像你一个人没法同
                                     ↓
 主线程空闲 ← Event Loop 调度 ← 任务队列
 ```
-::
+:::
 
-::example{title="setTimeout 不是\"暂停\""}
+:::example{title="setTimeout 不是\"暂停\""}
 看这段代码的执行顺序：
 ```js
 console.log('① 开始演奏')
@@ -32,9 +32,9 @@ console.log('① 开始')
 setTimeout(() => console.log('③ 异步回调'), 0)
 console.log('② 继续')
 ```因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像指挥不会在小提琴拉到一半时突然让定音鼓插入。
-::
+:::
 
-::example{title="生活中的类比"}
+:::example{title="生活中的类比"}
 你去咖啡店点一杯拿铁：
 1. 你点单（同步代码）
 2. 咖啡师开始做咖啡（交给 Web API）
@@ -42,28 +42,28 @@ console.log('② 继续')
 4. 咖啡做好了，叫号（回调进任务队列）
 5. 你去取咖啡（Event Loop 调度执行回调）
 你不会站在柜台前干等咖啡师做完——那太浪费时间了。JS 也一样，不会卡住等异步任务。
-::
+:::
 
-::task{title="动手试试 ✨"}
-:::step{purpose="训练对 Event Loop 的直觉理解。新手常以为 setTimeout(fn, 0) 会\"立即\"执行，但实际上所有同步代码先跑完，异步回调才被队列调度。先预测再验证，加深记忆。" expected="正确预测顺序为 A → B → D → C。即使 D 的延迟是 0，D 也在 B 之后——因为同步代码优先于所有异步回调。"}
+:::task{title="动手试试 ✨"}
+::::step{purpose="训练对 Event Loop 的直觉理解。新手常以为 setTimeout(fn, 0) 会\"立即\"执行，但实际上所有同步代码先跑完，异步回调才被队列调度。先预测再验证，加深记忆。" expected="正确预测顺序为 A → B → D → C。即使 D 的延迟是 0，D 也在 B 之后——因为同步代码优先于所有异步回调。"}
 阅读代码：console.log("A") → setTimeout(..., 500) → setTimeout(..., 0) → console.log("B")，写下你预测的输出顺序
-:::
+::::
 
-:::step{purpose="亲手验证比看一百次理论都有效。当预测和实际一致时，你真正理解了 Event Loop；如果不一致，说明认知有偏差——这正是学习的黄金时刻。" expected="控制台输出顺序为 A → B → D → C，D（0ms 异步）在 C（500ms 异步）之前，因为 D 先进入任务队列。"}
+::::step{purpose="亲手验证比看一百次理论都有效。当预测和实际一致时，你真正理解了 Event Loop；如果不一致，说明认知有偏差——这正是学习的黄金时刻。" expected="控制台输出顺序为 A → B → D → C，D（0ms 异步）在 C（500ms 异步）之前，因为 D 先进入任务队列。"}
 运行代码，打开控制台观察实际输出，与你的预测对比
-:::
+::::
 
-:::step{purpose="理解\"同步代码优先于异步回调\"这个规则，你就能预测所有 setTimeout/Promise/fetch 的执行顺序。就像理解\"指挥先给弦乐起拍\"——节奏规则一旦内化，看任何总谱都不会乱。" expected="你能用自己的话解释：即使 setTimeout(fn, 0)，fn 也要先进任务队列，等调用栈清空后 Event Loop 才会取它执行。"}
+::::step{purpose="理解\"同步代码优先于异步回调\"这个规则，你就能预测所有 setTimeout/Promise/fetch 的执行顺序。就像理解\"指挥先给弦乐起拍\"——节奏规则一旦内化，看任何总谱都不会乱。" expected="你能用自己的话解释：即使 setTimeout(fn, 0)，fn 也要先进任务队列，等调用栈清空后 Event Loop 才会取它执行。"}
 思考：为什么 setTimeout(fn, 0) 的回调排在 console.log("B") 之后？如果你理解了这个，就掌握了 Event Loop 的核心规则
+::::
+
 :::
 
-::
-
-::hint{title="理解要点"}
+:::hint{title="理解要点"}
 核心规则：**同步代码优先于异步回调**。即使 `setTimeout(fn, 0)`，`fn` 也要等所有同步代码跑完。因为回调必须先进任务队列，而 Event Loop 只有在调用栈清空后才会去取任务队列里的任务。
-::
+:::
 
-::listen-to
+:::listen-to
 拉威尔《波莱罗》— 同一段旋律在不同乐器间依次传递，每种乐器依次"异步"进入，完美诠释了顺序与调度的美感。
-::
+:::
 

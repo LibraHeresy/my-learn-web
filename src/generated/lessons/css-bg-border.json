@@ -27,7 +27,7 @@
       "attrs": {
         "title": "背景颜色"
       },
-      "content": "{{term:background}}-{{term:color}} {{term:属性}}设置{{term:元素}}的背景色，border 设置边框，{{term:border-radius}} 设置圆角，{{term:box-shadow}} 设置阴影。就像给扬琴谱选暖色纸、加装饰边框——让页面更有{{term:层}}次感。\n```css\ndiv {\n  background-color: #FFFAF2;\n}\n```"
+      "content": "{{term:background}}-{{term:color}} {{term:属性}}设置{{term:元素}}的背景色，border 设置边框，{{term:border-radius}} 设置圆角，{{term:box-shadow}} 设置阴影。就像给扬琴谱选暖色纸、加装饰边框——让页面更有{{term:层}}次感。\n\n```css\r\ndiv {\r\n  background-color: #FFFAF2;\r\n}\r\n```"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "边框与圆角"
       },
-      "content": "`border` 给{{term:元素}}加上边框，`border-radius` 让边角变圆滑：\n```css\ndiv {\n  border: 2px solid #D4C5A9;\n  border-radius: 12px;\n}\n```\n- `2px` — 边框粗细\n- `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）\n- `#D4C5A9` — 边框颜色\n- `border-radius: 12px` — 圆角半径，值越大越圆\n圆角让卡片更柔和，就像乐谱中圆润的连音线。"
+      "content": "`border` 给{{term:元素}}加上边框，`border-radius` 让边角变圆滑：\n\n```css\r\ndiv {\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 12px;\r\n}\r\n```\n\n- `2px` — 边框粗细\r\n- `solid` — 实线（还有 `dashed` 虚线、`dotted` 点线）\r\n- `#D4C5A9` — 边框颜色\r\n- `border-radius: 12px` — 圆角半径，值越大越圆\r\n圆角让卡片更柔和，就像乐谱中圆润的连音线。"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码创建了一张\"作曲家卡片\"，有暖色背景、细边框和圆角：\n```css\n.card {\n  background-color: #FFFAF2; /* 背景色：暖白，像旧乐谱的颜色 */\n  border: 2px solid #D4C5A9; /* 边框：粗细 样式 颜色 */\n  border-radius: 12px;       /* 圆角：让卡片四角变圆 */\n  padding: 20px;             /* 内边距：内容到边框的距离 */\n}\n.card h2 {\n  color: #8B2E2E;            /* 文字颜色：暗红，像古典乐谱标题 */\n}\n```\n切换到 {{term:CSS}} {{term:标签}}页查看完整代码。"
+      "content": "下面的代码创建了一张\"作曲家卡片\"，有暖色背景、细边框和圆角：\n\n```css\r\n.card {\r\n  background-color: #FFFAF2; /* 背景色：暖白，像旧乐谱的颜色 */\r\n  border: 2px solid #D4C5A9; /* 边框：粗细 样式 颜色 */\r\n  border-radius: 12px;       /* 圆角：让卡片四角变圆 */\r\n  padding: 20px;             /* 内边距：内容到边框的距离 */\r\n}\r\n.card h2 {\r\n  color: #8B2E2E;            /* 文字颜色：暗红，像古典乐谱标题 */\r\n}\r\n```\n\n切换到 {{term:CSS}} {{term:标签}}页查看完整代码。"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"`background-color` 像舞台幕布——改变{{term:元素}}的背景色，营造不同的视觉氛围。\" expected=\"卡片背景色变了。不同的颜色传达不同的感觉：蓝调冷静，橙调温暖。\"}\n把 `.card` 的 `background-color` 换一个颜色（试试 `#F0F8FF` 浅蓝，或 `#FFF8F0` 暖橙）\n:::\n\n:::step{purpose=\"`border` 的三个值：粗细、{{term:样式}}、颜色。`2px solid #D4C5A9` 分别对应这三个维度。\" expected=\"卡片的边框变粗了一倍。边框像画框——越粗越强调，越细越含蓄。\"}\n把 `border` 的粗细从 `2px` 改成 `4px`，看边框变粗\n:::\n\n:::step{purpose=\"`border-radius` 控制圆角半径——值越大，角越圆。`0` 是直角，`50%` 是圆形。\" expected=\"卡片四角变得更加圆润。圆角和直角传达完全不同的视觉感受。\"}\n把 `border-radius` 改成 `24px`，让卡片更圆润\n:::\n\n:::step{purpose=\"`border-style` 除了 `solid`（实线）还有 `dashed`（虚线）、`dotted`（点线）等多种{{term:样式}}。\" expected=\"卡片边框变成了虚线。不同的边框{{term:样式}}适合不同的设计场景。\"}\n试试把 `solid` 改成 `dashed`，看虚线边框\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 `.card` 的 `background-color` 换一个颜色（试试 `#F0F8FF` 浅蓝，或 `#FFF8F0` 暖橙）",

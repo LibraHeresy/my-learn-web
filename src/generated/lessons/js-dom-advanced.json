@@ -27,7 +27,7 @@
       "attrs": {
         "title": "动态创建元素"
       },
-      "content": "{{term:createElement}} 动态创建 {{term:HTML}} {{term:元素}}，{{term:appendChild}} 把它添加进页面，remove 移除{{term:元素}}。就像在演奏中临时增加一件乐器——全新的{{term:元素}}出现在页面上。\n```js\n// 创建元素\nlet card = document.createElement(\"div\");\ncard.className = \"card\";         // 设类名\ncard.innerHTML = \"<h2>新卡片</h2>\";  // 设内容\n// 追加到页面\ndocument.querySelector(\"#list\").appendChild(card);\n```"
+      "content": "{{term:createElement}} 动态创建 {{term:HTML}} {{term:元素}}，{{term:appendChild}} 把它添加进页面，remove 移除{{term:元素}}。就像在演奏中临时增加一件乐器——全新的{{term:元素}}出现在页面上。\n\n```js\r\n// 创建元素\r\nlet card = document.createElement(\"div\");\r\ncard.className = \"card\";         // 设类名\r\ncard.innerHTML = \"<h2>新卡片</h2>\";  // 设内容\r\n// 追加到页面\r\ndocument.querySelector(\"#list\").appendChild(card);\r\n```"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "删除与替换"
       },
-      "content": "`.remove()` 直接删除{{term:元素}}：\n```js\nlet card = document.querySelector(\"#card3\");\ncard.remove();  // 没了！\n```\n配合 `createElement` 实现增删：\n```js\nfunction addCard(title) {\n  let card = document.createElement(\"div\");\n  card.className = \"card\";\n  card.textContent = title;\n  document.querySelector(\"#list\").appendChild(card);\n}\nfunction removeLast() {\n  let cards = document.querySelectorAll(\".card\");\n  let last = cards[cards.length - 1];\n  if (last) last.remove();\n}\n```\n增删改查——完整的数据操作闭环！"
+      "content": "`.remove()` 直接删除{{term:元素}}：\n\n```js\r\nlet card = document.querySelector(\"#card3\");\r\ncard.remove();  // 没了！\r\n```\n\n配合 `createElement` 实现增删：\n\n```js\r\nfunction addCard(title) {\r\n  let card = document.createElement(\"div\");\r\n  card.className = \"card\";\r\n  card.textContent = title;\r\n  document.querySelector(\"#list\").appendChild(card);\r\n}\r\nfunction removeLast() {\r\n  let cards = document.querySelectorAll(\".card\");\r\n  let last = cards[cards.length - 1];\r\n  if (last) last.remove();\r\n}\r\n```\n\n增删改查——完整的数据操作闭环！"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码有一个输入框和`添加`\"删除最后\"两个按钮，可以动态维护一张练琴计划列表：\n```js\nfunction addItem() {\n  // createElement：创建一个新的 HTML 元素\n  let item = document.createElement(\"div\");\n  item.className = \"plan-item\";       // 给它加 CSS 类名\n  item.textContent = input.value;     // 设置它的文字内容\n  list.appendChild(item);             // appendChild：把新元素加到页面上\n  input.value = \"\";                   // 清空输入框\n}\nfunction removeLast() {\n  // querySelectorAll：找到所有匹配的元素，返回一个列表\n  let items = document.querySelectorAll(\".plan-item\");\n  let last = items[items.length - 1]; // 取最后一个\n  if (last) last.remove();            // remove()：从页面上删除这个元素\n}\n```\n切换到预览区，输入内容点添加，再点删除试试——页面{{term:元素}}在动态变化！"
+      "content": "下面的代码有一个输入框和`添加`\"删除最后\"两个按钮，可以动态维护一张练琴计划列表：\n\n```js\r\nfunction addItem() {\r\n  // createElement：创建一个新的 HTML 元素\r\n  let item = document.createElement(\"div\");\r\n  item.className = \"plan-item\";       // 给它加 CSS 类名\r\n  item.textContent = input.value;     // 设置它的文字内容\r\n  list.appendChild(item);             // appendChild：把新元素加到页面上\r\n  input.value = \"\";                   // 清空输入框\r\n}\r\nfunction removeLast() {\r\n  // querySelectorAll：找到所有匹配的元素，返回一个列表\r\n  let items = document.querySelectorAll(\".plan-item\");\r\n  let last = items[items.length - 1]; // 取最后一个\r\n  if (last) last.remove();            // remove()：从页面上删除这个元素\r\n}\r\n```\n\n切换到预览区，输入内容点添加，再点删除试试——页面{{term:元素}}在动态变化！"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"`createElement` + `appendChild` 是动态添加{{term:元素}}的黄金组合——就像在演奏中临时加入一段即兴 solo。页面不再是一成不变的静态文档，而是活的数据容器。\" expected=\"每次点击添加，列表底部就会多出一行练习内容。输入框清空后可以继续添加下一条。页面{{term:元素}}在动态变化——这就是「动态 {{term:DOM}}」的魔力。\"}\n在输入框输入练习内容（如「哈农练习曲 第1条」），点击「添加」，观察列表中出现新的练习项。连续添加多条，感受列表的动态增长\n:::\n\n:::step{purpose=\"`.remove()` 直接销毁{{term:元素}}——不留下任何痕迹。配合 `querySelectorAll` 获取所有练习项，取最后一个（`items[items.length - 1]`），实现了精确的「栈式」删除。增加 + 删除的组合让你拥有了完整的数据管理能力。\" expected=\"每次点击删除，列表最后一项消失。列表可以为空（不会报错），也可以再添加回来。增删自如。\"}\n连续点击「删除最后」按钮，观察列表从末尾开始逐条缩短，直到完全为空。理解 `querySelectorAll` + `[length-1]` {{term:索引}} + `.remove()` 的删除逻辑\n:::\n\n:::step{purpose=\"在 `createElement` 时动态计算内容，让你的练习计划更像真实的应用。序号的自动递增体现了「创建时动态赋值」的思想——每次创建时根据当前状态决定{{term:元素}}的内容。\" expected=\"每个练习项前面出现了序号（如「1. 哈农练习曲」「2. 音阶练习」），即使删除后重新添加，序号也会重新计算。\"}\n修改 `addItem` {{term:函数}}的逻辑，让每个练习项前面带上序号。提示：在设置 `item.textContent` 时，先获取当前列表的项数（`querySelectorAll` 的 `.length`），然后拼接序号\n:::\n\n:::step{purpose=\"这挑战综合了 `createElement` + `appendChild` + {{term:事件}}绑定 + `.remove()` 四项技能。在创建{{term:元素}}时就内嵌删除逻辑，就像在每个音符上标注「可删除」——这比全局的「删除最后」按钮更灵活，每一项都独立可控。\" expected=\"每个练习项右侧都有一个删除按钮，点击后只删除该项，不影响其他项。你现在拥有了一个完整的 Todo 列表管理功能——可以任意添加和删除任一项。\"}\n挑战：给每个练习项加一个独立的「删除」按钮。在 `createElement` 时同时创建一个删除按钮子{{term:元素}}，给按钮绑定 click {{term:事件}}，点击时调用 `item.remove()` 只删除它所属的那一项\n:::",
+      "content": "",
       "steps": [
         {
           "content": "在输入框输入练习内容（如「哈农练习曲 第1条」），点击「添加」，观察列表中出现新的练习项。连续添加多条，感受列表的动态增长",

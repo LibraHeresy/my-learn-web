@@ -27,7 +27,7 @@
       "attrs": {
         "title": "什么是 Flexbox？"
       },
-      "content": "{{term:Flexbox}}（{{term:弹性}}盒子）让{{term:元素}}排列变得简单。只需在**父{{term:元素}}**上设置 `display: flex`，子{{term:元素}}就会自动排列：\n```css\n.container {\n  display: flex;\n}\n```\n默认情况下，子{{term:元素}}会**横向排列**（就像乐团的乐器按行排开）。"
+      "content": "{{term:Flexbox}}（{{term:弹性}}盒子）让{{term:元素}}排列变得简单。只需在**父{{term:元素}}**上设置 `display: flex`，子{{term:元素}}就会自动排列：\n\n```css\r\n.container {\r\n  display: flex;\r\n}\r\n```\n\n默认情况下，子{{term:元素}}会**横向排列**（就像乐团的乐器按行排开）。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "主轴方向"
       },
-      "content": "`flex-direction` 决定排列方向：\n- `row`（默认）— 横向排列，从左到右，像乐团的一排\n- `column` — 纵向排列，从上到下，像总谱的各声部\n乐团排练时指挥说\"弦乐坐左边，管乐坐右边\"——在 {{term:CSS}} 中，`flex-direction` 就是你的指挥棒！"
+      "content": "`flex-direction` 决定排列方向：\n\n- `row`（默认）— 横向排列，从左到右，像乐团的一排\r\n- `column` — 纵向排列，从上到下，像总谱的各声部\r\n乐团排练时指挥说\"弦乐坐左边，管乐坐右边\"——在 {{term:CSS}} 中，`flex-direction` 就是你的指挥棒！"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "间距分配"
       },
-      "content": "`justify-content` 控制主轴上的对齐方式：\n- `flex-start` — 靠左/靠上\n- `center` — 居中\n- `space-between` — 两端对齐，中间均匀分布\n- `space-around` — 每个{{term:元素}}周围有相同间距\n就像合唱团在舞台上排开——可以挤在中间，也可以均匀分布。"
+      "content": "`justify-content` 控制主轴上的对齐方式：\n\n- `flex-start` — 靠左/靠上\r\n- `center` — 居中\r\n- `space-between` — 两端对齐，中间均匀分布\r\n- `space-around` — 每个{{term:元素}}周围有相同间距\r\n就像合唱团在舞台上排开——可以挤在中间，也可以均匀分布。"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码用 {{term:Flexbox}} 把三张作曲家卡片横向排列。注意 `.container` 上的 `display: flex`：\n```css\n.container {\n  display: flex;\n  gap: 20px;\n  justify-content: center;\n}\n.card {\n  flex: 1;\n}\n```\n{{term:gap}}` 是卡片之间的间距，`flex: 1` 让每张卡片平均分配宽度。"
+      "content": "下面的代码用 {{term:Flexbox}} 把三张作曲家卡片横向排列。注意 `.container` 上的 `display: flex`：\n\n```css\r\n.container {\r\n  display: flex;\r\n  gap: 20px;\r\n  justify-content: center;\r\n}\r\n.card {\r\n  flex: 1;\r\n}\r\n```\n\n{{term:gap}}` 是卡片之间的间距，`flex: 1` 让每张卡片平均分配宽度。"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"理解 `flex-direction`——它决定主轴方向。`row` = 横向排列（默认），`column` = 纵向排列。就像指挥决定声部是横排还是竖排。\" expected=\"三张卡片变成了上下堆叠排列。主轴方向一变，整个布局就变了。\"}\n把 `.container` 的 `flex-direction` 改成 `column`，看卡片变成纵向排列\n:::\n\n:::step{purpose=\"`justify-content` 控制主轴上的分布方式。`space-between` 首尾贴边中间平均分配，`space-around` 每个{{term:元素}}周围间距相等。\" expected=\"卡片之间的间距分布方式改变了。`space-between` 时首尾卡片贴边。\"}\n把 `justify-content` 改成 `space-between` 或 `space-around`\n:::\n\n:::step{purpose=\"`gap` 是 {{term:Flexbox}} 中设置子{{term:元素}}间距的最简单方式。一个值 = 行间距和列间距相同。\" expected=\"卡片间距变大或变小了。`gap` 越大，卡片之间越疏远。\"}\n调整 `gap` 的值，看卡片间距变化\n:::\n\n:::step{purpose=\"`flex: 1` 表示每张卡片平分剩余空间。去掉后该卡片只占用内容所需的最小宽度，其余空间被有 `flex: 1` 的卡片瓜分。\" expected=\"没有 `flex: 1` 的卡片变窄了，其他卡片变宽了。这就是{{term:弹性}}分配的核心。\"}\n试试去掉某张卡片的 `flex: 1`，看宽度怎么分配\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 `.container` 的 `flex-direction` 改成 `column`，看卡片变成纵向排列",

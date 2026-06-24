@@ -27,7 +27,7 @@
       "attrs": {
         "title": "console.log 不够用了吗？"
       },
-      "content": "你一直在用 console.log 来调试代码——这在简单场景下确实管用。但当你遇到复杂问题时：\n- {{term:变量}}在 5 个地方被修改，不知道是谁改错了\n- 循环 100 次，不知道第 47 次为什么出问题\n- {{term:异步}}代码的执行顺序让人困惑\n- 想看某个时刻**所有**{{term:变量}}的值，而不是只 log 一个\n这时候你需要{{term:断点}}（breakpoint）——在代码的某一行设置一个暂停标记，程序运行到这里就会停下来，你可以慢慢检查一切。\n**打开 {{term:DevTools}} Sources 面板：**\n1. 按 F12 打开开发者工具\n2. 切换到 Sources（源代码）面板\n3. 左侧找到你的 {{term:JS}} 文件\n4. 点击行号设置{{term:断点}}（出现蓝色箭头标记）\n5. 刷新页面或触发{{term:事件}}——程序在{{term:断点}}处暂停！"
+      "content": "你一直在用 console.log 来调试代码——这在简单场景下确实管用。但当你遇到复杂问题时：\n\n- {{term:变量}}在 5 个地方被修改，不知道是谁改错了\r\n- 循环 100 次，不知道第 47 次为什么出问题\r\n- {{term:异步}}代码的执行顺序让人困惑\r\n- 想看某个时刻**所有**{{term:变量}}的值，而不是只 log 一个\r\n这时候你需要{{term:断点}}（breakpoint）——在代码的某一行设置一个暂停标记，程序运行到这里就会停下来，你可以慢慢检查一切。\r\n**打开 {{term:DevTools}} Sources 面板：**\n\n1. 按 F12 打开开发者工具\r\n2. 切换到 Sources（源代码）面板\r\n3. 左侧找到你的 {{term:JS}} 文件\r\n4. 点击行号设置{{term:断点}}（出现蓝色箭头标记）\r\n5. 刷新页面或触发{{term:事件}}——程序在{{term:断点}}处暂停！"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "断点操作 — 你的指挥手势"
       },
-      "content": "程序暂停后，你可以使用以下控制按钮（像指挥的不同手势）：\n| 按钮 | 快捷键 | 作用 |\n|------|--------|------|\n| Resume | F8 | 继续执行，直到下一个{{term:断点}} |\n| Step Over | F10 | 执行当前行，不进入{{term:函数}}内部 |\n| Step Into | F11 | 进入{{term:函数}}内部，逐行执行 |\n| Step Out | Shift+F11 | 跳出当前{{term:函数}} |\n暂停时，你可以：\n- **鼠标悬停**在任何{{term:变量}}上查看它的值\n- 在右侧 **Scope（{{term:作用域}}）** 面板查看所有局部和全局{{term:变量}}\n- 在 **Watch（监视）** 面板添加表达式，实时追踪其值变化\n- 在 **{{term:Console}}** 面板直接输入{{term:变量}}名来测试表达式\n> 🎯 就像一个指挥随时可以指着某个乐手问你这里奏的是什么，你随时可以查看任何{{term:变量}}的值。"
+      "content": "程序暂停后，你可以使用以下控制按钮（像指挥的不同手势）：\r\n| 按钮 | 快捷键 | 作用 |\r\n|------|--------|------|\r\n| Resume | F8 | 继续执行，直到下一个{{term:断点}} |\r\n| Step Over | F10 | 执行当前行，不进入{{term:函数}}内部 |\r\n| Step Into | F11 | 进入{{term:函数}}内部，逐行执行 |\r\n| Step Out | Shift+F11 | 跳出当前{{term:函数}} |\r\n暂停时，你可以：\n\n- **鼠标悬停**在任何{{term:变量}}上查看它的值\r\n- 在右侧 **Scope（{{term:作用域}}）** 面板查看所有局部和全局{{term:变量}}\r\n- 在 **Watch（监视）** 面板添加表达式，实时追踪其值变化\r\n- 在 **{{term:Console}}** 面板直接输入{{term:变量}}名来测试表达式\n\n> 🎯 就像一个指挥随时可以指着某个乐手问你这里奏的是什么，你随时可以查看任何{{term:变量}}的值。"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "条件断点与 DOM 断点"
       },
-      "content": "**条件{{term:断点}}：** 右键点击行号 → \"Add conditional breakpoint\" → 输入条件表达式（如 i === 47）。只有当条件为 {{term:true}} 时才会暂停。这在调试第 47 次循环出问题时是救星。\n```js\n// 条件断点表达式：i === 47\n// 循环到第 48 次（i=47）时才会暂停\nfor (let i = 0; i < 100; i++) {\n  processItem(data[i])\n}\n```\n**{{term:DOM}} {{term:断点}}：** 在 {{term:Elements 面板}}中右键一个 {{term:DOM}} {{term:元素}} → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个{{term:元素}}被修改、删除或{{term:属性}}变化时，自动跳转到修改它的 {{term:JS}} 代码。\n**XHR/Fetch {{term:断点}}：** 在 Sources 面板右侧的 XHR/{{term:fetch}} Breakpoints 中添加 URL 片段（如 {{term:search}}）。当有{{term:请求}}匹配这个 URL 时自动暂停——调试网络{{term:请求}}的神器。"
+      "content": "**条件{{term:断点}}：** 右键点击行号 → \"Add conditional breakpoint\" → 输入条件表达式（如 i === 47）。只有当条件为 {{term:true}} 时才会暂停。这在调试第 47 次循环出问题时是救星。\n\n```js\r\n// 条件断点表达式：i === 47\r\n// 循环到第 48 次（i=47）时才会暂停\r\nfor (let i = 0; i < 100; i++) {\r\n  processItem(data[i])\r\n}\r\n```\n\n**{{term:DOM}} {{term:断点}}：** 在 {{term:Elements 面板}}中右键一个 {{term:DOM}} {{term:元素}} → Break on → 选择 subtree modifications / attribute modifications / node removal。当这个{{term:元素}}被修改、删除或{{term:属性}}变化时，自动跳转到修改它的 {{term:JS}} 代码。\r\n**XHR/Fetch {{term:断点}}：** 在 Sources 面板右侧的 XHR/{{term:fetch}} Breakpoints 中添加 URL 片段（如 {{term:search}}）。当有{{term:请求}}匹配这个 URL 时自动暂停——调试网络{{term:请求}}的神器。"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码是一个猜数字游戏。请在 Sources 面板中设置{{term:断点}}来调试：\n```js\nlet target = Math.floor(Math.random() * 100)\nlet score = 100\nlet attempts = 0\nfunction guess(num) {\n  attempts++\n  if (num > target) {\n    score -= 10\n    return '太大了！'\n  } else if (num < target) {\n    score -= 10\n    return '太小了！'\n  } else {\n    // 在这里设置一个断点——检查 num、target、score 的值\n    return '恭喜！你得分为 ' + score\n  }\n}\n```\n打开 F12 → Sources → 在 {{term:return}} 那行设置{{term:断点}} → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有{{term:变量}}。"
+      "content": "下面的代码是一个猜数字游戏。请在 Sources 面板中设置{{term:断点}}来调试：\n\n```js\r\nlet target = Math.floor(Math.random() * 100)\r\nlet score = 100\r\nlet attempts = 0\r\nfunction guess(num) {\r\n  attempts++\r\n  if (num > target) {\r\n    score -= 10\r\n    return '太大了！'\r\n  } else if (num < target) {\r\n    score -= 10\r\n    return '太小了！'\r\n  } else {\r\n    // 在这里设置一个断点——检查 num、target、score 的值\r\n    return '恭喜！你得分为 ' + score\r\n  }\r\n}\r\n```\n\n打开 F12 → Sources → 在 {{term:return}} 那行设置{{term:断点}} → 在输入框输入数字 → 点击按钮触发 guess() → 程序暂停，查看右侧面板中所有{{term:变量}}。"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:断点}}是比 console.log 更强大的调试工具——你可以在任意时刻\\\"凝固\\\"程序，查看所有{{term:变量}}的值。就像指挥让乐队在某一小节停下，逐个声部检查每个乐手的状态。\" expected=\"程序在{{term:断点}}处暂停，右侧 Scope 面板显示 num、{{term:target}}、score、attempts 等所有局部{{term:变量}}和它们的当前值。\"}\n打开 F12 → Sources 面板，在 guess {{term:函数}}的第一行（attempts++）设置{{term:断点}}，输入数字并触发 guess()\n:::\n\n:::step{purpose=\"逐行执行让你看到代码的真实执行路径——走到了 if 还是 else if？score 减了没有？就像用慢镜头回放演奏，看清每一个音符的来龙去脉。\" expected=\"每按一次 F10，代码前进一行，Scope 面板中的{{term:变量}}值实时更新。你能看到 if 分支的跳转逻辑。\"}\n使用 Step Over（F10）逐行执行，观察 score 和 attempts 如何随每次判断而变化\n:::\n\n:::step{purpose=\"条件{{term:断点}}只在你指定的条件满足时才暂停。这在调试\\\"第 47 次循环才出错\\\"的问题时是救星——你不用手动跳过 46 次无用的暂停。\" expected=\"只有当输入 81~89 之间的数字时，程序才会在{{term:断点}}处暂停；其他数字正常执行不停。\"}\n在 if (num > {{term:target}}) 行设置条件{{term:断点}}，右键行号 → Add conditional breakpoint → 输入 num > 80 && num < 90\n:::\n\n:::step{purpose=\"Watch 面板让你监控动态表达式，无需修改代码就能观察数据关系。就像在排练中临时加入一个测量工具，实时显示\\\"当前音高和目标音高的差距\\\"。\" expected=\"Watch 面板中 {{term:target}} - num 显示正数（猜小了）或负数（猜大了），帮助你精确调整下一次猜测。\"}\n（挑战）在 Watch 面板添加表达式 {{term:target}} - num 和 {{term:Math}}.abs({{term:target}} - num)，实时追踪猜测差值\n:::",
+      "content": "",
       "steps": [
         {
           "content": "打开 F12 → Sources 面板，在 guess {{term:函数}}的第一行（attempts++）设置{{term:断点}}，输入数字并触发 guess()",

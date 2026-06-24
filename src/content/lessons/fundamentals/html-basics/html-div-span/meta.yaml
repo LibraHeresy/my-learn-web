@@ -4,6 +4,6 @@ track: fundamentals
 chapter: html-basics
 order: 6
 mode: sandbox
-musicAnalogy: `<div>` 像**小节线**，把内容划分成独立的段落，每个段落独占一行；`<span>` 像**连音线**，在句子内部连接和标记某些词语，不打断句子的流动。
+musicAnalogy: "`<div>` 像**小节线**，把内容划分成独立的段落，每个段落独占一行；`<span>` 像**连音线**，在句子内部连接和标记某些词语，不打断句子的流动。"
 listenTo: 巴赫《勃兰登堡协奏曲》— 不同乐器组（就像 div）各自成段，但独奏乐器在其中穿插对话（就像 span）。
 estimatedMinutes: 0

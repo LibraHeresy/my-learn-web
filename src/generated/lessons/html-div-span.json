@@ -22,12 +22,25 @@
       "content": "`<div>` 像**小节线**，把内容划分成独立的段落，每个段落独占一行；`<span>` 像**连音线**，在句子内部连接和标记某些词语，不打断句子的流动。"
     },
     {
-      "type": "block:explain",
-      "name": "explain",
-      "attrs": {
-        "title": "两种最基本的\"容器\""
-      },
-      "content": "{{term:div}} 和 {{term:span}} 本身不添加任何{{term:样式}}，它们是用来把内容分组的——{{term:div}} 是{{term:块级元素}}（独占一行，就像独奏段落独占舞台中央），{{term:span}} 是{{term:内联元素}}（在文字流中不换行，就像装饰音/加花）。\n\n{{term:class}} {{term:属性}}可以给它们贴上分类{{term:标签}}（🌐{{term:全局属性}}——所有{{term:标签}}都能用）。{{term:class}} 就像给琴竹分类——\"这批是硬竹\"\"这批是软竹\"，同一类竹法可以给多根弦用，同一个 {{term:class}} 可以给多个{{term:元素}}用。\n\n具体写法：\n- `<div>` — **{{term:块级元素}}**（{{term:block}}），独占一行，像一整个段落\n- `<span>` — **{{term:内联元素}}**（{{term:inline}}），在文字流内部，像句子中的标记\n```html\n<div>我是一个块，占满整行。</div>\n<div>我是另一个块，自动换行。</div>\n<p>文字中<span>这个部分</span>被span标记了。</p>\n```"
+      "type": "paragraph",
+      "text": ":::explain{{{term:title}}=\"两种最基本的\\\"容器\\\"\"}\n{{term:div}} 和 {{term:span}} 本身不添加任何{{term:样式}}，它们是用来把内容分组的——{{term:div}} 是{{term:块级元素}}（独占一行，就像独奏段落独占舞台中央），{{term:span}} 是{{term:内联元素}}（在文字流中不换行，就像装饰音/加花）。"
+    },
+    {
+      "type": "paragraph",
+      "text": "{{term:class}} {{term:属性}}可以给它们贴上分类{{term:标签}}（🌐{{term:全局属性}}——所有{{term:标签}}都能用）。{{term:class}} 就像给琴竹分类——\"这批是硬竹\"\"这批是软竹\"，同一类竹法可以给多根弦用，同一个 {{term:class}} 可以给多个{{term:元素}}用。"
+    },
+    {
+      "type": "paragraph",
+      "text": "具体写法："
+    },
+    {
+      "type": "code",
+      "language": "html",
+      "code": "<div>我是一个块，占满整行。</div>\r\n<div>我是另一个块，自动换行。</div>\r\n<p>文字中<span>这个部分</span>被span标记了。</p>"
+    },
+    {
+      "type": "paragraph",
+      "text": ":::"
     },
     {
       "type": "block:explain",
@@ -35,7 +48,7 @@
       "attrs": {
         "title": "什么时候用 div？什么时候用 span？"
       },
-      "content": "**用 `<div>` 当你要：**\n- 创建一个卡片、面板、区块\n- 把一组{{term:元素}}包在一起\n- 需要块级布局（独占一行）\n**用 `<span>` 当你要：**\n- 高亮句子中的某个词\n- 给行内文字加特殊{{term:样式}}\n- 不改动文字流的情况下标记内容\n简单记忆：**{{term:div}} 管\"块\"，{{term:span}} 管\"字\"。**就像扬琴的音区划分——{{term:div}} 是高音区/中音区/低音区各自独立成块，{{term:span}} 是在某几个音上画圈标记。\n**{{term:class}} 和 {{term:id}} 的区别**（两个都是{{term:全局属性}}，但用法完全不同）：\n- {{term:class}} = 琴竹分类（硬竹/软竹/反竹）——多个{{term:元素}}可以共用同一个 {{term:class}} 名，{{term:CSS}} 用 .{{term:class}}名 选中\n- {{term:id}} = 琴弦唯一编号（C3/D3/E3…）——整个页面同个 {{term:id}} 只能出现一次，{{term:CSS}} 用 #{{term:id}}名 选中\n\n什么时候用 {{term:class}}？给一组相似{{term:元素}}统一{{term:样式}}（比如所有\"作曲家名字\"都加金色）\n什么时候用 {{term:id}}？给独一无二的{{term:元素}}特殊{{term:样式}}（比如页面唯一的\"提交按钮\"）"
+      "content": "**用 `<div>` 当你要：**\n\n- 创建一个卡片、面板、区块\r\n- 把一组{{term:元素}}包在一起\r\n- 需要块级布局（独占一行）\r\n**用 `<span>` 当你要：**\r\n- 高亮句子中的某个词\r\n- 给行内文字加特殊{{term:样式}}\r\n- 不改动文字流的情况下标记内容\r\n简单记忆：**{{term:div}} 管\"块\"，{{term:span}} 管\"字\"。**就像扬琴的音区划分——{{term:div}} 是高音区/中音区/低音区各自独立成块，{{term:span}} 是在某几个音上画圈标记。\r\n**{{term:class}} 和 {{term:id}} 的区别**（两个都是{{term:全局属性}}，但用法完全不同）：\r\n- {{term:class}} = 琴竹分类（硬竹/软竹/反竹）——多个{{term:元素}}可以共用同一个 {{term:class}} 名，{{term:CSS}} 用 .{{term:class}}名 选中\r\n- {{term:id}} = 琴弦唯一编号（C3/D3/E3…）——整个页面同个 {{term:id}} 只能出现一次，{{term:CSS}} 用 #{{term:id}}名 选中\n\n什么时候用 {{term:class}}？给一组相似{{term:元素}}统一{{term:样式}}（比如所有\"作曲家名字\"都加金色）\r\n什么时候用 {{term:id}}？给独一无二的{{term:元素}}特殊{{term:样式}}（比如页面唯一的\"提交按钮\"）"
     },
     {
       "type": "block:example",
@@ -43,7 +56,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码用 `<div>` 创建了三张音乐卡片，用 `<span>` 在文字中高亮了作曲家名字：\n```html\n<div class=\"card\">\n  <h2><span class=\"name\">巴赫</span></h2>\n  <p>时期：<span class=\"name\">巴洛克</span></p>\n</div>\n```注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。"
+      "content": "下面的代码用 `<div>` 创建了三张音乐卡片，用 `<span>` 在文字中高亮了作曲家名字：\n\n```html\r\n<div class=\"card\">\r\n  <h2><span class=\"name\">巴赫</span></h2>\r\n  <p>时期：<span class=\"name\">巴洛克</span></p>\r\n</div>\r\n```注意：每个 `<div>` 独占一行，而 `<span>` 只是在行内标记文字。"
     },
     {
       "type": "block:task",
@@ -51,7 +64,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"练习 `span` 的用法——`span` 是{{term:内联元素}}，在文字流中不换行，只标记其中的一部分。\" expected=\"第三张卡片的作曲家名字和时期也有了高亮{{term:样式}}。\"}\n给第三张卡片也加上 `<span class=\"name\">` 高亮作曲家名字和时期\n:::\n\n:::step{purpose=\"理解 `div` 的块级特性——**每个 {{term:div}} 独占一行**，新卡片会自动换到下一行。\" expected=\"复制出来的卡片出现在下方新的一行，而不是并排。这就是{{term:块级元素}}的行为。\"}\n试着复制一张卡片（整个 `<div>` 块），看看它是独占一行还是并排\n:::\n\n:::step{purpose=\"直接对比块级（`div`）和内联（`span`）的差异——`div` 会打断文字流强制换行，`span` 不会。\" expected=\"改成 `<div>` 后，原本流畅的文字在中间断开了。这就是块级 vs 内联最直观的区别。\"}\n把某个 `<span>` 改成 `<div>`，观察布局变化\n:::",
+      "content": "",
       "steps": [
         {
           "content": "给第三张卡片也加上 `<span class=\"name\">` 高亮作曲家名字和时期",

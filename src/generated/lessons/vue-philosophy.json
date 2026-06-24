@@ -27,7 +27,7 @@
       "attrs": {
         "title": "命令式 vs 声明式"
       },
-      "content": "**命令式（Imperative）：** 一步步告诉计算机怎么做。\n```js\n// 纯 JS：操作 DOM\nconst title = document.createElement('h1')\ntitle.textContent = '你好，音乐世界'\ndocument.getElementById('app').appendChild(title)\n```\n**声明式（Declarative）：** 描述你想要什么结果。\n```vue\n<!-- Vue：声明结果 -->\n<template>\n  <h1>{{ message }}</h1>\n</template>\n<script setup>\nconst message = '你好，音乐世界'\n</script>\n```\n命令式像给乐手发微信：\"左手按G弦第二品，右手拨弦\"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。"
+      "content": "**命令式（Imperative）：** 一步步告诉计算机怎么做。\n\n```js\r\n// 纯 JS：操作 DOM\r\nconst title = document.createElement('h1')\r\ntitle.textContent = '你好，音乐世界'\r\ndocument.getElementById('app').appendChild(title)\r\n```\n\n**声明式（Declarative）：** 描述你想要什么结果。\n\n```vue\r\n<!-- Vue：声明结果 -->\r\n<template>\r\n  <h1>{{ message }}</h1>\r\n</template>\r\n<script setup>\r\nconst message = '你好，音乐世界'\r\n</script>\r\n```\n\n命令式像给乐手发微信：\"左手按G弦第二品，右手拨弦\"——高效但不优雅。声明式像给乐手一份乐谱——他知道该做什么，你只管结果。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "Vue 的核心思想"
       },
-      "content": "{{term:Vue}} 的三个核心理念：\n1. **{{term:响应式}}数据：** 数据变了，页面自动更新。你不需要手动 `document.querySelector().textContent = ...`\n2. **{{term:组件}}化：** 把页面拆成独立、可复用的{{term:组件}}，像乐团中的不同声部（弦乐组、管乐组、打击乐组）\n3. **声明式{{term:渲染}}：** 在模板中描述 {{term:UI}} 应该长什么样，{{term:Vue}} 负责把数据{{term:渲染}}到 {{term:DOM}}\n> 💡 你不是在\"操作 {{term:DOM}}\"，你是在\"描述 {{term:UI}}\"。{{term:Vue}} 负责中间的一切。"
+      "content": "{{term:Vue}} 的三个核心理念：\n\n1. **{{term:响应式}}数据：** 数据变了，页面自动更新。你不需要手动 `document.querySelector().textContent = ...`\r\n2. **{{term:组件}}化：** 把页面拆成独立、可复用的{{term:组件}}，像乐团中的不同声部（弦乐组、管乐组、打击乐组）\r\n3. **声明式{{term:渲染}}：** 在模板中描述 {{term:UI}} 应该长什么样，{{term:Vue}} 负责把数据{{term:渲染}}到 {{term:DOM}}\n\n> 💡 你不是在\"操作 {{term:DOM}}\"，你是在\"描述 {{term:UI}}\"。{{term:Vue}} 负责中间的一切。"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "reactivity 的本质"
       },
-      "content": "{{term:Vue}} 的{{term:响应式}}系统让你专注于数据：\n```vue\n<script setup>\nimport { ref } from 'vue'\nconst count = ref(0)  // 响应式数据\nfunction increment() {\n  count.value++  // 修改数据\n  // 无需操作 DOM！页面自动更新\n}\n</script>\n<template>\n  <p>已点赞 {{ count }} 次</p>\n  <button @click=\"increment\">👍 点赞</button>\n</template>\n```\n就像 MIDI 键盘：你按键，声音自动发出。你不用管\"怎么发声\"——那已经被系统处理好了。你只管演奏。"
+      "content": "{{term:Vue}} 的{{term:响应式}}系统让你专注于数据：\n\n```vue\r\n<script setup>\r\nimport { ref } from 'vue'\r\nconst count = ref(0)  // 响应式数据\r\nfunction increment() {\r\n  count.value++  // 修改数据\r\n  // 无需操作 DOM！页面自动更新\r\n}\r\n</script>\r\n<template>\r\n  <p>已点赞 {{ count }} 次</p>\r\n  <button @click=\"increment\">👍 点赞</button>\r\n</template>\r\n```\n\n就像 MIDI 键盘：你按键，声音自动发出。你不用管\"怎么发声\"——那已经被系统处理好了。你只管演奏。"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "反思题 🤔"
       },
-      "content": ":::step{purpose=\"这不是一个需要动手写代码的练习，而是一次思维转变。在乐理篇你每改一个数据就要手动找到 {{term:DOM}} {{term:元素}}并更新它——这是命令式编程：一步步告诉计算机做什么。{{term:Vue}} 的声明式思维让你只描述「界面应该长什么样」，{{term:框架}}负责实现。就像从逐音给乐手发指令，变成给他们一份总谱。\" expected=\"你心中清晰地看到：原来需要 10 行 {{term:JS}} 操作的 {{term:UI}} 更新，用 {{term:Vue}} 只需改动一行数据。这就是 {{term:Vue}} 的价值。\"}\n回顾你在乐理篇和合奏篇中用纯 {{term:JS}} 写的代码（{{term:querySelector}}、{{term:innerHTML}}、{{term:appendChild}}）。闭上眼睛想象：如果数据变了页面自动更新，你能省去多少代码？\n:::",
+      "content": "",
       "steps": [
         {
           "content": "回顾你在乐理篇和合奏篇中用纯 {{term:JS}} 写的代码（{{term:querySelector}}、{{term:innerHTML}}、{{term:appendChild}}）。闭上眼睛想象：如果数据变了页面自动更新，你能省去多少代码？",

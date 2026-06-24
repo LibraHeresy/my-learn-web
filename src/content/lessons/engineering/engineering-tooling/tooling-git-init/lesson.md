@@ -1,10 +1,10 @@
 # Git — 你的"乐谱版本管理器"
 
-::music-analogy
+:::music-analogy
 作曲家写一部作品，通常会经历多个版本：草稿、修改稿、定稿、修订版……每一个版本都可能需要回头查看。**Git 就是这个"版本档案柜"**——你每完成一步就"存档"一次，随时可以回到任何历史版本，也随时知道"谁在什么时候改了什么"。
-::
+:::
 
-::explain{title="为什么需要 Git？"}
+:::explain{title="为什么需要 Git？"}
 你可能经历过这种情况：
 ```音乐收藏_v1.html
 音乐收藏_v2.html
@@ -18,9 +18,9 @@ Git 解决了这个混乱。有了 Git：
 - 任何时候可以回到之前的版本
 - 清楚地看到每次改了什么（`git diff`）
 程序员用 Git，就像作曲家保留每一版草稿——只是更优雅。
-::
+:::
 
-::explain{title="三个基本操作"}
+:::explain{title="三个基本操作"}
 **1. `git init` — 初始化仓库**
 ```bash
 cd music-collection
@@ -55,9 +55,9 @@ git commit -m "添加了筛选功能"
 git add .
 git commit -m "修复了收藏按钮的样式"
 ```
-::
+:::
 
-::task{title="你的任务 ✨"}
+:::task{title="你的任务 ✨"}
 1. 在 `music-collection` 项目中初始化 Git：`git init`
 2. 创建 `.gitignore` 文件，内容为 `node_modules/` 和 `dist/`
 3. 运行 `git add .` 把所有文件加入暂存区
@@ -65,9 +65,9 @@ git commit -m "修复了收藏按钮的样式"
 5. 修改 `App.vue`（比如改个标题），然后 `git add .` + `git commit -m "更新标题"`
 6. 运行 `git log` 查看提交历史（按 `q` 退出）
 > 🎉 你刚刚完成了人生中第一次 Git commit！从此你的代码有了"时间机器"。
-::
+:::
 
-::hint{title="Commit 消息怎么写？"}
+:::hint{title="Commit 消息怎么写？"}
 好的 commit 消息让人一眼知道改了什么：
 - ✅ `添加音乐卡片组件`
 - ✅ `修复收藏按钮点击无效的bug`
@@ -76,9 +76,9 @@ git commit -m "修复了收藏按钮的样式"
 - ❌ `asdf`（无意义）
 - ❌ `根据需求修改了一些文件`（等于没说）
 写 commit 消息就像写日记——未来的你会感谢现在认真写消息的你。
-::
+:::
 
-::listen-to
+:::listen-to
 贝多芬《迪亚贝利变奏曲》Op.120 — 33 个变奏从同一个主题演化而来。每一个变奏就像 Git 中的一个 commit——从同一个起点出发，每次修改都留下清晰的记录。
-::
+:::
 

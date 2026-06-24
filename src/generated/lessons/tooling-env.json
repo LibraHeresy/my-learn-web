@@ -27,7 +27,7 @@
       "attrs": {
         "title": "为什么需要环境变量？"
       },
-      "content": "在真实项目中，你经常会遇到不同环境用不同值的场景：\n| 场景 | 开发环境 | 生产环境 |\n|------|----------|----------|\n| {{term:API}} 地址 | {{term:http}}://{{term:localhost}}:3000/api | {{term:https}}://api.myapp.com |\n| 调试模式 | 开启（显示 log、调试面板） | 关闭 |\n| 分析工具 | 禁用 | 启用 |\n如果没有环境{{term:变量}}，你需要**每次{{term:部署}}前手动改代码**——繁琐且容易出错。环境{{term:变量}}让这些值外置到配置文件中，根据运行环境自动切换。"
+      "content": "在真实项目中，你经常会遇到不同环境用不同值的场景：\r\n| 场景 | 开发环境 | 生产环境 |\r\n|------|----------|----------|\r\n| {{term:API}} 地址 | {{term:http}}://{{term:localhost}}:3000/api | {{term:https}}://api.myapp.com |\r\n| 调试模式 | 开启（显示 log、调试面板） | 关闭 |\r\n| 分析工具 | 禁用 | 启用 |\r\n如果没有环境{{term:变量}}，你需要**每次{{term:部署}}前手动改代码**——繁琐且容易出错。环境{{term:变量}}让这些值外置到配置文件中，根据运行环境自动切换。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": ".env 文件 — 你的后台配置单"
       },
-      "content": "{{term:Vite}} 项目默认支持 .env 文件（通过 dotenv）：\n```bash\n# .env.development  — 开发时自动加载\nVITE_API_BASE=http://localhost:3000/api\nVITE_DEBUG=true\nVITE_APP_TITLE=音乐收藏（开发版）\n# .env.production  — 构建时自动加载\nVITE_API_BASE=https://api.myapp.com\nVITE_DEBUG=false\nVITE_APP_TITLE=音乐收藏\n```\n**命名规则：** 只有以 VITE_ 开头的{{term:变量}}才会暴露给客户端代码。这是 {{term:Vite}} 的安全措施——防止意外的敏感信息泄露。\n**注意：** .env 文件**不应该提交到 {{term:Git}}**（把 .env 加入 .gitignore）。敏感信息如 {{term:API}} 密钥永远不要放在前端环境{{term:变量}}中——它们会被打包进 {{term:JS}} 文件，任何人都能看到。"
+      "content": "{{term:Vite}} 项目默认支持 .env 文件（通过 dotenv）：\n\n```bash\r\n# .env.development  — 开发时自动加载\r\nVITE_API_BASE=http://localhost:3000/api\r\nVITE_DEBUG=true\r\nVITE_APP_TITLE=音乐收藏（开发版）\r\n# .env.production  — 构建时自动加载\r\nVITE_API_BASE=https://api.myapp.com\r\nVITE_DEBUG=false\r\nVITE_APP_TITLE=音乐收藏\r\n```\n\n**命名规则：** 只有以 VITE_ 开头的{{term:变量}}才会暴露给客户端代码。这是 {{term:Vite}} 的安全措施——防止意外的敏感信息泄露。\r\n**注意：** .env 文件**不应该提交到 {{term:Git}}**（把 .env 加入 .gitignore）。敏感信息如 {{term:API}} 密钥永远不要放在前端环境{{term:变量}}中——它们会被打包进 {{term:JS}} 文件，任何人都能看到。"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "在代码中使用环境变量"
       },
-      "content": "在 {{term:Vue}} {{term:组件}}或 {{term:JS}} 文件中通过 {{term:import}}.{{term:meta}}.env 访问：\n```js\n// 在任何 .vue 或 .js 文件中\nconst API_BASE = import.meta.env.VITE_API_BASE\nconst isDebug = import.meta.env.VITE_DEBUG === 'true'\n// 使用\nasync function searchMusic(keyword) {\n  const res = await fetch(\n    import.meta.env.VITE_API_BASE + '/search?q=' + keyword\n  )\n  return res.json()\n}\n// 条件逻辑\nif (import.meta.env.DEV) {\n  console.log('当前是开发环境')\n}\nif (import.meta.env.PROD) {\n  // 生产环境特有的逻辑\n}\n```\n**{{term:Vite}} 内置的环境{{term:变量}}：**\n- {{term:import}}.{{term:meta}}.env.MODE — 当前模式（development / production）\n- {{term:import}}.{{term:meta}}.env.DEV — 是否开发模式（{{term:boolean}}）\n- {{term:import}}.{{term:meta}}.env.PROD — 是否生产模式（{{term:boolean}}）\n- {{term:import}}.{{term:meta}}.env.BASE_URL — {{term:部署}}的基础路径（来自 vite.{{term:config}}.js 的 base）\n> 🎭 环境{{term:变量}}就像演出前的后台配置——灯光师根据场地调试灯光，音响师根据厅堂调 EQ。开发和生产是两种完全不同的演出，需要不同的配置。"
+      "content": "在 {{term:Vue}} {{term:组件}}或 {{term:JS}} 文件中通过 {{term:import}}.{{term:meta}}.env 访问：\n\n```js\r\n// 在任何 .vue 或 .js 文件中\r\nconst API_BASE = import.meta.env.VITE_API_BASE\r\nconst isDebug = import.meta.env.VITE_DEBUG === 'true'\r\n// 使用\r\nasync function searchMusic(keyword) {\r\n  const res = await fetch(\r\n    import.meta.env.VITE_API_BASE + '/search?q=' + keyword\r\n  )\r\n  return res.json()\r\n}\r\n// 条件逻辑\r\nif (import.meta.env.DEV) {\r\n  console.log('当前是开发环境')\r\n}\r\nif (import.meta.env.PROD) {\r\n  // 生产环境特有的逻辑\r\n}\r\n```\n\n**{{term:Vite}} 内置的环境{{term:变量}}：**\n\n- {{term:import}}.{{term:meta}}.env.MODE — 当前模式（development / production）\r\n- {{term:import}}.{{term:meta}}.env.DEV — 是否开发模式（{{term:boolean}}）\r\n- {{term:import}}.{{term:meta}}.env.PROD — 是否生产模式（{{term:boolean}}）\r\n- {{term:import}}.{{term:meta}}.env.BASE_URL — {{term:部署}}的基础路径（来自 vite.{{term:config}}.js 的 base）\n\n> 🎭 环境{{term:变量}}就像演出前的后台配置——灯光师根据场地调试灯光，音响师根据厅堂调 EQ。开发和生产是两种完全不同的演出，需要不同的配置。"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "以下是一个使用环境{{term:变量}}的实际例子：\n```js\n// src/config.js — 集中管理所有环境配置\nexport const config = {\n  apiBase: import.meta.env.VITE_API_BASE || 'http://localhost:3000/api',\n  debug: import.meta.env.VITE_DEBUG === 'true',\n  appTitle: import.meta.env.VITE_APP_TITLE || '音乐收藏',\n  enableAnalytics: import.meta.env.PROD  // 只在生产环境开启统计\n}\n// 在组件中使用\nimport { config } from './config.js'\nconsole.log('当前环境：', import.meta.env.MODE)\nconsole.log('API 地址：', config.apiBase)\nconsole.log('调试模式：', config.debug ? '开启' : '关闭')\n```\n开发时运行 {{term:npm}} run dev，自动读取 .env.development。\n{{term:构建}}时运行 {{term:npm}} run build，自动读取 .env.production。"
+      "content": "以下是一个使用环境{{term:变量}}的实际例子：\n\n```js\r\n// src/config.js — 集中管理所有环境配置\r\nexport const config = {\r\n  apiBase: import.meta.env.VITE_API_BASE || 'http://localhost:3000/api',\r\n  debug: import.meta.env.VITE_DEBUG === 'true',\r\n  appTitle: import.meta.env.VITE_APP_TITLE || '音乐收藏',\r\n  enableAnalytics: import.meta.env.PROD  // 只在生产环境开启统计\r\n}\r\n// 在组件中使用\r\nimport { config } from './config.js'\r\nconsole.log('当前环境：', import.meta.env.MODE)\r\nconsole.log('API 地址：', config.apiBase)\r\nconsole.log('调试模式：', config.debug ? '开启' : '关闭')\r\n```\n\n开发时运行 {{term:npm}} run dev，自动读取 .env.development。\r\n{{term:构建}}时运行 {{term:npm}} run build，自动读取 .env.production。"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": "在你的 music-collection-vue 项目中：\n1. 创建 .env.development 和 .env.production 文件\n2. 在两个文件中定义不同的 VITE_API_BASE 和 VITE_APP_TITLE\n3. 在项目中用 {{term:import}}.{{term:meta}}.env 读取这些{{term:变量}}，并在页面标题或 console.log 中显示\n4. 分别运行 {{term:npm}} run dev 和 {{term:npm}} run build && {{term:npm}} run preview，观察{{term:变量}}值的变化\n5. 确认 .gitignore 中包含 .env（避免提交到 {{term:Git}}）\n6. 挑战：在 vite.{{term:config}}.js 中用 define 选项定义自定义的全局常量\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p>在 <{{term:code}}>vite.{{term:config}}.js</{{term:code}}> 中添加 <{{term:code}}>define</{{term:code}}> 配置：</p><{{term:pre}}><{{term:code}}>{{term:import}} { defineConfig } {{term:from}} \"vite\";\n{{term:import}} vue {{term:from}} \"@vitejs/{{term:plugin}}-vue\";\n{{term:export}} default defineConfig({\n  plugins: [vue()],\n  define: {\n    __APP_VERSION__: {{term:JSON}}.stringify(\"1.0.0\"),\n    __BUILD_TIME__: {{term:JSON}}.stringify({{term:new}} {{term:Date}}().toISOString()),\n    __AUTHOR__: {{term:JSON}}.stringify(\"你的名字\"),\n  },\n});</{{term:code}}></{{term:pre}}><p>在代码中直接使用：<{{term:code}}>console.log(\"版本：\", __APP_VERSION__);</{{term:code}}></p><p><{{term:code}}>define</{{term:code}}> 在编译时替换，适合版本号等固定值；<{{term:code}}>{{term:import}}.{{term:meta}}.env.VITE_*</{{term:code}}> 运行时读取，适合环境相关值。</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]",
+      "content": "在你的 music-collection-vue 项目中：\r\n1. 创建 .env.development 和 .env.production 文件\r\n2. 在两个文件中定义不同的 VITE_API_BASE 和 VITE_APP_TITLE\r\n3. 在项目中用 {{term:import}}.{{term:meta}}.env 读取这些{{term:变量}}，并在页面标题或 console.log 中显示\r\n4. 分别运行 {{term:npm}} run dev 和 {{term:npm}} run build && {{term:npm}} run preview，观察{{term:变量}}值的变化\r\n5. 确认 .gitignore 中包含 .env（避免提交到 {{term:Git}}）\r\n6. 挑战：在 vite.{{term:config}}.js 中用 define 选项定义自定义的全局常量\r\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p>在 <{{term:code}}>vite.{{term:config}}.js</{{term:code}}> 中添加 <{{term:code}}>define</{{term:code}}> 配置：</p><{{term:pre}}><{{term:code}}>{{term:import}} { defineConfig } {{term:from}} \"vite\";\r\n{{term:import}} vue {{term:from}} \"@vitejs/{{term:plugin}}-vue\";\r\n{{term:export}} default defineConfig({\r\n  plugins: [vue()],\r\n  define: {\r\n    __APP_VERSION__: {{term:JSON}}.stringify(\"1.0.0\"),\r\n    __BUILD_TIME__: {{term:JSON}}.stringify({{term:new}} {{term:Date}}().toISOString()),\r\n    __AUTHOR__: {{term:JSON}}.stringify(\"你的名字\"),\r\n  },\r\n});</{{term:code}}></{{term:pre}}><p>在代码中直接使用：<{{term:code}}>console.log(\"版本：\", __APP_VERSION__);</{{term:code}}></p><p><{{term:code}}>define</{{term:code}}> 在编译时替换，适合版本号等固定值；<{{term:code}}>{{term:import}}.{{term:meta}}.env.VITE_*</{{term:code}}> 运行时读取，适合环境相关值。</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]",
       "steps": []
     },
     {

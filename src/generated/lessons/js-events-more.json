@@ -27,31 +27,20 @@
       "attrs": {
         "title": "不只是 click — 认识更多事件类型"
       },
-      "content": "除了 click 点击{{term:事件}}外，还有很多常用{{term:事件}}类型：{{term:input}}（输入框内容变化）、keydown（键盘按下）、{{term:mouseenter}}（鼠标移入）、{{term:mouseleave}}（鼠标移出）、{{term:submit}}（表单提交）。{{term:addEventListener}} 的第一个{{term:参数}}是{{term:事件}}类型，除了 `\"click\"`，还有很多常用{{term:事件}}：\n- `\"input\"` — 输入框内容**每次变化**都触发\n- `\"change\"` — 输入框内容改变且**失去焦点**时触发\n- `\"keydown\"` — 键盘**按下**任意键\n- `\"mouseenter\"` — 鼠标**进入**{{term:元素}}\n- `\"mouseleave\"` — 鼠标**离开**{{term:元素}}\n- `\"submit\"` — 表单**提交**时触发\n```js\ninputEl.addEventListener(\"input\", function() {\n  // 用户每输入一个字就执行\n});\n```"
+      "content": "除了 click 点击{{term:事件}}外，还有很多常用{{term:事件}}类型：{{term:input}}（输入框内容变化）、keydown（键盘按下）、{{term:mouseenter}}（鼠标移入）、{{term:mouseleave}}（鼠标移出）、{{term:submit}}（表单提交）。{{term:addEventListener}} 的第一个{{term:参数}}是{{term:事件}}类型，除了 `\"click\"`，还有很多常用{{term:事件}}：\n\n- `\"input\"` — 输入框内容**每次变化**都触发\r\n- `\"change\"` — 输入框内容改变且**失去焦点**时触发\r\n- `\"keydown\"` — 键盘**按下**任意键\r\n- `\"mouseenter\"` — 鼠标**进入**{{term:元素}}\r\n- `\"mouseleave\"` — 鼠标**离开**{{term:元素}}\r\n- `\"submit\"` — 表单**提交**时触发\n\n```js\r\ninputEl.addEventListener(\"input\", function() {\r\n  // 用户每输入一个字就执行\r\n});\r\n```"
     },
     {
-      "type": "block:explain",
-      "name": "explain",
-      "attrs": {
-        "title": "event 对象 — 事件携带的\"信息卡\""
-      },
-      "content": "每个{{term:事件}}触发时，浏览器都会创建一个 **event 对象**，包含了{{term:事件}}的详细信息。在{{term:回调}}{{term:函数}}中通过{{term:参数}}接收：\n```js\nbtn.addEventListener(\"click\", function(event) {\n  console.log(event.target);  // 被点击的元素\n  console.log(event.type);    // \"click\"\n});\ninputEl.addEventListener(\"input\", function(event) {\n  console.log(event.target.value); // 输入框当前内容\n});\ndocument.addEventListener(\"keydown\", function(event) {\n  console.log(event.key); // 按下的键名，如 \"Enter\"、\"a\"\n});\n````event.target` 是触发{{term:事件}}的{{term:元素}}——就像知道是哪个乐器在发声。"
+      "type": "paragraph",
+      "text": ":::explain{{{term:title}}=\"event 对象 — {{term:事件}}携带的\\\"信息卡\\\"\"}\n每个{{term:事件}}触发时，浏览器都会创建一个 **event 对象**，包含了{{term:事件}}的详细信息。在{{term:回调}}{{term:函数}}中通过{{term:参数}}接收："
     },
     {
-      "type": "block:explain",
-      "name": "explain",
-      "attrs": {
-        "title": "preventDefault — 阻止默认行为"
-      },
-      "content": "有些{{term:元素}}有自己的默认行为：\n- 表单的 `<button type=\"submit\">` 点击后会**刷新页面**\n- `<a>` 链接点击后会**跳转**\n用 `event.preventDefault()` 阻止这些默认行为：\n```js\nform.addEventListener(\"submit\", function(event) {\n  event.preventDefault();  // 阻止页面刷新！\n  console.log(\"表单已提交（但页面不刷新）\");\n});\n```这在前端开发中非常常用——表单提交通常用 {{term:JS}} 处理，不需要刷新页面。"
+      "type": "code",
+      "language": "js",
+      "code": "btn.addEventListener(\"click\", function(event) {\r\n  console.log(event.target);  // 被点击的元素\r\n  console.log(event.type);    // \"click\"\r\n});\r\ninputEl.addEventListener(\"input\", function(event) {\r\n  console.log(event.target.value); // 输入框当前内容\r\n});\r\ndocument.addEventListener(\"keydown\", function(event) {\r\n  console.log(event.key); // 按下的键名，如 \"Enter\"、\"a\"\r\n});\r\n````event.target` 是触发事件的元素——就像知道是哪个乐器在发声。\r\n:::\n\r\n:::explain{title=\"preventDefault — 阻止默认行为\"}\n有些元素有自己的默认行为：\r\n- 表单的 `<button type=\"submit\">` 点击后会**刷新页面**\r\n- `<a>` 链接点击后会**跳转**\r\n用 `event.preventDefault()` 阻止这些默认行为：\r\n```js\r\nform.addEventListener(\"submit\", function(event) {\r\n  event.preventDefault();  // 阻止页面刷新！\r\n  console.log(\"表单已提交（但页面不刷新）\");\r\n});\r\n```这在前端开发中非常常用——表单提交通常用 JS 处理，不需要刷新页面。\r\n:::\n\r\n:::example{title=\"看例子\"}\n下面的代码综合使用多种事件：\r\n```js\r\n// 实时显示输入内容\r\ninputEl.addEventListener(\"input\", function(event) {\r\n  displayEl.textContent = event.target.value;\r\n});\r\n// 鼠标悬停高亮\r\ncard.addEventListener(\"mouseenter\", function() {\r\n  card.style.borderColor = \"#C9A96E\";\r\n});\r\ncard.addEventListener(\"mouseleave\", function() {\r\n  card.style.borderColor = \"#D4C5A9\";\r\n});\r\n// 回车键提交\r\ndocument.addEventListener(\"keydown\", function(event) {\r\n  if (event.key === \"Enter\") {\r\n    console.log(\"你按了回车！\");\r\n  }\r\n});"
     },
     {
-      "type": "block:example",
-      "name": "example",
-      "attrs": {
-        "title": "看例子"
-      },
-      "content": "下面的代码综合使用多种{{term:事件}}：\n```js\n// 实时显示输入内容\ninputEl.addEventListener(\"input\", function(event) {\n  displayEl.textContent = event.target.value;\n});\n// 鼠标悬停高亮\ncard.addEventListener(\"mouseenter\", function() {\n  card.style.borderColor = \"#C9A96E\";\n});\ncard.addEventListener(\"mouseleave\", function() {\n  card.style.borderColor = \"#D4C5A9\";\n});\n// 回车键提交\ndocument.addEventListener(\"keydown\", function(event) {\n  if (event.key === \"Enter\") {\n    console.log(\"你按了回车！\");\n  }\n});\n```"
+      "type": "paragraph",
+      "text": ":::"
     },
     {
       "type": "block:task",
@@ -59,7 +48,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"让你体验 `input` {{term:事件}}的「实时性」——每敲一个字符就触发一次。这不同于点击{{term:事件}}的一次性响应。`event.target.value` 是获取输入内容的「标准姿势」，后续所有输入{{term:交互}}都靠它。\" expected=\"下方「你输入的是」后面的文字会随着你的打字实时变化，一个字不差地同步显示。松手时它已经显示了全部输入内容。\"}\n切换到预览区，在输入框中打字，观察下方「你输入的是」区域实时同步显示你敲的每一个字符\n:::\n\n:::step{purpose=\"让你感受 `mouseenter` 和 `mouseleave` 这对「成双成对」的{{term:事件}}。它们总是在一起使用——就像音乐的渐强和渐弱，一个进入，一个退出，形成完整的互动闭环。\" expected=\"鼠标移入卡片时，边框变为金色（#C9A96E），背景也微微泛黄；鼠标移出后恢复原状。这种反馈让用户感觉自己真的在和页面「对话」。\"}\n把鼠标移到「鼠标悬停卡片」上再移开，观察边框颜色和背景色的变化——移入时变为金色边框，移出时恢复原状\n:::\n\n:::step{purpose=\"`keydown` {{term:事件}}可以精确识别用户按下了哪个键——`event.key` 告诉你键名。配合 `if` 判断，不同键可以做不同的事：回车提交、Escape 取消、空格播放/暂停……这是{{term:构建}}快捷键系统的基础。\" expected=\"按下任意键，底部提示会显示「你按下了: \\\"X\\\"」（X 为键名）。按下回车键则显示特殊提示「你按了回车键！」且颜色变为深红。\"}\n按键盘上的任意键，观察页面底部提示文字的实时变化。再试试按回车键（Enter），看是否显示特殊的回车提示信息\n:::\n\n:::step{purpose=\"综合运用 `keydown` {{term:事件}} + `event.key` 判断 + {{term:DOM}} 操作。学会根据特定按键执行特定操作，这是实现「键盘快捷键」的完整模式。\" expected=\"在输入框中随便打些字，然后按 Escape 键——输入框清空，实时显示也变回「---」，底部提示框中显示清空提示。一个按键完成了清空操作。\"}\n挑战：给输入框增加 `keydown` {{term:事件}}监听，当按 Escape 键时清空输入框内容和实时显示。提示：判断 `event.key === \"Escape\"`，然后设置 `inputEl.value = \"\"` 和 `liveText.textContent = \"---\"`\n:::",
+      "content": "",
       "steps": [
         {
           "content": "切换到预览区，在输入框中打字，观察下方「你输入的是」区域实时同步显示你敲的每一个字符",

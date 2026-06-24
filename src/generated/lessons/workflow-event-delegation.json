@@ -27,7 +27,7 @@
       "attrs": {
         "title": "问题：动态创建的元素没有事件"
       },
-      "content": "上一节课你学会了用 `createElement` 动态创建{{term:元素}}。但这里有一个棘手的问题：\n```js\n// 页面初始有 3 张卡片，每张绑定了点击事件\nlet cards = document.querySelectorAll(\".card\");\ncards.forEach(function(card) {\n  card.addEventListener(\"click\", function() {\n    alert(\"点击了卡片！\");\n  });\n});\n// 后来动态添加了一张新卡片\nlet newCard = document.createElement(\"div\");\nnewCard.classList.add(\"card\");\nlistEl.appendChild(newCard);\n// ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在\n```\n这是一个很常见的 bug：**动态添加的{{term:元素}}不会自动继承之前绑定的{{term:事件}}**。"
+      "content": "上一节课你学会了用 `createElement` 动态创建{{term:元素}}。但这里有一个棘手的问题：\n\n```js\r\n// 页面初始有 3 张卡片，每张绑定了点击事件\r\nlet cards = document.querySelectorAll(\".card\");\r\ncards.forEach(function(card) {\r\n  card.addEventListener(\"click\", function() {\r\n    alert(\"点击了卡片！\");\r\n  });\r\n});\r\n// 后来动态添加了一张新卡片\r\nlet newCard = document.createElement(\"div\");\r\nnewCard.classList.add(\"card\");\r\nlistEl.appendChild(newCard);\r\n// ❌ 新卡片没有点击事件！因为 addEventListener 运行时它还不存在\r\n```\n\n这是一个很常见的 bug：**动态添加的{{term:元素}}不会自动继承之前绑定的{{term:事件}}**。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "解决方案：把事件绑在父容器上"
       },
-      "content": "不分别给每张卡片绑{{term:事件}}，而是**给包含所有卡片的父容器绑一个{{term:事件}}**。当子{{term:元素}}被点击时，{{term:事件}}会\"冒泡\"到父容器：\n```js\n// 给父容器绑定事件（只绑定一次！）\nlistEl.addEventListener(\"click\", function(event) {\n  // event.target 是实际被点击的元素\n  // closest(\".card\") 向上查找最近的 .card 容器\n  let card = event.target.closest(\".card\");\n  if (card) {\n    // 找到了！说明点击的是某张卡片\n    card.classList.toggle(\"highlight\");\n  }\n});\n// 之后动态添加的卡片也会自动响应，因为事件绑在父容器上！\n```\n这就是**{{term:事件}}委托**——把{{term:事件}}交给父容器代理，不管子{{term:元素}}是初始就有还是后来加的，都能响应。"
+      "content": "不分别给每张卡片绑{{term:事件}}，而是**给包含所有卡片的父容器绑一个{{term:事件}}**。当子{{term:元素}}被点击时，{{term:事件}}会\"冒泡\"到父容器：\n\n```js\r\n// 给父容器绑定事件（只绑定一次！）\r\nlistEl.addEventListener(\"click\", function(event) {\r\n  // event.target 是实际被点击的元素\r\n  // closest(\".card\") 向上查找最近的 .card 容器\r\n  let card = event.target.closest(\".card\");\r\n  if (card) {\r\n    // 找到了！说明点击的是某张卡片\r\n    card.classList.toggle(\"highlight\");\r\n  }\r\n});\r\n// 之后动态添加的卡片也会自动响应，因为事件绑在父容器上！\r\n```\n\n这就是**{{term:事件}}委托**——把{{term:事件}}交给父容器代理，不管子{{term:元素}}是初始就有还是后来加的，都能响应。"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "关键 API：closest() 和 matches()"
       },
-      "content": "**`event.target`** — 实际被点击的{{term:元素}}（可能是卡片里的 {{term:h3}}、{{term:span}}、甚至卡片本身）\n**`.closest(\"选择器\")`** — 从当前{{term:元素}}向上查找最近的匹配祖先\n```js\nevent.target.closest(\".card\");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span\n```\n**`.matches(\"选择器\")`** — 判断当前{{term:元素}}是否匹配{{term:选择器}}\n```js\nif (event.target.matches(\"button\")) {\n  // 点击的是按钮\n}\n```\n**常见模式：用 data {{term:属性}}区分不同{{term:元素}}**\n```html\n<button data-action=\"delete\">删除</button>\n<button data-action=\"like\">收藏</button>\n```\n```js\nlet action = event.target.dataset.action;  // \"delete\" 或 \"like\"\n```"
+      "content": "**`event.target`** — 实际被点击的{{term:元素}}（可能是卡片里的 {{term:h3}}、{{term:span}}、甚至卡片本身）\r\n**`.closest(\"选择器\")`** — 从当前{{term:元素}}向上查找最近的匹配祖先\n\n```js\r\nevent.target.closest(\".card\");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span\r\n```\n\n**`.matches(\"选择器\")`** — 判断当前{{term:元素}}是否匹配{{term:选择器}}\n\n```js\r\nif (event.target.matches(\"button\")) {\r\n  // 点击的是按钮\r\n}\r\n```\n\n**常见模式：用 data {{term:属性}}区分不同{{term:元素}}**\n\n```html\r\n<button data-action=\"delete\">删除</button>\r\n<button data-action=\"like\">收藏</button>\r\n```\n\n```js\r\nlet action = event.target.dataset.action;  // \"delete\" 或 \"like\"\r\n```"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:事件}}委托是前端最重要的性能和维护性模式之一——一个{{term:事件}}监听器覆盖所有子{{term:元素}}，无论它们是初始就有还是后来动态添加的。就像指挥用一个手势统领所有乐手，而不需要逐个走过去说\\\"到你吹了\\\"。\" expected=\"#cardList 上只有一个 click {{term:事件}}监听器，但所有 3 张初始卡片都能正常切换收藏状态。\"}\n移除所有 {{term:forEach}} 逐个绑定的{{term:事件}}，改为在 #cardList 上绑定一个 click {{term:事件}}\n:::\n\n:::step{purpose=\"closest() 方法向上查找最近的匹配祖先{{term:元素}}，这是{{term:事件}}委托的核心技巧。因为 event.{{term:target}} 可能是按钮里的文字节点或更深{{term:层}}{{term:元素}}，closest() 确保你总能找到想要的按钮——就像从演奏者位置顺藤摸瓜找到他所属的声部。\" expected=\"无论点击按钮的哪个位置（包括按钮内部文字），都能正确触发收藏逻辑。\"}\n在{{term:事件}}处理{{term:函数}}中用 event.{{term:target}}.closest(\".like-btn\") 判{{term:断点}}击的是否为收藏按钮\n:::\n\n:::step{purpose=\"这就是{{term:事件}}委托最让人惊叹的地方——动态添加的{{term:元素}}自动获得{{term:事件}}响应，零额外代码。因为{{term:事件}}注册在父容器上，新{{term:元素}}只是被 {{term:appendChild}} 进这个容器而已。\" expected=\"新增的卡片点击收藏按钮后，状态正常切换，与初始卡片行为完全一致。\"}\n点击\"添加随机曲目\"按钮，确认新卡片也能正常收藏（不需要任何额外代码）\n:::",
+      "content": "",
       "steps": [
         {
           "content": "移除所有 {{term:forEach}} 逐个绑定的{{term:事件}}，改为在 #cardList 上绑定一个 click {{term:事件}}",

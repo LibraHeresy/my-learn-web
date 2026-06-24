@@ -27,7 +27,7 @@
       "attrs": {
         "title": "innerHTML vs createElement — 两种渲染方式对比"
       },
-      "content": "回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建{{term:元素}}。现在我们来深入对比这两种方式，理解什么时候该用哪个：\n| 特性 | {{term:innerHTML}} | {{term:createElement}} |\n|------|-----------|---------------|\n| 速度 | 一次性替换，批量操作快 | 逐个创建，精细控制快 |\n| {{term:事件}}保留 | 替换后旧{{term:事件}}丢失 | {{term:事件}}绑定在{{term:元素}}上，不受影响 |\n| 安全性 | 容易 XSS 注入 | {{term:textContent}} 天然安全 |\n| 精细度 | 只能整体替换 | 可以单独修改任一{{term:元素}} |\n| 代码量 | 代码少 | 代码多 |\n**经验法则：**\n- 初始化页面、展示静态数据用 `innerHTML` 更简洁\n- 需要绑定{{term:事件}}、频繁更新、处理用户输入用 `createElement` 更安全灵活\n就像排练新曲子：第一次通读可以直接复印全谱（{{term:innerHTML}}），但之后要修改某几个小节的指法，就得逐个音符编辑（{{term:createElement}}）。"
+      "content": "回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建{{term:元素}}。现在我们来深入对比这两种方式，理解什么时候该用哪个：\r\n| 特性 | {{term:innerHTML}} | {{term:createElement}} |\r\n|------|-----------|---------------|\r\n| 速度 | 一次性替换，批量操作快 | 逐个创建，精细控制快 |\r\n| {{term:事件}}保留 | 替换后旧{{term:事件}}丢失 | {{term:事件}}绑定在{{term:元素}}上，不受影响 |\r\n| 安全性 | 容易 XSS 注入 | {{term:textContent}} 天然安全 |\r\n| 精细度 | 只能整体替换 | 可以单独修改任一{{term:元素}} |\r\n| 代码量 | 代码少 | 代码多 |\r\n**经验法则：**\n\n- 初始化页面、展示静态数据用 `innerHTML` 更简洁\r\n- 需要绑定{{term:事件}}、频繁更新、处理用户输入用 `createElement` 更安全灵活\r\n就像排练新曲子：第一次通读可以直接复印全谱（{{term:innerHTML}}），但之后要修改某几个小节的指法，就得逐个音符编辑（{{term:createElement}}）。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "classList API — 精确操控样式类"
       },
-      "content": "`classList` 提供了比 `className` 更精细的 {{term:class}} 控制方式：\n```js\nlet el = document.querySelector('.card')\n// 添加一个 class（不会覆盖已有的）\nel.classList.add('highlight')\n// 移除一个 class\nel.classList.remove('highlight')\n// 切换：有则删，无则加\nel.classList.toggle('active')\n// 检查是否包含\nif (el.classList.contains('card')) {\n  console.log('这是一张卡片')\n}\n```\n{{term:classList}}` 的优势：\n- `className = 'xxx'` 会覆盖所有已有 {{term:class}}\n- `classList.add()` 只追加，不影响已有 {{term:class}}\n- `classList.toggle()` 一行搞定开关效果\n> 类比：`className` 像换一件新乐器的全部配件，`classList` 像微调——只给长笛加个弱音器、给小提琴上调一个琴码。"
+      "content": "`classList` 提供了比 `className` 更精细的 {{term:class}} 控制方式：\n\n```js\r\nlet el = document.querySelector('.card')\r\n// 添加一个 class（不会覆盖已有的）\r\nel.classList.add('highlight')\r\n// 移除一个 class\r\nel.classList.remove('highlight')\r\n// 切换：有则删，无则加\r\nel.classList.toggle('active')\r\n// 检查是否包含\r\nif (el.classList.contains('card')) {\r\n  console.log('这是一张卡片')\r\n}\r\n```\n\n{{term:classList}}` 的优势：\n\n- `className = 'xxx'` 会覆盖所有已有 {{term:class}}\r\n- `classList.add()` 只追加，不影响已有 {{term:class}}\r\n- `classList.toggle()` 一行搞定开关效果\n\n> 类比：`className` 像换一件新乐器的全部配件，`classList` 像微调——只给长笛加个弱音器、给小提琴上调一个琴码。"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:createElement}} 比 {{term:innerHTML}} 更精细——每个{{term:元素}}都是独立的 {{term:JS}} 对象，你可以单独修改它、给它绑定{{term:事件}}、甚至随时移除。就像用手工雕刻代替复印机，虽然多写几行代码，但获得了完全的控制权。\" expected=\"页面显示 3 张卡片的收藏列表，外观与 {{term:innerHTML}} 方式完全一致，但底{{term:层}}是用 {{term:createElement}} 逐个创建的。\"}\n把 {{term:render}}() 中的 {{term:innerHTML}} 方式改为 {{term:createElement}} + {{term:appendChild}}：创建 {{term:div}}.card、{{term:h3}}、{{term:span}}，用 {{term:appendChild}} 组装后挂载到页面\n:::\n\n:::step{purpose=\"{{term:classList}}.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个按钮同时控制弱音器的装上和取下——按一下装上，再按一下取下。\" expected=\"点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。\"}\n给每张卡片绑定 click {{term:事件}}，调用 {{term:classList}}.toggle(\"liked\") 切换选中状态\n:::\n\n:::step{purpose=\"用 {{term:createElement}} 创建{{term:元素}}并即时绑定{{term:事件}}，新卡片的点击行为与初始卡片完全一致。这就是 {{term:createElement}} 相对于 {{term:innerHTML}} 的优势——{{term:事件}}在创建时就绑定了，不会丢失。\" expected=\"新增的卡片点击后同样能切换 liked {{term:样式}}，功能完全一致。\"}\n确认动态添加的卡片（点击\"添加随机曲目\"）也能正常切换收藏状态\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 {{term:render}}() 中的 {{term:innerHTML}} 方式改为 {{term:createElement}} + {{term:appendChild}}：创建 {{term:div}}.card、{{term:h3}}、{{term:span}}，用 {{term:appendChild}} 组装后挂载到页面",

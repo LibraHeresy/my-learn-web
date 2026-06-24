@@ -2,6 +2,10 @@ import { mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import * as yaml from 'js-yaml'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkDirective from 'remark-directive'
 import type {
   BlockAttrs,
   BlockName,
@@ -118,76 +122,13 @@ function toBlockType(name: BlockName): BlockType {
   return `block:${name}` as BlockType
 }
 
-function createBlockNode(
-  name: BlockName,
-  rawAttrs: string | undefined,
-  content: string,
-): BlockNode {
-  return {
-    type: toBlockType(name),
-    name,
-    attrs: parseAttrs(rawAttrs) as BlockAttrs | undefined,
-    content,
-    steps: name === 'task' ? parseTaskBlock(content) : undefined,
-  }
-}
-
-function parseScalar(value: string): string | number {
-  const trimmed = value.trim()
-  if (/^-?\d+$/.test(trimmed)) return Number(trimmed)
-  // Handle YAML double-quoted strings: strip quotes, unescape \" \\ \n
-  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
-    const inner = trimmed.slice(1, -1)
-    return inner.replace(/\\(.)/g, (_, c: string) => {
-      if (c === 'n') return '\n'
-      if (c === 't') return '\t'
-      return c
-    })
-  }
-  return trimmed
-}
-
-function parseSimpleYaml(input: string): Record<string, string | number | string[]> {
-  const result: Record<string, string | number | string[]> = {}
-  let currentArrayKey: string | null = null
-
-  for (const rawLine of input.split(/\r?\n/)) {
-    const line = rawLine.trimEnd()
-    if (!line || line.trimStart().startsWith('#')) continue
-
-    if (/^\s*-\s+/.test(rawLine)) {
-      if (!currentArrayKey) {
-        throw new Error(`Invalid YAML array item: ${rawLine}`)
-      }
-      const arr = (result[currentArrayKey] as string[]) || []
-      arr.push(rawLine.replace(/^\s*-\s+/, '').trim())
-      result[currentArrayKey] = arr
-      continue
-    }
-
-    const match = rawLine.match(/^([A-Za-z][A-Za-z0-9]*):\s*(.*)$/)
-    if (!match) {
-      throw new Error(`Invalid YAML line: ${rawLine}`)
-    }
-
-    const [, key, value] = match
-    if (value === '') {
-      result[key] = []
-      currentArrayKey = key
-    } else {
-      result[key] = parseScalar(value)
-      currentArrayKey = null
-    }
-  }
-
-  return result
-}
 
 type GlossaryEntry = {
   key: string
   explanation: string
   analogy?: string
 }
+
 
 function parseGlossaryYaml(input: string): GlossaryEntry[] {
   const entries: GlossaryEntry[] = []
@@ -211,9 +152,9 @@ function parseGlossaryYaml(input: string): GlossaryEntry[] {
       continue
     }
 
-    if (!current) throw new Error(`Invalid glossary YAML line: ${rawLine}`)
+    if (!current) continue
     const field = rawLine.match(/^\s+([A-Za-z][A-Za-z0-9]*):\s*(.*)\s*$/)
-    if (!field) throw new Error(`Invalid glossary YAML line: ${rawLine}`)
+    if (!field) continue
     const [, key, value] = field
     if (key === 'explanation') current.explanation = value.trim()
     if (key === 'analogy') current.analogy = value.trim()
@@ -230,23 +171,6 @@ function parseGlossaryYaml(input: string): GlossaryEntry[] {
   return entries
 }
 
-function parseAttrs(raw?: string): Record<string, string | string[]> | undefined {
-  if (!raw) return undefined
-  const attrs: Record<string, string | string[]> = {}
-  const regex = /([A-Za-z][\w-]*)="((?:[^"\\]|\\.)*)"|([A-Za-z][\w-]*)='((?:[^'\\]|\\.)*)'/g
-
-  for (const match of raw.matchAll(regex)) {
-    const key = (match[1] || match[3]) as string
-    const value = (match[2] || match[4] || '').trim().replace(/\\(.)/g, '$1')
-    if (value.includes(',')) {
-      attrs[key] = value.split(',').map((item) => item.trim()).filter(Boolean)
-    } else {
-      attrs[key] = value
-    }
-  }
-
-  return Object.keys(attrs).length ? attrs : undefined
-}
 
 function escapeTermKey(key: string): string {
   return key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -339,139 +263,168 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
   })
 }
 
-function parseTaskBlock(content: string): Array<{ content: string; purpose?: string; expected?: string }> {
+
+
+const mdProcessor = unified()
+  .use(remarkParse as any)
+  .use(remarkDirective as any)
+
+/** Extract raw source substring for an AST node by its position offsets */
+function nodeSource(src: string, node: { position?: { start: { offset?: number }; end: { offset?: number } } }): string {
+  const pos = node.position
+  if (!pos || pos.start.offset === undefined) return ''
+  return src.slice(pos.start.offset, pos.end.offset ?? src.length).trim()
+}
+
+
+/**
+ * remark-directive 对 :::task 内多个 ::::step 的嵌套有 bug（只嵌入第一个步骤）。
+ * 此函数直接从原始文本（已经剥去 :::task{...} 开头和 ::: 结尾）手工解析步骤。
+ */
+function parseTaskSteps(rawInner: string): { content: string; steps: Array<{ content: string; purpose?: string; expected?: string }> } {
+  const lines = rawInner.split('\n')
   const steps: Array<{ content: string; purpose?: string; expected?: string }> = []
-  const lines = content.split(/\r?\n/)
+  const nonStepLines: string[] = []
   let i = 0
 
   while (i < lines.length) {
-    const line = lines[i]
-    const start = line.match(/^:::step(?:\{(.*)\})?\s*$/)
-    if (!start) {
+    const trimmed = lines[i].trimEnd()
+    const stepOpen = trimmed.match(/^::::step(?:\{([^}]*)\})?\s*$/)
+    if (stepOpen) {
       i += 1
+      const stepLines: string[] = []
+      while (i < lines.length && lines[i].trimEnd() !== '::::') {
+        stepLines.push(lines[i])
+        i += 1
+      }
+      if (i >= lines.length) throw new Error('Unclosed ::::step block')
+      const attrsRaw = stepOpen[1] ?? ''
+      const purpose = attrsRaw.match(/purpose="((?:[^"\\]|\\.)*)"/)?.[1]?.replace(/\\(.)/g, '$1')
+      const expected = attrsRaw.match(/expected="((?:[^"\\]|\\.)*)"/)?.[1]?.replace(/\\(.)/g, '$1')
+      steps.push({
+        content: stepLines.join('\n').trim(),
+        purpose: purpose || undefined,
+        expected: expected || undefined,
+      })
+      i += 1 // skip closing ::::
       continue
     }
-
-    const attrs = parseAttrs(start[1])
-    i += 1
-    const contentLines: string[] = []
-    while (i < lines.length && lines[i].trim() !== ':::') {
-      contentLines.push(lines[i])
-      i += 1
-    }
-    if (i >= lines.length) throw new Error('Unclosed :::step block')
-    steps.push({
-      content: contentLines.join('\n').trim(),
-      purpose: typeof attrs?.purpose === 'string' ? attrs.purpose : undefined,
-      expected: typeof attrs?.expected === 'string' ? attrs.expected : undefined,
-    })
+    nonStepLines.push(lines[i])
     i += 1
   }
 
-  return steps
+  return { content: nonStepLines.join('\n').trim(), steps }
 }
 
 function parseLessonMarkdown(input: string): ContentBodyNode[] {
+  // ── Pre-extract :::task blocks (remark-directive doesn't handle multiple
+  //    nested ::::step siblings correctly; pre-extract avoids the issue) ────
+  const taskBlocks: BlockNode[] = []
+  let taskIdx = 0
+  const modified = input.replace(
+    /^:::task([^\n]*)\n([\s\S]*?)^:::[ \t]*(?:\r)?$/gm,
+    (_, attrsLine, inner) => {
+      const title = attrsLine.match(/\{.*?title="((?:[^"\\]|\\.)*)"/)?.[1]
+      const blockAttrs: BlockAttrs | undefined = title ? { title } : undefined
+      const { content, steps } = parseTaskSteps(inner.trim())
+      taskBlocks.push({ type: 'block:task', name: 'task', attrs: blockAttrs, content, steps })
+      return `<!-- __task_${taskIdx++}__ -->`
+    },
+  )
+
+  // ── Remark parse on the task-free modified string ───────────────────────
+  const tree = mdProcessor.parse(modified) as { type: string; children: unknown[] }
   const body: ContentBodyNode[] = []
-  const lines = input.split(/\r?\n/)
-  let i = 0
 
-  while (i < lines.length) {
-    const line = lines[i].trim()
-    if (!line) {
-      i += 1
-      continue
-    }
+  for (const rawNode of tree.children) {
+    const node = rawNode as { type: string; [key: string]: unknown }
 
-    const fence = line.match(/^```\s*([\w-]+)?\s*$/)
-    if (fence) {
-      const language = fence[1] || 'text'
-      i += 1
-      const codeLines: string[] = []
-      while (i < lines.length && !lines[i].trim().startsWith('```')) {
-        codeLines.push(lines[i])
-        i += 1
+    // ── Task placeholder ──────────────────────────────────────────────────
+    if (node.type === 'html') {
+      const m = (node.value as string | undefined)?.match(/<!--\s*__task_(\d+)__\s*-->/)
+      if (m) {
+        body.push(taskBlocks[parseInt(m[1])])
+        continue
       }
-      if (i >= lines.length) throw new Error('Unclosed ``` code fence')
-      body.push({
-        type: 'code',
-        language,
-        code: codeLines.join('\n').trimEnd(),
-      })
-      i += 1
-      continue
     }
 
-    const singleLineCode = lines[i].trim().match(/^`([^`]+)`$/) ?? lines[i].trim().match(/^``([^`]+)``$/)
-    if (singleLineCode) {
-      const raw = singleLineCode[1].trim()
-      const langMatch = raw.match(/^(html|css|js|ts|tsx|jsx|json|yaml|yml|bash|sh)\s+(.*)$/i)
-      const language = langMatch ? langMatch[1].toLowerCase() : 'text'
-      const code = langMatch ? langMatch[2] : raw
-      body.push({ type: 'code', language, code })
-      i += 1
-      continue
-    }
-
-    const heading = line.match(/^(#{1,6})\s+(.+)$/)
-    if (heading) {
+    // ── Heading ───────────────────────────────────────────────────────────
+    if (node.type === 'heading') {
+      const raw = nodeSource(modified, node as any)
       body.push({
         type: 'heading',
-        depth: heading[1].length,
-        text: heading[2].trim(),
+        depth: node.depth as number,
+        text: raw.replace(/^#+\s*/, ''),
       })
-      i += 1
       continue
     }
 
-    const blockStart = lines[i].match(/^::([A-Za-z][\w-]*)(?:\{(.*)\})?\s*$/)
-    if (blockStart) {
-      const [, name, rawAttrs] = blockStart
-      if (!isBlockName(name)) {
-        throw new Error(`Unsupported block ::${name}`)
+    // ── Paragraph ─────────────────────────────────────────────────────────
+    if (node.type === 'paragraph') {
+      // Special case: single inline code acting as a named code snippet
+      // e.g. `html <div class="foo">` – treated as code block with lang prefix
+      const children = node.children as unknown[]
+      if (children.length === 1) {
+        const child = children[0] as { type: string; value?: string }
+        if (child.type === 'inlineCode') {
+          const raw = (child.value ?? '').trim()
+          const langMatch = raw.match(/^(html|css|js|ts|tsx|jsx|json|yaml|yml|bash|sh)\s+([\s\S]*)$/i)
+          if (langMatch) {
+            body.push({ type: 'code', language: langMatch[1].toLowerCase(), code: langMatch[2] })
+            continue
+          }
+        }
       }
-      i += 1
-      const contentLines: string[] = []
-      while (i < lines.length && lines[i].trim() !== '::') {
-        contentLines.push(lines[i])
-        i += 1
-      }
-      if (i >= lines.length) throw new Error(`Unclosed block ::${name}`)
-      const content = contentLines.join('\n').trim()
-      body.push(createBlockNode(name, rawAttrs, content))
-      i += 1
+      body.push({ type: 'paragraph', text: nodeSource(modified, node as any) })
       continue
     }
 
-    const paragraphLines = [lines[i].trim()]
-    i += 1
-    while (
-      i < lines.length &&
-      lines[i].trim() &&
-      !lines[i].trim().startsWith('::') &&
-      !lines[i].trim().startsWith('#') &&
-      !lines[i].trim().startsWith('```')
-    ) {
-      paragraphLines.push(lines[i].trim())
-      i += 1
+    // ── Fenced code block ─────────────────────────────────────────────────
+    if (node.type === 'code') {
+      body.push({
+        type: 'code',
+        language: (node.lang as string) || 'text',
+        code: node.value as string,
+      })
+      continue
     }
-    body.push({
-      type: 'paragraph',
-      text: paragraphLines.join(' '),
-    })
+
+    // ── Container directive (non-task blocks) ─────────────────────────────
+    if (node.type === 'containerDirective') {
+      const name = node.name as string
+      if (!isBlockName(name as BlockName)) {
+        throw new Error(`Unsupported block :::${name}`)
+      }
+      const bname = name as BlockName
+      const attrs = node.attributes as Record<string, string> | undefined
+      const blockAttrs: BlockAttrs | undefined = attrs?.title ? { title: attrs.title } : undefined
+      const children = (node.children ?? []) as unknown[]
+      const content = children
+        .map((c: any) => nodeSource(modified, c))
+        .join('\n\n')
+        .trim()
+      body.push({
+        type: toBlockType(bname),
+        name: bname,
+        attrs: blockAttrs,
+        content,
+      })
+    }
   }
 
   return body
 }
 
-function toMeta(data: Record<string, string | number | string[]>): ContentMeta {
+
+function toMeta(data: Record<string, unknown>): ContentMeta {
   const required = ['id', 'title', 'track', 'chapter', 'order', 'mode', 'musicAnalogy'] as const
   for (const key of required) {
     if (!(key in data)) throw new Error(`Missing required meta field: ${key}`)
   }
 
   if (typeof data.order !== 'number') throw new Error('meta.order must be a number')
-  if (typeof data.mode !== 'string' || !allowedModes.has(data.mode)) throw new Error('meta.mode must be sandbox or local')
+  const mode = String(data.mode)
+  if (!allowedModes.has(mode)) throw new Error('meta.mode must be sandbox or local')
 
   return {
     id: String(data.id),
@@ -479,7 +432,7 @@ function toMeta(data: Record<string, string | number | string[]>): ContentMeta {
     track: String(data.track),
     chapter: String(data.chapter),
     order: Number(data.order),
-    mode: data.mode as ContentMeta['mode'],
+    mode: mode as ContentMeta['mode'],
     musicAnalogy: String(data.musicAnalogy),
     listenTo: typeof data.listenTo === 'string' ? data.listenTo : undefined,
   }
@@ -515,7 +468,7 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
 
   let meta: ContentMeta
   try {
-    meta = toMeta(parseSimpleYaml(metaRaw))
+    meta = toMeta(yaml.load(metaRaw) as Record<string, unknown>)
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
     throw new Error(`Failed to parse ${path.relative(projectRoot, metaPath)}: ${msg}`)
@@ -550,13 +503,14 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
     },
   }
 }
-function toProjectMeta(data: Record<string, string | number | string[]>): ProjectMeta {
+function toProjectMeta(data: Record<string, unknown>): ProjectMeta {
   const required = ['id', 'title', 'subtitle', 'icon', 'track', 'order', 'mode', 'musicAnalogy'] as const
   for (const key of required) {
     if (!(key in data)) throw new Error(`Missing required project meta field: ${key}`)
   }
   if (typeof data.order !== 'number') throw new Error('project meta.order must be a number')
-  if (typeof data.mode !== 'string' || !allowedModes.has(data.mode)) throw new Error('project meta.mode must be sandbox or local')
+  const mode = String(data.mode)
+  if (!allowedModes.has(mode)) throw new Error('project meta.mode must be sandbox or local')
 
   return {
     id: String(data.id),
@@ -565,7 +519,7 @@ function toProjectMeta(data: Record<string, string | number | string[]>): Projec
     icon: String(data.icon),
     track: String(data.track),
     order: Number(data.order),
-    mode: data.mode as ProjectMeta['mode'],
+    mode: mode as ProjectMeta['mode'],
     musicAnalogy: String(data.musicAnalogy),
     listenTo: typeof data.listenTo === 'string' ? data.listenTo : undefined,
   }
@@ -601,7 +555,7 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
 
   let meta: ProjectMeta
   try {
-    meta = toProjectMeta(parseSimpleYaml(metaRaw))
+    meta = toProjectMeta(yaml.load(metaRaw) as Record<string, unknown>)
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e)
     throw new Error(`Failed to parse ${path.relative(projectRoot, metaPath)}: ${msg}`)
@@ -625,59 +579,10 @@ type TaxonomyTrack = { id: string; title: string; subtitle: string; icon: string
 type TaxonomyChapter = { id: string; title: string; subtitle: string; icon: string; order: number }
 type Taxonomy = { tracks: TaxonomyTrack[]; chapters: TaxonomyChapter[] }
 
-function parseTaxonomyYaml(input: string): Taxonomy {
-  const tracks: TaxonomyTrack[] = []
-  const chapters: TaxonomyChapter[] = []
-  let target: 'tracks' | 'chapters' | null = null
-  let current: Partial<TaxonomyTrack> | null = null
-
-  function commitCurrent() {
-    if (!current?.id) return
-    const item = { id: String(current.id), title: String(current.title || ''), subtitle: String(current.subtitle || ''), icon: String(current.icon || ''), order: Number(current.order || 0) }
-    if (target === 'tracks') tracks.push(item)
-    else if (target === 'chapters') chapters.push(item)
-    current = null
-  }
-
-  for (const line of input.split(/\r?\n/)) {
-    const trimmed = line.trim()
-    if (!trimmed || trimmed.startsWith('#')) continue
-
-    if (trimmed === 'tracks:') {
-      if (current?.id) commitCurrent()
-      target = 'tracks'
-      continue
-    }
-    if (trimmed === 'chapters:') {
-      if (current?.id) commitCurrent()
-      target = 'chapters'
-      continue
-    }
-
-    if (trimmed.startsWith('- id:')) {
-      if (current?.id) commitCurrent()
-      current = { id: trimmed.replace(/- id:\s*/, '').trim() }
-      continue
-    }
-
-    if (current) {
-      const fm = trimmed.match(/^(\w+):\s*(.+)/)
-      if (fm) {
-        const [, key, value] = fm
-        if (key === 'order') current.order = parseInt(value.trim(), 10)
-        else (current as any)[key] = value.trim()
-      }
-    }
-  }
-
-  if (current?.id) commitCurrent()
-
-  return { tracks, chapters }
-}
 
 async function buildTaxonomy(): Promise<void> {
   const raw = await readFile(taxonomySourceFile, 'utf8')
-  const taxonomy = parseTaxonomyYaml(raw)
+  const taxonomy = yaml.load(raw) as Taxonomy
   await atomicWriteFile(generatedTaxonomyFile, JSON.stringify(taxonomy, null, 2) + '\n')
 }
 
@@ -725,138 +630,38 @@ async function compileQuiz(): Promise<void> {
   for (const entry of entries.sort()) {
     if (!entry.endsWith('.yaml')) continue
     const raw = await readFile(path.join(quizSourceDir, entry), 'utf8')
-
-    // Parse gem metadata from YAML header (before "levels:")
-    const header = raw.split('levels:')[0] || ''
-    const gemMeta: Record<string, string | number> = {}
-    let inGem = false
-    for (const rawLine of header.split(/\r?\n/)) {
-      const line = rawLine.trim()
-      if (!line || line.startsWith('#')) continue
-      if (line === 'gem:') { inGem = true; continue }
-      if (!inGem) continue
-      const m = line.match(/^(\w+):\s*(.*)/)
-      if (m) {
-        const val = m[2].trim()
-        gemMeta[m[1]] = m[1] === 'order' ? parseInt(val, 10) : val.replace(/^"(.*)"$/, '$1')
-      }
+    const data = yaml.load(raw) as {
+      gem: { id: string; name: string; icon: string; achievement: string; order: number }
+      levels: Array<{
+        level: number; type: string; threshold: number; name: string
+        questions: Array<{
+          id: number; difficulty: number; question: string
+          options: string[]; answer: number; explanation: string
+        }>
+      }>
     }
 
     const gem: CompiledGem = {
-      id: String(gemMeta.id || entry.replace('.yaml', '')),
-      name: String(gemMeta.name || ''),
-      icon: String(gemMeta.icon || ''),
-      achievement: String(gemMeta.achievement || ''),
-      order: Number(gemMeta.order || 0),
-      levels: [],
-    }
-
-    // Parse levels from the structured YAML
-    const levelBlocks = raw.split(/\n  - level:/).slice(1)
-    for (const block of levelBlocks) {
-      const lines = block.split(/\r?\n/)
-      // First line after split is the level number
-      const levelNumber = parseInt(lines[0].trim(), 10)
-      const levelData: Record<string, any> = { level: levelNumber }
-      let inQuestions = false
-      let currentQ: Record<string, any> = {}
-      const questions: CompiledQuizQuestion[] = []
-      let optionsList: string[] = []
-
-      for (let li = 1; li < lines.length; li++) {
-        const rawLine = lines[li]
-        const line = rawLine.trim()
-        if (!line || line.startsWith('#')) continue
-
-        // Parse level metadata
-        if (!inQuestions && !line.startsWith('questions:')) {
-          const m = line.match(/^(\w+):\s*(.*)/)
-          if (m) {
-            const [, key, value] = m
-            if (key === 'threshold') levelData[key] = parseInt(value, 10)
-            else levelData[key] = value.trim()
-          }
-          continue
-        }
-
-        if (line.startsWith('questions:')) {
-          inQuestions = true
-          continue
-        }
-
-        // Parse question entries
-        if (inQuestions) {
-          if (line.startsWith('- id:')) {
-            if (currentQ.id !== undefined) {
-              questions.push({
-                id: Number(currentQ.id),
-                difficulty: Number(currentQ.difficulty || 1),
-                question: String(currentQ.question || ''),
-                options: [...optionsList],
-                answer: Number(currentQ.answer || 0),
-                explanation: String(currentQ.explanation || ''),
-              })
-              optionsList = []
-            }
-            currentQ = { id: parseInt(line.replace('- id:', '').trim(), 10) }
-            continue
-          }
-
-          if (line.startsWith('- ') && !line.startsWith('- id:')) {
-            // This is an option value
-            const optVal = line.replace(/^\s*-\s*/, '').trim()
-            // Remove YAML quotes if present
-            optionsList.push(optVal.replace(/^"(.*)"$/, '$1'))
-            continue
-          }
-
-          const m = line.match(/^(\w+):\s*(.*)/)
-          if (m) {
-            const [, key, value] = m
-            if (key === 'difficulty') currentQ[key] = parseInt(value, 10)
-            else if (key === 'answer') currentQ[key] = parseInt(value, 10)
-            else if (key === 'question') {
-              // Multi-line question (block scalar indicator)
-              currentQ[key] = value === '|' ? '' : value.trim()
-            } else if (key === 'explanation') {
-              currentQ[key] = value === '|' ? '' : value.trim()
-            } else {
-              currentQ[key] = value.trim()
-            }
-          } else if (currentQ.question === '' || currentQ.explanation === '') {
-            // Continuation of multi-line value
-            const trimmedLine = rawLine.replace(/^\s+/, '')
-            if (currentQ.question === '') currentQ.question = trimmedLine
-            else if (currentQ.explanation === '') currentQ.explanation = trimmedLine
-            else {
-              // Append to whichever was last set to empty
-              if (currentQ._lastField === 'question') currentQ.question += '\n' + trimmedLine
-              else currentQ.explanation += '\n' + trimmedLine
-            }
-          }
-        }
-      }
-
-      // Push last question
-      if (currentQ.id !== undefined) {
-        questions.push({
-          id: Number(currentQ.id),
-          difficulty: Number(currentQ.difficulty || 1),
-          question: String(currentQ.question || ''),
-          options: [...optionsList],
-          answer: Number(currentQ.answer || 0),
-          explanation: String(currentQ.explanation || ''),
-        })
-      }
-
-      gem.levels.push({
-        level: Number(levelData.level || 1),
-        type: String(levelData.type || 'normal'),
-        threshold: Number(levelData.threshold || 60),
-        name: String(levelData.name || ''),
-        count: questions.length,
-        questions,
-      })
+      id: String(data.gem.id),
+      name: String(data.gem.name),
+      icon: String(data.gem.icon),
+      achievement: String(data.gem.achievement),
+      order: Number(data.gem.order),
+      levels: (data.levels ?? []).map((l) => ({
+        level: Number(l.level),
+        type: String(l.type),
+        threshold: Number(l.threshold),
+        name: String(l.name),
+        count: (l.questions ?? []).length,
+        questions: (l.questions ?? []).map((q) => ({
+          id: Number(q.id),
+          difficulty: Number(q.difficulty ?? 1),
+          question: String(q.question ?? ''),
+          options: (q.options ?? []).map(String),
+          answer: Number(q.answer ?? 0),
+          explanation: String(q.explanation ?? ''),
+        })),
+      })),
     }
 
     gems.push(gem)
@@ -865,8 +670,8 @@ async function compileQuiz(): Promise<void> {
   gems.sort((a, b) => a.order - b.order)
 
   // Flatten questions for backward compatibility — add gem/level fields
-  const allQuestions = gems.flatMap(g =>
-    g.levels.flatMap(l => l.questions.map(q => ({ ...q, gem: g.id, level: l.level })))
+  const allQuestions = gems.flatMap((g) =>
+    g.levels.flatMap((l) => l.questions.map((q) => ({ ...q, gem: g.id, level: l.level })))
   )
 
   await atomicWriteFile(generatedQuizFile, JSON.stringify({ gems, questions: allQuestions }, null, 2) + '\n')
@@ -921,7 +726,7 @@ export async function main() {
     allLessonDirs.map(async (dir) => {
       try {
         const raw = await readFile(path.join(dir, 'meta.yaml'), 'utf8')
-        const data = parseSimpleYaml(raw)
+        const data = yaml.load(raw) as Record<string, unknown>
         lessonModes[dir] = String(data.mode || 'local')
       } catch {
         lessonModes[dir] = 'local'
@@ -964,7 +769,7 @@ export async function main() {
     const unchangedLoaded = await Promise.all(
       unchangedDirs.map(async (dir) => {
         try {
-          const meta = parseSimpleYaml(await readFile(path.join(dir, 'meta.yaml'), 'utf8'))
+          const meta = yaml.load(await readFile(path.join(dir, 'meta.yaml'), 'utf8')) as Record<string, unknown>
           const id = String(meta.id)
           const json = await readFile(path.join(lessonsOutDir, `${id}.json`), 'utf8')
           return JSON.parse(json)
@@ -1043,7 +848,7 @@ export async function main() {
     const unchangedProjectsLoaded = await Promise.all(
       unchangedProjects.map(async (dir) => {
         try {
-          const meta = parseSimpleYaml(await readFile(path.join(dir, 'meta.yaml'), 'utf8'))
+          const meta = yaml.load(await readFile(path.join(dir, 'meta.yaml'), 'utf8')) as Record<string, unknown>
           const id = String(meta.id)
           const json = await readFile(path.join(projectsOutDir, `${id}.json`), 'utf8')
           return JSON.parse(json)

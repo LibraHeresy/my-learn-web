@@ -1,10 +1,10 @@
 # 层叠与优先级 — 当多个规则"打架"时谁说了算？
 
-::music-analogy
+:::music-analogy
 CSS 的"C"代表 **Cascading**（层叠）。当指挥给木管组一个整体指示、同时又给长笛手一个特别指示时，长笛手听谁？当然是**更具体的那个**。CSS 也一样——当多个规则都指向同一个元素时，浏览器按照一套"乐谱排演规则"来决定谁生效：编号越精确的规则优先级越高。
-::
+:::
 
-::explain{title="三条规则决定谁胜出"}
+:::explain{title="三条规则决定谁胜出"}
 多条 CSS 规则都指向同一个元素时，浏览器按以下顺序决定：
 **1. 来源与 `!important`**
 - 作者样式 > 用户样式 > 浏览器默认样式
@@ -17,9 +17,9 @@ CSS 的"C"代表 **Cascading**（层叠）。当指挥给木管组一个整体�
 **3. 书写顺序**
 - 权重相同时，**后写的覆盖先写的**
 - 就像一部交响曲——最后奏出的主题留在耳中
-::
+:::
 
-::explain{title="权重计算实例"}
+:::explain{title="权重计算实例"}
 看这几个例子，理解权重怎么算：
 ```css
 h1 { color: red; }                     /* 权重: 1 */
@@ -35,9 +35,9 @@ h1 { color: red; }                     /* 权重: 1 */
 .card h1 { color: blue; }  /* ← 这条胜利！（后写） */
 ```
 提示：用浏览器 DevTools（F12）可以看到被"划掉"的失效样式——被谁覆盖了，一目了然。
-::
+:::
 
-::explain{title="!important — 紧急按钮，慎用！"}
+:::explain{title="!important — 紧急按钮，慎用！"}
 `!important` 写在属性值后面，会让这条声明**无视权重直接生效**：
 ```css
 h1 {
@@ -50,9 +50,9 @@ h1 {
 **只有两种情况应该用：**
 1. 覆盖你无法控制的第三方样式（如 UI 库）
 2. 工具类（如 `.hidden` 必须隐藏元素）
-::
+:::
 
-::example{title="看例子"}
+:::example{title="看例子"}
 下面的代码故意写了冲突的规则，感受层叠效果：
 ```css
 /* 规则 1：权重 1 */
@@ -65,28 +65,28 @@ p { color: gray; }
 #special { color: #C9A96E; }
 ```
 在预览区看第三条卡片的文字颜色——ID 选择器的金色覆盖了所有其他。
-::
+:::
 
-::task{title="动手试试 ✨"}
-:::step{purpose="理解权重规则：去掉最高权重（101）的 #ID 选择器后，下一条最高权重（21）的 `.card p.highlight` 会生效。" expected="第三条卡片的文字从金色变成了 `.card p.highlight` 定义的暗红色。"}
+:::task{title="动手试试 ✨"}
+::::step{purpose="理解权重规则：去掉最高权重（101）的 #ID 选择器后，下一条最高权重（21）的 `.card p.highlight` 会生效。" expected="第三条卡片的文字从金色变成了 `.card p.highlight` 定义的暗红色。"}
 去掉 `#special` 的 color 样式，看第三条文字变成什么颜色
-:::
+::::
 
-:::step{purpose="`!important` 无视权重直接胜出。但这是紧急按钮——一旦用了，后面的覆盖会越来越困难。" expected="带 `!important` 的规则覆盖了 `#special` 的样式。第二条卡片文字可能也跟着变了颜色。"}
+::::step{purpose="`!important` 无视权重直接胜出。但这是紧急按钮——一旦用了，后面的覆盖会越来越困难。" expected="带 `!important` 的规则覆盖了 `#special` 的样式。第二条卡片文字可能也跟着变了颜色。"}
 给 `.card p.highlight` 的 color 加 `!important`，看效果
-:::
+::::
 
-:::step{purpose="学用 DevTools 诊断层叠冲突——被覆盖的样式会显示为删除线，一眼就能看出谁赢了。" expected="在 Computed 面板中能看到最终生效的 color 值，以及所有被覆盖的样式。"}
+::::step{purpose="学用 DevTools 诊断层叠冲突——被覆盖的样式会显示为删除线，一眼就能看出谁赢了。" expected="在 Computed 面板中能看到最终生效的 color 值，以及所有被覆盖的样式。"}
 在 DevTools（F12）中查看元素的 Computed 样式，观察被划掉的规则
-:::
+::::
 
-:::step{purpose="用手写实验验证权重计算：`body`(1) + `.card`(10) + `p`(1) = 12。12 > 11，所以覆盖 `.card p`；12 < 21，所以被 `.card p.highlight` 覆盖。" expected="`body .card p` 覆盖了 `.card p` 的样式，但无法覆盖 `.card p.highlight` 和 `#special`。权重数字精确决定了谁胜出。"}
+::::step{purpose="用手写实验验证权重计算：`body`(1) + `.card`(10) + `p`(1) = 12。12 > 11，所以覆盖 `.card p`；12 < 21，所以被 `.card p.highlight` 覆盖。" expected="`body .card p` 覆盖了 `.card p` 的样式，但无法覆盖 `.card p.highlight` 和 `#special`。权重数字精确决定了谁胜出。"}
 挑战：增加一条 `body .card p` 规则（权重 12），观察它能否覆盖 `.card p`（权重 11）但不能覆盖更高权重的规则
+::::
+
 :::
 
-::
-
-::listen-to
+:::listen-to
 柴可夫斯基《1812 序曲》— 开头弦乐的祈祷、中间骑兵冲锋的马赛曲、结尾钟声与加农炮的巨响。不同乐器在不同时刻占据前景——CSS 层叠也是如此，具体的选择器在关键时刻"压过"通用规则，形成视觉焦点。
-::
+:::
 

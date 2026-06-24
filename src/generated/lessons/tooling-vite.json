@@ -27,7 +27,7 @@
       "attrs": {
         "title": "Vite 是什么？"
       },
-      "content": "{{term:Vite}}（法语\"快\"的意思，读作 /viːt/）是一个**前端{{term:构建}}工具**。它做了三件关键的事：\n1. **开发服务器** — 运行 `npm run dev`，自动在浏览器打开你的页面，修改代码后页面**瞬时更新**（{{term:热更新}} HMR）\n2. **{{term:构建}}打包** — 运行 `npm run build`，把你的代码压缩优化成可以{{term:部署}}到服务器上的文件\n3. **项目脚手架** — 运行 `npm create vite@latest`，自动生成项目文件夹结构\n> 💡 \"{{term:构建}}\"这个词可能陌生。想象你把散落的乐谱整理成一本精美的节目单——{{term:构建}}就是把你的源代码变成最终产品。"
+      "content": "{{term:Vite}}（法语\"快\"的意思，读作 /viːt/）是一个**前端{{term:构建}}工具**。它做了三件关键的事：\n\n1. **开发服务器** — 运行 `npm run dev`，自动在浏览器打开你的页面，修改代码后页面**瞬时更新**（{{term:热更新}} HMR）\r\n2. **{{term:构建}}打包** — 运行 `npm run build`，把你的代码压缩优化成可以{{term:部署}}到服务器上的文件\r\n3. **项目脚手架** — 运行 `npm create vite@latest`，自动生成项目文件夹结构\n\n> 💡 \"{{term:构建}}\"这个词可能陌生。想象你把散落的乐谱整理成一本精美的节目单——{{term:构建}}就是把你的源代码变成最终产品。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "创建项目"
       },
-      "content": "在{{term:终端}}中运行：\n```bash\nnpm create vite@latest music-collection -- --template vue\n```\n这条命令做了什么？\n- `npm create` — {{term:npm}} 的\"创建项目\"功能\n- `vite@latest` — 使用最新版 {{term:Vite}} 脚手架\n- `music-collection` — 项目名称（也是文件夹名）\n- `-- --template vue` — 使用 {{term:Vue}} 模板\n运行后：\n```bash\ncd music-collection   # 进入项目文件夹\nnpm install           # 安装依赖（Vue、Vite 等）\nnpm run dev           # 启动开发服务器\n```\n浏览器会自动打开 `http://localhost:5173`，你会看到一个 {{term:Vue}} 的欢迎页面！\n**项目结构一览：**\n```music-collection/\n├── index.html          # 入口 HTML\n├── package.json        # 项目配置\n├── vite.config.js      # Vite 配置\n├── src/\n│   ├── main.js         # 应用入口\n│   ├── App.vue         # 根组件\n│   ├── components/     # 放组件的地方\n│   └── assets/         # 放图片、CSS 等\n└── node_modules/       # 依赖包\n```"
+      "content": "在{{term:终端}}中运行：\n\n```bash\r\nnpm create vite@latest music-collection -- --template vue\r\n```\n\n这条命令做了什么？\n\n- `npm create` — {{term:npm}} 的\"创建项目\"功能\r\n- `vite@latest` — 使用最新版 {{term:Vite}} 脚手架\r\n- `music-collection` — 项目名称（也是文件夹名）\r\n- `-- --template vue` — 使用 {{term:Vue}} 模板\r\n运行后：\n\n```bash\r\ncd music-collection   # 进入项目文件夹\r\nnpm install           # 安装依赖（Vue、Vite 等）\r\nnpm run dev           # 启动开发服务器\r\n```\n\n浏览器会自动打开 `http://localhost:5173`，你会看到一个 {{term:Vue}} 的欢迎页面！\r\n**项目结构一览：**\n\n```music-collection/\r\n├── index.html          # 入口 HTML\r\n├── package.json        # 项目配置\r\n├── vite.config.js      # Vite 配置\r\n├── src/\r\n│   ├── main.js         # 应用入口\r\n│   ├── App.vue         # 根组件\r\n│   ├── components/     # 放组件的地方\r\n│   └── assets/         # 放图片、CSS 等\r\n└── node_modules/       # 依赖包\r\n```"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "你的任务 ✨"
       },
-      "content": "1. 在{{term:终端}}中运行创建命令（在自己选的位置，比如桌面）：\n   ```bash\n   npm create vite@latest music-collection -- --template vue\n   ```\n2. `cd music-collection` 进入项目\n3. `npm install` 安装{{term:依赖}}\n4. `npm run dev` 启动开发服务器\n5. 在浏览器中访问 `http://localhost:5173`，看到 {{term:Vue}} 欢迎页\n6. 打开 `src/App.vue`，把 `<template>` 里的内容改成 `<h1>🎵 我的音乐收藏</h1>`，保存，看浏览器自动更新！\n> 🎉 你刚刚完成了第一个工程化的 {{term:Vue}} 项目！不再是 CDN 引入，而是真正的 {{term:npm}} + {{term:Vite}} + {{term:Vue}} 项目结构。",
+      "content": "1. 在{{term:终端}}中运行创建命令（在自己选的位置，比如桌面）：\r\n   ```bash\r\n   npm create vite@latest music-collection -- --template vue\r\n   ```\r\n2. `cd music-collection` 进入项目\r\n3. `npm install` 安装{{term:依赖}}\r\n4. `npm run dev` 启动开发服务器\r\n5. 在浏览器中访问 `http://localhost:5173`，看到 {{term:Vue}} 欢迎页\r\n6. 打开 `src/App.vue`，把 `<template>` 里的内容改成 `<h1>🎵 我的音乐收藏</h1>`，保存，看浏览器自动更新！\r\n> 🎉 你刚刚完成了第一个工程化的 {{term:Vue}} 项目！不再是 CDN 引入，而是真正的 {{term:npm}} + {{term:Vite}} + {{term:Vue}} 项目结构。",
       "steps": []
     },
     {
@@ -52,7 +52,7 @@
       "attrs": {
         "title": "常见问题"
       },
-      "content": "- **端口被占用？** {{term:Vite}} 会自动换一个端口（如 5174），看{{term:终端}}提示。\n- **`npm run dev` 报错？** 确认你已经 `cd` 到了 `music-collection` 目录里。\n- **浏览器没有自动打开？** 手动访问{{term:终端}}中显示的地址（通常是 `http://localhost:5173`）。\n- **修改代码没反应？** 确认你保存了文件（`Ctrl+S`），或者开启自动保存。"
+      "content": "- **端口被占用？** {{term:Vite}} 会自动换一个端口（如 5174），看{{term:终端}}提示。\r\n- **`npm run dev` 报错？** 确认你已经 `cd` 到了 `music-collection` 目录里。\r\n- **浏览器没有自动打开？** 手动访问{{term:终端}}中显示的地址（通常是 `http://localhost:5173`）。\r\n- **修改代码没反应？** 确认你保存了文件（`Ctrl+S`），或者开启自动保存。"
     },
     {
       "type": "block:listen-to",

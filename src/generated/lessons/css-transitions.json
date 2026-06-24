@@ -27,7 +27,7 @@
       "attrs": {
         "title": "transition — 平滑过渡"
       },
-      "content": "{{term:transition}} {{term:属性}}让 {{term:CSS}} 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。{{term:ease}} 是默认的时间曲线（慢→快→慢），{{term:linear}} 是匀速。就像扬琴曲的渐快或渐慢——不是突然切换速度，而是平滑过渡。\n```css\n.card {\n  background: #FFFAF2;\n  transition: all 0.3s ease;\n}\n.card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n```\n- `all` — 所有{{term:属性}}都过渡\n- `0.3s` — 过渡耗时 0.3 秒\n- `ease` — 缓动{{term:函数}}（开始快，结束慢）\n就像渐强记号把音量从一个等级平滑带到另一个等级。"
+      "content": "{{term:transition}} {{term:属性}}让 {{term:CSS}} 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。{{term:ease}} 是默认的时间曲线（慢→快→慢），{{term:linear}} 是匀速。就像扬琴曲的渐快或渐慢——不是突然切换速度，而是平滑过渡。\n\n```css\r\n.card {\r\n  background: #FFFAF2;\r\n  transition: all 0.3s ease;\r\n}\r\n.card:hover {\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n  transform: scale(1.05);\r\n}\r\n```\n\n- `all` — 所有{{term:属性}}都过渡\r\n- `0.3s` — 过渡耗时 0.3 秒\r\n- `ease` — 缓动{{term:函数}}（开始快，结束慢）\r\n就像渐强记号把音量从一个等级平滑带到另一个等级。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "transform — 变换形态"
       },
-      "content": "`transform` 可以改变{{term:元素}}的形状和位置，配合 `transition` 效果最佳：\n- `translateY(-4px)` — 向上移动 4px\n- `scale(1.1)` — 放大到 1.1 倍\n- `rotate(5deg)` — 旋转 5 度\n```css\n.card:hover {\n  transform: translateY(-4px) scale(1.02);\n}\n```\n多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！"
+      "content": "`transform` 可以改变{{term:元素}}的形状和位置，配合 `transition` 效果最佳：\n\n- `translateY(-4px)` — 向上移动 4px\r\n- `scale(1.1)` — 放大到 1.1 倍\r\n- `rotate(5deg)` — 旋转 5 度\n\n```css\r\n.card:hover {\r\n  transform: translateY(-4px) scale(1.02);\r\n}\r\n```\n\n多个变换用空格分隔即可。就像演奏者身体微微前倾（位移）+ 音量加大（缩放）来表现渐强！"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "@keyframes — 关键帧动画"
       },
-      "content": "`@keyframes` 可以定义更复杂的、自动播放的动画：\n```css\n@keyframes pulse {\n  0%   { opacity: 1; transform: scale(1); }\n  50%  { opacity: 0.6; transform: scale(1.05); }\n  100% { opacity: 1; transform: scale(1); }\n}\n.card {\n  animation: pulse 2s ease-in-out infinite;\n}\n```\n- `pulse` — 动画名称（自己命名）\n- `2s` — 一个周期 2 秒\n- `ease-in-out` — 缓入缓出\n- `infinite` — 无限循环\n就像一个持续重复的节奏型——鼓手打的固定节拍！"
+      "content": "`@keyframes` 可以定义更复杂的、自动播放的动画：\n\n```css\r\n@keyframes pulse {\r\n  0%   { opacity: 1; transform: scale(1); }\r\n  50%  { opacity: 0.6; transform: scale(1.05); }\r\n  100% { opacity: 1; transform: scale(1); }\r\n}\r\n.card {\r\n  animation: pulse 2s ease-in-out infinite;\r\n}\r\n```\n\n- `pulse` — 动画名称（自己命名）\r\n- `2s` — 一个周期 2 秒\r\n- `ease-in-out` — 缓入缓出\r\n- `infinite` — 无限循环\r\n就像一个持续重复的节奏型——鼓手打的固定节拍！"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码展示了三种动画效果。鼠标悬停在前两张卡片上看过渡效果，第三张是自动播放的脉动动画：\n```css\n.fade-card { transition: all 0.3s ease; }\n.fade-card:hover {\n  background: #8B2E2E;\n  color: #fff;\n  transform: scale(1.05);\n}\n.bounce-card:hover {\n  animation: bounce 0.6s ease;\n}\n@keyframes bounce {\n  0%, 100% { transform: translateY(0); }\n  50% { transform: translateY(-10px); }\n}\n```\n切换到预览区，把鼠标移到卡片上试试！"
+      "content": "下面的代码展示了三种动画效果。鼠标悬停在前两张卡片上看过渡效果，第三张是自动播放的脉动动画：\n\n```css\r\n.fade-card { transition: all 0.3s ease; }\r\n.fade-card:hover {\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n  transform: scale(1.05);\r\n}\r\n.bounce-card:hover {\r\n  animation: bounce 0.6s ease;\r\n}\r\n@keyframes bounce {\r\n  0%, 100% { transform: translateY(0); }\r\n  50% { transform: translateY(-10px); }\r\n}\r\n```\n\n切换到预览区，把鼠标移到卡片上试试！"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"`transition` 的 `duration`（时长）决定变化快慢。数字越大越慢，越小越快。就像渐强的速度——可以慢慢推，也可以急速推进。\" expected=\"鼠标悬停时，卡片颜色和大小变化明显变慢了。这就是 {{term:transition}} 的 duration {{term:参数}}在起作用。\"}\n把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢\n:::\n\n:::step{purpose=\"`@keyframes` 中每个百分比定义了该时刻{{term:元素}}的状态。修改关键帧的值，动画效果也会改变。\" expected=\"卡片跳动幅度变大了一倍。你直接修改了关键帧的 `translateY` 值。\"}\n修改 `@keyframes bounce` 中的 `-10px` 改成 `-20px`，让跳动更大\n:::\n\n:::step{purpose=\"`animation-duration` 控制一个动画周期的时间。改成 `0.5s`（半秒），脉动会快 4 倍。\" expected=\"第三张卡片的脉动变得非常快。duration 越小，动画越快。\"}\n调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快\n:::\n\n:::step{purpose=\"从零创建一个 `@keyframes` 动画——`from { rotate(0deg) }` 到 `to { rotate(360deg) }`，然后应用到新卡片上。\" expected=\"鼠标悬停时，新卡片会旋转一圈。你已经能独立创建 {{term:CSS}} 动画了！\"}\n挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画\n:::",
+      "content": "::::step{purpose=\"从零创建一个 `@keyframes` 动画——`from { rotate(0deg) }` 到 `to { rotate(360deg) }`，然后应用到新卡片上。\" expected=\"鼠标悬停时，新卡片会旋转一圈。你已经能独立创建 {{term:CSS}} 动画了！\"}\n挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画\r\n::::",
       "steps": [
         {
           "content": "把 `.fade-card` 的 `transition` 时间改成 `1s`，看过渡变慢",
@@ -75,11 +75,6 @@
           "content": "调整 `.auto-pulse` 的 `animation` 中 `2s` 改成 `0.5s`，让脉动更快",
           "purpose": "`animation-duration` 控制一个动画周期的时间。改成 `0.5s`（半秒），脉动会快 4 倍。",
           "expected": "第三张卡片的脉动变得非常快。duration 越小，动画越快。"
-        },
-        {
-          "content": "挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画",
-          "purpose": "从零创建一个 `@keyframes` 动画——`from { rotate(0deg) }` 到 `to { rotate(360deg) }`，然后应用到新卡片上。",
-          "expected": "鼠标悬停时，新卡片会旋转一圈。你已经能独立创建 {{term:CSS}} 动画了！"
         }
       ]
     },

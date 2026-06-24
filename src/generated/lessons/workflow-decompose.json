@@ -27,7 +27,7 @@
       "attrs": {
         "title": "为什么要把大函数拆小？"
       },
-      "content": "看看这个\"做了一切\"的{{term:函数}}：\n```js\nfunction handleEverything() {\n  // 获取数据\n  // 验证数据\n  // 渲染页面\n  // 绑定事件\n  // 处理点击\n  // 更新显示\n  // 保存记录\n  // …… 100 行代码\n}\n```\n问题：\n1. **难读懂** — 你需要从头到尾理解才能修改其中一步\n2. **难调试** — 出错时不知道是哪一步的问题\n3. **难复用** — 如果另一个地方也需要\"{{term:渲染}}页面\"，你没法单独调用\n**好代码的样子：**\n```js\nfunction initPage() {\n  let data = loadData();\n  renderCards(data);\n  bindEvents();\n}\nfunction loadData() { /* 只负责获取数据 */ }\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindEvents() { /* 只负责绑定事件 */ }\n```\n每个{{term:函数}}**只做一件事**，{{term:函数}}名准确描述它做什么。这就是\"单一职责\"——编程最重要的组织原则之一。"
+      "content": "看看这个\"做了一切\"的{{term:函数}}：\n\n```js\r\nfunction handleEverything() {\r\n  // 获取数据\r\n  // 验证数据\r\n  // 渲染页面\r\n  // 绑定事件\r\n  // 处理点击\r\n  // 更新显示\r\n  // 保存记录\r\n  // …… 100 行代码\r\n}\r\n```\n\n问题：\n\n1. **难读懂** — 你需要从头到尾理解才能修改其中一步\r\n2. **难调试** — 出错时不知道是哪一步的问题\r\n3. **难复用** — 如果另一个地方也需要\"{{term:渲染}}页面\"，你没法单独调用\r\n**好代码的样子：**\n\n```js\r\nfunction initPage() {\r\n  let data = loadData();\r\n  renderCards(data);\r\n  bindEvents();\r\n}\r\nfunction loadData() { /* 只负责获取数据 */ }\r\nfunction renderCards(list) { /* 只负责渲染 */ }\r\nfunction bindEvents() { /* 只负责绑定事件 */ }\r\n```\n\n每个{{term:函数}}**只做一件事**，{{term:函数}}名准确描述它做什么。这就是\"单一职责\"——编程最重要的组织原则之一。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "什么时候该拆分？"
       },
-      "content": "三个信号告诉你\"该拆了\"：\n**信号 1：代码块有明确的注释分区**\n如果你的代码里出现了 `// ===== 第一部分 =====` 这样的注释，说明这里应该是一个独立{{term:函数}}。{{term:函数}}名就是最好的\"注释\"。\n**信号 2：你复制粘贴了一段代码**\n如果你发现自己复制了某段代码只改了一两个地方——立刻把它提取成一个{{term:函数}}！这叫做 DRY 原则（Don't Repeat Yourself）。\n**信号 3：{{term:函数}}超过 20 行**\n这不是死规矩，但如果你写了一个超过 20 行的{{term:函数}}，问问自己：这个{{term:函数}}有没有在做两件事？如果{{term:函数}}名里出现了\"和\"字（\"获取数据并{{term:渲染}}\"），它就该拆成两个。"
+      "content": "三个信号告诉你\"该拆了\"：\r\n**信号 1：代码块有明确的注释分区**\r\n如果你的代码里出现了 `// ===== 第一部分 =====` 这样的注释，说明这里应该是一个独立{{term:函数}}。{{term:函数}}名就是最好的\"注释\"。\r\n**信号 2：你复制粘贴了一段代码**\r\n如果你发现自己复制了某段代码只改了一两个地方——立刻把它提取成一个{{term:函数}}！这叫做 DRY 原则（Don't Repeat Yourself）。\r\n**信号 3：{{term:函数}}超过 20 行**\r\n这不是死规矩，但如果你写了一个超过 20 行的{{term:函数}}，问问自己：这个{{term:函数}}有没有在做两件事？如果{{term:函数}}名里出现了\"和\"字（\"获取数据并{{term:渲染}}\"），它就该拆成两个。"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "拆分前 vs 拆分后"
       },
-      "content": "**拆分前（一个{{term:函数}}做三件事）：**\n```js\nfunction setupMusicPage() {\n  // 渲染卡片 — 15 行\n  let cardHTML = \"\";\n  for (let i = 0; i < pieces.length; i++) {\n    cardHTML += `<div class=\"card\"><h3>${pieces[i].name}</h3></div>`;\n  }\n  gallery.innerHTML = cardHTML;\n  // 绑定筛选 — 10 行\n  filterBtn.addEventListener(\"click\", function() {\n    let filtered = pieces.filter(/* ... */);\n    // 重新渲染...\n  });\n  // 显示统计 — 8 行\n  let total = pieces.length;\n  statsEl.textContent = \"共 \" + total + \" 首曲目\";\n}\n```\n**拆分后（三个{{term:函数}}各司其职）：**\n```js\nfunction initPage() {\n  renderCards(pieces);\n  bindFilter();\n  showStats(pieces);\n}\nfunction renderCards(list) { /* 只负责渲染 */ }\nfunction bindFilter() { /* 只负责筛选逻辑 */ }\nfunction showStats(list) { /* 只负责显示统计 */ }\n```\n现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新{{term:渲染}}——这就是拆分的威力！"
+      "content": "**拆分前（一个{{term:函数}}做三件事）：**\n\n```js\r\nfunction setupMusicPage() {\r\n  // 渲染卡片 — 15 行\r\n  let cardHTML = \"\";\r\n  for (let i = 0; i < pieces.length; i++) {\r\n    cardHTML += `<div class=\"card\"><h3>${pieces[i].name}</h3></div>`;\r\n  }\r\n  gallery.innerHTML = cardHTML;\r\n  // 绑定筛选 — 10 行\r\n  filterBtn.addEventListener(\"click\", function() {\r\n    let filtered = pieces.filter(/* ... */);\r\n    // 重新渲染...\r\n  });\r\n  // 显示统计 — 8 行\r\n  let total = pieces.length;\r\n  statsEl.textContent = \"共 \" + total + \" 首曲目\";\r\n}\r\n```\n\n**拆分后（三个{{term:函数}}各司其职）：**\n\n```js\r\nfunction initPage() {\r\n  renderCards(pieces);\r\n  bindFilter();\r\n  showStats(pieces);\r\n}\r\nfunction renderCards(list) { /* 只负责渲染 */ }\r\nfunction bindFilter() { /* 只负责筛选逻辑 */ }\r\nfunction showStats(list) { /* 只负责显示统计 */ }\r\n```\n\n现在你可以单独调用 `renderCards(filteredPieces)` 在筛选后重新{{term:渲染}}——这就是拆分的威力！"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:渲染}}{{term:函数}}接收{{term:参数}}是关键设计——筛选后可以调用 renderProgram(filtered) 直接刷新显示，而不是复制粘贴{{term:渲染}}代码。就像写一个可复用的旋律动机，在乐章不同段落变换乐器但仍用同一个主题。\" expected=\"renderProgram(pieces) 调用后，页面显示 5 首曲目的卡片列表，与拆分前完全一致。\"}\n提取 renderProgram({{term:list}}) {{term:函数}}：接收{{term:数组}}{{term:参数}}，负责{{term:渲染}}卡片 {{term:HTML}} 到页面\n:::\n\n:::step{purpose=\"将统计逻辑独立出来，任何地方需要更新计数时只需一行 updateCount(n)。这就是{{term:函数}}复用的威力——改一处而全站更新，就像在总谱上改一个速度标记，所有声部的这个段落都受影响。\" expected=\"底部显示\\\"共 5 首曲目\\\"，切换筛选后数字自动更新为筛选结果的数量。\"}\n提取 updateCount(n) {{term:函数}}：接收数字{{term:参数}}，更新底部统计文字\n:::\n\n:::step{purpose=\"{{term:事件}}绑定和业务逻辑分开后，每个{{term:函数}}只做一件事。筛选按钮的逻辑变得极短：过滤{{term:数组}} → 调用 renderProgram → 调用 updateCount，一目了然。这就是\\\"单一职责\\\"原则的实际应用。\" expected=\"点击\\\"巴洛克\\\"显示 2 首巴洛克曲目，点击\\\"古典主义\\\"显示 3 首古典主义曲目，点击\\\"全部\\\"恢复显示 5 首。\"}\n提取 bindFilterButtons() {{term:函数}}：给三个筛选按钮绑定{{term:事件}}，点击后调用 renderProgram(filtered) 和 updateCount\n:::\n\n:::step{purpose=\"initPage 像交响乐的序奏——不处理任何细节，只负责调度各声部在恰当的时机进入。这是项目启动{{term:层}}的标准写法：一个入口{{term:函数}}，清晰列出初始化步骤。\" expected=\"initPage() 调用后页面完整呈现，与原来 setupPage() 效果完全一致，但代码结构清晰了 10 倍。\"}\n写出 initPage() {{term:函数}}：只负责调用 renderProgram、bindFilterButtons、updateCount 三个{{term:函数}}来启动页面\n:::",
+      "content": "",
       "steps": [
         {
           "content": "提取 renderProgram({{term:list}}) {{term:函数}}：接收{{term:数组}}{{term:参数}}，负责{{term:渲染}}卡片 {{term:HTML}} 到页面",

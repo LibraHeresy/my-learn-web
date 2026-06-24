@@ -27,7 +27,7 @@
       "attrs": {
         "title": "好名字 vs 坏名字"
       },
-      "content": "来看一组对比：\n**❌ 坏命名（你一个月后根本看不懂）：**\n```js\nlet a = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\nlet b = document.querySelector(\"#c\");\nlet d = document.querySelector(\"#e\");\nd.addEventListener(\"click\", function() {\n  let f = Math.floor(Math.random() * a.length);\n  b.textContent = a[f];\n});\n```\n**✅ 好命名（任何人都看得懂）：**\n```js\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\nlet displayEl = document.querySelector(\"#composerDisplay\");\nlet shuffleBtn = document.querySelector(\"#shuffleBtn\");\nshuffleBtn.addEventListener(\"click\", function() {\n  let randomIndex = Math.floor(Math.random() * composers.length);\n  displayEl.textContent = composers[randomIndex];\n});\n```\n两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**"
+      "content": "来看一组对比：\r\n**❌ 坏命名（你一个月后根本看不懂）：**\n\n```js\r\nlet a = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nlet b = document.querySelector(\"#c\");\r\nlet d = document.querySelector(\"#e\");\r\nd.addEventListener(\"click\", function() {\r\n  let f = Math.floor(Math.random() * a.length);\r\n  b.textContent = a[f];\r\n});\r\n```\n\n**✅ 好命名（任何人都看得懂）：**\n\n```js\r\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nlet displayEl = document.querySelector(\"#composerDisplay\");\r\nlet shuffleBtn = document.querySelector(\"#shuffleBtn\");\r\nshuffleBtn.addEventListener(\"click\", function() {\r\n  let randomIndex = Math.floor(Math.random() * composers.length);\r\n  displayEl.textContent = composers[randomIndex];\r\n});\r\n```\n\n两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "命名规则速查表"
       },
-      "content": "**{{term:CSS}} 类名：** 用小写字母 + 连字符（kebab-case）\n- ✅ `card-title` `music-list` `play-btn`\n- ❌ `CardTitle` `music_list` `a` `b` `c`\n**{{term:JS}} {{term:变量}}名：** 用驼峰命名（camelCase）\n- ✅ `composerName` `totalCount` `likeBtn` `musicList`\n- ❌ `composer_name` `totalcount` `btn` `x`\n**{{term:JS}} {{term:函数}}名：** 用动词开头，描述做什么\n- ✅ `playMusic()` `addCard()` `showMessage()` `calculateTotal()`\n- ❌ `music()` `card()` `message()` `total()`\n**常用前缀约定：**\n- 存储 {{term:DOM}} {{term:元素}}的{{term:变量}}后加 `El`：`titleEl`、`cardEl`、`msgEl`\n- 存储按钮的{{term:变量}}后加 `Btn`：`likeBtn`、`closeBtn`、`submitBtn`\n- 布尔值用 `is` / `has` 开头：`isPlaying`、`hasLiked`"
+      "content": "**{{term:CSS}} 类名：** 用小写字母 + 连字符（kebab-case）\n\n- ✅ `card-title` `music-list` `play-btn`\r\n- ❌ `CardTitle` `music_list` `a` `b` `c`\r\n**{{term:JS}} {{term:变量}}名：** 用驼峰命名（camelCase）\r\n- ✅ `composerName` `totalCount` `likeBtn` `musicList`\r\n- ❌ `composer_name` `totalcount` `btn` `x`\r\n**{{term:JS}} {{term:函数}}名：** 用动词开头，描述做什么\r\n- ✅ `playMusic()` `addCard()` `showMessage()` `calculateTotal()`\r\n- ❌ `music()` `card()` `message()` `total()`\r\n**常用前缀约定：**\r\n- 存储 {{term:DOM}} {{term:元素}}的{{term:变量}}后加 `El`：`titleEl`、`cardEl`、`msgEl`\r\n- 存储按钮的{{term:变量}}后加 `Btn`：`likeBtn`、`closeBtn`、`submitBtn`\r\n- 布尔值用 `is` / `has` 开头：`isPlaying`、`hasLiked`"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"给存储 {{term:DOM}} {{term:元素}}的{{term:变量}}加上 El/Btn 后缀是团队通用的命名约定。好名字让代码自解释——shuffleBtn 一眼就知道是\\\"随机播放\\\"按钮，而 c 需要你来回翻看才知道是什么。\" expected=\"代码中不再有 b、c、d、e 这样的单字母{{term:变量}}，取而代之的是有意义的名字，阅读时不需要额外注释。\"}\n把 {{term:DOM}} {{term:元素}}{{term:变量}}重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn\n:::\n\n:::step{purpose=\"数据{{term:变量}}的命名直接反映其内容——composers 明确是作曲家{{term:数组}}，randomIndex 清楚表达它是随机{{term:索引}}。就像乐谱上的标注\\\"mp\\\"比\\\"中等偏弱\\\"更好——精确、简短、无歧义。\" expected=\"a 变成 composers，f 变成 randomIndex，{{term:变量}}名准确地描述了它们存储的内容。\"}\n把数据{{term:变量}}重命名：a → composers、f → randomIndex\n:::\n\n:::step{purpose=\"{{term:函数}}名应该用动词开头来描述它做什么。showRandom() 明确是\\\"随机显示\\\"，addComposer() 明确是\\\"添加作曲家\\\"。好的{{term:函数}}名就是最好的注释——你甚至不需要读{{term:函数}}体就知道它的职责。\" expected=\"{{term:函数}}名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。\"}\n把{{term:函数}}重命名：x() → showRandom()、y() → addComposer()\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 {{term:DOM}} {{term:元素}}{{term:变量}}重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn",

@@ -27,7 +27,7 @@
       "attrs": {
         "title": "为什么需要模块化？"
       },
-      "content": "早期的网页开发中，所有 {{term:JS}} 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n- {{term:变量}}名冲突（两个{{term:函数}}都想用 {{term:name}} 这个{{term:变量}}）\n- 代码难以维护（找一个 bug 要翻几千行）\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\n模块化解决了这些问题：\n```text\n// 之前：一个巨大的 script.js\nscript.js (800 行)\n// 之后：按职责分成小文件\nutils.js        ← 工具函数（格式化日期、编码等）\napi.js          ← 网络请求\nrender.js       ← 渲染页面\napp.js          ← 主入口，引入其他模块\n```\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。"
+      "content": "早期的网页开发中，所有 {{term:JS}} 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：\n\n- {{term:变量}}名冲突（两个{{term:函数}}都想用 {{term:name}} 这个{{term:变量}}）\r\n- 代码难以维护（找一个 bug 要翻几千行）\r\n- 无法复用（想在新项目里用某个功能，得从旧文件里复制粘贴）\r\n模块化解决了这些问题：\n\n```text\r\n// 之前：一个巨大的 script.js\r\nscript.js (800 行)\r\n// 之后：按职责分成小文件\r\nutils.js        ← 工具函数（格式化日期、编码等）\r\napi.js          ← 网络请求\r\nrender.js       ← 渲染页面\r\napp.js          ← 主入口，引入其他模块\r\n```\n\n就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "export — 两种导出方式"
       },
-      "content": "ES Modules 提供两种导出方式：\n**1. 命名导出（Named Export）** — 一个模块可以导出多个东西：\n```js\n// utils.js — 导出多个工具函数\nexport function formatDate(date) {\n  return date.toLocaleDateString('zh-CN')\n}\nexport const API_BASE = 'https://api.example.com'\nexport function debounce(fn, delay) {\n  let timer\n  return (...args) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), delay)\n  }\n}\n```\n**2. 默认导出（Default Export）** — 一个模块只导出一个主角：\n```js\n// search.js — 这个文件的主角就是 searchMusic\nexport default async function searchMusic(keyword) {\n  const res = await fetch(API_BASE + '/search?q=' + keyword)\n  return res.json()\n}\n```\n每个模块只能有一个 default {{term:export}}。\n> 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。"
+      "content": "ES Modules 提供两种导出方式：\r\n**1. 命名导出（Named Export）** — 一个模块可以导出多个东西：\n\n```js\r\n// utils.js — 导出多个工具函数\r\nexport function formatDate(date) {\r\n  return date.toLocaleDateString('zh-CN')\r\n}\r\nexport const API_BASE = 'https://api.example.com'\r\nexport function debounce(fn, delay) {\r\n  let timer\r\n  return (...args) => {\r\n    clearTimeout(timer)\r\n    timer = setTimeout(() => fn(...args), delay)\r\n  }\r\n}\r\n```\n\n**2. 默认导出（Default Export）** — 一个模块只导出一个主角：\n\n```js\r\n// search.js — 这个文件的主角就是 searchMusic\r\nexport default async function searchMusic(keyword) {\r\n  const res = await fetch(API_BASE + '/search?q=' + keyword)\r\n  return res.json()\r\n}\r\n```\n\n每个模块只能有一个 default {{term:export}}。\n\n> 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "import — 引入其他模块"
       },
-      "content": "**导入命名导出：** 用花括号 `{}` 精确指定要导入什么\n```js\n// 按需导入\nimport { formatDate, debounce } from './utils.js'\n// 重命名（避免命名冲突）\nimport { debounce as deb } from './utils.js'\n// 全部导入到一个命名空间\nimport * as utils from './utils.js'\nutils.formatDate(new Date())\n```\n**导入默认导出：** 不用花括号，名字可以自己取\n```js\nimport searchMusic from './search.js'\n// 名字可以自己定，但建议和导出保持一致\n```\n**混合导入：**\n```js\nimport searchMusic, { API_BASE } from './search.js'\n```\n**{{term:npm}} 包的导入：** (不需要 ./ 或 ../ 前缀)\n```js\nimport { ref, computed } from 'vue'\nimport axios from 'axios'\n```\n**注意：** `.js` 后缀在 {{term:Vite}}/{{term:Vue}} 项目中可以省略，在纯浏览器 ESM 中必须写。"
+      "content": "**导入命名导出：** 用花括号 `{}` 精确指定要导入什么\n\n```js\r\n// 按需导入\r\nimport { formatDate, debounce } from './utils.js'\r\n// 重命名（避免命名冲突）\r\nimport { debounce as deb } from './utils.js'\r\n// 全部导入到一个命名空间\r\nimport * as utils from './utils.js'\r\nutils.formatDate(new Date())\r\n```\n\n**导入默认导出：** 不用花括号，名字可以自己取\n\n```js\r\nimport searchMusic from './search.js'\r\n// 名字可以自己定，但建议和导出保持一致\r\n```\n\n**混合导入：**\n\n```js\r\nimport searchMusic, { API_BASE } from './search.js'\r\n```\n\n**{{term:npm}} 包的导入：** (不需要 ./ 或 ../ 前缀)\n\n```js\r\nimport { ref, computed } from 'vue'\r\nimport axios from 'axios'\r\n```\n\n**注意：** `.js` 后缀在 {{term:Vite}}/{{term:Vue}} 项目中可以省略，在纯浏览器 ESM 中必须写。"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "假设你在做一个音乐搜索器，模块化之后项目结构是这样的：\n```js\n// 项目结构：\n// music-searcher/\n// ├── index.html\n// ├── js/\n// │   ├── app.js        ← 主入口（组装所有模块）\n// │   ├── api.js        ← 封装 fetch 请求\n// │   ├── render.js     ← 负责渲染 DOM\n// │   └── utils.js      ← 通用工具（防抖、格式化）\n\n// api.js — 只负责数据\nexport async function searchMusic(keyword) {\n  const res = await fetch(\n    'https://itunes.apple.com/search?term=' + encodeURIComponent(keyword) + '&limit=10'\n  )\n  return res.json()\n}\n\n// render.js — 只负责 DOM\nexport function renderResults(data, container) {\n  container.innerHTML = data.results.map(item => `\n    <div class=\"card\">\n      <img src=\"${item.artworkUrl100}\" />\n      <h3>${item.trackName}</h3>\n    </div>\n  `).join('')\n}\n\n// app.js — 组装一切\nimport { searchMusic } from './api.js'\nimport { renderResults } from './render.js'\nimport { debounce } from './utils.js'\n\nconst input = document.querySelector('#search')\nconst results = document.querySelector('#results')\n\ninput.addEventListener('input', debounce(async (e) => {\n  const data = await searchMusic(e.target.value)\n  renderResults(data, results)\n}, 400))\n```\n每个文件职责单一——修改{{term:渲染}}逻辑不会影响 {{term:API}} 代码，反之亦然。"
+      "content": "假设你在做一个音乐搜索器，模块化之后项目结构是这样的：\n\n```js\r\n// 项目结构：\r\n// music-searcher/\r\n// ├── index.html\r\n// ├── js/\r\n// │   ├── app.js        ← 主入口（组装所有模块）\r\n// │   ├── api.js        ← 封装 fetch 请求\r\n// │   ├── render.js     ← 负责渲染 DOM\r\n// │   └── utils.js      ← 通用工具（防抖、格式化）\r\n\r\n// api.js — 只负责数据\r\nexport async function searchMusic(keyword) {\r\n  const res = await fetch(\r\n    'https://itunes.apple.com/search?term=' + encodeURIComponent(keyword) + '&limit=10'\r\n  )\r\n  return res.json()\r\n}\r\n\r\n// render.js — 只负责 DOM\r\nexport function renderResults(data, container) {\r\n  container.innerHTML = data.results.map(item => `\r\n    <div class=\"card\">\r\n      <img src=\"${item.artworkUrl100}\" />\r\n      <h3>${item.trackName}</h3>\r\n    </div>\r\n  `).join('')\r\n}\r\n\r\n// app.js — 组装一切\r\nimport { searchMusic } from './api.js'\r\nimport { renderResults } from './render.js'\r\nimport { debounce } from './utils.js'\r\n\r\nconst input = document.querySelector('#search')\r\nconst results = document.querySelector('#results')\r\n\r\ninput.addEventListener('input', debounce(async (e) => {\r\n  const data = await searchMusic(e.target.value)\r\n  renderResults(data, results)\r\n}, 400))\r\n```\n\n每个文件职责单一——修改{{term:渲染}}逻辑不会影响 {{term:API}} 代码，反之亦然。"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": "在本地 {{term:VS Code}} 中练习（这是 local 模式课程）：\n1. 创建一个 music-searcher 文件夹，在其中创建 api.js、{{term:render}}.js、app.js 三个文件\n2. 在 api.js 中 {{term:export}} 一个 searchMusic {{term:函数}}（用到 {{term:fetch}}）\n3. 在 {{term:render}}.js 中 {{term:export}} 一个 renderResults {{term:函数}}（创建 {{term:DOM}} {{term:元素}}）\n4. 在 app.js 中 {{term:import}} 这两个{{term:函数}}，组装成完整的搜索功能\n5. 练习：尝试用 default {{term:export}} 改写 api.js，看 {{term:import}} 语法有什么变化\n6. 练习：尝试 {{term:import}} * as 的方式，对比按需导入的区别",
+      "content": "在本地 {{term:VS Code}} 中练习（这是 local 模式课程）：\r\n1. 创建一个 music-searcher 文件夹，在其中创建 api.js、{{term:render}}.js、app.js 三个文件\r\n2. 在 api.js 中 {{term:export}} 一个 searchMusic {{term:函数}}（用到 {{term:fetch}}）\r\n3. 在 {{term:render}}.js 中 {{term:export}} 一个 renderResults {{term:函数}}（创建 {{term:DOM}} {{term:元素}}）\r\n4. 在 app.js 中 {{term:import}} 这两个{{term:函数}}，组装成完整的搜索功能\r\n5. 练习：尝试用 default {{term:export}} 改写 api.js，看 {{term:import}} 语法有什么变化\r\n6. 练习：尝试 {{term:import}} * as 的方式，对比按需导入的区别",
       "steps": []
     },
     {

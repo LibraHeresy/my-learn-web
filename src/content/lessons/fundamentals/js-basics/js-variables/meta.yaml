@@ -4,6 +4,6 @@ track: fundamentals
 chapter: js-basics
 order: 2
 mode: sandbox
-musicAnalogy: 变量就像**反复记号**——把一段内容存起来，想用的时候随时调用。变量名就像乐谱上的段落标记（A段、B段），方便你指代和引用。
+musicAnalogy: "变量就像**反复记号**——把一段内容存起来，想用的时候随时调用。变量名就像乐谱上的段落标记（A段、B段），方便你指代和引用。"
 listenTo: 拉威尔《波莱罗》— 同一个旋律重复 18 遍，但每次配器都在变化。变量存着不变的旋律，但你可以用不同的方式使用它。
 estimatedMinutes: 0

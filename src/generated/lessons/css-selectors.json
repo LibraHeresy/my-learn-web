@@ -27,7 +27,7 @@
       "attrs": {
         "title": "基础选择器"
       },
-      "content": "{{term:选择器}}告诉 {{term:CSS}}\"对谁生效\"。三种最基础的{{term:选择器}}：\n| {{term:选择器}} | 写法 | 含义 |\n|--------|------|------|\n| {{term:元素}}{{term:选择器}} | `h1` | 选中所有 `<h1>` |\n| 类{{term:选择器}} | `.card` | 选中所有 `class=\"card\"` 的{{term:元素}} |\n| ID{{term:选择器}} | `#title` | 选中 `id=\"title\"` 的{{term:元素}} |\n```css\nh1 { color: #8B2E2E; }        /* 所有 h1 */\n.card { background: #FFFAF2; } /* 所有带 class=\"card\" 的 */\n#title { font-size: 2rem; }    /* 只有 id=\"title\" 那个 */\n```\n**类{{term:选择器}}最常用**——一个类可以给多个{{term:元素}}，一个{{term:元素}}也可以有多个类。"
+      "content": "{{term:选择器}}告诉 {{term:CSS}}\"对谁生效\"。三种最基础的{{term:选择器}}：\r\n| {{term:选择器}} | 写法 | 含义 |\r\n|--------|------|------|\r\n| {{term:元素}}{{term:选择器}} | `h1` | 选中所有 `<h1>` |\r\n| 类{{term:选择器}} | `.card` | 选中所有 `class=\"card\"` 的{{term:元素}} |\r\n| ID{{term:选择器}} | `#title` | 选中 `id=\"title\"` 的{{term:元素}} |\n\n```css\r\nh1 { color: #8B2E2E; }        /* 所有 h1 */\r\n.card { background: #FFFAF2; } /* 所有带 class=\"card\" 的 */\r\n#title { font-size: 2rem; }    /* 只有 id=\"title\" 那个 */\r\n```\n\n**类{{term:选择器}}最常用**——一个类可以给多个{{term:元素}}，一个{{term:元素}}也可以有多个类。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "组合与后代"
       },
-      "content": "{{term:选择器}}可以组合使用，精确指定{{term:层}}级关系：\n- `.card h2` — **后代{{term:选择器}}**，`.card` 内部的所有 `<h2>`\n- `.card > h2` — **子代{{term:选择器}}**，`.card` 的直接子{{term:元素}} `<h2>`\n- `h2, h3` — **分组{{term:选择器}}**，同时选中 `<h2>` 和 `<h3>`\n- `.card.featured` — **交集{{term:选择器}}**，同时有 `class=\"card featured\"` 的{{term:元素}}\n```css\n.card h2 { color: #8B2E2E; }       /* card 内的所有 h2 */\n.card.featured { border-color: gold; } /* 只有 featured 的那张卡片 */\n```\n就像指挥可以指向\"弦乐组中的第一小提琴\"或\"整个管乐声部\"。"
+      "content": "{{term:选择器}}可以组合使用，精确指定{{term:层}}级关系：\n\n- `.card h2` — **后代{{term:选择器}}**，`.card` 内部的所有 `<h2>`\r\n- `.card > h2` — **子代{{term:选择器}}**，`.card` 的直接子{{term:元素}} `<h2>`\r\n- `h2, h3` — **分组{{term:选择器}}**，同时选中 `<h2>` 和 `<h3>`\r\n- `.card.featured` — **交集{{term:选择器}}**，同时有 `class=\"card featured\"` 的{{term:元素}}\n\n```css\r\n.card h2 { color: #8B2E2E; }       /* card 内的所有 h2 */\r\n.card.featured { border-color: gold; } /* 只有 featured 的那张卡片 */\r\n```\n\n就像指挥可以指向\"弦乐组中的第一小提琴\"或\"整个管乐声部\"。"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "伪类选择器 — 状态触发的魔法"
       },
-      "content": "{{term:伪类}}以 `:` 开头，根据{{term:元素}}的**状态**来应用{{term:样式}}：\n- `:hover` — 鼠标悬停时\n- `:first-child` — 是父{{term:元素}}的第一个子{{term:元素}}\n- `:last-child` — 是父{{term:元素}}的最后一个子{{term:元素}}\n- `:nth-child(n)` — 是父{{term:元素}}的第 n 个子{{term:元素}}\n```css\n.card:hover { transform: translateY(-2px); }\n.card:first-child { border-color: #8B2E2E; }\n.card:nth-child(2) { border-color: #C9A96E; }\n```\n:{{term:hover}}` 是{{term:交互}}感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！"
+      "content": "{{term:伪类}}以 `:` 开头，根据{{term:元素}}的**状态**来应用{{term:样式}}：\n\n- `:hover` — 鼠标悬停时\r\n- `:first-child` — 是父{{term:元素}}的第一个子{{term:元素}}\r\n- `:last-child` — 是父{{term:元素}}的最后一个子{{term:元素}}\r\n- `:nth-child(n)` — 是父{{term:元素}}的第 n 个子{{term:元素}}\n\n```css\r\n.card:hover { transform: translateY(-2px); }\r\n.card:first-child { border-color: #8B2E2E; }\r\n.card:nth-child(2) { border-color: #C9A96E; }\r\n```\n\n:{{term:hover}}` 是{{term:交互}}感的来源——鼠标移到卡片上，卡片微微上浮，就像指挥的棒尖点到了你！"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码有三张卡片，用不同的{{term:选择器}}为它们设置了左侧的强调色：\n```css\n/* 所有卡片共享的样式 */\n.card {\n  background-color: #FFFAF2;\n  border: 1px solid #D4C5A9;\n  border-radius: 8px;\n  padding: 16px;\n  margin-bottom: 12px;\n  transition: all 0.3s ease;\n}\n/* :hover 交互反馈 */\n.card:hover {\n  border-color: #C9A96E;\n  transform: translateY(-2px);\n}\n/* :nth-child 给每张卡片不同的强调色 */\n.card:nth-child(1) { border-left: 4px solid #8B2E2E; }\n.card:nth-child(2) { border-left: 4px solid #C9A96E; }\n.card:nth-child(3) { border-left: 4px solid #5B8C5A; }\n```\n试试把鼠标移到卡片上，看它们微微上浮的效果！"
+      "content": "下面的代码有三张卡片，用不同的{{term:选择器}}为它们设置了左侧的强调色：\n\n```css\r\n/* 所有卡片共享的样式 */\r\n.card {\r\n  background-color: #FFFAF2;\r\n  border: 1px solid #D4C5A9;\r\n  border-radius: 8px;\r\n  padding: 16px;\r\n  margin-bottom: 12px;\r\n  transition: all 0.3s ease;\r\n}\r\n/* :hover 交互反馈 */\r\n.card:hover {\r\n  border-color: #C9A96E;\r\n  transform: translateY(-2px);\r\n}\r\n/* :nth-child 给每张卡片不同的强调色 */\r\n.card:nth-child(1) { border-left: 4px solid #8B2E2E; }\r\n.card:nth-child(2) { border-left: 4px solid #C9A96E; }\r\n.card:nth-child(3) { border-left: 4px solid #5B8C5A; }\r\n```\n\n试试把鼠标移到卡片上，看它们微微上浮的效果！"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"`:nth-child(n)` {{term:伪类}}根据{{term:元素}}位置选中它。`nth-child(1)` = 第一个{{term:元素}}，不用给每张卡片单独加 {{term:class}}。\" expected=\"第一张卡片的左边框颜色变了。注意 {{term:CSS}} 里的注释告诉你每张卡片当前的颜色是什么。\"}\n把 `.card:nth-child(1)` 的左边框颜色换一个\n:::\n\n:::step{purpose=\"`:hover` 是{{term:交互}}感的来源——鼠标移到{{term:元素}}上时触发{{term:样式}}变化。`box-shadow` 添加阴影，让卡片看起来浮起来了。\" expected=\"鼠标悬停时卡片不仅有上浮动画，还多了阴影效果。这是网页中最常见的{{term:交互}}模式。\"}\n给 `.card:hover` 增加 `box-shadow` {{term:属性}}，让悬浮效果更明显\n:::\n\n:::step{purpose=\"`:last-child` 自动选中最后一个子{{term:元素}}。不用手动数有几张卡片，{{term:CSS}} 会自动定位到最后一张。\" expected=\"最后一张卡片有了你设定的特殊{{term:样式}}。`:last-child` 的优势：新加卡片后仍自动命中最后一张。\"}\n试试 `.card:last-child` {{term:选择器}}，给最后一张卡片特殊的{{term:样式}}\n:::\n\n:::step{purpose=\"综合练习：在 {{term:HTML}} 中添加新卡片 + 在 {{term:CSS}} 中用 `:nth-child(4)` 给它{{term:样式}}。`n` 从 1 开始计数。\" expected=\"页面出现第四张卡片，带有你设定的不同颜色强调边框。\"}\n挑战：添加一张新卡片（第4张），用 `.card:nth-child(4)` 设置不同的颜色\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 `.card:nth-child(1)` 的左边框颜色换一个",

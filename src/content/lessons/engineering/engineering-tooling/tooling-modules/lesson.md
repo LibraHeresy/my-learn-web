@@ -1,10 +1,10 @@
 # JS 模块化 — 把代码分成声部管理
 
-::music-analogy
+:::music-analogy
 管弦乐总谱不会把所有音符挤在一行——第一小提琴、第二小提琴、中提琴、大提琴各有自己的谱表。模块化就是给你的代码分声部：一个文件管搜索（search.js），一个文件管渲染（render.js），一个文件管数据（store.js）。每个模块有自己的职责，通过 import/export 像不同声部之间的对话一样协作。
-::
+:::
 
-::explain{title="为什么需要模块化？"}
+:::explain{title="为什么需要模块化？"}
 早期的网页开发中，所有 JS 代码写在一个文件里——几百行甚至上千行。随着项目变大，问题来了：
 - 变量名冲突（两个函数都想用 name 这个变量）
 - 代码难以维护（找一个 bug 要翻几千行）
@@ -20,9 +20,9 @@ render.js       ← 渲染页面
 app.js          ← 主入口，引入其他模块
 ```
 就像一个 100 人的乐团不会挤在一张谱台上——每个人有自己的分谱（模块），总谱（入口文件）告诉指挥各声部如何配合。
-::
+:::
 
-::explain{title="export — 两种导出方式"}
+:::explain{title="export — 两种导出方式"}
 ES Modules 提供两种导出方式：
 **1. 命名导出（Named Export）** — 一个模块可以导出多个东西：
 ```js
@@ -49,9 +49,9 @@ export default async function searchMusic(keyword) {
 ```
 每个模块只能有一个 default export。
 > 🎻 命名导出像乐团里的多个乐手（各有其名），默认导出像首席小提琴——这个模块的代言人。
-::
+:::
 
-::explain{title="import — 引入其他模块"}
+:::explain{title="import — 引入其他模块"}
 **导入命名导出：** 用花括号 `{}` 精确指定要导入什么
 ```js
 // 按需导入
@@ -77,9 +77,9 @@ import { ref, computed } from 'vue'
 import axios from 'axios'
 ```
 **注意：** `.js` 后缀在 Vite/Vue 项目中可以省略，在纯浏览器 ESM 中必须写。
-::
+:::
 
-::example{title="看例子"}
+:::example{title="看例子"}
 假设你在做一个音乐搜索器，模块化之后项目结构是这样的：
 ```js
 // 项目结构：
@@ -123,9 +123,9 @@ input.addEventListener('input', debounce(async (e) => {
 }, 400))
 ```
 每个文件职责单一——修改渲染逻辑不会影响 API 代码，反之亦然。
-::
+:::
 
-::task{title="动手试试 ✨"}
+:::task{title="动手试试 ✨"}
 在本地 VS Code 中练习（这是 local 模式课程）：
 1. 创建一个 music-searcher 文件夹，在其中创建 api.js、render.js、app.js 三个文件
 2. 在 api.js 中 export 一个 searchMusic 函数（用到 fetch）
@@ -133,8 +133,8 @@ input.addEventListener('input', debounce(async (e) => {
 4. 在 app.js 中 import 这两个函数，组装成完整的搜索功能
 5. 练习：尝试用 default export 改写 api.js，看 import 语法有什么变化
 6. 练习：尝试 import * as 的方式，对比按需导入的区别
-::
+:::
 
-::listen-to
+:::listen-to
 本杰明·布里顿《青少年管弦乐队指南》— 一段主题由不同乐器组依次演奏，每个乐器组（模块）独立展示自己的音色（功能），最后由整个乐队合奏（import 整合）。完美的模块化示范！
-::
+:::

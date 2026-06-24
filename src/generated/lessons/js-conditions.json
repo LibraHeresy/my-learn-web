@@ -22,20 +22,17 @@
       "content": "`if/else` 就像乐谱中的**反复记号**——满足条件就跳转，不满足就继续。也像**评委打分**：如果音准正确就给通过，否则请再练一遍。条件判断让代码有了\"决策能力\"。"
     },
     {
-      "type": "block:explain",
-      "name": "explain",
-      "attrs": {
-        "title": "if 语句 — 代码的\"如果\""
-      },
-      "content": "{{term:if/else}} 条件判断让代码在不同情况下执行不同操作——就像练琴时\"如果音准不对就停下来调整，否则继续往下弹\"。比较运算符：=== 等于、!== 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于。\n```js\nlet score = 85;\nif (score >= 80) {\n  console.log(\"优秀！\");\n}\n```就像评委打分：分数 ≥ 80 才算优秀。"
+      "type": "paragraph",
+      "text": ":::explain{{{term:title}}=\"if 语句 — 代码的\\\"如果\\\"\"}\n{{term:if/else}} 条件判断让代码在不同情况下执行不同操作——就像练琴时\"如果音准不对就停下来调整，否则继续往下弹\"。比较运算符：=== 等于、!== 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于。"
     },
     {
-      "type": "block:explain",
-      "name": "explain",
-      "attrs": {
-        "title": "else 与 else if — 多分岔路"
-      },
-      "content": "`else` 处理\"否则\"的情况，`else if` 添加更多分岔：\n```js\nlet score = 75;\nif (score >= 90) {\n  console.log(\"金奖！🥇\");\n} else if (score >= 80) {\n  console.log(\"银奖！🥈\");\n} else if (score >= 60) {\n  console.log(\"铜奖🥉\");\n} else {\n  console.log(\"继续努力！\");\n}\n```逻辑运算符：\n- `&&` — 并且（两个条件都成立）\n- `||` — 或者（任意一个成立）\n```js\nif (score >= 80 && score < 90) {\n  console.log(\"优秀但未达金奖\");\n}\n```"
+      "type": "code",
+      "language": "js",
+      "code": "let score = 85;\r\nif (score >= 80) {\r\n  console.log(\"优秀！\");\r\n}\r\n```就像评委打分：分数 ≥ 80 才算优秀。\r\n:::\n\r\n:::explain{title=\"else 与 else if — 多分岔路\"}\n`else` 处理\"否则\"的情况，`else if` 添加更多分岔：\r\n```js\r\nlet score = 75;\r\nif (score >= 90) {\r\n  console.log(\"金奖！🥇\");\r\n} else if (score >= 80) {\r\n  console.log(\"银奖！🥈\");\r\n} else if (score >= 60) {\r\n  console.log(\"铜奖🥉\");\r\n} else {\r\n  console.log(\"继续努力！\");\r\n}\r\n```逻辑运算符：\r\n- `&&` — 并且（两个条件都成立）\r\n- `||` — 或者（任意一个成立）\r\n```js\r\nif (score >= 80 && score < 90) {\r\n  console.log(\"优秀但未达金奖\");\r\n}"
+    },
+    {
+      "type": "paragraph",
+      "text": ":::"
     },
     {
       "type": "block:example",
@@ -43,7 +40,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码是一个作曲家答题器。输入答案后点击提交，{{term:JS}} 判断你的答案是否正确：\n```js\n// 获取输入框里用户写的内容\nlet answer = document.querySelector(\"#answer\").value;\n\n// if/else：条件判断——\"如果...就...否则...\"\nif (answer === \"肖邦\") {                              // === 比较是否相等\n  display.textContent = \"✓ 回答正确！\";              // 条件成立走这里\n} else {\n  display.textContent = \"✗ 再想想？提示：他是波兰人\"; // 条件不成立走这里\n}\n```切换到 {{term:JS}} {{term:标签}}页，看 {{term:submit}} 按钮的点击{{term:事件}}中完整的 {{term:if/else}} 逻辑。"
+      "content": "下面的代码是一个作曲家答题器。输入答案后点击提交，{{term:JS}} 判断你的答案是否正确：\n\n```js\r\n// 获取输入框里用户写的内容\r\nlet answer = document.querySelector(\"#answer\").value;\r\n\r\n// if/else：条件判断——\"如果...就...否则...\"\r\nif (answer === \"肖邦\") {                              // === 比较是否相等\r\n  display.textContent = \"✓ 回答正确！\";              // 条件成立走这里\r\n} else {\r\n  display.textContent = \"✗ 再想想？提示：他是波兰人\"; // 条件不成立走这里\r\n}\r\n```切换到 {{term:JS}} {{term:标签}}页，看 {{term:submit}} 按钮的点击{{term:事件}}中完整的 {{term:if/else}} 逻辑。"
     },
     {
       "type": "block:task",
@@ -51,7 +48,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"让你直观感受 `if/else` 的分支逻辑——同样的代码，输入不同，走的路径完全不同。就像音乐比赛评委会根据选手表现给出「晋级」或「淘汰」两种完全不同的结果。\" expected=\"输入「肖邦」→ 绿色提示「回答正确！」；输入其他名字 → 红色提示「再想想？」。同一段代码根据条件走出了两条不同的路。\"}\n在预览区的输入框中输入「肖邦」，点击「提交答案」，观察反馈信息。再输入一个错误的名字（如「李白」），看反馈有什么不同\n:::\n\n:::step{purpose=\"`else if` 让你处理「中间情况」——不是对也不是错，而是「还没输入」。这就像音乐比赛中除了「晋级」和「淘汰」，还有「请先上台」的第三种情况。多{{term:层}}分支是{{term:构建}}复杂决策逻辑的基础。\" expected=\"空输入时显示金色提示「请先输入一个名字哦 ~」，既不是正确也不是错误，而是第三种专门处理空值的情况。\"}\n空着输入框直接点击提交，观察 `else if` 分支给出的特殊提示。理解 `if → else if → else` 的三{{term:层}}判断结构\n:::\n\n:::step{purpose=\"`&&`（逻辑与）让你把多个条件「绑在一起」——全部满足才通过。就像「只有既是古典主义时期、又是德国作曲家」才归入某个分类。`&&` 和 `||` 是{{term:构建}}复杂判断的核心工具。\" expected=\"只有当两个条件都满足时，才执行该分支的代码。如果只满足一个，则跳过这个分支走到下一个判断——逻辑运算符就像{{term:层}}{{term:层}}安检，一道不通过就不放行。\"}\n在 if 条件中试试用 `&&` 组合多个判断条件。比如：在正确回答的同时增加额外判断，如 `answer === \"肖邦\" && answer.length > 1`，体会逻辑与的「双重把关」效果\n:::\n\n:::step{purpose=\"练习扩展条件分支——不是简单地加一个 if，而是在 `if → else if → else if → else` 链中找到合适的位置插入。每个分支处理一种特定情况，分支之间互斥。\" expected=\"输入「李斯特」→ 显示特殊提示（既不是「正确」的绿色，也不是「错误」的红色，而是第三种独特反馈）；输入其他名字 → 显示通用的错误提示。你的判断逻辑更精细了。\"}\n挑战：在已有的 if-else if-else 链中增加一个新分支，判断是否输入了「李斯特」。给出区别于正确答案的特殊提示，如「李斯特也是一位伟大的钢琴家，但标准答案是肖邦」\n:::",
+      "content": "",
       "steps": [
         {
           "content": "在预览区的输入框中输入「肖邦」，点击「提交答案」，观察反馈信息。再输入一个错误的名字（如「李白」），看反馈有什么不同",

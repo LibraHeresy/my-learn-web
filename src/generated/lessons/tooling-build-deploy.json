@@ -27,7 +27,7 @@
       "attrs": {
         "title": "开发 vs 生产"
       },
-      "content": "在开发过程中，{{term:Vite}} 的开发服务器做了很多\"方便你开发\"的事：\n- {{term:热更新}}（修改代码页面自动刷新）\n- 不压缩代码（方便调试）\n- 源码映射（报错时能看到原始代码位置）\n但当你准备发布时，需要\"{{term:构建}}\"——把代码变成**适合用户访问的最终版本**：\n- 代码压缩（去掉空格、缩短{{term:变量}}名）\n- 文件合并（减少 HTTP {{term:请求}}次数）\n- 去除开发调试代码\n**类比：**\n- 开发 = 排练时的笔记，潦草但你能看懂\n- {{term:构建}} = 正式演出的节目单，印刷精美，观众能看懂\n**命令：**\n```bash\nnpm run build\n```\n运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要{{term:部署}}的文件。\n```dist/\n├── index.html        # 入口页面\n├── assets/\n│   ├── index-abc123.js   # 打包后的 JS\n│   └── index-def456.css  # 打包后的 CSS\n└── ...\n```\n> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的\"产品\"。"
+      "content": "在开发过程中，{{term:Vite}} 的开发服务器做了很多\"方便你开发\"的事：\n\n- {{term:热更新}}（修改代码页面自动刷新）\r\n- 不压缩代码（方便调试）\r\n- 源码映射（报错时能看到原始代码位置）\r\n但当你准备发布时，需要\"{{term:构建}}\"——把代码变成**适合用户访问的最终版本**：\r\n- 代码压缩（去掉空格、缩短{{term:变量}}名）\r\n- 文件合并（减少 HTTP {{term:请求}}次数）\r\n- 去除开发调试代码\r\n**类比：**\r\n- 开发 = 排练时的笔记，潦草但你能看懂\r\n- {{term:构建}} = 正式演出的节目单，印刷精美，观众能看懂\r\n**命令：**\n\n```bash\r\nnpm run build\r\n```\n\n运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要{{term:部署}}的文件。\n\n```dist/\r\n├── index.html        # 入口页面\r\n├── assets/\r\n│   ├── index-abc123.js   # 打包后的 JS\r\n│   └── index-def456.css  # 打包后的 CSS\r\n└── ...\r\n```\n\n> 💡 `dist` 是 distribution（分发）的缩写。这个文件夹的内容就是你的\"产品\"。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "部署到 GitHub Pages"
       },
-      "content": "{{term:GitHub Pages}} 是 {{term:GitHub}} 提供的免费静态网站托管服务。你可以把 `dist/` 文件夹的内容{{term:部署}}上去，获得一个 `https://你的用户名.github.io/music-collection/` 的网址。\n**最简单的{{term:部署}}方式：**\n1. 在项目中安装 `gh-pages` 包：\n```bash\nnpm install -D gh-pages\n```\n2. 在 `package.json` 中添加{{term:部署}}脚本：\n```json\n{\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"deploy\": \"gh-pages -d dist\"\n  }\n}\n```\n3. 在 `vite.config.js` 中添加 base 配置：\n```js\nimport { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nexport default defineConfig({\n  plugins: [vue()],\n  base: '/music-collection/'  // 你的仓库名\n})\n```\n4. {{term:构建}}并{{term:部署}}：\n```bash\nnpm run build\nnpm run deploy\n```\n等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉"
+      "content": "{{term:GitHub Pages}} 是 {{term:GitHub}} 提供的免费静态网站托管服务。你可以把 `dist/` 文件夹的内容{{term:部署}}上去，获得一个 `https://你的用户名.github.io/music-collection/` 的网址。\r\n**最简单的{{term:部署}}方式：**\n\n1. 在项目中安装 `gh-pages` 包：\n\n```bash\r\nnpm install -D gh-pages\r\n```\n\n2. 在 `package.json` 中添加{{term:部署}}脚本：\n\n```json\r\n{\r\n  \"scripts\": {\r\n    \"dev\": \"vite\",\r\n    \"build\": \"vite build\",\r\n    \"deploy\": \"gh-pages -d dist\"\r\n  }\r\n}\r\n```\n\n3. 在 `vite.config.js` 中添加 base 配置：\n\n```js\r\nimport { defineConfig } from 'vite'\r\nimport vue from '@vitejs/plugin-vue'\r\nexport default defineConfig({\r\n  plugins: [vue()],\r\n  base: '/music-collection/'  // 你的仓库名\r\n})\r\n```\n\n4. {{term:构建}}并{{term:部署}}：\n\n```bash\r\nnpm run build\r\nnpm run deploy\r\n```\n\n等待几分钟，访问 `https://你的用户名.github.io/music-collection/`，你的项目就上线了！🎉"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "你的任务 ✨"
       },
-      "content": "1. 运行 `npm run build`，查看生成的 `dist/` 文件夹\n2. 安装 `gh-pages`：`npm install -D gh-pages`\n3. 在 `vite.config.js` 中添加 `base` 配置\n4. 在 `package.json` 中添加 `deploy` 脚本\n5. 运行 `npm run deploy`，把项目{{term:部署}}到 {{term:GitHub Pages}}\n6. 访问你的网址，确认一切正常\n> 🎉 恭喜！你刚刚完成了从写第一行代码到{{term:部署}}上线的完整流程。你把一个 {{term:Vue}} 项目变成了全世界都能访问的网站。",
+      "content": "1. 运行 `npm run build`，查看生成的 `dist/` 文件夹\r\n2. 安装 `gh-pages`：`npm install -D gh-pages`\r\n3. 在 `vite.config.js` 中添加 `base` 配置\r\n4. 在 `package.json` 中添加 `deploy` 脚本\r\n5. 运行 `npm run deploy`，把项目{{term:部署}}到 {{term:GitHub Pages}}\r\n6. 访问你的网址，确认一切正常\r\n> 🎉 恭喜！你刚刚完成了从写第一行代码到{{term:部署}}上线的完整流程。你把一个 {{term:Vue}} 项目变成了全世界都能访问的网站。",
       "steps": []
     },
     {
@@ -52,7 +52,7 @@
       "attrs": {
         "title": "部署的其他选择"
       },
-      "content": "{{term:GitHub Pages}} 是最简单的免费方案。此外还有：\n- **Vercel** — 自动从 {{term:GitHub}} {{term:部署}}，支持自定义域名，速度更快\n- **Netlify** — 类似 Vercel，也是拖拽文件夹即可{{term:部署}}\n- **Cloudflare Pages** — 速度极快，全球 CDN 加速\n对于个人项目，{{term:GitHub Pages}} 完全够用。当你需要更高级的功能时，这些平台的学习成本也很低。"
+      "content": "{{term:GitHub Pages}} 是最简单的免费方案。此外还有：\n\n- **Vercel** — 自动从 {{term:GitHub}} {{term:部署}}，支持自定义域名，速度更快\r\n- **Netlify** — 类似 Vercel，也是拖拽文件夹即可{{term:部署}}\r\n- **Cloudflare Pages** — 速度极快，全球 CDN 加速\r\n对于个人项目，{{term:GitHub Pages}} 完全够用。当你需要更高级的功能时，这些平台的学习成本也很低。"
     },
     {
       "type": "block:listen-to",

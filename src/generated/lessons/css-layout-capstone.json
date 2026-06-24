@@ -27,7 +27,7 @@
       "attrs": {
         "title": "综合运用你学过的布局技巧"
       },
-      "content": "这个项目综合使用了前面学过的所有布局技能：\n- **{{term:Flexbox}}** — 导航栏、演奏者卡片排列\n- **{{term:Grid}}** — 页面整体结构、节目单网格\n- **Position** — 售票按钮固定在{{term:视口}}右下角\n- **居中** — 标题区域垂直居中\n- **{{term:响应式}}** — 移动端和桌面端两套布局\n就像指挥把弦乐、管乐、打击乐协调在一起——每种布局技术各司其职。"
+      "content": "这个项目综合使用了前面学过的所有布局技能：\n\n- **{{term:Flexbox}}** — 导航栏、演奏者卡片排列\r\n- **{{term:Grid}}** — 页面整体结构、节目单网格\r\n- **Position** — 售票按钮固定在{{term:视口}}右下角\r\n- **居中** — 标题区域垂直居中\r\n- **{{term:响应式}}** — 移动端和桌面端两套布局\r\n就像指挥把弦乐、管乐、打击乐协调在一起——每种布局技术各司其职。"
     },
     {
       "type": "block:task",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "逐步构建 ✨"
       },
-      "content": ":::step{purpose=\"导航栏是 {{term:Flexbox}} 最经典的应用场景——横向排列链接，间距均匀，{{term:响应式}}下可切换为竖排。\" expected=\"导航链接水平排列在页面顶部，当前页{{term:标签}}有高亮下划线。\"}\n**完善导航栏**——用 {{term:Flexbox}} 让导航链接水平排列，给当前页链接加 `.active` {{term:样式}}\n:::\n\n:::step{purpose=\"节目单是 {{term:Grid}} 的典型案例——行和列都需要对齐。`grid-template-columns: 80px 1fr` 让时间列固定宽度、曲名列{{term:弹性}}填充。\" expected=\"节目单呈现整洁的两列布局，时间左对齐，曲目名规整排列。\"}\n**完善节目单网格**——用 {{term:Grid}} 把曲目列表排成时间+曲名两列，对齐文字\n:::\n\n:::step{purpose=\"`flex-wrap: wrap` 让卡片一行放不下时自动换行。{{term:hover}} 效果是用 `:hover` + `transform` + `transition` 组合实现。\" expected=\"三张卡片横向排列，鼠标悬停时卡片微微上浮。\"}\n**演奏者卡片**——用 {{term:Flexbox}} 让三张卡片水平排列并自动换行，加 {{term:hover}} 上浮效果\n:::\n\n:::step{purpose=\"`fixed` 定位相对于浏览器窗口，滚动页面也不会移动。常用于 CTA 按钮、回到顶部等需要始终可见的{{term:元素}}。\" expected=\"无论怎么滚动页面，购票按钮始终固定在右下角。\"}\n**底部固定按钮**——用 `position: fixed` 让购票按钮始终在右下角\n:::\n\n:::step{purpose=\"移动端屏幕窄，单列布局更合适的。这是移动端优先的设计思路：大屏增强，小屏基础。\" expected=\"缩小浏览器窗口到 640px 以下时，导航变竖排，节目单变单列，卡片变堆叠。\"}\n**{{term:响应式}}适配**——在 `@media (max-width: 640px)` 中，节目单改单列，导航栏改竖排\n:::",
+      "content": "",
       "steps": [
         {
           "content": "**完善导航栏**——用 {{term:Flexbox}} 让导航链接水平排列，给当前页链接加 `.active` {{term:样式}}",
@@ -70,7 +70,7 @@
       "attrs": {
         "title": "提示"
       },
-      "content": "- {{term:Grid}} 结构：`grid-template-columns: 120px 1fr;` 让时间和曲目名宽度不同\n- `position: fixed; bottom: 20px; right: 20px;` 实现右下角浮按钮\n- `flex-wrap: wrap;` 让卡片自动换行\n- 用 `@media` 做{{term:断点}}切换——移动端 `flex-direction: column`、`grid-template-columns: 1fr`"
+      "content": "- {{term:Grid}} 结构：`grid-template-columns: 120px 1fr;` 让时间和曲目名宽度不同\r\n- `position: fixed; bottom: 20px; right: 20px;` 实现右下角浮按钮\r\n- `flex-wrap: wrap;` 让卡片自动换行\r\n- 用 `@media` 做{{term:断点}}切换——移动端 `flex-direction: column`、`grid-template-columns: 1fr`"
     },
     {
       "type": "block:listen-to",

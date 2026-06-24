@@ -26,7 +26,7 @@
       "attrs": {
         "title": "一、逐个组件，逐个对话"
       },
-      "content": "项目规划做好了，脚手架搭起来了，现在开始写{{term:组件}}。\n不要在一个对话里让 {{term:AI}} 生成所有{{term:组件}}。原因是：(1) {{term:AI}} 的上下文窗口有限，后面的{{term:组件}}会忘记前面的设计决策；(2) 你无法逐个审查和验证。\n**正确做法：每个{{term:组件}}一个对话，或每 2-3 个紧密相关的{{term:组件}}一个对话。**\n示例流程（以番茄钟为例）：\n**对话 1：** \"写一个 TimerDisplay {{term:组件}}。显示倒计时时间，格式 MM:SS。接收 `seconds` prop，当时间小于 60 秒时数字变红。\"\n→ 生成 → 你审查 → 修改 → 确认没问题 → 下一个{{term:组件}}。\n**对话 2：** \"写一个 TimerControls {{term:组件}}。包含三个按钮：开始、暂停、{{term:重置}}。通过 {{term:emit}} 向父{{term:组件}}发送 'start'、'pause'、'reset' {{term:事件}}。开始和暂停是同一个按钮——当前状态是运行中时显示'暂停'，否则显示'开始'。\"\n**对话 3：** \"在 App{{term:.vue}} 中组合 TimerDisplay 和 TimerControls。用 `useTimer` composable 管理倒计时逻辑。TimerDisplay 接收剩余秒数，TimerControls 的按钮控制计时的启动、暂停和{{term:重置}}。\""
+      "content": "项目规划做好了，脚手架搭起来了，现在开始写{{term:组件}}。\r\n不要在一个对话里让 {{term:AI}} 生成所有{{term:组件}}。原因是：(1) {{term:AI}} 的上下文窗口有限，后面的{{term:组件}}会忘记前面的设计决策；(2) 你无法逐个审查和验证。\r\n**正确做法：每个{{term:组件}}一个对话，或每 2-3 个紧密相关的{{term:组件}}一个对话。**\r\n示例流程（以番茄钟为例）：\r\n**对话 1：** \"写一个 TimerDisplay {{term:组件}}。显示倒计时时间，格式 MM:SS。接收 `seconds` prop，当时间小于 60 秒时数字变红。\"\r\n→ 生成 → 你审查 → 修改 → 确认没问题 → 下一个{{term:组件}}。\r\n**对话 2：** \"写一个 TimerControls {{term:组件}}。包含三个按钮：开始、暂停、{{term:重置}}。通过 {{term:emit}} 向父{{term:组件}}发送 'start'、'pause'、'reset' {{term:事件}}。开始和暂停是同一个按钮——当前状态是运行中时显示'暂停'，否则显示'开始'。\"\r\n**对话 3：** \"在 App{{term:.vue}} 中组合 TimerDisplay 和 TimerControls。用 `useTimer` composable 管理倒计时逻辑。TimerDisplay 接收剩余秒数，TimerControls 的按钮控制计时的启动、暂停和{{term:重置}}。\""
     },
     {
       "type": "block:explain",
@@ -34,7 +34,7 @@
       "attrs": {
         "title": "二、你的角色：接口协调者"
       },
-      "content": "当 {{term:AI}} 在不同对话中生成不同{{term:组件}}时，它不知道别的对话里发生了什么。{{term:组件}} A 期望的 prop 叫 `time`，{{term:组件}} B {{term:emit}} 的{{term:事件}}叫 `update-time`，但在 App{{term:.vue}} 里你需要把它们接起来。\n这个\"接起来\"的工作——**定义{{term:组件}}之间的接口**——是你的事。{{term:AI}} 做不到，因为 {{term:AI}} 看不到全貌。\n在开始每个{{term:组件}}之前，先花 30 秒写下：\n- **这个{{term:组件}}接收什么 {{term:props}}？** 名字、类型、是否必需\n- **这个{{term:组件}} {{term:emit}} 什么{{term:事件}}？** {{term:事件}}名、payload\n- **这个{{term:组件}}{{term:依赖}}什么外部数据？** {{term:store}}、{{term:API}}、composable\n把这些信息写在 Prompt 的开头，{{term:AI}} 生成的{{term:组件}}接口就会一致。\n**你是总指挥。每个 {{term:AI}} 对话是一个声部的排练。你确保所有声部在同一个调上。**"
+      "content": "当 {{term:AI}} 在不同对话中生成不同{{term:组件}}时，它不知道别的对话里发生了什么。{{term:组件}} A 期望的 prop 叫 `time`，{{term:组件}} B {{term:emit}} 的{{term:事件}}叫 `update-time`，但在 App{{term:.vue}} 里你需要把它们接起来。\r\n这个\"接起来\"的工作——**定义{{term:组件}}之间的接口**——是你的事。{{term:AI}} 做不到，因为 {{term:AI}} 看不到全貌。\r\n在开始每个{{term:组件}}之前，先花 30 秒写下：\n\n- **这个{{term:组件}}接收什么 {{term:props}}？** 名字、类型、是否必需\r\n- **这个{{term:组件}} {{term:emit}} 什么{{term:事件}}？** {{term:事件}}名、payload\r\n- **这个{{term:组件}}{{term:依赖}}什么外部数据？** {{term:store}}、{{term:API}}、composable\r\n把这些信息写在 Prompt 的开头，{{term:AI}} 生成的{{term:组件}}接口就会一致。\r\n**你是总指挥。每个 {{term:AI}} 对话是一个声部的排练。你确保所有声部在同一个调上。**"
     }
   ],
   "starter": {

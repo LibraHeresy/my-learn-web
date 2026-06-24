@@ -27,7 +27,7 @@
       "attrs": {
         "title": "你学会了什么？"
       },
-      "content": "回顾 {{term:JavaScript}} 入门篇你学过的所有技能：\n| 技能 | 知识点 |\n|------|--------|\n| {{term:变量}} | `let`, `const`, 字符串, {{term:模板字符串}} |\n| {{term:函数}} | `function`, {{term:参数}}, `return` |\n| 条件判断 | `if/else`, `===`, `&&`, `> <` |\n| {{term:数组}} | `[]`, `.push()`, `.join()`, `.length` |\n| 循环 | `forEach`, `for` |\n| {{term:DOM}} 选择 | `querySelector`, `querySelectorAll` |\n| {{term:DOM}} 操作 | `.textContent`, `.innerHTML`, `createElement`, `.remove()` |\n| {{term:事件}} | `addEventListener(\"click\", ...)` |\n| {{term:样式}}控制 | `.style`, `.classList` |\n| 定时器 | `setInterval`, `setTimeout`, `clearInterval` |\n现在把这些知识组合起来，做一个**{{term:交互}}式音乐名片生成器**！"
+      "content": "回顾 {{term:JavaScript}} 入门篇你学过的所有技能：\r\n| 技能 | 知识点 |\r\n|------|--------|\r\n| {{term:变量}} | `let`, `const`, 字符串, {{term:模板字符串}} |\r\n| {{term:函数}} | `function`, {{term:参数}}, `return` |\r\n| 条件判断 | `if/else`, `===`, `&&`, `> <` |\r\n| {{term:数组}} | `[]`, `.push()`, `.join()`, `.length` |\r\n| 循环 | `forEach`, `for` |\r\n| {{term:DOM}} 选择 | `querySelector`, `querySelectorAll` |\r\n| {{term:DOM}} 操作 | `.textContent`, `.innerHTML`, `createElement`, `.remove()` |\r\n| {{term:事件}} | `addEventListener(\"click\", ...)` |\r\n| {{term:样式}}控制 | `.style`, `.classList` |\r\n| 定时器 | `setInterval`, `setTimeout`, `clearInterval` |\r\n现在把这些知识组合起来，做一个**{{term:交互}}式音乐名片生成器**！"
     },
     {
       "type": "block:task",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "逐步构建 ✨"
       },
-      "content": ":::step{purpose=\"读懂现有代码是编程中的必修课——就像拿到一份乐谱先理解调性、拍号和结构。理解了数据流向（composers → {{term:filter}} → showGallery → {{term:innerHTML}}），你才能胸有成竹地添加新功能。\" expected=\"你能用自己的话描述：「composers {{term:数组}}存了什么数据」「showGallery {{term:函数}}做了什么」「按下一个筛选按钮后数据经历了怎样的流程」。\"}\n阅读 {{term:JS}} {{term:标签}}页中的代码，理解三个核心部分：`composers` 对象{{term:数组}}的数据结构、`showGallery(list)` {{term:函数}}如何用 `forEach` {{term:渲染}}卡片、`setActive(btn)` 如何切换按钮的高亮状态\n:::\n\n:::step{purpose=\"综合运用对象{{term:属性}}访问（`c.period`）+ {{term:数组}} {{term:filter}} 方法 + {{term:DOM}} {{term:事件}}绑定。三个筛选按钮共享同一个模式（获取数据 → 筛选 → {{term:渲染}}），这就是可复用的设计模式。\" expected=\"点击不同按钮，画廊中的卡片随筛选条件变化。点击「全部」显示所有人，点击「浪漫主义」只显示肖邦和舒曼，点击「巴洛克」只显示巴赫。\"}\n完成筛选功能：`全部`按钮显示所有作曲家，`浪漫主义`按钮用 `.filter()` 筛选 `period === \"浪漫主义\"` 的作曲家。挑战：新增一个「巴洛克」按钮，筛选巴洛克时期的作曲家\n:::\n\n:::step{purpose=\"动态数据操作是前端应用的核心——数据变化后重新{{term:渲染}}，用户立刻看到结果。这和之前学过的{{term:数组}} push + {{term:DOM}} 刷新是一个模式，只是数据更复杂（对象而非字符串）。\" expected=\"点击「随机添加」按钮，画廊中多出一位新作曲家（柴可夫斯基、海顿或拉威尔）。每次点击增加一位，直到预设数据池用完。筛选功能对新添加的数据同样有效。\"}\n完善「随机添加」按钮的功能：点击按钮时，从预设的 `pool` {{term:数组}}中取出下一位作曲家对象，用 `.push()` 添加到 `composers` {{term:数组}}，然后调用 `showGallery(composers)` 刷新画廊\n:::\n\n:::step{purpose=\"这是第四章的毕业作品——没有标准答案。把你学过的{{term:变量}}、{{term:函数}}、循环、条件、{{term:数组}}、对象、{{term:事件}}、定时器自由组合，就像学会所有乐器的演奏者终于可以即兴创作。编程的乐趣就在于创造。\" expected=\"你的音乐名片画廊有了独一无二的功能——无论是一个小动画、一个新按钮、还是一段自动播放逻辑，这都是你亲手创造的{{term:交互}}体验。恭喜完成 {{term:JavaScript}} 入门篇！\"}\n发挥创意，添加你自己的功能。可以尝试：给卡片增加 {{term:hover}} 高亮动画、添加一个「自动轮播」按钮用 `setInterval` 定时切换高亮的卡片、增加搜索框用实时输入筛选……任何你想到的！\n:::",
+      "content": "",
       "steps": [
         {
           "content": "阅读 {{term:JS}} {{term:标签}}页中的代码，理解三个核心部分：`composers` 对象{{term:数组}}的数据结构、`showGallery(list)` {{term:函数}}如何用 `forEach` {{term:渲染}}卡片、`setActive(btn)` 如何切换按钮的高亮状态",
@@ -65,7 +65,7 @@
       "attrs": {
         "title": "提示"
       },
-      "content": "- `composers.filter(function(c) { return c.period === \"浪漫主义\"; })` 可以过滤{{term:数组}}\n- 修改 {{term:DOM}} 后记得重新调用{{term:渲染}}{{term:函数}}\n- 如果卡住了，回顾前几节课的代码示例\n- 完成之后，这就是你的**第四章毕业作品**！🎉"
+      "content": "- `composers.filter(function(c) { return c.period === \"浪漫主义\"; })` 可以过滤{{term:数组}}\r\n- 修改 {{term:DOM}} 后记得重新调用{{term:渲染}}{{term:函数}}\r\n- 如果卡住了，回顾前几节课的代码示例\r\n- 完成之后，这就是你的**第四章毕业作品**！🎉"
     },
     {
       "type": "block:listen-to",

@@ -25,7 +25,7 @@
                 "<h1>"
               ],
               "answer": 1,
-              "explanation": "\"<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。\""
+              "explanation": "<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。"
             },
             {
               "id": 2,
@@ -56,7 +56,7 @@
             {
               "id": 4,
               "difficulty": 1,
-              "question": "\"表格中 <tr> 代表什么？\"",
+              "question": "表格中 <tr> 代表什么？",
               "options": [
                 "表格",
                 "表头",
@@ -77,7 +77,7 @@
                 "# 注释"
               ],
               "answer": 2,
-              "explanation": "\"HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。\""
+              "explanation": "HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。"
             }
           ]
         },
@@ -99,7 +99,7 @@
                 "strong 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。\""
+              "explanation": "strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。"
             },
             {
               "id": 7,
@@ -169,7 +169,7 @@
             {
               "id": 12,
               "difficulty": 2,
-              "question": "\"<p>Hello<br>World</p> 渲染几行？\"",
+              "question": "<p>Hello<br>World</p> 渲染几行？",
               "options": [
                 "1行",
                 "2行",
@@ -182,15 +182,15 @@
             {
               "id": 13,
               "difficulty": 2,
-              "question": "\"<div class=\\\"a b c\\\"> 有几个 class？\"",
+              "question": "<div class=\"a b c\"> 有几个 class？",
               "options": [
-                "1个，名字是\\\"a b c\\\"",
+                "1个，名字是\"a b c\"",
                 "3个：a、b、c",
                 "语法错误",
                 "只有第一个生效"
               ],
               "answer": 1,
-              "explanation": "\"class 用空格分隔多个类名。\\\"a b c\\\" 是三个独立的类。\""
+              "explanation": "class 用空格分隔多个类名。\"a b c\" 是三个独立的类。"
             }
           ]
         },
@@ -207,7 +207,7 @@
               "question": "一段纯 div 导航页如何改写为语义化？",
               "options": [
                 "把 class 名改成语义化即可",
-                "<div class=\\\"header\\\">→<header> 等，换标签",
+                "<div class=\"header\">→<header> 等，换标签",
                 "全部换成 section",
                 "不需要改"
               ],
@@ -217,7 +217,7 @@
             {
               "id": 15,
               "difficulty": 3,
-              "question": "\"<ul><p>列表项</p></ul> 有什么问题？\"",
+              "question": "<ul><p>列表项</p></ul> 有什么问题？",
               "options": [
                 "完全没问题",
                 "ul 的直接子元素只能是 li 不能是 p",
@@ -225,12 +225,12 @@
                 "p 不能放在任何列表里"
               ],
               "answer": 1,
-              "explanation": "\"ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。\""
+              "explanation": "ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。"
             },
             {
               "id": 16,
               "difficulty": 2,
-              "question": "\"<img src=\\\"x.jpg\\\"> 和 <img src=\\\"x.jpg\\\" alt=\\\"\\\"> 区别？\"",
+              "question": "<img src=\"x.jpg\"> 和 <img src=\"x.jpg\" alt=\"\"> 区别？",
               "options": [
                 "完全一样",
                 "前者不写 alt 阅读器可能读文件名，后者表示纯装饰阅读器跳过",
@@ -238,12 +238,12 @@
                 "alt 可以不写"
               ],
               "answer": 1,
-              "explanation": "\"不写 alt 屏幕阅读器可能读文件名。alt=\\\"\\\" 表示纯装饰，让阅读器跳过。alt=\\\"描述\\\" 提供有意义的替代信息。\""
+              "explanation": "不写 alt 屏幕阅读器可能读文件名。alt=\"\" 表示纯装饰，让阅读器跳过。alt=\"描述\" 提供有意义的替代信息。"
             },
             {
               "id": 17,
               "difficulty": 3,
-              "question": "\"<td colspan=\\\"2\\\"> 和 rowspan=\\\"2\\\" 各做什么？\"",
+              "question": "<td colspan=\"2\"> 和 rowspan=\"2\" 各做什么？",
               "options": [
                 "colspan 跨行 rowspan 跨列",
                 "colspan 水平跨列 rowspan 垂直跨行",
@@ -264,12 +264,12 @@
                 "不支持多格式"
               ],
               "answer": 1,
-              "explanation": "\"用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。\""
+              "explanation": "用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。"
             },
             {
               "id": 19,
               "difficulty": 2,
-              "question": "\"<br> 和 <p> 都能换行，核心区别？\"",
+              "question": "<br> 和 <p> 都能换行，核心区别？",
               "options": [
                 "br 是段落 p 是换行",
                 "br 行内换行无间距，p 段落分隔有间距",
@@ -282,7 +282,7 @@
             {
               "id": 20,
               "difficulty": 3,
-              "question": "\"<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？\"",
+              "question": "<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？",
               "options": [
                 "嵌套的两个 p",
                 "两个并列的 p（p 不能嵌套）",
@@ -290,12 +290,12 @@
                 "只显示第一段"
               ],
               "answer": 1,
-              "explanation": "\"p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。\""
+              "explanation": "p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。"
             },
             {
               "id": 21,
               "difficulty": 2,
-              "question": "\"<button disabled> 和普通按钮区别？\"",
+              "question": "<button disabled> 和普通按钮区别？",
               "options": [
                 "前者灰色不可点击",
                 "前者隐藏",
@@ -303,12 +303,12 @@
                 "前者是旧写法"
               ],
               "answer": 0,
-              "explanation": "\"disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于\\\"条件不满足暂时不能点\\\"。\""
+              "explanation": "disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于\"条件不满足暂时不能点\"。"
             },
             {
               "id": 22,
               "difficulty": 2,
-              "question": "\"<input readonly> 和 disabled 区别？\"",
+              "question": "<input readonly> 和 disabled 区别？",
               "options": [
                 "完全一样",
                 "readonly 可选中复制可提交值，disabled 完全不可交互不提交",
@@ -321,7 +321,7 @@
             {
               "id": 23,
               "difficulty": 1,
-              "question": "\"&lt; 在 HTML 中显示为什么？\"",
+              "question": "&lt; 在 HTML 中显示为什么？",
               "options": [
                 "<",
                 ">",
@@ -329,25 +329,25 @@
                 "报错"
               ],
               "answer": 0,
-              "explanation": "\"&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。\""
+              "explanation": "&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。"
             },
             {
               "id": 24,
               "difficulty": 2,
               "question": "链接新标签页打开 target 写什么？",
               "options": [
-                "target=\\\"new\\\"",
-                "target=\\\"_blank\\\"",
-                "target=\\\"blank\\\"",
-                "open=\\\"new\\\""
+                "target=\"new\"",
+                "target=\"_blank\"",
+                "target=\"blank\"",
+                "open=\"new\""
               ],
               "answer": 1,
-              "explanation": "\"target=\\\"_blank\\\" 在新标签页打开。_blank 是标准保留值。\""
+              "explanation": "target=\"_blank\" 在新标签页打开。_blank 是标准保留值。"
             },
             {
               "id": 25,
               "difficulty": 2,
-              "question": "\"<meta charset=\\\"UTF-8\\\"> 不写会怎样？\"",
+              "question": "<meta charset=\"UTF-8\"> 不写会怎样？",
               "options": [
                 "页面无法显示",
                 "中文可能乱码",
@@ -355,7 +355,7 @@
                 "图片加载失败"
               ],
               "answer": 1,
-              "explanation": "\"charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标\\\"五线谱\\\"还是\\\"简谱\\\"。\""
+              "explanation": "charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标\"五线谱\"还是\"简谱\"。"
             }
           ]
         }
@@ -378,7 +378,7 @@
             {
               "id": 26,
               "difficulty": 1,
-              "question": "\"class 用 . 还是 # 选中？id 呢？\"",
+              "question": "class 用 . 还是 # 选中？id 呢？",
               "options": [
                 "class 用 . id 用 #",
                 "class 用 # id 用 .",
@@ -386,7 +386,7 @@
                 "都用 #"
               ],
               "answer": 0,
-              "explanation": "\"类选择器用 .class名，ID 选择器用 #id名。记忆：class=分类(点号)，id=身份证(井号)。\""
+              "explanation": "类选择器用 .class名，ID 选择器用 #id名。记忆：class=分类(点号)，id=身份证(井号)。"
             },
             {
               "id": 27,
@@ -406,18 +406,18 @@
               "difficulty": 1,
               "question": "布尔属性需要写值吗？举一个例子",
               "options": [
-                "需要，如 disabled=\\\"true\\\"",
+                "需要，如 disabled=\"true\"",
                 "不需要，只要出现就生效如 disabled",
                 "必须有值",
                 "布尔属性已废弃"
               ],
               "answer": 1,
-              "explanation": "\"布尔属性只关心\\\"有\\\"还是\\\"没有\\\"，不关心值。disabled/checked/controls/loop 都是布尔属性。\""
+              "explanation": "布尔属性只关心\"有\"还是\"没有\"，不关心值。disabled/checked/controls/loop 都是布尔属性。"
             },
             {
               "id": 29,
               "difficulty": 1,
-              "question": "\"data-* 属性做什么？JS 怎么读？\"",
+              "question": "data-* 属性做什么？JS 怎么读？",
               "options": [
                 "设置样式",
                 "存储自定义数据，用 dataset 读取",
@@ -425,7 +425,7 @@
                 "声明编码"
               ],
               "answer": 1,
-              "explanation": "\"data-* 在元素上存自定义信息，JS 通过 element.dataset.xxx 读取。<div data-id=\\\"1\\\">→el.dataset.id。\""
+              "explanation": "data-* 在元素上存自定义信息，JS 通过 element.dataset.xxx 读取。<div data-id=\"1\">→el.dataset.id。"
             },
             {
               "id": 30,
@@ -460,7 +460,7 @@
                 "可以，写多个 class 属性"
               ],
               "answer": 1,
-              "explanation": "\"class=\\\"card highlight active\\\"——用空格分隔多个类名，这个元素同时属于三个类。\""
+              "explanation": "class=\"card highlight active\"——用空格分隔多个类名，这个元素同时属于三个类。"
             },
             {
               "id": 32,
@@ -478,7 +478,7 @@
             {
               "id": 33,
               "difficulty": 2,
-              "question": "\"hidden 属性和 display:none 效果一样吗？\"",
+              "question": "hidden 属性和 display:none 效果一样吗？",
               "options": [
                 "完全一样",
                 "hidden 是 HTML 属性层隐藏，display:none 是 CSS 层",
@@ -486,7 +486,7 @@
                 "display:none 不可恢复"
               ],
               "answer": 1,
-              "explanation": "\"效果类似。但 hidden 优先级低——若 CSS 设 display:block，hidden 会被覆盖。\""
+              "explanation": "效果类似。但 hidden 优先级低——若 CSS 设 display:block，hidden 会被覆盖。"
             },
             {
               "id": 34,
@@ -504,7 +504,7 @@
             {
               "id": 35,
               "difficulty": 2,
-              "question": "\"属性值必须加引号吗？<img src=photo.jpg> 合法吗？\"",
+              "question": "属性值必须加引号吗？<img src=photo.jpg> 合法吗？",
               "options": [
                 "必须加",
                 "不必须，HTML5 允许不加引号",
@@ -525,20 +525,20 @@
                 "id 会覆盖 class"
               ],
               "answer": 1,
-              "explanation": "\"class 和 id 可以同时存在。class 用于样式分组，id 用于唯一标识和 JS 选取。<div class=\\\"card\\\" id=\\\"card1\\\">\""
+              "explanation": "class 和 id 可以同时存在。class 用于样式分组，id 用于唯一标识和 JS 选取。<div class=\"card\" id=\"card1\">"
             },
             {
               "id": 37,
               "difficulty": 2,
-              "question": "\"checked=\\\"false\\\" 和完全不写 checked 的区别？\"",
+              "question": "checked=\"false\" 和完全不写 checked 的区别？",
               "options": [
                 "前者不选中",
                 "前者仍然选中！布尔属性只看出现不看值",
                 "完全相同",
-                "checked=\\\"false\\\" 语法错误"
+                "checked=\"false\" 语法错误"
               ],
               "answer": 1,
-              "explanation": "\"checked=\\\"false\\\" 仍然是选中状态！布尔属性只关心\\\"有没有出现\\\"不看值。想不选中需要完全移除 checked。\""
+              "explanation": "checked=\"false\" 仍然是选中状态！布尔属性只关心\"有没有出现\"不看值。想不选中需要完全移除 checked。"
             }
           ]
         },
@@ -552,7 +552,7 @@
             {
               "id": 38,
               "difficulty": 3,
-              "question": "\"<img src=\\\"x.jpg\\\" alt=\\\"\\\"> 图片加载失败时用户看到什么？\"",
+              "question": "<img src=\"x.jpg\" alt=\"\"> 图片加载失败时用户看到什么？",
               "options": [
                 "看到空 alt 文字",
                 "看到裂图图标无替代文字",
@@ -560,12 +560,12 @@
                 "看到文件名"
               ],
               "answer": 1,
-              "explanation": "\"alt=\\\"\\\" 表示纯装饰，阅读器跳过。加载失败时浏览器显示裂图图标无替代文字。alt=\\\"描述\\\" 才会显示描述。\""
+              "explanation": "alt=\"\" 表示纯装饰，阅读器跳过。加载失败时浏览器显示裂图图标无替代文字。alt=\"描述\" 才会显示描述。"
             },
             {
               "id": 39,
               "difficulty": 3,
-              "question": "\"<a href=\\\"wikipedia.org\\\"> 和 href=\\\"https://wikipedia.org\\\"> 区别？\"",
+              "question": "<a href=\"wikipedia.org\"> 和 href=\"https://wikipedia.org\"> 区别？",
               "options": [
                 "都正常跳转",
                 "前者被当作相对路径(网站内文件)，后者正常跳转",
@@ -573,12 +573,12 @@
                 "前者自动补全"
               ],
               "answer": 1,
-              "explanation": "\"无 https:// 时浏览器把 wikipedia.org 当作你网站内的相对路径→404。必须写完整 URL。\""
+              "explanation": "无 https:// 时浏览器把 wikipedia.org 当作你网站内的相对路径→404。必须写完整 URL。"
             },
             {
               "id": 40,
               "difficulty": 3,
-              "question": "\"<label for=\\\"email\\\"> 但 input id=\\\"userEmail\\\"→点 label 会？\"",
+              "question": "<label for=\"email\"> 但 input id=\"userEmail\"→点 label 会？",
               "options": [
                 "正常聚焦",
                 "什么都不发生，for 和 id 不匹配",
@@ -586,7 +586,7 @@
                 "聚焦最近输入框"
               ],
               "answer": 1,
-              "explanation": "\"label 的 for 必须等于 input 的 id——这对\\\"钥匙和锁\\\"必须一模一样才会生效。不匹配点击无反应。\""
+              "explanation": "label 的 for 必须等于 input 的 id——这对\"钥匙和锁\"必须一模一样才会生效。不匹配点击无反应。"
             },
             {
               "id": 41,
@@ -617,15 +617,15 @@
             {
               "id": 43,
               "difficulty": 3,
-              "question": "\"<input type=\\\"checkbox\\\" checked> 选中的值是什么？\"",
+              "question": "<input type=\"checkbox\" checked> 选中的值是什么？",
               "options": [
-                "\\\"checked\\\"",
-                "不写 value 时默认为 \\\"on\\\"",
+                "\"checked\"",
+                "不写 value 时默认为 \"on\"",
                 "true",
                 "false"
               ],
               "answer": 1,
-              "explanation": "\"checkbox 不写 value 属性时，选中提交的默认值是 \\\"on\\\"。想提交自定义值需设 value=\\\"自定义值\\\"。\""
+              "explanation": "checkbox 不写 value 属性时，选中提交的默认值是 \"on\"。想提交自定义值需设 value=\"自定义值\"。"
             },
             {
               "id": 44,
@@ -643,7 +643,7 @@
             {
               "id": 45,
               "difficulty": 3,
-              "question": "\"<input required> 和 <input pattern=\\\"[0-9]+\\\"> 各做什么？\"",
+              "question": "<input required> 和 <input pattern=\"[0-9]+\"> 各做什么？",
               "options": [
                 "required 必填，pattern 正则校验格式",
                 "完全相同",
@@ -682,7 +682,7 @@
                 "<class名>"
               ],
               "answer": 0,
-              "explanation": "\"类选择器用 .开头：.card 选中所有 class=\\\"card\\\" 的元素。\""
+              "explanation": "类选择器用 .开头：.card 选中所有 class=\"card\" 的元素。"
             },
             {
               "id": 47,
@@ -695,7 +695,7 @@
                 "<id名>"
               ],
               "answer": 1,
-              "explanation": "\"ID 选择器用 #开头：#title 选中 id=\\\"title\\\" 的元素。\""
+              "explanation": "ID 选择器用 #开头：#title 选中 id=\"title\" 的元素。"
             },
             {
               "id": 48,
@@ -704,11 +704,11 @@
               "options": [
                 "color: red",
                 "color = red",
-                "color: \\\"red\\\"",
+                "color: \"red\"",
                 "color; red"
               ],
               "answer": 0,
-              "explanation": "\"CSS 声明格式：属性: 值; 如 color: red;。不能用等号，值通常不加引号。\""
+              "explanation": "CSS 声明格式：属性: 值; 如 color: red;。不能用等号，值通常不加引号。"
             },
             {
               "id": 49,
@@ -721,12 +721,12 @@
                 "# 注释"
               ],
               "answer": 2,
-              "explanation": "\"CSS 用 /* 注释 */。// 是 JS 注释在 CSS 中无效。\""
+              "explanation": "CSS 用 /* 注释 */。// 是 JS 注释在 CSS 中无效。"
             },
             {
               "id": 50,
               "difficulty": 1,
-              "question": "\"color: #f00 和 red 等价吗？\"",
+              "question": "color: #f00 和 red 等价吗？",
               "options": [
                 "等价都是红色",
                 "不等价",
@@ -734,7 +734,7 @@
                 "red 已废弃"
               ],
               "answer": 0,
-              "explanation": "\"#f00=#ff0000=red，都是纯红色完全等价。#f00 是 #ff0000 的缩写。\""
+              "explanation": "#f00=#ff0000=red，都是纯红色完全等价。#f00 是 #ff0000 的缩写。"
             }
           ]
         },
@@ -748,7 +748,7 @@
             {
               "id": 51,
               "difficulty": 2,
-              "question": "\"`.card.highlight` 和 `.card .highlight` 区别？\"",
+              "question": "`.card.highlight` 和 `.card .highlight` 区别？",
               "options": [
                 "完全相同",
                 "前者选中同时有两个类的元素，后者选中 card 内后代有 highlight 的元素",
@@ -769,7 +769,7 @@
                 "!important 不算"
               ],
               "answer": 1,
-              "explanation": "\"权重：(ID数,类数,元素数)。如 #header .nav a=(1,1,1)。!important 强制覆盖一切。内联 style=1000。\""
+              "explanation": "权重：(ID数,类数,元素数)。如 #header .nav a=(1,1,1)。!important 强制覆盖一切。内联 style=1000。"
             },
             {
               "id": 53,
@@ -795,12 +795,12 @@
                 "content"
               ],
               "answer": 3,
-              "explanation": "\"box-sizing:content-box(默认)时 width 只设置 content 区域宽度。padding 和 border 额外增加总宽。\""
+              "explanation": "box-sizing:content-box(默认)时 width 只设置 content 区域宽度。padding 和 border 额外增加总宽。"
             },
             {
               "id": 55,
               "difficulty": 2,
-              "question": "\"box-sizing:border-box 改变什么？\"",
+              "question": "box-sizing:border-box 改变什么？",
               "options": [
                 "什么也不变",
                 "width 包含 content+padding+border 总宽",
@@ -808,7 +808,7 @@
                 "只改变高度"
               ],
               "answer": 1,
-              "explanation": "\"border-box 让 width=content+padding+border 总宽，更直观。推荐全局设置 *{box-sizing:border-box}。\""
+              "explanation": "border-box 让 width=content+padding+border 总宽，更直观。推荐全局设置 *{box-sizing:border-box}。"
             },
             {
               "id": 56,
@@ -839,7 +839,7 @@
             {
               "id": 58,
               "difficulty": 2,
-              "question": "\"width:100% 和 width:100vw 区别？\"",
+              "question": "width:100% 和 width:100vw 区别？",
               "options": [
                 "完全一样",
                 "100%相对父元素宽度，100vw相对视口宽度(含滚动条)",
@@ -847,7 +847,7 @@
                 "100% 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"100%相对于父容器 content 宽度。100vw 是整个视口宽度(含滚动条)。有滚动条时100vw>100%。\""
+              "explanation": "100%相对于父容器 content 宽度。100vw 是整个视口宽度(含滚动条)。有滚动条时100vw>100%。"
             },
             {
               "id": 59,
@@ -865,7 +865,7 @@
             {
               "id": 60,
               "difficulty": 2,
-              "question": "\"!important 为什么尽量不用？\"",
+              "question": "!important 为什么尽量不用？",
               "options": [
                 "提高性能",
                 "破坏正常优先级体系难以调试",
@@ -873,7 +873,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"!important 强制覆盖一切但滥用会导致难以调试和覆盖——形成恶性循环。应通过提高选择器权重而非!important。\""
+              "explanation": "!important 强制覆盖一切但滥用会导致难以调试和覆盖——形成恶性循环。应通过提高选择器权重而非!important。"
             }
           ]
         },
@@ -887,7 +887,7 @@
             {
               "id": 61,
               "difficulty": 3,
-              "question": "\"h1 同时被 `h1{color:red}` 和 `.title{color:blue}` 选中且 class=\\\"title\\\"→什么颜色？\"",
+              "question": "h1 同时被 `h1{color:red}` 和 `.title{color:blue}` 选中且 class=\"title\"→什么颜色？",
               "options": [
                 "红元素选择器优先",
                 "蓝类选择器权重(10)>元素(1)",
@@ -895,12 +895,12 @@
                 "取决于文件顺序"
               ],
               "answer": 1,
-              "explanation": "\"类选择器权重(0,1,0)>元素选择器(0,0,1)，.title 胜出。\""
+              "explanation": "类选择器权重(0,1,0)>元素选择器(0,0,1)，.title 胜出。"
             },
             {
               "id": 62,
               "difficulty": 3,
-              "question": "\"div 设 width:200px;padding:20px;border:5px→实际总宽？\"",
+              "question": "div 设 width:200px;padding:20px;border:5px→实际总宽？",
               "options": [
                 "200px",
                 "250px=200+40+10",
@@ -913,7 +913,7 @@
             {
               "id": 63,
               "difficulty": 3,
-              "question": "\"同上改为 box-sizing:border-box，实际总宽？\"",
+              "question": "同上改为 box-sizing:border-box，实际总宽？",
               "options": [
                 "250px",
                 "200px(width 已含 padding+border)",
@@ -926,7 +926,7 @@
             {
               "id": 64,
               "difficulty": 3,
-              "question": "\"margin:10px 20px 30px 三个值各对应哪边？\"",
+              "question": "margin:10px 20px 30px 三个值各对应哪边？",
               "options": [
                 "上10/左右20/下30",
                 "上10/右20/下30/左20",
@@ -939,7 +939,7 @@
             {
               "id": 65,
               "difficulty": 3,
-              "question": "\"子元素设 margin-top:50px 为什么父元素也跟着下移？怎么修？\"",
+              "question": "子元素设 margin-top:50px 为什么父元素也跟着下移？怎么修？",
               "options": [
                 "不可能发生",
                 "margin 折叠穿透。给父元素加 overflow:hidden 或 padding:1px",
@@ -947,7 +947,7 @@
                 "margin-top 只能用于 body"
               ],
               "answer": 1,
-              "explanation": "\"子元素 margin-top 会\\\"穿透\\\"父元素(margin collapse)。修法：父设 overflow:hidden/padding:1px/border:1px/flex 布局。\""
+              "explanation": "子元素 margin-top 会\"穿透\"父元素(margin collapse)。修法：父设 overflow:hidden/padding:1px/border:1px/flex 布局。"
             },
             {
               "id": 66,
@@ -960,12 +960,12 @@
                 "a:active→a:hover→a:link→a:visited"
               ],
               "answer": 1,
-              "explanation": "\"LVHA=LoVe HAte。:link→:visited→:hover→:active 必须按此顺序否则某些状态被覆盖。\""
+              "explanation": "LVHA=LoVe HAte。:link→:visited→:hover→:active 必须按此顺序否则某些状态被覆盖。"
             },
             {
               "id": 67,
               "difficulty": 3,
-              "question": "\"`div p` 和 `div > p` 区别？\"",
+              "question": "`div p` 和 `div > p` 区别？",
               "options": [
                 "完全相同",
                 "前者所有后代 p，后者仅直接子元素 p",
@@ -973,12 +973,12 @@
                 "语法错误"
               ],
               "answer": 1,
-              "explanation": "\"空格=所有层级后代。>=只直接子元素不包含更深层的 p。\""
+              "explanation": "空格=所有层级后代。>=只直接子元素不包含更深层的 p。"
             },
             {
               "id": 68,
               "difficulty": 3,
-              "question": "\"`h1,h2,h3{color:red}` 选中什么？\"",
+              "question": "`h1,h2,h3{color:red}` 选中什么？",
               "options": [
                 "h1 内嵌套的 h2 和 h3",
                 "所有 h1、所有 h2、所有 h3",
@@ -986,12 +986,12 @@
                 "语法错误"
               ],
               "answer": 1,
-              "explanation": "\"逗号=分组选择器表示\\\"或\\\"。选中所有 h1、所有 h2、所有 h3。\""
+              "explanation": "逗号=分组选择器表示\"或\"。选中所有 h1、所有 h2、所有 h3。"
             },
             {
               "id": 69,
               "difficulty": 2,
-              "question": "\"opacity:0.5 和 opacity:50% 等价吗？\"",
+              "question": "opacity:0.5 和 opacity:50% 等价吗？",
               "options": [
                 "等价",
                 "不等价 50% 语法错",
@@ -999,12 +999,12 @@
                 "取决于浏览器"
               ],
               "answer": 0,
-              "explanation": "\"CSS 支持百分比：opacity:50% 等于 opacity:0.5 完全等价。\""
+              "explanation": "CSS 支持百分比：opacity:50% 等于 opacity:0.5 完全等价。"
             },
             {
               "id": 70,
               "difficulty": 2,
-              "question": "\"display:none 和 visibility:hidden 核心区别？\"",
+              "question": "display:none 和 visibility:hidden 核心区别？",
               "options": [
                 "完全相同",
                 "前者不占空间(从布局移除)，后者占空间(不可见)",
@@ -1012,7 +1012,7 @@
                 "后者不占空间"
               ],
               "answer": 1,
-              "explanation": "\"display:none 元素从布局中移除不占空间。visibility:hidden 元素不可见但保持原空间。\""
+              "explanation": "display:none 元素从布局中移除不占空间。visibility:hidden 元素不可见但保持原空间。"
             },
             {
               "id": 71,
@@ -1038,12 +1038,12 @@
                 "语法错误"
               ],
               "answer": 1,
-              "explanation": "\"font-family:\\\"Microsoft YaHei\\\",sans-serif——优先用第一个字体，没有安装则回退到下一个。\""
+              "explanation": "font-family:\"Microsoft YaHei\",sans-serif——优先用第一个字体，没有安装则回退到下一个。"
             },
             {
               "id": 73,
               "difficulty": 2,
-              "question": "\"overflow:hidden/scroll/auto 区别？\"",
+              "question": "overflow:hidden/scroll/auto 区别？",
               "options": [
                 "全部一样",
                 "hidden=裁剪隐藏/scroll=始终滚动条/auto=需要时滚动条",
@@ -1056,7 +1056,7 @@
             {
               "id": 74,
               "difficulty": 3,
-              "question": "\"h1 权重对决：!important vs 内联 style vs #id vs .class vs div→排序？\"",
+              "question": "h1 权重对决：!important vs 内联 style vs #id vs .class vs div→排序？",
               "options": [
                 "!important>内联>#id>.class>div",
                 "#id>!important>内联>.class>div",
@@ -1064,7 +1064,7 @@
                 ".class>#id>内联>!important>div"
               ],
               "answer": 0,
-              "explanation": "\"优先级链：!important(无视一切)>内联 style(1000)>ID(100)>类(10)>元素(1)。\""
+              "explanation": "优先级链：!important(无视一切)>内联 style(1000)>ID(100)>类(10)>元素(1)。"
             },
             {
               "id": 75,
@@ -1077,7 +1077,7 @@
                 "outline 在 border 里面"
               ],
               "answer": 1,
-              "explanation": "\"outline 绘制在 border 之外不占盒模型空间不影响布局。常用于 :focus 焦点指示器不会导致元素抖动。\""
+              "explanation": "outline 绘制在 border 之外不占盒模型空间不影响布局。常用于 :focus 焦点指示器不会导致元素抖动。"
             }
           ]
         }
@@ -1100,7 +1100,7 @@
             {
               "id": 76,
               "difficulty": 1,
-              "question": "\"display:flex 写在哪？\"",
+              "question": "display:flex 写在哪？",
               "options": [
                 "子元素",
                 "父容器",
@@ -1108,7 +1108,7 @@
                 "html 上"
               ],
               "answer": 1,
-              "explanation": "\"display:flex 写在父元素(容器)上，其直接子元素自动变弹性项目。\""
+              "explanation": "display:flex 写在父元素(容器)上，其直接子元素自动变弹性项目。"
             },
             {
               "id": 77,
@@ -1121,7 +1121,7 @@
                 "文字方向"
               ],
               "answer": 1,
-              "explanation": "\"默认 flex-direction:row 时主轴是横向，justify-content 控制横向对齐。column 时主轴变纵向。\""
+              "explanation": "默认 flex-direction:row 时主轴是横向，justify-content 控制横向对齐。column 时主轴变纵向。"
             },
             {
               "id": 78,
@@ -1139,7 +1139,7 @@
             {
               "id": 79,
               "difficulty": 1,
-              "question": "\"grid-template-columns:1fr 2fr 1fr 含义？\"",
+              "question": "grid-template-columns:1fr 2fr 1fr 含义？",
               "options": [
                 "三列宽比 1:2:1",
                 "四列等宽",
@@ -1147,12 +1147,12 @@
                 "两列"
               ],
               "answer": 0,
-              "explanation": "\"fr=fraction 份数。三列宽比 1:2:1，总 4 份，每列占 25%/50%/25%。\""
+              "explanation": "fr=fraction 份数。三列宽比 1:2:1，总 4 份，每列占 25%/50%/25%。"
             },
             {
               "id": 80,
               "difficulty": 1,
-              "question": "\"@media 的作用？\"",
+              "question": "@media 的作用？",
               "options": [
                 "设置动画",
                 "根据屏幕条件应用不同样式(响应式)",
@@ -1160,7 +1160,7 @@
                 "引入字体"
               ],
               "answer": 1,
-              "explanation": "\"@media 媒体查询根据屏幕宽度等条件应用不同样式，实现响应式设计。\""
+              "explanation": "@media 媒体查询根据屏幕宽度等条件应用不同样式，实现响应式设计。"
             }
           ]
         },
@@ -1174,7 +1174,7 @@
             {
               "id": 81,
               "difficulty": 2,
-              "question": "\"flex-direction:column 改变什么？\"",
+              "question": "flex-direction:column 改变什么？",
               "options": [
                 "什么也不变",
                 "主轴变纵向，justify-content 和 align-items 轴向互换",
@@ -1187,7 +1187,7 @@
             {
               "id": 82,
               "difficulty": 2,
-              "question": "\"flex:1 意思？\"",
+              "question": "flex:1 意思？",
               "options": [
                 "宽度 1px",
                 "占据剩余空间中 1 份",
@@ -1195,7 +1195,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"flex:1=flex-grow:1;flex-shrink:1;flex-basis:0 简写。两子元素 flex:1 和 flex:2 宽比 1:2。\""
+              "explanation": "flex:1=flex-grow:1;flex-shrink:1;flex-basis:0 简写。两子元素 flex:1 和 flex:2 宽比 1:2。"
             },
             {
               "id": 83,
@@ -1252,7 +1252,7 @@
             {
               "id": 87,
               "difficulty": 2,
-              "question": "\"@media(max-width:768px)匹配什么？\"",
+              "question": "@media(max-width:768px)匹配什么？",
               "options": [
                 "宽度≥768px",
                 "宽度≤768px(手机/小平板)",
@@ -1260,7 +1260,7 @@
                 "只匹配手机"
               ],
               "answer": 1,
-              "explanation": "\"max-width 表示\\\"宽度≤此值时应用\\\"=通常匹配手机。min-width 表示\\\"宽度≥此值时应用\\\"=通常匹配桌面。\""
+              "explanation": "max-width 表示\"宽度≤此值时应用\"=通常匹配手机。min-width 表示\"宽度≥此值时应用\"=通常匹配桌面。"
             },
             {
               "id": 88,
@@ -1273,7 +1273,7 @@
                 "不可能实现"
               ],
               "answer": 1,
-              "explanation": "\"display:flex+space-between。左边元素自然靠左，右边元素靠右，中间空白自动填充。\""
+              "explanation": "display:flex+space-between。左边元素自然靠左，右边元素靠右，中间空白自动填充。"
             }
           ]
         },
@@ -1308,7 +1308,7 @@
                 "transition 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"transition 被触发(hover等)只 A→B 过渡。animation 主动播放通过@keyframes 定义任意多帧可循环。\""
+              "explanation": "transition 被触发(hover等)只 A→B 过渡。animation 主动播放通过@keyframes 定义任意多帧可循环。"
             },
             {
               "id": 91,
@@ -1326,7 +1326,7 @@
             {
               "id": 92,
               "difficulty": 3,
-              "question": "\"animation-fill-mode:forwards vs none？\"",
+              "question": "animation-fill-mode:forwards vs none？",
               "options": [
                 "forwards 停最后一帧 none 回初始(闪回)",
                 "完全相同",
@@ -1339,7 +1339,7 @@
             {
               "id": 93,
               "difficulty": 3,
-              "question": "\"无限旋转动画 @keyframes 怎么写？\"",
+              "question": "无限旋转动画 @keyframes 怎么写？",
               "options": [
                 "@keyframes s{from{rotate:0}to{rotate:360deg}}",
                 "@keyframes s{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}",
@@ -1347,7 +1347,7 @@
                 "@keyframes s{0%{rotate:0}100%{rotate:1turn}}"
               ],
               "answer": 1,
-              "explanation": "\"animation:s 2s linear infinite 配合使用。\""
+              "explanation": "animation:s 2s linear infinite 配合使用。"
             },
             {
               "id": 94,
@@ -1386,12 +1386,12 @@
                 "用 JS 判断屏幕"
               ],
               "answer": 1,
-              "explanation": "\"响应式=不同屏幕不同布局。核心：@media 媒体查询+弹性单位(%,vw,fr)+flex/grid 弹性布局+移动优先。\""
+              "explanation": "响应式=不同屏幕不同布局。核心：@media 媒体查询+弹性单位(%,vw,fr)+flex/grid 弹性布局+移动优先。"
             },
             {
               "id": 97,
               "difficulty": 3,
-              "question": "\"animation-direction:alternate 效果？\"",
+              "question": "animation-direction:alternate 效果？",
               "options": [
                 "反向播放",
                 "奇数遍正向偶数遍反向来回交替",
@@ -1399,7 +1399,7 @@
                 "只播放反向"
               ],
               "answer": 1,
-              "explanation": "\"alternate 奇数遍(1,3,5)正向偶数遍(2,4,6)反向。配合 infinite 做来回效果。\""
+              "explanation": "alternate 奇数遍(1,3,5)正向偶数遍(2,4,6)反向。配合 infinite 做来回效果。"
             },
             {
               "id": 98,
@@ -1412,7 +1412,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"nowrap(默认)不换行子元素被压缩。wrap 允许换行。通常配合 flex-wrap:wrap 实现自适应布局。\""
+              "explanation": "nowrap(默认)不换行子元素被压缩。wrap 允许换行。通常配合 flex-wrap:wrap 实现自适应布局。"
             },
             {
               "id": 99,
@@ -1425,12 +1425,12 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"sticky=滚动时先正常排列，到达阈值(如 top:0)后吸附固定。常用于吸顶导航栏。父元素不能设 overflow:hidden。\""
+              "explanation": "sticky=滚动时先正常排列，到达阈值(如 top:0)后吸附固定。常用于吸顶导航栏。父元素不能设 overflow:hidden。"
             },
             {
               "id": 100,
               "difficulty": 2,
-              "question": "\"repeat(3,1fr) 和 1fr 1fr 1fr 等价吗？\"",
+              "question": "repeat(3,1fr) 和 1fr 1fr 1fr 等价吗？",
               "options": [
                 "等价",
                 "不等价 repeat 更慢",
@@ -1438,7 +1438,7 @@
                 "repeat 已废弃"
               ],
               "answer": 0,
-              "explanation": "\"完全等价。repeat(次数,值)是简写。repeat(3,1fr)=1fr 1fr 1fr。repeat(auto-fill,minmax(200px,1fr))更强大。\""
+              "explanation": "完全等价。repeat(次数,值)是简写。repeat(3,1fr)=1fr 1fr 1fr。repeat(auto-fill,minmax(200px,1fr))更强大。"
             }
           ]
         }
@@ -1482,46 +1482,46 @@
                 "只有 3 种"
               ],
               "answer": 0,
-              "explanation": "\"7 种基本类型。typeof null 返回\\\"object\\\"(历史 bug)。函数 typeof 返回\\\"function\\\"(object 子类型)。\""
+              "explanation": "7 种基本类型。typeof null 返回\"object\"(历史 bug)。函数 typeof 返回\"function\"(object 子类型)。"
             },
             {
               "id": 103,
               "difficulty": 1,
-              "question": "\"`\\\"Hello\\\"+\\\" \\\"+\\\"World\\\"` 结果？\"",
+              "question": "`\"Hello\"+\" \"+\"World\"` 结果？",
               "options": [
                 "Hello World",
-                "\\\"Hello World\\\"",
+                "\"Hello World\"",
                 "HelloWorld",
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"+ 用于字符串拼接：三个字符串连成 \\\"Hello World\\\"。\""
+              "explanation": "+ 用于字符串拼接：三个字符串连成 \"Hello World\"。"
             },
             {
               "id": 104,
               "difficulty": 1,
-              "question": "\"`let x; console.log(typeof x)` 输出？\"",
+              "question": "`let x; console.log(typeof x)` 输出？",
               "options": [
-                "\\\"null\\\"",
-                "\\\"undefined\\\"",
-                "\\\"object\\\"",
+                "\"null\"",
+                "\"undefined\"",
+                "\"object\"",
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"声明了但没赋值的变量值为 undefined，typeof undefined 返回 \\\"undefined\\\"。\""
+              "explanation": "声明了但没赋值的变量值为 undefined，typeof undefined 返回 \"undefined\"。"
             },
             {
               "id": 105,
               "difficulty": 1,
-              "question": "\"`\\\"abc\\\".toUpperCase()` 结果？\"",
+              "question": "`\"abc\".toUpperCase()` 结果？",
               "options": [
-                "\\\"abc\\\"",
-                "\\\"ABC\\\"",
-                "\\\"Abc\\\"",
+                "\"abc\"",
+                "\"ABC\"",
+                "\"Abc\"",
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"toUpperCase() 将所有字母转为大写。\\\"abc\\\"→\\\"ABC\\\"。toLowerCase() 反向操作。\""
+              "explanation": "toUpperCase() 将所有字母转为大写。\"abc\"→\"ABC\"。toLowerCase() 反向操作。"
             }
           ]
         },
@@ -1535,15 +1535,15 @@
             {
               "id": 106,
               "difficulty": 2,
-              "question": "\"\\\"5\\\"+3 和 \\\"5\\\"-3 结果？\"",
+              "question": "\"5\"+3 和 \"5\"-3 结果？",
               "options": [
                 "53 和 2",
                 "8 和 2",
-                "\\\"53\\\"和\\\"53\\\"",
+                "\"53\"和\"53\"",
                 "报错"
               ],
               "answer": 0,
-              "explanation": "\"+遇字符串拼接：\\\"5\\\"+3=\\\"53\\\"。-只用于数字，先把\\\"5\\\"转数字再减：5-3=2。隐式类型转换。\""
+              "explanation": "+遇字符串拼接：\"5\"+3=\"53\"。-只用于数字，先把\"5\"转数字再减：5-3=2。隐式类型转换。"
             },
             {
               "id": 107,
@@ -1561,7 +1561,7 @@
             {
               "id": 108,
               "difficulty": 2,
-              "question": "\"`if(0){console.log(\\\"yes\\\")}` 会输出吗？\"",
+              "question": "`if(0){console.log(\"yes\")}` 会输出吗？",
               "options": [
                 "会",
                 "不会 0 是 falsy",
@@ -1569,12 +1569,12 @@
                 "输出 undefined"
               ],
               "answer": 1,
-              "explanation": "\"0/\\\"\\\"/null/undefined/NaN/false 都是 falsy 值条件判断中视为 false。\""
+              "explanation": "0/\"\"/null/undefined/NaN/false 都是 falsy 值条件判断中视为 false。"
             },
             {
               "id": 109,
               "difficulty": 2,
-              "question": "\"`for(let i=0;i<3;i++){console.log(i)}` 输出？\"",
+              "question": "`for(let i=0;i<3;i++){console.log(i)}` 输出？",
               "options": [
                 "0,1,2",
                 "1,2,3",
@@ -1587,7 +1587,7 @@
             {
               "id": 110,
               "difficulty": 2,
-              "question": "\"`[1,2,3].forEach(n=>console.log(n*2))` 输出？\"",
+              "question": "`[1,2,3].forEach(n=>console.log(n*2))` 输出？",
               "options": [
                 "1,2,3",
                 "2,4,6",
@@ -1595,38 +1595,38 @@
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"forEach 对每个元素执行回调打印 n*2。不返回新数组(返回 undefined)。\""
+              "explanation": "forEach 对每个元素执行回调打印 n*2。不返回新数组(返回 undefined)。"
             },
             {
               "id": 111,
               "difficulty": 2,
-              "question": "\"`let score=85;score>=60?\\\"及格\\\":\\\"不及格\\\"` 结果？\"",
+              "question": "`let score=85;score>=60?\"及格\":\"不及格\"` 结果？",
               "options": [
-                "\\\"及格\\\"",
-                "\\\"不及格\\\"",
+                "\"及格\"",
+                "\"不及格\"",
                 "85",
                 "报错"
               ],
               "answer": 0,
-              "explanation": "\"三元运算符：条件?真值:假值。85>=60 为 true→\\\"及格\\\"。\""
+              "explanation": "三元运算符：条件?真值:假值。85>=60 为 true→\"及格\"。"
             },
             {
               "id": 112,
               "difficulty": 2,
-              "question": "\"`if(\\\"false\\\"){console.log(\\\"yes\\\")}` 会输出？\"",
+              "question": "`if(\"false\"){console.log(\"yes\")}` 会输出？",
               "options": [
                 "会非空字符串是 truthy",
-                "不会\\\"false\\\"是 falsy",
+                "不会\"false\"是 falsy",
                 "报错",
                 "undefined"
               ],
               "answer": 0,
-              "explanation": "\"非空字符串(含\\\"false\\\")是 truthy→执行 if 块。只有空字符串\\\"\\\"是 falsy。\""
+              "explanation": "非空字符串(含\"false\")是 truthy→执行 if 块。只有空字符串\"\"是 falsy。"
             },
             {
               "id": 113,
               "difficulty": 2,
-              "question": "\"`10%3` 结果？\"",
+              "question": "`10%3` 结果？",
               "options": [
                 "3",
                 "1(取余)",
@@ -1634,12 +1634,12 @@
                 "10"
               ],
               "answer": 1,
-              "explanation": "\"%=取余数(mod)。10÷3=3 余 1。常用于判断奇偶(n%2===0 偶数)。\""
+              "explanation": "%=取余数(mod)。10÷3=3 余 1。常用于判断奇偶(n%2===0 偶数)。"
             },
             {
               "id": 114,
               "difficulty": 2,
-              "question": "\"`3>2 && 2>1` 结果？\"",
+              "question": "`3>2 && 2>1` 结果？",
               "options": [
                 "true",
                 "false",
@@ -1647,12 +1647,12 @@
                 "报错"
               ],
               "answer": 0,
-              "explanation": "\"&&=逻辑与(且)。两边都 true 结果 true。||=逻辑或(或)。!=逻辑非(取反)。\""
+              "explanation": "&&=逻辑与(且)。两边都 true 结果 true。||=逻辑或(或)。!=逻辑非(取反)。"
             },
             {
               "id": 115,
               "difficulty": 2,
-              "question": "\"`const arr=[1,2,3];arr.push(4)` 会报错吗？\"",
+              "question": "`const arr=[1,2,3];arr.push(4)` 会报错吗？",
               "options": [
                 "会 const 不能改",
                 "不会 const 保护引用数组内容可改",
@@ -1682,12 +1682,12 @@
                 "0"
               ],
               "answer": 1,
-              "explanation": "\"无 return 函数隐式返回 undefined。箭头函数一行表达式无{}时自动返回。\""
+              "explanation": "无 return 函数隐式返回 undefined。箭头函数一行表达式无{}时自动返回。"
             },
             {
               "id": 117,
               "difficulty": 3,
-              "question": "\"箭头函数 `(a,b)=>a+b` 等价什么？\"",
+              "question": "箭头函数 `(a,b)=>a+b` 等价什么？",
               "options": [
                 "function(a,b){return a+b}",
                 "let a+b",
@@ -1695,7 +1695,7 @@
                 "function a(b){}"
               ],
               "answer": 0,
-              "explanation": "\"箭头函数是 function 简写。单行可省略{}和 return。\""
+              "explanation": "箭头函数是 function 简写。单行可省略{}和 return。"
             },
             {
               "id": 118,
@@ -1708,38 +1708,38 @@
                 "var 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"var 函数作用域有变量提升。let 块级作用域{}内有效无提升。推荐用 let/const 避免 var 混乱。\""
+              "explanation": "var 函数作用域有变量提升。let 块级作用域{}内有效无提升。推荐用 let/const 避免 var 混乱。"
             },
             {
               "id": 119,
               "difficulty": 3,
-              "question": "\"闭包是什么？`function o(){let x=1;return function(){return x}}` 内函数能访问 x？\"",
+              "question": "闭包是什么？`function o(){let x=1;return function(){return x}}` 内函数能访问 x？",
               "options": [
                 "不能",
-                "能内部函数\\\"记住\\\"外部变量=闭包",
+                "能内部函数\"记住\"外部变量=闭包",
                 "只有外部函数运行时才能",
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"闭包=函数+它访问的外部变量。内函数\\\"捕获\\\"了 x，即使外部函数执行完毕 x 仍能被内函数访问。\""
+              "explanation": "闭包=函数+它访问的外部变量。内函数\"捕获\"了 x，即使外部函数执行完毕 x 仍能被内函数访问。"
             },
             {
               "id": 120,
               "difficulty": 3,
-              "question": "\"`typeof null` 返回？为什么？\"",
+              "question": "`typeof null` 返回？为什么？",
               "options": [
-                "\\\"null\\\"",
-                "\\\"object\\\"——JS 早期实现 bug 为兼容保留至今",
-                "\\\"undefined\\\"",
-                "\\\"nullpointer\\\""
+                "\"null\"",
+                "\"object\"——JS 早期实现 bug 为兼容保留至今",
+                "\"undefined\"",
+                "\"nullpointer\""
               ],
               "answer": 1,
-              "explanation": "\"typeof null===\\\"object\\\"是 JS 最早实现的 bug。null 的类型标记是 000 和对象相同。为兼容未修复。\""
+              "explanation": "typeof null===\"object\"是 JS 最早实现的 bug。null 的类型标记是 000 和对象相同。为兼容未修复。"
             },
             {
               "id": 121,
               "difficulty": 3,
-              "question": "\"`let a,b=5;console.log(a,b)` 输出？\"",
+              "question": "`let a,b=5;console.log(a,b)` 输出？",
               "options": [
                 "5,5",
                 "undefined,5",
@@ -1747,12 +1747,12 @@
                 "null,5"
               ],
               "answer": 1,
-              "explanation": "\"let a,b=5 中只有 b 被赋值为 5，a 只声明未赋值=undefined。\""
+              "explanation": "let a,b=5 中只有 b 被赋值为 5，a 只声明未赋值=undefined。"
             },
             {
               "id": 122,
               "difficulty": 3,
-              "question": "\"`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)` 顺序？\"",
+              "question": "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)` 顺序？",
               "options": [
                 "1,2,3",
                 "1,3,2",
@@ -1778,7 +1778,7 @@
             {
               "id": 124,
               "difficulty": 3,
-              "question": "\"`Cannot read property xxx of null` 什么错误？怎么修？\"",
+              "question": "`Cannot read property xxx of null` 什么错误？怎么修？",
               "options": [
                 "电脑坏了",
                 "访问 null 的属性。先判 if(el)再操作或检查选择器是否正确",
@@ -1791,7 +1791,7 @@
             {
               "id": 125,
               "difficulty": 2,
-              "question": "\"`!true` 结果？\"",
+              "question": "`!true` 结果？",
               "options": [
                 "true",
                 "false",
@@ -1799,12 +1799,12 @@
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"!=逻辑非(取反)。!true=false !false=true。!!值可转布尔型。\""
+              "explanation": "!=逻辑非(取反)。!true=false !false=true。!!值可转布尔型。"
             },
             {
               "id": 126,
               "difficulty": 3,
-              "question": "\"`let x=5;x=10` vs `const x=5;x=10` 区别？\"",
+              "question": "`let x=5;x=10` vs `const x=5;x=10` 区别？",
               "options": [
                 "都成功",
                 "前者成功 x=10；后者报错 TypeError",
@@ -1817,20 +1817,20 @@
             {
               "id": 127,
               "difficulty": 3,
-              "question": "\"`\\\" hello \\\".trim().toUpperCase()` 结果？\"",
+              "question": "`\" hello \".trim().toUpperCase()` 结果？",
               "options": [
-                "\\\" HELLO \\\"",
-                "\\\"HELLO\\\"",
-                "\\\"hello\\\"",
+                "\" HELLO \"",
+                "\"HELLO\"",
+                "\"hello\"",
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"trim()去两端空白→\\\"hello\\\"，toUpperCase()转大写→\\\"HELLO\\\"。方法链从左到右执行。\""
+              "explanation": "trim()去两端空白→\"hello\"，toUpperCase()转大写→\"HELLO\"。方法链从左到右执行。"
             },
             {
               "id": 128,
               "difficulty": 2,
-              "question": "\"`[3,10,1,20].sort()` 结果？为什么？\"",
+              "question": "`[3,10,1,20].sort()` 结果？为什么？",
               "options": [
                 "[1,3,10,20]",
                 "[1,10,20,3]——sort 默认按字符串排序",
@@ -1838,12 +1838,12 @@
                 "报错"
               ],
               "answer": 1,
-              "explanation": "\"sort()默认转字符串按字典序排序→\\\"10\\\"<\\\"3\\\"因为\\\"1\\\"<\\\"3\\\"。数字排序需(a,b)=>a-b。\""
+              "explanation": "sort()默认转字符串按字典序排序→\"10\"<\"3\"因为\"1\"<\"3\"。数字排序需(a,b)=>a-b。"
             },
             {
               "id": 129,
               "difficulty": 3,
-              "question": "\"`const{name,age}=person` 是什么语法？\"",
+              "question": "`const{name,age}=person` 是什么语法？",
               "options": [
                 "错误",
                 "解构赋值——从对象中提取 name 和 age 属性",
@@ -1856,7 +1856,7 @@
             {
               "id": 130,
               "difficulty": 2,
-              "question": "\"`let name=\\\"小明\\\";let Name=\\\"小红\\\";console.log(name)` 输出？\"",
+              "question": "`let name=\"小明\";let Name=\"小红\";console.log(name)` 输出？",
               "options": [
                 "小明(JS 区分大小写)",
                 "小红",
@@ -1921,7 +1921,7 @@
                 "HTML 源码"
               ],
               "answer": 0,
-              "explanation": "\"通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\\\"#id\\\")稍快。\""
+              "explanation": "通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\"#id\")稍快。"
             },
             {
               "id": 134,
@@ -1934,12 +1934,12 @@
                 "删除元素"
               ],
               "answer": 1,
-              "explanation": "\"给元素绑定事件监听器：element.addEventListener(\\\"click\\\",callback)。\""
+              "explanation": "给元素绑定事件监听器：element.addEventListener(\"click\",callback)。"
             },
             {
               "id": 135,
               "difficulty": 1,
-              "question": "\"[1,2,3].includes(2) 返回？\"",
+              "question": "[1,2,3].includes(2) 返回？",
               "options": [
                 "true",
                 "false",
@@ -2003,7 +2003,7 @@
               "question": "createElement+appendChild 流程？",
               "options": [
                 "直接写 HTML",
-                "let el=document.createElement(\\\"div\\\")→设置属性内容→parent.appendChild(el)",
+                "let el=document.createElement(\"div\")→设置属性内容→parent.appendChild(el)",
                 "只能创建 div",
                 "appendChild 已废弃"
               ],
@@ -2082,7 +2082,7 @@
                 "都不修改"
               ],
               "answer": 1,
-              "explanation": "\"splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。\""
+              "explanation": "splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。"
             },
             {
               "id": 145,
@@ -2100,10 +2100,10 @@
             {
               "id": 146,
               "difficulty": 3,
-              "question": "\"[1,2,3].join(\\\"-\\\") 和 \\\"a,b,c\\\".split(\\\",\\\") 各返回？\"",
+              "question": "[1,2,3].join(\"-\") 和 \"a,b,c\".split(\",\") 各返回？",
               "options": [
                 "join 返回数组 split 返回字符串",
-                "join 返回\\\"1-2-3\\\"数组→字符串；split 返回[\\\"a\\\",\\\"b\\\",\\\"c\\\"]字符串→数组",
+                "join 返回\"1-2-3\"数组→字符串；split 返回[\"a\",\"b\",\"c\"]字符串→数组",
                 "都返回字符串",
                 "都返回数组"
               ],
@@ -2121,7 +2121,7 @@
                 "无法实现"
               ],
               "answer": 1,
-              "explanation": "\"innerHTML+=\\\"...\\\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。\""
+              "explanation": "innerHTML+=\"...\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。"
             },
             {
               "id": 148,
@@ -2160,7 +2160,7 @@
                 "some 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。\""
+              "explanation": "[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。"
             },
             {
               "id": 151,
@@ -2186,38 +2186,38 @@
                 ".array()"
               ],
               "answer": 1,
-              "explanation": "\"扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。\""
+              "explanation": "扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。"
             },
             {
               "id": 153,
               "difficulty": 2,
-              "question": "\"\\\"hello\\\".slice(1,3) 返回？\"",
+              "question": "\"hello\".slice(1,3) 返回？",
               "options": [
-                "\\\"el\\\"",
-                "\\\"ell\\\"",
-                "\\\"h\\\"",
-                "\\\"lo\\\""
+                "\"el\"",
+                "\"ell\"",
+                "\"h\"",
+                "\"lo\""
               ],
               "answer": 0,
-              "explanation": "\"slice(1,3)截取索引[1,3)=\\\"el\\\"。索引从 0 开始。\""
+              "explanation": "slice(1,3)截取索引[1,3)=\"el\"。索引从 0 开始。"
             },
             {
               "id": 154,
               "difficulty": 2,
-              "question": "\"\\\"hello\\\".replace(\\\"h\\\",\\\"H\\\") 返回？\"",
+              "question": "\"hello\".replace(\"h\",\"H\") 返回？",
               "options": [
-                "\\\"Hello\\\"",
-                "\\\"hello\\\"",
-                "\\\"HELLO\\\"",
-                "[\\\"Hello\\\"]"
+                "\"Hello\"",
+                "\"hello\"",
+                "\"HELLO\"",
+                "[\"Hello\"]"
               ],
               "answer": 0,
-              "explanation": "\"replace 替换第一个匹配项。\\\"hello\\\".replace(\\\"l\\\",\\\"L\\\")→\\\"heLlo\\\"。\""
+              "explanation": "replace 替换第一个匹配项。\"hello\".replace(\"l\",\"L\")→\"heLlo\"。"
             },
             {
               "id": 155,
               "difficulty": 2,
-              "question": "\"[1,2,3].indexOf(4) 返回？\"",
+              "question": "[1,2,3].indexOf(4) 返回？",
               "options": [
                 "4",
                 "-1(未找到)",
@@ -2289,13 +2289,13 @@
               "difficulty": 3,
               "question": "HTML+CSS：图片加载失败不显示裂图图标应设置什么？",
               "options": [
-                "style=\\\"hide-on-error\\\"",
-                "alt=\\\"\\\"且设置 onerror 替换",
+                "style=\"hide-on-error\"",
+                "alt=\"\"且设置 onerror 替换",
                 "无法实现",
                 "display:none"
               ],
               "answer": 1,
-              "explanation": "\"alt=\\\"\\\"不让阅读器读文件名。CSS/JS 可监听 error 事件隐藏或替换裂图。\""
+              "explanation": "alt=\"\"不让阅读器读文件名。CSS/JS 可监听 error 事件隐藏或替换裂图。"
             },
             {
               "id": 160,
@@ -2303,7 +2303,7 @@
               "question": "HTML+CSS：移动端页面在手机上缩放异常最常见原因？",
               "options": [
                 "JS 错误",
-                "缺少 <meta name=\\\"viewport\\\" content=\\\"width=device-width\\\">",
+                "缺少 <meta name=\"viewport\" content=\"width=device-width\">",
                 "CSS 太多",
                 "图片太大"
               ],
@@ -2313,7 +2313,7 @@
             {
               "id": 161,
               "difficulty": 3,
-              "question": "\"JS：querySelector(\\\".card\\\")返回 null 最可能原因？\"",
+              "question": "JS：querySelector(\".card\")返回 null 最可能原因？",
               "options": [
                 "CSS 没加载",
                 "JS 在 DOM 之前执行或选择器写错",
@@ -2326,10 +2326,10 @@
             {
               "id": 162,
               "difficulty": 3,
-              "question": "\"JS：addEventListener(\\\"click\\\",handler)→点击没反应可能原因？\"",
+              "question": "JS：addEventListener(\"click\",handler)→点击没反应可能原因？",
               "options": [
                 "元素未创建时绑事件",
-                "事件名拼错(如\\\"clik\\\")或 handler 未定义",
+                "事件名拼错(如\"clik\")或 handler 未定义",
                 "绑定在了父元素上",
                 "以上都可能"
               ],
@@ -2339,7 +2339,7 @@
             {
               "id": 163,
               "difficulty": 3,
-              "question": "\"JS：innerHTML+=\\\"<div>新内容</div>\\\"有什么隐藏问题？\"",
+              "question": "JS：innerHTML+=\"<div>新内容</div>\"有什么隐藏问题？",
               "options": [
                 "没有",
                 "已有元素的绑定事件和状态会被重置",
@@ -2352,7 +2352,7 @@
             {
               "id": 164,
               "difficulty": 3,
-              "question": "\"JS：[1,2,3,4,5]中筛选>2且×2→结果？\"",
+              "question": "JS：[1,2,3,4,5]中筛选>2且×2→结果？",
               "options": [
                 "[3,4,5]",
                 "[6,8,10]",
@@ -2360,7 +2360,7 @@
                 "[6,8]"
               ],
               "answer": 1,
-              "explanation": "\"[1,2,3,4,5].filter(x=>x>2)得[3,4,5]→.map(x=>x*2)得[6,8,10]。方法链！\""
+              "explanation": "[1,2,3,4,5].filter(x=>x>2)得[3,4,5]→.map(x=>x*2)得[6,8,10]。方法链！"
             },
             {
               "id": 165,
@@ -2380,9 +2380,9 @@
               "difficulty": 3,
               "question": "HTML+CSS+JS 综合：表单提交不刷新页面用什么？",
               "options": [
-                "action=\\\"#\\\"",
+                "action=\"#\"",
                 "e.preventDefault()阻止默认提交",
-                "method=\\\"POST\\\"",
+                "method=\"POST\"",
                 "无法阻止"
               ],
               "answer": 1,
@@ -2417,7 +2417,7 @@
             {
               "id": 169,
               "difficulty": 3,
-              "question": "\"HTML+CSS+JS 综合：以下哪项属于\\\"语义化\\\"的最佳实践？\"",
+              "question": "HTML+CSS+JS 综合：以下哪项属于\"语义化\"的最佳实践？",
               "options": [
                 "全部用 div",
                 "header/nav/main/footer 等有含义标签+正确的 heading 层级+alt 属性",
@@ -2513,7 +2513,7 @@
             {
               "id": 175,
               "difficulty": 1,
-              "question": "\"fetch(\\\"/api\\\")返回什么？\"",
+              "question": "fetch(\"/api\")返回什么？",
               "options": [
                 "数据对象",
                 "Promise 对象",
@@ -2569,7 +2569,7 @@
                 "取决于内部"
               ],
               "answer": 1,
-              "explanation": "\"async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。\""
+              "explanation": "async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。"
             },
             {
               "id": 179,
@@ -2600,7 +2600,7 @@
             {
               "id": 181,
               "difficulty": 2,
-              "question": "\"Promise.all([p1,p2,p3])何时 resolve？\"",
+              "question": "Promise.all([p1,p2,p3])何时 resolve？",
               "options": [
                 "第一个完成",
                 "全部完成",
@@ -2613,7 +2613,7 @@
             {
               "id": 182,
               "difficulty": 2,
-              "question": "\"try{await fetch(url)}catch(e){} 能捕获什么？\"",
+              "question": "try{await fetch(url)}catch(e){} 能捕获什么？",
               "options": [
                 "HTTP 404",
                 "网络错误(断网等)",
@@ -2634,7 +2634,7 @@
                 "一种设计模式"
               ],
               "answer": 1,
-              "explanation": "\"回调嵌套导致代码横向增长(\\\"金字塔\\\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。\""
+              "explanation": "回调嵌套导致代码横向增长(\"金字塔\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。"
             }
           ]
         },
@@ -2656,7 +2656,7 @@
                 "自动处理"
               ],
               "answer": 1,
-              "explanation": "\"try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。\""
+              "explanation": "try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。"
             },
             {
               "id": 185,
@@ -2669,7 +2669,7 @@
                 "并行会出错"
               ],
               "answer": 1,
-              "explanation": "\"const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。\""
+              "explanation": "const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。"
             },
             {
               "id": 186,
@@ -2682,12 +2682,12 @@
                 "防止重复提交"
               ],
               "answer": 1,
-              "explanation": "\"用户输入\\\"贝多芬\\\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。\""
+              "explanation": "用户输入\"贝多芬\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。"
             },
             {
               "id": 187,
               "difficulty": 3,
-              "question": "\"`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？\"",
+              "question": "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？",
               "options": [
                 "1,2,3",
                 "1,3,2",
@@ -2695,12 +2695,12 @@
                 "3,2,1"
               ],
               "answer": 1,
-              "explanation": "\"同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。\""
+              "explanation": "同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。"
             },
             {
               "id": 188,
               "difficulty": 3,
-              "question": "\"`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？\"",
+              "question": "`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？",
               "options": [
                 "1 和 2",
                 "只有 1(Promise 状态一旦改变不可逆)",
@@ -2713,7 +2713,7 @@
             {
               "id": 189,
               "difficulty": 3,
-              "question": "\"`fetch(url).then(r=>r.json())`为什么需要两步？\"",
+              "question": "`fetch(url).then(r=>r.json())`为什么需要两步？",
               "options": [
                 "设计缺陷",
                 "第一步得 Response 对象第二步解析 JSON 体(异步)",
@@ -2739,7 +2739,7 @@
             {
               "id": 191,
               "difficulty": 3,
-              "question": "\"`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？\"",
+              "question": "`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？",
               "options": [
                 "能",
                 "不能——延迟是最小等待时间实际可能更长(取决于事件队列)",
@@ -2791,7 +2791,7 @@
             {
               "id": 195,
               "difficulty": 3,
-              "question": "\"addEventListener(\\\"click\\\",async(e)=>{await fetch(...)})这样写对吗？\"",
+              "question": "addEventListener(\"click\",async(e)=>{await fetch(...)})这样写对吗？",
               "options": [
                 "对回调可以是 async",
                 "错 addEventListener 不支持 async",
@@ -2969,7 +2969,7 @@
                 "命名导出已废弃"
               ],
               "answer": 1,
-              "explanation": "\"export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。\""
+              "explanation": "export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。"
             },
             {
               "id": 207,
@@ -3056,7 +3056,7 @@
                 "删除文件重来"
               ],
               "answer": 1,
-              "explanation": "\"Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。\""
+              "explanation": "Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。"
             },
             {
               "id": 213,
@@ -3095,7 +3095,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"scripts 定义项目常用命令如\\\"dev\\\":\\\"vite\\\"→npm run dev 执行 vite。可自定义任意脚本。\""
+              "explanation": "scripts 定义项目常用命令如\"dev\":\"vite\"→npm run dev 执行 vite。可自定义任意脚本。"
             }
           ]
         }
@@ -3131,7 +3131,7 @@
             {
               "id": 217,
               "difficulty": 1,
-              "question": "\"{{ }}在 Vue 模板中做什么？\"",
+              "question": "{{ }}在 Vue 模板中做什么？",
               "options": [
                 "注释",
                 "文本插值——显示 JS 表达式的值",
@@ -3139,7 +3139,7 @@
                 "条件判断"
               ],
               "answer": 1,
-              "explanation": "\"{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。\""
+              "explanation": "{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。"
             },
             {
               "id": 218,
@@ -3152,7 +3152,7 @@
                 "事件监听"
               ],
               "answer": 1,
-              "explanation": "\"v-bind:src=\\\"url\\\"等价于 :src=\\\"url\\\"。把 JS 表达式的值绑定到 HTML 属性上。\""
+              "explanation": "v-bind:src=\"url\"等价于 :src=\"url\"。把 JS 表达式的值绑定到 HTML 属性上。"
             },
             {
               "id": 219,
@@ -3165,7 +3165,7 @@
                 "循环"
               ],
               "answer": 1,
-              "explanation": "\"v-on:click=\\\"fn\\\"等价于 @click=\\\"fn\\\"。监听 DOM 事件执行对应方法。\""
+              "explanation": "v-on:click=\"fn\"等价于 @click=\"fn\"。监听 DOM 事件执行对应方法。"
             },
             {
               "id": 220,
@@ -3205,7 +3205,7 @@
             {
               "id": 222,
               "difficulty": 2,
-              "question": "\"v-for 为什么需要 :key？用 index 做 key的问题？\"",
+              "question": "v-for 为什么需要 :key？用 index 做 key的问题？",
               "options": [
                 "性能优化",
                 "key 帮助 Vue 识别每个节点做高效 diff。用 index 做 key 在列表重排时导致错误复用和状态错乱",
@@ -3226,7 +3226,7 @@
                 "v-for+v-bind"
               ],
               "answer": 1,
-              "explanation": "\"v-model=\\\"name\\\"等价于:value=\\\"name\\\" @input=\\\"name=$event.target.value\\\"。双向绑定=数据→视图+视图→数据。\""
+              "explanation": "v-model=\"name\"等价于:value=\"name\" @input=\"name=$event.target.value\"。双向绑定=数据→视图+视图→数据。"
             },
             {
               "id": 224,
@@ -3273,7 +3273,7 @@
               "question": "Emits 的作用？",
               "options": [
                 "父传子",
-                "子组件向父组件发送事件通知(如\\\"我完成了\\\")",
+                "子组件向父组件发送事件通知(如\"我完成了\")",
                 "双向绑定",
                 "定义样式"
               ],
@@ -3291,7 +3291,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。\""
+              "explanation": "<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。"
             }
           ]
         },
@@ -3318,7 +3318,7 @@
             {
               "id": 230,
               "difficulty": 3,
-              "question": "\"以下 Vue 代码问题在哪？`<div v-for=\\\"item in list\\\">{{item}}</div>`\"",
+              "question": "以下 Vue 代码问题在哪？`<div v-for=\"item in list\">{{item}}</div>`",
               "options": [
                 "语法错",
                 "缺少 :key 属性",
@@ -3326,7 +3326,7 @@
                 "没问题"
               ],
               "answer": 1,
-              "explanation": "\"v-for 应始终加 :key=\\\"唯一标识\\\"。Vue 用 key 追踪每个节点的身份以高效更新。\""
+              "explanation": "v-for 应始终加 :key=\"唯一标识\"。Vue 用 key 追踪每个节点的身份以高效更新。"
             },
             {
               "id": 231,
@@ -3357,7 +3357,7 @@
             {
               "id": 233,
               "difficulty": 3,
-              "question": "\"`<div :class=\\\"{active:isActive}\\\">` 中 active 什么时候生效？\"",
+              "question": "`<div :class=\"{active:isActive}\">` 中 active 什么时候生效？",
               "options": [
                 "总是生效",
                 "isActive 为 true 时",
@@ -3365,12 +3365,12 @@
                 "永不生效"
               ],
               "answer": 1,
-              "explanation": "\"对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\\\"[base,dynamic]\\\"。\""
+              "explanation": "对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\"[base,dynamic]\"。"
             },
             {
               "id": 234,
               "difficulty": 3,
-              "question": "\"Vue 模板中 {{}} 和 v-text 的区别？\"",
+              "question": "Vue 模板中 {{}} 和 v-text 的区别？",
               "options": [
                 "完全相同",
                 "{{}}可能闪烁(未编译前显示花括号)；v-text 不会。功能等价",
@@ -3378,7 +3378,7 @@
                 "{{}} 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。\""
+              "explanation": "功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。"
             },
             {
               "id": 235,
@@ -3396,7 +3396,7 @@
             {
               "id": 236,
               "difficulty": 3,
-              "question": "\"`watch(x,(newVal,oldVal)=>{...})` 参数是什么？\"",
+              "question": "`watch(x,(newVal,oldVal)=>{...})` 参数是什么？",
               "options": [
                 "无参数",
                 "newVal=变化后的值 oldVal=变化前的值",
@@ -3404,7 +3404,7 @@
                 "只有 oldVal"
               ],
               "answer": 1,
-              "explanation": "\"watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。\""
+              "explanation": "watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。"
             },
             {
               "id": 237,
@@ -3435,7 +3435,7 @@
             {
               "id": 239,
               "difficulty": 3,
-              "question": "\"<script setup> 和普通 <script> 区别？\"",
+              "question": "<script setup> 和普通 <script> 区别？",
               "options": [
                 "完全相同",
                 "setup 中顶层变量/函数自动暴露给模板无需 return。更简洁",
@@ -3443,12 +3443,12 @@
                 "setup 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。\""
+              "explanation": "<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。"
             },
             {
               "id": 240,
               "difficulty": 3,
-              "question": "\"`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？\"",
+              "question": "`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？",
               "options": [
                 "会",
                 "不会——v-once 只渲染一次后续不再响应数据变化",
@@ -3482,7 +3482,7 @@
               "question": "Vue Router 作用？",
               "options": [
                 "管理 CSS",
-                "前端路由——切换\\\"页面\\\"不刷新浏览器",
+                "前端路由——切换\"页面\"不刷新浏览器",
                 "状态管理",
                 "构建工具"
               ],
@@ -3492,7 +3492,7 @@
             {
               "id": 242,
               "difficulty": 1,
-              "question": "\"<router-link> 和 <a> 区别？\"",
+              "question": "<router-link> 和 <a> 区别？",
               "options": [
                 "完全相同",
                 "router-link 无刷新跳转；a 标签会整页刷新",
@@ -3505,7 +3505,7 @@
             {
               "id": 243,
               "difficulty": 1,
-              "question": "\"动态路由 /user/:id 怎么获取 id？\"",
+              "question": "动态路由 /user/:id 怎么获取 id？",
               "options": [
                 "从 URL 手动解析",
                 "useRoute().params.id",
@@ -3561,7 +3561,7 @@
                 "样式隔离"
               ],
               "answer": 1,
-              "explanation": "\"slot 让组件接收\\\"模板内容\\\"而非数据。子组件留\\\"空位\\\"，父组件填充内容。具名插槽有多个名称不同的空位。\""
+              "explanation": "slot 让组件接收\"模板内容\"而非数据。子组件留\"空位\"，父组件填充内容。具名插槽有多个名称不同的空位。"
             },
             {
               "id": 247,
@@ -3587,7 +3587,7 @@
                 "只有 getters"
               ],
               "answer": 1,
-              "explanation": "\"store=defineStore(\\\"name\\\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。\""
+              "explanation": "store=defineStore(\"name\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。"
             },
             {
               "id": 249,
@@ -3600,7 +3600,7 @@
                 "reactive 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。\""
+              "explanation": "const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。"
             },
             {
               "id": 250,
@@ -3661,12 +3661,12 @@
                 "存储状态"
               ],
               "answer": 1,
-              "explanation": "\"router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。\""
+              "explanation": "router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。"
             },
             {
               "id": 254,
               "difficulty": 3,
-              "question": "\"`<style scoped>` 的原理？\"",
+              "question": "`<style scoped>` 的原理？",
               "options": [
                 "随机数",
                 "Vue 给组件元素加唯一属性(data-v-xxx)CSS 选择器追加该属性选择器",
@@ -3674,12 +3674,12 @@
                 "PostCSS"
               ],
               "answer": 1,
-              "explanation": "\"Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。\""
+              "explanation": "Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。"
             },
             {
               "id": 255,
               "difficulty": 3,
-              "question": "\"`<script setup>` 中如何声明 props 和 emits？\"",
+              "question": "`<script setup>` 中如何声明 props 和 emits？",
               "options": [
                 "无法声明",
                 "defineProps({...})和 defineEmits([...])",
@@ -3721,7 +3721,7 @@
               "question": "Vue Router 的懒加载怎么做？",
               "options": [
                 "无法实现",
-                "component:()=>import(\\\"./View.vue\\\")——路由被访问时才加载组件代码",
+                "component:()=>import(\"./View.vue\")——路由被访问时才加载组件代码",
                 "手动加载",
                 "自动加载"
               ],
@@ -3739,12 +3739,12 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。\""
+              "explanation": "const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。"
             },
             {
               "id": 260,
               "difficulty": 3,
-              "question": "\"`<KeepAlive>` 组件做什么？\"",
+              "question": "`<KeepAlive>` 组件做什么？",
               "options": [
                 "缓存路由",
                 "缓存被切换走的组件实例不销毁保留其状态。切回来时恢复之前的状态",
@@ -3783,7 +3783,7 @@
                 "能创造知识"
               ],
               "answer": 1,
-              "explanation": "\"大语言模型本质\\\"下一个词预测器\\\"。根据训练数据和上下文计算每个可能 token 的概率。\""
+              "explanation": "大语言模型本质\"下一个词预测器\"。根据训练数据和上下文计算每个可能 token 的概率。"
             },
             {
               "id": 262,
@@ -3822,7 +3822,7 @@
                 "越长越好"
               ],
               "answer": 1,
-              "explanation": "\"角色(\\\"你是前端专家\\\")+上下文(\\\"我在做音乐教学网站\\\")+任务(\\\"写一个 CSS 动画\\\")+格式约束(\\\"输出完整代码\\\")。\""
+              "explanation": "角色(\"你是前端专家\")+上下文(\"我在做音乐教学网站\")+任务(\"写一个 CSS 动画\")+格式约束(\"输出完整代码\")。"
             },
             {
               "id": 265,
@@ -3835,7 +3835,7 @@
                 "简单代码可以直接用"
               ],
               "answer": 1,
-              "explanation": "\"AI 生成的代码像\\\"初稿\\\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。\""
+              "explanation": "AI 生成的代码像\"初稿\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。"
             }
           ]
         },
@@ -3870,7 +3870,7 @@
                 "不需要贴报错"
               ],
               "answer": 1,
-              "explanation": "\"三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\\\"我想让按钮点击后变色\\\")。\""
+              "explanation": "三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\"我想让按钮点击后变色\")。"
             },
             {
               "id": 268,
@@ -3904,7 +3904,7 @@
               "question": "让 AI 解释代码 vs 让 AI 写代码→Prompt 有什么不同？",
               "options": [
                 "完全相同",
-                "解释代码：给代码+问\\\"这段代码在做什么\\\"。写代码：给需求+约束+示例",
+                "解释代码：给代码+问\"这段代码在做什么\"。写代码：给需求+约束+示例",
                 "解释代码不能用 AI",
                 "写代码不能用 AI"
               ],
@@ -3917,7 +3917,7 @@
               "question": "AI 对话中为什么不能一次塞太多无关内容？",
               "options": [
                 "AI 记性好",
-                "上下文窗口有限→无关内容挤占空间→AI\\\"忘记\\\"前面的重要信息。保持对话聚焦",
+                "上下文窗口有限→无关内容挤占空间→AI\"忘记\"前面的重要信息。保持对话聚焦",
                 "AI 能处理任意长度",
                 "多给 AI 数据更好"
               ],
@@ -3970,14 +3970,14 @@
                 "换一个 AI"
               ],
               "answer": 1,
-              "explanation": "\"不盲信 AI。用已有知识质疑查阅权威来源(官方文档/MDN)验证。告诉 AI\\\"你错了因为...\\\"可能让它修正。\""
+              "explanation": "不盲信 AI。用已有知识质疑查阅权威来源(官方文档/MDN)验证。告诉 AI\"你错了因为...\"可能让它修正。"
             },
             {
               "id": 275,
               "difficulty": 3,
               "question": "AI 辅助项目规划→Prompt 应包含什么？",
               "options": [
-                "\\\"帮我做一个项目\\\"",
+                "\"帮我做一个项目\"",
                 "功能列表+目标用户+技术栈偏好+时间约束+期望输出格式",
                 "只写项目名",
                 "越长越好"
@@ -4153,7 +4153,7 @@
                 "opacity 不加速"
               ],
               "answer": 1,
-              "explanation": "\"创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。\""
+              "explanation": "创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。"
             },
             {
               "id": 287,
@@ -4192,7 +4192,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。\""
+              "explanation": "will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。"
             },
             {
               "id": 290,
@@ -4245,7 +4245,7 @@
             {
               "id": 293,
               "difficulty": 3,
-              "question": "\"以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`\"",
+              "question": "以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`",
               "options": [
                 "1,2,3",
                 "3,1,2",
@@ -4279,7 +4279,7 @@
                 "transform 平移后的元素不占原文档流空间"
               ],
               "answer": 2,
-              "explanation": "\"opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。\""
+              "explanation": "opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。"
             },
             {
               "id": 296,
@@ -4292,7 +4292,7 @@
                 "废弃了"
               ],
               "answer": 1,
-              "explanation": "\"修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。\""
+              "explanation": "修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。"
             },
             {
               "id": 297,
@@ -4388,7 +4388,7 @@
                 "不优化也行"
               ],
               "answer": 1,
-              "explanation": "\"WebP/AVIF 比 JPEG/PNG 小 30-50%。srcset 根据屏幕选合适尺寸。loading=lazy 延迟加载屏幕外图片。\""
+              "explanation": "WebP/AVIF 比 JPEG/PNG 小 30-50%。srcset 根据屏幕选合适尺寸。loading=lazy 延迟加载屏幕外图片。"
             },
             {
               "id": 303,
@@ -4436,7 +4436,7 @@
                 "服务器配置"
               ],
               "answer": 1,
-              "explanation": "\"图片：原生 loading=\\\"lazy\\\"属性或 IntersectionObserver 监听进入视口。路由组件：()=>import(\\\"./X.vue\\\")。大列表：虚拟列表只渲染可见行。\""
+              "explanation": "图片：原生 loading=\"lazy\"属性或 IntersectionObserver 监听进入视口。路由组件：()=>import(\"./X.vue\")。大列表：虚拟列表只渲染可见行。"
             },
             {
               "id": 306,
@@ -4449,7 +4449,7 @@
                 "缓存让页面变慢"
               ],
               "answer": 1,
-              "explanation": "\"强缓存：Cache-Control:max-age=31536000。文件内容变化→改文件名(hash)→新 URL 无缓存→下载。协商缓存：ETag/Last-Modified 向服务器确认是否变化。\""
+              "explanation": "强缓存：Cache-Control:max-age=31536000。文件内容变化→改文件名(hash)→新 URL 无缓存→下载。协商缓存：ETag/Last-Modified 向服务器确认是否变化。"
             },
             {
               "id": 307,
@@ -4488,7 +4488,7 @@
                 "不用考虑兼容"
               ],
               "answer": 1,
-              "explanation": "\"<picture><source srcset=\\\"x.webp\\\" type=\\\"image/webp\\\"><img src=\\\"x.jpg\\\"></picture>。浏览器选第一个支持的格式。\""
+              "explanation": "<picture><source srcset=\"x.webp\" type=\"image/webp\"><img src=\"x.jpg\"></picture>。浏览器选第一个支持的格式。"
             },
             {
               "id": 310,
@@ -4544,12 +4544,12 @@
               "question": "骨架屏(Skeleton Screen)的作用？",
               "options": [
                 "装饰",
-                "在内容加载前显示灰色占位图形。让用户感知\\\"正在加载\\\"比空白或转圈更好",
+                "在内容加载前显示灰色占位图形。让用户感知\"正在加载\"比空白或转圈更好",
                 "加速加载",
                 "SEO"
               ],
               "answer": 1,
-              "explanation": "\"骨架屏=页面结构的灰色占位。给用户\\\"内容马上就来\\\"的感觉减少跳出。比空白页面或 spinner 体验更好。\""
+              "explanation": "骨架屏=页面结构的灰色占位。给用户\"内容马上就来\"的感觉减少跳出。比空白页面或 spinner 体验更好。"
             },
             {
               "id": 314,
@@ -4601,7 +4601,7 @@
                 "CSS 放底部"
               ],
               "answer": 1,
-              "explanation": "\"内联关键 CSS(首屏需要的样式)在 head 优先渲染。非关键 CSS 用 media=\\\"print\\\" onload 异步加载。JS 用 defer 延迟执行不阻塞 HTML 解析。\""
+              "explanation": "内联关键 CSS(首屏需要的样式)在 head 优先渲染。非关键 CSS 用 media=\"print\" onload 异步加载。JS 用 defer 延迟执行不阻塞 HTML 解析。"
             },
             {
               "id": 318,
@@ -4684,7 +4684,7 @@
                 "SEO 优化"
               ],
               "answer": 1,
-              "explanation": "\"HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\\\"不安全\\\"。\""
+              "explanation": "HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\"不安全\"。"
             }
           ]
         },
@@ -4706,7 +4706,7 @@
                 "innerHTML 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。\""
+              "explanation": "innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。"
             },
             {
               "id": 324,
@@ -4772,7 +4772,7 @@
             {
               "id": 328,
               "difficulty": 3,
-              "question": "\"以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`\"",
+              "question": "以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`",
               "options": [
                 "无问题",
                 "若服务端将 name 参数直接输出到 HTML→反射型 XSS。应转义 HTML 实体",
@@ -4780,7 +4780,7 @@
                 "参数名错误"
               ],
               "answer": 1,
-              "explanation": "\"反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。\""
+              "explanation": "反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。"
             },
             {
               "id": 329,
@@ -4819,7 +4819,7 @@
                 "无法防御"
               ],
               "answer": 1,
-              "explanation": "\"攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。\""
+              "explanation": "攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。"
             },
             {
               "id": 332,
@@ -4968,7 +4968,7 @@
             {
               "id": 341,
               "difficulty": 2,
-              "question": "\"测试覆盖率 100% 是好目标吗？\"",
+              "question": "测试覆盖率 100% 是好目标吗？",
               "options": [
                 "是必须",
                 "不是——追求覆盖率数字导致写无意义测试。重要的代码都被测试覆盖即可",
@@ -4976,7 +4976,7 @@
                 "不需要覆盖率"
               ],
               "answer": 1,
-              "explanation": "\"100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。\""
+              "explanation": "100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。"
             },
             {
               "id": 342,
@@ -5045,7 +5045,7 @@
               "question": "测试命名规范为什么重要？",
               "options": [
                 "不重要",
-                "好测试名=被测对象+场景+期望结果。\\\"点击提交按钮且表单为空应显示错误信息\\\"",
+                "好测试名=被测对象+场景+期望结果。\"点击提交按钮且表单为空应显示错误信息\"",
                 "随便命名",
                 "命名无所谓"
               ],
@@ -5320,12 +5320,12 @@
                 "只写一半"
               ],
               "answer": 1,
-              "explanation": "\"YAGNI=不要提前实现\\\"将来可能需要\\\"的功能。需求会变→提前做的可能用不上。等需求明确时再实现更高效。\""
+              "explanation": "YAGNI=不要提前实现\"将来可能需要\"的功能。需求会变→提前做的可能用不上。等需求明确时再实现更高效。"
             },
             {
               "id": 365,
               "difficulty": 3,
-              "question": "\"KISS(Keep It Simple, Stupid)在前端的体现？\"",
+              "question": "KISS(Keep It Simple, Stupid)在前端的体现？",
               "options": [
                 "简单就是简陋",
                 "优先最简单的解决方案。能用 CSS 不用 JS；能用标准库不引入第三方包；能用纯函数不用复杂模式",
@@ -5333,7 +5333,7 @@
                 "KISS 已过时"
               ],
               "answer": 1,
-              "explanation": "\"简单方案 > 炫技。能用 HTML/CSS 解决不用 JS。能用浏览器 API 不引入库。复杂度随需求增长而非提前设计。\""
+              "explanation": "简单方案 > 炫技。能用 HTML/CSS 解决不用 JS。能用浏览器 API 不引入库。复杂度随需求增长而非提前设计。"
             },
             {
               "id": 366,
@@ -5385,7 +5385,7 @@
                 "已废弃"
               ],
               "answer": 1,
-              "explanation": "\"Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。\""
+              "explanation": "Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。"
             }
           ]
         }
@@ -5424,12 +5424,12 @@
               "question": "alt 属性对无障碍的重要性？",
               "options": [
                 "不重要",
-                "屏幕阅读器读出 alt 文字让视障用户\\\"看到\\\"图片。没有 alt→用户不知道图片内容",
+                "屏幕阅读器读出 alt 文字让视障用户\"看到\"图片。没有 alt→用户不知道图片内容",
                 "只影响 SEO",
                 "只装饰图片需要"
               ],
               "answer": 1,
-              "explanation": "\"alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\\\"\\\"让阅读器跳过。\""
+              "explanation": "alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\"\"让阅读器跳过。"
             },
             {
               "id": 372,
@@ -5464,7 +5464,7 @@
                 "语义化过时"
               ],
               "answer": 1,
-              "explanation": "\"<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\\\"...\\\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。\""
+              "explanation": "<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\"...\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。"
             },
             {
               "id": 374,
@@ -5472,7 +5472,7 @@
               "question": "ARIA 的作用？什么时候需要？",
               "options": [
                 "替代 HTML",
-                "当 HTML 原生语义不够用时补充无障碍信息。如 role=\\\"tab\\\" aria-selected=\\\"true\\\"。能用原生就不用 ARIA",
+                "当 HTML 原生语义不够用时补充无障碍信息。如 role=\"tab\" aria-selected=\"true\"。能用原生就不用 ARIA",
                 "不需要",
                 "总需要"
               ],
@@ -5503,7 +5503,7 @@
                 "去掉提升美观"
               ],
               "answer": 1,
-              "explanation": "\"永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。\""
+              "explanation": "永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。"
             },
             {
               "id": 377,
@@ -5516,7 +5516,7 @@
                 "aria-label 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"aria-label=\\\"关闭\\\"直接在元素上设标签。aria-labelledby=\\\"id1\\\"引用页面已有元素的内容作为标签(避免重复文本)。\""
+              "explanation": "aria-label=\"关闭\"直接在元素上设标签。aria-labelledby=\"id1\"引用页面已有元素的内容作为标签(避免重复文本)。"
             }
           ]
         },
@@ -5530,15 +5530,15 @@
             {
               "id": 378,
               "difficulty": 3,
-              "question": "\"以下 tab 顺序有问题吗？`<input><button style=\\\"position:absolute;left:-999px\\\">隐藏</button><input>`\"",
+              "question": "以下 tab 顺序有问题吗？`<input><button style=\"position:absolute;left:-999px\">隐藏</button><input>`",
               "options": [
                 "没问题",
-                "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\\\"消失了\\\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)",
+                "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\"消失了\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)",
                 "隐藏元素自动跳过",
                 "position:absolute 自动移除"
               ],
               "answer": 1,
-              "explanation": "\"视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。\""
+              "explanation": "视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。"
             },
             {
               "id": 379,
@@ -5546,7 +5546,7 @@
               "question": "动态内容更新(如 AJAX 加载)如何让屏幕阅读器知晓？",
               "options": [
                 "自动知晓",
-                "用 aria-live 区域(如 aria-live=\\\"polite\\\")播报内容变化。重要消息用 assertive",
+                "用 aria-live 区域(如 aria-live=\"polite\")播报内容变化。重要消息用 assertive",
                 "刷新页面",
                 "不需要通知"
               ],
@@ -5559,7 +5559,7 @@
               "question": "以下 modal 对话框缺少什么无障碍特性？",
               "options": [
                 "不缺",
-                "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\\\"true\\\"；body 滚动锁定",
+                "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\"true\"；body 滚动锁定",
                 "只需 ESC",
                 "只需关闭按钮"
               ],
@@ -5572,12 +5572,12 @@
               "question": "表单错误信息如何让屏幕阅读器感知？",
               "options": [
                 "只显示红色",
-                "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\\\"alert\\\"",
+                "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\"alert\"",
                 "不需要",
                 "颜色区分即可"
               ],
               "answer": 1,
-              "explanation": "\"仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\\\"true\\\"标记无效输入。role=\\\"alert\\\"自动播报。\""
+              "explanation": "仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\"true\"标记无效输入。role=\"alert\"自动播报。"
             },
             {
               "id": 382,
@@ -5603,7 +5603,7 @@
                 "不需要处理"
               ],
               "answer": 1,
-              "explanation": "\"<button><i class=\\\"icon-close\\\"></i></button>→阅读器读出\\\"按钮\\\"但不知道做什么。加 aria-label=\\\"关闭\\\"或用 visually-hidden 文字。\""
+              "explanation": "<button><i class=\"icon-close\"></i></button>→阅读器读出\"按钮\"但不知道做什么。加 aria-label=\"关闭\"或用 visually-hidden 文字。"
             },
             {
               "id": 384,
@@ -5616,7 +5616,7 @@
                 "ARIA 已废弃"
               ],
               "answer": 1,
-              "explanation": "\"ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\\\"button\\\"好一万倍。滥用 ARIA 降低可访问性。\""
+              "explanation": "ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\"button\"好一万倍。滥用 ARIA 降低可访问性。"
             }
           ]
         }
@@ -5635,7 +5635,7 @@
         "<h1>"
       ],
       "answer": 1,
-      "explanation": "\"<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。\"",
+      "explanation": "<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。",
       "gem": "html-tags",
       "level": 1
     },
@@ -5672,7 +5672,7 @@
     {
       "id": 4,
       "difficulty": 1,
-      "question": "\"表格中 <tr> 代表什么？\"",
+      "question": "表格中 <tr> 代表什么？",
       "options": [
         "表格",
         "表头",
@@ -5695,7 +5695,7 @@
         "# 注释"
       ],
       "answer": 2,
-      "explanation": "\"HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。\"",
+      "explanation": "HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。",
       "gem": "html-tags",
       "level": 1
     },
@@ -5710,7 +5710,7 @@
         "strong 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。\"",
+      "explanation": "strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。",
       "gem": "html-tags",
       "level": 2
     },
@@ -5792,7 +5792,7 @@
     {
       "id": 12,
       "difficulty": 2,
-      "question": "\"<p>Hello<br>World</p> 渲染几行？\"",
+      "question": "<p>Hello<br>World</p> 渲染几行？",
       "options": [
         "1行",
         "2行",
@@ -5807,15 +5807,15 @@
     {
       "id": 13,
       "difficulty": 2,
-      "question": "\"<div class=\\\"a b c\\\"> 有几个 class？\"",
+      "question": "<div class=\"a b c\"> 有几个 class？",
       "options": [
-        "1个，名字是\\\"a b c\\\"",
+        "1个，名字是\"a b c\"",
         "3个：a、b、c",
         "语法错误",
         "只有第一个生效"
       ],
       "answer": 1,
-      "explanation": "\"class 用空格分隔多个类名。\\\"a b c\\\" 是三个独立的类。\"",
+      "explanation": "class 用空格分隔多个类名。\"a b c\" 是三个独立的类。",
       "gem": "html-tags",
       "level": 2
     },
@@ -5825,7 +5825,7 @@
       "question": "一段纯 div 导航页如何改写为语义化？",
       "options": [
         "把 class 名改成语义化即可",
-        "<div class=\\\"header\\\">→<header> 等，换标签",
+        "<div class=\"header\">→<header> 等，换标签",
         "全部换成 section",
         "不需要改"
       ],
@@ -5837,7 +5837,7 @@
     {
       "id": 15,
       "difficulty": 3,
-      "question": "\"<ul><p>列表项</p></ul> 有什么问题？\"",
+      "question": "<ul><p>列表项</p></ul> 有什么问题？",
       "options": [
         "完全没问题",
         "ul 的直接子元素只能是 li 不能是 p",
@@ -5845,14 +5845,14 @@
         "p 不能放在任何列表里"
       ],
       "answer": 1,
-      "explanation": "\"ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。\"",
+      "explanation": "ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 16,
       "difficulty": 2,
-      "question": "\"<img src=\\\"x.jpg\\\"> 和 <img src=\\\"x.jpg\\\" alt=\\\"\\\"> 区别？\"",
+      "question": "<img src=\"x.jpg\"> 和 <img src=\"x.jpg\" alt=\"\"> 区别？",
       "options": [
         "完全一样",
         "前者不写 alt 阅读器可能读文件名，后者表示纯装饰阅读器跳过",
@@ -5860,14 +5860,14 @@
         "alt 可以不写"
       ],
       "answer": 1,
-      "explanation": "\"不写 alt 屏幕阅读器可能读文件名。alt=\\\"\\\" 表示纯装饰，让阅读器跳过。alt=\\\"描述\\\" 提供有意义的替代信息。\"",
+      "explanation": "不写 alt 屏幕阅读器可能读文件名。alt=\"\" 表示纯装饰，让阅读器跳过。alt=\"描述\" 提供有意义的替代信息。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 17,
       "difficulty": 3,
-      "question": "\"<td colspan=\\\"2\\\"> 和 rowspan=\\\"2\\\" 各做什么？\"",
+      "question": "<td colspan=\"2\"> 和 rowspan=\"2\" 各做什么？",
       "options": [
         "colspan 跨行 rowspan 跨列",
         "colspan 水平跨列 rowspan 垂直跨行",
@@ -5890,14 +5890,14 @@
         "不支持多格式"
       ],
       "answer": 1,
-      "explanation": "\"用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。\"",
+      "explanation": "用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 19,
       "difficulty": 2,
-      "question": "\"<br> 和 <p> 都能换行，核心区别？\"",
+      "question": "<br> 和 <p> 都能换行，核心区别？",
       "options": [
         "br 是段落 p 是换行",
         "br 行内换行无间距，p 段落分隔有间距",
@@ -5912,7 +5912,7 @@
     {
       "id": 20,
       "difficulty": 3,
-      "question": "\"<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？\"",
+      "question": "<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？",
       "options": [
         "嵌套的两个 p",
         "两个并列的 p（p 不能嵌套）",
@@ -5920,14 +5920,14 @@
         "只显示第一段"
       ],
       "answer": 1,
-      "explanation": "\"p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。\"",
+      "explanation": "p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 21,
       "difficulty": 2,
-      "question": "\"<button disabled> 和普通按钮区别？\"",
+      "question": "<button disabled> 和普通按钮区别？",
       "options": [
         "前者灰色不可点击",
         "前者隐藏",
@@ -5935,14 +5935,14 @@
         "前者是旧写法"
       ],
       "answer": 0,
-      "explanation": "\"disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于\\\"条件不满足暂时不能点\\\"。\"",
+      "explanation": "disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于\"条件不满足暂时不能点\"。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 22,
       "difficulty": 2,
-      "question": "\"<input readonly> 和 disabled 区别？\"",
+      "question": "<input readonly> 和 disabled 区别？",
       "options": [
         "完全一样",
         "readonly 可选中复制可提交值，disabled 完全不可交互不提交",
@@ -5957,7 +5957,7 @@
     {
       "id": 23,
       "difficulty": 1,
-      "question": "\"&lt; 在 HTML 中显示为什么？\"",
+      "question": "&lt; 在 HTML 中显示为什么？",
       "options": [
         "<",
         ">",
@@ -5965,7 +5965,7 @@
         "报错"
       ],
       "answer": 0,
-      "explanation": "\"&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。\"",
+      "explanation": "&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。",
       "gem": "html-tags",
       "level": 3
     },
@@ -5974,20 +5974,20 @@
       "difficulty": 2,
       "question": "链接新标签页打开 target 写什么？",
       "options": [
-        "target=\\\"new\\\"",
-        "target=\\\"_blank\\\"",
-        "target=\\\"blank\\\"",
-        "open=\\\"new\\\""
+        "target=\"new\"",
+        "target=\"_blank\"",
+        "target=\"blank\"",
+        "open=\"new\""
       ],
       "answer": 1,
-      "explanation": "\"target=\\\"_blank\\\" 在新标签页打开。_blank 是标准保留值。\"",
+      "explanation": "target=\"_blank\" 在新标签页打开。_blank 是标准保留值。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 25,
       "difficulty": 2,
-      "question": "\"<meta charset=\\\"UTF-8\\\"> 不写会怎样？\"",
+      "question": "<meta charset=\"UTF-8\"> 不写会怎样？",
       "options": [
         "页面无法显示",
         "中文可能乱码",
@@ -5995,14 +5995,14 @@
         "图片加载失败"
       ],
       "answer": 1,
-      "explanation": "\"charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标\\\"五线谱\\\"还是\\\"简谱\\\"。\"",
+      "explanation": "charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标\"五线谱\"还是\"简谱\"。",
       "gem": "html-tags",
       "level": 3
     },
     {
       "id": 26,
       "difficulty": 1,
-      "question": "\"class 用 . 还是 # 选中？id 呢？\"",
+      "question": "class 用 . 还是 # 选中？id 呢？",
       "options": [
         "class 用 . id 用 #",
         "class 用 # id 用 .",
@@ -6010,7 +6010,7 @@
         "都用 #"
       ],
       "answer": 0,
-      "explanation": "\"类选择器用 .class名，ID 选择器用 #id名。记忆：class=分类(点号)，id=身份证(井号)。\"",
+      "explanation": "类选择器用 .class名，ID 选择器用 #id名。记忆：class=分类(点号)，id=身份证(井号)。",
       "gem": "html-ability",
       "level": 1
     },
@@ -6034,20 +6034,20 @@
       "difficulty": 1,
       "question": "布尔属性需要写值吗？举一个例子",
       "options": [
-        "需要，如 disabled=\\\"true\\\"",
+        "需要，如 disabled=\"true\"",
         "不需要，只要出现就生效如 disabled",
         "必须有值",
         "布尔属性已废弃"
       ],
       "answer": 1,
-      "explanation": "\"布尔属性只关心\\\"有\\\"还是\\\"没有\\\"，不关心值。disabled/checked/controls/loop 都是布尔属性。\"",
+      "explanation": "布尔属性只关心\"有\"还是\"没有\"，不关心值。disabled/checked/controls/loop 都是布尔属性。",
       "gem": "html-ability",
       "level": 1
     },
     {
       "id": 29,
       "difficulty": 1,
-      "question": "\"data-* 属性做什么？JS 怎么读？\"",
+      "question": "data-* 属性做什么？JS 怎么读？",
       "options": [
         "设置样式",
         "存储自定义数据，用 dataset 读取",
@@ -6055,7 +6055,7 @@
         "声明编码"
       ],
       "answer": 1,
-      "explanation": "\"data-* 在元素上存自定义信息，JS 通过 element.dataset.xxx 读取。<div data-id=\\\"1\\\">→el.dataset.id。\"",
+      "explanation": "data-* 在元素上存自定义信息，JS 通过 element.dataset.xxx 读取。<div data-id=\"1\">→el.dataset.id。",
       "gem": "html-ability",
       "level": 1
     },
@@ -6085,7 +6085,7 @@
         "可以，写多个 class 属性"
       ],
       "answer": 1,
-      "explanation": "\"class=\\\"card highlight active\\\"——用空格分隔多个类名，这个元素同时属于三个类。\"",
+      "explanation": "class=\"card highlight active\"——用空格分隔多个类名，这个元素同时属于三个类。",
       "gem": "html-ability",
       "level": 2
     },
@@ -6107,7 +6107,7 @@
     {
       "id": 33,
       "difficulty": 2,
-      "question": "\"hidden 属性和 display:none 效果一样吗？\"",
+      "question": "hidden 属性和 display:none 效果一样吗？",
       "options": [
         "完全一样",
         "hidden 是 HTML 属性层隐藏，display:none 是 CSS 层",
@@ -6115,7 +6115,7 @@
         "display:none 不可恢复"
       ],
       "answer": 1,
-      "explanation": "\"效果类似。但 hidden 优先级低——若 CSS 设 display:block，hidden 会被覆盖。\"",
+      "explanation": "效果类似。但 hidden 优先级低——若 CSS 设 display:block，hidden 会被覆盖。",
       "gem": "html-ability",
       "level": 2
     },
@@ -6137,7 +6137,7 @@
     {
       "id": 35,
       "difficulty": 2,
-      "question": "\"属性值必须加引号吗？<img src=photo.jpg> 合法吗？\"",
+      "question": "属性值必须加引号吗？<img src=photo.jpg> 合法吗？",
       "options": [
         "必须加",
         "不必须，HTML5 允许不加引号",
@@ -6160,29 +6160,29 @@
         "id 会覆盖 class"
       ],
       "answer": 1,
-      "explanation": "\"class 和 id 可以同时存在。class 用于样式分组，id 用于唯一标识和 JS 选取。<div class=\\\"card\\\" id=\\\"card1\\\">\"",
+      "explanation": "class 和 id 可以同时存在。class 用于样式分组，id 用于唯一标识和 JS 选取。<div class=\"card\" id=\"card1\">",
       "gem": "html-ability",
       "level": 2
     },
     {
       "id": 37,
       "difficulty": 2,
-      "question": "\"checked=\\\"false\\\" 和完全不写 checked 的区别？\"",
+      "question": "checked=\"false\" 和完全不写 checked 的区别？",
       "options": [
         "前者不选中",
         "前者仍然选中！布尔属性只看出现不看值",
         "完全相同",
-        "checked=\\\"false\\\" 语法错误"
+        "checked=\"false\" 语法错误"
       ],
       "answer": 1,
-      "explanation": "\"checked=\\\"false\\\" 仍然是选中状态！布尔属性只关心\\\"有没有出现\\\"不看值。想不选中需要完全移除 checked。\"",
+      "explanation": "checked=\"false\" 仍然是选中状态！布尔属性只关心\"有没有出现\"不看值。想不选中需要完全移除 checked。",
       "gem": "html-ability",
       "level": 2
     },
     {
       "id": 38,
       "difficulty": 3,
-      "question": "\"<img src=\\\"x.jpg\\\" alt=\\\"\\\"> 图片加载失败时用户看到什么？\"",
+      "question": "<img src=\"x.jpg\" alt=\"\"> 图片加载失败时用户看到什么？",
       "options": [
         "看到空 alt 文字",
         "看到裂图图标无替代文字",
@@ -6190,14 +6190,14 @@
         "看到文件名"
       ],
       "answer": 1,
-      "explanation": "\"alt=\\\"\\\" 表示纯装饰，阅读器跳过。加载失败时浏览器显示裂图图标无替代文字。alt=\\\"描述\\\" 才会显示描述。\"",
+      "explanation": "alt=\"\" 表示纯装饰，阅读器跳过。加载失败时浏览器显示裂图图标无替代文字。alt=\"描述\" 才会显示描述。",
       "gem": "html-ability",
       "level": 3
     },
     {
       "id": 39,
       "difficulty": 3,
-      "question": "\"<a href=\\\"wikipedia.org\\\"> 和 href=\\\"https://wikipedia.org\\\"> 区别？\"",
+      "question": "<a href=\"wikipedia.org\"> 和 href=\"https://wikipedia.org\"> 区别？",
       "options": [
         "都正常跳转",
         "前者被当作相对路径(网站内文件)，后者正常跳转",
@@ -6205,14 +6205,14 @@
         "前者自动补全"
       ],
       "answer": 1,
-      "explanation": "\"无 https:// 时浏览器把 wikipedia.org 当作你网站内的相对路径→404。必须写完整 URL。\"",
+      "explanation": "无 https:// 时浏览器把 wikipedia.org 当作你网站内的相对路径→404。必须写完整 URL。",
       "gem": "html-ability",
       "level": 3
     },
     {
       "id": 40,
       "difficulty": 3,
-      "question": "\"<label for=\\\"email\\\"> 但 input id=\\\"userEmail\\\"→点 label 会？\"",
+      "question": "<label for=\"email\"> 但 input id=\"userEmail\"→点 label 会？",
       "options": [
         "正常聚焦",
         "什么都不发生，for 和 id 不匹配",
@@ -6220,7 +6220,7 @@
         "聚焦最近输入框"
       ],
       "answer": 1,
-      "explanation": "\"label 的 for 必须等于 input 的 id——这对\\\"钥匙和锁\\\"必须一模一样才会生效。不匹配点击无反应。\"",
+      "explanation": "label 的 for 必须等于 input 的 id——这对\"钥匙和锁\"必须一模一样才会生效。不匹配点击无反应。",
       "gem": "html-ability",
       "level": 3
     },
@@ -6257,15 +6257,15 @@
     {
       "id": 43,
       "difficulty": 3,
-      "question": "\"<input type=\\\"checkbox\\\" checked> 选中的值是什么？\"",
+      "question": "<input type=\"checkbox\" checked> 选中的值是什么？",
       "options": [
-        "\\\"checked\\\"",
-        "不写 value 时默认为 \\\"on\\\"",
+        "\"checked\"",
+        "不写 value 时默认为 \"on\"",
         "true",
         "false"
       ],
       "answer": 1,
-      "explanation": "\"checkbox 不写 value 属性时，选中提交的默认值是 \\\"on\\\"。想提交自定义值需设 value=\\\"自定义值\\\"。\"",
+      "explanation": "checkbox 不写 value 属性时，选中提交的默认值是 \"on\"。想提交自定义值需设 value=\"自定义值\"。",
       "gem": "html-ability",
       "level": 3
     },
@@ -6287,7 +6287,7 @@
     {
       "id": 45,
       "difficulty": 3,
-      "question": "\"<input required> 和 <input pattern=\\\"[0-9]+\\\"> 各做什么？\"",
+      "question": "<input required> 和 <input pattern=\"[0-9]+\"> 各做什么？",
       "options": [
         "required 必填，pattern 正则校验格式",
         "完全相同",
@@ -6310,7 +6310,7 @@
         "<class名>"
       ],
       "answer": 0,
-      "explanation": "\"类选择器用 .开头：.card 选中所有 class=\\\"card\\\" 的元素。\"",
+      "explanation": "类选择器用 .开头：.card 选中所有 class=\"card\" 的元素。",
       "gem": "css-style",
       "level": 1
     },
@@ -6325,7 +6325,7 @@
         "<id名>"
       ],
       "answer": 1,
-      "explanation": "\"ID 选择器用 #开头：#title 选中 id=\\\"title\\\" 的元素。\"",
+      "explanation": "ID 选择器用 #开头：#title 选中 id=\"title\" 的元素。",
       "gem": "css-style",
       "level": 1
     },
@@ -6336,11 +6336,11 @@
       "options": [
         "color: red",
         "color = red",
-        "color: \\\"red\\\"",
+        "color: \"red\"",
         "color; red"
       ],
       "answer": 0,
-      "explanation": "\"CSS 声明格式：属性: 值; 如 color: red;。不能用等号，值通常不加引号。\"",
+      "explanation": "CSS 声明格式：属性: 值; 如 color: red;。不能用等号，值通常不加引号。",
       "gem": "css-style",
       "level": 1
     },
@@ -6355,14 +6355,14 @@
         "# 注释"
       ],
       "answer": 2,
-      "explanation": "\"CSS 用 /* 注释 */。// 是 JS 注释在 CSS 中无效。\"",
+      "explanation": "CSS 用 /* 注释 */。// 是 JS 注释在 CSS 中无效。",
       "gem": "css-style",
       "level": 1
     },
     {
       "id": 50,
       "difficulty": 1,
-      "question": "\"color: #f00 和 red 等价吗？\"",
+      "question": "color: #f00 和 red 等价吗？",
       "options": [
         "等价都是红色",
         "不等价",
@@ -6370,14 +6370,14 @@
         "red 已废弃"
       ],
       "answer": 0,
-      "explanation": "\"#f00=#ff0000=red，都是纯红色完全等价。#f00 是 #ff0000 的缩写。\"",
+      "explanation": "#f00=#ff0000=red，都是纯红色完全等价。#f00 是 #ff0000 的缩写。",
       "gem": "css-style",
       "level": 1
     },
     {
       "id": 51,
       "difficulty": 2,
-      "question": "\"`.card.highlight` 和 `.card .highlight` 区别？\"",
+      "question": "`.card.highlight` 和 `.card .highlight` 区别？",
       "options": [
         "完全相同",
         "前者选中同时有两个类的元素，后者选中 card 内后代有 highlight 的元素",
@@ -6400,7 +6400,7 @@
         "!important 不算"
       ],
       "answer": 1,
-      "explanation": "\"权重：(ID数,类数,元素数)。如 #header .nav a=(1,1,1)。!important 强制覆盖一切。内联 style=1000。\"",
+      "explanation": "权重：(ID数,类数,元素数)。如 #header .nav a=(1,1,1)。!important 强制覆盖一切。内联 style=1000。",
       "gem": "css-style",
       "level": 2
     },
@@ -6430,14 +6430,14 @@
         "content"
       ],
       "answer": 3,
-      "explanation": "\"box-sizing:content-box(默认)时 width 只设置 content 区域宽度。padding 和 border 额外增加总宽。\"",
+      "explanation": "box-sizing:content-box(默认)时 width 只设置 content 区域宽度。padding 和 border 额外增加总宽。",
       "gem": "css-style",
       "level": 2
     },
     {
       "id": 55,
       "difficulty": 2,
-      "question": "\"box-sizing:border-box 改变什么？\"",
+      "question": "box-sizing:border-box 改变什么？",
       "options": [
         "什么也不变",
         "width 包含 content+padding+border 总宽",
@@ -6445,7 +6445,7 @@
         "只改变高度"
       ],
       "answer": 1,
-      "explanation": "\"border-box 让 width=content+padding+border 总宽，更直观。推荐全局设置 *{box-sizing:border-box}。\"",
+      "explanation": "border-box 让 width=content+padding+border 总宽，更直观。推荐全局设置 *{box-sizing:border-box}。",
       "gem": "css-style",
       "level": 2
     },
@@ -6482,7 +6482,7 @@
     {
       "id": 58,
       "difficulty": 2,
-      "question": "\"width:100% 和 width:100vw 区别？\"",
+      "question": "width:100% 和 width:100vw 区别？",
       "options": [
         "完全一样",
         "100%相对父元素宽度，100vw相对视口宽度(含滚动条)",
@@ -6490,7 +6490,7 @@
         "100% 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"100%相对于父容器 content 宽度。100vw 是整个视口宽度(含滚动条)。有滚动条时100vw>100%。\"",
+      "explanation": "100%相对于父容器 content 宽度。100vw 是整个视口宽度(含滚动条)。有滚动条时100vw>100%。",
       "gem": "css-style",
       "level": 2
     },
@@ -6512,7 +6512,7 @@
     {
       "id": 60,
       "difficulty": 2,
-      "question": "\"!important 为什么尽量不用？\"",
+      "question": "!important 为什么尽量不用？",
       "options": [
         "提高性能",
         "破坏正常优先级体系难以调试",
@@ -6520,14 +6520,14 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"!important 强制覆盖一切但滥用会导致难以调试和覆盖——形成恶性循环。应通过提高选择器权重而非!important。\"",
+      "explanation": "!important 强制覆盖一切但滥用会导致难以调试和覆盖——形成恶性循环。应通过提高选择器权重而非!important。",
       "gem": "css-style",
       "level": 2
     },
     {
       "id": 61,
       "difficulty": 3,
-      "question": "\"h1 同时被 `h1{color:red}` 和 `.title{color:blue}` 选中且 class=\\\"title\\\"→什么颜色？\"",
+      "question": "h1 同时被 `h1{color:red}` 和 `.title{color:blue}` 选中且 class=\"title\"→什么颜色？",
       "options": [
         "红元素选择器优先",
         "蓝类选择器权重(10)>元素(1)",
@@ -6535,14 +6535,14 @@
         "取决于文件顺序"
       ],
       "answer": 1,
-      "explanation": "\"类选择器权重(0,1,0)>元素选择器(0,0,1)，.title 胜出。\"",
+      "explanation": "类选择器权重(0,1,0)>元素选择器(0,0,1)，.title 胜出。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 62,
       "difficulty": 3,
-      "question": "\"div 设 width:200px;padding:20px;border:5px→实际总宽？\"",
+      "question": "div 设 width:200px;padding:20px;border:5px→实际总宽？",
       "options": [
         "200px",
         "250px=200+40+10",
@@ -6557,7 +6557,7 @@
     {
       "id": 63,
       "difficulty": 3,
-      "question": "\"同上改为 box-sizing:border-box，实际总宽？\"",
+      "question": "同上改为 box-sizing:border-box，实际总宽？",
       "options": [
         "250px",
         "200px(width 已含 padding+border)",
@@ -6572,7 +6572,7 @@
     {
       "id": 64,
       "difficulty": 3,
-      "question": "\"margin:10px 20px 30px 三个值各对应哪边？\"",
+      "question": "margin:10px 20px 30px 三个值各对应哪边？",
       "options": [
         "上10/左右20/下30",
         "上10/右20/下30/左20",
@@ -6587,7 +6587,7 @@
     {
       "id": 65,
       "difficulty": 3,
-      "question": "\"子元素设 margin-top:50px 为什么父元素也跟着下移？怎么修？\"",
+      "question": "子元素设 margin-top:50px 为什么父元素也跟着下移？怎么修？",
       "options": [
         "不可能发生",
         "margin 折叠穿透。给父元素加 overflow:hidden 或 padding:1px",
@@ -6595,7 +6595,7 @@
         "margin-top 只能用于 body"
       ],
       "answer": 1,
-      "explanation": "\"子元素 margin-top 会\\\"穿透\\\"父元素(margin collapse)。修法：父设 overflow:hidden/padding:1px/border:1px/flex 布局。\"",
+      "explanation": "子元素 margin-top 会\"穿透\"父元素(margin collapse)。修法：父设 overflow:hidden/padding:1px/border:1px/flex 布局。",
       "gem": "css-style",
       "level": 3
     },
@@ -6610,14 +6610,14 @@
         "a:active→a:hover→a:link→a:visited"
       ],
       "answer": 1,
-      "explanation": "\"LVHA=LoVe HAte。:link→:visited→:hover→:active 必须按此顺序否则某些状态被覆盖。\"",
+      "explanation": "LVHA=LoVe HAte。:link→:visited→:hover→:active 必须按此顺序否则某些状态被覆盖。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 67,
       "difficulty": 3,
-      "question": "\"`div p` 和 `div > p` 区别？\"",
+      "question": "`div p` 和 `div > p` 区别？",
       "options": [
         "完全相同",
         "前者所有后代 p，后者仅直接子元素 p",
@@ -6625,14 +6625,14 @@
         "语法错误"
       ],
       "answer": 1,
-      "explanation": "\"空格=所有层级后代。>=只直接子元素不包含更深层的 p。\"",
+      "explanation": "空格=所有层级后代。>=只直接子元素不包含更深层的 p。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 68,
       "difficulty": 3,
-      "question": "\"`h1,h2,h3{color:red}` 选中什么？\"",
+      "question": "`h1,h2,h3{color:red}` 选中什么？",
       "options": [
         "h1 内嵌套的 h2 和 h3",
         "所有 h1、所有 h2、所有 h3",
@@ -6640,14 +6640,14 @@
         "语法错误"
       ],
       "answer": 1,
-      "explanation": "\"逗号=分组选择器表示\\\"或\\\"。选中所有 h1、所有 h2、所有 h3。\"",
+      "explanation": "逗号=分组选择器表示\"或\"。选中所有 h1、所有 h2、所有 h3。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 69,
       "difficulty": 2,
-      "question": "\"opacity:0.5 和 opacity:50% 等价吗？\"",
+      "question": "opacity:0.5 和 opacity:50% 等价吗？",
       "options": [
         "等价",
         "不等价 50% 语法错",
@@ -6655,14 +6655,14 @@
         "取决于浏览器"
       ],
       "answer": 0,
-      "explanation": "\"CSS 支持百分比：opacity:50% 等于 opacity:0.5 完全等价。\"",
+      "explanation": "CSS 支持百分比：opacity:50% 等于 opacity:0.5 完全等价。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 70,
       "difficulty": 2,
-      "question": "\"display:none 和 visibility:hidden 核心区别？\"",
+      "question": "display:none 和 visibility:hidden 核心区别？",
       "options": [
         "完全相同",
         "前者不占空间(从布局移除)，后者占空间(不可见)",
@@ -6670,7 +6670,7 @@
         "后者不占空间"
       ],
       "answer": 1,
-      "explanation": "\"display:none 元素从布局中移除不占空间。visibility:hidden 元素不可见但保持原空间。\"",
+      "explanation": "display:none 元素从布局中移除不占空间。visibility:hidden 元素不可见但保持原空间。",
       "gem": "css-style",
       "level": 3
     },
@@ -6700,14 +6700,14 @@
         "语法错误"
       ],
       "answer": 1,
-      "explanation": "\"font-family:\\\"Microsoft YaHei\\\",sans-serif——优先用第一个字体，没有安装则回退到下一个。\"",
+      "explanation": "font-family:\"Microsoft YaHei\",sans-serif——优先用第一个字体，没有安装则回退到下一个。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 73,
       "difficulty": 2,
-      "question": "\"overflow:hidden/scroll/auto 区别？\"",
+      "question": "overflow:hidden/scroll/auto 区别？",
       "options": [
         "全部一样",
         "hidden=裁剪隐藏/scroll=始终滚动条/auto=需要时滚动条",
@@ -6722,7 +6722,7 @@
     {
       "id": 74,
       "difficulty": 3,
-      "question": "\"h1 权重对决：!important vs 内联 style vs #id vs .class vs div→排序？\"",
+      "question": "h1 权重对决：!important vs 内联 style vs #id vs .class vs div→排序？",
       "options": [
         "!important>内联>#id>.class>div",
         "#id>!important>内联>.class>div",
@@ -6730,7 +6730,7 @@
         ".class>#id>内联>!important>div"
       ],
       "answer": 0,
-      "explanation": "\"优先级链：!important(无视一切)>内联 style(1000)>ID(100)>类(10)>元素(1)。\"",
+      "explanation": "优先级链：!important(无视一切)>内联 style(1000)>ID(100)>类(10)>元素(1)。",
       "gem": "css-style",
       "level": 3
     },
@@ -6745,14 +6745,14 @@
         "outline 在 border 里面"
       ],
       "answer": 1,
-      "explanation": "\"outline 绘制在 border 之外不占盒模型空间不影响布局。常用于 :focus 焦点指示器不会导致元素抖动。\"",
+      "explanation": "outline 绘制在 border 之外不占盒模型空间不影响布局。常用于 :focus 焦点指示器不会导致元素抖动。",
       "gem": "css-style",
       "level": 3
     },
     {
       "id": 76,
       "difficulty": 1,
-      "question": "\"display:flex 写在哪？\"",
+      "question": "display:flex 写在哪？",
       "options": [
         "子元素",
         "父容器",
@@ -6760,7 +6760,7 @@
         "html 上"
       ],
       "answer": 1,
-      "explanation": "\"display:flex 写在父元素(容器)上，其直接子元素自动变弹性项目。\"",
+      "explanation": "display:flex 写在父元素(容器)上，其直接子元素自动变弹性项目。",
       "gem": "css-layout",
       "level": 1
     },
@@ -6775,7 +6775,7 @@
         "文字方向"
       ],
       "answer": 1,
-      "explanation": "\"默认 flex-direction:row 时主轴是横向，justify-content 控制横向对齐。column 时主轴变纵向。\"",
+      "explanation": "默认 flex-direction:row 时主轴是横向，justify-content 控制横向对齐。column 时主轴变纵向。",
       "gem": "css-layout",
       "level": 1
     },
@@ -6797,7 +6797,7 @@
     {
       "id": 79,
       "difficulty": 1,
-      "question": "\"grid-template-columns:1fr 2fr 1fr 含义？\"",
+      "question": "grid-template-columns:1fr 2fr 1fr 含义？",
       "options": [
         "三列宽比 1:2:1",
         "四列等宽",
@@ -6805,14 +6805,14 @@
         "两列"
       ],
       "answer": 0,
-      "explanation": "\"fr=fraction 份数。三列宽比 1:2:1，总 4 份，每列占 25%/50%/25%。\"",
+      "explanation": "fr=fraction 份数。三列宽比 1:2:1，总 4 份，每列占 25%/50%/25%。",
       "gem": "css-layout",
       "level": 1
     },
     {
       "id": 80,
       "difficulty": 1,
-      "question": "\"@media 的作用？\"",
+      "question": "@media 的作用？",
       "options": [
         "设置动画",
         "根据屏幕条件应用不同样式(响应式)",
@@ -6820,14 +6820,14 @@
         "引入字体"
       ],
       "answer": 1,
-      "explanation": "\"@media 媒体查询根据屏幕宽度等条件应用不同样式，实现响应式设计。\"",
+      "explanation": "@media 媒体查询根据屏幕宽度等条件应用不同样式，实现响应式设计。",
       "gem": "css-layout",
       "level": 1
     },
     {
       "id": 81,
       "difficulty": 2,
-      "question": "\"flex-direction:column 改变什么？\"",
+      "question": "flex-direction:column 改变什么？",
       "options": [
         "什么也不变",
         "主轴变纵向，justify-content 和 align-items 轴向互换",
@@ -6842,7 +6842,7 @@
     {
       "id": 82,
       "difficulty": 2,
-      "question": "\"flex:1 意思？\"",
+      "question": "flex:1 意思？",
       "options": [
         "宽度 1px",
         "占据剩余空间中 1 份",
@@ -6850,7 +6850,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"flex:1=flex-grow:1;flex-shrink:1;flex-basis:0 简写。两子元素 flex:1 和 flex:2 宽比 1:2。\"",
+      "explanation": "flex:1=flex-grow:1;flex-shrink:1;flex-basis:0 简写。两子元素 flex:1 和 flex:2 宽比 1:2。",
       "gem": "css-layout",
       "level": 2
     },
@@ -6917,7 +6917,7 @@
     {
       "id": 87,
       "difficulty": 2,
-      "question": "\"@media(max-width:768px)匹配什么？\"",
+      "question": "@media(max-width:768px)匹配什么？",
       "options": [
         "宽度≥768px",
         "宽度≤768px(手机/小平板)",
@@ -6925,7 +6925,7 @@
         "只匹配手机"
       ],
       "answer": 1,
-      "explanation": "\"max-width 表示\\\"宽度≤此值时应用\\\"=通常匹配手机。min-width 表示\\\"宽度≥此值时应用\\\"=通常匹配桌面。\"",
+      "explanation": "max-width 表示\"宽度≤此值时应用\"=通常匹配手机。min-width 表示\"宽度≥此值时应用\"=通常匹配桌面。",
       "gem": "css-layout",
       "level": 2
     },
@@ -6940,7 +6940,7 @@
         "不可能实现"
       ],
       "answer": 1,
-      "explanation": "\"display:flex+space-between。左边元素自然靠左，右边元素靠右，中间空白自动填充。\"",
+      "explanation": "display:flex+space-between。左边元素自然靠左，右边元素靠右，中间空白自动填充。",
       "gem": "css-layout",
       "level": 2
     },
@@ -6970,7 +6970,7 @@
         "transition 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"transition 被触发(hover等)只 A→B 过渡。animation 主动播放通过@keyframes 定义任意多帧可循环。\"",
+      "explanation": "transition 被触发(hover等)只 A→B 过渡。animation 主动播放通过@keyframes 定义任意多帧可循环。",
       "gem": "css-layout",
       "level": 3
     },
@@ -6992,7 +6992,7 @@
     {
       "id": 92,
       "difficulty": 3,
-      "question": "\"animation-fill-mode:forwards vs none？\"",
+      "question": "animation-fill-mode:forwards vs none？",
       "options": [
         "forwards 停最后一帧 none 回初始(闪回)",
         "完全相同",
@@ -7007,7 +7007,7 @@
     {
       "id": 93,
       "difficulty": 3,
-      "question": "\"无限旋转动画 @keyframes 怎么写？\"",
+      "question": "无限旋转动画 @keyframes 怎么写？",
       "options": [
         "@keyframes s{from{rotate:0}to{rotate:360deg}}",
         "@keyframes s{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}",
@@ -7015,7 +7015,7 @@
         "@keyframes s{0%{rotate:0}100%{rotate:1turn}}"
       ],
       "answer": 1,
-      "explanation": "\"animation:s 2s linear infinite 配合使用。\"",
+      "explanation": "animation:s 2s linear infinite 配合使用。",
       "gem": "css-layout",
       "level": 3
     },
@@ -7060,14 +7060,14 @@
         "用 JS 判断屏幕"
       ],
       "answer": 1,
-      "explanation": "\"响应式=不同屏幕不同布局。核心：@media 媒体查询+弹性单位(%,vw,fr)+flex/grid 弹性布局+移动优先。\"",
+      "explanation": "响应式=不同屏幕不同布局。核心：@media 媒体查询+弹性单位(%,vw,fr)+flex/grid 弹性布局+移动优先。",
       "gem": "css-layout",
       "level": 3
     },
     {
       "id": 97,
       "difficulty": 3,
-      "question": "\"animation-direction:alternate 效果？\"",
+      "question": "animation-direction:alternate 效果？",
       "options": [
         "反向播放",
         "奇数遍正向偶数遍反向来回交替",
@@ -7075,7 +7075,7 @@
         "只播放反向"
       ],
       "answer": 1,
-      "explanation": "\"alternate 奇数遍(1,3,5)正向偶数遍(2,4,6)反向。配合 infinite 做来回效果。\"",
+      "explanation": "alternate 奇数遍(1,3,5)正向偶数遍(2,4,6)反向。配合 infinite 做来回效果。",
       "gem": "css-layout",
       "level": 3
     },
@@ -7090,7 +7090,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"nowrap(默认)不换行子元素被压缩。wrap 允许换行。通常配合 flex-wrap:wrap 实现自适应布局。\"",
+      "explanation": "nowrap(默认)不换行子元素被压缩。wrap 允许换行。通常配合 flex-wrap:wrap 实现自适应布局。",
       "gem": "css-layout",
       "level": 3
     },
@@ -7105,14 +7105,14 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"sticky=滚动时先正常排列，到达阈值(如 top:0)后吸附固定。常用于吸顶导航栏。父元素不能设 overflow:hidden。\"",
+      "explanation": "sticky=滚动时先正常排列，到达阈值(如 top:0)后吸附固定。常用于吸顶导航栏。父元素不能设 overflow:hidden。",
       "gem": "css-layout",
       "level": 3
     },
     {
       "id": 100,
       "difficulty": 2,
-      "question": "\"repeat(3,1fr) 和 1fr 1fr 1fr 等价吗？\"",
+      "question": "repeat(3,1fr) 和 1fr 1fr 1fr 等价吗？",
       "options": [
         "等价",
         "不等价 repeat 更慢",
@@ -7120,7 +7120,7 @@
         "repeat 已废弃"
       ],
       "answer": 0,
-      "explanation": "\"完全等价。repeat(次数,值)是简写。repeat(3,1fr)=1fr 1fr 1fr。repeat(auto-fill,minmax(200px,1fr))更强大。\"",
+      "explanation": "完全等价。repeat(次数,值)是简写。repeat(3,1fr)=1fr 1fr 1fr。repeat(auto-fill,minmax(200px,1fr))更强大。",
       "gem": "css-layout",
       "level": 3
     },
@@ -7150,67 +7150,67 @@
         "只有 3 种"
       ],
       "answer": 0,
-      "explanation": "\"7 种基本类型。typeof null 返回\\\"object\\\"(历史 bug)。函数 typeof 返回\\\"function\\\"(object 子类型)。\"",
+      "explanation": "7 种基本类型。typeof null 返回\"object\"(历史 bug)。函数 typeof 返回\"function\"(object 子类型)。",
       "gem": "js-syntax",
       "level": 1
     },
     {
       "id": 103,
       "difficulty": 1,
-      "question": "\"`\\\"Hello\\\"+\\\" \\\"+\\\"World\\\"` 结果？\"",
+      "question": "`\"Hello\"+\" \"+\"World\"` 结果？",
       "options": [
         "Hello World",
-        "\\\"Hello World\\\"",
+        "\"Hello World\"",
         "HelloWorld",
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"+ 用于字符串拼接：三个字符串连成 \\\"Hello World\\\"。\"",
+      "explanation": "+ 用于字符串拼接：三个字符串连成 \"Hello World\"。",
       "gem": "js-syntax",
       "level": 1
     },
     {
       "id": 104,
       "difficulty": 1,
-      "question": "\"`let x; console.log(typeof x)` 输出？\"",
+      "question": "`let x; console.log(typeof x)` 输出？",
       "options": [
-        "\\\"null\\\"",
-        "\\\"undefined\\\"",
-        "\\\"object\\\"",
+        "\"null\"",
+        "\"undefined\"",
+        "\"object\"",
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"声明了但没赋值的变量值为 undefined，typeof undefined 返回 \\\"undefined\\\"。\"",
+      "explanation": "声明了但没赋值的变量值为 undefined，typeof undefined 返回 \"undefined\"。",
       "gem": "js-syntax",
       "level": 1
     },
     {
       "id": 105,
       "difficulty": 1,
-      "question": "\"`\\\"abc\\\".toUpperCase()` 结果？\"",
+      "question": "`\"abc\".toUpperCase()` 结果？",
       "options": [
-        "\\\"abc\\\"",
-        "\\\"ABC\\\"",
-        "\\\"Abc\\\"",
+        "\"abc\"",
+        "\"ABC\"",
+        "\"Abc\"",
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"toUpperCase() 将所有字母转为大写。\\\"abc\\\"→\\\"ABC\\\"。toLowerCase() 反向操作。\"",
+      "explanation": "toUpperCase() 将所有字母转为大写。\"abc\"→\"ABC\"。toLowerCase() 反向操作。",
       "gem": "js-syntax",
       "level": 1
     },
     {
       "id": 106,
       "difficulty": 2,
-      "question": "\"\\\"5\\\"+3 和 \\\"5\\\"-3 结果？\"",
+      "question": "\"5\"+3 和 \"5\"-3 结果？",
       "options": [
         "53 和 2",
         "8 和 2",
-        "\\\"53\\\"和\\\"53\\\"",
+        "\"53\"和\"53\"",
         "报错"
       ],
       "answer": 0,
-      "explanation": "\"+遇字符串拼接：\\\"5\\\"+3=\\\"53\\\"。-只用于数字，先把\\\"5\\\"转数字再减：5-3=2。隐式类型转换。\"",
+      "explanation": "+遇字符串拼接：\"5\"+3=\"53\"。-只用于数字，先把\"5\"转数字再减：5-3=2。隐式类型转换。",
       "gem": "js-syntax",
       "level": 2
     },
@@ -7232,7 +7232,7 @@
     {
       "id": 108,
       "difficulty": 2,
-      "question": "\"`if(0){console.log(\\\"yes\\\")}` 会输出吗？\"",
+      "question": "`if(0){console.log(\"yes\")}` 会输出吗？",
       "options": [
         "会",
         "不会 0 是 falsy",
@@ -7240,14 +7240,14 @@
         "输出 undefined"
       ],
       "answer": 1,
-      "explanation": "\"0/\\\"\\\"/null/undefined/NaN/false 都是 falsy 值条件判断中视为 false。\"",
+      "explanation": "0/\"\"/null/undefined/NaN/false 都是 falsy 值条件判断中视为 false。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 109,
       "difficulty": 2,
-      "question": "\"`for(let i=0;i<3;i++){console.log(i)}` 输出？\"",
+      "question": "`for(let i=0;i<3;i++){console.log(i)}` 输出？",
       "options": [
         "0,1,2",
         "1,2,3",
@@ -7262,7 +7262,7 @@
     {
       "id": 110,
       "difficulty": 2,
-      "question": "\"`[1,2,3].forEach(n=>console.log(n*2))` 输出？\"",
+      "question": "`[1,2,3].forEach(n=>console.log(n*2))` 输出？",
       "options": [
         "1,2,3",
         "2,4,6",
@@ -7270,44 +7270,44 @@
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"forEach 对每个元素执行回调打印 n*2。不返回新数组(返回 undefined)。\"",
+      "explanation": "forEach 对每个元素执行回调打印 n*2。不返回新数组(返回 undefined)。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 111,
       "difficulty": 2,
-      "question": "\"`let score=85;score>=60?\\\"及格\\\":\\\"不及格\\\"` 结果？\"",
+      "question": "`let score=85;score>=60?\"及格\":\"不及格\"` 结果？",
       "options": [
-        "\\\"及格\\\"",
-        "\\\"不及格\\\"",
+        "\"及格\"",
+        "\"不及格\"",
         "85",
         "报错"
       ],
       "answer": 0,
-      "explanation": "\"三元运算符：条件?真值:假值。85>=60 为 true→\\\"及格\\\"。\"",
+      "explanation": "三元运算符：条件?真值:假值。85>=60 为 true→\"及格\"。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 112,
       "difficulty": 2,
-      "question": "\"`if(\\\"false\\\"){console.log(\\\"yes\\\")}` 会输出？\"",
+      "question": "`if(\"false\"){console.log(\"yes\")}` 会输出？",
       "options": [
         "会非空字符串是 truthy",
-        "不会\\\"false\\\"是 falsy",
+        "不会\"false\"是 falsy",
         "报错",
         "undefined"
       ],
       "answer": 0,
-      "explanation": "\"非空字符串(含\\\"false\\\")是 truthy→执行 if 块。只有空字符串\\\"\\\"是 falsy。\"",
+      "explanation": "非空字符串(含\"false\")是 truthy→执行 if 块。只有空字符串\"\"是 falsy。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 113,
       "difficulty": 2,
-      "question": "\"`10%3` 结果？\"",
+      "question": "`10%3` 结果？",
       "options": [
         "3",
         "1(取余)",
@@ -7315,14 +7315,14 @@
         "10"
       ],
       "answer": 1,
-      "explanation": "\"%=取余数(mod)。10÷3=3 余 1。常用于判断奇偶(n%2===0 偶数)。\"",
+      "explanation": "%=取余数(mod)。10÷3=3 余 1。常用于判断奇偶(n%2===0 偶数)。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 114,
       "difficulty": 2,
-      "question": "\"`3>2 && 2>1` 结果？\"",
+      "question": "`3>2 && 2>1` 结果？",
       "options": [
         "true",
         "false",
@@ -7330,14 +7330,14 @@
         "报错"
       ],
       "answer": 0,
-      "explanation": "\"&&=逻辑与(且)。两边都 true 结果 true。||=逻辑或(或)。!=逻辑非(取反)。\"",
+      "explanation": "&&=逻辑与(且)。两边都 true 结果 true。||=逻辑或(或)。!=逻辑非(取反)。",
       "gem": "js-syntax",
       "level": 2
     },
     {
       "id": 115,
       "difficulty": 2,
-      "question": "\"`const arr=[1,2,3];arr.push(4)` 会报错吗？\"",
+      "question": "`const arr=[1,2,3];arr.push(4)` 会报错吗？",
       "options": [
         "会 const 不能改",
         "不会 const 保护引用数组内容可改",
@@ -7360,14 +7360,14 @@
         "0"
       ],
       "answer": 1,
-      "explanation": "\"无 return 函数隐式返回 undefined。箭头函数一行表达式无{}时自动返回。\"",
+      "explanation": "无 return 函数隐式返回 undefined。箭头函数一行表达式无{}时自动返回。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 117,
       "difficulty": 3,
-      "question": "\"箭头函数 `(a,b)=>a+b` 等价什么？\"",
+      "question": "箭头函数 `(a,b)=>a+b` 等价什么？",
       "options": [
         "function(a,b){return a+b}",
         "let a+b",
@@ -7375,7 +7375,7 @@
         "function a(b){}"
       ],
       "answer": 0,
-      "explanation": "\"箭头函数是 function 简写。单行可省略{}和 return。\"",
+      "explanation": "箭头函数是 function 简写。单行可省略{}和 return。",
       "gem": "js-syntax",
       "level": 3
     },
@@ -7390,44 +7390,44 @@
         "var 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"var 函数作用域有变量提升。let 块级作用域{}内有效无提升。推荐用 let/const 避免 var 混乱。\"",
+      "explanation": "var 函数作用域有变量提升。let 块级作用域{}内有效无提升。推荐用 let/const 避免 var 混乱。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 119,
       "difficulty": 3,
-      "question": "\"闭包是什么？`function o(){let x=1;return function(){return x}}` 内函数能访问 x？\"",
+      "question": "闭包是什么？`function o(){let x=1;return function(){return x}}` 内函数能访问 x？",
       "options": [
         "不能",
-        "能内部函数\\\"记住\\\"外部变量=闭包",
+        "能内部函数\"记住\"外部变量=闭包",
         "只有外部函数运行时才能",
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"闭包=函数+它访问的外部变量。内函数\\\"捕获\\\"了 x，即使外部函数执行完毕 x 仍能被内函数访问。\"",
+      "explanation": "闭包=函数+它访问的外部变量。内函数\"捕获\"了 x，即使外部函数执行完毕 x 仍能被内函数访问。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 120,
       "difficulty": 3,
-      "question": "\"`typeof null` 返回？为什么？\"",
+      "question": "`typeof null` 返回？为什么？",
       "options": [
-        "\\\"null\\\"",
-        "\\\"object\\\"——JS 早期实现 bug 为兼容保留至今",
-        "\\\"undefined\\\"",
-        "\\\"nullpointer\\\""
+        "\"null\"",
+        "\"object\"——JS 早期实现 bug 为兼容保留至今",
+        "\"undefined\"",
+        "\"nullpointer\""
       ],
       "answer": 1,
-      "explanation": "\"typeof null===\\\"object\\\"是 JS 最早实现的 bug。null 的类型标记是 000 和对象相同。为兼容未修复。\"",
+      "explanation": "typeof null===\"object\"是 JS 最早实现的 bug。null 的类型标记是 000 和对象相同。为兼容未修复。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 121,
       "difficulty": 3,
-      "question": "\"`let a,b=5;console.log(a,b)` 输出？\"",
+      "question": "`let a,b=5;console.log(a,b)` 输出？",
       "options": [
         "5,5",
         "undefined,5",
@@ -7435,14 +7435,14 @@
         "null,5"
       ],
       "answer": 1,
-      "explanation": "\"let a,b=5 中只有 b 被赋值为 5，a 只声明未赋值=undefined。\"",
+      "explanation": "let a,b=5 中只有 b 被赋值为 5，a 只声明未赋值=undefined。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 122,
       "difficulty": 3,
-      "question": "\"`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)` 顺序？\"",
+      "question": "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)` 顺序？",
       "options": [
         "1,2,3",
         "1,3,2",
@@ -7472,7 +7472,7 @@
     {
       "id": 124,
       "difficulty": 3,
-      "question": "\"`Cannot read property xxx of null` 什么错误？怎么修？\"",
+      "question": "`Cannot read property xxx of null` 什么错误？怎么修？",
       "options": [
         "电脑坏了",
         "访问 null 的属性。先判 if(el)再操作或检查选择器是否正确",
@@ -7487,7 +7487,7 @@
     {
       "id": 125,
       "difficulty": 2,
-      "question": "\"`!true` 结果？\"",
+      "question": "`!true` 结果？",
       "options": [
         "true",
         "false",
@@ -7495,14 +7495,14 @@
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"!=逻辑非(取反)。!true=false !false=true。!!值可转布尔型。\"",
+      "explanation": "!=逻辑非(取反)。!true=false !false=true。!!值可转布尔型。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 126,
       "difficulty": 3,
-      "question": "\"`let x=5;x=10` vs `const x=5;x=10` 区别？\"",
+      "question": "`let x=5;x=10` vs `const x=5;x=10` 区别？",
       "options": [
         "都成功",
         "前者成功 x=10；后者报错 TypeError",
@@ -7517,22 +7517,22 @@
     {
       "id": 127,
       "difficulty": 3,
-      "question": "\"`\\\" hello \\\".trim().toUpperCase()` 结果？\"",
+      "question": "`\" hello \".trim().toUpperCase()` 结果？",
       "options": [
-        "\\\" HELLO \\\"",
-        "\\\"HELLO\\\"",
-        "\\\"hello\\\"",
+        "\" HELLO \"",
+        "\"HELLO\"",
+        "\"hello\"",
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"trim()去两端空白→\\\"hello\\\"，toUpperCase()转大写→\\\"HELLO\\\"。方法链从左到右执行。\"",
+      "explanation": "trim()去两端空白→\"hello\"，toUpperCase()转大写→\"HELLO\"。方法链从左到右执行。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 128,
       "difficulty": 2,
-      "question": "\"`[3,10,1,20].sort()` 结果？为什么？\"",
+      "question": "`[3,10,1,20].sort()` 结果？为什么？",
       "options": [
         "[1,3,10,20]",
         "[1,10,20,3]——sort 默认按字符串排序",
@@ -7540,14 +7540,14 @@
         "报错"
       ],
       "answer": 1,
-      "explanation": "\"sort()默认转字符串按字典序排序→\\\"10\\\"<\\\"3\\\"因为\\\"1\\\"<\\\"3\\\"。数字排序需(a,b)=>a-b。\"",
+      "explanation": "sort()默认转字符串按字典序排序→\"10\"<\"3\"因为\"1\"<\"3\"。数字排序需(a,b)=>a-b。",
       "gem": "js-syntax",
       "level": 3
     },
     {
       "id": 129,
       "difficulty": 3,
-      "question": "\"`const{name,age}=person` 是什么语法？\"",
+      "question": "`const{name,age}=person` 是什么语法？",
       "options": [
         "错误",
         "解构赋值——从对象中提取 name 和 age 属性",
@@ -7562,7 +7562,7 @@
     {
       "id": 130,
       "difficulty": 2,
-      "question": "\"`let name=\\\"小明\\\";let Name=\\\"小红\\\";console.log(name)` 输出？\"",
+      "question": "`let name=\"小明\";let Name=\"小红\";console.log(name)` 输出？",
       "options": [
         "小明(JS 区分大小写)",
         "小红",
@@ -7615,7 +7615,7 @@
         "HTML 源码"
       ],
       "answer": 0,
-      "explanation": "\"通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\\\"#id\\\")稍快。\"",
+      "explanation": "通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\"#id\")稍快。",
       "gem": "js-practice",
       "level": 1
     },
@@ -7630,14 +7630,14 @@
         "删除元素"
       ],
       "answer": 1,
-      "explanation": "\"给元素绑定事件监听器：element.addEventListener(\\\"click\\\",callback)。\"",
+      "explanation": "给元素绑定事件监听器：element.addEventListener(\"click\",callback)。",
       "gem": "js-practice",
       "level": 1
     },
     {
       "id": 135,
       "difficulty": 1,
-      "question": "\"[1,2,3].includes(2) 返回？\"",
+      "question": "[1,2,3].includes(2) 返回？",
       "options": [
         "true",
         "false",
@@ -7700,7 +7700,7 @@
       "question": "createElement+appendChild 流程？",
       "options": [
         "直接写 HTML",
-        "let el=document.createElement(\\\"div\\\")→设置属性内容→parent.appendChild(el)",
+        "let el=document.createElement(\"div\")→设置属性内容→parent.appendChild(el)",
         "只能创建 div",
         "appendChild 已废弃"
       ],
@@ -7780,7 +7780,7 @@
         "都不修改"
       ],
       "answer": 1,
-      "explanation": "\"splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。\"",
+      "explanation": "splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。",
       "gem": "js-practice",
       "level": 3
     },
@@ -7802,10 +7802,10 @@
     {
       "id": 146,
       "difficulty": 3,
-      "question": "\"[1,2,3].join(\\\"-\\\") 和 \\\"a,b,c\\\".split(\\\",\\\") 各返回？\"",
+      "question": "[1,2,3].join(\"-\") 和 \"a,b,c\".split(\",\") 各返回？",
       "options": [
         "join 返回数组 split 返回字符串",
-        "join 返回\\\"1-2-3\\\"数组→字符串；split 返回[\\\"a\\\",\\\"b\\\",\\\"c\\\"]字符串→数组",
+        "join 返回\"1-2-3\"数组→字符串；split 返回[\"a\",\"b\",\"c\"]字符串→数组",
         "都返回字符串",
         "都返回数组"
       ],
@@ -7825,7 +7825,7 @@
         "无法实现"
       ],
       "answer": 1,
-      "explanation": "\"innerHTML+=\\\"...\\\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。\"",
+      "explanation": "innerHTML+=\"...\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。",
       "gem": "js-practice",
       "level": 3
     },
@@ -7870,7 +7870,7 @@
         "some 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。\"",
+      "explanation": "[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。",
       "gem": "js-practice",
       "level": 3
     },
@@ -7900,44 +7900,44 @@
         ".array()"
       ],
       "answer": 1,
-      "explanation": "\"扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。\"",
+      "explanation": "扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。",
       "gem": "js-practice",
       "level": 3
     },
     {
       "id": 153,
       "difficulty": 2,
-      "question": "\"\\\"hello\\\".slice(1,3) 返回？\"",
+      "question": "\"hello\".slice(1,3) 返回？",
       "options": [
-        "\\\"el\\\"",
-        "\\\"ell\\\"",
-        "\\\"h\\\"",
-        "\\\"lo\\\""
+        "\"el\"",
+        "\"ell\"",
+        "\"h\"",
+        "\"lo\""
       ],
       "answer": 0,
-      "explanation": "\"slice(1,3)截取索引[1,3)=\\\"el\\\"。索引从 0 开始。\"",
+      "explanation": "slice(1,3)截取索引[1,3)=\"el\"。索引从 0 开始。",
       "gem": "js-practice",
       "level": 3
     },
     {
       "id": 154,
       "difficulty": 2,
-      "question": "\"\\\"hello\\\".replace(\\\"h\\\",\\\"H\\\") 返回？\"",
+      "question": "\"hello\".replace(\"h\",\"H\") 返回？",
       "options": [
-        "\\\"Hello\\\"",
-        "\\\"hello\\\"",
-        "\\\"HELLO\\\"",
-        "[\\\"Hello\\\"]"
+        "\"Hello\"",
+        "\"hello\"",
+        "\"HELLO\"",
+        "[\"Hello\"]"
       ],
       "answer": 0,
-      "explanation": "\"replace 替换第一个匹配项。\\\"hello\\\".replace(\\\"l\\\",\\\"L\\\")→\\\"heLlo\\\"。\"",
+      "explanation": "replace 替换第一个匹配项。\"hello\".replace(\"l\",\"L\")→\"heLlo\"。",
       "gem": "js-practice",
       "level": 3
     },
     {
       "id": 155,
       "difficulty": 2,
-      "question": "\"[1,2,3].indexOf(4) 返回？\"",
+      "question": "[1,2,3].indexOf(4) 返回？",
       "options": [
         "4",
         "-1(未找到)",
@@ -7999,13 +7999,13 @@
       "difficulty": 3,
       "question": "HTML+CSS：图片加载失败不显示裂图图标应设置什么？",
       "options": [
-        "style=\\\"hide-on-error\\\"",
-        "alt=\\\"\\\"且设置 onerror 替换",
+        "style=\"hide-on-error\"",
+        "alt=\"\"且设置 onerror 替换",
         "无法实现",
         "display:none"
       ],
       "answer": 1,
-      "explanation": "\"alt=\\\"\\\"不让阅读器读文件名。CSS/JS 可监听 error 事件隐藏或替换裂图。\"",
+      "explanation": "alt=\"\"不让阅读器读文件名。CSS/JS 可监听 error 事件隐藏或替换裂图。",
       "gem": "web-foundation",
       "level": 1
     },
@@ -8015,7 +8015,7 @@
       "question": "HTML+CSS：移动端页面在手机上缩放异常最常见原因？",
       "options": [
         "JS 错误",
-        "缺少 <meta name=\\\"viewport\\\" content=\\\"width=device-width\\\">",
+        "缺少 <meta name=\"viewport\" content=\"width=device-width\">",
         "CSS 太多",
         "图片太大"
       ],
@@ -8027,7 +8027,7 @@
     {
       "id": 161,
       "difficulty": 3,
-      "question": "\"JS：querySelector(\\\".card\\\")返回 null 最可能原因？\"",
+      "question": "JS：querySelector(\".card\")返回 null 最可能原因？",
       "options": [
         "CSS 没加载",
         "JS 在 DOM 之前执行或选择器写错",
@@ -8042,10 +8042,10 @@
     {
       "id": 162,
       "difficulty": 3,
-      "question": "\"JS：addEventListener(\\\"click\\\",handler)→点击没反应可能原因？\"",
+      "question": "JS：addEventListener(\"click\",handler)→点击没反应可能原因？",
       "options": [
         "元素未创建时绑事件",
-        "事件名拼错(如\\\"clik\\\")或 handler 未定义",
+        "事件名拼错(如\"clik\")或 handler 未定义",
         "绑定在了父元素上",
         "以上都可能"
       ],
@@ -8057,7 +8057,7 @@
     {
       "id": 163,
       "difficulty": 3,
-      "question": "\"JS：innerHTML+=\\\"<div>新内容</div>\\\"有什么隐藏问题？\"",
+      "question": "JS：innerHTML+=\"<div>新内容</div>\"有什么隐藏问题？",
       "options": [
         "没有",
         "已有元素的绑定事件和状态会被重置",
@@ -8072,7 +8072,7 @@
     {
       "id": 164,
       "difficulty": 3,
-      "question": "\"JS：[1,2,3,4,5]中筛选>2且×2→结果？\"",
+      "question": "JS：[1,2,3,4,5]中筛选>2且×2→结果？",
       "options": [
         "[3,4,5]",
         "[6,8,10]",
@@ -8080,7 +8080,7 @@
         "[6,8]"
       ],
       "answer": 1,
-      "explanation": "\"[1,2,3,4,5].filter(x=>x>2)得[3,4,5]→.map(x=>x*2)得[6,8,10]。方法链！\"",
+      "explanation": "[1,2,3,4,5].filter(x=>x>2)得[3,4,5]→.map(x=>x*2)得[6,8,10]。方法链！",
       "gem": "web-foundation",
       "level": 1
     },
@@ -8104,9 +8104,9 @@
       "difficulty": 3,
       "question": "HTML+CSS+JS 综合：表单提交不刷新页面用什么？",
       "options": [
-        "action=\\\"#\\\"",
+        "action=\"#\"",
         "e.preventDefault()阻止默认提交",
-        "method=\\\"POST\\\"",
+        "method=\"POST\"",
         "无法阻止"
       ],
       "answer": 1,
@@ -8147,7 +8147,7 @@
     {
       "id": 169,
       "difficulty": 3,
-      "question": "\"HTML+CSS+JS 综合：以下哪项属于\\\"语义化\\\"的最佳实践？\"",
+      "question": "HTML+CSS+JS 综合：以下哪项属于\"语义化\"的最佳实践？",
       "options": [
         "全部用 div",
         "header/nav/main/footer 等有含义标签+正确的 heading 层级+alt 属性",
@@ -8237,7 +8237,7 @@
     {
       "id": 175,
       "difficulty": 1,
-      "question": "\"fetch(\\\"/api\\\")返回什么？\"",
+      "question": "fetch(\"/api\")返回什么？",
       "options": [
         "数据对象",
         "Promise 对象",
@@ -8290,7 +8290,7 @@
         "取决于内部"
       ],
       "answer": 1,
-      "explanation": "\"async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。\"",
+      "explanation": "async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。",
       "gem": "js-async",
       "level": 2
     },
@@ -8327,7 +8327,7 @@
     {
       "id": 181,
       "difficulty": 2,
-      "question": "\"Promise.all([p1,p2,p3])何时 resolve？\"",
+      "question": "Promise.all([p1,p2,p3])何时 resolve？",
       "options": [
         "第一个完成",
         "全部完成",
@@ -8342,7 +8342,7 @@
     {
       "id": 182,
       "difficulty": 2,
-      "question": "\"try{await fetch(url)}catch(e){} 能捕获什么？\"",
+      "question": "try{await fetch(url)}catch(e){} 能捕获什么？",
       "options": [
         "HTTP 404",
         "网络错误(断网等)",
@@ -8365,7 +8365,7 @@
         "一种设计模式"
       ],
       "answer": 1,
-      "explanation": "\"回调嵌套导致代码横向增长(\\\"金字塔\\\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。\"",
+      "explanation": "回调嵌套导致代码横向增长(\"金字塔\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。",
       "gem": "js-async",
       "level": 2
     },
@@ -8380,7 +8380,7 @@
         "自动处理"
       ],
       "answer": 1,
-      "explanation": "\"try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。\"",
+      "explanation": "try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。",
       "gem": "js-async",
       "level": 3
     },
@@ -8395,7 +8395,7 @@
         "并行会出错"
       ],
       "answer": 1,
-      "explanation": "\"const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。\"",
+      "explanation": "const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。",
       "gem": "js-async",
       "level": 3
     },
@@ -8410,14 +8410,14 @@
         "防止重复提交"
       ],
       "answer": 1,
-      "explanation": "\"用户输入\\\"贝多芬\\\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。\"",
+      "explanation": "用户输入\"贝多芬\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。",
       "gem": "js-async",
       "level": 3
     },
     {
       "id": 187,
       "difficulty": 3,
-      "question": "\"`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？\"",
+      "question": "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？",
       "options": [
         "1,2,3",
         "1,3,2",
@@ -8425,14 +8425,14 @@
         "3,2,1"
       ],
       "answer": 1,
-      "explanation": "\"同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。\"",
+      "explanation": "同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。",
       "gem": "js-async",
       "level": 3
     },
     {
       "id": 188,
       "difficulty": 3,
-      "question": "\"`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？\"",
+      "question": "`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？",
       "options": [
         "1 和 2",
         "只有 1(Promise 状态一旦改变不可逆)",
@@ -8447,7 +8447,7 @@
     {
       "id": 189,
       "difficulty": 3,
-      "question": "\"`fetch(url).then(r=>r.json())`为什么需要两步？\"",
+      "question": "`fetch(url).then(r=>r.json())`为什么需要两步？",
       "options": [
         "设计缺陷",
         "第一步得 Response 对象第二步解析 JSON 体(异步)",
@@ -8477,7 +8477,7 @@
     {
       "id": 191,
       "difficulty": 3,
-      "question": "\"`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？\"",
+      "question": "`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？",
       "options": [
         "能",
         "不能——延迟是最小等待时间实际可能更长(取决于事件队列)",
@@ -8537,7 +8537,7 @@
     {
       "id": 195,
       "difficulty": 3,
-      "question": "\"addEventListener(\\\"click\\\",async(e)=>{await fetch(...)})这样写对吗？\"",
+      "question": "addEventListener(\"click\",async(e)=>{await fetch(...)})这样写对吗？",
       "options": [
         "对回调可以是 async",
         "错 addEventListener 不支持 async",
@@ -8710,7 +8710,7 @@
         "命名导出已废弃"
       ],
       "answer": 1,
-      "explanation": "\"export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。\"",
+      "explanation": "export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。",
       "gem": "engineering",
       "level": 2
     },
@@ -8800,7 +8800,7 @@
         "删除文件重来"
       ],
       "answer": 1,
-      "explanation": "\"Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。\"",
+      "explanation": "Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。",
       "gem": "engineering",
       "level": 3
     },
@@ -8845,7 +8845,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"scripts 定义项目常用命令如\\\"dev\\\":\\\"vite\\\"→npm run dev 执行 vite。可自定义任意脚本。\"",
+      "explanation": "scripts 定义项目常用命令如\"dev\":\"vite\"→npm run dev 执行 vite。可自定义任意脚本。",
       "gem": "engineering",
       "level": 3
     },
@@ -8867,7 +8867,7 @@
     {
       "id": 217,
       "difficulty": 1,
-      "question": "\"{{ }}在 Vue 模板中做什么？\"",
+      "question": "{{ }}在 Vue 模板中做什么？",
       "options": [
         "注释",
         "文本插值——显示 JS 表达式的值",
@@ -8875,7 +8875,7 @@
         "条件判断"
       ],
       "answer": 1,
-      "explanation": "\"{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。\"",
+      "explanation": "{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。",
       "gem": "vue-basic",
       "level": 1
     },
@@ -8890,7 +8890,7 @@
         "事件监听"
       ],
       "answer": 1,
-      "explanation": "\"v-bind:src=\\\"url\\\"等价于 :src=\\\"url\\\"。把 JS 表达式的值绑定到 HTML 属性上。\"",
+      "explanation": "v-bind:src=\"url\"等价于 :src=\"url\"。把 JS 表达式的值绑定到 HTML 属性上。",
       "gem": "vue-basic",
       "level": 1
     },
@@ -8905,7 +8905,7 @@
         "循环"
       ],
       "answer": 1,
-      "explanation": "\"v-on:click=\\\"fn\\\"等价于 @click=\\\"fn\\\"。监听 DOM 事件执行对应方法。\"",
+      "explanation": "v-on:click=\"fn\"等价于 @click=\"fn\"。监听 DOM 事件执行对应方法。",
       "gem": "vue-basic",
       "level": 1
     },
@@ -8942,7 +8942,7 @@
     {
       "id": 222,
       "difficulty": 2,
-      "question": "\"v-for 为什么需要 :key？用 index 做 key的问题？\"",
+      "question": "v-for 为什么需要 :key？用 index 做 key的问题？",
       "options": [
         "性能优化",
         "key 帮助 Vue 识别每个节点做高效 diff。用 index 做 key 在列表重排时导致错误复用和状态错乱",
@@ -8965,7 +8965,7 @@
         "v-for+v-bind"
       ],
       "answer": 1,
-      "explanation": "\"v-model=\\\"name\\\"等价于:value=\\\"name\\\" @input=\\\"name=$event.target.value\\\"。双向绑定=数据→视图+视图→数据。\"",
+      "explanation": "v-model=\"name\"等价于:value=\"name\" @input=\"name=$event.target.value\"。双向绑定=数据→视图+视图→数据。",
       "gem": "vue-basic",
       "level": 2
     },
@@ -9020,7 +9020,7 @@
       "question": "Emits 的作用？",
       "options": [
         "父传子",
-        "子组件向父组件发送事件通知(如\\\"我完成了\\\")",
+        "子组件向父组件发送事件通知(如\"我完成了\")",
         "双向绑定",
         "定义样式"
       ],
@@ -9040,7 +9040,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。\"",
+      "explanation": "<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。",
       "gem": "vue-basic",
       "level": 2
     },
@@ -9062,7 +9062,7 @@
     {
       "id": 230,
       "difficulty": 3,
-      "question": "\"以下 Vue 代码问题在哪？`<div v-for=\\\"item in list\\\">{{item}}</div>`\"",
+      "question": "以下 Vue 代码问题在哪？`<div v-for=\"item in list\">{{item}}</div>`",
       "options": [
         "语法错",
         "缺少 :key 属性",
@@ -9070,7 +9070,7 @@
         "没问题"
       ],
       "answer": 1,
-      "explanation": "\"v-for 应始终加 :key=\\\"唯一标识\\\"。Vue 用 key 追踪每个节点的身份以高效更新。\"",
+      "explanation": "v-for 应始终加 :key=\"唯一标识\"。Vue 用 key 追踪每个节点的身份以高效更新。",
       "gem": "vue-basic",
       "level": 3
     },
@@ -9107,7 +9107,7 @@
     {
       "id": 233,
       "difficulty": 3,
-      "question": "\"`<div :class=\\\"{active:isActive}\\\">` 中 active 什么时候生效？\"",
+      "question": "`<div :class=\"{active:isActive}\">` 中 active 什么时候生效？",
       "options": [
         "总是生效",
         "isActive 为 true 时",
@@ -9115,14 +9115,14 @@
         "永不生效"
       ],
       "answer": 1,
-      "explanation": "\"对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\\\"[base,dynamic]\\\"。\"",
+      "explanation": "对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\"[base,dynamic]\"。",
       "gem": "vue-basic",
       "level": 3
     },
     {
       "id": 234,
       "difficulty": 3,
-      "question": "\"Vue 模板中 {{}} 和 v-text 的区别？\"",
+      "question": "Vue 模板中 {{}} 和 v-text 的区别？",
       "options": [
         "完全相同",
         "{{}}可能闪烁(未编译前显示花括号)；v-text 不会。功能等价",
@@ -9130,7 +9130,7 @@
         "{{}} 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。\"",
+      "explanation": "功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。",
       "gem": "vue-basic",
       "level": 3
     },
@@ -9152,7 +9152,7 @@
     {
       "id": 236,
       "difficulty": 3,
-      "question": "\"`watch(x,(newVal,oldVal)=>{...})` 参数是什么？\"",
+      "question": "`watch(x,(newVal,oldVal)=>{...})` 参数是什么？",
       "options": [
         "无参数",
         "newVal=变化后的值 oldVal=变化前的值",
@@ -9160,7 +9160,7 @@
         "只有 oldVal"
       ],
       "answer": 1,
-      "explanation": "\"watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。\"",
+      "explanation": "watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。",
       "gem": "vue-basic",
       "level": 3
     },
@@ -9197,7 +9197,7 @@
     {
       "id": 239,
       "difficulty": 3,
-      "question": "\"<script setup> 和普通 <script> 区别？\"",
+      "question": "<script setup> 和普通 <script> 区别？",
       "options": [
         "完全相同",
         "setup 中顶层变量/函数自动暴露给模板无需 return。更简洁",
@@ -9205,14 +9205,14 @@
         "setup 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。\"",
+      "explanation": "<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。",
       "gem": "vue-basic",
       "level": 3
     },
     {
       "id": 240,
       "difficulty": 3,
-      "question": "\"`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？\"",
+      "question": "`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？",
       "options": [
         "会",
         "不会——v-once 只渲染一次后续不再响应数据变化",
@@ -9230,7 +9230,7 @@
       "question": "Vue Router 作用？",
       "options": [
         "管理 CSS",
-        "前端路由——切换\\\"页面\\\"不刷新浏览器",
+        "前端路由——切换\"页面\"不刷新浏览器",
         "状态管理",
         "构建工具"
       ],
@@ -9242,7 +9242,7 @@
     {
       "id": 242,
       "difficulty": 1,
-      "question": "\"<router-link> 和 <a> 区别？\"",
+      "question": "<router-link> 和 <a> 区别？",
       "options": [
         "完全相同",
         "router-link 无刷新跳转；a 标签会整页刷新",
@@ -9257,7 +9257,7 @@
     {
       "id": 243,
       "difficulty": 1,
-      "question": "\"动态路由 /user/:id 怎么获取 id？\"",
+      "question": "动态路由 /user/:id 怎么获取 id？",
       "options": [
         "从 URL 手动解析",
         "useRoute().params.id",
@@ -9310,7 +9310,7 @@
         "样式隔离"
       ],
       "answer": 1,
-      "explanation": "\"slot 让组件接收\\\"模板内容\\\"而非数据。子组件留\\\"空位\\\"，父组件填充内容。具名插槽有多个名称不同的空位。\"",
+      "explanation": "slot 让组件接收\"模板内容\"而非数据。子组件留\"空位\"，父组件填充内容。具名插槽有多个名称不同的空位。",
       "gem": "vue-advanced",
       "level": 2
     },
@@ -9340,7 +9340,7 @@
         "只有 getters"
       ],
       "answer": 1,
-      "explanation": "\"store=defineStore(\\\"name\\\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。\"",
+      "explanation": "store=defineStore(\"name\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。",
       "gem": "vue-advanced",
       "level": 2
     },
@@ -9355,7 +9355,7 @@
         "reactive 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。\"",
+      "explanation": "const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。",
       "gem": "vue-advanced",
       "level": 2
     },
@@ -9415,14 +9415,14 @@
         "存储状态"
       ],
       "answer": 1,
-      "explanation": "\"router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。\"",
+      "explanation": "router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。",
       "gem": "vue-advanced",
       "level": 3
     },
     {
       "id": 254,
       "difficulty": 3,
-      "question": "\"`<style scoped>` 的原理？\"",
+      "question": "`<style scoped>` 的原理？",
       "options": [
         "随机数",
         "Vue 给组件元素加唯一属性(data-v-xxx)CSS 选择器追加该属性选择器",
@@ -9430,14 +9430,14 @@
         "PostCSS"
       ],
       "answer": 1,
-      "explanation": "\"Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。\"",
+      "explanation": "Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。",
       "gem": "vue-advanced",
       "level": 3
     },
     {
       "id": 255,
       "difficulty": 3,
-      "question": "\"`<script setup>` 中如何声明 props 和 emits？\"",
+      "question": "`<script setup>` 中如何声明 props 和 emits？",
       "options": [
         "无法声明",
         "defineProps({...})和 defineEmits([...])",
@@ -9485,7 +9485,7 @@
       "question": "Vue Router 的懒加载怎么做？",
       "options": [
         "无法实现",
-        "component:()=>import(\\\"./View.vue\\\")——路由被访问时才加载组件代码",
+        "component:()=>import(\"./View.vue\")——路由被访问时才加载组件代码",
         "手动加载",
         "自动加载"
       ],
@@ -9505,14 +9505,14 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。\"",
+      "explanation": "const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。",
       "gem": "vue-advanced",
       "level": 3
     },
     {
       "id": 260,
       "difficulty": 3,
-      "question": "\"`<KeepAlive>` 组件做什么？\"",
+      "question": "`<KeepAlive>` 组件做什么？",
       "options": [
         "缓存路由",
         "缓存被切换走的组件实例不销毁保留其状态。切回来时恢复之前的状态",
@@ -9535,7 +9535,7 @@
         "能创造知识"
       ],
       "answer": 1,
-      "explanation": "\"大语言模型本质\\\"下一个词预测器\\\"。根据训练数据和上下文计算每个可能 token 的概率。\"",
+      "explanation": "大语言模型本质\"下一个词预测器\"。根据训练数据和上下文计算每个可能 token 的概率。",
       "gem": "ai-collab",
       "level": 1
     },
@@ -9580,7 +9580,7 @@
         "越长越好"
       ],
       "answer": 1,
-      "explanation": "\"角色(\\\"你是前端专家\\\")+上下文(\\\"我在做音乐教学网站\\\")+任务(\\\"写一个 CSS 动画\\\")+格式约束(\\\"输出完整代码\\\")。\"",
+      "explanation": "角色(\"你是前端专家\")+上下文(\"我在做音乐教学网站\")+任务(\"写一个 CSS 动画\")+格式约束(\"输出完整代码\")。",
       "gem": "ai-collab",
       "level": 1
     },
@@ -9595,7 +9595,7 @@
         "简单代码可以直接用"
       ],
       "answer": 1,
-      "explanation": "\"AI 生成的代码像\\\"初稿\\\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。\"",
+      "explanation": "AI 生成的代码像\"初稿\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。",
       "gem": "ai-collab",
       "level": 1
     },
@@ -9625,7 +9625,7 @@
         "不需要贴报错"
       ],
       "answer": 1,
-      "explanation": "\"三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\\\"我想让按钮点击后变色\\\")。\"",
+      "explanation": "三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\"我想让按钮点击后变色\")。",
       "gem": "ai-collab",
       "level": 2
     },
@@ -9665,7 +9665,7 @@
       "question": "让 AI 解释代码 vs 让 AI 写代码→Prompt 有什么不同？",
       "options": [
         "完全相同",
-        "解释代码：给代码+问\\\"这段代码在做什么\\\"。写代码：给需求+约束+示例",
+        "解释代码：给代码+问\"这段代码在做什么\"。写代码：给需求+约束+示例",
         "解释代码不能用 AI",
         "写代码不能用 AI"
       ],
@@ -9680,7 +9680,7 @@
       "question": "AI 对话中为什么不能一次塞太多无关内容？",
       "options": [
         "AI 记性好",
-        "上下文窗口有限→无关内容挤占空间→AI\\\"忘记\\\"前面的重要信息。保持对话聚焦",
+        "上下文窗口有限→无关内容挤占空间→AI\"忘记\"前面的重要信息。保持对话聚焦",
         "AI 能处理任意长度",
         "多给 AI 数据更好"
       ],
@@ -9730,7 +9730,7 @@
         "换一个 AI"
       ],
       "answer": 1,
-      "explanation": "\"不盲信 AI。用已有知识质疑查阅权威来源(官方文档/MDN)验证。告诉 AI\\\"你错了因为...\\\"可能让它修正。\"",
+      "explanation": "不盲信 AI。用已有知识质疑查阅权威来源(官方文档/MDN)验证。告诉 AI\"你错了因为...\"可能让它修正。",
       "gem": "ai-collab",
       "level": 3
     },
@@ -9739,7 +9739,7 @@
       "difficulty": 3,
       "question": "AI 辅助项目规划→Prompt 应包含什么？",
       "options": [
-        "\\\"帮我做一个项目\\\"",
+        "\"帮我做一个项目\"",
         "功能列表+目标用户+技术栈偏好+时间约束+期望输出格式",
         "只写项目名",
         "越长越好"
@@ -9910,7 +9910,7 @@
         "opacity 不加速"
       ],
       "answer": 1,
-      "explanation": "\"创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。\"",
+      "explanation": "创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。",
       "gem": "principles",
       "level": 2
     },
@@ -9955,7 +9955,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。\"",
+      "explanation": "will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。",
       "gem": "principles",
       "level": 2
     },
@@ -10007,7 +10007,7 @@
     {
       "id": 293,
       "difficulty": 3,
-      "question": "\"以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`\"",
+      "question": "以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`",
       "options": [
         "1,2,3",
         "3,1,2",
@@ -10045,7 +10045,7 @@
         "transform 平移后的元素不占原文档流空间"
       ],
       "answer": 2,
-      "explanation": "\"opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。\"",
+      "explanation": "opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。",
       "gem": "principles",
       "level": 3
     },
@@ -10060,7 +10060,7 @@
         "废弃了"
       ],
       "answer": 1,
-      "explanation": "\"修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。\"",
+      "explanation": "修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。",
       "gem": "principles",
       "level": 3
     },
@@ -10150,7 +10150,7 @@
         "不优化也行"
       ],
       "answer": 1,
-      "explanation": "\"WebP/AVIF 比 JPEG/PNG 小 30-50%。srcset 根据屏幕选合适尺寸。loading=lazy 延迟加载屏幕外图片。\"",
+      "explanation": "WebP/AVIF 比 JPEG/PNG 小 30-50%。srcset 根据屏幕选合适尺寸。loading=lazy 延迟加载屏幕外图片。",
       "gem": "performance",
       "level": 1
     },
@@ -10195,7 +10195,7 @@
         "服务器配置"
       ],
       "answer": 1,
-      "explanation": "\"图片：原生 loading=\\\"lazy\\\"属性或 IntersectionObserver 监听进入视口。路由组件：()=>import(\\\"./X.vue\\\")。大列表：虚拟列表只渲染可见行。\"",
+      "explanation": "图片：原生 loading=\"lazy\"属性或 IntersectionObserver 监听进入视口。路由组件：()=>import(\"./X.vue\")。大列表：虚拟列表只渲染可见行。",
       "gem": "performance",
       "level": 2
     },
@@ -10210,7 +10210,7 @@
         "缓存让页面变慢"
       ],
       "answer": 1,
-      "explanation": "\"强缓存：Cache-Control:max-age=31536000。文件内容变化→改文件名(hash)→新 URL 无缓存→下载。协商缓存：ETag/Last-Modified 向服务器确认是否变化。\"",
+      "explanation": "强缓存：Cache-Control:max-age=31536000。文件内容变化→改文件名(hash)→新 URL 无缓存→下载。协商缓存：ETag/Last-Modified 向服务器确认是否变化。",
       "gem": "performance",
       "level": 2
     },
@@ -10255,7 +10255,7 @@
         "不用考虑兼容"
       ],
       "answer": 1,
-      "explanation": "\"<picture><source srcset=\\\"x.webp\\\" type=\\\"image/webp\\\"><img src=\\\"x.jpg\\\"></picture>。浏览器选第一个支持的格式。\"",
+      "explanation": "<picture><source srcset=\"x.webp\" type=\"image/webp\"><img src=\"x.jpg\"></picture>。浏览器选第一个支持的格式。",
       "gem": "performance",
       "level": 2
     },
@@ -10310,12 +10310,12 @@
       "question": "骨架屏(Skeleton Screen)的作用？",
       "options": [
         "装饰",
-        "在内容加载前显示灰色占位图形。让用户感知\\\"正在加载\\\"比空白或转圈更好",
+        "在内容加载前显示灰色占位图形。让用户感知\"正在加载\"比空白或转圈更好",
         "加速加载",
         "SEO"
       ],
       "answer": 1,
-      "explanation": "\"骨架屏=页面结构的灰色占位。给用户\\\"内容马上就来\\\"的感觉减少跳出。比空白页面或 spinner 体验更好。\"",
+      "explanation": "骨架屏=页面结构的灰色占位。给用户\"内容马上就来\"的感觉减少跳出。比空白页面或 spinner 体验更好。",
       "gem": "performance",
       "level": 3
     },
@@ -10375,7 +10375,7 @@
         "CSS 放底部"
       ],
       "answer": 1,
-      "explanation": "\"内联关键 CSS(首屏需要的样式)在 head 优先渲染。非关键 CSS 用 media=\\\"print\\\" onload 异步加载。JS 用 defer 延迟执行不阻塞 HTML 解析。\"",
+      "explanation": "内联关键 CSS(首屏需要的样式)在 head 优先渲染。非关键 CSS 用 media=\"print\" onload 异步加载。JS 用 defer 延迟执行不阻塞 HTML 解析。",
       "gem": "performance",
       "level": 3
     },
@@ -10450,7 +10450,7 @@
         "SEO 优化"
       ],
       "answer": 1,
-      "explanation": "\"HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\\\"不安全\\\"。\"",
+      "explanation": "HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\"不安全\"。",
       "gem": "security",
       "level": 1
     },
@@ -10465,7 +10465,7 @@
         "innerHTML 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。\"",
+      "explanation": "innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。",
       "gem": "security",
       "level": 2
     },
@@ -10532,7 +10532,7 @@
     {
       "id": 328,
       "difficulty": 3,
-      "question": "\"以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`\"",
+      "question": "以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`",
       "options": [
         "无问题",
         "若服务端将 name 参数直接输出到 HTML→反射型 XSS。应转义 HTML 实体",
@@ -10540,7 +10540,7 @@
         "参数名错误"
       ],
       "answer": 1,
-      "explanation": "\"反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。\"",
+      "explanation": "反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。",
       "gem": "security",
       "level": 3
     },
@@ -10585,7 +10585,7 @@
         "无法防御"
       ],
       "answer": 1,
-      "explanation": "\"攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。\"",
+      "explanation": "攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。",
       "gem": "security",
       "level": 3
     },
@@ -10727,7 +10727,7 @@
     {
       "id": 341,
       "difficulty": 2,
-      "question": "\"测试覆盖率 100% 是好目标吗？\"",
+      "question": "测试覆盖率 100% 是好目标吗？",
       "options": [
         "是必须",
         "不是——追求覆盖率数字导致写无意义测试。重要的代码都被测试覆盖即可",
@@ -10735,7 +10735,7 @@
         "不需要覆盖率"
       ],
       "answer": 1,
-      "explanation": "\"100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。\"",
+      "explanation": "100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。",
       "gem": "testing",
       "level": 2
     },
@@ -10805,7 +10805,7 @@
       "question": "测试命名规范为什么重要？",
       "options": [
         "不重要",
-        "好测试名=被测对象+场景+期望结果。\\\"点击提交按钮且表单为空应显示错误信息\\\"",
+        "好测试名=被测对象+场景+期望结果。\"点击提交按钮且表单为空应显示错误信息\"",
         "随便命名",
         "命名无所谓"
       ],
@@ -11080,14 +11080,14 @@
         "只写一半"
       ],
       "answer": 1,
-      "explanation": "\"YAGNI=不要提前实现\\\"将来可能需要\\\"的功能。需求会变→提前做的可能用不上。等需求明确时再实现更高效。\"",
+      "explanation": "YAGNI=不要提前实现\"将来可能需要\"的功能。需求会变→提前做的可能用不上。等需求明确时再实现更高效。",
       "gem": "architecture",
       "level": 3
     },
     {
       "id": 365,
       "difficulty": 3,
-      "question": "\"KISS(Keep It Simple, Stupid)在前端的体现？\"",
+      "question": "KISS(Keep It Simple, Stupid)在前端的体现？",
       "options": [
         "简单就是简陋",
         "优先最简单的解决方案。能用 CSS 不用 JS；能用标准库不引入第三方包；能用纯函数不用复杂模式",
@@ -11095,7 +11095,7 @@
         "KISS 已过时"
       ],
       "answer": 1,
-      "explanation": "\"简单方案 > 炫技。能用 HTML/CSS 解决不用 JS。能用浏览器 API 不引入库。复杂度随需求增长而非提前设计。\"",
+      "explanation": "简单方案 > 炫技。能用 HTML/CSS 解决不用 JS。能用浏览器 API 不引入库。复杂度随需求增长而非提前设计。",
       "gem": "architecture",
       "level": 3
     },
@@ -11155,7 +11155,7 @@
         "已废弃"
       ],
       "answer": 1,
-      "explanation": "\"Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。\"",
+      "explanation": "Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。",
       "gem": "architecture",
       "level": 3
     },
@@ -11180,12 +11180,12 @@
       "question": "alt 属性对无障碍的重要性？",
       "options": [
         "不重要",
-        "屏幕阅读器读出 alt 文字让视障用户\\\"看到\\\"图片。没有 alt→用户不知道图片内容",
+        "屏幕阅读器读出 alt 文字让视障用户\"看到\"图片。没有 alt→用户不知道图片内容",
         "只影响 SEO",
         "只装饰图片需要"
       ],
       "answer": 1,
-      "explanation": "\"alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\\\"\\\"让阅读器跳过。\"",
+      "explanation": "alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\"\"让阅读器跳过。",
       "gem": "a11y",
       "level": 1
     },
@@ -11215,7 +11215,7 @@
         "语义化过时"
       ],
       "answer": 1,
-      "explanation": "\"<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\\\"...\\\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。\"",
+      "explanation": "<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\"...\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。",
       "gem": "a11y",
       "level": 2
     },
@@ -11225,7 +11225,7 @@
       "question": "ARIA 的作用？什么时候需要？",
       "options": [
         "替代 HTML",
-        "当 HTML 原生语义不够用时补充无障碍信息。如 role=\\\"tab\\\" aria-selected=\\\"true\\\"。能用原生就不用 ARIA",
+        "当 HTML 原生语义不够用时补充无障碍信息。如 role=\"tab\" aria-selected=\"true\"。能用原生就不用 ARIA",
         "不需要",
         "总需要"
       ],
@@ -11260,7 +11260,7 @@
         "去掉提升美观"
       ],
       "answer": 1,
-      "explanation": "\"永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。\"",
+      "explanation": "永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。",
       "gem": "a11y",
       "level": 2
     },
@@ -11275,22 +11275,22 @@
         "aria-label 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"aria-label=\\\"关闭\\\"直接在元素上设标签。aria-labelledby=\\\"id1\\\"引用页面已有元素的内容作为标签(避免重复文本)。\"",
+      "explanation": "aria-label=\"关闭\"直接在元素上设标签。aria-labelledby=\"id1\"引用页面已有元素的内容作为标签(避免重复文本)。",
       "gem": "a11y",
       "level": 2
     },
     {
       "id": 378,
       "difficulty": 3,
-      "question": "\"以下 tab 顺序有问题吗？`<input><button style=\\\"position:absolute;left:-999px\\\">隐藏</button><input>`\"",
+      "question": "以下 tab 顺序有问题吗？`<input><button style=\"position:absolute;left:-999px\">隐藏</button><input>`",
       "options": [
         "没问题",
-        "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\\\"消失了\\\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)",
+        "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\"消失了\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)",
         "隐藏元素自动跳过",
         "position:absolute 自动移除"
       ],
       "answer": 1,
-      "explanation": "\"视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。\"",
+      "explanation": "视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。",
       "gem": "a11y",
       "level": 3
     },
@@ -11300,7 +11300,7 @@
       "question": "动态内容更新(如 AJAX 加载)如何让屏幕阅读器知晓？",
       "options": [
         "自动知晓",
-        "用 aria-live 区域(如 aria-live=\\\"polite\\\")播报内容变化。重要消息用 assertive",
+        "用 aria-live 区域(如 aria-live=\"polite\")播报内容变化。重要消息用 assertive",
         "刷新页面",
         "不需要通知"
       ],
@@ -11315,7 +11315,7 @@
       "question": "以下 modal 对话框缺少什么无障碍特性？",
       "options": [
         "不缺",
-        "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\\\"true\\\"；body 滚动锁定",
+        "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\"true\"；body 滚动锁定",
         "只需 ESC",
         "只需关闭按钮"
       ],
@@ -11330,12 +11330,12 @@
       "question": "表单错误信息如何让屏幕阅读器感知？",
       "options": [
         "只显示红色",
-        "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\\\"alert\\\"",
+        "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\"alert\"",
         "不需要",
         "颜色区分即可"
       ],
       "answer": 1,
-      "explanation": "\"仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\\\"true\\\"标记无效输入。role=\\\"alert\\\"自动播报。\"",
+      "explanation": "仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\"true\"标记无效输入。role=\"alert\"自动播报。",
       "gem": "a11y",
       "level": 3
     },
@@ -11365,7 +11365,7 @@
         "不需要处理"
       ],
       "answer": 1,
-      "explanation": "\"<button><i class=\\\"icon-close\\\"></i></button>→阅读器读出\\\"按钮\\\"但不知道做什么。加 aria-label=\\\"关闭\\\"或用 visually-hidden 文字。\"",
+      "explanation": "<button><i class=\"icon-close\"></i></button>→阅读器读出\"按钮\"但不知道做什么。加 aria-label=\"关闭\"或用 visually-hidden 文字。",
       "gem": "a11y",
       "level": 3
     },
@@ -11380,7 +11380,7 @@
         "ARIA 已废弃"
       ],
       "answer": 1,
-      "explanation": "\"ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\\\"button\\\"好一万倍。滥用 ARIA 降低可访问性。\"",
+      "explanation": "ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\"button\"好一万倍。滥用 ARIA 降低可访问性。",
       "gem": "a11y",
       "level": 3
     }

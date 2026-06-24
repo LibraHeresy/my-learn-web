@@ -27,7 +27,7 @@
       "attrs": {
         "title": "选中一组元素"
       },
-      "content": "{{term:querySelectorAll}} 选中所有匹配{{term:选择器}}的{{term:元素}}，返回一个列表（{{term:NodeList}}）。可以用 {{term:forEach}} 遍历每个{{term:元素}}——就像指挥同时命令整个弦乐声部做同一个动作。\n```js\nlet cards = document.querySelectorAll(\".card\");\n```\n{{term:NodeList}} 可以和{{term:数组}}一样用 `forEach` 遍历：\n```js\ncards.forEach(function(card) {\n  card.style.border = \"2px solid gold\";\n});\n```\n也支持{{term:索引}}：\n```js\ncards[0].style.background = \"#FFFAF2\";  // 第一张\ncards[1].style.background = \"#F0F8FF\";  // 第二张\n```"
+      "content": "{{term:querySelectorAll}} 选中所有匹配{{term:选择器}}的{{term:元素}}，返回一个列表（{{term:NodeList}}）。可以用 {{term:forEach}} 遍历每个{{term:元素}}——就像指挥同时命令整个弦乐声部做同一个动作。\n\n```js\r\nlet cards = document.querySelectorAll(\".card\");\r\n```\n\n{{term:NodeList}} 可以和{{term:数组}}一样用 `forEach` 遍历：\n\n```js\r\ncards.forEach(function(card) {\r\n  card.style.border = \"2px solid gold\";\r\n});\r\n```\n\n也支持{{term:索引}}：\n\n```js\r\ncards[0].style.background = \"#FFFAF2\";  // 第一张\r\ncards[1].style.background = \"#F0F8FF\";  // 第二张\r\n```"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "classList — 批量切换样式类"
       },
-      "content": "`classList` 比直接操作 `style` 更优雅，配合 {{term:CSS}} 类使用：\n- `.classList.add(\"active\")` — 添加类\n- `.classList.remove(\"active\")` — 移除类\n- `.classList.toggle(\"active\")` — 切换（有则删，无则加）\n- `.classList.contains(\"active\")` — 判断是否包含\n```js\nlet cards = document.querySelectorAll(\".card\");\ncards.forEach(function(card) {\n  card.classList.add(\"highlighted\");\n});\n```\n然后 {{term:CSS}} 中定义 `.highlighted` 的{{term:样式}}即可——{{term:JS}} 负责逻辑，{{term:CSS}} 负责外观，各司其职。"
+      "content": "`classList` 比直接操作 `style` 更优雅，配合 {{term:CSS}} 类使用：\n\n- `.classList.add(\"active\")` — 添加类\r\n- `.classList.remove(\"active\")` — 移除类\r\n- `.classList.toggle(\"active\")` — 切换（有则删，无则加）\r\n- `.classList.contains(\"active\")` — 判断是否包含\n\n```js\r\nlet cards = document.querySelectorAll(\".card\");\r\ncards.forEach(function(card) {\r\n  card.classList.add(\"highlighted\");\r\n});\r\n```\n\n然后 {{term:CSS}} 中定义 `.highlighted` 的{{term:样式}}即可——{{term:JS}} 负责逻辑，{{term:CSS}} 负责外观，各司其职。"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码有 5 张乐器卡片。三个按钮分别实现\"全选高亮\"\"取消高亮\"\"切换 '弦乐' 类\"：\n```js\n// 高亮全部\nlet cards = document.querySelectorAll(\".card\");\ncards.forEach(function(card) {\n  card.classList.add(\"highlighted\");\n});\n// 只看弦乐\ncards.forEach(function(card) {\n  card.classList.toggle(\"hidden\", !card.classList.contains(\"strings\"));\n});\n```\n切换到 {{term:JS}} {{term:标签}}页查看完整代码，预览区点击按钮试试批量效果。"
+      "content": "下面的代码有 5 张乐器卡片。三个按钮分别实现\"全选高亮\"\"取消高亮\"\"切换 '弦乐' 类\"：\n\n```js\r\n// 高亮全部\r\nlet cards = document.querySelectorAll(\".card\");\r\ncards.forEach(function(card) {\r\n  card.classList.add(\"highlighted\");\r\n});\r\n// 只看弦乐\r\ncards.forEach(function(card) {\r\n  card.classList.toggle(\"hidden\", !card.classList.contains(\"strings\"));\r\n});\r\n```\n\n切换到 {{term:JS}} {{term:标签}}页查看完整代码，预览区点击按钮试试批量效果。"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"让你感受 `querySelectorAll` + `forEach` 组合的「批量操作」威力——一条指令作用于所有匹配{{term:元素}}。就像指挥一挥手，整个弦乐声部同时起弓。这比手动操作每个{{term:元素}}高效得多。\" expected=\"点击高亮全部 → 5 张卡片同时变为金色边框+阴影（`.highlighted` 类生效）；点击取消 → 全部恢复原状。批量操作一气呵成。\"}\n点击「高亮全部」按钮，观察所有 5 张乐器卡片的边框和阴影同时亮起；再点击「取消高亮」，看它们同时恢复原状\n:::\n\n:::step{purpose=\"`classList` 是操作{{term:元素}} {{term:CSS}} 类的标准方式——添加、移除、切换类名比直接改 {{term:style}} 更优雅，因为{{term:样式}}统一在 {{term:CSS}} 中管理。这也是 {{term:CSS}} 和 {{term:JS}} 各司其职的最佳实践：{{term:CSS}} 管外观，{{term:JS}} 管逻辑。\" expected=\"点击「只看弦乐」→ 弦乐卡片清晰，管乐卡片变半透明（{{term:opacity}}: 0.15）；点击「显示全部」→ 所有卡片恢复。过滤效果通过 toggle 类名实现。\"}\n点击「只看弦乐」按钮，观察弦乐卡片保持清晰而管乐卡片变半透明；再点击「显示全部」恢复。理解 `classList.add/remove/toggle` 的用法\n:::\n\n:::step{purpose=\"让你理解 `classList.remove` 的灵活性——移除不同的类名就能实现不同的操作。同一个按钮，改一个字符串就从「显示全部」变成了「取消高亮」。代码逻辑完全一样，只是操作的类名不同。\" expected=\"先高亮全部→再点击修改后的「显示全部」→所有高亮被取消。你发现这个按钮现在和「取消高亮」功能一样了——类名决定了操作的目标效果。\"}\n修改「显示全部」按钮的{{term:事件}}逻辑，把 `card.classList.remove(\"hidden\")` 改成 `card.classList.remove(\"highlighted\")`，看看点击后变化的是什么效果\n:::\n\n:::step{purpose=\"综合运用 {{term:querySelectorAll}} + {{term:forEach}} + {{term:classList}}.contains + {{term:classList}}.add——这四者结合就是前端批量操作的标准模式。从零开始实现「条件筛选 + 批量{{term:样式}}更新」，这是真实项目中最常用的技能。\" expected=\"点击「高亮管乐」→ 只有小号和长笛两张管乐卡片高亮，弦乐卡片保持不变。你成功地基于{{term:元素}}特征进行了「选择性批量操作」。\"}\n挑战：新增一个「高亮管乐」按钮。在 {{term:HTML}} 中添加按钮，在 {{term:JS}} 中用 `querySelector` 获取，绑定 click {{term:事件}}，遍历所有卡片，用 `card.classList.contains(\"winds\")` 判断是否是管乐类，只给管乐卡片加 `.highlighted` 类\n:::",
+      "content": "",
       "steps": [
         {
           "content": "点击「高亮全部」按钮，观察所有 5 张乐器卡片的边框和阴影同时亮起；再点击「取消高亮」，看它们同时恢复原状",

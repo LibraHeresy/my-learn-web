@@ -27,7 +27,7 @@
       "attrs": {
         "title": "回顾你学会了什么"
       },
-      "content": "从乐理篇到现在，你的成长路径：\n| 阶段 | 技能 | 工具 |\n|------|------|------|\n| 乐理篇 | {{term:HTML}}/{{term:CSS}}/{{term:JS}} 基础 | 浏览器、在线编辑器 |\n| 合奏篇 | 工作流、调试、命名、数据驱动 | 浏览器、在线编辑器 |\n| 登台篇 | {{term:Node.js}}、{{term:npm}}、{{term:Vite}}、{{term:Vue}} {{term:SFC}}、{{term:组件}}通信、{{term:Git}}、{{term:部署}} | **{{term:VS Code}}、{{term:终端}}、{{term:GitHub}}** |\n在乐理篇你写第一个 `<h1>你好世界</h1>` 时，你可能想不到：几个月后，你会在{{term:终端}}里敲 `npm run build`，把一个完整的 {{term:Vue}} 应用{{term:部署}}到互联网上。\n**这就是工程化**——不是学更多语法，而是掌握让代码从\"能跑\"到\"专业\"的完整流程。"
+      "content": "从乐理篇到现在，你的成长路径：\r\n| 阶段 | 技能 | 工具 |\r\n|------|------|------|\r\n| 乐理篇 | {{term:HTML}}/{{term:CSS}}/{{term:JS}} 基础 | 浏览器、在线编辑器 |\r\n| 合奏篇 | 工作流、调试、命名、数据驱动 | 浏览器、在线编辑器 |\r\n| 登台篇 | {{term:Node.js}}、{{term:npm}}、{{term:Vite}}、{{term:Vue}} {{term:SFC}}、{{term:组件}}通信、{{term:Git}}、{{term:部署}} | **{{term:VS Code}}、{{term:终端}}、{{term:GitHub}}** |\r\n在乐理篇你写第一个 `<h1>你好世界</h1>` 时，你可能想不到：几个月后，你会在{{term:终端}}里敲 `npm run build`，把一个完整的 {{term:Vue}} 应用{{term:部署}}到互联网上。\r\n**这就是工程化**——不是学更多语法，而是掌握让代码从\"能跑\"到\"专业\"的完整流程。"
     },
     {
       "type": "block:task",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "结业项目：音乐收藏管理器 🎵"
       },
-      "content": ":::step{purpose=\"{{term:v-for}} 是列表{{term:渲染}}的核心指令。将数据{{term:数组}}中的每一项映射为可视化的卡片，是整个应用的基础骨架。这一步验证你对{{term:响应式}}数据绑定和列表{{term:渲染}}的掌握。\" expected=\"页面上整齐排列着多张曲目卡片，每张显示曲名、作曲家和时期。\"}\n【基础1】用 {{term:v-for}} 展示曲目列表（每首包含曲名、作曲家、时期）\n:::\n\n:::step{purpose=\"{{term:computed}} 自动从数据派生新值。根据用户选择的时期筛选曲目列表，切换时期时列表自动更新。这是声明式数据处理的核心模式——你描述筛选规则，{{term:Vue}} 自动执行。\" expected=\"点击不同时期按钮，列表自动过滤，筛选计数同步更新。\"}\n【基础2】用 {{term:computed}} 实现按时期筛选\n:::\n\n:::step{purpose=\"{{term:v-model}} 双向绑定让表单开发变得极其简洁。输入框的值自动同步到数据，提交后新曲目出现在列表中。整个过程不需要一个 {{term:addEventListener}}。\" expected=\"填写曲名、作曲家、时期后点击添加，新曲目出现在列表中。\"}\n【基础3】用 {{term:v-model}} + 表单实现添加新曲目\n:::\n\n:::step{purpose=\"{{term:watch}} 监听数据变化自动保存到 {{term:localStorage}}，onMounted 时从 {{term:localStorage}} 恢复数据。数据持久化是真实应用的基本需求，{{term:watch}} + {{term:localStorage}} 是最简洁的实现方案。\" expected=\"添加/删除曲目后刷新页面，数据完整保留。\"}\n【基础4】用 {{term:localStorage}} 持久化数据（刷新不丢失）\n:::\n\n:::step{purpose=\"{{term:组件}}化是 {{term:Vue}} 工程化的核心实践。将卡片逻辑从 App{{term:.vue}} 中提取为独立{{term:组件}}，通过 {{term:props}} 传入数据，通过 {{term:emits}} 回传{{term:事件}}。这验证你对{{term:组件}}通信模式的掌握。\" expected=\"MusicCard{{term:.vue}} {{term:组件}}可复用，通过 {{term:props}} 接收曲目数据，通过 {{term:emits}} 发送{{term:事件}}。\"}\n【进阶5】把卡片提取成 MusicCard{{term:.vue}} {{term:组件}}（{{term:props}} + {{term:emits}}）\n:::\n\n:::step{purpose=\"{{term:emit}} {{term:事件}}让子{{term:组件}}通知父{{term:组件}}执行数据变更。收藏功能是一个典型的子{{term:组件}}触发、父{{term:组件}}处理的场景，综合运用了 {{term:props}}（传入收藏状态）和 {{term:emits}}（传出切换{{term:事件}}）。\" expected=\"点击卡片上的收藏按钮，收藏状态切换（❤️/🤍），数据持久化到 {{term:localStorage}}。\"}\n【进阶6】添加收藏/取消收藏功能\n:::\n\n:::step{purpose=\"删除功能验证了你对 {{term:Vue}} {{term:响应式}}{{term:数组}}操作的理解。使用 {{term:filter}} 返回新{{term:数组}}（而非直接修改原{{term:数组}}），确保{{term:响应式}}系统能正确检测变化并更新 {{term:DOM}}。\" expected=\"点击删除按钮，对应的曲目从列表中消失，{{term:localStorage}} 同步更新。\"}\n【进阶7】添加删除曲目功能\n:::\n\n:::step{purpose=\"版本管理是专业开发者的基本素养。将项目拆分为有意义的提交（如初始化 {{term:Vue}} 项目、实现曲目列表和筛选、添加持久化功能），每个 {{term:commit}} 都有清晰的描述。这不仅是项目管理的需要，也是展示你工程化思维的窗口。\" expected=\"git log 显示至少 3 个有意义的 {{term:commit}}，每个都有清晰的 {{term:commit}} message。\"}\n【进阶8】用 {{term:Git}} 管理版本（至少 3 次 {{term:commit}}）\n:::\n\n:::step{purpose=\"{{term:部署}}是将代码变成真正的在线应用的最后一步。用 {{term:npm}} run build {{term:构建}}生产版本，配置 vite.{{term:config}}.js 的 base 路径，推送到 gh-pages 分支。你的作品不再只是本地文件——而是互联网上任何人都能访问的网址。\" expected=\"在浏览器中访问 {{term:GitHub Pages}} URL，能看到你完整的音乐收藏管理器在线运行。\"}\n【进阶9】{{term:部署}}到 {{term:GitHub Pages}}\n:::",
+      "content": "",
       "steps": [
         {
           "content": "【基础1】用 {{term:v-for}} 展示曲目列表（每首包含曲名、作曲家、时期）",
@@ -90,7 +90,7 @@
       "attrs": {
         "title": "如果卡住了"
       },
-      "content": "- **忘了 {{term:ref}} 怎么用？** → 回顾第 2 课\n- **忘了 {{term:props}}/{{term:emits}}？** → 回顾第 3 课\n- **忘了怎么{{term:部署}}？** → 回顾第 8 课\n- **{{term:localStorage}} 读写：** `localStorage.setItem(\"key\", JSON.stringify(data))` / `JSON.parse(localStorage.getItem(\"key\"))`\n- **最重要的是：** 你已经具备了所有需要的技能。相信自己，一步步来。"
+      "content": "- **忘了 {{term:ref}} 怎么用？** → 回顾第 2 课\r\n- **忘了 {{term:props}}/{{term:emits}}？** → 回顾第 3 课\r\n- **忘了怎么{{term:部署}}？** → 回顾第 8 课\r\n- **{{term:localStorage}} 读写：** `localStorage.setItem(\"key\", JSON.stringify(data))` / `JSON.parse(localStorage.getItem(\"key\"))`\r\n- **最重要的是：** 你已经具备了所有需要的技能。相信自己，一步步来。"
     },
     {
       "type": "block:explain",
@@ -98,7 +98,7 @@
       "attrs": {
         "title": "下一步是什么？"
       },
-      "content": "完成这个结业项目后，你已经是一个**入门级前端开发者**了。你学会了：\n✅ 用 {{term:HTML}}/{{term:CSS}}/{{term:JS}} {{term:构建}}页面\n✅ 用 {{term:Vue}} {{term:组件}}化思维组织代码\n✅ 用 {{term:npm}} + {{term:Vite}} 搭建工程化项目\n✅ 用 {{term:Git}} 管理代码版本\n✅ 用 {{term:GitHub Pages}} {{term:部署}}上线\n接下来的方向：\n- **作品集 v2：** 用 {{term:Vue}} 重构你的音乐收藏库（component、{{term:router}}、{{term:store}}）\n- **作品集 v3：** 学习后端 {{term:API}}，做一个完整的全栈应用\n- **持续学习：** {{term:Vue}} Router、Pinia 状态管理、{{term:TypeScript}}、测试……\n> 🎵 编程的世界就像音乐——你永远有新的曲目可以学，新的技巧可以练。但你已经有了最重要的东西：**基本功和信心**。"
+      "content": "完成这个结业项目后，你已经是一个**入门级前端开发者**了。你学会了：\r\n✅ 用 {{term:HTML}}/{{term:CSS}}/{{term:JS}} {{term:构建}}页面\r\n✅ 用 {{term:Vue}} {{term:组件}}化思维组织代码\r\n✅ 用 {{term:npm}} + {{term:Vite}} 搭建工程化项目\r\n✅ 用 {{term:Git}} 管理代码版本\r\n✅ 用 {{term:GitHub Pages}} {{term:部署}}上线\r\n接下来的方向：\n\n- **作品集 v2：** 用 {{term:Vue}} 重构你的音乐收藏库（component、{{term:router}}、{{term:store}}）\r\n- **作品集 v3：** 学习后端 {{term:API}}，做一个完整的全栈应用\r\n- **持续学习：** {{term:Vue}} Router、Pinia 状态管理、{{term:TypeScript}}、测试……\n\n> 🎵 编程的世界就像音乐——你永远有新的曲目可以学，新的技巧可以练。但你已经有了最重要的东西：**基本功和信心**。"
     },
     {
       "type": "block:listen-to",

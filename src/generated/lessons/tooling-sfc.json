@@ -27,7 +27,7 @@
       "attrs": {
         "title": ".vue 文件的三段结构"
       },
-      "content": "打开 `src/App.vue`，你会看到：\n```vue\n<script setup>\n// 1. 逻辑区 — 数据和函数\nimport { ref } from 'vue'\nconst message = ref(\"你好，Vue！\")\n</script>\n<template>\n  <!-- 2. 模板区 — HTML 结构 -->\n  <h1>{{ message }}</h1>\n</template>\n<style scoped>\n/* 3. 样式区 — CSS */\nh1 {\n  color: #8B2E2E;\n}\n</style>\n```\n**三段各司其职：**\n- `<script setup>` — {{term:JavaScript}} 逻辑（数据、{{term:函数}}、计算{{term:属性}}等）。`setup` 关键词表示使用 {{term:Vue}} 3 的组合式 {{term:API}} 语法\n- `<template>` — {{term:HTML}} 模板（你在之前课程学的所有{{term:标签}}和指令都在这里：`{{ }}`、`v-if`、`v-for`、`@click` 等）\n- `<style scoped>` — {{term:CSS}} {{term:样式}}。`scoped` 关键词让这些{{term:样式}}只作用于当前{{term:组件}}，不会影响其他{{term:组件}}\n和之前 CDN 方式对比：\n**CDN 方式（浏览器内）：**\n- {{term:JS}}、{{term:HTML}}、{{term:CSS}} 分在三个独立的编辑区\n- {{term:HTML}} 需要一个 `<div id=\"app\">` 作为挂载点\n- `createApp({...}).mount(\"#app\")` 手动挂载\n**{{term:.vue}} 文件方式（工程化）：**\n- 三段写在一个 `.vue` 文件里，一个{{term:组件}}一个文件\n- 不需要 `createApp` 和 `mount`——{{term:Vite}} 自动处理\n- {{term:组件}}之间通过 `import` 引入"
+      "content": "打开 `src/App.vue`，你会看到：\n\n```vue\r\n<script setup>\r\n// 1. 逻辑区 — 数据和函数\r\nimport { ref } from 'vue'\r\nconst message = ref(\"你好，Vue！\")\r\n</script>\r\n<template>\r\n  <!-- 2. 模板区 — HTML 结构 -->\r\n  <h1>{{ message }}</h1>\r\n</template>\r\n<style scoped>\r\n/* 3. 样式区 — CSS */\r\nh1 {\r\n  color: #8B2E2E;\r\n}\r\n</style>\r\n```\n\n**三段各司其职：**\n\n- `<script setup>` — {{term:JavaScript}} 逻辑（数据、{{term:函数}}、计算{{term:属性}}等）。`setup` 关键词表示使用 {{term:Vue}} 3 的组合式 {{term:API}} 语法\r\n- `<template>` — {{term:HTML}} 模板（你在之前课程学的所有{{term:标签}}和指令都在这里：`{{ }}`、`v-if`、`v-for`、`@click` 等）\r\n- `<style scoped>` — {{term:CSS}} {{term:样式}}。`scoped` 关键词让这些{{term:样式}}只作用于当前{{term:组件}}，不会影响其他{{term:组件}}\r\n和之前 CDN 方式对比：\r\n**CDN 方式（浏览器内）：**\r\n- {{term:JS}}、{{term:HTML}}、{{term:CSS}} 分在三个独立的编辑区\r\n- {{term:HTML}} 需要一个 `<div id=\"app\">` 作为挂载点\r\n- `createApp({...}).mount(\"#app\")` 手动挂载\r\n**{{term:.vue}} 文件方式（工程化）：**\r\n- 三段写在一个 `.vue` 文件里，一个{{term:组件}}一个文件\r\n- 不需要 `createApp` 和 `mount`——{{term:Vite}} 自动处理\r\n- {{term:组件}}之间通过 `import` 引入"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "组件的引入和使用"
       },
-      "content": "在工程化项目中，{{term:组件}}就是 `.vue` 文件：\n**定义一个{{term:组件}} `MusicCard.vue`：**\n```vue\n<script setup>\ndefineProps([\"name\", \"composer\"])\n</script>\n<template>\n  <div class=\"card\">\n    <h3>{{ name }}</h3>\n    <p>{{ composer }}</p>\n  </div>\n</template>\n<style scoped>\n.card {\n  border: 1px solid #D4C5A9;\n  border-radius: 10px;\n  padding: 16px;\n}\n</style>\n```\n**在 `App.vue` 中使用：**\n```vue\n<script setup>\nimport MusicCard from './components/MusicCard.vue'\n</script>\n<template>\n  <MusicCard name=\"夜曲 Op.9 No.2\" composer=\"肖邦\" />\n  <MusicCard name=\"月光\" composer=\"德彪西\" />\n</template>\n```\n注意：{{term:组件}}名在模板中写成 PascalCase（`<MusicCard>`），{{term:Vue}} 会自动识别。"
+      "content": "在工程化项目中，{{term:组件}}就是 `.vue` 文件：\r\n**定义一个{{term:组件}} `MusicCard.vue`：**\n\n```vue\r\n<script setup>\r\ndefineProps([\"name\", \"composer\"])\r\n</script>\r\n<template>\r\n  <div class=\"card\">\r\n    <h3>{{ name }}</h3>\r\n    <p>{{ composer }}</p>\r\n  </div>\r\n</template>\r\n<style scoped>\r\n.card {\r\n  border: 1px solid #D4C5A9;\r\n  border-radius: 10px;\r\n  padding: 16px;\r\n}\r\n</style>\r\n```\n\n**在 `App.vue` 中使用：**\n\n```vue\r\n<script setup>\r\nimport MusicCard from './components/MusicCard.vue'\r\n</script>\r\n<template>\r\n  <MusicCard name=\"夜曲 Op.9 No.2\" composer=\"肖邦\" />\r\n  <MusicCard name=\"月光\" composer=\"德彪西\" />\r\n</template>\r\n```\n\n注意：{{term:组件}}名在模板中写成 PascalCase（`<MusicCard>`），{{term:Vue}} 会自动识别。"
     },
     {
       "type": "block:task",
@@ -43,17 +43,12 @@
       "attrs": {
         "title": "你的任务 ✨"
       },
-      "content": ":::step{purpose=\"{{term:.vue}} 文件是 {{term:Vue}} 工程化的基本组织单元。每个{{term:组件}}一个文件，<{{term:template}}>、<{{term:script setup}}>、<{{term:style}} {{term:scoped}}> 三段式让你的代码结构清晰，容易维护。就像乐团中每个声部有自己的分谱——各司其职，互不干扰。\" expected=\"项目中出现 {{term:src}}/components/HelloMusic{{term:.vue}} 文件，内含完整的三段式结构。\"}\n在 {{term:src}}/components/ 下新建 HelloMusic{{term:.vue}} 文件\n:::\n\n:::step{purpose=\"{{term:组件}}的内容通过 <{{term:template}}> 中的 {{term:HTML}} 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 {{term:DOM}}。这是声明式编程的核心——你负责描述界面，{{term:Vue}} 负责{{term:渲染}}。\" expected=\"页面上出现你选择的音乐名言文字。\"}\n在{{term:组件}}中显示一句你最喜欢的音乐名言\n:::\n\n:::step{purpose=\"{{term:组件}}之间通过 ES module 的 {{term:import}} 语法相互引用，这是工程化与 CDN 方式最大的不同。{{term:import}} 后，{{term:组件}}名在模板中自动可用，不需要 components 注册步骤。这让你可以像搭积木一样组合页面。\" expected=\"App{{term:.vue}} 中成功导入 HelloMusic，页面上能看到该{{term:组件}}{{term:渲染}}的内容。\"}\n在 App{{term:.vue}} 中 {{term:import}} 并使用 <HelloMusic /> {{term:组件}}\n:::\n\n:::step{purpose=\"<{{term:style}} {{term:scoped}}> 让 {{term:CSS}} 只作用于当前{{term:组件}}，不会「污染」其他{{term:组件}}的{{term:样式}}。这是工程化的核心优势之一——你可以放心地给每个{{term:组件}}写{{term:样式}}，不用担心{{term:样式}}冲突。就像每个声部的排练标记只对该声部生效。\" expected=\"HelloMusic{{term:.vue}} 中的文字有了自定义的字体、颜色和边框{{term:样式}}。\"}\n给{{term:组件}}添加 {{term:scoped}} {{term:样式}}（字体、颜色、边框等）\n:::\n\n:::step{purpose=\"去掉 {{term:scoped}} 后，这个{{term:组件}}的 {{term:CSS}} 会变成「全局{{term:样式}}」，影响页面上的所有{{term:元素}}。通过对比，你能直观感受到 {{term:scoped}} 的作用——它在编译时给每个{{term:元素}}加上唯一的 data-v-xxx {{term:属性}}，实现{{term:样式}}隔离。\" expected=\"去掉 {{term:scoped}} 后，你可能发现 App{{term:.vue}} 中同类型{{term:元素}}的{{term:样式}}也被改变了——这就是{{term:样式}}「泄漏」的效果。\"}\n把 <{{term:style}} {{term:scoped}}> 改成 <{{term:style}}>（去掉 {{term:scoped}}），观察变化\n:::",
+      "content": "::::step{purpose=\"{{term:组件}}的内容通过 <{{term:template}}> 中的 {{term:HTML}} 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 {{term:DOM}}。这是声明式编程的核心——你负责描述界面，{{term:Vue}} 负责{{term:渲染}}。\" expected=\"页面上出现你选择的音乐名言文字。\"}\n在{{term:组件}}中显示一句你最喜欢的音乐名言\r\n::::",
       "steps": [
         {
           "content": "在 {{term:src}}/components/ 下新建 HelloMusic{{term:.vue}} 文件",
           "purpose": "{{term:.vue}} 文件是 {{term:Vue}} 工程化的基本组织单元。每个{{term:组件}}一个文件，<{{term:template}}>、<{{term:script setup}}>、<{{term:style}} {{term:scoped}}> 三段式让你的代码结构清晰，容易维护。就像乐团中每个声部有自己的分谱——各司其职，互不干扰。",
           "expected": "项目中出现 {{term:src}}/components/HelloMusic{{term:.vue}} 文件，内含完整的三段式结构。"
-        },
-        {
-          "content": "在{{term:组件}}中显示一句你最喜欢的音乐名言",
-          "purpose": "{{term:组件}}的内容通过 <{{term:template}}> 中的 {{term:HTML}} 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 {{term:DOM}}。这是声明式编程的核心——你负责描述界面，{{term:Vue}} 负责{{term:渲染}}。",
-          "expected": "页面上出现你选择的音乐名言文字。"
         },
         {
           "content": "在 App{{term:.vue}} 中 {{term:import}} 并使用 <HelloMusic /> {{term:组件}}",
@@ -78,7 +73,7 @@
       "attrs": {
         "title": "文件命名约定"
       },
-      "content": "{{term:组件}}文件通常使用 PascalCase 命名（首字母大写）：\n- ✅ `MusicCard.vue`\n- ✅ `HelloMusic.vue`\n- ❌ `musicCard.vue`（虽然也能用，但不推荐）\n- ❌ `music-card.vue`（同上）\n这就像音乐术语用意大利语标记——不是强制规定，但全世界通用的约定。"
+      "content": "{{term:组件}}文件通常使用 PascalCase 命名（首字母大写）：\n\n- ✅ `MusicCard.vue`\r\n- ✅ `HelloMusic.vue`\r\n- ❌ `musicCard.vue`（虽然也能用，但不推荐）\r\n- ❌ `music-card.vue`（同上）\r\n这就像音乐术语用意大利语标记——不是强制规定，但全世界通用的约定。"
     },
     {
       "type": "block:listen-to",

@@ -27,7 +27,7 @@
       "attrs": {
         "title": "console.log 是什么？"
       },
-      "content": "console.log() 是 {{term:JavaScript}} 最常用的调试工具——在控制台中打印出你想检查的值。就像练琴时录下来回听，看哪个音不对。在你怀疑有问题的地方插入 console.log({{term:变量}}名)，打开控制台（F12）查看输出。\n```js\nlet composer = \"肖邦\";\nconsole.log(composer);  // 控制台输出：肖邦\nlet count = 5;\nconsole.log(\"当前数量：\", count);  // 可以同时打印文字和变量\nlet list = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\nconsole.log(\"列表内容：\", list);  // 数组也可以打印\n```"
+      "content": "console.log() 是 {{term:JavaScript}} 最常用的调试工具——在控制台中打印出你想检查的值。就像练琴时录下来回听，看哪个音不对。在你怀疑有问题的地方插入 console.log({{term:变量}}名)，打开控制台（F12）查看输出。\n\n```js\r\nlet composer = \"肖邦\";\r\nconsole.log(composer);  // 控制台输出：肖邦\r\nlet count = 5;\r\nconsole.log(\"当前数量：\", count);  // 可以同时打印文字和变量\r\nlet list = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nconsole.log(\"列表内容：\", list);  // 数组也可以打印\r\n```"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "用 console.log 追踪代码流程"
       },
-      "content": "最常见的调试模式是**在{{term:函数}}开头和关键位置加 console.log**，追踪代码执行到了哪里：\n```js\nfunction playMusic(piece) {\n  console.log(\"=== playMusic 被调用了 ===\");\n  console.log(\"传入的参数 piece：\", piece);\n  if (piece === \"夜曲\") {\n    console.log(\"进入夜曲分支\");\n    // ... 处理夜曲\n  } else {\n    console.log(\"进入其他曲目分支\");\n    // ... 处理其他\n  }\n  console.log(\"=== playMusic 执行完毕 ===\");\n}\n```\n这就像在排练中逐段录音回放——你清楚地知道代码走到了哪里、每个{{term:变量}}是什么值。当你觉得\"为什么结果不对\"时，先 `console.log` 看看到底发生了什么。"
+      "content": "最常见的调试模式是**在{{term:函数}}开头和关键位置加 console.log**，追踪代码执行到了哪里：\n\n```js\r\nfunction playMusic(piece) {\r\n  console.log(\"=== playMusic 被调用了 ===\");\r\n  console.log(\"传入的参数 piece：\", piece);\r\n  if (piece === \"夜曲\") {\r\n    console.log(\"进入夜曲分支\");\r\n    // ... 处理夜曲\r\n  } else {\r\n    console.log(\"进入其他曲目分支\");\r\n    // ... 处理其他\r\n  }\r\n  console.log(\"=== playMusic 执行完毕 ===\");\r\n}\r\n```\n\n这就像在排练中逐段录音回放——你清楚地知道代码走到了哪里、每个{{term:变量}}是什么值。当你觉得\"为什么结果不对\"时，先 `console.log` 看看到底发生了什么。"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "编辑器里有一个简单的\"音乐计数器\"页面。它看起来可以工作，但有一个逻辑问题——仔细看 {{term:JS}} 代码，你能发现吗？\n**你的任务不是修 bug，而是加 console.log 来\"监听\"这个 bug。** 在按钮点击{{term:事件}}中插入 console.log，打印当前数值，这样你就能在控制台看到程序的实际行为。\n这种\"先观察、再修复\"的方法，就是工程师的日常。"
+      "content": "编辑器里有一个简单的\"音乐计数器\"页面。它看起来可以工作，但有一个逻辑问题——仔细看 {{term:JS}} 代码，你能发现吗？\r\n**你的任务不是修 bug，而是加 console.log 来\"监听\"这个 bug。** 在按钮点击{{term:事件}}中插入 console.log，打印当前数值，这样你就能在控制台看到程序的实际行为。\r\n这种\"先观察、再修复\"的方法，就是工程师的日常。"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"console.log 是程序员最常用的调试工具——就像排练时录音回放，让你\\\"看到\\\"代码运行过程中每个{{term:变量}}的真实值。在怀疑有问题的地方插 log，比盯着代码瞎猜高效十倍。\" expected=\"每次点击按钮后，控制台输出类似\\\"点击前 count = 0\\\"和\\\"点击后 count = 0\\\"两条信息——注意值没有变！\"}\n在 addOne() {{term:函数}}中添加 console.log，分别打印点击前和点击后的 count 值\n:::\n\n:::step{purpose=\"当控制台输出和预期不一致时，说明你的理解有偏差——这正是 console.log 最有价值的时刻。它能帮你发现\\\"count = count++\\\"这种隐蔽的错误：后缀 ++ 先返回旧值再自增，赋值又把旧值写回去了。\" expected=\"控制台显示 count 始终为 0，证实 bug 存在。你定位到问题出在 count = count++ 这行。\"}\n观察控制台输出：多次点击按钮，count 的值是否每次都在 +1？\n:::\n\n:::step{purpose=\"理解 count++ 和 count = count + 1 的区别是避坑的关键。后缀 ++ 是一个\\\"先取值、后自增\\\"的操作，赋值给它会覆盖自增效果。这是一个经典的初学者陷阱。\" expected=\"再次点击按钮，控制台输出从 0、1、2... 递增，计数器功能正常工作了。\"}\n修复 bug：把 count = count++ 改为 count = count + 1（或 count++ 不赋值）\n:::",
+      "content": "",
       "steps": [
         {
           "content": "在 addOne() {{term:函数}}中添加 console.log，分别打印点击前和点击后的 count 值",

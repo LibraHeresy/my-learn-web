@@ -27,7 +27,7 @@
       "attrs": {
         "title": "错误不是失败，是路标"
       },
-      "content": "写代码一定会遇到错误。即便是工作了 20 年的工程师，也天天看报错信息。区别在于：他们不慌张，而是**先看控制台**。\n当你的 {{term:JS}} 不工作时，第一个动作不是盯着代码瞎猜——**先打开浏览器控制台**：\n- Windows：按 `F12`，点击 \"{{term:Console}}\"（控制台）{{term:标签}}\n- Mac：按 `Cmd + Option + J`\n- 或者右键页面 → \"检查\" → \"{{term:Console}}\"\n红色文字就是错误信息。**红色不可怕，可怕的是不读红字。** 就像一个音不准时你的耳朵会告诉你——控制台就是代码的\"听力训练\"。"
+      "content": "写代码一定会遇到错误。即便是工作了 20 年的工程师，也天天看报错信息。区别在于：他们不慌张，而是**先看控制台**。\r\n当你的 {{term:JS}} 不工作时，第一个动作不是盯着代码瞎猜——**先打开浏览器控制台**：\n\n- Windows：按 `F12`，点击 \"{{term:Console}}\"（控制台）{{term:标签}}\r\n- Mac：按 `Cmd + Option + J`\r\n- 或者右键页面 → \"检查\" → \"{{term:Console}}\"\r\n红色文字就是错误信息。**红色不可怕，可怕的是不读红字。** 就像一个音不准时你的耳朵会告诉你——控制台就是代码的\"听力训练\"。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "读懂红字错误信息"
       },
-      "content": "每条错误通常包含三部分信息：\n**1. 错误类型** — 告诉你\"出了什么问题\"：\n- `ReferenceError: xxx is not defined` — {{term:变量}}没声明就用了\n- `TypeError: xxx is not a function` — 把不是{{term:函数}}的东西当{{term:函数}}调用了\n- `SyntaxError: Unexpected token` — 语法错误，漏了括号或引号\n**2. 文件名 + 行号** — 告诉你\"在哪里出的错\"：\n- 例如 `at 3:15` 表示第 3 行第 15 个字符\n**3. 错误消息** — 英文描述的具体原因\n现在编辑器里的代码有 5 个故意埋下的错误。打开控制台，一个一个找出并修复它们！"
+      "content": "每条错误通常包含三部分信息：\r\n**1. 错误类型** — 告诉你\"出了什么问题\"：\n\n- `ReferenceError: xxx is not defined` — {{term:变量}}没声明就用了\r\n- `TypeError: xxx is not a function` — 把不是{{term:函数}}的东西当{{term:函数}}调用了\r\n- `SyntaxError: Unexpected token` — 语法错误，漏了括号或引号\r\n**2. 文件名 + 行号** — 告诉你\"在哪里出的错\"：\r\n- 例如 `at 3:15` 表示第 3 行第 15 个字符\r\n**3. 错误消息** — 英文描述的具体原因\r\n现在编辑器里的代码有 5 个故意埋下的错误。打开控制台，一个一个找出并修复它们！"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"学会打开控制台是所有前端调试的第一步。红色错误信息不是惩罚，而是路标——就像调音器告诉你哪根弦不准，它精确地指出错误类型和位置。\" expected=\"控制台出现红色错误信息，包含错误类型（ReferenceError/TypeError）、文件名和行号。\"}\n打开浏览器控制台（F12），查看红色错误信息——第一条错误告诉你第几行出了什么错？\n:::\n\n:::step{purpose=\"ReferenceError 是最常见的错误类型——{{term:变量}}未定义。学会从错误信息中的行号定位代码，而不是盲目猜测，能大幅缩短调试时间。\" expected=\"修复后再次运行，第一条红色错误消失，第二条错误出现——就像调音时修好一根弦后，下一根弦的问题才被听到。\"}\n根据第一条错误提示（{{term:document}} 拼写为 docuement），找到对应代码行并修复\n:::\n\n:::step{purpose=\"错误之间会互相掩盖——一个错误导致后续代码不执行。这就像交响乐中一个声部漏了，后面的乐手没法跟进去。逐个修复错音，直到所有声部和谐共鸣。\" expected=\"控制台变干净（无红色错误），点击收藏按钮后卡片状态正常切换，消息文字正确显示。\"}\n继续修复剩余 4 个错误：{{term:querySelector}} 大小写 → {{term:变量}}名不一致 → {{term:textContent}} 拼写错误 → {{term:innerHTML}} 大小写\n:::",
+      "content": "",
       "steps": [
         {
           "content": "打开浏览器控制台（F12），查看红色错误信息——第一条错误告诉你第几行出了什么错？",
@@ -68,7 +68,7 @@
       "attrs": {
         "title": "需要一点线索？"
       },
-      "content": "5 个错误的类型分别是：\n1. `document` 拼写错误 — ReferenceError\n2. `querySelector` 大小写错误 — TypeError\n3. {{term:变量}}名不一致（声明和使用的名字不同）\n4. {{term:DOM}} 方法名拼写错误\n5. {{term:DOM}} {{term:属性}}名拼写错误\n控制台会精确告诉你每一个错误的位置。耐心读完红字！"
+      "content": "5 个错误的类型分别是：\n\n1. `document` 拼写错误 — ReferenceError\r\n2. `querySelector` 大小写错误 — TypeError\r\n3. {{term:变量}}名不一致（声明和使用的名字不同）\r\n4. {{term:DOM}} 方法名拼写错误\r\n5. {{term:DOM}} {{term:属性}}名拼写错误\r\n控制台会精确告诉你每一个错误的位置。耐心读完红字！"
     },
     {
       "type": "block:listen-to",

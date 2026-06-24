@@ -27,7 +27,7 @@
       "attrs": {
         "title": "什么是变量？"
       },
-      "content": "{{term:变量}}是一个**有名字的容器**，用来存储数据。你可以把任何东西放进去，然后用名字来取用：\n```js\nlet composer = \"肖邦\";\nlet piece = \"夜曲\";\nlet year = 1830;\n```\n- `let` — 声明一个{{term:变量}}（可以修改）\n- `const` — 声明一个常量（不能修改）\n- `composer` / `piece` — {{term:变量}}名（你自己起的名字）\n- `\"肖邦\"` — 字符串（文本），用引号包裹\n- `1830` — 数字，不需要引号"
+      "content": "{{term:变量}}是一个**有名字的容器**，用来存储数据。你可以把任何东西放进去，然后用名字来取用：\n\n```js\r\nlet composer = \"肖邦\";\r\nlet piece = \"夜曲\";\r\nlet year = 1830;\r\n```\n\n- `let` — 声明一个{{term:变量}}（可以修改）\r\n- `const` — 声明一个常量（不能修改）\r\n- `composer` / `piece` — {{term:变量}}名（你自己起的名字）\r\n- `\"肖邦\"` — 字符串（文本），用引号包裹\r\n- `1830` — 数字，不需要引号"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "拼接字符串"
       },
-      "content": "用 `+` 号可以把字符串和{{term:变量}}拼接在一起：\n```js\nlet composer = \"肖邦\";\nlet sentence = \"我最喜欢的作曲家是\" + composer;\n```\n更好的写法是**{{term:模板字符串}}**，用反引号 `` ` `` 包裹，`${}` 插入{{term:变量}}：\n```js\nlet sentence = `我最喜欢的作曲家是${composer}`;\n```\n就像把两个乐句连接成一个完整的乐段！"
+      "content": "用 `+` 号可以把字符串和{{term:变量}}拼接在一起：\n\n```js\r\nlet composer = \"肖邦\";\r\nlet sentence = \"我最喜欢的作曲家是\" + composer;\r\n```\n\n更好的写法是**{{term:模板字符串}}**，用反引号 `` ` `` 包裹，`${}` 插入{{term:变量}}：\n\n```js\r\nlet sentence = `我最喜欢的作曲家是${composer}`;\r\n```\n\n就像把两个乐句连接成一个完整的乐段！"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "document.querySelector — 找到页面中的元素"
       },
-      "content": "`document.querySelector()` 可以找到页面上的 {{term:HTML}} {{term:元素}}，然后通过 `.textContent` 修改它的文字内容：\n```js\nlet el = document.querySelector(\"h1\");\nel.textContent = \"新的标题\";\n```\n就像指挥家用手势指定\"现在看这里\"，`querySelector` 帮你指向页面中的{{term:元素}}。"
+      "content": "`document.querySelector()` 可以找到页面上的 {{term:HTML}} {{term:元素}}，然后通过 `.textContent` 修改它的文字内容：\n\n```js\r\nlet el = document.querySelector(\"h1\");\r\nel.textContent = \"新的标题\";\r\n```\n\n就像指挥家用手势指定\"现在看这里\"，`querySelector` 帮你指向页面中的{{term:元素}}。"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码用{{term:变量}}存储了作曲家信息，然后用 `querySelector` 把它们显示在页面上：\n```js\n// let：声明一个可以修改的变量\nlet composer = \"弗雷德里克·肖邦\";\nlet piece = \"降E大调夜曲 Op.9 No.2\";\n\n// 模板字符串：用反引号 `` 包裹，${} 里面放变量名\nlet description = `${composer}的代表作之一是《${piece}》。`;\n\n// querySelector：找到 HTML 元素；textContent：修改它的文字内容\ndocument.querySelector(\"#composer\").textContent = composer;\ndocument.querySelector(\"#piece\").textContent = piece;\ndocument.querySelector(\"#description\").textContent = description;\n```\n切换到 {{term:JS}} {{term:标签}}页查看完整代码。运行后，{{term:JavaScript}} 会自动把信息填入页面。"
+      "content": "下面的代码用{{term:变量}}存储了作曲家信息，然后用 `querySelector` 把它们显示在页面上：\n\n```js\r\n// let：声明一个可以修改的变量\r\nlet composer = \"弗雷德里克·肖邦\";\r\nlet piece = \"降E大调夜曲 Op.9 No.2\";\r\n\r\n// 模板字符串：用反引号 `` 包裹，${} 里面放变量名\r\nlet description = `${composer}的代表作之一是《${piece}》。`;\r\n\r\n// querySelector：找到 HTML 元素；textContent：修改它的文字内容\r\ndocument.querySelector(\"#composer\").textContent = composer;\r\ndocument.querySelector(\"#piece\").textContent = piece;\r\ndocument.querySelector(\"#description\").textContent = description;\r\n```\n\n切换到 {{term:JS}} {{term:标签}}页查看完整代码。运行后，{{term:JavaScript}} 会自动把信息填入页面。"
     },
     {
       "type": "block:task",
@@ -59,17 +59,12 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"{{term:变量}}是命名的容器——改一个{{term:变量}}的值，所有用到它的地方自动更新。{{term:变量}}名本身也是一段代码的自注释。\" expected=\"页面上显示的作曲家和曲目名称都变了。一次改{{term:变量}}值，多处自动生效。\"}\n把 `composer` 和 `piece` 改成你喜欢的作曲家和曲目\n:::\n\n:::step{purpose=\"{{term:模板字符串}}用 `` ` `` 包裹，`${}` 插入变量。比用 `+` 拼接字符串清晰得多，更不容易出错。\" expected=\"描述文字变成了你自定义的内容，{{term:变量}}部分自动替换。\"}\n修改 `description` 的{{term:模板字符串}}，写一句你自己的话\n:::\n\n:::step{purpose=\"`let` = 可修改的{{term:变量}}，`const` = 不可修改的常量。这里 `composer` 没有重新赋值，所以效果一样。但如果后续代码要改它，`const` 会报错。\" expected=\"效果一样——因为这些{{term:变量}}没有重新赋值。但如果你尝试给 `const` {{term:变量}}重新赋值，控制台会报错。\"}\n试试把 `let` 改成 `const`，效果一样吗？\n:::\n\n:::step{purpose=\"你需要自己添加{{term:变量}}、在 {{term:HTML}} 中加 `<span>` 定位{{term:元素}}、用 `querySelector` + `textContent` 显示。这是第一个完整的数据流练习。\" expected=\"页面上多了一行显示了创作年份。你独立完成了数据从 {{term:JS}} 到 {{term:HTML}} 的完整流程。\"}\n挑战：新增一个{{term:变量}} `year`，存创作年份，并把它也显示在页面上\n:::",
+      "content": "::::step{purpose=\"{{term:模板字符串}}用 `` ` `` 包裹，`${}` 插入变量。比用 `+` 拼接字符串清晰得多，更不容易出错。\" expected=\"描述文字变成了你自定义的内容，{{term:变量}}部分自动替换。\"}\n修改 `description` 的{{term:模板字符串}}，写一句你自己的话\r\n::::",
       "steps": [
         {
           "content": "把 `composer` 和 `piece` 改成你喜欢的作曲家和曲目",
           "purpose": "{{term:变量}}是命名的容器——改一个{{term:变量}}的值，所有用到它的地方自动更新。{{term:变量}}名本身也是一段代码的自注释。",
           "expected": "页面上显示的作曲家和曲目名称都变了。一次改{{term:变量}}值，多处自动生效。"
-        },
-        {
-          "content": "修改 `description` 的{{term:模板字符串}}，写一句你自己的话",
-          "purpose": "{{term:模板字符串}}用 `` ` `` 包裹，`${}` 插入变量。比用 `+` 拼接字符串清晰得多，更不容易出错。",
-          "expected": "描述文字变成了你自定义的内容，{{term:变量}}部分自动替换。"
         },
         {
           "content": "试试把 `let` 改成 `const`，效果一样吗？",

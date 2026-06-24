@@ -1,19 +1,56 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 defineProps<{
   term: string
   explanation: string
   analogy?: string
 }>()
+
+const termRef = ref<HTMLElement | null>(null)
+const visible = ref(false)
+const popX = ref(0)
+const popY = ref(0)
+
+const POPOVER_WIDTH = 260
+const GAP = 10
+
+function onMouseEnter() {
+  if (!termRef.value) return
+  const rect = termRef.value.getBoundingClientRect()
+  // 水平居中对齐术语，clamp 防止超出视口
+  const raw = rect.left + rect.width / 2
+  popX.value = Math.max(POPOVER_WIDTH / 2 + 8, Math.min(window.innerWidth - POPOVER_WIDTH / 2 - 8, raw))
+  popY.value = rect.bottom + GAP
+  visible.value = true
+}
+
+function onMouseLeave() {
+  visible.value = false
+}
 </script>
 
 <template>
-  <span class="term-tip">
+  <span
+    ref="termRef"
+    class="term-tip"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+  >
     <slot />
-    <span class="term-popover">
-      <span class="term-title">🎼 {{ term }}</span>
-      <span class="term-explain">{{ explanation }}</span>
-      <span v-if="analogy" class="term-analogy">{{ analogy }}</span>
-    </span>
+    <Teleport to="body">
+      <Transition name="term-pop">
+        <span
+          v-if="visible"
+          class="term-popover"
+          :style="{ top: popY + 'px', left: popX + 'px' }"
+        >
+          <span class="term-title">🎼 {{ term }}</span>
+          <span class="term-explain">{{ explanation }}</span>
+          <span v-if="analogy" class="term-analogy">{{ analogy }}</span>
+        </span>
+      </Transition>
+    </Teleport>
   </span>
 </template>
 
@@ -24,11 +61,12 @@ defineProps<{
   color: var(--color-accent);
   cursor: help;
 }
+</style>
 
+<!-- 非 scoped：teleport 后的元素挂载在 body，需全局样式 -->
+<style>
 .term-popover {
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 10px);
+  position: fixed;
   transform: translateX(-50%);
   width: 260px;
   background: var(--color-editor-bg);
@@ -37,15 +75,8 @@ defineProps<{
   border-radius: 8px;
   padding: 12px 14px;
   box-shadow: var(--shadow-lg);
-  opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
-  z-index: 50;
-}
-
-.term-tip:hover .term-popover {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-2px);
+  z-index: 9999;
 }
 
 .term-title {
@@ -74,5 +105,25 @@ defineProps<{
   color: var(--color-gold);
   font-style: italic;
 }
-</style>
 
+.term-pop-enter-active,
+.term-pop-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.term-pop-enter-from {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.term-pop-enter-to,
+.term-pop-leave-from {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.term-pop-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-4px);
+}
+</style>

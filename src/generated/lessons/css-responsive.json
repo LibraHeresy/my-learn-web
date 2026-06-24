@@ -27,7 +27,7 @@
       "attrs": {
         "title": "什么是响应式设计？"
       },
-      "content": "{{term:响应式}}设计让同一个网页在桌面、平板、手机上都有良好的体验。核心工具是 `@media` 查询：\n```css\n/* 手机端（默认） */\n.card { width: 100%; }\n/* 平板（≥600px） */\n@media (min-width: 600px) {\n  .card { width: 48%; }\n}\n/* 桌面（≥900px） */\n@media (min-width: 900px) {\n  .card { width: 30%; }\n}\n```\n{{term:@media}}` 后面跟着一个\"条件\"——当条件满足时，里面的{{term:样式}}才生效。\n**移动端优先（推荐）**：先写手机{{term:样式}}作为默认，再用 `min-width` 逐步增强大屏。"
+      "content": "{{term:响应式}}设计让同一个网页在桌面、平板、手机上都有良好的体验。核心工具是 `@media` 查询：\n\n```css\r\n/* 手机端（默认） */\r\n.card { width: 100%; }\r\n/* 平板（≥600px） */\r\n@media (min-width: 600px) {\r\n  .card { width: 48%; }\r\n}\r\n/* 桌面（≥900px） */\r\n@media (min-width: 900px) {\r\n  .card { width: 30%; }\r\n}\r\n```\n\n{{term:@media}}` 后面跟着一个\"条件\"——当条件满足时，里面的{{term:样式}}才生效。\r\n**移动端优先（推荐）**：先写手机{{term:样式}}作为默认，再用 `min-width` 逐步增强大屏。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "常见的断点"
       },
-      "content": "三个常用的{{term:响应式}}{{term:断点}}：\n| {{term:断点}} | 设备 | 典型宽度 |\n|------|------|----------|\n| 小屏 | 手机 | < 640px（默认） |\n| 中屏 | 平板 | 640px ~ 1024px |\n| 大屏 | 桌面 | > 1024px |\n```css\n/* 默认：手机（单列） */\n.grid { grid-template-columns: 1fr; }\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n就像独奏版（手机）、室内乐版（平板）、管弦乐版（桌面）——核心旋律不变，编制递增！"
+      "content": "三个常用的{{term:响应式}}{{term:断点}}：\r\n| {{term:断点}} | 设备 | 典型宽度 |\r\n|------|------|----------|\r\n| 小屏 | 手机 | < 640px（默认） |\r\n| 中屏 | 平板 | 640px ~ 1024px |\r\n| 大屏 | 桌面 | > 1024px |\n\n```css\r\n/* 默认：手机（单列） */\r\n.grid { grid-template-columns: 1fr; }\r\n/* 平板：两列 */\r\n@media (min-width: 640px) {\r\n  .grid { grid-template-columns: repeat(2, 1fr); }\r\n}\r\n/* 桌面：三列 */\r\n@media (min-width: 1024px) {\r\n  .grid { grid-template-columns: repeat(3, 1fr); }\r\n}\r\n```\n\n就像独奏版（手机）、室内乐版（平板）、管弦乐版（桌面）——核心旋律不变，编制递增！"
     },
     {
       "type": "block:example",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码已经包含了{{term:响应式}}{{term:断点}}。试着**改变浏览器窗口的宽度**，你会看到卡片从 1 列变成 2 列再变成 3 列：\n```css\n/* 手机：单列 */\n.grid { grid-template-columns: 1fr; }\n/* 平板：两列 */\n@media (min-width: 640px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}\n/* 桌面：三列 */\n@media (min-width: 1024px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n在这个网站中，把浏览器窗口从左边向右拖拽，看看发生了什么？"
+      "content": "下面的代码已经包含了{{term:响应式}}{{term:断点}}。试着**改变浏览器窗口的宽度**，你会看到卡片从 1 列变成 2 列再变成 3 列：\n\n```css\r\n/* 手机：单列 */\r\n.grid { grid-template-columns: 1fr; }\r\n/* 平板：两列 */\r\n@media (min-width: 640px) {\r\n  .grid { grid-template-columns: repeat(2, 1fr); }\r\n}\r\n/* 桌面：三列 */\r\n@media (min-width: 1024px) {\r\n  .grid { grid-template-columns: repeat(3, 1fr); }\r\n}\r\n```\n\n在这个网站中，把浏览器窗口从左边向右拖拽，看看发生了什么？"
     },
     {
       "type": "block:task",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"这是{{term:响应式}}设计最重要的体验——同一个页面在不同窗口宽度下自动调整布局。`@media` 查询让 {{term:CSS}} 拥有了判断屏幕尺寸的能力。\" expected=\"拖动窗口时，卡片从 1 列 → 2 列 → 3 列自动切换。注意观察{{term:断点}}切换的瞬间。\"}\n调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）\n:::\n\n:::step{purpose=\"{{term:断点}}值决定了布局切换的时机。值越小，越早进入大屏布局。\" expected=\"窗口宽度 500px 时就已经是两列布局了（之前要 640px）。\"}\n修改 `640px` {{term:断点}}为 `500px`，让两列布局更早出现\n:::\n\n:::step{purpose=\"可以在不同{{term:断点}}里修改任意 {{term:CSS}} {{term:属性}}。大屏字体大一点更舒适，小屏字体小一点省空间。\" expected=\"窗口宽度 >= 1024px 时，卡片字体变大到 18px。小于 1024px 时恢复默认大小。\"}\n在 `1024px` {{term:断点}}里给 `.card` 添加 `font-size: 18px`\n:::\n\n:::step{purpose=\"`display: none` 隐藏 + `@media` 条件显示 = 按设备控制{{term:元素}}可见性。这种模式在真实项目中非常常用。\" expected=\"手机上看到的是隐藏信息，拉宽窗口到桌面尺寸后就出现了。\"}\n挑战：在手机{{term:断点}}隐藏 `.desktop-only` {{term:元素}}，在桌面{{term:断点}}显示它\n:::",
+      "content": "",
       "steps": [
         {
           "content": "调整浏览器窗口宽度，观察卡片列数变化（必须实际拖拽窗口！）",

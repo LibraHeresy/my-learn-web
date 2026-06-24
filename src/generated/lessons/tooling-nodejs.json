@@ -27,7 +27,7 @@
       "attrs": {
         "title": "Node.js 是什么？"
       },
-      "content": "到目前为止，你的 {{term:JavaScript}} 都运行在**浏览器**里。{{term:Node.js}} 让 {{term:JavaScript}} 可以运行在**你的电脑**上——就像以前只能在音乐教室弹钢琴，现在你家里也有了一台。\n有了 {{term:Node.js}}，你才能使用：\n- **{{term:npm}}** — 包管理器（相当于一个巨大的乐谱库）\n- **{{term:Vite}}** — {{term:构建}}工具（自动搭建排练厅）\n- **{{term:终端}}命令** — 用文字指挥电脑\n> 💡 不要被\"安装\"吓到。这就像第一次调音——看起来很专业，但其实只是拧几个旋钮。"
+      "content": "到目前为止，你的 {{term:JavaScript}} 都运行在**浏览器**里。{{term:Node.js}} 让 {{term:JavaScript}} 可以运行在**你的电脑**上——就像以前只能在音乐教室弹钢琴，现在你家里也有了一台。\r\n有了 {{term:Node.js}}，你才能使用：\n\n- **{{term:npm}}** — 包管理器（相当于一个巨大的乐谱库）\r\n- **{{term:Vite}}** — {{term:构建}}工具（自动搭建排练厅）\r\n- **{{term:终端}}命令** — 用文字指挥电脑\n\n> 💡 不要被\"安装\"吓到。这就像第一次调音——看起来很专业，但其实只是拧几个旋钮。"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "安装步骤（Windows / Mac 通用）"
       },
-      "content": "1. 打开浏览器，访问 **nodejs.org**\n2. 下载 **LTS 版本**（长期支持版，偶数是版本号，如 20.x）\n   - LTS = Long Term Support，最稳定的版本\n   - 不要下载\"Current\"版本——那是给尝鲜的人用的\n3. 运行安装程序，一路点\"Next\"（全部默认选项即可）\n4. 安装完成后，打开{{term:终端}}验证：\n**Windows：** 按 `Win + R`，输入 `cmd`，回车\n**Mac：** 按 `Cmd + 空格`，输入 `Terminal`，回车\n在{{term:终端}}中输入：\n```bash\nnode -v\n```\n如果看到版本号（如 `v20.11.0`），安装成功！🎉\n再输入：\n```bash\nnpm -v\n```\n如果也看到版本号（如 `10.2.4`），说明 {{term:npm}} 也装好了。"
+      "content": "1. 打开浏览器，访问 **nodejs.org**\r\n2. 下载 **LTS 版本**（长期支持版，偶数是版本号，如 20.x）\r\n   - LTS = Long Term Support，最稳定的版本\r\n   - 不要下载\"Current\"版本——那是给尝鲜的人用的\r\n3. 运行安装程序，一路点\"Next\"（全部默认选项即可）\r\n4. 安装完成后，打开{{term:终端}}验证：\r\n**Windows：** 按 `Win + R`，输入 `cmd`，回车\r\n**Mac：** 按 `Cmd + 空格`，输入 `Terminal`，回车\r\n在{{term:终端}}中输入：\n\n```bash\r\nnode -v\r\n```\n\n如果看到版本号（如 `v20.11.0`），安装成功！🎉\r\n再输入：\n\n```bash\r\nnpm -v\r\n```\n\n如果也看到版本号（如 `10.2.4`），说明 {{term:npm}} 也装好了。"
     },
     {
       "type": "block:task",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "你的任务 ✨"
       },
-      "content": "1. 从 nodejs.org 下载并安装 {{term:Node.js}} LTS 版本\n2. 打开{{term:终端}}，运行 `node -v`，确认看到版本号\n3. 运行 `npm -v`，确认看到版本号\n4. 在{{term:终端}}中试试 `node -e \"console.log('你好，工程化世界！')\"` —— 这是用 {{term:Node.js}} 执行一行 {{term:JavaScript}}\n> 完成之后，你已经迈出了工程化的第一步。接下来的所有课程都{{term:依赖}} {{term:Node.js}}，确保安装成功再继续。",
+      "content": "1. 从 nodejs.org 下载并安装 {{term:Node.js}} LTS 版本\r\n2. 打开{{term:终端}}，运行 `node -v`，确认看到版本号\r\n3. 运行 `npm -v`，确认看到版本号\r\n4. 在{{term:终端}}中试试 `node -e \"console.log('你好，工程化世界！')\"` —— 这是用 {{term:Node.js}} 执行一行 {{term:JavaScript}}\r\n> 完成之后，你已经迈出了工程化的第一步。接下来的所有课程都{{term:依赖}} {{term:Node.js}}，确保安装成功再继续。",
       "steps": []
     },
     {
@@ -52,7 +52,7 @@
       "attrs": {
         "title": "常见问题"
       },
-      "content": "- **\"node 不是内部或外部命令\"** → 安装时可能没勾选\"Add to PATH\"。重新运行安装程序，确保勾选这个选项。\n- **Mac 权限问题** → 如果提示权限不足，尝试用管理员权限安装。\n- **不确定有没有装过？** → 在{{term:终端}}运行 `node -v`，能显示版本号就是装过了。\n- **版本号太旧？** → 推荐 v18 或 v20 以上。低于 v16 建议重新安装。"
+      "content": "- **\"node 不是内部或外部命令\"** → 安装时可能没勾选\"Add to PATH\"。重新运行安装程序，确保勾选这个选项。\r\n- **Mac 权限问题** → 如果提示权限不足，尝试用管理员权限安装。\r\n- **不确定有没有装过？** → 在{{term:终端}}运行 `node -v`，能显示版本号就是装过了。\r\n- **版本号太旧？** → 推荐 v18 或 v20 以上。低于 v16 建议重新安装。"
     },
     {
       "type": "block:listen-to",

@@ -27,7 +27,7 @@
       "attrs": {
         "title": "static 与 relative"
       },
-      "content": "所有{{term:元素}}默认都是 `position: static`（正常文档流，位置由 {{term:HTML}} 顺序决定）。\n`position: relative` 让{{term:元素}}可以**相对于自己原来的位置**偏移：\n```css\n.box {\n  position: relative;\n  top: 10px;    /* 下移 10px */\n  left: 20px;   /* 右移 20px */\n}\n```\n- {{term:元素}}仍然占据原来的空间（别人不会顶上来）\n- 就像乐团成员在自己的座位上微微调整姿势，不影响旁边的乐手"
+      "content": "所有{{term:元素}}默认都是 `position: static`（正常文档流，位置由 {{term:HTML}} 顺序决定）。\r\n`position: relative` 让{{term:元素}}可以**相对于自己原来的位置**偏移：\n\n```css\r\n.box {\r\n  position: relative;\r\n  top: 10px;    /* 下移 10px */\r\n  left: 20px;   /* 右移 20px */\r\n}\r\n```\n\n- {{term:元素}}仍然占据原来的空间（别人不会顶上来）\r\n- 就像乐团成员在自己的座位上微微调整姿势，不影响旁边的乐手"
     },
     {
       "type": "block:explain",
@@ -35,7 +35,7 @@
       "attrs": {
         "title": "absolute — 脱离文档流"
       },
-      "content": "`position: absolute` 让{{term:元素}}脱离正常文档流，相对于**最近的已定位祖先**定位：\n```css\n.stage {\n  position: relative;  /* 祖先必须有定位 */\n}\n.soloist {\n  position: absolute;\n  top: 20px;\n  right: 30px;\n}\n```\n- {{term:元素}}完全脱离文档流（不占据原来的空间）\n- 用 `top`、`right`、`bottom`、`left` 控制位置\n- 就像**独奏者走出乐团，站在舞台前方的精确位置**"
+      "content": "`position: absolute` 让{{term:元素}}脱离正常文档流，相对于**最近的已定位祖先**定位：\n\n```css\r\n.stage {\r\n  position: relative;  /* 祖先必须有定位 */\r\n}\r\n.soloist {\r\n  position: absolute;\r\n  top: 20px;\r\n  right: 30px;\r\n}\r\n```\n\n- {{term:元素}}完全脱离文档流（不占据原来的空间）\r\n- 用 `top`、`right`、`bottom`、`left` 控制位置\r\n- 就像**独奏者走出乐团，站在舞台前方的精确位置**"
     },
     {
       "type": "block:explain",
@@ -43,7 +43,7 @@
       "attrs": {
         "title": "fixed 与 sticky"
       },
-      "content": "`position: fixed` — 相对于**浏览器窗口**定位，滚动也不动：\n```css\n.navbar {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  z-index: 100;\n}\n```\n{{term:position}}: {{term:sticky}}` — 滚动到一定阈值后\"粘\"住：\n```css\n.header {\n  position: sticky;\n  top: 0;\n}\n```\n- `fixed` 像**舞台追光灯**——永远锁定在视野中\n- `sticky` 像**指挥台**——正常流动，但一旦到达顶部就固定\n- `z-index` 控制{{term:层}}叠顺序（数值越大越靠前）"
+      "content": "`position: fixed` — 相对于**浏览器窗口**定位，滚动也不动：\n\n```css\r\n.navbar {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  z-index: 100;\r\n}\r\n```\n\n{{term:position}}: {{term:sticky}}` — 滚动到一定阈值后\"粘\"住：\n\n```css\r\n.header {\r\n  position: sticky;\r\n  top: 0;\r\n}\r\n```\n\n- `fixed` 像**舞台追光灯**——永远锁定在视野中\r\n- `sticky` 像**指挥台**——正常流动，但一旦到达顶部就固定\r\n- `z-index` 控制{{term:层}}叠顺序（数值越大越靠前）"
     },
     {
       "type": "block:example",
@@ -51,7 +51,7 @@
       "attrs": {
         "title": "看例子"
       },
-      "content": "下面的代码模拟了一个舞台布局：指挥台（{{term:sticky}} 顶部）、独奏者（{{term:absolute}} 在卡片中央）、乐手（{{term:relative}} 偏移）：\n```css\n.stage {\n  position: relative;\n  height: 300px;\n}\n.soloist {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n.player {\n  position: relative;\n  left: 20px;\n}\n```\n看预览区中{{term:元素}}的位置关系。独奏者始终在卡片右上角！"
+      "content": "下面的代码模拟了一个舞台布局：指挥台（{{term:sticky}} 顶部）、独奏者（{{term:absolute}} 在卡片中央）、乐手（{{term:relative}} 偏移）：\n\n```css\r\n.stage {\r\n  position: relative;\r\n  height: 300px;\r\n}\r\n.soloist {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n}\r\n.player {\r\n  position: relative;\r\n  left: 20px;\r\n}\r\n```\n\n看预览区中{{term:元素}}的位置关系。独奏者始终在卡片右上角！"
     },
     {
       "type": "block:task",
@@ -59,7 +59,7 @@
       "attrs": {
         "title": "动手试试 ✨"
       },
-      "content": ":::step{purpose=\"`top`、`right`、`bottom`、`left` 是绝对定位的核心——精确控制{{term:元素}}相对于已定位祖先的位置。数值越大，离该边缘越远。\" expected=\"独奏者卡片从右上角移到了更靠中间的位置。改变 `top` 和 `right` 的值就改变了它的坐标。\"}\n把 `.soloist` 的 `top` 改成 `50px`，`right` 改成 `50px`，看它移动到哪里\n:::\n\n:::step{purpose=\"`relative` 偏移不影响其他{{term:元素}}的位置——乐手向右移了，但旁边的乐手不会跟过来。\" expected=\"带有 `relative` 的乐手卡片大幅右移，但其他卡片保持在原位。\"}\n把 `.player-shift` 的 `left` 从 `20px` 改成 `60px`\n:::\n\n:::step{purpose=\"`absolute` 的徽章可以溢出父{{term:元素}}边界——负值让{{term:元素}}向外突出。\" expected=\"徽章移到了卡片外面。`absolute` + 负值让{{term:元素}}可以超出容器边界。\"}\n试试在 `.badge` 中使用 `position: absolute` 和 `top: -8px; right: -8px`\n:::\n\n:::step{purpose=\"`sticky` 在到达阈值前正常流动，到达后固定不动——就像指挥台，滚到顶部就粘住。\" expected=\"(本示例中内容较短，可能看不到 {{term:sticky}} 效果) 理解概念即可：{{term:sticky}} 是 {{term:relative}} 和 fixed 的混合。\"}\n在预览区滚动（如果内容够多），观察 `sticky` 的行为\n:::",
+      "content": "",
       "steps": [
         {
           "content": "把 `.soloist` 的 `top` 改成 `50px`，`right` 改成 `50px`，看它移动到哪里",
