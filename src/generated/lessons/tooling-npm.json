@@ -1,0 +1,68 @@
+{
+  "id": "tooling-npm",
+  "meta": {
+    "id": "tooling-npm",
+    "title": "包管理器 — 你的\"乐谱图书馆\"",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "order": 5,
+    "mode": "local",
+    "musicAnalogy": "作曲家不需要从零发明每一个和弦——他们在已有的音乐体系上创作。**npm 就是编程世界的音乐图书馆**：全球开发者共享了超过 200 万个\"包\"，你只需要 `npm install`，就能把别人写好的功能直接拿来用。",
+    "listenTo": "莫扎特《安魂曲》K.626 — 莫扎特在这部作品中引用了亨德尔、海顿等前辈的音乐元素。好的作曲家善于\"复用\"前人的精华。npm 让你站在全球开发者的肩膀上——不需要重新发明轮子。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "包管理器 — 你的\"乐谱图书馆\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "作曲家不需要从零发明每一个和弦——他们在已有的音乐体系上创作。**{{term:npm}} 就是编程世界的音乐图书馆**：全球开发者共享了超过 200 万个\"包\"，你只需要 `npm install`，就能把别人写好的功能直接拿来用。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "npm 做了什么？"
+      },
+      "content": "{{term:npm}}（Node Package Manager）是 {{term:Node.js}} 自带的包管理器。它做三件事：\n1. **下载别人的代码** — `npm install 包名`\n2. **管理{{term:依赖}}关系** — 记录你的项目用了哪些包（`package.json`）\n3. **运行脚本** — `npm run 脚本名`\n**{{term:npm}} 和 {{term:pip}}/brew 类比：**\n- 如果你学过 Python：{{term:npm}} = {{term:pip}}\n- 如果你用 Mac：{{term:npm}} = Homebrew\n- 如果你用手机：{{term:npm}} = 应用商店\n> 💡 每次你 `npm install` 一个包，代码被下载到 `node_modules/` 文件夹。这个文件夹通常很大——所以一般不上传到 {{term:Git}}。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "package.json — 项目的\"身份证\""
+      },
+      "content": "每个前端项目都有一个 `package.json` 文件，它记录了：\n```json\n{\n  \"name\": \"my-music-app\",\n  \"version\": \"1.0.0\",\n  \"description\": \"我的音乐收藏应用\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\"\n  },\n  \"dependencies\": {\n    \"vue\": \"^3.4.0\"\n  },\n  \"devDependencies\": {\n    \"vite\": \"^5.0.0\"\n  }\n}\n```- **{{term:name}}** — 项目名称\n- **scripts** — 你可以运行的命令（`npm run dev` 就是运行这里定义的 `dev` 脚本）\n- **dependencies** — 项目运行需要的包（用户最终也会用到）\n- **devDependencies** — 只在开发时需要用的包（如 {{term:Vite}}、测试工具）\n创建 `package.json` 的命令：\n```bash\nnpm init -y\n````-y` 表示跳过所有问题，使用默认值。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "你的任务 ✨"
+      },
+      "content": "1. 在 {{term:VS Code}} {{term:终端}}中，确保你在 `my-music-app` 目录下（`pwd` 确认）\n2. 运行 `npm init -y`，你会看到生成了 `package.json`\n3. 打开 `package.json` 看看里面的内容\n4. 试试安装一个包：`npm install dayjs`（dayjs 是一个日期处理库，很小的包）\n5. 观察变化：`package.json` 多了一个 `dependencies` 字段，还生成了 `node_modules` 文件夹\n> 你刚刚完成了人生中第一次 `npm install`！以后你会做很多很多次。",
+      "steps": []
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "node_modules 很重"
+      },
+      "content": "`node_modules` 文件夹可能会变得非常大（几百 MB）。**永远不要把它上传到 {{term:GitHub}} 或发给别人**——别人拿到你的 `package.json` 之后，只需要运行 `npm install`，就能自动下载所有{{term:依赖}}。\n就像你只需要告诉乐团\"贝多芬第五交响曲\"，不需要给每个人抄一份总谱。"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "莫扎特《安魂曲》K.626 — 莫扎特在这部作品中引用了亨德尔、海顿等前辈的音乐{{term:元素}}。好的作曲家善于\"复用\"前人的精华。{{term:npm}} 让你站在全球开发者的肩膀上——不需要重新发明轮子。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}

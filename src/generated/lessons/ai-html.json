@@ -1,0 +1,53 @@
+{
+  "id": "ai-html",
+  "meta": {
+    "id": "ai-html",
+    "title": "用 AI 写结构和语义",
+    "track": "ai-collaboration",
+    "chapter": "ai-frontend",
+    "order": 1,
+    "mode": "local",
+    "musicAnalogy": "「AI 能把音符写下来，但只有懂乐理的人才知道这段旋律该配什么和弦。」"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "用 AI 写结构和语义"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "「{{term:AI}} 能把音符写下来，但只有懂乐理的人才知道这段旋律该配什么和弦。」"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "一、让 AI 生成 HTML 结构"
+      },
+      "content": "你在第一章手写了 {{term:HTML}}——{{term:标签}}、嵌套、{{term:语义化}}。现在试试让 {{term:AI}} 写。\n打开 {{term:AI}} 工具，试试这个 Prompt：\n> 我在做一个个人博客。请生成一个文章列表页面的 {{term:HTML}} 结构。每篇文章包含：标题（{{term:h2}}）、摘要（p）、作者名、发布日期、{{term:标签}}列表、一个\"阅读更多\"链接。要求：使用{{term:语义化标签}}（{{term:article}}、{{term:header}}、{{term:main}}、{{term:footer}} 等），结构清晰，{{term:class}} 命名用 BEM 风格。\n{{term:AI}} 会生成一段 {{term:HTML}}。现在——**用你在第一章学到的知识审查它：**\n- 用了 `<article>` 还是 `<div class=\"article\">`？\n- `<header>` 和 `<footer>` 的位置对吗？\n- {{term:标签}}列表用了 `<ul>` 还是几个 `<span>` 挤在一起？\n- {{term:class}} 命名真的符合 BEM 吗？有没有叫 `red-text` 这种和表现相关的名字？\n- 有没有遗漏任何你要求的内容？\n你会发现：{{term:AI}} 的结构通常是合理的，但总有那么一两处不够{{term:语义化}}、不够干净。**这正是你的用武之地。**"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "二、常见的 AI HTML 问题"
+      },
+      "content": "通过审查大量 {{term:AI}} 生成的 {{term:HTML}}，你会发现几个反复出现的模式：\n**问题一：{{term:div}} 泛滥。** {{term:AI}} 倾向于用 `<div>` 包一切，因为它的训练数据里有海量的 `<div>`。当你要求\"{{term:语义化标签}}\"时它才用 `<article>`、`<nav>`，但没说的时候默认 `<div>`。\n**问题二：缺失的 {{term:alt}} {{term:属性}}。** {{term:AI}} 在生成 `<img>` 时经常会漏掉 `alt` {{term:属性}}——因为在互联网上有太多图片没有 {{term:alt}}。这是一个\"统计上常见但规范上错误\"的行为。\n**问题三：过度嵌套。** {{term:AI}} 有时候会 `<div><div><div><span>文字</span></div></div></div>`——多{{term:层}}不必要的容器。这是因为它在模仿一些复杂 {{term:UI}} 库的 {{term:DOM}} 结构。\n**问题四：没有考虑可访问性。** `aria-label`、`role`、表单 {{term:label}} 关联——这些基本都会漏掉，除非你在 Prompt 里明确提出。\n**你的任务：** 养成审查习惯。{{term:AI}} 输出的 {{term:HTML}} 不是\"完成品\"，是\"初稿\"——你来打磨。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "三、练习"
+      },
+      "content": "用 {{term:AI}} 生成以下三个需求的 {{term:HTML}}，然后对照第一章的知识点逐一审查：\n**需求 1：** \"一个网站的导航栏，包含 Logo、5 个导航链接、一个搜索输入框。\"\n→ 审查点：导航用了 `<nav>` 吗？搜索框有没有 `<label>`？\n**需求 2：** \"一个商品列表页面，每个商品有图片、名称、价格、加入购物车按钮。\"\n→ 审查点：图片有 `alt` 吗？按钮是 `<button>` 吗？结构是否扁平？\n**需求 3：** \"一个页脚，包含三列链接（产品、公司、支持）和底部版权信息。\"\n→ 审查点：三列的结构合理吗？版权行用了 `<small>` 吗？\n每个需求，先让 {{term:AI}} 生成，然后**至少找出 2 处可以改进的地方并手动修改**。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}

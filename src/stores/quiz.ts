@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { getAllQuestions, getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
+import { safeSetItem, safeGetItem } from '../utils/storage'
 const gems = getGems()
 const quizQuestions = getAllQuestions()
 
@@ -12,13 +13,21 @@ interface QuizData { gems: Record<string, GemProgress>; wrongPool: number[]; que
 
 function load(): QuizData {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) { const d = JSON.parse(raw); if (d.version === 1) { d.questionStreaks = d.questionStreaks || {}; d.version = 2; return d } }
+    const result = safeGetItem(STORAGE_KEY)
+    if (result.value) { const d = JSON.parse(result.value); if (d.version === 1) { d.questionStreaks = d.questionStreaks || {}; d.version = 2; return d } }
   } catch { /* ignore */ }
   return { gems: {}, wrongPool: [], questionStreaks: {}, totalAnswered: 0, totalCorrect: 0, version: 2 }
 }
 
-function save(data: QuizData) { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)) }
+const lastError = ref<string | null>(null)
+
+function save(data: QuizData) {
+  const result = safeSetItem(STORAGE_KEY, JSON.stringify(data))
+  if (!result.success) {
+    lastError.value = result.error ?? '保存失败'
+    setTimeout(() => { lastError.value = null }, 5000)
+  }
+}
 
 export const useQuizStore = defineStore('quiz', () => {
   const data = ref<QuizData>(load())
@@ -135,6 +144,7 @@ export const useQuizStore = defineStore('quiz', () => {
     midProgress, midTotal, midAchievement,
     seniorProgress, seniorTotal, seniorAchievement,
     getGemProgress, getLevelProgress, isGemUnlocked, isLevelUnlocked, isGemComplete,
-    recordLevelResult, recordAnswer, getQuestionStreak, pickLevelQuestions, pickWrongQuestions
+    recordLevelResult, recordAnswer, getQuestionStreak, pickLevelQuestions, pickWrongQuestions,
+    lastError,
   }
 })

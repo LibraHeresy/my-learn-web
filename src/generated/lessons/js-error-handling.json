@@ -1,0 +1,99 @@
+{
+  "id": "js-error-handling",
+  "meta": {
+    "id": "js-error-handling",
+    "title": "错误处理 — 给代码上\"保险\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "order": 12,
+    "mode": "sandbox",
+    "musicAnalogy": "演奏中难免出错（碰错音、进错拍），好乐手知道如何处理——继续演奏而不是停下来。编程也一样：错误一定会发生，关键是优雅地处理它们，而不是让整个程序\"戛然而止\"。",
+    "listenTo": "爵士乐即兴演奏 — 爵士乐手最擅长的就是在\"错误\"中找到新的旋律。一个\"错音\"可以被变成经过音，编程中的错误也可以被优雅地化解。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "错误处理 — 给代码上\"保险\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "演奏中难免出错（碰错音、进错拍），好乐手知道如何处理——继续演奏而不是停下来。编程也一样：错误一定会发生，关键是优雅地处理它们，而不是让整个程序\"戛然而止\"。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "什么会出错？"
+      },
+      "content": "在之前的学习中，你可能遇到过这些情况：\n- 点击按钮没反应（{{term:JS}} 报错了，后面的代码不执行）\n- 页面白屏（一个错误导致整个脚本崩溃）\n- 数据{{term:加载}}失败（网络问题、{{term:API}} 挂了）\n就像一个乐团的定音鼓手突然缺席，指挥需要有后备方案。程序中，我们用 **{{term:try/catch}}** 来应对。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "try/catch — \"排练一下，看看会不会出错\""
+      },
+      "content": "基本结构：\n```js\ntry {\n  // 尝试执行可能有风险的代码\n  const data = JSON.parse(userInput)\n  console.log('解析成功：', data)\n} catch (error) {\n  // 如果出错，在这里处理\n  console.log('解析失败，请输入合法的 JSON')\n  console.log('错误详情：', error.message)\n}\n```**{{term:try}}** 说\"试试这段代码\"。**{{term:catch}}** 说\"如果出错了，执行这段\"。\n就像排练时你标记出可能出错的地方，想好补救方案。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "throw — 主动\"喊停\""
+      },
+      "content": "有时候你需要主动抛出错误：\n```js\nfunction setVolume(level) {\n  if (level < 0 || level > 100) {\n    throw new Error('音量必须在 0-100 之间')\n  }\n  console.log('音量设置为：' + level)\n}\ntry {\n  setVolume(150)  // 这会触发错误\n} catch (e) {\n  console.log('设置失败：' + e.message)\n}\n````throw` 就像指挥突然停下乐队：\"不对，长号声音太大了！\"——主动发现并指出问题。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "实际场景：localStorage 读取"
+      },
+      "content": "`localStorage` 读取时经常出错（数据损坏、格式不对）：\n```js\nfunction loadCollection() {\n  try {\n    const raw = localStorage.getItem('my-collection')\n    if (!raw) return []  // 没有数据，返回空数组\n    const data = JSON.parse(raw)\n    if (!Array.isArray(data)) throw new Error('数据格式错误')\n    return data\n  } catch (e) {\n    console.log('读取收藏失败，已重置：', e.message)\n    return []  // 出错就返回空数组，程序不崩溃\n  }\n}\n```这就是\"防御性编程\"——假设任何可能出错的地方都会出错，提前做好准备。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"{{term:JSON.parse}} 是常见的\\\"炸弹\\\"——传入非法字符串就直接报错崩溃。{{term:try/catch}} 就是防爆服：把可能爆炸的代码放在 {{term:try}} 里，一旦炸了，{{term:catch}} 会接住它而不是让整个程序崩溃。\" expected=\"传入合法 {{term:JSON}} 字符串时，返回解析后的 {{term:JS}} 对象——与直接调用 {{term:JSON.parse}} 的行为一致。\"}\n用 {{term:try}} 包裹 {{term:JSON.parse}}(str) 的调用，将解析结果赋值给一个{{term:变量}}并返回\n:::\n\n:::step{purpose=\"{{term:catch}} 不只是\\\"吞掉\\\"错误，还可以把错误信息包装成友好的格式返回给调用者。这样调用者不需要 {{term:try/catch}}，直接检查返回值的 error {{term:属性}}就知道是否出错了。这是\\\"防御性编程\\\"的核心思想。\" expected=\"传入非法 {{term:JSON}} 字符串时，返回 { error: {{term:true}}, message: \\\"Unexpected {{term:token}}...\\\" } 而不是报错崩溃。\"}\n在 {{term:catch}} 块中返回 { error: {{term:true}}, message: error.message }——描述发生了什么错误\n:::\n\n:::step{purpose=\"测试两条分支（成功路径和失败路径）是确保 {{term:try/catch}} 正确实现的关键。就像排练时既练习正常演奏流程，也演练弦断了怎么办——两条路径都验证过，你的代码才算可靠。\" expected=\"控制台分别输出解析成功的对象和包含 error: {{term:true}} 的错误对象，程序没有崩溃。\"}\n分别传入合法 {{term:JSON}}（{\"{{term:name}}\": \"月光\", \"composer\": \"贝多芬\"}）和非法 {{term:JSON}}（\"这不是{{term:JSON}}\"），测试两种路径\n:::",
+      "steps": [
+        {
+          "content": "用 {{term:try}} 包裹 {{term:JSON.parse}}(str) 的调用，将解析结果赋值给一个{{term:变量}}并返回",
+          "purpose": "{{term:JSON.parse}} 是常见的\"炸弹\"——传入非法字符串就直接报错崩溃。{{term:try/catch}} 就是防爆服：把可能爆炸的代码放在 {{term:try}} 里，一旦炸了，{{term:catch}} 会接住它而不是让整个程序崩溃。",
+          "expected": "传入合法 {{term:JSON}} 字符串时，返回解析后的 {{term:JS}} 对象——与直接调用 {{term:JSON.parse}} 的行为一致。"
+        },
+        {
+          "content": "在 {{term:catch}} 块中返回 { error: {{term:true}}, message: error.message }——描述发生了什么错误",
+          "purpose": "{{term:catch}} 不只是\"吞掉\"错误，还可以把错误信息包装成友好的格式返回给调用者。这样调用者不需要 {{term:try/catch}}，直接检查返回值的 error {{term:属性}}就知道是否出错了。这是\"防御性编程\"的核心思想。"
+        },
+        {
+          "content": "分别传入合法 {{term:JSON}}（{\"{{term:name}}\": \"月光\", \"composer\": \"贝多芬\"}）和非法 {{term:JSON}}（\"这不是{{term:JSON}}\"），测试两种路径",
+          "purpose": "测试两条分支（成功路径和失败路径）是确保 {{term:try/catch}} 正确实现的关键。就像排练时既练习正常演奏流程，也演练弦断了怎么办——两条路径都验证过，你的代码才算可靠。",
+          "expected": "控制台分别输出解析成功的对象和包含 error: {{term:true}} 的错误对象，程序没有崩溃。"
+        }
+      ]
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "提示"
+      },
+      "content": "```js\nfunction safeParse(str) {\n  try {\n    const result = JSON.parse(str)\n    return result  // 成功则返回解析结果\n  } catch (e) {\n    return { error: true, message: e.message }  // 失败返回错误对象\n  }\n}\n```"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "爵士乐即兴演奏 — 爵士乐手最擅长的就是在\"错误\"中找到新的旋律。一个\"错音\"可以被变成经过音，编程中的错误也可以被优雅地化解。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": "// 请完成 safeParse 函数\r\nfunction safeParse(str) {\r\n  // TODO: 用 try/catch 实现安全解析\r\n}\r\n\r\n// 测试\r\nconsole.log('合法 JSON：', safeParse('{\"name\": \"月光\", \"composer\": \"贝多芬\"}'))\r\nconsole.log('非法 JSON：', safeParse('这不是JSON'))"
+  }
+}

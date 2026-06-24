@@ -1,0 +1,100 @@
+{
+  "id": "async-search-debounce",
+  "meta": {
+    "id": "async-search-debounce",
+    "title": "防抖与搜索 — 别让\"乐团\"累坏了",
+    "track": "framework",
+    "chapter": "async-data",
+    "order": 7,
+    "mode": "sandbox",
+    "musicAnalogy": "如果指挥每半秒就给乐团一个新指令，乐团会疯掉的。好的指挥一定会等前一个乐句结束再给下一个指示。**防抖（debounce）** 就是这个\"等待稳定再行动\"的智慧——用户在输入框打字时，不要每个字母都发请求，而是等用户停下来再发。",
+    "listenTo": "约翰·凯奇《4'33\"》— 这部作品提醒我们，**沉默和等待也是音乐的一部分**。防抖就是在合适的时机\"不做什么\"，这也是一种智慧。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "防抖与搜索 — 别让\"乐团\"累坏了"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "如果指挥每半秒就给乐团一个新指令，乐团会疯掉的。好的指挥一定会等前一个乐句结束再给下一个指示。**{{term:防抖}}（debounce）** 就是这个\"等待稳定再行动\"的智慧——用户在输入框打字时，不要每个字母都发{{term:请求}}，而是等用户停下来再发。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "为什么需要防抖？"
+      },
+      "content": "场景：搜索框。用户输入\"贝多芬\"，来数数会触发几次{{term:请求}}：\n```贝 → 请求1\n贝多 → 请求2\n贝多芬 → 请求3\n```如果每个字都发 {{term:API}} {{term:请求}}：\n- 浪费网络资源\n- 服务器压力大\n- 返回顺序可能错乱（后发的{{term:请求}}可能先返回）\n**{{term:防抖}}：** 用户停止输入 N 毫秒后，才发一次{{term:请求}}。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "防抖函数实现"
+      },
+      "content": "{{term:防抖}}的核心：每次触发时清除上一个定时器，重新计时。\n```js\nfunction debounce(fn, delay = 300) {\n  let timer = null\n  return function(...args) {\n    clearTimeout(timer)            // 清除上次的定时器\n    timer = setTimeout(() => {     // 重新计时\n      fn.apply(this, args)\n    }, delay)\n  }\n}\n// 使用\nconst search = debounce(async (keyword) => {\n  console.log('搜索：', keyword)\n  const result = await api.get(\\`/search?q=\\${keyword}\\`)\n  displayResults(result)\n}, 500)\n// 用户在输入框打字\ninput.addEventListener('input', (e) => {\n  search(e.target.value)  // 停止输入 500ms 后才真正搜索\n})\n```"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "直观理解"
+      },
+      "content": "{{term:防抖}}就像等电梯：\n- 不断有人按关门键（每次按键触发 debounce）\n- 电梯不会立刻关门（清除之前的定时器）\n- 等最后一个人进来后，过几秒才关门（定时器到期，执行{{term:回调}}）\n在搜索场景中，用户连续输入\"贝\"→\"多\"→\"芬\"，每次输入都{{term:重置}}计时器。等用户停止输入 500ms 后，才发送搜索\"贝多芬\"的{{term:请求}}。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "闭包 — 函数\"记住\"外部变量的能力"
+      },
+      "content": "{{term:防抖}}{{term:函数}}之所以能工作，{{term:依赖}}一个重要的概念：**闭包（Closure）**。\n看{{term:防抖}}的结构：\n```js\nfunction debounce(fn, delay) {\n  let timer = null           // 外层函数的变量\n  return function(...args) {  // 内层函数\n    clearTimeout(timer)       // 访问了外层的 timer！\n    timer = setTimeout(...)   // 修改了外层的 timer！\n  }\n}\n```**闭包**就是：内{{term:层}}{{term:函数}}可以记住并访问外{{term:层}}{{term:函数}}的{{term:变量}}，即使外{{term:层}}{{term:函数}}已经执行完毕。就像乐队成员各自记住自己的分谱——音乐会结束后，谱子仍然在他们的记忆里。\n`timer` {{term:变量}}被所有{{term:防抖}}调用共享——每次调用 `clearTimeout(timer)` 清除的都是同一个 timer，这正是{{term:防抖}}能取消上一次等待的关键。\n闭包是 {{term:JavaScript}} 中最强大的特性之一，你在{{term:事件}}处理、模块封装、数据{{term:缓存}}等场景都会用到它。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"{{term:防抖}}利用闭包（Closure）让内{{term:层}}{{term:函数}}记住并访问外{{term:层}}的 timer {{term:变量}}。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。\" expected=\"debounce 返回一个新{{term:函数}}，这个{{term:函数}}在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。\"}\n在 debounce 内部声明 {{term:let}} timer = {{term:null}}（闭包{{term:变量}}），返回的{{term:函数}}中先 clearTimeout(timer)，再 timer = {{term:setTimeout}}(() => fn(...args), delay)\n:::\n\n:::step{purpose=\"{{term:防抖}}{{term:函数}}是一个\\\"装饰器\\\"——它接收一个{{term:函数}}，返回一个被\\\"{{term:防抖}}化\\\"的新{{term:函数}}。原{{term:函数}}的功能不变，只是增加了\\\"等待稳定后再执行\\\"的行为。这种包装模式在工程中非常常见。\" expected=\"debouncedSearch 的行为与 searchAPI 相同，但连续快速调用时只有最后一次会生效。\"}\n用 {{term:const}} debouncedSearch = debounce(searchAPI, 500) 包装搜索{{term:函数}}\n:::\n\n:::step{purpose=\"在搜索场景中，用户在输入框快速打字时，debounce 避免了每个字符都发一次网络{{term:请求}}——只在用户停下来 500ms 后才真正搜索。这对节省流量和服务器资源至关重要。\" expected=\"500ms 后控制台只输出一次 \\\"🔍 发送搜索{{term:请求}}：贝多芬\\\"，前两次调用被取消了。\"}\n连续快速调用 debouncedSearch(\"贝\") → debouncedSearch(\"贝多\") → debouncedSearch(\"贝多芬\")，验证控制台只输出一次搜索{{term:请求}}\n:::",
+      "steps": [
+        {
+          "content": "在 debounce 内部声明 {{term:let}} timer = {{term:null}}（闭包{{term:变量}}），返回的{{term:函数}}中先 clearTimeout(timer)，再 timer = {{term:setTimeout}}(() => fn(...args), delay)",
+          "purpose": "{{term:防抖}}利用闭包（Closure）让内{{term:层}}{{term:函数}}记住并访问外{{term:层}}的 timer {{term:变量}}。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。",
+          "expected": "debounce 返回一个新{{term:函数}}，这个{{term:函数}}在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。"
+        },
+        {
+          "content": "用 {{term:const}} debouncedSearch = debounce(searchAPI, 500) 包装搜索{{term:函数}}",
+          "purpose": "{{term:防抖}}{{term:函数}}是一个\"装饰器\"——它接收一个{{term:函数}}，返回一个被\"{{term:防抖}}化\"的新{{term:函数}}。原{{term:函数}}的功能不变，只是增加了\"等待稳定后再执行\"的行为。这种包装模式在工程中非常常见。",
+          "expected": "debouncedSearch 的行为与 searchAPI 相同，但连续快速调用时只有最后一次会生效。"
+        },
+        {
+          "content": "连续快速调用 debouncedSearch(\"贝\") → debouncedSearch(\"贝多\") → debouncedSearch(\"贝多芬\")，验证控制台只输出一次搜索{{term:请求}}",
+          "purpose": "在搜索场景中，用户在输入框快速打字时，debounce 避免了每个字符都发一次网络{{term:请求}}——只在用户停下来 500ms 后才真正搜索。这对节省流量和服务器资源至关重要。",
+          "expected": "500ms 后控制台只输出一次 \"🔍 发送搜索{{term:请求}}：贝多芬\"，前两次调用被取消了。"
+        }
+      ]
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "提示"
+      },
+      "content": "关键两步：\n1. 在返回的{{term:函数}}中 `clearTimeout(timer)` 取消上次的等待\n2. 然后 `timer = setTimeout(() => fn(...args), delay)` 重新开始等待\n`timer` 要存在闭包中（外{{term:层}}{{term:变量}}），这样每次调用都能访问到同一个 timer。"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "约翰·凯奇《4'33\"》— 这部作品提醒我们，**沉默和等待也是音乐的一部分**。{{term:防抖}}就是在合适的时机\"不做什么\"，这也是一种智慧。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": "// TODO: 实现 debounce 函数\r\nfunction debounce(fn, delay = 300) {\r\n  // 在这里写代码\r\n}\r\n\r\n// 模拟搜索 API\r\nasync function searchAPI(keyword) {\r\n  console.log('🔍 发送搜索请求：' + keyword)\r\n}\r\n\r\n// 用 debounce 包装\r\nconst debouncedSearch = debounce(searchAPI, 500)\r\n\r\n// 模拟快速连续输入\r\nconsole.log('模拟用户输入\"贝多芬\"...')\r\ndebouncedSearch('贝')\r\ndebouncedSearch('贝多')\r\ndebouncedSearch('贝多芬')\r\n\r\n// 你应该只看到一次 \"🔍 发送搜索请求：贝多芬\"\r\n// （500ms 后）"
+  }
+}

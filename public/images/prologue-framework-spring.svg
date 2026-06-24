@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <title>框架春秋</title>
+  <rect x="15" y="30" width="130" height="100" rx="4" fill="#F5EDDD" stroke="#D4C5A9" stroke-width="1"/>
+  <text x="80" y="50" font-family="sans-serif" font-size="9" fill="#8B2E2E" text-anchor="middle" font-weight="bold">原生 JS</text>
+  <text x="35" y="66" font-family="monospace" font-size="6" fill="#3D2B1F">var el = document.</text>
+  <text x="35" y="76" font-family="monospace" font-size="6" fill="#3D2B1F">  getElementById('x');</text>
+  <text x="35" y="90" font-family="monospace" font-size="6" fill="#3D2B1F">el.style.display = 'b';</text>
+  <text x="35" y="104" font-family="monospace" font-size="6" fill="#3D2B1F">el.className = 'active';</text>
+  <text x="160" y="90" font-family="sans-serif" font-size="16" text-anchor="middle">🚀</text>
+  <rect x="175" y="30" width="130" height="100" rx="4" fill="#FFF8F0" stroke="#C9A96E" stroke-width="1.5"/>
+  <text x="240" y="50" font-family="sans-serif" font-size="9" fill="#8B5E3C" text-anchor="middle" font-weight="bold">jQuery</text>
+  <text x="189" y="68" font-family="monospace" font-size="9" fill="#5B8C5A">$('#menu')</text>
+  <text x="189" y="82" font-family="monospace" font-size="9" fill="#5B8C5A">  .show()</text>
+  <text x="189" y="96" font-family="monospace" font-size="9" fill="#5B8C5A">  .addClass('a');</text>
+  <text x="160" y="170" font-family="sans-serif" font-size="10" fill="#6B5A4E" text-anchor="middle">「jq.com — 两个字母改变一切」</text>
+</svg>

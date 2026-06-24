@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <title>浏览器战争</title>
+  <rect x="15" y="35" width="125" height="96" rx="6" fill="#F0F4FF" stroke="#3B7DD8" stroke-width="2"/>
+  <rect x="15" y="35" width="125" height="22" rx="6" fill="#3B7DD8"/>
+  <rect x="15" y="49" width="125" height="8" fill="#3B7DD8"/>
+  <text x="78" y="51" font-family="sans-serif" font-size="10" fill="#FFF8F0" text-anchor="middle" font-weight="bold">NETSCAPE</text>
+  <text x="78" y="76" font-family="sans-serif" font-size="8" fill="#3B7DD8" text-anchor="middle">90% 市占率</text>
+  <text x="78" y="93" font-family="sans-serif" font-size="7" fill="#6B5A4E" text-anchor="middle">JavaScript</text>
+  <text x="78" y="106" font-family="sans-serif" font-size="7" fill="#6B5A4E" text-anchor="middle">插件、Cookie</text>
+  <text x="160" y="80" font-family="sans-serif" font-size="20" text-anchor="middle">⚔️</text>
+  <rect x="180" y="35" width="125" height="96" rx="6" fill="#F0F8F0" stroke="#107C10" stroke-width="2"/>
+  <rect x="180" y="35" width="125" height="22" rx="6" fill="#107C10"/>
+  <rect x="180" y="49" width="125" height="8" fill="#107C10"/>
+  <text x="243" y="51" font-family="sans-serif" font-size="10" fill="#FFF8F0" text-anchor="middle" font-weight="bold">INTERNET EXPLORER</text>
+  <text x="243" y="76" font-family="sans-serif" font-size="8" fill="#107C10" text-anchor="middle">95% 最终份额</text>
+  <text x="243" y="93" font-family="sans-serif" font-size="7" fill="#6B5A4E" text-anchor="middle">免费捆绑</text>
+  <text x="243" y="106" font-family="sans-serif" font-size="7" fill="#6B5A4E" text-anchor="middle">Windows 集成</text>
+  <text x="160" y="165" font-family="sans-serif" font-size="10" fill="#6B5A4E" text-anchor="middle">「赢家不是技术更好的那个」</text>
+</svg>

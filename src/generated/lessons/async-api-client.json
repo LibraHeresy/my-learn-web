@@ -1,0 +1,87 @@
+{
+  "id": "async-api-client",
+  "meta": {
+    "id": "async-api-client",
+    "title": "封装 API 客户端 — 打造你的\"专属乐务\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "order": 6,
+    "mode": "sandbox",
+    "musicAnalogy": "专业乐团有乐务（stage manager），负责处理所有后勤——联系场地、安排排练、协调乐器。你不会让指挥跑去订盒饭。同样，把所有的 fetch 逻辑封装到专门的 API 模块中，让代码各司其职。",
+    "listenTo": "柴可夫斯基《胡桃夹子》— 每个角色（糖梅仙子、花之圆舞曲、俄罗斯舞曲）都有明确的\"职责\"，合在一起却有统一的风格。好的 API 模块设计也是如此。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "封装 API 客户端 — 打造你的\"专属乐务\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "专业乐团有乐务（stage manager），负责处理所有后勤——联系场地、安排排练、协调乐器。你不会让指挥跑去订盒饭。同样，把所有的 {{term:fetch}} 逻辑封装到专门的 {{term:API}} 模块中，让代码各司其职。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "为什么需要封装？"
+      },
+      "content": "之前我们把 {{term:fetch}} 直接写在业务逻辑里。随着项目变大，问题来了：\n- 每个接口都要重复写 `fetch(BASE_URL + '/...')`\n- 每个{{term:请求}}都要重复检查 `response.ok`\n- 基础 URL 改了要改几十处\n- 没有统一的错误处理\n**解决方式：** 创建一个 `apiClient` 模块，统一管理所有{{term:请求}}。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "基础 API 客户端"
+      },
+      "content": "```js\n// api.js — 你的\"乐务\"\nconst BASE_URL = 'https://api.example.com'\nasync function request(path, options = {}) {\n  const url = BASE_URL + path\n  const response = await fetch(url, {\n    headers: {\n      'Content-Type': 'application/json',\n      ...options.headers  // 合并自定义 headers\n    },\n    ...options\n  })\n  if (!response.ok) {\n    throw new Error(\\`请求失败：\\${response.status}\\`)\n  }\n  return response.json()\n}\n// 语义化方法\nexport const api = {\n  get: (path) => request(path),\n  post: (path, body) => request(path, {\n    method: 'POST',\n    body: JSON.stringify(body)\n  }),\n  delete: (path) => request(path, { method: 'DELETE' })\n}\n```"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "使用封装后的 API"
+      },
+      "content": "对比前后的代码：\n```js\n// ❌ 未封装：每个地方都要写完整 fetch\nconst res = await fetch(BASE_URL + '/pieces', {\n  headers: { 'Content-Type': 'application/json' }\n})\nif (!res.ok) throw new Error('请求失败')\nconst data = await res.json()\n// ✅ 封装后：一行搞定\nconst data = await api.get('/pieces')\n```\n封装的好处：\n- 代码量减少 80%\n- 修改 BASE_URL 只改一处\n- 错误处理统一，不会遗漏\n- 可以方便地添加日志、{{term:token}} 等功能"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"封装的核心价值是\\\"写一次，到处用\\\"——所有{{term:请求}}共用一个 BASE_URL、一个错误处理逻辑、一个响应解析流程。就像乐务统一负责所有演出的场地和设备，指挥不需要每次联系不同的人。\" expected=\"api.get(\\\"/posts\\\") 返回一个 {{term:Promise}}，解析后得到帖子{{term:数组}}。\"}\n实现 api.get(path)：内部用 {{term:fetch}}(BASE_URL + path) 发送{{term:请求}}，检查 response.ok，返回 response.json()\n:::\n\n:::step{purpose=\"封装后的调用只一行代码——对比未封装时需要写 {{term:fetch}}+检查 ok+解析 json 三步，代码量减少 80%。修改 BASE_URL 也只需改一处，所有 api.get() 调用自动生效。\" expected=\"控制台输出前 2 条帖子数据，与直接用 {{term:fetch}} 的结果完全一致，但代码简洁得多。\"}\n用封装好的 api.get(\"/posts\") 获取数据，调用 .{{term:slice}}(0, 2) 取前 2 条显示\n:::",
+      "steps": [
+        {
+          "content": "实现 api.get(path)：内部用 {{term:fetch}}(BASE_URL + path) 发送{{term:请求}}，检查 response.ok，返回 response.json()",
+          "purpose": "封装的核心价值是\"写一次，到处用\"——所有{{term:请求}}共用一个 BASE_URL、一个错误处理逻辑、一个响应解析流程。就像乐务统一负责所有演出的场地和设备，指挥不需要每次联系不同的人。",
+          "expected": "api.get(\"/posts\") 返回一个 {{term:Promise}}，解析后得到帖子{{term:数组}}。"
+        },
+        {
+          "content": "用封装好的 api.get(\"/posts\") 获取数据，调用 .{{term:slice}}(0, 2) 取前 2 条显示",
+          "purpose": "封装后的调用只一行代码——对比未封装时需要写 {{term:fetch}}+检查 ok+解析 json 三步，代码量减少 80%。修改 BASE_URL 也只需改一处，所有 api.get() 调用自动生效。",
+          "expected": "控制台输出前 2 条帖子数据，与直接用 {{term:fetch}} 的结果完全一致，但代码简洁得多。"
+        }
+      ]
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "提示"
+      },
+      "content": "```js\nconst BASE_URL = 'https://jsonplaceholder.typicode.com'\nconst api = {\n  get: async (path) => {\n    const res = await fetch(BASE_URL + path)\n    if (!res.ok) throw new Error('请求失败')\n    return res.json()\n  }\n}\n```"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "柴可夫斯基《胡桃夹子》— 每个角色（糖梅仙子、花之圆舞曲、俄罗斯舞曲）都有明确的\"职责\"，合在一起却有统一的风格。好的 {{term:API}} 模块设计也是如此。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": "const BASE_URL = 'https://jsonplaceholder.typicode.com'\r\n\r\n// TODO: 封装 api 对象\r\nconst api = {\r\n  get: async (path) => {\r\n    // 在这里实现\r\n  }\r\n}\r\n\r\n// 测试你的 api\r\nasync function test() {\r\n  const posts = await api.get('/posts')\r\n  console.log('前2条数据：', posts?.slice(0, 2))\r\n}\r\ntest()"
+  }
+}

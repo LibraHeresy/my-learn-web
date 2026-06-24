@@ -1,4 +1,5 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { safeSetItem, safeGetItem } from '../utils/storage'
 
 interface PanelWidths {
   content: number
@@ -15,9 +16,9 @@ export function usePanelResize(storageKey: string, version: number = 1) {
 
   function loadPanelWidths() {
     try {
-      const raw = localStorage.getItem(storageKey)
-      if (raw) {
-        const data = JSON.parse(raw)
+      const result = safeGetItem(storageKey)
+      if (result.value) {
+        const data = JSON.parse(result.value)
         if (data._version !== version) {
           panelWidths.value = { content: 40, editor: 30, preview: 30 }
           savePanelWidths()
@@ -32,7 +33,7 @@ export function usePanelResize(storageKey: string, version: number = 1) {
   }
 
   function savePanelWidths() {
-    localStorage.setItem(storageKey, JSON.stringify({
+    safeSetItem(storageKey, JSON.stringify({
       _version: version,
       widths: panelWidths.value
     }))

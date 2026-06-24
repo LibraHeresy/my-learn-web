@@ -1,0 +1,76 @@
+{
+  "id": "workflow-create-element",
+  "meta": {
+    "id": "workflow-create-element",
+    "title": "DOM 渲染进阶 — innerHTML 对比与 classList 操控",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "order": 8,
+    "mode": "sandbox",
+    "musicAnalogy": "用 `innerHTML` 像\"复印一整页乐谱\"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像\"一个音符一个音符地写\"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。",
+    "listenTo": "巴赫《音乐的奉献》— 这首作品中的每一行都是独立的声部线条，精确编织在一起。createElement 就像在五线谱上逐个添加音符——每个音符都可以独立地定位、装饰、甚至移除。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "DOM 渲染进阶 — innerHTML 对比与 classList 操控"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "用 `innerHTML` 像\"复印一整页乐谱\"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像\"一个音符一个音符地写\"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "innerHTML vs createElement — 两种渲染方式对比"
+      },
+      "content": "回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建{{term:元素}}。现在我们来深入对比这两种方式，理解什么时候该用哪个：\n| 特性 | {{term:innerHTML}} | {{term:createElement}} |\n|------|-----------|---------------|\n| 速度 | 一次性替换，批量操作快 | 逐个创建，精细控制快 |\n| {{term:事件}}保留 | 替换后旧{{term:事件}}丢失 | {{term:事件}}绑定在{{term:元素}}上，不受影响 |\n| 安全性 | 容易 XSS 注入 | {{term:textContent}} 天然安全 |\n| 精细度 | 只能整体替换 | 可以单独修改任一{{term:元素}} |\n| 代码量 | 代码少 | 代码多 |\n**经验法则：**\n- 初始化页面、展示静态数据用 `innerHTML` 更简洁\n- 需要绑定{{term:事件}}、频繁更新、处理用户输入用 `createElement` 更安全灵活\n就像排练新曲子：第一次通读可以直接复印全谱（{{term:innerHTML}}），但之后要修改某几个小节的指法，就得逐个音符编辑（{{term:createElement}}）。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "classList API — 精确操控样式类"
+      },
+      "content": "`classList` 提供了比 `className` 更精细的 {{term:class}} 控制方式：\n```js\nlet el = document.querySelector('.card')\n// 添加一个 class（不会覆盖已有的）\nel.classList.add('highlight')\n// 移除一个 class\nel.classList.remove('highlight')\n// 切换：有则删，无则加\nel.classList.toggle('active')\n// 检查是否包含\nif (el.classList.contains('card')) {\n  console.log('这是一张卡片')\n}\n```\n{{term:classList}}` 的优势：\n- `className = 'xxx'` 会覆盖所有已有 {{term:class}}\n- `classList.add()` 只追加，不影响已有 {{term:class}}\n- `classList.toggle()` 一行搞定开关效果\n> 类比：`className` 像换一件新乐器的全部配件，`classList` 像微调——只给长笛加个弱音器、给小提琴上调一个琴码。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"{{term:createElement}} 比 {{term:innerHTML}} 更精细——每个{{term:元素}}都是独立的 {{term:JS}} 对象，你可以单独修改它、给它绑定{{term:事件}}、甚至随时移除。就像用手工雕刻代替复印机，虽然多写几行代码，但获得了完全的控制权。\" expected=\"页面显示 3 张卡片的收藏列表，外观与 {{term:innerHTML}} 方式完全一致，但底{{term:层}}是用 {{term:createElement}} 逐个创建的。\"}\n把 {{term:render}}() 中的 {{term:innerHTML}} 方式改为 {{term:createElement}} + {{term:appendChild}}：创建 {{term:div}}.card、{{term:h3}}、{{term:span}}，用 {{term:appendChild}} 组装后挂载到页面\n:::\n\n:::step{purpose=\"{{term:classList}}.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个按钮同时控制弱音器的装上和取下——按一下装上，再按一下取下。\" expected=\"点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。\"}\n给每张卡片绑定 click {{term:事件}}，调用 {{term:classList}}.toggle(\"liked\") 切换选中状态\n:::\n\n:::step{purpose=\"用 {{term:createElement}} 创建{{term:元素}}并即时绑定{{term:事件}}，新卡片的点击行为与初始卡片完全一致。这就是 {{term:createElement}} 相对于 {{term:innerHTML}} 的优势——{{term:事件}}在创建时就绑定了，不会丢失。\" expected=\"新增的卡片点击后同样能切换 liked {{term:样式}}，功能完全一致。\"}\n确认动态添加的卡片（点击\"添加随机曲目\"）也能正常切换收藏状态\n:::",
+      "steps": [
+        {
+          "content": "把 {{term:render}}() 中的 {{term:innerHTML}} 方式改为 {{term:createElement}} + {{term:appendChild}}：创建 {{term:div}}.card、{{term:h3}}、{{term:span}}，用 {{term:appendChild}} 组装后挂载到页面",
+          "purpose": "{{term:createElement}} 比 {{term:innerHTML}} 更精细——每个{{term:元素}}都是独立的 {{term:JS}} 对象，你可以单独修改它、给它绑定{{term:事件}}、甚至随时移除。就像用手工雕刻代替复印机，虽然多写几行代码，但获得了完全的控制权。",
+          "expected": "页面显示 3 张卡片的收藏列表，外观与 {{term:innerHTML}} 方式完全一致，但底{{term:层}}是用 {{term:createElement}} 逐个创建的。"
+        },
+        {
+          "content": "给每张卡片绑定 click {{term:事件}}，调用 {{term:classList}}.toggle(\"liked\") 切换选中状态",
+          "purpose": "{{term:classList}}.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个按钮同时控制弱音器的装上和取下——按一下装上，再按一下取下。",
+          "expected": "点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。"
+        },
+        {
+          "content": "确认动态添加的卡片（点击\"添加随机曲目\"）也能正常切换收藏状态",
+          "purpose": "用 {{term:createElement}} 创建{{term:元素}}并即时绑定{{term:事件}}，新卡片的点击行为与初始卡片完全一致。这就是 {{term:createElement}} 相对于 {{term:innerHTML}} 的优势——{{term:事件}}在创建时就绑定了，不会丢失。",
+          "expected": "新增的卡片点击后同样能切换 liked {{term:样式}}，功能完全一致。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "巴赫《音乐的奉献》— 这首作品中的每一行都是独立的声部线条，精确编织在一起。{{term:createElement}} 就像在五线谱上逐个添加音符——每个音符都可以独立地定位、装饰、甚至移除。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>我的收藏列表</h1>\r\n<div id=\"cardList\"></div>\r\n<div class=\"add-bar\">\r\n  <button id=\"addBtn\">➕ 添加随机曲目</button>\r\n</div>",
+    "css": "h1 {\r\n  text-align: center;\r\n  color: #8B2E2E;\r\n}\r\n#cardList {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 8px;\r\n  max-width: 400px;\r\n  margin: 16px auto;\r\n}\r\n.card {\r\n  background: #FFFAF2;\r\n  border: 1px solid #D4C5A9;\r\n  border-radius: 10px;\r\n  padding: 16px 20px;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  cursor: pointer;\r\n  transition: background 0.2s, border-color 0.2s;\r\n}\r\n.card:hover {\r\n  border-color: #C9A96E;\r\n}\r\n.card.liked {\r\n  background: #FFF0E8;\r\n  border-color: #C94545;\r\n}\r\n.card h3 {\r\n  margin: 0;\r\n  color: #8B2E2E;\r\n  font-size: 16px;\r\n}\r\n.card .tag {\r\n  color: #C9A96E;\r\n  font-size: 12px;\r\n  font-weight: 600;\r\n}\r\n.add-bar {\r\n  text-align: center;\r\n  margin-top: 16px;\r\n}\r\n#addBtn {\r\n  padding: 10px 24px;\r\n  background: #8B2E2E;\r\n  color: white;\r\n  border: none;\r\n  border-radius: 8px;\r\n  cursor: pointer;\r\n  font-size: 15px;\r\n}\r\n#addBtn:hover {\r\n  background: #C94545;\r\n}",
+    "js": "// 曲目数据\r\nlet pieces = [\r\n  { name: \"布兰登堡协奏曲\", period: \"巴洛克\" },\r\n  { name: \"费加罗的婚礼序曲\", period: \"古典主义\" },\r\n  { name: \"月光奏鸣曲\", period: \"古典主义\" }\r\n];\r\nlet listEl = document.querySelector(\"#cardList\");\r\n// 当前用 innerHTML 渲染——你的任务：改成 createElement + appendChild\r\nfunction render() {\r\n  let html = \"\";\r\n  for (let i = 0; i < pieces.length; i++) {\r\n    html += '<div class=\"card\"><h3>' + pieces[i].name + '</h3><span class=\"tag\">' + pieces[i].period + '</span></div>';\r\n  }\r\n  listEl.innerHTML = html;\r\n}\r\nrender();\r\n// 添加随机曲目\r\ndocument.querySelector(\"#addBtn\").addEventListener(\"click\", function() {\r\n  let randomPieces = [\r\n    { name: \"G弦上的咏叹调\", period: \"巴洛克\" },\r\n    { name: \"第40号交响曲\", period: \"古典主义\" },\r\n    { name: \"夜曲 Op.9 No.2\", period: \"浪漫主义\" }\r\n  ];\r\n  let pick = randomPieces[Math.floor(Math.random() * randomPieces.length)];\r\n  pieces.push(pick);\r\n  render();\r\n});"
+  }
+}

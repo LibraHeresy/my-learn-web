@@ -20,8 +20,12 @@ const lessonsRoot = path.join(projectRoot, 'src', 'content', 'lessons')
 const prologueRoot = path.join(projectRoot, 'src', 'content', 'prologue')
 const projectsRoot = path.join(projectRoot, 'src', 'content', 'projects')
 const generatedDir = path.join(projectRoot, 'src', 'generated')
-const generatedFile = path.join(generatedDir, 'lessons-index.json')
-const generatedProjectsFile = path.join(generatedDir, 'projects-index.json')
+const lessonsMetaFile = path.join(generatedDir, 'lessons-meta.json')
+const lessonsOutDir = path.join(generatedDir, 'lessons')
+const projectsMetaFile = path.join(generatedDir, 'projects-meta.json')
+const projectsOutDir = path.join(generatedDir, 'projects')
+const legacyLessonsIndex = path.join(generatedDir, 'lessons-index.json')
+const legacyProjectsIndex = path.join(generatedDir, 'projects-index.json')
 const generatedTaxonomyFile = path.join(generatedDir, 'taxonomy.json')
 const glossarySourceFile = path.join(projectRoot, 'src', 'content', 'glossary', 'terms.yaml')
 const glossaryGeneratedFile = path.join(generatedDir, 'glossary.json')
@@ -847,9 +851,28 @@ export async function main() {
   compiledProjects.sort((a, b) => a.meta.order - b.meta.order)
 
   await mkdir(generatedDir, { recursive: true })
+  await mkdir(lessonsOutDir, { recursive: true })
+  await mkdir(projectsOutDir, { recursive: true })
+
+  const lessonsMeta = compiled.map(({ id, meta }) => ({ id, meta }))
+  const projectsMetaList = compiledProjects.map(({ id, meta, steps }) => ({ id, meta, stepCount: steps.length }))
+
+  // Remove legacy index files
+  const { rm } = await import('node:fs/promises')
   await Promise.all([
-    atomicWriteFile(generatedFile, `${JSON.stringify(compiled, null, 2)}\n`),
-    atomicWriteFile(generatedProjectsFile, `${JSON.stringify(compiledProjects, null, 2)}\n`),
+    rm(legacyLessonsIndex, { force: true }),
+    rm(legacyProjectsIndex, { force: true }),
+  ])
+
+  await Promise.all([
+    atomicWriteFile(lessonsMetaFile, `${JSON.stringify(lessonsMeta, null, 2)}\n`),
+    ...compiled.map((l) =>
+      writeFile(path.join(lessonsOutDir, `${l.id}.json`), `${JSON.stringify(l, null, 2)}\n`),
+    ),
+    atomicWriteFile(projectsMetaFile, `${JSON.stringify(projectsMetaList, null, 2)}\n`),
+    ...compiledProjects.map((p) =>
+      writeFile(path.join(projectsOutDir, `${p.id}.json`), `${JSON.stringify(p, null, 2)}\n`),
+    ),
     atomicWriteFile(glossaryGeneratedFile, `${JSON.stringify(glossary, null, 2)}\n`),
     buildTaxonomy(),
     compileQuiz(),

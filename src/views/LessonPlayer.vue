@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watchEffect, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAllLessons, getLesson } from '../content-loaders/lessons'
 import { useProgressStore } from '../stores/progress'
@@ -18,6 +18,13 @@ import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 const route = useRoute()
 const router = useRouter()
 const progressStore = useProgressStore()
+
+// 存储错误提示
+watch(() => progressStore.lastError, (err) => {
+  if (err && typeof window !== 'undefined') {
+    window.alert(err)
+  }
+})
 
 const lessonId = computed(() => route.params.lessonId as string)
 const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
@@ -46,18 +53,34 @@ function toggleSidebar() {
   sidebarExpanded.value = !sidebarExpanded.value
 }
 
-watchEffect(() => {
-  const l = lesson.value
+// 同步当前课程 ID（独立 watcher，不影响代码初始化）
+watch(lesson, (l) => {
+  if (l) progressStore.currentLessonId = l.id
+})
+
+// 仅在课程切换时初始化代码（显式 watch，编辑操作不会触发）
+watch(lesson, (l) => {
   if (!l) return
-  progressStore.currentLessonId = l.id
   if (l.meta.mode === 'sandbox') {
-    userCode.value = { ...l.starter }
+    const saved = progressStore.getUserCode(l.id)
+    userCode.value = saved ? { ...saved } : { ...l.starter }
     triggerPreview()
   }
 })
 
 function onCodeChange(code: UserCode) {
   userCode.value = code
+  if (lesson.value) {
+    progressStore.saveUserCode(lesson.value.id, code)
+  }
+}
+
+function resetCode() {
+  const l = lesson.value
+  if (!l) return
+  userCode.value = { ...l.starter }
+  progressStore.resetUserCode(l.id)
+  triggerPreview()
 }
 
 const currentTrackId = computed(() => lesson.value?.meta.track || 'fundamentals')
@@ -216,8 +239,10 @@ watch(lessonId, () => {
             <CodeEditor
               :key="lessonId"
               :model-value="userCode"
+              :show-reset="true"
               @update:model-value="onCodeChange"
               @run="triggerPreview"
+              @reset="resetCode"
             />
           </div>
 

@@ -1,12 +1,16 @@
-import generatedProjects from '../generated/projects-index.json'
-import type { CompiledProject } from '../content-runtime/types'
+import projectsMeta from '../generated/projects-meta.json'
+import type { CompiledProject, ProjectListItem } from '../content-runtime/types'
 
-const compiledProjects = generatedProjects as CompiledProject[]
+const metaItems = projectsMeta as ProjectListItem[]
+const projectModules = import.meta.glob('../generated/projects/*.json')
 
-export function getAllProjects(): CompiledProject[] {
-  return compiledProjects
+export function getAllProjects(): ProjectListItem[] {
+  return metaItems
 }
 
-export function getProject(projectId: string): CompiledProject | null {
-  return compiledProjects.find((p) => p.id === projectId) ?? null
+export async function getProject(projectId: string): Promise<CompiledProject | null> {
+  const loader = projectModules[`../generated/projects/${projectId}.json`]
+  if (!loader) return null
+  const mod = await loader()
+  return (mod as { default?: CompiledProject }).default ?? (mod as CompiledProject)
 }

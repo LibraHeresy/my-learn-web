@@ -1,0 +1,68 @@
+{
+  "id": "tooling-github",
+  "meta": {
+    "id": "tooling-github",
+    "title": "GitHub — 把你的作品\"发布到音乐厅\"",
+    "track": "engineering",
+    "chapter": "engineering-tooling",
+    "order": 9,
+    "mode": "local",
+    "musicAnalogy": "到目前为止，你的乐谱（代码）只存在于自己的电脑上。**GitHub 就像是把乐谱出版发行**——你的作品有了一个公开的地址，别人可以看到、使用、甚至贡献。它也是程序员界的\"LinkedIn\"——你的 GitHub 主页就是你的技术名片。",
+    "listenTo": "马勒《第八交响曲\"千人\"》— 这部作品需要超过一千名表演者。没有任何一个乐团能独自完成——它需要多个合唱团、独唱家、乐团的**协作**。GitHub 让全球开发者以同样的方式协作：每个人贡献自己的一部分。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "GitHub — 把你的作品\"发布到音乐厅\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "到目前为止，你的乐谱（代码）只存在于自己的电脑上。**{{term:GitHub}} 就像是把乐谱出版发行**——你的作品有了一个公开的地址，别人可以看到、使用、甚至贡献。它也是程序员界的\"LinkedIn\"——你的 {{term:GitHub}} 主页就是你的技术名片。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "Git 和 GitHub 的区别"
+      },
+      "content": "这是初学者最容易混淆的概念：\n| | {{term:Git}} | {{term:GitHub}} |\n|------|-----|--------|\n| 是什么 | 版本管理工具 | 代码托管网站 |\n| 装在哪里 | 你的电脑 | 互联网上的服务器 |\n| 能做什么 | 记录版本、回退历史 | 存储代码、协作、展示作品 |\n| 类比 | 你书房里的乐谱档案柜 | 公开图书馆的乐谱收藏室 |\n**{{term:Git}} 不需要 {{term:GitHub}} 也能用**——但 {{term:GitHub}} 让你的代码有了\"线上备份\"和\"公开展示\"的能力。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "关联本地项目到 GitHub"
+      },
+      "content": "**第一步：在 {{term:GitHub}} 上创建{{term:仓库}}**\n1. 打开 [github.com](https://github.com)，注册/登录账号\n2. 点击右上角的 ➕ → \"New repository\"\n3. {{term:仓库}}名填写 `music-collection`\n4. 设置为 **Public**（公开）\n5. **不要勾选** \"Add a README {{term:file}}\"（因为本地已有项目）\n6. 点击 \"Create repository\"\n**第二步：关联本地项目**\n{{term:GitHub}} 会显示一段命令，复制并在 {{term:VS Code}} {{term:终端}}中运行：\n```bash\ngit remote add origin https://github.com/你的用户名/music-collection.git\ngit branch -M main\ngit push -u origin main\n```\n逐行解释：\n- `git remote add origin <URL>` — 告诉 {{term:Git}}\"远程{{term:仓库}}的地址在这里\"，给它起个名叫 `origin`\n- `git branch -M main` — 把当前分支命名为 `main`\n- `git push -u origin main` — 把本地的 `main` 分支推送到远程的 `origin`\n之后每次有新的 {{term:commit}}，只需要：\n```bash\ngit push\n```\n刷新 {{term:GitHub}} 页面，你的代码就出现在网上了！🎉"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "你的任务 ✨"
+      },
+      "content": "1. 在 {{term:GitHub}} 上注册账号（如果还没有）\n2. 创建一个名为 `music-collection` 的公开{{term:仓库}}\n3. 按照 {{term:GitHub}} 提供的命令，把本地项目推送到远程\n4. 刷新 {{term:GitHub}} 页面，确认代码已经上传\n5. 在本地修改 `App.vue`，{{term:commit}}，然后 `git push`，刷新 {{term:GitHub}} 看更新\n> 🎉 你刚刚完成了第一次 git push！从现在开始，你的代码有了\"云端备份\"，再也不用担心电脑坏了代码丢失。",
+      "steps": []
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "常见问题"
+      },
+      "content": "- **\"Permission denied\"** → 需要配置 SSH Key 或使用 Personal Access Token。初学者推荐用 HTTPS + Token（{{term:GitHub}} 登录后会自动生成）。\n- **首次 push 时提示登录** → 在弹出的窗口中用 {{term:GitHub}} 账号登录即可。\n- **push 被拒绝？** → 如果创建{{term:仓库}}时勾选了 README，需要先 `git pull origin main --allow-unrelated-histories`。\n- **{{term:仓库}}名和文件夹名不一致没关系** — {{term:Git}} 只看 remote URL，不关心文件夹叫什么。"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "马勒《第八交响曲\"千人\"》— 这部作品需要超过一千名表演者。没有任何一个乐团能独自完成——它需要多个合唱团、独唱家、乐团的**协作**。{{term:GitHub}} 让全球开发者以同样的方式协作：每个人贡献自己的一部分。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "js-es6-syntax",
+  "meta": {
+    "id": "js-es6-syntax",
+    "title": "ES6 新语法 — 让代码更优雅的\"新乐器\"",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "order": 11,
+    "mode": "sandbox",
+    "musicAnalogy": "就像现代音乐加入了电声乐器让表现力更丰富，ES6（ECMAScript 2015）为 JavaScript 带来了更简洁、更强大的语法。用这些新\"乐器\"，你可以用更少的音符写出更丰富的旋律。",
+    "listenTo": "德彪西《意象集》— 印象派用新的和声语言打破了传统规则，正如 ES6 用新语法改变了 JavaScript 的写法。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "ES6 新语法 — 让代码更优雅的\"新乐器\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "就像现代音乐加入了电声乐器让表现力更丰富，ES6（ECMAScript 2015）为 {{term:JavaScript}} 带来了更简洁、更强大的语法。用这些新\"乐器\"，你可以用更少的音符写出更丰富的旋律。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "为什么需要新语法？"
+      },
+      "content": "在 {{term:JS}} 基础篇中，你学会了用 `var` 声明{{term:变量}}、用 `function` 定义{{term:函数}}。但 {{term:JavaScript}} 一直在进化——2015 年发布的 ES6 是一次\"革命性升级\"。\nES6 引入了：\n- `let` 和 `const`：替代 `var`，更安全\n- 箭头{{term:函数}}：更简洁的{{term:函数}}写法\n- 解构赋值：优雅地从对象/{{term:数组}}中取值\n- {{term:模板字符串}}：用反引号（[[{{term:html}}]]<{{term:code}} {{term:class}}=\"{{term:inline}}-{{term:code}}\">`</{{term:code}}>[[/{{term:html}}]]）拼接字符串\n- 展开运算符：`...` 展开{{term:数组}}和对象\n这些新语法让代码**更短、更清晰、更不容易出错**。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "解构赋值 — 从\"抽屉\"里取东西"
+      },
+      "content": "想象你有一个乐谱夹，里面有多首曲子。以前你要一首一首拿：\n```js\n// 旧写法\nconst piece1 = pieces[0]\nconst piece2 = pieces[1]\nconst piece3 = pieces[2]\n```解构赋值让你一次取出：\n```js\n// 数组解构\nconst [piece1, piece2, piece3] = pieces\n// 对象解构\nconst { name, composer, period } = piece\n```就像从谱架上一次取下三本乐谱——整齐又高效。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "箭头函数 — 精简的\"旋律线\""
+      },
+      "content": "箭头{{term:函数}}是 `function` 的简写版：\n```js\n// 旧写法\nconst double = function(x) {\n  return x * 2\n}\n// 箭头函数\nconst double = x => x * 2\n// 多行逻辑用花括号\nconst greet = name => {\n  const message = '你好，' + name\n  return message\n}\n```箭头{{term:函数}}就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。\n**重要区别：箭头{{term:函数}}没有自己的 `this`。** 普通{{term:函数}}中的 `this` 取决于谁调用了它，而箭头{{term:函数}}的 `this` 继承自定义它的外{{term:层}}{{term:作用域}}。这在{{term:事件}}处理中尤其需要注意。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "展开运算符 — 拆包与合并"
+      },
+      "content": "`...` 像一只手，可以把{{term:数组}}/对象\"展开\"：\n```js\n// 合并数组\nconst classical = ['巴赫', '莫扎特']\nconst romantic = ['肖邦', '李斯特']\nconst all = [...classical, ...romantic]\n// ['巴赫', '莫扎特', '肖邦', '李斯特']\n// 复制对象并修改\nconst piece = { name: '月光', composer: '贝多芬' }\nconst updated = { ...piece, period: '古典主义' }\n```就像把两个乐团的乐手合并成一个更大的乐团——不改变原来的，创造一个新的。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"解构赋值让你一行代码取出多个{{term:属性}}，避免重复写 instrument.{{term:name}}、instrument.family。就像从谱架上一次取下三本乐谱，而不是一本一本拿——整齐又高效，也让代码意图更清晰。\" expected=\"控制台输出 {{term:name}}、family、{{term:range}} 三个{{term:变量}}的正确值（小提琴、弦乐、G3-E6）。\"}\n用解构赋值 {{term:const}} { {{term:name}}, family, {{term:range}} } = instrument 从对象中取出三个{{term:属性}}\n:::\n\n:::step{purpose=\"箭头{{term:函数}}省略了 {{term:function}} 关键字，代码更短；{{term:模板字符串}}使用反引号和 ${} 插值，告别了繁琐的字符串拼接。这是现代 {{term:JavaScript}} 最常用的两种语法，几乎每一个项目中都会大量使用。\" expected=\"describe(instrument) 返回\\\"小提琴 是弦乐器，音域 G3-E6\\\"，输出与原始 {{term:function}} 版本一致。\"}\n用箭头{{term:函数}}重写 describe {{term:函数}}，并用{{term:模板字符串}}（反引号）返回格式化的描述文字\n:::\n\n:::step{purpose=\"展开运算符创建新对象而不修改原对象——这是{{term:函数}}式编程的重要理念：不改变原始数据。就像用一份乐谱复印本做标注，原件保持不变，随时可以回到最初版本。\" expected=\"新对象包含原 instrument 的所有{{term:属性}}（{{term:name}}, family, {{term:range}}）加上 players {{term:属性}}，而原 instrument 对象保持不变。\"}\n用展开运算符 { ...instrument, players: \"40人\" } 给 instrument 对象添加新{{term:属性}}\n:::",
+      "steps": [
+        {
+          "content": "用解构赋值 {{term:const}} { {{term:name}}, family, {{term:range}} } = instrument 从对象中取出三个{{term:属性}}",
+          "purpose": "解构赋值让你一行代码取出多个{{term:属性}}，避免重复写 instrument.{{term:name}}、instrument.family。就像从谱架上一次取下三本乐谱，而不是一本一本拿——整齐又高效，也让代码意图更清晰。",
+          "expected": "控制台输出 {{term:name}}、family、{{term:range}} 三个{{term:变量}}的正确值（小提琴、弦乐、G3-E6）。"
+        },
+        {
+          "content": "用箭头{{term:函数}}重写 describe {{term:函数}}，并用{{term:模板字符串}}（反引号）返回格式化的描述文字",
+          "purpose": "箭头{{term:函数}}省略了 {{term:function}} 关键字，代码更短；{{term:模板字符串}}使用反引号和 ${} 插值，告别了繁琐的字符串拼接。这是现代 {{term:JavaScript}} 最常用的两种语法，几乎每一个项目中都会大量使用。",
+          "expected": "describe(instrument) 返回\"小提琴 是弦乐器，音域 G3-E6\"，输出与原始 {{term:function}} 版本一致。"
+        },
+        {
+          "content": "用展开运算符 { ...instrument, players: \"40人\" } 给 instrument 对象添加新{{term:属性}}",
+          "purpose": "展开运算符创建新对象而不修改原对象——这是{{term:函数}}式编程的重要理念：不改变原始数据。就像用一份乐谱复印本做标注，原件保持不变，随时可以回到最初版本。"
+        }
+      ]
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "小提示"
+      },
+      "content": "- 对象解构：`const { name, family } = instrument`\n- 箭头{{term:函数}}：`const fn = (param) => { return ... }`\n- 展开对象：`const newObj = { ...oldObj, newKey: value }`\n- {{term:模板字符串}}用反引号包裹：[[{{term:html}}]]<{{term:code}} {{term:class}}=\"{{term:inline}}-{{term:code}}\">`乐器：${name}`</{{term:code}}>[[/{{term:html}}]]"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "德彪西《意象集》— 印象派用新的和声语言打破了传统规则，正如 ES6 用新语法改变了 {{term:JavaScript}} 的写法。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": "// === 练习区 ===\r\nconst instrument = {\r\n  name: '小提琴',\r\n  family: '弦乐',\r\n  range: 'G3-E6'\r\n}\r\n\r\n// 原始 describe 函数（你需要用箭头函数重写它）\r\n\tfunction describe(instrument) {\r\n\t  return instrument.name + ' 是' + instrument.family + '乐器，音域' + instrument.range\r\n\t}\r\n\r\n\t// 1. 用解构赋值取出三个属性\r\n// TODO: 在这里写代码\r\n\r\n// 2. 用箭头函数重写 describe（用模板字符串）\r\n// TODO: 在这里写代码\r\n\r\n// 3. 用展开运算符添加 players 属性\r\n// TODO: 在这里写代码\r\n\r\nconsole.log('乐器信息：', describe(instrument))"
+  }
+}

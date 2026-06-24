@@ -35,7 +35,7 @@ const projects = computed(() =>
       icon: p.meta.icon,
       musicAnalogy: p.meta.musicAnalogy,
       listenTo: p.meta.listenTo,
-      steps: p.steps,
+      stepCount: p.stepCount,
     })),
 );
 
@@ -322,14 +322,14 @@ function goToProject(projectId: string) {
         <div
           v-for="project in projects"
           :key="project.id"
-          :class="['project-card', { draft: project.steps.length === 0 }]"
+          :class="['project-card', { draft: project.stepCount === 0 }]"
         >
           <div class="project-card-header">
             <span class="project-icon">{{ project.icon }}</span>
             <div class="project-info">
               <h3 class="project-title">
                 {{ project.title }}
-                <span v-if="project.steps.length === 0" class="project-soon-tag"
+                <span v-if="project.stepCount === 0" class="project-soon-tag"
                   >即将推出</span
                 >
               </h3>
@@ -343,8 +343,8 @@ function goToProject(projectId: string) {
           ></p>
 
           <div class="project-meta">
-            <span v-if="project.steps.length > 0" class="project-steps"
-              >{{ project.steps.length }} 个步骤</span
+            <span v-if="project.stepCount > 0" class="project-steps"
+              >{{ project.stepCount }} 个步骤</span
             >
             <span v-if="project.listenTo" class="project-listen"
               >🎧 {{ project.listenTo }}</span
@@ -353,7 +353,7 @@ function goToProject(projectId: string) {
 
           <div class="project-actions">
             <button
-              v-if="project.steps.length > 0"
+              v-if="project.stepCount > 0"
               class="btn-project-start"
               @click="goToProject(project.id)"
             >
@@ -380,7 +380,9 @@ function goToProject(projectId: string) {
           class="prologue-card"
           @click="goToLesson(card.lessonId)"
         >
-          <div class="prologue-card-thumb" v-html="card.thumbnailSvg"></div>
+          <div class="prologue-card-thumb">
+            <img :src="card.thumbnailSrc" :alt="card.title" loading="lazy" />
+          </div>
           <div class="prologue-card-body">
             <h3 class="prologue-card-title">{{ card.title }}</h3>
             <p class="prologue-card-subtitle">{{ card.subtitle }}</p>
@@ -1034,9 +1036,10 @@ function goToProject(projectId: string) {
   line-height: 0;
 }
 
-.prologue-card-thumb :deep(svg) {
+.prologue-card-thumb img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
 .prologue-card-body {

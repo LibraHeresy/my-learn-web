@@ -1,0 +1,89 @@
+{
+  "id": "css-centering",
+  "meta": {
+    "id": "css-centering",
+    "title": "居中与对齐 — 让页面更专业",
+    "track": "fundamentals",
+    "chapter": "css-layout",
+    "order": 2,
+    "mode": "sandbox",
+    "musicAnalogy": "页面居中对齐就像**指挥站在舞台中央**——视觉焦点集中、平衡和谐。而对齐方式的选择，就像决定乐团的排列：对称式、扇形、还是弧形分布。",
+    "listenTo": "莫扎特《G大调弦乐小夜曲》K.525 — 完美的对称结构和平衡感，每一个乐句都恰到好处，就像精心的页面布局。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "居中与对齐 — 让页面更专业"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "页面居中对齐就像**指挥站在舞台中央**——视觉焦点集中、平衡和谐。而对齐方式的选择，就像决定乐团的排列：对称式、扇形、还是弧形分布。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "水平居中与垂直居中"
+      },
+      "content": "在网页布局中，居中对齐是最常用的技巧之一：\n**水平居中（文字）：**\n```css\ntext-align: center;\n```\n**水平居中（{{term:块级元素}}）：**\n```css\nmargin: 0 auto;\n```\n**{{term:Flexbox}} 一键居中（最强方法）：**\n```css\n.container {\n  display: flex;\n  justify-content: center;  /* 水平居中 */\n  align-items: center;      /* 垂直居中 */\n}\n```"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "align-items 交叉轴对齐"
+      },
+      "content": "`align-items` 控制**交叉轴**（垂直于主轴的方向）上的对齐：\n- `stretch`（默认）— 拉伸填满\n- `center` — 交叉轴居中\n- `flex-start` — 交叉轴起点\n- `flex-end` — 交叉轴终点\n在横向排列（{{term:row}}）时，交叉轴就是垂直方向。用 `align-items: center` 可以让所有卡片在垂直方向居中对齐，即使它们高度不同。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码创建了一个居中的\"演奏邀请卡\"。`.wrapper` 使用 {{term:Flexbox}} 将卡片在页面中水平和垂直居中，`.card` 内的文字也居中对齐：\n```css\n.wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 200px;\n}\n.card {\n  text-align: center;\n}\n```"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"`justify-content: flex-start` 让{{term:元素}}在主轴起点对齐。{{term:Flexbox}} 默认就是 `flex-start`，所以看起来和没设一样。\" expected=\"卡片从居中移到了左侧。`center` vs `flex-start` 的差异一目了然。\"}\n把 `.wrapper` 的 `justify-content` 改成 `flex-start`，看卡片移到左边\n:::\n\n:::step{purpose=\"`align-items` 控制交叉轴（垂直于主轴）的对齐。在横向排列时，交叉轴是垂直方向。`center` = 垂直居中，`flex-start` = 顶部对齐。\" expected=\"卡片从垂直居中移到了顶部。`align-items` 控制的就是这个方向。\"}\n把 `align-items` 改成 `flex-start`，卡片移到顶部\n:::\n\n:::step{purpose=\"`margin: 0 auto` 是传统居中方法——上下 0、左右自动。给{{term:块级元素}}一个固定宽度后，`auto` 会让浏览器自动分配两侧空白。\" expected=\"卡片有了固定宽度 300px，并且在父容器中水平居中。\"}\n试试在 `.card` 中添加 `width: 300px`，然后用 `margin: 0 auto` 居中\n:::\n\n:::step{purpose=\"`text-align` 只控制文字和行内{{term:元素}}的对齐，不影响{{term:块级元素}}的布局。`center` = 文字居中，`left` = 文字左对齐。\" expected=\"卡片内部的文字从居中变成左对齐。卡片的整体位置不变，但内部文字排列方式变了。\"}\n把 `.card` 的 `text-align` 改成 `left`，看文字左对齐\n:::",
+      "steps": [
+        {
+          "content": "把 `.wrapper` 的 `justify-content` 改成 `flex-start`，看卡片移到左边",
+          "purpose": "`justify-content: flex-start` 让{{term:元素}}在主轴起点对齐。{{term:Flexbox}} 默认就是 `flex-start`，所以看起来和没设一样。",
+          "expected": "卡片从居中移到了左侧。`center` vs `flex-start` 的差异一目了然。"
+        },
+        {
+          "content": "把 `align-items` 改成 `flex-start`，卡片移到顶部",
+          "purpose": "`align-items` 控制交叉轴（垂直于主轴）的对齐。在横向排列时，交叉轴是垂直方向。`center` = 垂直居中，`flex-start` = 顶部对齐。",
+          "expected": "卡片从垂直居中移到了顶部。`align-items` 控制的就是这个方向。"
+        },
+        {
+          "content": "试试在 `.card` 中添加 `width: 300px`，然后用 `margin: 0 auto` 居中",
+          "purpose": "`margin: 0 auto` 是传统居中方法——上下 0、左右自动。给{{term:块级元素}}一个固定宽度后，`auto` 会让浏览器自动分配两侧空白。",
+          "expected": "卡片有了固定宽度 300px，并且在父容器中水平居中。"
+        },
+        {
+          "content": "把 `.card` 的 `text-align` 改成 `left`，看文字左对齐",
+          "purpose": "`text-align` 只控制文字和行内{{term:元素}}的对齐，不影响{{term:块级元素}}的布局。`center` = 文字居中，`left` = 文字左对齐。",
+          "expected": "卡片内部的文字从居中变成左对齐。卡片的整体位置不变，但内部文字排列方式变了。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "莫扎特《G大调弦乐小夜曲》K.525 — 完美的对称结构和平衡感，每一个乐句都恰到好处，就像精心的页面布局。"
+    }
+  ],
+  "starter": {
+    "html": "<div class=\"wrapper\">\r\n  <div class=\"card\">\r\n    <div class=\"icon\">🎵</div>\r\n    <h2>诚挚邀请</h2>\r\n    <p>欢迎参加本周六的</p>\r\n    <p class=\"highlight\">古典音乐之夜</p>\r\n    <p class=\"time\">19:30 · 音乐厅</p>\r\n  </div>\r\n</div>",
+    "css": ".wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  min-height: 200px;\r\n}\r\n.card {\r\n  background-color: #FFFAF2;\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 16px;\r\n  padding: 40px;\r\n  text-align: center;\r\n}\r\n.icon {\r\n  font-size: 48px;\r\n  margin-bottom: 12px;\r\n}\r\n.card h2 {\r\n  color: #8B2E2E;\r\n  margin: 0 0 16px 0;\r\n}\r\n.card p {\r\n  color: #6B5A4E;\r\n  margin: 4px 0;\r\n}\r\n.highlight {\r\n  font-size: 20px;\r\n  font-weight: 700;\r\n  color: #8B2E2E !important;\r\n}\r\n.time {\r\n  margin-top: 16px !important;\r\n  color: #C9A96E !important;\r\n  font-weight: 600;\r\n}",
+    "js": ""
+  }
+}

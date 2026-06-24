@@ -1,0 +1,109 @@
+{
+  "id": "vue-directives",
+  "meta": {
+    "id": "vue-directives",
+    "title": "Vue 指令 — 模板的演奏记号",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "order": 2,
+    "mode": "local",
+    "musicAnalogy": "乐谱上有各种演奏记号——f 代表强奏、p 代表弱奏、tr 是颤音、反复记号指定哪些小节要重复。Vue 指令就是模板中的演奏记号：v-if 是此处休止（这个声部不奏）、v-show 是加弱音器（还在但静默）、v-for 是反复记号（同一乐句重复多次）、v-bind 是连音线（把数据和 DOM 属性连起来）、v-html 是即兴华彩段（直接插入内容，但需谨慎）。",
+    "listenTo": "帕格尼尼《24 首随想曲》— 每一首都是对一种特定演奏技巧（泛音、双音、拨弦、跳弓）的极致发挥。Vue 的每个指令就像一种特定的演奏技巧——各司其职，组合起来就是一场华丽的演出。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "Vue 指令 — 模板的演奏记号"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "乐谱上有各种演奏记号——f 代表强奏、p 代表弱奏、{{term:tr}} 是颤音、反复记号指定哪些小节要重复。{{term:Vue}} 指令就是模板中的演奏记号：{{term:v-if}} 是此处休止（这个声部不奏）、{{term:v-show}} 是加弱音器（还在但静默）、{{term:v-for}} 是反复记号（同一乐句重复多次）、{{term:v-bind}} 是连音线（把数据和 {{term:DOM}} {{term:属性}}连起来）、v-{{term:html}} 是即兴华彩段（直接插入内容，但需谨慎）。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "v-bind — 动态绑定属性"
+      },
+      "content": "{{term:Vue}} 指令是以 v- 开头的特殊{{term:属性}}——{{term:v-bind}}（简写 :）把数据绑定到{{term:属性}}，{{term:v-if}}/{{term:v-show}} 控制显示隐藏，{{term:v-for}} 循环{{term:渲染}}列表，{{term:v-on}}（简写 @）监听{{term:事件}}，{{term:v-model}} 双向绑定表单。就像扬琴谱上的各种演奏记号，每个指令控制一种行为。{{term:v-bind}} 把 {{term:JS}} 表达式的值绑定到 {{term:HTML}} {{term:属性}}上，简写是 :：\n```html\n<!-- 完整写法 -->\n<img v-bind:src=\"imageUrl\">\n<a v-bind:href=\"'/user/' + userId\">用户</a>\n<div v-bind:class=\"{ active: isActive }\">...</div>\n<!-- 简写（最常用） -->\n<img :src=\"imageUrl\">\n<a :href=\"'/user/' + userId\">用户</a>\n<div :class=\"{ active: isActive }\">...</div>\n<div :style=\"{ color: textColor, fontSize: size + 'px' }\">...</div>\n```\n**和 {{ }} 文本插值的区别：**\n- `{{ expression }}` — 把值插入到**文本内容**中\n- `v-bind:attr=\"expression\"` — 把值绑定到**{{term:HTML}} {{term:属性}}**上\n```html\n<!-- 文本插值：显示在标签内容中 -->\n<p>{{ message }}</p>\n<!-- 属性绑定：绑定到 HTML 属性 -->\n<img :src=\"imageUrl\" :alt=\"imageDesc\">\n<button :disabled=\"isLoading\">提交</button>\n```\n就像连音线把两个音符连起来——{{term:v-bind}} 把 {{term:JS}} 数据和 {{term:DOM}} {{term:属性}}连起来。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "v-if / v-show — 条件渲染"
+      },
+      "content": "**{{term:v-if}} / v-else-if / v-else：** 根据条件决定是否**创建/销毁** {{term:DOM}} {{term:元素}}\n```html\n<div v-if=\"status === 'loading'\">加载中...</div>\n<div v-else-if=\"status === 'error'\">出错了！</div>\n<div v-else-if=\"status === 'empty'\">没有数据</div>\n<div v-else>\n  <p>{{ result }}</p>\n</div>\n```\n**{{term:v-show}}：** 根据条件决定是否**显示**{{term:元素}}（{{term:元素}}始终存在，只是切换 {{term:display}}:{{term:none}}）\n```html\n<div v-show=\"isVisible\">这段文字可以快速切换显示/隐藏</div>\n```\n**{{term:v-if}} vs {{term:v-show}} 的选择：**\n| | {{term:v-if}} | {{term:v-show}} |\n|------|------|--------|\n| 机制 | 移除/创建 {{term:DOM}} | {{term:display}}: {{term:none}} 切换 |\n| 初始{{term:渲染}} | 条件为 {{term:false}} 时不{{term:渲染}} | 始终{{term:渲染}} |\n| 切换开销 | 大（销毁+重建） | 小（只改 {{term:CSS}}） |\n| 适用场景 | 条件很少改变 | 频繁切换 |\n> 🎼 {{term:v-if}} 是这个乐手这场不参加（人根本不在舞台上），{{term:v-show}} 是这个乐手在场但保持沉默（人在但不出声）。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "v-for — 列表渲染"
+      },
+      "content": "`v-for` 遍历{{term:数组}}或对象，为每个{{term:元素}}{{term:渲染}}一段模板：\n```html\n<!-- 遍历数组：item in items -->\n<ul>\n  <li v-for=\"item in items\" :key=\"item.id\">\n    {{ item.name }} — {{ item.price }} 元\n  </li>\n</ul>\n<!-- 带索引： (item, index) in items -->\n<li v-for=\"(item, index) in items\" :key=\"item.id\">\n  {{ index + 1 }}. {{ item.name }}\n</li>\n<!-- 遍历对象： (value, key, index) in obj -->\n<li v-for=\"(value, key) in composer\" :key=\"key\">\n  {{ key }}: {{ value }}\n</li>\n<!-- 遍历数字范围 -->\n<span v-for=\"n in 5\" :key=\"n\">{{ n }}</span>\n```\n**`:key` 为什么重要：**\nkey 是 {{term:Vue}} 识别每个节点的唯一标识。没有 key 或 key 不唯一会导致：\n- 列表更新时出现错误的 {{term:DOM}} 复用\n- {{term:组件}}状态错乱\n- 过渡动画失效\n始终给 {{term:v-for}} 一个唯一且稳定的 key（通常是 {{term:id}}，**永远不要用 index 作为 key** ——除非列表是静态的且不会重新排序）。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "v-html / v-text 与其他常用指令"
+      },
+      "content": "**v-{{term:html}}：** 把字符串当作 {{term:HTML}} {{term:渲染}}（⚠️ 有 XSS 安全风险！）\n```html\n<div v-html=\"rawHtml\"></div>\n<!-- 仅在信任内容来源时使用！用户输入绝不能直接用 v-html -->\n```\n**v-{{term:text}}：** 等价于 {{ }}，设置{{term:元素}}的文本内容\n```html\n<span v-text=\"message\"></span>\n<!-- 等价于 <span>{{ message }}</span> -->\n```\n**{{term:v-on}}ce：** 只{{term:渲染}}一次，后续不再响应数据变化（静态内容优化）\n```html\n<div v-once>这个标题永远不会变：{{ title }}</div>\n```\n**v-{{term:pre}}：** 跳过这个{{term:元素}}及其子{{term:元素}}的编译（显示原始 Mustache 语法）\n```html\n<pre v-pre>{{ 这里不会编译，直接显示 {{ message }} 原文 }}</pre>\n```"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子：一个完整的指令演示"
+      },
+      "content": "下面的代码综合展示了所有主要指令。切换到预览区，实际操作感受：\n```html\n<!-- 条件渲染：切换 tab -->\n<div :class=\"['tab', { active: activeTab === 'all' }]\" @click=\"activeTab = 'all'\">全部</div>\n<!-- 列表渲染：遍历曲目 -->\n<div v-for=\"track in filteredTracks\" :key=\"track.id\" class=\"track-card\">\n  <img :src=\"track.cover\" :alt=\"track.title\">\n  <h3>{{ track.title }}</h3>\n  <p v-if=\"track.artist\">{{ track.artist }}</p>\n  <span :class=\"['tag', 'tag-' + track.genre]\">{{ track.genre }}</span>\n</div>\n<!-- v-show 切换 -->\n<div v-show=\"showPlayer\" class=\"player\">播放器控件</div>\n```\n注意：:{{term:class}} 可以接收对象（{ {{term:active}}: isActive }）或{{term:数组}}（['base', dynamicClass]）。:{{term:style}} 同样支持对象语法。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"模板中的数据驱动一切：修改 {{term:JS}} 中的{{term:数组}}，{{term:UI}} 自动变化。这展示了 {{term:Vue}} 的声明式核心——你只需更改数据，{{term:Vue}} 负责 {{term:DOM}} 更新。通过给{{term:数组}}增加{{term:元素}}，你会看到新按钮自动出现在页面上，无需手动操作 {{term:DOM}}。\" expected=\"筛选按钮栏中出现一个新按钮「印象派」，点击后能够筛选出对应时期的曲目。\"}\n修改 filterButtons {{term:数组}}——添加一个「印象派」筛选选项\n:::\n\n:::step{purpose=\"数据是 {{term:Vue}} 应用的唯一真相来源。添加数据后，{{term:v-for}} 会自动{{term:渲染}}新条目。这验证了{{term:响应式}}系统的关键特性：列表{{term:渲染}}完全由数据驱动，不需要像以前那样手动调用 {{term:createElement}} 和 {{term:appendChild}}。\" expected=\"曲目列表底部出现你新添加的两首曲目卡片，格式与已有卡片一致。\"}\n在 tracks {{term:数组}}中添加两首你自己喜欢的曲目\n:::\n\n:::step{purpose=\"{{term:v-if}} 根据条件决定 {{term:DOM}} {{term:元素}}是否存在。当筛选结果为空时，显示友好的空状态提示，而不是一片空白——这是用户体验的基本要求。{{term:v-if}} 在条件为 {{term:false}} 时完全移除 {{term:DOM}} {{term:元素}}，适合状态切换不频繁的场景。\" expected=\"选择某个没有曲目的时期（如印象派）时，筛选区域显示「暂无匹配曲目」的提示文字。\"}\n用 {{term:v-if}} 添加「暂无匹配曲目」的空状态提示\n:::\n\n:::step{purpose=\"{{term:v-show}} 与 {{term:v-if}} 不同：{{term:元素}}始终存在于 {{term:DOM}} 中，只是通过 {{term:CSS}} {{term:display}}:{{term:none}} 隐藏。适合频繁切换的场景（如播放器控件的显示/隐藏），因为切换开销几乎为零，不会触发重新{{term:渲染}}。\" expected=\"一个播放状态指示器，可以通过按钮控制显示/隐藏，切换流畅即时。\"}\n用 {{term:v-show}} 实现一个播放状态切换的指示器\n:::\n\n:::step{purpose=\"{{term:v-for}} 的{{term:索引}}语法 (item, index) 让你同时访问{{term:元素}}和位置。index + 1 显示为人类友好的序号。:key 是 {{term:Vue}} 内部识别列表节点的唯一依据——key 不稳定会导致 {{term:DOM}} 复用错误、状态错乱和过渡动画失效。永远用唯一 ID 做 key，不要用 index。\" expected=\"每张曲目卡片前显示带有序号的{{term:标签}}（1. 2. 3. ...），修改筛选条件后序号能正确反映新列表顺序。\"}\n挑战：用 {{term:v-for}}=\"(track, index)\" 给每张卡片前加上序号（1. 2. 3. ...），并为每个{{term:元素}}指定稳定的 :key\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p>修改模板中的 <{{term:code}}>{{term:v-for}}</{{term:code}}>：</p><{{term:pre}}><{{term:code}}>&lt;{{term:template}}&gt;\n  &lt;{{term:ul}}&gt;\n    &lt;{{term:li}} {{term:v-for}}=\"(track, index) {{term:in}} filteredTracks\" :key=\"track.{{term:id}}\"&gt;\n      &lt;{{term:span}} {{term:class}}=\"num\"&gt;{{ index + 1 }}.&lt;/{{term:span}}&gt;\n      &lt;{{term:strong}}&gt;{{ track.{{term:name}} }}&lt;/{{term:strong}}&gt;\n      &lt;{{term:span}}&gt;— {{ track.composer }}&lt;/{{term:span}}&gt;\n      &lt;{{term:span}} {{term:class}}=\"period\"&gt;{{ track.period }}&lt;/{{term:span}}&gt;\n    &lt;/{{term:li}}&gt;\n  &lt;/{{term:ul}}&gt;\n&lt;/{{term:template}}&gt;</{{term:code}}></{{term:pre}}><p>关键：<{{term:code}}>{{term:v-for}}=\"(track, index)\"</{{term:code}}> 中 index 从 0 开始；<{{term:code}}>{{ index + 1 }}</{{term:code}}> 显示为 1,2,3...；<{{term:code}}>:key=\"track.{{term:id}}\"</{{term:code}}> 始终用唯一 ID，不要用 index 做 key。</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]\n:::",
+      "steps": [
+        {
+          "content": "修改 filterButtons {{term:数组}}——添加一个「印象派」筛选选项",
+          "purpose": "模板中的数据驱动一切：修改 {{term:JS}} 中的{{term:数组}}，{{term:UI}} 自动变化。这展示了 {{term:Vue}} 的声明式核心——你只需更改数据，{{term:Vue}} 负责 {{term:DOM}} 更新。通过给{{term:数组}}增加{{term:元素}}，你会看到新按钮自动出现在页面上，无需手动操作 {{term:DOM}}。",
+          "expected": "筛选按钮栏中出现一个新按钮「印象派」，点击后能够筛选出对应时期的曲目。"
+        },
+        {
+          "content": "在 tracks {{term:数组}}中添加两首你自己喜欢的曲目",
+          "purpose": "数据是 {{term:Vue}} 应用的唯一真相来源。添加数据后，{{term:v-for}} 会自动{{term:渲染}}新条目。这验证了{{term:响应式}}系统的关键特性：列表{{term:渲染}}完全由数据驱动，不需要像以前那样手动调用 {{term:createElement}} 和 {{term:appendChild}}。",
+          "expected": "曲目列表底部出现你新添加的两首曲目卡片，格式与已有卡片一致。"
+        },
+        {
+          "content": "用 {{term:v-if}} 添加「暂无匹配曲目」的空状态提示",
+          "purpose": "{{term:v-if}} 根据条件决定 {{term:DOM}} {{term:元素}}是否存在。当筛选结果为空时，显示友好的空状态提示，而不是一片空白——这是用户体验的基本要求。{{term:v-if}} 在条件为 {{term:false}} 时完全移除 {{term:DOM}} {{term:元素}}，适合状态切换不频繁的场景。",
+          "expected": "选择某个没有曲目的时期（如印象派）时，筛选区域显示「暂无匹配曲目」的提示文字。"
+        },
+        {
+          "content": "用 {{term:v-show}} 实现一个播放状态切换的指示器",
+          "purpose": "{{term:v-show}} 与 {{term:v-if}} 不同：{{term:元素}}始终存在于 {{term:DOM}} 中，只是通过 {{term:CSS}} {{term:display}}:{{term:none}} 隐藏。适合频繁切换的场景（如播放器控件的显示/隐藏），因为切换开销几乎为零，不会触发重新{{term:渲染}}。",
+          "expected": "一个播放状态指示器，可以通过按钮控制显示/隐藏，切换流畅即时。"
+        },
+        {
+          "content": "挑战：用 {{term:v-for}}=\"(track, index)\" 给每张卡片前加上序号（1. 2. 3. ...），并为每个{{term:元素}}指定稳定的 :key\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p>修改模板中的 <{{term:code}}>{{term:v-for}}</{{term:code}}>：</p><{{term:pre}}><{{term:code}}>&lt;{{term:template}}&gt;\n  &lt;{{term:ul}}&gt;\n    &lt;{{term:li}} {{term:v-for}}=\"(track, index) {{term:in}} filteredTracks\" :key=\"track.{{term:id}}\"&gt;\n      &lt;{{term:span}} {{term:class}}=\"num\"&gt;{{ index + 1 }}.&lt;/{{term:span}}&gt;\n      &lt;{{term:strong}}&gt;{{ track.{{term:name}} }}&lt;/{{term:strong}}&gt;\n      &lt;{{term:span}}&gt;— {{ track.composer }}&lt;/{{term:span}}&gt;\n      &lt;{{term:span}} {{term:class}}=\"period\"&gt;{{ track.period }}&lt;/{{term:span}}&gt;\n    &lt;/{{term:li}}&gt;\n  &lt;/{{term:ul}}&gt;\n&lt;/{{term:template}}&gt;</{{term:code}}></{{term:pre}}><p>关键：<{{term:code}}>{{term:v-for}}=\"(track, index)\"</{{term:code}}> 中 index 从 0 开始；<{{term:code}}>{{ index + 1 }}</{{term:code}}> 显示为 1,2,3...；<{{term:code}}>:key=\"track.{{term:id}}\"</{{term:code}}> 始终用唯一 ID，不要用 index 做 key。</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]",
+          "expected": "每张曲目卡片前显示带有序号的{{term:标签}}（1. 2. 3. ...），修改筛选条件后序号能正确反映新列表顺序。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "帕格尼尼《24 首随想曲》— 每一首都是对一种特定演奏技巧（泛音、双音、拨弦、跳弓）的极致发挥。{{term:Vue}} 的每个指令就像一种特定的演奏技巧——各司其职，组合起来就是一场华丽的演出。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}

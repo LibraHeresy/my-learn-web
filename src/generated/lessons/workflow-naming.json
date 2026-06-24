@@ -1,0 +1,76 @@
+{
+  "id": "workflow-naming",
+  "meta": {
+    "id": "workflow-naming",
+    "title": "命名就像给音符标注指法 — 让代码自己说话",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "order": 6,
+    "mode": "sandbox",
+    "musicAnalogy": "乐谱上标注的指法标记让演奏者一眼就知道用哪个手指。同样，**好的变量名和类名让阅读代码的人（包括一个月后的你自己）一眼就知道这段代码在做什么**。命名是程序员最被低估的技能——它不改变功能，但能让你写代码的速度快 10 倍。",
+    "listenTo": "肖邦《练习曲》Op.10 No.1 — 每一组琶音的指法都经过精心设计，让演奏如流水般自然。好的命名就像好的指法——\"好的命名\"让你读代码时如行云流水。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "命名就像给音符标注指法 — 让代码自己说话"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "乐谱上标注的指法标记让演奏者一眼就知道用哪个手指。同样，**好的{{term:变量}}名和类名让阅读代码的人（包括一个月后的你自己）一眼就知道这段代码在做什么**。命名是程序员最被低估的技能——它不改变功能，但能让你写代码的速度快 10 倍。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "好名字 vs 坏名字"
+      },
+      "content": "来看一组对比：\n**❌ 坏命名（你一个月后根本看不懂）：**\n```js\nlet a = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\nlet b = document.querySelector(\"#c\");\nlet d = document.querySelector(\"#e\");\nd.addEventListener(\"click\", function() {\n  let f = Math.floor(Math.random() * a.length);\n  b.textContent = a[f];\n});\n```\n**✅ 好命名（任何人都看得懂）：**\n```js\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\nlet displayEl = document.querySelector(\"#composerDisplay\");\nlet shuffleBtn = document.querySelector(\"#shuffleBtn\");\nshuffleBtn.addEventListener(\"click\", function() {\n  let randomIndex = Math.floor(Math.random() * composers.length);\n  displayEl.textContent = composers[randomIndex];\n});\n```\n两者功能完全一样，但可读性天差地别。**好名字让代码自己说话，不需要额外解释。**"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "命名规则速查表"
+      },
+      "content": "**{{term:CSS}} 类名：** 用小写字母 + 连字符（kebab-case）\n- ✅ `card-title` `music-list` `play-btn`\n- ❌ `CardTitle` `music_list` `a` `b` `c`\n**{{term:JS}} {{term:变量}}名：** 用驼峰命名（camelCase）\n- ✅ `composerName` `totalCount` `likeBtn` `musicList`\n- ❌ `composer_name` `totalcount` `btn` `x`\n**{{term:JS}} {{term:函数}}名：** 用动词开头，描述做什么\n- ✅ `playMusic()` `addCard()` `showMessage()` `calculateTotal()`\n- ❌ `music()` `card()` `message()` `total()`\n**常用前缀约定：**\n- 存储 {{term:DOM}} {{term:元素}}的{{term:变量}}后加 `El`：`titleEl`、`cardEl`、`msgEl`\n- 存储按钮的{{term:变量}}后加 `Btn`：`likeBtn`、`closeBtn`、`submitBtn`\n- 布尔值用 `is` / `has` 开头：`isPlaying`、`hasLiked`"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"给存储 {{term:DOM}} {{term:元素}}的{{term:变量}}加上 El/Btn 后缀是团队通用的命名约定。好名字让代码自解释——shuffleBtn 一眼就知道是\\\"随机播放\\\"按钮，而 c 需要你来回翻看才知道是什么。\" expected=\"代码中不再有 b、c、d、e 这样的单字母{{term:变量}}，取而代之的是有意义的名字，阅读时不需要额外注释。\"}\n把 {{term:DOM}} {{term:元素}}{{term:变量}}重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn\n:::\n\n:::step{purpose=\"数据{{term:变量}}的命名直接反映其内容——composers 明确是作曲家{{term:数组}}，randomIndex 清楚表达它是随机{{term:索引}}。就像乐谱上的标注\\\"mp\\\"比\\\"中等偏弱\\\"更好——精确、简短、无歧义。\" expected=\"a 变成 composers，f 变成 randomIndex，{{term:变量}}名准确地描述了它们存储的内容。\"}\n把数据{{term:变量}}重命名：a → composers、f → randomIndex\n:::\n\n:::step{purpose=\"{{term:函数}}名应该用动词开头来描述它做什么。showRandom() 明确是\\\"随机显示\\\"，addComposer() 明确是\\\"添加作曲家\\\"。好的{{term:函数}}名就是最好的注释——你甚至不需要读{{term:函数}}体就知道它的职责。\" expected=\"{{term:函数}}名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。\"}\n把{{term:函数}}重命名：x() → showRandom()、y() → addComposer()\n:::",
+      "steps": [
+        {
+          "content": "把 {{term:DOM}} {{term:元素}}{{term:变量}}重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn",
+          "purpose": "给存储 {{term:DOM}} {{term:元素}}的{{term:变量}}加上 El/Btn 后缀是团队通用的命名约定。好名字让代码自解释——shuffleBtn 一眼就知道是\"随机播放\"按钮，而 c 需要你来回翻看才知道是什么。",
+          "expected": "代码中不再有 b、c、d、e 这样的单字母{{term:变量}}，取而代之的是有意义的名字，阅读时不需要额外注释。"
+        },
+        {
+          "content": "把数据{{term:变量}}重命名：a → composers、f → randomIndex",
+          "purpose": "数据{{term:变量}}的命名直接反映其内容——composers 明确是作曲家{{term:数组}}，randomIndex 清楚表达它是随机{{term:索引}}。就像乐谱上的标注\"mp\"比\"中等偏弱\"更好——精确、简短、无歧义。",
+          "expected": "a 变成 composers，f 变成 randomIndex，{{term:变量}}名准确地描述了它们存储的内容。"
+        },
+        {
+          "content": "把{{term:函数}}重命名：x() → showRandom()、y() → addComposer()",
+          "purpose": "{{term:函数}}名应该用动词开头来描述它做什么。showRandom() 明确是\"随机显示\"，addComposer() 明确是\"添加作曲家\"。好的{{term:函数}}名就是最好的注释——你甚至不需要读{{term:函数}}体就知道它的职责。",
+          "expected": "{{term:函数}}名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "肖邦《练习曲》Op.10 No.1 — 每一组琶音的指法都经过精心设计，让演奏如流水般自然。好的命名就像好的指法——\"好的命名\"让你读代码时如行云流水。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>作曲家随机播放</h1>\r\n<div class=\"card\">\r\n  <p id=\"nameDisplay\">点击按钮开始</p>\r\n  <div class=\"buttons\">\r\n    <button id=\"shuffleBtn\">🎲 换一首</button>\r\n    <button id=\"addBtn\">➕ 添加</button>\r\n  </div>\r\n  <p id=\"msg\"></p>\r\n</div>",
+    "css": "h1 {\r\n  text-align: center;\r\n  color: #8B2E2E;\r\n}\r\n.card {\r\n  text-align: center;\r\n  background: #FFFAF2;\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 16px;\r\n  padding: 32px;\r\n  max-width: 380px;\r\n  margin: 20px auto;\r\n}\r\n.card p:first-of-type {\r\n  font-size: 24px;\r\n  color: #8B2E2E;\r\n  font-weight: 600;\r\n  min-height: 40px;\r\n  margin-bottom: 20px;\r\n}\r\n.buttons {\r\n  display: flex;\r\n  gap: 8px;\r\n  justify-content: center;\r\n}\r\n.buttons button {\r\n  padding: 10px 24px;\r\n  border: none;\r\n  border-radius: 8px;\r\n  cursor: pointer;\r\n  font-size: 16px;\r\n}\r\n#shuffleBtn {\r\n  background: #8B2E2E;\r\n  color: white;\r\n}\r\n#shuffleBtn:hover {\r\n  background: #C94545;\r\n}\r\n#addBtn {\r\n  background: #C9A96E;\r\n  color: white;\r\n}\r\n#addBtn:hover {\r\n  background: #B8944D;\r\n}\r\n#msg {\r\n  color: #C9A96E;\r\n  margin-top: 16px;\r\n  font-weight: 600;\r\n}",
+    "js": "// 这个页面功能正确，但命名非常糟糕\r\n// 你的任务：把所有单字母变量和函数名改成有意义的名字\r\n// 提示：用\"重命名清单\"来对照修改——\r\n//   a → composers（作曲家数组）\r\n//   b → nameDisplay（显示区元素）\r\n//   c → shuffleBtn（换一首按钮）\r\n//   d → msgEl（消息区元素）\r\n//   e → addBtn（添加按钮）\r\n//   f → randomIndex（随机索引）\r\n//   x() → showRandom()（随机显示一位作曲家）\r\n//   y() → addComposer()（添加一位作曲家）\r\nlet a = [\"巴赫\", \"莫扎特\", \"贝多芬\", \"肖邦\", \"舒曼\"];\r\nlet b = document.querySelector(\"#nameDisplay\");\r\nlet c = document.querySelector(\"#shuffleBtn\");\r\nlet d = document.querySelector(\"#msg\");\r\nlet e = document.querySelector(\"#addBtn\");\r\nfunction x() {\r\n  let f = Math.floor(Math.random() * a.length);\r\n  b.textContent = a[f];\r\n  d.textContent = \"当前显示：\" + a[f];\r\n}\r\nfunction y() {\r\n  a.push(\"德彪西\");\r\n  d.textContent = \"已添加：德彪西（共\" + a.length + \"位作曲家）\";\r\n}\r\nc.addEventListener(\"click\", x);\r\ne.addEventListener(\"click\", y);"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "html-tables",
+  "meta": {
+    "id": "html-tables",
+    "title": "表格 — 整理你的音乐数据",
+    "track": "fundamentals",
+    "chapter": "html-basics",
+    "order": 9,
+    "mode": "sandbox",
+    "musicAnalogy": "表格就像一张**曲目单**或**节目表**——用行列分明的结构组织信息。每一行是一个条目，每一列是一种属性，就像节目中第一列是作曲家、第二列是曲目、第三列是时长。",
+    "listenTo": "莫扎特歌剧《费加罗的婚礼》— 歌剧中复杂的人物关系和章节结构，就像表格中纵横交错的行与列。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "表格 — 整理你的音乐数据"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "表格就像一张**曲目单**或**节目表**——用行列分明的结构组织信息。每一行是一个条目，每一列是一种{{term:属性}}，就像节目中第一列是作曲家、第二列是曲目、第三列是时长。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "表格的基本结构"
+      },
+      "content": "表格由外到内有三{{term:层}}{{term:标签}}：\n- `<!-- {{term:table}}：创建表格 -->\n<{{term:table}}>` — 整个表格的容器\n- `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}>` — **表行**（{{term:table}} {{term:row}}），一行\n- `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>` — **表单元格**（{{term:table}} data），一个格子\n```html\n<!-- table：创建表格 -->\n<table>\n  <!-- tr：表格的一行 -->\n<tr>\n    <!-- td：表格数据单元格 -->\n<td>巴赫</td>\n    <!-- td：表格数据单元格 -->\n<td>巴洛克</td>\n    <!-- td：表格数据单元格 -->\n<td>德国</td>\n  </tr>\n  <!-- tr：表格的一行 -->\n<tr>\n    <!-- td：表格数据单元格 -->\n<td>肖邦</td>\n    <!-- td：表格数据单元格 -->\n<td>浪漫主义</td>\n    <!-- td：表格数据单元格 -->\n<td>波兰</td>\n  </tr>\n</table>\n```每一对 `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}></{{term:tr}}>` 是一行，里面每个 `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}></{{term:td}}>` 是一个格子。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "表头与分区"
+      },
+      "content": "`<!-- {{term:th}}：表头单元格（加粗居中） -->\n<{{term:th}}>` 代替 `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>` 可以做**表头**（加粗居中）：\n```html\n<!-- tr：表格的一行 -->\n<tr>\n  <!-- th：表头单元格（加粗居中） -->\n<th>作曲家</th>\n  <!-- th：表头单元格（加粗居中） -->\n<th>时期</th>\n  <!-- th：表头单元格（加粗居中） -->\n<th>国家</th>\n</tr>\n````<!-- {{term:thead}}：表头区域 -->\n<{{term:thead}}>`、`<!-- {{term:tbody}}：表格数据区域 -->\n<{{term:tbody}}>` 把表头和表体分开，方便分别设置{{term:样式}}：\n```html\n<!-- table：创建表格 -->\n<table>\n  <!-- thead：表头区域 -->\n<thead>\n    <!-- tr：表格的一行 -->\n<tr><!-- th：表头单元格（加粗居中） -->\n<th>列1</th><th>列2</th></tr>\n  </thead>\n  <!-- tbody：表格数据区域 -->\n<tbody>\n    <!-- tr：表格的一行 -->\n<tr><!-- td：表格数据单元格 -->\n<td>数据1</td><td>数据2</td></tr>\n  </tbody>\n</table>\n```"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "合并单元格"
+      },
+      "content": "有时候一个格子需要跨越多列或多行，用 `colspan` 和 `rowspan`：\n- `colspan=\"2\"` — 跨 2 列（水平合并）\n- `rowspan=\"3\"` — 跨 3 行（垂直合并）\n```html\n<td colspan=\"2\">这格占了两个列的宽度</td>\n```就像节目单中的\"中场休息\"横跨整页！"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码创建了一张作曲家信息表，有表头和两行数据：\n```html\n<!-- table：创建表格 -->\n<table>\n  <!-- thead：表头区域 -->\n<thead>\n    <!-- tr：表格的一行 -->\n<tr>\n      <!-- th：表头单元格（加粗居中） -->\n<th>作曲家</th>\n      <!-- th：表头单元格（加粗居中） -->\n<th>时期</th>\n      <!-- th：表头单元格（加粗居中） -->\n<th>代表作</th>\n    </tr>\n  </thead>\n  <!-- tbody：表格数据区域 -->\n<tbody>\n    <!-- tr：表格的一行 -->\n<tr>\n      <!-- td：表格数据单元格 -->\n<td>巴赫</td>\n      <!-- td：表格数据单元格 -->\n<td>巴洛克</td>\n      <!-- td：表格数据单元格 -->\n<td>赋格的艺术</td>\n    </tr>\n  </tbody>\n</table>\n```"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"练习 `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}>` + `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>` 的嵌套——每一行是 `<{{term:tr}}>`，行内每个格子是 `<{{term:td}}>`。\" expected=\"表格多了一行，显示了新添加的作曲家信息。\"}\n在表格中添加一行新数据，写你喜欢的作曲家\n:::\n\n:::step{purpose=\"理解表格的对齐原则——表头加了几列，数据行也要加几列，否则表格对不齐。\" expected=\"表格多了一列「国家」列。每行也多了对应的国家信息。\"}\n在表头再加一列（比如「国家」），每行也加对应的 `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>`\n:::\n\n:::step{purpose=\"理解 `colspan`——它让一个单元格跨越多列，像节目单上的中场休息横跨整页。\" expected=\"表格最后出现了一行横跨三列的提示文字。\"}\n试试在表格下方加一行 `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}><{{term:td}} {{term:colspan}}=\"3\">更多作曲家敬请期待</{{term:td}}></{{term:tr}}>`\n:::\n\n:::step{purpose=\"从零创建表格结构：`<!-- {{term:table}}：创建表格 -->\n<{{term:table}}>` > `<!-- {{term:thead}}：表头区域 -->\n<{{term:thead}}>`/`<!-- {{term:tbody}}：表格数据区域 -->\n<{{term:tbody}}>` > `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}>` > `<!-- {{term:th}}：表头单元格（加粗居中） -->\n<{{term:th}}>`/`<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>`。\" expected=\"页面中有两张独立的表格。完成后你已经掌握了表格的完整用法。\"}\n挑战：创建第二个表格，列出你的「每周练琴计划」（日期、曲目、时长）\n:::",
+      "steps": [
+        {
+          "content": "在表头再加一列（比如「国家」），每行也加对应的 `<!-- {{term:td}}：表格数据单元格 -->\n<{{term:td}}>`",
+          "purpose": "理解表格的对齐原则——表头加了几列，数据行也要加几列，否则表格对不齐。",
+          "expected": "表格多了一列「国家」列。每行也多了对应的国家信息。"
+        },
+        {
+          "content": "试试在表格下方加一行 `<!-- {{term:tr}}：表格的一行 -->\n<{{term:tr}}><{{term:td}} {{term:colspan}}=\"3\">更多作曲家敬请期待</{{term:td}}></{{term:tr}}>`",
+          "purpose": "理解 `colspan`——它让一个单元格跨越多列，像节目单上的中场休息横跨整页。",
+          "expected": "表格最后出现了一行横跨三列的提示文字。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "莫扎特歌剧《费加罗的婚礼》— 歌剧中复杂的人物关系和章节结构，就像表格中纵横交错的行与列。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>作曲家速查表</h1>\r\n<table>\r\n  <thead>\r\n    <tr>\r\n      <th>作曲家</th>\r\n      <th>时期</th>\r\n      <th>代表作</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr>\r\n      <td>巴赫</td>\r\n      <td>巴洛克</td>\r\n      <td>《赋格的艺术》</td>\r\n    </tr>\r\n    <tr>\r\n      <td>莫扎特</td>\r\n      <td>古典主义</td>\r\n      <td>《魔笛》</td>\r\n    </tr>\r\n    <tr>\r\n      <td>肖邦</td>\r\n      <td>浪漫主义</td>\r\n      <td>《夜曲》</td>\r\n    </tr>\r\n  </tbody>\r\n</table>",
+    "css": "h1 {\r\n  color: #8B2E2E;\r\n  text-align: center;\r\n}\r\ntable {\r\n  width: 100%;\r\n  max-width: 500px;\r\n  margin: 20px auto;\r\n  border-collapse: collapse;\r\n}\r\nth, td {\r\n  border: 1px solid #D4C5A9;\r\n  padding: 10px 14px;\r\n  text-align: left;\r\n}\r\nth {\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n}\r\ntd {\r\n  color: #3D2B1F;\r\n}\r\ntbody tr:nth-child(even) {\r\n  background: #FFFAF2;\r\n}",
+    "js": ""
+  }
+}

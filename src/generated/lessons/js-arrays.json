@@ -1,0 +1,89 @@
+{
+  "id": "js-arrays",
+  "meta": {
+    "id": "js-arrays",
+    "title": "数组 — 存储你的曲目列表",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "order": 8,
+    "mode": "sandbox",
+    "musicAnalogy": "数组就像一张**歌单/曲目列表**——把多个相关的值按顺序组织在一起。`[\"巴赫\", \"莫扎特\", \"贝多芬\"]` 就像写在纸上的三首曲目，用 `[0]` 可以取第一首，用 `.push()` 可以在末尾添加新曲目。",
+    "listenTo": "柴可夫斯基《胡桃夹子》组曲 — 舞剧中包含\"进行曲\"\"糖果仙子之舞\"\"花之圆舞曲\"等多段舞曲，就像数组中的不同条目，每段有独立的索引和性格。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "数组 — 存储你的曲目列表"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "{{term:数组}}就像一张**歌单/曲目列表**——把多个相关的值按顺序组织在一起。`[\"巴赫\", \"莫扎特\", \"贝多芬\"]` 就像写在纸上的三首曲目，用 `[0]` 可以取第一首，用 `.push()` 可以在末尾添加新曲目。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "创建和访问数组"
+      },
+      "content": "{{term:数组}}用 `[]` 创建，每个值用逗号分隔：\n```js\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\", \"肖邦\"];\n```\n- `composers[0]` — 第 1 项（\"巴赫\"），{{term:索引}}从 0 开始\n- `composers[2]` — 第 3 项（\"贝多芬\"）\n- `composers.length` — {{term:数组}}长度（4）\n就像曲目单上第一首是 0 号，不是 1 号——这是编程的习惯。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "数组常用方法"
+      },
+      "content": "{{term:数组}}有一套强大的操作方法：\n- `.push(\"德彪西\")` — 在末尾添加一项\n- `.pop()` — 移除末尾一项\n- `.join(\"、\")` — 用指定分隔符拼接为字符串\n```js\nlet composers = [\"巴赫\", \"莫扎特\"];\ncomposers.push(\"肖邦\");  // 末尾追加\n// composers 现在是 [\"巴赫\", \"莫扎特\", \"肖邦\"]\nlet text = composers.join(\" | \");\n// text 是 \"巴赫 | 莫扎特 | 肖邦\"\n```\n.{{term:join}}()` 特别实用——把一个{{term:数组}}变成页面上的文字！"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码维护了一个作曲家{{term:数组}}，用 `.push()` 添加新名字，用 `.join()` 显示到页面上：\n```js\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\n// 显示列表\nlet text = composers.join(\" · \");\ndisplay.textContent = text;\n// 添加新作曲家\ncomposers.push(\"肖邦\");\ntext = composers.join(\" · \");\ndisplay.textContent = text;\n```\n切换到 {{term:JS}} {{term:标签}}页，输入一个名字点击添加，看列表实时更新。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"让你体验 `.push()` 方法的「增」操作——往{{term:数组}}末尾追加一个{{term:元素}}后，用 `.join()` 重新拼接显示。理解「{{term:数组}}数据变化 → 页面同步更新」这个核心模式，这是所有数据驱动页面的基础思路。\" expected=\"列表从「巴赫 · 莫扎特 · 贝多芬」变成「巴赫 · 莫扎特 · 贝多芬 · 德彪西」，新增的名字自动出现在末尾，分隔符也正确显示。\"}\n在预览区输入框中输入「德彪西」，点击「添加」按钮，观察列表中是否多出了一位作曲家，分隔符是否正确连接了所有名字\n:::\n\n:::step{purpose=\"`.join()` 是{{term:数组}}转字符串的最常用方法——分隔符决定了最终的视觉呈现。就像乐谱上可以用空格、逗号或破折号分隔曲目，不同的分隔符传递不同的排版感受。\" expected=\"列表显示的分隔符从圆点变成了竖线或顿号，整体视觉效果随之改变。你完全不需要修改{{term:数组}}数据本身，只改了一个字符串{{term:参数}}。\"}\n修改 `.join()` 的分隔符{{term:参数}}，从 `\" · \"` 改成 `\" | \"` 或 `\"、\"`（中文顿号），观察列表显示效果的差异\n:::\n\n:::step{purpose=\"让你理解{{term:数组}}初始化的概念——{{term:数组}}的内容由你定义，就像你可以随意编排自己的练习曲目单。同时帮你建立「改数据 → 看效果」的直觉。\" expected=\"页面上的列表显示变成了你自定义的作曲家名单，列表逻辑和{{term:样式}}完全不受影响——数据和展示逻辑分离，这是好设计的标志。\"}\n修改{{term:数组}}初始值（`let composers = [...]` 那一行），替换成你自己喜欢的作曲家名字，保存后刷新页面查看效果\n:::\n\n:::step{purpose=\"`.pop()` 是 `.push()` 的镜像操作——一个加末尾，一个删末尾。组合增删操作，你就实现了完整的「数据管理」功能。就像排练时可以随时在曲目单上添加或划掉一首曲子。\" expected=\"点击「删除最后」按钮，列表最后一位作曲家消失。连续点击直到列表为空时也不会报错（因为有了 `length > 0` 的保护）。增加和删除两个功能形成了一个完整的 CRUD 闭环。\"}\n挑战：添加一个「删除最后一位」按钮。在 {{term:HTML}} 中添加 `<button id=\"removeBtn\">删除最后</button>`，在 {{term:JS}} 中用 `composers.pop()` 删除{{term:数组}}最后一项，然后调用 `showList()` 刷新显示。记得加 `if (composers.length > 0)` 防止空{{term:数组}}出错\n:::",
+      "steps": [
+        {
+          "content": "在预览区输入框中输入「德彪西」，点击「添加」按钮，观察列表中是否多出了一位作曲家，分隔符是否正确连接了所有名字",
+          "purpose": "让你体验 `.push()` 方法的「增」操作——往{{term:数组}}末尾追加一个{{term:元素}}后，用 `.join()` 重新拼接显示。理解「{{term:数组}}数据变化 → 页面同步更新」这个核心模式，这是所有数据驱动页面的基础思路。",
+          "expected": "列表从「巴赫 · 莫扎特 · 贝多芬」变成「巴赫 · 莫扎特 · 贝多芬 · 德彪西」，新增的名字自动出现在末尾，分隔符也正确显示。"
+        },
+        {
+          "content": "修改 `.join()` 的分隔符{{term:参数}}，从 `\" · \"` 改成 `\" | \"` 或 `\"、\"`（中文顿号），观察列表显示效果的差异",
+          "purpose": "`.join()` 是{{term:数组}}转字符串的最常用方法——分隔符决定了最终的视觉呈现。就像乐谱上可以用空格、逗号或破折号分隔曲目，不同的分隔符传递不同的排版感受。",
+          "expected": "列表显示的分隔符从圆点变成了竖线或顿号，整体视觉效果随之改变。你完全不需要修改{{term:数组}}数据本身，只改了一个字符串{{term:参数}}。"
+        },
+        {
+          "content": "修改{{term:数组}}初始值（`let composers = [...]` 那一行），替换成你自己喜欢的作曲家名字，保存后刷新页面查看效果",
+          "purpose": "让你理解{{term:数组}}初始化的概念——{{term:数组}}的内容由你定义，就像你可以随意编排自己的练习曲目单。同时帮你建立「改数据 → 看效果」的直觉。",
+          "expected": "页面上的列表显示变成了你自定义的作曲家名单，列表逻辑和{{term:样式}}完全不受影响——数据和展示逻辑分离，这是好设计的标志。"
+        },
+        {
+          "content": "挑战：添加一个「删除最后一位」按钮。在 {{term:HTML}} 中添加 `<button id=\"removeBtn\">删除最后</button>`，在 {{term:JS}} 中用 `composers.pop()` 删除{{term:数组}}最后一项，然后调用 `showList()` 刷新显示。记得加 `if (composers.length > 0)` 防止空{{term:数组}}出错",
+          "purpose": "`.pop()` 是 `.push()` 的镜像操作——一个加末尾，一个删末尾。组合增删操作，你就实现了完整的「数据管理」功能。就像排练时可以随时在曲目单上添加或划掉一首曲子。",
+          "expected": "点击「删除最后」按钮，列表最后一位作曲家消失。连续点击直到列表为空时也不会报错（因为有了 `length > 0` 的保护）。增加和删除两个功能形成了一个完整的 CRUD 闭环。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "柴可夫斯基《胡桃夹子》组曲 — 舞剧中包含\"进行曲\"\"糖果仙子之舞\"\"花之圆舞曲\"等多段舞曲，就像{{term:数组}}中的不同条目，每段有独立的{{term:索引}}和性格。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>作曲家列表</h1>\r\n<div class=\"list-box\">\r\n  <p id=\"display\">列表加载中...</p>\r\n  <div class=\"add-row\">\r\n    <input type=\"text\" id=\"nameInput\" placeholder=\"输入作曲家名字\">\r\n    <button id=\"addBtn\">➕ 添加</button>\r\n  </div>\r\n</div>",
+    "css": "h1 {\r\n  text-align: center;\r\n  color: #8B2E2E;\r\n}\r\n.list-box {\r\n  background: #FFFAF2;\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 12px;\r\n  padding: 24px;\r\n  max-width: 440px;\r\n  margin: 20px auto;\r\n}\r\n#display {\r\n  font-size: 18px;\r\n  color: #3D2B1F;\r\n  text-align: center;\r\n  min-height: 30px;\r\n  margin-bottom: 16px;\r\n  padding: 12px;\r\n  background: #fff;\r\n  border-radius: 6px;\r\n  border: 1px solid #E8DDCC;\r\n}\r\n.add-row {\r\n  display: flex;\r\n  gap: 8px;\r\n}\r\n#nameInput {\r\n  flex: 1;\r\n  padding: 10px 14px;\r\n  border: 1px solid #D4C5A9;\r\n  border-radius: 6px;\r\n  font-size: 15px;\r\n  font-family: inherit;\r\n}\r\n#addBtn {\r\n  padding: 10px 20px;\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n  border: none;\r\n  border-radius: 6px;\r\n  font-size: 14px;\r\n  cursor: pointer;\r\n  white-space: nowrap;\r\n}\r\n#addBtn:hover {\r\n  background: #C94545;\r\n}",
+    "js": "// 初始数组\r\nlet composers = [\"巴赫\", \"莫扎特\", \"贝多芬\"];\r\nlet display = document.querySelector(\"#display\");\r\nlet input = document.querySelector(\"#nameInput\");\r\nlet addBtn = document.querySelector(\"#addBtn\");\r\n// 显示数组内容\r\nfunction showList() {\r\n  let text = composers.join(\" · \");\r\n  display.textContent = text;\r\n}\r\nshowList();\r\n// 点击添加\r\naddBtn.addEventListener(\"click\", function() {\r\n  let name = input.value;\r\n  if (name !== \"\") {\r\n    composers.push(name);\r\n    showList();\r\n    input.value = \"\";\r\n  }\r\n});"
+  }
+}

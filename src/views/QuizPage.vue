@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useQuizStore } from '../stores/quiz'
 import { getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
 const gems = getGems()
 
 const store = useQuizStore()
+
+// 存储错误提示
+watch(() => store.lastError, (err) => {
+  if (err && typeof window !== 'undefined') {
+    window.alert(err)
+  }
+})
 
 type Page = 'home' | 'level' | 'result'
 const page = ref<Page>('home')

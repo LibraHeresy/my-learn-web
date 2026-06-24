@@ -1,0 +1,102 @@
+{
+  "id": "css-animations",
+  "meta": {
+    "id": "css-animations",
+    "title": "CSS 动画深入 — 让页面充满律动",
+    "track": "fundamentals",
+    "chapter": "css-style",
+    "order": 8,
+    "mode": "sandbox",
+    "musicAnalogy": "如果说 transition 是渐强记号（从 pp 平滑到 ff），那么 @keyframes 就是一段完整的节奏型——精确控制每个时间点的状态。animation 属性像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。",
+    "listenTo": "斯特拉文斯基《春之祭》— 复杂的节奏型、不规则的拍号、多个声部的交错进行，就像页面中同时运行的多个 @keyframes 动画。每一个拍点都精确计算，却产生了震撼人心的效果。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "CSS 动画深入 — 让页面充满律动"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "如果说 {{term:transition}} 是渐强记号（从 pp 平滑到 ff），那么 {{term:@keyframes}} 就是一段完整的节奏型——精确控制每个时间点的状态。animation {{term:属性}}像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "@keyframes — 定义动画的\"节奏型\""
+      },
+      "content": "还记得 {{term:transition}} 吗？它只能在两个状态之间平滑过渡（比如 {{term:hover}} 前 → {{term:hover}} 后）。{{term:@keyframes}} 让你定义**任意多个关键帧**，创建更复杂的动画：\n```css\n@keyframes swing {\n  0%   { transform: rotate(0deg); }\n  25%  { transform: rotate(5deg); }\n  50%  { transform: rotate(0deg); }\n  75%  { transform: rotate(-5deg); }\n  100% { transform: rotate(0deg); }\n}\n```百分比代表动画的进度（0% = 开始，100% = 结束）\n- 也可以用 {{term:from}}（= 0%）和 to（= 100%）\n- 每个关键帧可以定义任意多个 {{term:CSS}} {{term:属性}}\n就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "animation 属性 — 演奏法标记全解"
+      },
+      "content": "定义好 {{term:@keyframes}} 后，用 animation {{term:属性}}把它应用到{{term:元素}}上。它是 8 个子{{term:属性}}的简写：\n```css\n.card {\n  animation:\n    swing          /* animation-name: 用哪个关键帧 */\n    2s             /* animation-duration: 一个周期多长时间 */\n    ease-in-out    /* animation-timing-function: 缓动函数 */\n    1s             /* animation-delay: 等多久再开始 */\n    3              /* animation-iteration-count: 重复几次，infinite = 无限 */\n    alternate      /* animation-direction: 正放还是倒放 */\n    forwards       /* animation-fill-mode: 结束后保持哪个状态 */\n    running;       /* animation-play-state: running 或 paused */\n}\n```**常用 {{term:timing-function}}：**\n- {{term:ease}} — 慢→快→慢（默认）\n- {{term:linear}} — 匀速\n- {{term:ease-in}} — 慢→快\n- {{term:ease-out}} — 快→慢\n- {{term:cubic}}-{{term:bezier}}(n,n,n,n) — 自定义曲线\n**{{term:fill-mode}} 关键值：**\n- {{term:none}} — 结束后回到初始状态\n- {{term:forwards}} — 结束后保持在最后一帧\n- {{term:backwards}} — 开始前就取第一帧状态\n- {{term:both}} — 同时应用 {{term:forwards}} + {{term:backwards}}"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "transform 进阶 — 变形、旋转与 3D"
+      },
+      "content": "{{term:transform}} 不止能用在 {{term:transition}} 中，配合 {{term:@keyframes}} 效果更丰富：\n```css\n/* 2D 变换 */\ntransform: translateX(100px);    /* 水平移动 */\ntransform: translateY(-20px);    /* 垂直移动 */\ntransform: scale(1.2);           /* 放大到 1.2 倍 */\ntransform: rotate(45deg);        /* 顺时针旋转 45° */\ntransform: skewX(10deg);         /* 水平倾斜 */\n/* 组合变换（空格分隔，顺序很重要！） */\ntransform: translateX(100px) rotate(45deg) scale(1.1);\n/* 设置旋转中心点 */\ntransform-origin: center center;  /* 默认是元素中心 */\ntransform-origin: top left;       /* 改为左上角 */\n```3D 变换（需要 perspective 才能看到深度效果）：\n```css\n.container {\n  perspective: 600px;  /* 透视距离——越小越夸张 */\n}\n.card {\n  transform: rotateY(30deg);   /* 绕 Y 轴旋转 */\n  transform: rotateX(15deg);   /* 绕 X 轴翻转 */\n}\n```就像指挥要求小提琴组不只拉动琴弓（{{term:translate}}），还要微微转动琴身（{{term:rotate}}）来控制音色。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码展示了三种经典动画效果：\n```css\n/* 摇摆——像节拍器 */\n@keyframes swing {\n  0%, 100% { transform: rotate(-3deg); }\n  50% { transform: rotate(3deg); }\n}\n/* 淡入上浮——像幕布升起 */\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n/* 心跳——缩放+透明度脉动 */\n@keyframes heartbeat {\n  0%, 100% { transform: scale(1); }\n  15% { transform: scale(1.15); }\n  30% { transform: scale(1); }\n  45% { transform: scale(1.1); }\n  60% { transform: scale(1); }\n}\n```看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"修改 `@keyframes` 中关键帧的 `rotate` 值直接改变动画幅度。值越大，摇摆越猛。\" expected=\"第一张卡片的摇摆幅度明显更大了。动画的幅度由关键帧中的{{term:属性}}值决定。\"}\n把 `swing` 动画的 `rotate` 角度从 `3deg` 改成 `8deg`，看摇摆幅度变大\n:::\n\n:::step{purpose=\"增加位移距离让动画的轨迹更长。`translateY` 的正值表示向下移动。\" expected=\"第二张卡片的淡入上浮动画从更远的地方飘过来。修改值让动画效果发生了明显变化。\"}\n修改 `fadeInUp` 的 `translateY` 从 `30px` 改成 `60px`\n:::\n\n:::step{purpose=\"`animation-duration` 控制完整周期的时间。改小后心跳更快更急促。\" expected=\"心跳动画明显加速了。duration 是控制动画节奏最直接的{{term:参数}}。\"}\n给 `heartbeat` 的 `animation-duration` 从 `1.5s` 改成 `0.8s`\n:::\n\n:::step{purpose=\"三个关键{{term:参数}}组合：`rotate` 旋转、`linear` 匀速（不是默认的 {{term:ease}}）、`infinite` 无限循环——这就是黑胶唱片的视觉效果。\" expected=\"{{term:元素}}持续匀速旋转，不会停下。你创造了第一个真正独立的 {{term:CSS}} 动画。\"}\n挑战：写一个唱片旋转动画（`rotate` + `infinite` + `linear`）\n:::\n\n:::step{purpose=\"`animation-fill-mode: forwards` 让动画结束后停在最后一帧；`none` 则回到初始状态。先改 `infinite` 为 `1`（只播一次）才能看出区别。\" expected=\"`forwards` 时动画结束后{{term:元素}}停在终点位置不闪回；`none` 时播完后会闪回起点。\"}\n挑战：把 `fadeInUp` 的 `fill-mode` 改成 `forwards` 和 `none`，对比差异\n:::",
+      "steps": [
+        {
+          "content": "把 `swing` 动画的 `rotate` 角度从 `3deg` 改成 `8deg`，看摇摆幅度变大",
+          "purpose": "修改 `@keyframes` 中关键帧的 `rotate` 值直接改变动画幅度。值越大，摇摆越猛。",
+          "expected": "第一张卡片的摇摆幅度明显更大了。动画的幅度由关键帧中的{{term:属性}}值决定。"
+        },
+        {
+          "content": "修改 `fadeInUp` 的 `translateY` 从 `30px` 改成 `60px`",
+          "purpose": "增加位移距离让动画的轨迹更长。`translateY` 的正值表示向下移动。",
+          "expected": "第二张卡片的淡入上浮动画从更远的地方飘过来。修改值让动画效果发生了明显变化。"
+        },
+        {
+          "content": "给 `heartbeat` 的 `animation-duration` 从 `1.5s` 改成 `0.8s`",
+          "purpose": "`animation-duration` 控制完整周期的时间。改小后心跳更快更急促。",
+          "expected": "心跳动画明显加速了。duration 是控制动画节奏最直接的{{term:参数}}。"
+        },
+        {
+          "content": "挑战：写一个唱片旋转动画（`rotate` + `infinite` + `linear`）",
+          "purpose": "三个关键{{term:参数}}组合：`rotate` 旋转、`linear` 匀速（不是默认的 {{term:ease}}）、`infinite` 无限循环——这就是黑胶唱片的视觉效果。",
+          "expected": "{{term:元素}}持续匀速旋转，不会停下。你创造了第一个真正独立的 {{term:CSS}} 动画。"
+        },
+        {
+          "content": "挑战：把 `fadeInUp` 的 `fill-mode` 改成 `forwards` 和 `none`，对比差异",
+          "purpose": "`animation-fill-mode: forwards` 让动画结束后停在最后一帧；`none` 则回到初始状态。先改 `infinite` 为 `1`（只播一次）才能看出区别。",
+          "expected": "`forwards` 时动画结束后{{term:元素}}停在终点位置不闪回；`none` 时播完后会闪回起点。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "斯特拉文斯基《春之祭》— 复杂的节奏型、不规则的拍号、多个声部的交错进行，就像页面中同时运行的多个 {{term:@keyframes}} 动画。每一个拍点都精确计算，却产生了震撼人心的效果。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>🎬 动画舞台</h1>\r\n<div class=\"stage\">\r\n  <div class=\"anim-card swing-card\">\r\n    <span class=\"card-icon\">🎵</span>\r\n    <strong>摇摆</strong>\r\n    <p>像节拍器一样摆动</p>\r\n  </div>\r\n  <div class=\"anim-card fade-card\">\r\n    <span class=\"card-icon\">🎭</span>\r\n    <strong>淡入上浮</strong>\r\n    <p>幕布升起的效果</p>\r\n  </div>\r\n  <div class=\"anim-card heart-card\">\r\n    <span class=\"card-icon\">💗</span>\r\n    <strong>心跳</strong>\r\n    <p>缩放脉动的节奏</p>\r\n  </div>\r\n</div>\r\n<div class=\"controls\">\r\n  <button id=\"pauseBtn\">⏯ 暂停动画</button>\r\n</div>",
+    "css": "h1 { text-align: center; color: #8B2E2E; margin-bottom: 24px; }\r\n.stage { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }\r\n.anim-card { background: #FFFAF2; border: 1px solid #D4C5A9; border-radius: 12px; padding: 28px 24px; text-align: center; width: 180px; }\r\n.card-icon { font-size: 40px; display: block; margin-bottom: 8px; }\r\n.anim-card strong { display: block; color: #3D2B1F; font-size: 16px; margin-bottom: 4px; }\r\n.anim-card p { color: #6B5A4E; font-size: 12px; margin: 0; }\r\n@keyframes swing {\r\n  0%, 100% { transform: rotate(-3deg); }\r\n  50% { transform: rotate(3deg); }\r\n}\r\n.swing-card { animation: swing 2s ease-in-out infinite; transform-origin: center top; }\r\n@keyframes fadeInUp {\r\n  from { opacity: 0; transform: translateY(30px); }\r\n  to { opacity: 1; transform: translateY(0); }\r\n}\r\n.fade-card { animation: fadeInUp 1.5s ease-out infinite; }\r\n@keyframes heartbeat {\r\n  0%, 100% { transform: scale(1); }\r\n  15% { transform: scale(1.15); }\r\n  30% { transform: scale(1); }\r\n  45% { transform: scale(1.1); }\r\n  60% { transform: scale(1); }\r\n}\r\n.heart-card { animation: heartbeat 1.5s ease-in-out infinite; }\r\n.controls { text-align: center; margin-top: 28px; }\r\n#pauseBtn { padding: 10px 24px; background: #8B2E2E; color: #fff; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; transition: background 0.2s; }\r\n#pauseBtn:hover { background: #C94545; }\r\n.stage.paused .anim-card { animation-play-state: paused; }",
+    "js": "const pauseBtn = document.getElementById('pauseBtn');\r\nconst stage = document.querySelector('.stage');\r\npauseBtn.addEventListener('click', () => {\r\n  const isPaused = stage.classList.toggle('paused');\r\n  pauseBtn.textContent = isPaused ? '▶ 恢复动画' : '⏯ 暂停动画';\r\n});"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "js-events",
+  "meta": {
+    "id": "js-events",
+    "title": "点击事件 — 让按钮响应用户",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "order": 5,
+    "mode": "sandbox",
+    "musicAnalogy": "事件就像**乐器对演奏者的响应**——按下琴键（点击），琴槌敲击琴弦发出声音（执行代码）。没有演奏者的动作，乐器不会自己发出声音；没有事件，代码不会自动执行。",
+    "listenTo": "普罗科菲耶夫《彼得与狼》— 每个角色有特定主题，在故事的不同时间点\"出场\"（触发），就像页面中不同元素在不同事件触发时才响应。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "点击事件 — 让按钮响应用户"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "{{term:事件}}就像**乐器对演奏者的响应**——按下琴键（点击），琴槌敲击琴弦发出声音（执行代码）。没有演奏者的动作，乐器不会自己发出声音；没有{{term:事件}}，代码不会自动执行。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "什么是事件？"
+      },
+      "content": "在 {{term:JavaScript}} 中，**{{term:事件}}**是发生在 {{term:HTML}} {{term:元素}}上的\"事情\"：\n- `click` — 用户点击了一个{{term:元素}}\n- `input` — 用户在输入框中输入了文字\n- `mouseenter` — 鼠标移入了一个{{term:元素}}\n用 `addEventListener` 可以\"监听\"这些{{term:事件}}：\n```js\nlet btn = document.querySelector(\"#myBtn\");\nbtn.addEventListener(\"click\", function() {\n  alert(\"你点击了按钮！\");\n});\n```\n就像给按钮装了一只耳朵，它时刻听着有没有\"点击\"这件事发生。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "事件处理函数"
+      },
+      "content": "`addEventListener` 接收两个{{term:参数}}：\n1. {{term:事件}}类型（`\"click\"`）\n2. {{term:事件}}处理{{term:函数}}——{{term:事件}}发生时执行的代码\n```js\nbtn.addEventListener(\"click\", function() {\n  // 点击后执行的代码写在这里\n  document.querySelector(\"h1\").textContent = \"标题变了！\";\n});\n```\n{{term:事件}}处理{{term:函数}}就像一个\"回响\"——你按下琴键（触发{{term:事件}}），琴声响起（执行{{term:函数}}）。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码有一个按钮和一个显示区域。每次点击按钮，计数器就会加 1：\n```js\nlet count = 0;                                    // 计数器，从 0 开始\nlet btn = document.querySelector(\"#countBtn\");    // 找到按钮元素\nlet display = document.querySelector(\"#display\"); // 找到显示区域\n\n// addEventListener：给按钮绑定\"点击事件\"，第二个参数是点击后要执行的函数\nbtn.addEventListener(\"click\", function() {\n  count = count + 1;                              // 计数器 +1\n  display.textContent = `你点击了 ${count} 次`;   // 更新页面上的数字\n});\n```\n切换到 {{term:JS}} {{term:标签}}页和预览区，试试点击按钮！"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"让你直观感受{{term:事件}}驱动编程的核心模型：用户操作（点击）→ {{term:事件}}触发 → 执行{{term:回调}}{{term:函数}} → 更新页面。就像按下琴键 → 琴槌敲弦 → 发出声音——每一步都是对前一步的响应。\" expected=\"每点击一次按钮，计数器增加 1，页面显示「你点击了 N 次」。这是你第一次写出「能和用户互动」的代码。\"}\n切换到预览区，反复点击「点我打拍子」按钮，观察计数器从 0 开始逐次增加，感受每一次点击带来的即时响应\n:::\n\n:::step{purpose=\"让你意识到{{term:事件}}{{term:回调}}{{term:函数}}里的代码和普通 {{term:JS}} 代码完全一样——你可以自由地修改其中的逻辑和显示。{{term:事件}}只是一个触发时机，被触发后执行的代码由你完全掌控。\" expected=\"点击按钮后，页面显示的文字变成了你自定义的表达方式，但计数功能不受影响。你已经学会定制{{term:交互}}反馈了。\"}\n修改{{term:事件}}{{term:回调}}{{term:函数}}中 `display.textContent` 的显示文字，换一种表达方式。比如改成 `\"节拍计数：第 \" + count + \" 拍\"` 或使用{{term:模板字符串}}自定义\n:::\n\n:::step{purpose=\"让你理解核心逻辑的一行改动就能改变整个{{term:交互}}行为。这就是编程的魔力：一个数字的变化，整个节拍器的节奏就完全不一样了。大胆改，看看会发生什么。\" expected=\"每次点击按钮，计数器跳 5 个数，页面显示「你点击了 5 次」→「你点击了 10 次」→「你点击了 15 次」……节奏明显加快。\"}\n把{{term:回调}}{{term:函数}}中的 `count = count + 1` 改成 `count = count + 5`，体验每次点击跳 5 拍的节奏感\n:::\n\n:::step{purpose=\"从零开始完整走一遍「{{term:HTML}} 加{{term:元素}} → {{term:JS}} 获取{{term:元素}} → 绑定{{term:事件}} → 写{{term:回调}}逻辑」的全流程。这是前端开发中最常见的模式，掌握它就掌握了一大半{{term:交互}}开发的技能。\" expected=\"点击归零按钮后，计数器回到 0，显示内容也同步更新（如「计数器已归零」）。你在一个页面上同时拥有了「增加」和「归零」两个{{term:交互}}功能，就像节拍器有了开始和停止两个按钮。\"}\n挑战：添加归零按钮。在 {{term:HTML}} 的 counter-box 容器中添加 `<button id=\"resetBtn\">归零</button>`，在 {{term:JS}} 中用 `querySelector` 获取它，用 `addEventListener` 绑定点击{{term:事件}}，点击后将 `count` {{term:重置}}为 0 并更新 `display.textContent`\n:::",
+      "steps": [
+        {
+          "content": "切换到预览区，反复点击「点我打拍子」按钮，观察计数器从 0 开始逐次增加，感受每一次点击带来的即时响应",
+          "purpose": "让你直观感受{{term:事件}}驱动编程的核心模型：用户操作（点击）→ {{term:事件}}触发 → 执行{{term:回调}}{{term:函数}} → 更新页面。就像按下琴键 → 琴槌敲弦 → 发出声音——每一步都是对前一步的响应。",
+          "expected": "每点击一次按钮，计数器增加 1，页面显示「你点击了 N 次」。这是你第一次写出「能和用户互动」的代码。"
+        },
+        {
+          "content": "修改{{term:事件}}{{term:回调}}{{term:函数}}中 `display.textContent` 的显示文字，换一种表达方式。比如改成 `\"节拍计数：第 \" + count + \" 拍\"` 或使用{{term:模板字符串}}自定义",
+          "purpose": "让你意识到{{term:事件}}{{term:回调}}{{term:函数}}里的代码和普通 {{term:JS}} 代码完全一样——你可以自由地修改其中的逻辑和显示。{{term:事件}}只是一个触发时机，被触发后执行的代码由你完全掌控。",
+          "expected": "点击按钮后，页面显示的文字变成了你自定义的表达方式，但计数功能不受影响。你已经学会定制{{term:交互}}反馈了。"
+        },
+        {
+          "content": "把{{term:回调}}{{term:函数}}中的 `count = count + 1` 改成 `count = count + 5`，体验每次点击跳 5 拍的节奏感",
+          "purpose": "让你理解核心逻辑的一行改动就能改变整个{{term:交互}}行为。这就是编程的魔力：一个数字的变化，整个节拍器的节奏就完全不一样了。大胆改，看看会发生什么。",
+          "expected": "每次点击按钮，计数器跳 5 个数，页面显示「你点击了 5 次」→「你点击了 10 次」→「你点击了 15 次」……节奏明显加快。"
+        },
+        {
+          "content": "挑战：添加归零按钮。在 {{term:HTML}} 的 counter-box 容器中添加 `<button id=\"resetBtn\">归零</button>`，在 {{term:JS}} 中用 `querySelector` 获取它，用 `addEventListener` 绑定点击{{term:事件}}，点击后将 `count` {{term:重置}}为 0 并更新 `display.textContent`",
+          "purpose": "从零开始完整走一遍「{{term:HTML}} 加{{term:元素}} → {{term:JS}} 获取{{term:元素}} → 绑定{{term:事件}} → 写{{term:回调}}逻辑」的全流程。这是前端开发中最常见的模式，掌握它就掌握了一大半{{term:交互}}开发的技能。",
+          "expected": "点击归零按钮后，计数器回到 0，显示内容也同步更新（如「计数器已归零」）。你在一个页面上同时拥有了「增加」和「归零」两个{{term:交互}}功能，就像节拍器有了开始和停止两个按钮。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "普罗科菲耶夫《彼得与狼》— 每个角色有特定主题，在故事的不同时间点\"出场\"（触发），就像页面中不同{{term:元素}}在不同{{term:事件}}触发时才响应。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>节拍计数器</h1>\r\n<p>点击按钮，像打拍子一样计数！</p>\r\n<div class=\"counter-box\">\r\n  <p id=\"display\">你还没有点击</p>\r\n  <button id=\"countBtn\">🎵 点我打拍子</button>\r\n</div>",
+    "css": "h1 {\r\n  text-align: center;\r\n  color: #8B2E2E;\r\n}\r\np {\r\n  text-align: center;\r\n  color: #6B5A4E;\r\n}\r\n.counter-box {\r\n  text-align: center;\r\n  background: #FFFAF2;\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 16px;\r\n  padding: 32px;\r\n  max-width: 360px;\r\n  margin: 24px auto;\r\n}\r\n#display {\r\n  font-size: 24px;\r\n  font-weight: 700;\r\n  color: #8B2E2E;\r\n  margin-bottom: 20px;\r\n}\r\n#countBtn {\r\n  padding: 12px 32px;\r\n  font-size: 18px;\r\n  background: #8B2E2E;\r\n  color: #fff;\r\n  border: none;\r\n  border-radius: 8px;\r\n  cursor: pointer;\r\n}\r\n#countBtn:hover {\r\n  background: #C94545;\r\n}",
+    "js": "// 初始化计数器\r\nlet count = 0;\r\n// 获取页面元素\r\nlet btn = document.querySelector(\"#countBtn\");\r\nlet display = document.querySelector(\"#display\");\r\n// 监听点击事件\r\nbtn.addEventListener(\"click\", function() {\r\n  count = count + 1;\r\n  display.textContent = `你点击了 ${count} 次`;\r\n});"
+  }
+}

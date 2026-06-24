@@ -10,11 +10,13 @@ import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
 
 const props = defineProps<{
   modelValue: { html: string; css: string; js: string }
+  showReset?: boolean
 }>()
 
 const emit = defineEmits<{
   'update:modelValue': [value: { html: string; css: string; js: string }]
   run: []
+  reset: []
 }>()
 
 type Tab = 'html' | 'css' | 'js'
@@ -138,6 +140,9 @@ onBeforeUnmount(() => {
       <button class="editor-run-btn" @click="emit('run')" title="运行代码">
         ▶ 运行
       </button>
+      <button v-if="showReset" class="editor-reset-btn" @click="emit('reset')" title="重置为初始代码">
+        ↺ 重置
+      </button>
     </div>
     <div ref="editorHost" class="editor-host" />
   </div>
@@ -197,6 +202,26 @@ onBeforeUnmount(() => {
 .editor-run-btn:hover {
   background: var(--color-gold-light);
   color: var(--color-bg);
+}
+
+.editor-reset-btn {
+  margin-right: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  align-self: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.editor-reset-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .editor-host {

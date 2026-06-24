@@ -1,0 +1,84 @@
+{
+  "id": "js-functions",
+  "meta": {
+    "id": "js-functions",
+    "title": "函数 — 封装你的音乐逻辑",
+    "track": "fundamentals",
+    "chapter": "js-basics",
+    "order": 4,
+    "mode": "sandbox",
+    "musicAnalogy": "函数就像**乐曲的主题动机**——一段可重复使用的旋律片段。贝多芬第五交响曲的\"当当当当\"动机在全曲中反复出现、变形、发展。函数也是：写好一次，到处调用。",
+    "listenTo": "贝多芬《第五交响曲》第一乐章 — \"命运\"四音动机贯穿始终，同样的核心在弦乐、管乐、全奏中不断重现，就像函数被不同参数调用。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "函数 — 封装你的音乐逻辑"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "{{term:函数}}就像**乐曲的主题动机**——一段可重复使用的旋律片段。贝多芬第五交响曲的\"当当当当\"动机在全曲中反复出现、变形、发展。{{term:函数}}也是：写好一次，到处调用。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "什么是函数？"
+      },
+      "content": "{{term:函数}}是一段**有名字的代码块**，把一组操作封装起来，需要时调用：\n```js\nfunction sayHello() {\n  alert(\"你好！\");\n}\nsayHello();  // 调用函数\n```\n{{term:函数}}的好处：\n- **避免重复**：同样的代码不用写很多遍\n- **给代码起名字**：一看{{term:函数}}名就知道它做什么\n- **可以传{{term:参数}}**：像给动机配不同的乐器"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "带参数的函数"
+      },
+      "content": "{{term:函数}}可以接收**{{term:参数}}**（输入），然后根据{{term:参数}}做不同的事：\n```js\nfunction introduce(composer, piece) {\n  return `${composer}创作了《${piece}》。`;\n}\nlet result1 = introduce(\"肖邦\", \"夜曲\");\nlet result2 = introduce(\"莫扎特\", \"魔笛\");\n```\n- `composer` 和 `piece` 是**{{term:参数}}**——像{{term:函数}}接收的输入\n- `return` 把结果**返回**——像{{term:函数}}给出的输出\n- 同样一个 `introduce` {{term:函数}}，传入不同的作曲家，得到不同的句子\n> 💡 关于 `this`：在普通{{term:函数}}中，`this` 指向\"谁调用了这个{{term:函数}}\"。比如 `button.addEventListener(\"click\", handleClick)` 中，`handleClick` 里的 `this` 指向被点击的 `button`。后面学到{{term:事件}}和对象时你会更深入地理解它。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子"
+      },
+      "content": "下面的代码定义了一个 `createCard` {{term:函数}}，它接收作曲家信息并返回 {{term:HTML}} 字符串：\n```js\n// function：定义一个函数，像\"乐谱模板\"——给参数就能生成结果\nfunction createCard(composer, period, piece) {\n  return `                         // return：把结果\"返回\"给调用者\n    <div class=\"card\">\n      <h2>${composer}</h2>\n      <p>时期：${period}</p>\n      <p>代表作：《${piece}》</p>\n    </div>\n  `;\n}\n// 调用函数：传入不同的参数，得到不同的卡片\nlet html = createCard(\"巴赫\", \"巴洛克\", \"赋格的艺术\");\nlet html2 = createCard(\"德彪西\", \"印象派\", \"月光\");\n```\n切换到 {{term:JS}} {{term:标签}}页看看{{term:函数}}怎么生成页面的三张卡片。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"让你理解{{term:函数}}调用的核心：同一个{{term:函数}}，传入不同的{{term:参数}}，产生不同的输出。就像同一个旋律动机，用钢琴弹和用提琴拉，效果不同但结构一样——这就是{{term:函数}}的复用之美。\" expected=\"页面上对应卡片的名字、时期、代表作都变成了你新输入的作曲家信息，其他两张卡片保持不变。{{term:函数}}本身一行都没改，只是换了个「{{term:参数}}」。\"}\n修改已有的 `createCard()` 调用，把作曲家名字换成你喜欢的作曲家（如把「巴赫」改成「拉赫玛尼诺夫」），同时更新时期和代表作{{term:参数}}\n:::\n\n:::step{purpose=\"让你体验「调用一次{{term:函数}}就多一张卡片」的便利——不需要重新写整段 {{term:HTML}} 拼接逻辑，只需一行{{term:函数}}调用。这正是{{term:函数}}的核心价值：封装重复逻辑，一处定义，处处使用。\" expected=\"页面上从 3 张卡片变成 4 张，新增的卡片和其他卡片{{term:样式}}完全一致，说明{{term:函数}}正确生成了 {{term:HTML}} 结构。你创造了一张全新的卡片！\"}\n新增一行 `createCard()` 调用，创建第四张卡片。比如：`html += createCard(\"舒伯特\", \"浪漫主义\", \"未完成交响曲\");`，注意用 `+=` 追加到 {{term:html}} {{term:变量}}中\n:::\n\n:::step{purpose=\"练习修改{{term:函数}}定义——增加{{term:参数}}意味着{{term:函数}}的能力增强了。就像给一段旋律加一个变奏：原有的结构不变，但增加了新的表现力。理解「改一处定义，所有调用点都受益」这个设计思想。\" expected=\"所有卡片都会多出一行国籍信息，而你只需要改{{term:函数}}的定义和调用{{term:参数}}——这就是{{term:函数}}作为「单一真相来源」的力量。\"}\n挑战：给 `createCard` {{term:函数}}增加一个 `country` {{term:参数}}。先在{{term:函数}}定义的{{term:模板字符串}}中添加一行 `<p>国籍：${country}</p>`，然后在每次调用时传入国籍{{term:参数}}（如 `\"德国\"`、`\"奥地利\"`、`\"法国\"`）\n:::",
+      "steps": [
+        {
+          "content": "修改已有的 `createCard()` 调用，把作曲家名字换成你喜欢的作曲家（如把「巴赫」改成「拉赫玛尼诺夫」），同时更新时期和代表作{{term:参数}}",
+          "purpose": "让你理解{{term:函数}}调用的核心：同一个{{term:函数}}，传入不同的{{term:参数}}，产生不同的输出。就像同一个旋律动机，用钢琴弹和用提琴拉，效果不同但结构一样——这就是{{term:函数}}的复用之美。",
+          "expected": "页面上对应卡片的名字、时期、代表作都变成了你新输入的作曲家信息，其他两张卡片保持不变。{{term:函数}}本身一行都没改，只是换了个「{{term:参数}}」。"
+        },
+        {
+          "content": "新增一行 `createCard()` 调用，创建第四张卡片。比如：`html += createCard(\"舒伯特\", \"浪漫主义\", \"未完成交响曲\");`，注意用 `+=` 追加到 {{term:html}} {{term:变量}}中",
+          "purpose": "让你体验「调用一次{{term:函数}}就多一张卡片」的便利——不需要重新写整段 {{term:HTML}} 拼接逻辑，只需一行{{term:函数}}调用。这正是{{term:函数}}的核心价值：封装重复逻辑，一处定义，处处使用。",
+          "expected": "页面上从 3 张卡片变成 4 张，新增的卡片和其他卡片{{term:样式}}完全一致，说明{{term:函数}}正确生成了 {{term:HTML}} 结构。你创造了一张全新的卡片！"
+        },
+        {
+          "content": "挑战：给 `createCard` {{term:函数}}增加一个 `country` {{term:参数}}。先在{{term:函数}}定义的{{term:模板字符串}}中添加一行 `<p>国籍：${country}</p>`，然后在每次调用时传入国籍{{term:参数}}（如 `\"德国\"`、`\"奥地利\"`、`\"法国\"`）",
+          "purpose": "练习修改{{term:函数}}定义——增加{{term:参数}}意味着{{term:函数}}的能力增强了。就像给一段旋律加一个变奏：原有的结构不变，但增加了新的表现力。理解「改一处定义，所有调用点都受益」这个设计思想。",
+          "expected": "所有卡片都会多出一行国籍信息，而你只需要改{{term:函数}}的定义和调用{{term:参数}}——这就是{{term:函数}}作为「单一真相来源」的力量。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "贝多芬《第五交响曲》第一乐章 — \"命运\"四音动机贯穿始终，同样的核心在弦乐、管乐、全奏中不断重现，就像{{term:函数}}被不同{{term:参数}}调用。"
+    }
+  ],
+  "starter": {
+    "html": "<h1>作曲家画廊</h1>\r\n<div id=\"gallery\"></div>",
+    "css": "h1 {\r\n  text-align: center;\r\n  color: #8B2E2E;\r\n}\r\n#gallery {\r\n  display: flex;\r\n  gap: 16px;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n}\r\n.card {\r\n  background-color: #FFFAF2;\r\n  border: 2px solid #D4C5A9;\r\n  border-radius: 12px;\r\n  padding: 20px;\r\n  min-width: 180px;\r\n  text-align: center;\r\n}\r\n.card h2 {\r\n  color: #8B2E2E;\r\n  margin: 0 0 8px 0;\r\n}\r\n.card p {\r\n  color: #6B5A4E;\r\n  margin: 4px 0;\r\n  font-size: 14px;\r\n}",
+    "js": "// 定义一个函数，创建作曲家卡片\r\nfunction createCard(composer, period, piece) {\r\n  return `\r\n    <div class=\"card\">\r\n      <h2>${composer}</h2>\r\n      <p>时期：${period}</p>\r\n      <p>代表作：《${piece}》</p>\r\n    </div>\r\n  `;\r\n}\r\n// 调用函数生成三张卡片\r\nlet html = \"\";\r\nhtml += createCard(\"巴赫\", \"巴洛克\", \"赋格的艺术\");\r\nhtml += createCard(\"莫扎特\", \"古典主义\", \"魔笛\");\r\nhtml += createCard(\"德彪西\", \"印象派\", \"月光\");\r\n// 显示到页面上\r\ndocument.querySelector(\"#gallery\").innerHTML = html;"
+  }
+}

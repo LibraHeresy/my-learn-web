@@ -96,3 +96,9 @@ export type CompiledProject = {
   meta: ProjectMeta
   steps: ProjectStep[]
 }
+
+export type ProjectListItem = {
+  id: string
+  meta: ProjectMeta
+  stepCount: number
+}

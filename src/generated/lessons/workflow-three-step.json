@@ -1,0 +1,84 @@
+{
+  "id": "workflow-three-step",
+  "meta": {
+    "id": "workflow-three-step",
+    "title": "三段工作流 — HTML → CSS → JS 的正确顺序",
+    "track": "framework",
+    "chapter": "js-advanced",
+    "order": 1,
+    "mode": "sandbox",
+    "musicAnalogy": "作曲家从不一开始就写满整份总谱。通常先写旋律线（HTML），再配和声与配器（CSS），最后标注强弱与速度变化（JS）。写网页也一样——**永远先写结构，再写样式，最后写交互**。跳过任何一步都会让后面的工作变得混乱。",
+    "listenTo": "拉威尔《波莱罗》— 从一支长笛的简单旋律开始，逐步加入更多乐器，最后整个乐团爆发出磅礴的声响。这就是\"先骨架、再装饰、后互动\"的完美音乐示范。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "三段工作流 — HTML → CSS → JS 的正确顺序"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "作曲家从不一开始就写满整份总谱。通常先写旋律线（{{term:HTML}}），再配和声与配器（{{term:CSS}}），最后标注强弱与速度变化（{{term:JS}}）。写网页也一样——**永远先写结构，再写{{term:样式}}，最后写{{term:交互}}**。跳过任何一步都会让后面的工作变得混乱。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "为什么顺序很重要？"
+      },
+      "content": "在乐理篇中，你已经学会了三门\"乐器\"：\n- **{{term:HTML}}**（HyperText Markup Language，超文本标记语言）— 页面的骨架\n- **{{term:CSS}}**（Cascading Style Sheets，{{term:层}}叠{{term:样式}}表）— 页面的外观\n- **{{term:JS}} / {{term:JavaScript}}** — 页面的\"大脑\"，让它能听你的指令做出反应\n但从零开始{{term:构建}}一个页面时，**按什么顺序写**比写什么更重要。\n标准的三段工作流：\n**第一步：{{term:HTML}} 结构** — 把页面上所有内容先用{{term:标签}}写出来\n- 标题、段落、图片、按钮……先全部摆上去\n- 不关心颜色、大小、位置\n- 就像先把音符写在五线谱上\n**第二步：{{term:CSS}} {{term:样式}}** — 给每个{{term:元素}}穿上合适的\"衣服\"\n- 颜色、字体、间距、背景……\n- 从外到内，从大到小\n- 就像给旋律配上和声与音色\n**第三步：{{term:JS}}（{{term:JavaScript}}）{{term:交互}}** — 让页面\"动起来\"\n- 点击按钮会发生什么？\n- 用户输入后如何响应？\n- 就像指挥标注演奏法：这里渐强，那里渐慢\n> 💡 **关于 {{term:JS}} 和 {{term:JavaScript}}**：{{term:JS}} 是 {{term:JavaScript}} 的缩写，它们是同一个东西。就像\"贝多芬\"有时被简称为\"贝爷\"——{{term:JS}} 就是 {{term:JavaScript}} 的昵称。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "倒过来写会怎样？"
+      },
+      "content": "新手常犯的错误是：一上来就写 {{term:CSS}} 或 {{term:JS}}，结果 {{term:HTML}} 结构老在变，前面写的{{term:样式}}和逻辑全乱了。\n就像一个作曲家先写好配器再改旋律——每次改旋律都得重新配器，浪费时间。\n**正确做法：先让 {{term:HTML}} 稳定下来，确认结构是对的，再动手写 {{term:CSS}} 和 {{term:JS}}。** 这就是乐理篇把三门语言分开教的原因——先熟悉每件\"乐器\"，现在合奏篇教你如何一起演奏它们。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "两个常用的数学工具"
+      },
+      "content": "在写 {{term:JS}} {{term:交互}}时，经常需要\"随机选一个\"。{{term:JavaScript}} 内置了两个好用的数学方法：\n**`Math.random()` — 生成随机数**\n```js\nMath.random(); // 返回 0 到 1 之间的随机小数，比如 0.3847、0.9215\n```\n每次调用都会返回不同的值，就像伸手到袋子里随机摸一颗糖。\n**`Math.floor()` — 向下取整**\n```js\nMath.floor(3.8);  // 结果是 3\nMath.floor(7.1);  // 结果是 7\nMath.floor(0.95); // 结果是 0\n```\n把小数的小数部分直接切掉，只留整数部分。\n**搭配使用 — 获取随机{{term:数组}}{{term:索引}}：**\n```js\nlet arr = [\"苹果\", \"香蕉\", \"橘子\"];\nlet i = Math.floor(Math.random() * arr.length);\n// Math.random()       → 0~1 之间的小数\n// Math.random() * 3   → 0~3 之间的小数（如 1.2、2.8）\n// Math.floor(...)     → 向下取整（如 1.2→1, 2.8→2）\n// 最终 i 是 0、1、2 中的一个（三个索引）\narr[i]; // 随机选中的元素\n```\n这两个方法在后续课程中会经常用到！"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"从结构开始可以让你先确认页面上有哪些{{term:元素}}，就像作曲时先在五线谱上画出音符位置，之后再考虑音色和强弱。建立\\\"先骨架、后装饰\\\"的习惯，是前端开发最重要的纪律。\" expected=\"预览区能看到标题、名言文字和一个按钮，但{{term:样式}}还很朴素——这很正常，下一步才是 {{term:CSS}}。\"}\n写 {{term:HTML}} 结构：创建一个 {{term:div}} 包含 {{term:h2}} 标题、p 名言、{{term:button}} 按钮\n:::\n\n:::step{purpose=\"{{term:CSS}} 是给 {{term:HTML}} 穿上\\\"衣服\\\"的过程。先确保内容可见，再美化外观，这样你能清楚地分辨\\\"结构问题\\\"和\\\"{{term:样式}}问题\\\"——避免同时调试两个维度。\" expected=\"卡片有了温暖的米白背景和圆角边框，按钮变成暗红色并在鼠标悬停时变亮——页面看起来像一个真正的卡片了。\"}\n写 {{term:CSS}} {{term:样式}}：给卡片加背景色（#FFFAF2）、圆角边框、内边距和居中排版；给按钮加暗红背景、白色文字、圆角和悬停变色效果\n:::\n\n:::step{purpose=\"{{term:JS}} 是页面的大脑，让静态卡片\\\"活\\\"起来。{{term:Math}}.random() + {{term:Math}}.floor() 的组合是后续大量{{term:交互}}的基础——随机选取、随机排序、随机展示都离不开这两个方法。\" expected=\"点击\\\"换一句\\\"按钮后，名言文字随机变换成{{term:数组}}中的另一句，每次点击都有不同的结果——你的页面会响应了！\"}\n写 {{term:JS}} {{term:交互}}：准备一个名言{{term:数组}}，用 {{term:querySelector}} 获取{{term:元素}}，给按钮绑定 click {{term:事件}}，用 {{term:Math}}.random() 和 {{term:Math}}.floor() 随机选取名言并更新 {{term:textContent}}\n:::",
+      "steps": [
+        {
+          "content": "写 {{term:HTML}} 结构：创建一个 {{term:div}} 包含 {{term:h2}} 标题、p 名言、{{term:button}} 按钮",
+          "purpose": "从结构开始可以让你先确认页面上有哪些{{term:元素}}，就像作曲时先在五线谱上画出音符位置，之后再考虑音色和强弱。建立\"先骨架、后装饰\"的习惯，是前端开发最重要的纪律。",
+          "expected": "预览区能看到标题、名言文字和一个按钮，但{{term:样式}}还很朴素——这很正常，下一步才是 {{term:CSS}}。"
+        },
+        {
+          "content": "写 {{term:CSS}} {{term:样式}}：给卡片加背景色（#FFFAF2）、圆角边框、内边距和居中排版；给按钮加暗红背景、白色文字、圆角和悬停变色效果",
+          "purpose": "{{term:CSS}} 是给 {{term:HTML}} 穿上\"衣服\"的过程。先确保内容可见，再美化外观，这样你能清楚地分辨\"结构问题\"和\"{{term:样式}}问题\"——避免同时调试两个维度。",
+          "expected": "卡片有了温暖的米白背景和圆角边框，按钮变成暗红色并在鼠标悬停时变亮——页面看起来像一个真正的卡片了。"
+        },
+        {
+          "content": "写 {{term:JS}} {{term:交互}}：准备一个名言{{term:数组}}，用 {{term:querySelector}} 获取{{term:元素}}，给按钮绑定 click {{term:事件}}，用 {{term:Math}}.random() 和 {{term:Math}}.floor() 随机选取名言并更新 {{term:textContent}}",
+          "purpose": "{{term:JS}} 是页面的大脑，让静态卡片\"活\"起来。{{term:Math}}.random() + {{term:Math}}.floor() 的组合是后续大量{{term:交互}}的基础——随机选取、随机排序、随机展示都离不开这两个方法。",
+          "expected": "点击\"换一句\"按钮后，名言文字随机变换成{{term:数组}}中的另一句，每次点击都有不同的结果——你的页面会响应了！"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "拉威尔《波莱罗》— 从一支长笛的简单旋律开始，逐步加入更多乐器，最后整个乐团爆发出磅礴的声响。这就是\"先骨架、再装饰、后互动\"的完美音乐示范。"
+    }
+  ],
+  "starter": {
+    "html": "<!-- 第一步：写 HTML 结构 -->\r\n<!-- 写一个 <div>，里面放 <h2>标题</h2>、<p>名言</p>、<button>换一句</button> -->\r\n",
+    "css": "/* 第二步：写 CSS 样式 */\r\n/* 提示：给 div 加 background, border-radius, padding, text-align */\r\n/* 提示：给 button 加 background, color, border, padding, border-radius */\r\n",
+    "js": "// 第三步：写 JS 交互\r\n// 1. 准备一个名言数组\r\n//    例如：let quotes = [\"音乐是心灵的窗户。— 贝多芬\", \"简洁是智慧的灵魂。— 巴赫\", ...];\r\n// 2. 用 querySelector 找到 p 和 button\r\n//    let quoteEl = document.querySelector(\"p\");\r\n//    let btn = document.querySelector(\"button\");\r\n// 3. 给按钮添加 click 事件\r\n//    btn.addEventListener(\"click\", function() {\r\n//      let i = Math.floor(Math.random() * quotes.length);\r\n//      quoteEl.textContent = quotes[i];\r\n//    });\r\n"
+  }
+}

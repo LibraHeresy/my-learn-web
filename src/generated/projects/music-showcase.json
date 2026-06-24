@@ -1,0 +1,68 @@
+{
+  "id": "music-showcase",
+  "meta": {
+    "id": "music-showcase",
+    "title": "音乐家名片页",
+    "subtitle": "用 HTML 和 CSS 制作你的第一张音乐家数字名片",
+    "icon": "🎵",
+    "track": "projects",
+    "order": 1,
+    "mode": "sandbox",
+    "musicAnalogy": "就像第一次登上舞台演奏一首简单的练习曲——不需要复杂的技巧，只需要把每一个音符（标签）和表情记号（样式）准确地呈现出来。完成后，你就拥有了第一张属于自己的\"音乐数字名片\"。",
+    "listenTo": "巴赫《G大调小步舞曲》— 简单、优雅、结构清晰，正如你即将写下的第一张网页。"
+  },
+  "steps": [
+    {
+      "title": "搭建名片结构",
+      "content": "一张音乐家名片需要包含哪些信息？就像音乐会节目单上的作曲家介绍，至少要有：\n- **名字** — 用 `<h1>` 大标题（如\"路德维希·凡·贝多芬\"）\n- **简介** — 用 `<p>` 段落写一两句话（如\"德国作曲家，古典与浪漫时期的桥梁\"）\n- **代表作** — 用 `<ul>` 无序列表列出 3-5 首著名作品\n- **照片** — 用 `<img>` {{term:标签}}放一张音乐家的照片\n用 `<div>` 把所有内容包在一起，给 {{term:class}}=\"composer-card\"。\n先用你熟悉的{{term:标签}}把内容写出来，不用管好不好看——下一步我们会用 {{term:CSS}} 来美化。",
+      "task": "用 {{term:HTML}} 搭出一张音乐家名片，包含名字（{{term:h1}}）、简介（p）、代表作列表（{{term:ul}} > {{term:li}}）、照片（{{term:img}}）。全部包在一个 `<div class=\"composer-card\">` 里。",
+      "hint": "图片链接可以从维基百科获取。如果维基百科图片{{term:加载}}失败（常见于热链接限制），可以用 `https://placehold.co/400x300/E8D5B7/8B2E2E?text=Composer` 作为占位图。另外，给你的名片加一个超链接 `<a href=\"...\">` 指向音乐家的维基百科页面或作品试听链接，让卡片更有{{term:交互}}感！",
+      "purpose": "这是项目的起点——把你在第一章学到的 {{term:HTML}} {{term:标签}}综合运用。`h1`、`p`、`ul`、`li`、`img`、`div` 单独用都很简单，但组合起来才构成一张完整的卡片。这一步练习的是信息架构：先想清楚名片上需要什么信息，再选对应的{{term:标签}}。",
+      "expectedResult": "预览区中出现了一张信息卡片——有标题、段落、列表和图片。虽然还没有{{term:样式}}，但所有内容都清晰可读地排列在卡片中。这是你名片的地基。",
+      "starterCode": {
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <h3>代表作</h3>\n  <ul>\n    <li>第五交响曲\"命运\"</li>\n    <li>第九交响曲\"合唱\"</li>\n    <li>月光奏鸣曲</li>\n    <li>致爱丽丝</li>\n  </ul>\n</div>",
+        "css": "",
+        "js": ""
+      }
+    },
+    {
+      "title": "给名片穿上礼服",
+      "content": "现在你的名片有了内容，但看起来还很\"素\"。{{term:CSS}} 就是名片的服装设计师——给它配色、字体、圆角和阴影，让它从\"草稿\"变成\"名片\"。\n给 `.composer-card` 添加{{term:样式}}：\n- `max-width: 400px` — 限制卡片宽度，像名片的大小\n- `background` — 温暖的背景色\n- `border-radius: 12px` — 圆角让卡片更柔和\n- `box-shadow` — 阴影让卡片\"浮\"起来\n- `padding: 24px` — 内边距让内容呼吸\n- `text-align: center` — 内容居中\n也给图片加{{term:样式}}：\n- `width: 100%` — 图片填满卡片宽度\n- `border-radius: 8px` — 轻微圆角\n记得在 `<style>` {{term:标签}}或 {{term:CSS}} 编辑区中书写这些{{term:样式}}。",
+      "task": "在 {{term:CSS}} 编辑区美化你的名片：给卡片设置背景色、圆角、阴影、内边距和最大宽度。给图片设置合适的圆角。",
+      "hint": "试试 `box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12)` — 这是经典的\"卡片悬浮\"阴影。背景色建议用暖色系，如 `#FFFAF2` 或 `#FDF8F0`。",
+      "purpose": "这一步让你理解 {{term:CSS}} 的核心角色——视觉表现{{term:层}}。{{term:HTML}} 决定有什么（名字、图片、列表），{{term:CSS}} 决定长什么样（颜色、圆角、阴影）。把内容和表现分开，是网页设计最基本的原则。以后你维护一个网站时，改颜色只需要改 {{term:CSS}}，不用动 {{term:HTML}}。",
+      "expectedResult": "添加 {{term:CSS}} 后，名片从纯文字堆叠变成一张有背景色、有圆角、有阴影的精致卡片。图片也有了圆角。预想效果：像一张优雅的音乐家名片，而不是一份纯文本文档。",
+      "starterCode": {
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <h3>代表作</h3>\n  <ul>\n    <li>第五交响曲\"命运\"</li>\n    <li>第九交响曲\"合唱\"</li>\n    <li>月光奏鸣曲</li>\n    <li>致爱丽丝</li>\n  </ul>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card h3 {\n  font-size: 1rem;\n  color: #8B2E2E;\n  margin: 16px 0 8px 0;\n}\n.composer-card p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0;\n}\n.composer-card ul {\n  text-align: left;\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 1.8;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "js": ""
+      }
+    },
+    {
+      "title": "排列你的代表作",
+      "content": "现在名片的\"正装\"穿好了——我们来做一些排版细节的打磨。\n目前代表作列表是默认的列表{{term:样式}}。试试：\n- 给列表项加点间距\n- 把代表作区域加一个淡淡的背景色，和卡片主体区分开\n- 用 `::marker` {{term:选择器}}把列表的圆点改成音乐符号 🎵\n{{term:CSS}} 提示：\n```css\n.composer-card ul {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px 16px 16px 36px;\n}\n.composer-card li::marker {\n  content: \"🎵 \";\n}\n```这个步骤没有固定答案——按照你的审美来调整。排版的核心是：**让重要信息突出，让阅读体验舒适。**",
+      "task": "调整名片排版细节：给代表作列表添加背景色和圆角，给列表项之间加点间距（line-{{term:height}} 或 {{term:margin}}）。尝试自定义列表标记符号。",
+      "hint": "如果想改变列表标记，除了 `::marker` 还可以用 `list-style-type: \"🎵 \"`（注意 {{term:Firefox}} 支持有限）。兼容性最好的做法是用 `list-style: none` 然后在每个 `<li>` 前面手动加表情。",
+      "purpose": "这一步教你排版细节的打磨——{{term:CSS}} 不只是能加颜色和阴影，还能精细控制每个{{term:元素}}内部的间距、对齐和装饰。`::marker` {{term:选择器}}让你自定义列表标记，这是 {{term:CSS}} {{term:伪元素}}的典型应用。排版的核心是：让重要信息突出，让阅读体验舒适。",
+      "expectedResult": "代表作区域变成了一个有独立背景色和圆角的小盒子，列表项之间间距更舒适了。如果设置了 `::marker`，列表的圆点变成了你指定的符号。整个名片看起来更加精致。",
+      "starterCode": {
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h3>🎼 代表作</h3>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h3 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "js": ""
+      }
+    },
+    {
+      "title": "自由创作 — 换成你喜欢的音乐家",
+      "content": "恭喜！你已经拥有了一张漂亮的音乐家名片。\n最后一步——把名片变成**你自己的作品**：\n1. 把贝多芬换成你最喜欢的音乐家（或任何音乐人）\n2. 修改色彩方案——试试别的背景色，换个字体颜色\n3. 调整卡片大小和布局——看看 `max-width` 改成 500px 或 `margin` 改成不同值会怎样\n4. （可选）添加更多内容——生卒年份、国籍、著名乐章推荐\n这是你的名片，做你想做的任何改动。{{term:CSS}} 的乐趣在于**不断调整直到你满意为止**——就像调音师反复调试一架钢琴，直到每个音都恰到好处。\n> 🎵 完成这一步后，你就拥有了一个可以分享的网页！你可以把 {{term:HTML}} 文件发给朋友，他们用浏览器打开就能看到你的作品。",
+      "task": "把名片改成你喜欢的音乐家。调整颜色、字体、布局，直到你满意为止。尝试至少修改 5 处不同的 {{term:CSS}} {{term:属性}}。小提示：可以试试把外{{term:层}}的 `<div class=\"composer-card\">` 改成 `<article class=\"composer-card\">`（{{term:语义化标签}}），并添加一个指向该音乐家更多信息的链接。",
+      "hint": "想知道某种颜色好不好看？试试在浏览器中打开 `DevTools`（`F12`），然后点击{{term:元素}}检查器，直接在 `Styles` 面板中修改 {{term:CSS}} 值——页面会实时更新。这是设计师和开发者最常用的\"调色板\"。",
+      "purpose": "这是自由创作阶段——前几步是在学规则，这一步是让你突破规则。把贝多芬换成你真正喜欢的音乐家，配色方案改成你的审美。真正的学习不是照着做，而是用自己的判断力去调整和创造。完成的这张名片是你在代码乐章的第一个独立作品。",
+      "expectedResult": "名片完全变成了你的个人作品——音乐家换成了你选的、配色换成了你的风格、可能还多了新加的链接或内容。这张名片是你从学习到创造的分界线：你不再是一个教程的跟随者，而是一个能独立决定页面效果的设计者。",
+      "starterCode": {
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h3>🎼 代表作</h3>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h3 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "js": ""
+      }
+    }
+  ]
+}

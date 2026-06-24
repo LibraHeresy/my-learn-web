@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { LessonProgress } from '../types'
+import type { LessonProgress, UserCode } from '../types'
+import { safeSetItem, safeGetItem } from '../utils/storage'
 
 const STORAGE_KEY = 'code-score-progress'
 // 课程数据版本号，修改 lessons.ts 后递增此值，即可自动清空用户旧代码
 const DATA_VERSION = 5
+
+let saveTimer: ReturnType<typeof setTimeout> | null = null
 
 export const useProgressStore = defineStore('progress', () => {
   const lessonProgress = ref<Record<string, LessonProgress>>({})
@@ -13,7 +16,8 @@ export const useProgressStore = defineStore('progress', () => {
   // 从 localStorage 加载
   function loadProgress() {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY)
+      const result = safeGetItem(STORAGE_KEY)
+      const raw = result.value
       if (raw) {
         const data = JSON.parse(raw)
         // 版本不匹配时，保留完成状态但清空旧代码
@@ -42,33 +46,85 @@ export const useProgressStore = defineStore('progress', () => {
     }
   }
 
+  const lastError = ref<string | null>(null)
+
   // 持久化
   function persistProgress() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    const result = safeSetItem(STORAGE_KEY, JSON.stringify({
       _version: DATA_VERSION,
       progress: lessonProgress.value
     }))
+    if (!result.success) {
+      lastError.value = result.error ?? '保存失败'
+      setTimeout(() => { lastError.value = null }, 5000)
+    }
   }
 
   // 标记完成
   function markComplete(lessonId: string) {
-    if (!lessonProgress.value[lessonId]) {
-      lessonProgress.value[lessonId] = {
-        lessonId,
-        completed: true,
-        userCode: { html: '', css: '', js: '' },
-        lastVisited: Date.now()
-      }
-    } else {
-      lessonProgress.value[lessonId].completed = true
-      lessonProgress.value[lessonId].lastVisited = Date.now()
+    // 若有待执行的防抖保存，立即持久化
+    if (saveTimer) {
+      clearTimeout(saveTimer)
+      saveTimer = null
+      persistProgress()
     }
+    const entry = ensureProgress(lessonId)
+    entry.completed = true
+    entry.lastVisited = Date.now()
     persistProgress()
   }
 
   // 是否已完成
   function isCompleted(lessonId: string): boolean {
     return lessonProgress.value[lessonId]?.completed ?? false
+  }
+
+  // 确保进度条目存在（仅首次创建时赋值到 record，触发 watchEffect）
+  function ensureProgress(lessonId: string): LessonProgress {
+    if (!lessonProgress.value[lessonId]) {
+      lessonProgress.value[lessonId] = {
+        lessonId,
+        completed: false,
+        userCode: { html: '', css: '', js: '' },
+        lastVisited: Date.now(),
+      }
+    }
+    return lessonProgress.value[lessonId]
+  }
+
+  // 保存用户代码（800ms 防抖）
+  // 注意：使用属性赋值而非替换整个对象，避免触发 watchEffect 重新执行
+  function saveUserCode(lessonId: string, code: UserCode) {
+    const entry = ensureProgress(lessonId)
+    entry.userCode = { ...code }
+    entry.lastVisited = Date.now()
+
+    if (saveTimer) clearTimeout(saveTimer)
+    saveTimer = setTimeout(() => {
+      persistProgress()
+    }, 800)
+  }
+
+  // 获取用户已保存的代码
+  function getUserCode(lessonId: string): UserCode | null {
+    const entry = lessonProgress.value[lessonId]
+    if (!entry) return null
+    const code = entry.userCode
+    // 只有当用户实际修改过（非全空）时才返回
+    if (!code.html && !code.css && !code.js) return null
+    return { ...code }
+  }
+
+  // 重置用户代码（取消防抖并立即持久化）
+  function resetUserCode(lessonId: string) {
+    if (saveTimer) {
+      clearTimeout(saveTimer)
+      saveTimer = null
+    }
+    if (lessonProgress.value[lessonId]) {
+      lessonProgress.value[lessonId].userCode = { html: '', css: '', js: '' }
+      persistProgress()
+    }
   }
 
   // 初始化加载
@@ -79,5 +135,9 @@ export const useProgressStore = defineStore('progress', () => {
     currentLessonId,
     markComplete,
     isCompleted,
+    saveUserCode,
+    getUserCode,
+    resetUserCode,
+    lastError,
   }
 })

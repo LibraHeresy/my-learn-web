@@ -1,0 +1,87 @@
+{
+  "id": "vue-computed-watch",
+  "meta": {
+    "id": "vue-computed-watch",
+    "title": "computed 与 watch — 自动跟进的\"伴奏\"",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "order": 7,
+    "mode": "local",
+    "musicAnalogy": "乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（computed——自动计算，有缓存）；一种是鼓手听到变换后才改变节奏型（watch——观察变化，执行副作用）。两者各有用途，选对工具让你的\"演奏\"更流畅。",
+    "listenTo": "舒伯特《鳟鱼五重奏》— 五个乐器各有角色：钢琴提供和声基础（computed），低音提琴时而拨弦时而拉弓（watch 到主旋律变化时改变奏法）。听这首歌时想一下：谁在\"计算\"，谁在\"观察\"？"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "computed 与 watch — 自动跟进的\"伴奏\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（{{term:computed}}——自动计算，有{{term:缓存}}）；一种是鼓手听到变换后才改变节奏型（{{term:watch}}——观察变化，执行副作用）。两者各有用途，选对工具让你的\"演奏\"更流畅。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "computed — 自动计算的属性"
+      },
+      "content": "当某个值可以由其他数据**推导**出来时，用 `computed`：\n```vue\n<script setup>\nimport { ref, computed } from 'vue'\nconst pieces = ref([\n  { name: '月光', period: '古典主义' },\n  { name: '夜曲', period: '浪漫主义' },\n  { name: '春', period: '巴洛克' },\n  { name: '致爱丽丝', period: '古典主义' },\n])\n// computed：自动计算，有缓存\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n</script>\n<template>\n  <p>古典主义曲目：{{ classicalPieces.length }} 首</p>\n  <ul>\n    <li v-for=\"p in classicalPieces\" :key=\"p.name\">{{ p.name }}</li>\n  </ul>\n</template>\n```\nclassicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**{{term:缓存}}**——不{{term:依赖}}的值没变，不会重复计算。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "computed vs 普通函数"
+      },
+      "content": "为什么不用普通{{term:函数}}？\n```js\n// ❌ 普通函数：每次模板重渲染都重新计算\nfunction getClassical() {\n  return pieces.value.filter(p => p.period === '古典主义')\n}\n// ✅ computed：只在 pieces 变化时才重新计算\nconst classicalPieces = computed(() => {\n  return pieces.value.filter(p => p.period === '古典主义')\n})\n```\n就像乐谱翻页：{{term:函数}}式每次都从头到尾唱一遍来找古典曲目；{{term:computed}} 像在谱子上贴了{{term:标签}}——曲目单不变就不用重新翻。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "watch — 观察变化，执行操作"
+      },
+      "content": "`watch` 用于\"当某个值变了，我要做点什么\"——比如保存到 {{term:localStorage}}、发{{term:请求}}：\n```vue\n<script setup>\nimport { ref, watch } from 'vue'\nconst searchKeyword = ref('')\nconst results = ref([])\n// watch：监测 keyword 变化，执行副作用\nwatch(searchKeyword, async (newVal, oldVal) => {\n  if (newVal.length === 0) {\n    results.value = []\n    return\n  }\n  console.log(\\`搜索：\\${oldVal} → \\${newVal}\\`)\n  results.value = await searchAPI(newVal)\n})\n</script>\n```\n{{term:watch}}` 适合：\n- 保存数据到 {{term:localStorage}}\n- 搜索/筛选触发 {{term:API}} {{term:请求}}\n- 某个值变化时更新页面标题\n- 数据变化时触发动画"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "computed vs watch：选哪个？"
+      },
+      "content": "| 场景 | 用什么 | 为什么 |\n|------|--------|--------|\n| 筛选/排序列表 | {{term:computed}} | 纯计算，需要{{term:缓存}} |\n| 格式化显示 | {{term:computed}} | {{term:依赖}}数据 → 派生值 |\n| 数据变了要发{{term:请求}} | {{term:watch}} | 有副作用 |\n| 数据变了要存 {{term:localStorage}} | {{term:watch}} | 有副作用 |\n| 多个{{term:依赖}}组合判断 | {{term:computed}} | 自动追踪{{term:依赖}} |\n**口诀：** 需要**返回值**用 {{term:computed}}，需要**做事情**用 {{term:watch}}。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"{{term:computed}} 从已有数据自动派生出新值并自带{{term:缓存}}。你只需要声明筛选逻辑（{{term:filter}}），{{term:Vue}} 在{{term:依赖}}（曲目列表或选中时期）变化时自动重新计算。这在合奏篇中需要你手动写筛选逻辑 + 手动调用 {{term:render}}——现在一行 {{term:computed}} 搞定。\" expected=\"选择不同时期，曲目列表自动过滤，只显示匹配的曲目。\"}\n添加 {{term:computed}}：根据用户选择的时期（period）筛选曲目列表\n:::\n\n:::step{purpose=\"{{term:watch}} 用于在数据变化时执行副作用（如保存、发{{term:请求}}、操作 {{term:DOM}}）。这里用它监听曲目列表，自动将数据序列化到 {{term:localStorage}}——用户刷新页面后数据不会丢失。在合奏篇中你需要手动在每个修改点调用保存{{term:函数}}，现在只需一个 {{term:watch}}。\" expected=\"添加/删除曲目后刷新页面，数据仍然存在（自动从 {{term:localStorage}} 恢复）。\"}\n添加 {{term:watch}}：当曲目列表变化时，自动保存到 {{term:localStorage}}\n:::",
+      "steps": [
+        {
+          "content": "添加 {{term:computed}}：根据用户选择的时期（period）筛选曲目列表",
+          "purpose": "{{term:computed}} 从已有数据自动派生出新值并自带{{term:缓存}}。你只需要声明筛选逻辑（{{term:filter}}），{{term:Vue}} 在{{term:依赖}}（曲目列表或选中时期）变化时自动重新计算。这在合奏篇中需要你手动写筛选逻辑 + 手动调用 {{term:render}}——现在一行 {{term:computed}} 搞定。",
+          "expected": "选择不同时期，曲目列表自动过滤，只显示匹配的曲目。"
+        },
+        {
+          "content": "添加 {{term:watch}}：当曲目列表变化时，自动保存到 {{term:localStorage}}",
+          "purpose": "{{term:watch}} 用于在数据变化时执行副作用（如保存、发{{term:请求}}、操作 {{term:DOM}}）。这里用它监听曲目列表，自动将数据序列化到 {{term:localStorage}}——用户刷新页面后数据不会丢失。在合奏篇中你需要手动在每个修改点调用保存{{term:函数}}，现在只需一个 {{term:watch}}。",
+          "expected": "添加/删除曲目后刷新页面，数据仍然存在（自动从 {{term:localStorage}} 恢复）。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "舒伯特《鳟鱼五重奏》— 五个乐器各有角色：钢琴提供和声基础（{{term:computed}}），低音提琴时而拨弦时而拉弓（{{term:watch}} 到主旋律变化时改变奏法）。听这首歌时想一下：谁在\"计算\"，谁在\"观察\"？"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}

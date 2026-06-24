@@ -1,0 +1,90 @@
+{
+  "id": "async-await",
+  "meta": {
+    "id": "async-await",
+    "title": "async/await — 让异步代码\"看起来同步\"",
+    "track": "framework",
+    "chapter": "async-data",
+    "order": 4,
+    "mode": "sandbox",
+    "musicAnalogy": "Promise 的 `.then()` 链条就像看乐谱上的分谱——你要顺着每个声部找下去。而 async/await 就像看总谱——所有声部一目了然，从上到下顺序阅读，但实际演奏是同时发生的。",
+    "listenTo": "莫扎特《费加罗的婚礼》序曲 — 短短 4 分钟，多个主题自然流畅地衔接，听感上浑然一体。async/await 让异步代码也有这种\"行云流水\"的阅读体验。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "async/await — 让异步代码\"看起来同步\""
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "{{term:Promise}} 的 `.then()` 链条就像看乐谱上的分谱——你要顺着每个声部找下去。而 {{term:async/await}} 就像看总谱——所有声部一目了然，从上到下顺序阅读，但实际演奏是同时发生的。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "async/await 是什么？"
+      },
+      "content": "{{term:async/await}} 让{{term:异步}}代码看起来像同步代码——{{term:async}} 声明{{term:异步}}{{term:函数}}，{{term:await}} 等待 {{term:Promise}} 完成再继续。就像指挥等待独奏家完成华彩乐段再继续指挥——表面是同步的等待，实际是{{term:异步}}的完成。\n```js\n// Promise 写法\nfunction getMusicInfo() {\n  return fetchUser('小明')\n    .then(user => fetchFavorites(user.id))\n    .then(favs => console.log(favs))\n}\n// async/await 写法\nasync function getMusicInfo() {\n  const user = await fetchUser('小明')\n  const favs = await fetchFavorites(user.id)\n  console.log(favs)\n}\n```"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "错误处理：try/catch 回归"
+      },
+      "content": "用 {{term:async/await}} 时，错误处理回到了熟悉的 {{term:try/catch}}：\n```js\nasync function loadMusicData() {\n  try {\n    const user = await fetchUser('小明')\n    const favs = await fetchFavorites(user.id)\n    const details = await fetchDetails(favs[0].id)\n    console.log('加载成功：', details)\n  } catch (error) {\n    console.log('加载失败：', error.message)\n    // 可以在这里显示友好的错误提示\n  }\n}\n```\n这就是为什么学错误处理（上一章）很重要——{{term:async/await}} 中 {{term:try/catch}} 是最佳实践。"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "并行 vs 串行"
+      },
+      "content": "注意：`await` 是**串行**的（一个接一个等）。如果两个{{term:请求}}互不{{term:依赖}}，应该**并行**：\n```js\n// ❌ 串行：总要 2000ms（每个 1000ms）\nconst result1 = await fetchOne()   // 等 1000ms\nconst result2 = await fetchTwo()   // 再等 1000ms\n// ✅ 并行：只要 1000ms（同时进行）\nconst [result1, result2] = await Promise.all([\n  fetchOne(),\n  fetchTwo()\n])\n```\n{{term:Promise}}.all()` 就像指挥同时给弦乐和管乐起拍——一起开始，一起等。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"{{term:async/await}} 让{{term:异步}}代码读起来像同步代码——从上到下、从左到右。{{term:await}} 会暂停当前{{term:函数}}的执行等待 {{term:Promise}} 完成，但不阻塞主线程。就像指挥等独奏家完成华彩乐段——整个乐团在等，但不是僵住，而是准备好了随时接上。\" expected=\"concert {{term:变量}}得到 { {{term:id}}: \\\"c001\\\", {{term:title}}: \\\"维也纳新年音乐会\\\", place: \\\"金色大厅\\\" } 对象。\"}\n用 {{term:async}} {{term:function}} 声明 loadConcert，内部用 {{term:const}} concert = {{term:await}} fetchConcert() 获取演出信息\n:::\n\n:::step{purpose=\"{{term:await}} 返回的是 {{term:Promise}} 的\\\"兑现值\\\"——不需要 .then() {{term:回调}}了。这里你会直观地感受到 {{term:async/await}} 相比 {{term:Promise}} 链的优势：数据直接赋值给{{term:变量}}，下一行就能用，逻辑流线性的。\" expected=\"program {{term:变量}}得到 { concertId: \\\"c001\\\", pieces: [\\\"蓝色多瑙河\\\", \\\"拉德茨基进行曲\\\"] } 对象。\"}\n用 {{term:const}} program = {{term:await}} fetchProgram(concert.{{term:id}}) 获取曲目单\n:::\n\n:::step{purpose=\"{{term:async/await}} 让 {{term:try/catch}} 回归——不需要 .{{term:catch}}() 了。{{term:try}} 块里写正常流程，{{term:catch}} 块里处理异常，和同步代码的错误处理方式完全一致。之前学的错误处理知识在此无缝衔接。\" expected=\"loadConcert() 调用后返回完整的演出+曲目信息对象，或出错时返回 {{term:null}}，程序不会崩溃。\"}\n用 {{term:try/catch}} 包裹 {{term:await}} 调用，出错时返回 {{term:null}}；成功时 {{term:return}} { concert, program }\n:::",
+      "steps": [
+        {
+          "content": "用 {{term:async}} {{term:function}} 声明 loadConcert，内部用 {{term:const}} concert = {{term:await}} fetchConcert() 获取演出信息",
+          "purpose": "{{term:async/await}} 让{{term:异步}}代码读起来像同步代码——从上到下、从左到右。{{term:await}} 会暂停当前{{term:函数}}的执行等待 {{term:Promise}} 完成，但不阻塞主线程。就像指挥等独奏家完成华彩乐段——整个乐团在等，但不是僵住，而是准备好了随时接上。"
+        },
+        {
+          "content": "用 {{term:const}} program = {{term:await}} fetchProgram(concert.{{term:id}}) 获取曲目单",
+          "purpose": "{{term:await}} 返回的是 {{term:Promise}} 的\"兑现值\"——不需要 .then() {{term:回调}}了。这里你会直观地感受到 {{term:async/await}} 相比 {{term:Promise}} 链的优势：数据直接赋值给{{term:变量}}，下一行就能用，逻辑流线性的。"
+        },
+        {
+          "content": "用 {{term:try/catch}} 包裹 {{term:await}} 调用，出错时返回 {{term:null}}；成功时 {{term:return}} { concert, program }",
+          "purpose": "{{term:async/await}} 让 {{term:try/catch}} 回归——不需要 .{{term:catch}}() 了。{{term:try}} 块里写正常流程，{{term:catch}} 块里处理异常，和同步代码的错误处理方式完全一致。之前学的错误处理知识在此无缝衔接。",
+          "expected": "loadConcert() 调用后返回完整的演出+曲目信息对象，或出错时返回 {{term:null}}，程序不会崩溃。"
+        }
+      ]
+    },
+    {
+      "type": "block:hint",
+      "name": "hint",
+      "attrs": {
+        "title": "提示"
+      },
+      "content": "```js\nasync function loadConcert() {\n  try {\n    const concert = await fetchConcert()\n    const program = await fetchProgram(concert.id)\n    return { concert, program }\n  } catch (e) {\n    console.log('加载出错：', e.message)\n    return null\n  }\n}\n```"
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "莫扎特《费加罗的婚礼》序曲 — 短短 4 分钟，多个主题自然流畅地衔接，听感上浑然一体。{{term:async/await}} 让{{term:异步}}代码也有这种\"行云流水\"的阅读体验。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": "// 模拟 API（不要修改）\r\nfunction delay(ms) {\r\n  return new Promise(resolve => setTimeout(resolve, ms))\r\n}\r\n\r\nasync function fetchConcert() {\r\n  await delay(500)\r\n  return { id: 'c001', title: '维也纳新年音乐会', place: '金色大厅' }\r\n}\r\n\r\nasync function fetchProgram(concertId) {\r\n  await delay(500)\r\n  return { concertId, pieces: ['蓝色多瑙河', '拉德茨基进行曲'] }\r\n}\r\n\r\n// TODO: 实现 loadConcert 函数\r\nasync function loadConcert() {\r\n  // 在这里写代码\r\n}\r\n\r\n// 测试\r\nloadConcert().then(data => console.log('结果：', data))"
+  }
+}

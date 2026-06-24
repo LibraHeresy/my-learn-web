@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import { getAllLessons } from '../content-loaders/lessons'
+import { getAllLessons, getLesson } from '../content-loaders/lessons'
 import { getAllProjects } from '../content-loaders/projects'
 
 // ============================================================
@@ -83,10 +83,11 @@ describe('页面冒烟测试', () => {
   // ---- 关键组件 ----
   describe('关键组件', () => {
     it('DocumentRenderer 渲染', async () => {
-      const lesson = getAllLessons()[0]
+      const lesson = await getLesson(getAllLessons()[0].id)
+      expect(lesson).not.toBeNull()
       const { default: DocumentRenderer } = await import('../content-runtime/renderers/DocumentRenderer.vue')
       const wrapper = mount(DocumentRenderer, {
-        props: { lesson },
+        props: { lesson: lesson! },
       })
       expect(wrapper.find('.content-doc').exists()).toBe(true)
     })

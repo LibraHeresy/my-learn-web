@@ -1,12 +1,18 @@
-import generatedLessons from '../generated/lessons-index.json'
-import type { CompiledLesson } from '../content-runtime/types'
+import lessonsMeta from '../generated/lessons-meta.json'
+import type { CompiledLesson, ContentMeta } from '../content-runtime/types'
 
-const compiledLessons = generatedLessons as CompiledLesson[]
+export type LessonMetaItem = { id: string; meta: ContentMeta }
 
-export function getAllLessons(): CompiledLesson[] {
-  return compiledLessons
+const metaItems = lessonsMeta as LessonMetaItem[]
+const lessonModules = import.meta.glob('../generated/lessons/*.json')
+
+export function getAllLessons(): LessonMetaItem[] {
+  return metaItems
 }
 
-export function getLesson(lessonId: string): CompiledLesson | null {
-  return compiledLessons.find((lesson) => lesson.id === lessonId) ?? null
+export async function getLesson(lessonId: string): Promise<CompiledLesson | null> {
+  const loader = lessonModules[`../generated/lessons/${lessonId}.json`]
+  if (!loader) return null
+  const mod = await loader()
+  return (mod as { default?: CompiledLesson }).default ?? (mod as CompiledLesson)
 }

@@ -2,14 +2,14 @@
 import { ref, watch, nextTick, computed } from 'vue'
 import { chapters } from '../content-loaders/taxonomy'
 import { useProgressStore } from '../stores/progress'
-import type { CompiledLesson } from '../content-runtime/types'
+import type { LessonMetaItem } from '../content-loaders/lessons'
 
 const props = withDefaults(defineProps<{
   currentLessonId: string
   trackId?: string
   variant?: 'mobile' | 'expanded' | 'collapsed'
   currentPosition?: { lessonIndex: number; totalLessons: number }
-  lessons: CompiledLesson[]
+  lessons: LessonMetaItem[]
 }>(), {
   trackId: 'fundamentals',
   variant: 'mobile',

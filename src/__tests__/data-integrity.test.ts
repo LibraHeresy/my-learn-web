@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { getAllLessons } from '../content-loaders/lessons'
-import { getAllProjects } from '../content-loaders/projects'
+import { getAllLessons, getLesson } from '../content-loaders/lessons'
+import { getAllProjects, getProject } from '../content-loaders/projects'
 import { chapters, tracks } from '../content-loaders/taxonomy'
 import { prologueCards } from '../content-loaders/prologues'
 import { getGlossaryTuples } from '../content-loaders/glossary'
@@ -46,7 +46,7 @@ describe('数据完整性', () => {
       }
     })
 
-    it('所有 lesson 有必填字段', () => {
+    it('所有 lesson 有必填字段', async () => {
       for (const l of lessons) {
         expect(l.id, 'id 缺失').toBeTruthy()
         expect(l.meta.title, `"${l.id}" meta.title 缺失`).toBeTruthy()
@@ -54,8 +54,10 @@ describe('数据完整性', () => {
         expect(l.meta.chapter, `"${l.id}" meta.chapter 缺失`).toBeTruthy()
         expect(l.meta.mode, `"${l.id}" meta.mode 缺失`).toBeTruthy()
         expect(l.meta.musicAnalogy, `"${l.id}" meta.musicAnalogy 缺失`).toBeTruthy()
-        expect(l.body.length, `"${l.id}" body 为空`).toBeGreaterThan(0)
-        expect(l.starter, `"${l.id}" starter 缺失`).toBeDefined()
+        const full = await getLesson(l.id)
+        expect(full, `"${l.id}" 无法加载`).not.toBeNull()
+        expect(full!.body.length, `"${l.id}" body 为空`).toBeGreaterThan(0)
+        expect(full!.starter, `"${l.id}" starter 缺失`).toBeDefined()
       }
     })
 
@@ -88,11 +90,13 @@ describe('数据完整性', () => {
       expect(lessonIds).toEqual(cardLessonIds)
     })
 
-    it('所有 prologue 有必填字段', () => {
+    it('所有 prologue 有必填字段', async () => {
       for (const l of prologueLessons) {
         expect(l.id).toBeTruthy()
         expect(l.meta.title).toBeTruthy()
-        expect(l.body.length).toBeGreaterThan(0)
+        const full = await getLesson(l.id)
+        expect(full, `"${l.id}" 无法加载`).not.toBeNull()
+        expect(full!.body.length).toBeGreaterThan(0)
       }
     })
   })
@@ -104,15 +108,19 @@ describe('数据完整性', () => {
       expect(new Set(ids).size).toBe(ids.length)
     })
 
-    it('所有 project 至少有一个 step', () => {
+    it('所有 project 至少有一个 step', async () => {
       for (const p of projects) {
-        expect(p.steps.length, `project "${p.id}" 没有步骤`).toBeGreaterThan(0)
+        const full = await getProject(p.id)
+        expect(full, `project "${p.id}" 无法加载`).not.toBeNull()
+        expect(full!.steps.length, `project "${p.id}" 没有步骤`).toBeGreaterThan(0)
       }
     })
 
-    it('所有 step 的 task 非空', () => {
+    it('所有 step 的 task 非空', async () => {
       for (const p of projects) {
-        for (const s of p.steps) {
+        const full = await getProject(p.id)
+        expect(full, `project "${p.id}" 无法加载`).not.toBeNull()
+        for (const s of full!.steps) {
           expect(s.task.trim(), `project "${p.id}" step "${s.title}" task 为空`).not.toBe('')
         }
       }

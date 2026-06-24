@@ -1,0 +1,110 @@
+{
+  "id": "vue-lifecycle",
+  "meta": {
+    "id": "vue-lifecycle",
+    "title": "Vue 生命周期 — 组件的乐章结构",
+    "track": "engineering",
+    "chapter": "vue-framework",
+    "order": 3,
+    "mode": "local",
+    "musicAnalogy": "每首乐曲都有固定的结构——序奏呈示主题、展开部发展变化、再现部回归、尾声收束。Vue 组件也有自己的乐章结构（生命周期）：创建（setup）→ 挂载到 DOM（onMounted）→ 数据更新（onUpdated）→ 即将销毁（onBeforeUnmount）→ 已销毁（onUnmounted）。每个阶段都有对应的钩子函数，让你在正确的时间点执行正确的代码。",
+    "listenTo": "贝多芬《第五交响曲》全四个乐章 — 第一乐章：命运的动机登场（setup/onMounted），第二乐章：变奏展开（响应式更新），第三乐章：谐谑曲的神秘过渡（onBeforeUnmount），第四乐章：辉煌的凯旋（组件完成使命）。一部交响曲的生命周期，和 Vue 组件的生命周期如出一辙。"
+  },
+  "body": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "text": "Vue 生命周期 — 组件的乐章结构"
+    },
+    {
+      "type": "block:music-analogy",
+      "name": "music-analogy",
+      "content": "每首乐曲都有固定的结构——序奏呈示主题、展开部发展变化、再现部回归、尾声收束。{{term:Vue}} {{term:组件}}也有自己的乐章结构（生命周期）：创建（setup）→ 挂载到 {{term:DOM}}（onMounted）→ 数据更新（onUpdated）→ 即将销毁（onBeforeUnmount）→ 已销毁（onUnmounted）。每个阶段都有对应的钩子{{term:函数}}，让你在正确的时间点执行正确的代码。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "什么是生命周期？"
+      },
+      "content": "每个 {{term:Vue}} {{term:组件}}从创建到销毁，会经历一系列阶段。{{term:Vue}} 在每个阶段提供了**钩子{{term:函数}}（hooks）**，让你在特定时机执行代码：\n```setup() → 创建响应式状态\n  ↓\nonBeforeMount() → 即将挂载（很少用）\n  ↓\nonMounted() → 已挂载到 DOM ✅ 常用\n  ↓\nonBeforeUpdate() → 数据变了，DOM 即将更新\n  ↓\nonUpdated() → DOM 已更新\n  ↓\nonBeforeUnmount() → 组件即将销毁 ✅ 常用\n  ↓\nonUnmounted() → 组件已销毁\n```\n**你只需要了解最常用的三个就够了：**\n- onMounted — {{term:组件}}挂载完成后（操作 {{term:DOM}}、发{{term:请求}}、启定时器）\n- onBeforeUnmount — {{term:组件}}销毁前（清理定时器、取消{{term:请求}}、移除{{term:事件}}监听）\n- {{term:watch}} / watchEffect — {{term:响应式}}数据变化时自动执行\n> 🎼 就像在奏鸣曲的呈示部结束时要做转调，在再现部开始前要回到原调——生命周期的每个节点都有它特定的音乐任务。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "onMounted — 登台时刻"
+      },
+      "content": "`onMounted` 是使用最频繁的钩子。在 `<script setup>` 中，**顶{{term:层}}的代码在{{term:组件}}创建时执行**，但此时 {{term:DOM}} 还不存在。任何需要操作 {{term:DOM}} 的代码必须放在 onMounted 中：\n```vue\n<script setup>\nimport { ref, onMounted } from 'vue'\nconst inputRef = ref(null)  // template ref\n// ❌ 错误：此时 DOM 还没渲染，inputRef.value 是 null\n// inputRef.value.focus()\n// ✅ 正确：onMounted 中 DOM 已就绪\nonMounted(() => {\n  inputRef.value?.focus()    // 自动聚焦输入框\n  fetchUserData()            // 发初始请求\n  startTimer()               // 启动定时器\n  window.addEventListener('scroll', handleScroll)  // 绑定全局事件\n})\n</script>\n```\n**onMounted 的常见用途：**\n- 获取初始数据（调用 {{term:API}}）\n- 操作 {{term:DOM}} {{term:元素}}（聚焦、滚动、初始化第三方库）\n- 启动定时器 / 订阅{{term:事件}}\n- 添加全局{{term:事件}}监听（{{term:scroll}}、resize、keydown）"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "onBeforeUnmount — 谢幕前的清理"
+      },
+      "content": "{{term:组件}}销毁前，必须清理你在 onMounted 中创建的东西——否则会导致内存泄露或意外行为：\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount } from 'vue'\nlet timer = null\nonMounted(() => {\n  timer = setInterval(() => {\n    console.log('tick')\n  }, 1000)\n  window.addEventListener('resize', handleResize)\n})\nonBeforeUnmount(() => {\n  clearInterval(timer)  // 清理定时器——不然组件销毁后还在 tick！\n  window.removeEventListener('resize', handleResize)  // 移除事件监听——不然会内存泄露\n})\n</script>\n```\n**清理清单：**\n- clearInterval / clearTimeout — 清除定时器\n- removeEventListener — 移除全局{{term:事件}}监听\n- 取消未完成的 {{term:fetch}} {{term:请求}}（用 AbortController）\n- 销毁第三方库实例（如图表、地图）\n> 🎭 演出结束后的收琴——提琴手松弓毛、管乐手清理乐器、钢琴家合上琴盖。不清理的话，乐器会受损（内存泄露），下次演出也会出问题。"
+    },
+    {
+      "type": "block:explain",
+      "name": "explain",
+      "attrs": {
+        "title": "watch 与 watchEffect — 自动跟进的伴奏"
+      },
+      "content": "虽然 {{term:watch}} 不是严格的生命周期钩子，但它和生命周期密切相关——它监听数据变化并在正确的时机执行。\n**{{term:watch}}：** 明确指定要监听的数据源\n```vue\n<script setup>\nimport { ref, watch } from 'vue'\nconst keyword = ref('')\nconst results = ref([])\n// 监听 keyword 变化，自动搜索\nwatch(keyword, async (newVal, oldVal) => {\n  console.log('搜索词从', oldVal, '变为', newVal)\n  if (newVal.trim()) {\n    results.value = await searchAPI(newVal)\n  }\n})\n// 监听多个数据源\nwatch([keyword, category], ([newKw, newCat]) => {\n  // keyword 或 category 任一变化都会触发\n})\n// 深度监听对象\nwatch(user, (newUser) => {\n  console.log('用户信息变化了', newUser)\n}, { deep: true })\n</script>\n```\n**watchEffect：** 自动追踪内部用到的{{term:响应式}}数据，任意一个变化就重新执行\n```js\nwatchEffect(() => {\n  console.log(keyword.value, category.value)\n  document.title = keyword.value || '音乐收藏'\n})\n```\n**{{term:watch}} vs watchEffect：**\n- {{term:watch}} — 明确知道要监听什么，可以获取旧值\n- watchEffect — 不需要指定{{term:依赖}}，自动追踪，更简洁"
+    },
+    {
+      "type": "block:example",
+      "name": "example",
+      "attrs": {
+        "title": "看例子：生命周期实战"
+      },
+      "content": "下面的代码是一个时钟{{term:组件}}，完整展示了生命周期钩子的使用：\n```vue\n<script setup>\nimport { ref, onMounted, onBeforeUnmount, watch } from 'vue'\nconst time = ref(new Date().toLocaleTimeString())\nconst isRunning = ref(true)\nlet timer = null\nfunction tick() {\n  time.value = new Date().toLocaleTimeString()\n}\nfunction startClock() {\n  isRunning.value = true\n  timer = setInterval(tick, 1000)\n}\nfunction stopClock() {\n  isRunning.value = false\n  clearInterval(timer)\n  timer = null\n}\nonMounted(() => {\n  startClock()\n  console.log('🕐 时钟组件已挂载')\n})\nonBeforeUnmount(() => {\n  clearInterval(timer)\n  console.log('🕐 时钟组件已卸载，定时器已清理')\n})\nwatch(isRunning, (running) => {\n  console.log('时钟状态：', running ? '运行中' : '已暂停')\n})\n</script>\n```\n注意：如果不清除定时器，{{term:组件}}销毁后 {{term:setInterval}} 仍在运行——这就是内存泄露。"
+    },
+    {
+      "type": "block:task",
+      "name": "task",
+      "attrs": {
+        "title": "动手试试 ✨"
+      },
+      "content": ":::step{purpose=\"生命周期钩子让你在{{term:组件}}从创建到销毁的特定时间点执行代码。通过观察日志输出的顺序，你可以直观理解 onMounted 在{{term:组件}}挂载后触发、onBeforeUnmount 在销毁前触发。这是理解 {{term:Vue}} {{term:组件}}运行机制的基础。\" expected=\"控制台依次输出「时钟{{term:组件}}已挂载」等生命周期日志。\"}\n观察时钟{{term:组件}}——打开/关闭它，看控制台的生命周期日志\n:::\n\n:::step{purpose=\"onMounted 中的代码在 {{term:DOM}} 就绪后执行。你可以在这里修改初始化{{term:参数}}，比如改变定时器频率来实现不同倍速。这让你体会到 onMounted 是配置{{term:组件}}初始行为的正确位置。\" expected=\"时钟数字变化速度明显加快（每 667ms 更新一次而非 1000ms）。\"}\n修改 onMounted 中的 startClock——让时钟初始以 1.5 倍速运行\n:::\n\n:::step{purpose=\"{{term:watch}} 让你在特定数据变化时执行副作用。监听 time 并在 time % 60 === 0 时输出标记，是 {{term:watch}} 的典型用法——它明确指定监听源，并能拿到新值和旧值。\" expected=\"控制台在每次整分钟时打印一个 🎵 符号。\"}\n用 {{term:watch}} 监听 time 的变化，在整分钟时打印 🎵\n:::\n\n:::step{purpose=\"成对使用 onMounted 和 onBeforeUnmount 是 {{term:Vue}} 开发的铁律：在 mounted 中创建的资源（定时器、{{term:事件}}监听、订阅），必须在 unmount 中清理。否则{{term:组件}}销毁后资源仍在运行，造成内存泄露。\" expected=\"页面上出现一个自动增长的数字，关闭{{term:组件}}后数字停止增长（验证定时器已清除）。\"}\n添加一个计数器（{{term:ref}}），在 onMounted 中启动自增，onBeforeUnmount 中清除\n:::\n\n:::step{purpose=\"{{term:watch}} 需要手动指定数据源，但能拿到新旧值；watchEffect 自动追踪{{term:依赖}}，代码更简洁，但无法访问旧值。通过对比两种写法，你会明白：需要对比新旧值时用 {{term:watch}}，只需执行副作用时用 watchEffect。\" expected=\"watchEffect 在初始化时立即执行一次（{{term:watch}} 不执行），之后两者行为类似。\"}\n挑战：用 watchEffect 替代 {{term:watch}}，观察两者的区别\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p><{{term:strong}}>{{term:watch}} 的写法：</{{term:strong}}></p><{{term:pre}}><{{term:code}}>{{term:import}} { {{term:ref}}, {{term:watch}} } {{term:from}} \"vue\";\n{{term:const}} time = {{term:ref}}(0);\n{{term:watch}}(time, (newVal, oldVal) => {\n  if (newVal % 60 === 0 && newVal !== 0) {\n    console.log(\"🎵 整分钟到了！\");\n  }\n});</{{term:code}}></{{term:pre}}><p><{{term:strong}}>watchEffect 的写法：</{{term:strong}}></p><{{term:pre}}><{{term:code}}>{{term:import}} { {{term:ref}}, watchEffect } {{term:from}} \"vue\";\n{{term:const}} time = {{term:ref}}(0);\nwatchEffect(() => {\n  if (time.{{term:value}} % 60 === 0 && time.{{term:value}} !== 0) {\n    console.log(\"🎵 整分钟到了！（watchEffect）\");\n  }\n});</{{term:code}}></{{term:pre}}><p><{{term:strong}}>核心区别：</{{term:strong}}><{{term:br}}>• {{term:watch}} 手动指定数据源，可拿到旧值<{{term:br}}>• watchEffect 自动追踪{{term:依赖}}，默认立即执行一次<{{term:br}}>• 需要旧值时用 {{term:watch}}，简单副作用用 watchEffect</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]\n:::",
+      "steps": [
+        {
+          "content": "观察时钟{{term:组件}}——打开/关闭它，看控制台的生命周期日志",
+          "purpose": "生命周期钩子让你在{{term:组件}}从创建到销毁的特定时间点执行代码。通过观察日志输出的顺序，你可以直观理解 onMounted 在{{term:组件}}挂载后触发、onBeforeUnmount 在销毁前触发。这是理解 {{term:Vue}} {{term:组件}}运行机制的基础。",
+          "expected": "控制台依次输出「时钟{{term:组件}}已挂载」等生命周期日志。"
+        },
+        {
+          "content": "修改 onMounted 中的 startClock——让时钟初始以 1.5 倍速运行",
+          "purpose": "onMounted 中的代码在 {{term:DOM}} 就绪后执行。你可以在这里修改初始化{{term:参数}}，比如改变定时器频率来实现不同倍速。这让你体会到 onMounted 是配置{{term:组件}}初始行为的正确位置。",
+          "expected": "时钟数字变化速度明显加快（每 667ms 更新一次而非 1000ms）。"
+        },
+        {
+          "content": "用 {{term:watch}} 监听 time 的变化，在整分钟时打印 🎵",
+          "purpose": "{{term:watch}} 让你在特定数据变化时执行副作用。监听 time 并在 time % 60 === 0 时输出标记，是 {{term:watch}} 的典型用法——它明确指定监听源，并能拿到新值和旧值。",
+          "expected": "控制台在每次整分钟时打印一个 🎵 符号。"
+        },
+        {
+          "content": "添加一个计数器（{{term:ref}}），在 onMounted 中启动自增，onBeforeUnmount 中清除",
+          "purpose": "成对使用 onMounted 和 onBeforeUnmount 是 {{term:Vue}} 开发的铁律：在 mounted 中创建的资源（定时器、{{term:事件}}监听、订阅），必须在 unmount 中清理。否则{{term:组件}}销毁后资源仍在运行，造成内存泄露。",
+          "expected": "页面上出现一个自动增长的数字，关闭{{term:组件}}后数字停止增长（验证定时器已清除）。"
+        },
+        {
+          "content": "挑战：用 watchEffect 替代 {{term:watch}}，观察两者的区别\n[[{{term:html}}]]<{{term:details}} {{term:class}}=challenge-answer><{{term:summary}}>💡 查看答案</{{term:summary}}><{{term:div}} {{term:class}}=answer-{{term:content}}><p><{{term:strong}}>{{term:watch}} 的写法：</{{term:strong}}></p><{{term:pre}}><{{term:code}}>{{term:import}} { {{term:ref}}, {{term:watch}} } {{term:from}} \"vue\";\n{{term:const}} time = {{term:ref}}(0);\n{{term:watch}}(time, (newVal, oldVal) => {\n  if (newVal % 60 === 0 && newVal !== 0) {\n    console.log(\"🎵 整分钟到了！\");\n  }\n});</{{term:code}}></{{term:pre}}><p><{{term:strong}}>watchEffect 的写法：</{{term:strong}}></p><{{term:pre}}><{{term:code}}>{{term:import}} { {{term:ref}}, watchEffect } {{term:from}} \"vue\";\n{{term:const}} time = {{term:ref}}(0);\nwatchEffect(() => {\n  if (time.{{term:value}} % 60 === 0 && time.{{term:value}} !== 0) {\n    console.log(\"🎵 整分钟到了！（watchEffect）\");\n  }\n});</{{term:code}}></{{term:pre}}><p><{{term:strong}}>核心区别：</{{term:strong}}><{{term:br}}>• {{term:watch}} 手动指定数据源，可拿到旧值<{{term:br}}>• watchEffect 自动追踪{{term:依赖}}，默认立即执行一次<{{term:br}}>• 需要旧值时用 {{term:watch}}，简单副作用用 watchEffect</p></{{term:div}}></{{term:details}}>[[/{{term:html}}]]",
+          "purpose": "{{term:watch}} 需要手动指定数据源，但能拿到新旧值；watchEffect 自动追踪{{term:依赖}}，代码更简洁，但无法访问旧值。通过对比两种写法，你会明白：需要对比新旧值时用 {{term:watch}}，只需执行副作用时用 watchEffect。",
+          "expected": "watchEffect 在初始化时立即执行一次（{{term:watch}} 不执行），之后两者行为类似。"
+        }
+      ]
+    },
+    {
+      "type": "block:listen-to",
+      "name": "listen-to",
+      "content": "贝多芬《第五交响曲》全四个乐章 — 第一乐章：命运的动机登场（setup/onMounted），第二乐章：变奏展开（{{term:响应式}}更新），第三乐章：谐谑曲的神秘过渡（onBeforeUnmount），第四乐章：辉煌的凯旋（{{term:组件}}完成使命）。一部交响曲的生命周期，和 {{term:Vue}} {{term:组件}}的生命周期如出一辙。"
+    }
+  ],
+  "starter": {
+    "html": "",
+    "css": "",
+    "js": ""
+  }
+}
