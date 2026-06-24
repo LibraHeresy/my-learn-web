@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <section class="task-block">
-    <h3 v-if="typeof node.attrs?.title === 'string'" class="block-title">{{ node.attrs.title }}</h3>
+    <h3 v-if="node.attrs?.title" class="block-title">{{ node.attrs.title }}</h3>
     <div v-if="node.steps?.length" class="steps-list">
       <article v-for="(step, index) in node.steps" :key="index" class="step-card">
         <div class="step-header">

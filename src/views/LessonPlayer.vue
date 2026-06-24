@@ -6,13 +6,13 @@ import { useProgressStore } from '../stores/progress'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { useAsyncComputed } from '../composables/useAsyncComputed'
+import { useLessonNavigation } from '../composables/useLessonNavigation'
 import type { UserCode } from '../types'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
-import { getChapterOrder, getTrack, getChapter } from '../content-loaders/taxonomy'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
@@ -35,7 +35,6 @@ const { previewSrc, triggerPreview } = useCodePreview(userCode)
 const lesson = computed(() => lessonState.value.value)
 const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
 const isLocalMode = computed(() => lesson.value?.meta.mode === 'local')
-const isPrologue = computed(() => lesson.value?.meta.track === 'prologue')
 
 const windowWidth = ref(window.innerWidth)
 function onResize() { windowWidth.value = window.innerWidth }
@@ -52,6 +51,28 @@ const sidebarVariant = computed(() => {
 function toggleSidebar() {
   sidebarExpanded.value = !sidebarExpanded.value
 }
+
+// 导航与面包屑逻辑
+const {
+  isPrologue,
+  currentTrackId,
+  currentTrack,
+  currentChapter,
+  orderedLessons,
+  prevLesson,
+  nextLesson,
+  positionInChapter,
+  totalInChapter,
+  centerLabel,
+  prevLabel,
+  nextLabel,
+  prevNavTitle,
+  nextNavTitle,
+  prevDisabled,
+  nextDisabled,
+  goPrev,
+  goNext,
+} = useLessonNavigation(lessonId, lesson, all)
 
 // 同步当前课程 ID（独立 watcher，不影响代码初始化）
 watch(lesson, (l) => {
@@ -81,69 +102,6 @@ function resetCode() {
   userCode.value = { ...l.starter }
   progressStore.resetUserCode(l.id)
   triggerPreview()
-}
-
-const currentTrackId = computed(() => lesson.value?.meta.track || 'fundamentals')
-const currentChapterId = computed(() => lesson.value?.meta.chapter)
-
-const orderedLessons = computed(() => {
-  return all.value
-    .filter((l) => l.meta.track === currentTrackId.value)
-    .slice()
-    .sort((a, b) => {
-      const ai = getChapterOrder(a.meta.chapter)
-      const bi = getChapterOrder(b.meta.chapter)
-      if (ai !== bi) return ai - bi
-      return a.meta.order - b.meta.order
-    })
-})
-
-const currentIndex = computed(() => orderedLessons.value.findIndex((l) => l.id === lessonId.value))
-const prevLesson = computed(() => (currentIndex.value > 0 ? orderedLessons.value[currentIndex.value - 1] : null))
-const nextLesson = computed(() =>
-  currentIndex.value >= 0 && currentIndex.value < orderedLessons.value.length - 1 ? orderedLessons.value[currentIndex.value + 1] : null,
-)
-
-const currentChapterLessons = computed(() => {
-  if (!currentChapterId.value) return []
-  return orderedLessons.value.filter((l) => l.meta.chapter === currentChapterId.value)
-})
-
-const positionInChapter = computed(() => currentChapterLessons.value.findIndex((l) => l.id === lessonId.value) + 1)
-const totalInChapter = computed(() => currentChapterLessons.value.length)
-
-const centerLabel = computed(() => {
-  if (positionInChapter.value <= 0) return ''
-  if (isPrologue.value) return `第 ${positionInChapter.value}/${totalInChapter.value} 篇`
-  return `第 ${positionInChapter.value}/${totalInChapter.value} 课`
-})
-
-const currentTrack = computed(() => getTrack(currentTrackId.value))
-const currentChapter = computed(() => getChapter(currentChapterId.value))
-
-const prevLabel = computed(() => {
-  if (isPrologue.value) return prevLesson.value ? '上一篇' : ''
-  if (!prevLesson.value) return '上一课'
-  return prevLesson.value.meta.chapter !== currentChapterId.value ? '上一章' : '上一课'
-})
-
-const nextLabel = computed(() => {
-  if (isPrologue.value) return nextLesson.value ? '下一篇' : ''
-  if (!nextLesson.value) return '下一课'
-  return nextLesson.value.meta.chapter !== currentChapterId.value ? '下一章' : '下一课'
-})
-
-const prevNavTitle = computed(() => isPrologue.value ? '' : (prevLesson.value?.meta.title ?? ''))
-const nextNavTitle = computed(() => isPrologue.value ? '' : (nextLesson.value?.meta.title ?? ''))
-const prevDisabled = computed(() => !prevLesson.value)
-const nextDisabled = computed(() => !nextLesson.value)
-
-function goPrev() {
-  if (prevLesson.value) router.push(`/lesson/${prevLesson.value.id}`)
-}
-
-function goNext() {
-  if (nextLesson.value) router.push(`/lesson/${nextLesson.value.id}`)
 }
 
 function markComplete() {

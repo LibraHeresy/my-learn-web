@@ -13,7 +13,7 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 
 <template>
   <section class="hint-block">
-    <h4 v-if="typeof node.attrs?.title === 'string'" class="hint-title">💡 {{ node.attrs.title }}</h4>
+    <h4 v-if="node.attrs?.title" class="hint-title">💡 {{ node.attrs.title }}</h4>
     <template v-for="(seg, i) in segments" :key="i">
       <pre v-if="seg.type === 'code'" class="code-block"><code :class="`language-${seg.language}`" v-text="seg.code" /></pre>
       <hr v-else-if="seg.type === 'hr'" class="block-hr" />

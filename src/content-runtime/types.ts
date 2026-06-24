@@ -44,10 +44,15 @@ export type BlockType =
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 
+/** 所有 Block 当前支持的属性（title 为可选标题） */
+export type BlockAttrs = {
+  title?: string
+}
+
 export type BlockNode = {
   type: BlockType
   name: BlockName
-  attrs?: Record<string, string | string[]>
+  attrs?: BlockAttrs
   content?: string
   steps?: Array<{
     content: string

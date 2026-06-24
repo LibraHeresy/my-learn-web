@@ -1,7 +1,9 @@
 import { mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type {
+  BlockAttrs,
   BlockName,
   BlockNode,
   BlockType,
@@ -32,6 +34,65 @@ const glossaryGeneratedFile = path.join(generatedDir, 'glossary.json')
 const taxonomySourceFile = path.join(projectRoot, 'src', 'content', 'taxonomy.yaml')
 const quizSourceDir = path.join(projectRoot, 'src', 'content', 'quiz')
 const generatedQuizFile = path.join(generatedDir, 'quiz.json')
+const buildCacheFile = path.join(generatedDir, '.build-cache.json')
+
+// ---------- 增量编译：文件 Hash 缓存 ----------
+
+interface BuildCache {
+  glossary: string
+  taxonomy: string
+  lessons: Record<string, string>   // lessonDir 相对路径 -> hash
+  projects: Record<string, string>  // projectDir 相对路径 -> hash
+  quiz: Record<string, string>      // 文件名 -> hash
+}
+
+async function loadBuildCache(): Promise<BuildCache> {
+  try {
+    const raw = await readFile(buildCacheFile, 'utf8')
+    return JSON.parse(raw) as BuildCache
+  } catch {
+    return { glossary: '', taxonomy: '', lessons: {}, projects: {}, quiz: {} }
+  }
+}
+
+async function saveBuildCache(cache: BuildCache): Promise<void> {
+  await writeFile(buildCacheFile, JSON.stringify(cache, null, 2) + '\n', 'utf8')
+}
+
+async function hashFiles(filePaths: string[]): Promise<string> {
+  const hash = createHash('md5')
+  for (const fp of filePaths) {
+    try {
+      const content = await readFile(fp, 'utf8')
+      hash.update(content)
+    } catch {
+      hash.update('')
+    }
+  }
+  return hash.digest('hex')
+}
+
+async function hashLessonDir(lessonDir: string, mode: string): Promise<string> {
+  const files = [
+    path.join(lessonDir, 'meta.yaml'),
+    path.join(lessonDir, 'lesson.md'),
+  ]
+  if (mode === 'sandbox') {
+    files.push(
+      path.join(lessonDir, 'starter', 'index.html'),
+      path.join(lessonDir, 'starter', 'style.css'),
+      path.join(lessonDir, 'starter', 'script.js'),
+    )
+  }
+  return hashFiles(files)
+}
+
+async function hashProjectDir(projectDir: string): Promise<string> {
+  return hashFiles([
+    path.join(projectDir, 'meta.yaml'),
+    path.join(projectDir, 'project.json'),
+  ])
+}
 
 async function atomicWriteFile(filePath: string, data: string): Promise<void> {
   const tmpPath = filePath + '.tmp'
@@ -65,7 +126,7 @@ function createBlockNode(
   return {
     type: toBlockType(name),
     name,
-    attrs: parseAttrs(rawAttrs),
+    attrs: parseAttrs(rawAttrs) as BlockAttrs | undefined,
     content,
     steps: name === 'task' ? parseTaskBlock(content) : undefined,
   }
@@ -814,50 +875,200 @@ async function compileQuiz(): Promise<void> {
 // ---------- Main ----------
 
 export async function main() {
+  await mkdir(generatedDir, { recursive: true })
+  await mkdir(lessonsOutDir, { recursive: true })
+  await mkdir(projectsOutDir, { recursive: true })
+
+  // 加载增量编译缓存
+  const cache = await loadBuildCache()
+  const newCache: BuildCache = {
+    glossary: cache.glossary,
+    taxonomy: cache.taxonomy,
+    lessons: { ...cache.lessons },
+    projects: { ...cache.projects },
+    quiz: { ...cache.quiz },
+  }
+
+  // --- 术语表 ---
   let glossary: GlossaryEntry[] = []
+  let glossaryChanged = false
   try {
     const glossaryRaw = await readFile(glossarySourceFile, 'utf8')
-    glossary = parseGlossaryYaml(glossaryRaw)
+    const glossaryHash = createHash('md5').update(glossaryRaw).digest('hex')
+    if (glossaryHash !== cache.glossary) {
+      glossary = parseGlossaryYaml(glossaryRaw)
+      newCache.glossary = glossaryHash
+      glossaryChanged = true
+    } else {
+      glossary = parseGlossaryYaml(glossaryRaw)
+    }
   } catch {
-    glossary = []
+    glossaryChanged = cache.glossary !== ''
+    newCache.glossary = ''
   }
   const termKeys = glossary.map((g) => g.key).filter(Boolean)
 
+  // --- 课程编译（增量）---
   const [lessonDirs, prologueDirs] = await Promise.all([
     collectLessonDirs(lessonsRoot),
     collectLessonDirs(prologueRoot).catch(() => [] as string[]),
   ])
   const allLessonDirs = [...lessonDirs, ...prologueDirs]
-  const compiledRaw = await Promise.all(allLessonDirs.map((dir) => compileLesson(dir)))
-  const compiled = compiledRaw.map((lesson) => ({
-    ...lesson,
-    body: applyGlossaryToBody(lesson.body, termKeys),
-  }))
+
+  // 先读取所有 meta.yaml 以确定 mode
+  const lessonModes: Record<string, string> = {}
+  await Promise.all(
+    allLessonDirs.map(async (dir) => {
+      try {
+        const raw = await readFile(path.join(dir, 'meta.yaml'), 'utf8')
+        const data = parseSimpleYaml(raw)
+        lessonModes[dir] = String(data.mode || 'local')
+      } catch {
+        lessonModes[dir] = 'local'
+      }
+    }),
+  )
+
+  // 计算哪些课程需要重编译
+  const lessonHashes = await Promise.all(
+    allLessonDirs.map((dir) => hashLessonDir(dir, lessonModes[dir]))
+  )
+
+  const dirtyLessonDirs = allLessonDirs.filter((dir, i) => {
+    const key = path.relative(projectRoot, dir)
+    return glossaryChanged || lessonHashes[i] !== cache.lessons[key]
+  })
+
+  // 重编译有变化的课程
+  let compiledAll: ReturnType<typeof applyGlossaryToBody> extends infer _ ? any[] : never
+  if (dirtyLessonDirs.length === allLessonDirs.length) {
+    // 全量重编译
+    const compiledRaw = await Promise.all(allLessonDirs.map((dir) => compileLesson(dir)))
+    compiledAll = compiledRaw.map((lesson) => ({
+      ...lesson,
+      body: applyGlossaryToBody(lesson.body, termKeys),
+    }))
+    allLessonDirs.forEach((dir, i) => {
+      newCache.lessons[path.relative(projectRoot, dir)] = lessonHashes[i]
+    })
+  } else {
+    // 增量：只重编译有变化的课程
+    const dirtyCompiled = await Promise.all(dirtyLessonDirs.map((dir) => compileLesson(dir)))
+    const dirtyMap = new Map(dirtyCompiled.map((l) => [l.id, l]))
+
+    // 读取没有变化的课程（从已生成 JSON 加载）
+    const unchangedDirs = allLessonDirs.filter((dir) => {
+      const key = path.relative(projectRoot, dir)
+      return !glossaryChanged && lessonHashes[allLessonDirs.indexOf(dir)] === cache.lessons[key]
+    })
+    const unchangedLoaded = await Promise.all(
+      unchangedDirs.map(async (dir) => {
+        try {
+          const meta = parseSimpleYaml(await readFile(path.join(dir, 'meta.yaml'), 'utf8'))
+          const id = String(meta.id)
+          const json = await readFile(path.join(lessonsOutDir, `${id}.json`), 'utf8')
+          return JSON.parse(json)
+        } catch {
+          return null
+        }
+      })
+    )
+
+    compiledAll = [
+      ...dirtyCompiled.map((l) => ({
+        ...l,
+        body: applyGlossaryToBody(l.body, termKeys),
+      })),
+      ...unchangedLoaded.filter(Boolean),
+    ]
+
+    // 更新有变化课程的 hash
+    dirtyLessonDirs.forEach((dir, i) => {
+      newCache.lessons[path.relative(projectRoot, dir)] = lessonHashes[allLessonDirs.indexOf(dir)]
+    })
+
+    if (dirtyLessonDirs.length > 0) {
+      const skipped = allLessonDirs.length - dirtyLessonDirs.length
+      console.log(`[incremental] ${dirtyLessonDirs.length} lesson(s) changed, ${skipped} skipped`)
+    }
+  }
+
+  const compiled = compiledAll
   compiled.sort((a, b) => a.meta.order - b.meta.order)
 
+  // --- 项目编译（增量）---
   const projectDirs = await collectProjectDirs(projectsRoot)
-  const compiledProjectsRaw = await Promise.all(projectDirs.map((dir) => compileProject(dir)))
-  const compiledProjects = compiledProjectsRaw.map((project) => ({
-    ...project,
-    steps: project.steps.map((step) => ({
-      ...step,
-      content: injectTerms(step.content, termKeys),
-      task: injectTerms(step.task, termKeys),
-      hint: step.hint ? injectTerms(step.hint, termKeys) : undefined,
-      purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
-      expectedResult: step.expectedResult ? injectTerms(step.expectedResult, termKeys) : undefined,
-    })),
-  }))
-  compiledProjects.sort((a, b) => a.meta.order - b.meta.order)
+  const projectHashes = await Promise.all(projectDirs.map(hashProjectDir))
 
-  await mkdir(generatedDir, { recursive: true })
-  await mkdir(lessonsOutDir, { recursive: true })
-  await mkdir(projectsOutDir, { recursive: true })
+  const dirtyProjectDirs = projectDirs.filter((dir, i) => {
+    const key = path.relative(projectRoot, dir)
+    return glossaryChanged || projectHashes[i] !== cache.projects[key]
+  })
 
-  const lessonsMeta = compiled.map(({ id, meta }) => ({ id, meta }))
-  const projectsMetaList = compiledProjects.map(({ id, meta, steps }) => ({ id, meta, stepCount: steps.length }))
+  let compiledProjects
+  if (dirtyProjectDirs.length === projectDirs.length) {
+    const raw = await Promise.all(projectDirs.map((dir) => compileProject(dir)))
+    compiledProjects = raw.map((project) => ({
+      ...project,
+      steps: project.steps.map((step) => ({
+        ...step,
+        content: injectTerms(step.content, termKeys),
+        task: injectTerms(step.task, termKeys),
+        hint: step.hint ? injectTerms(step.hint, termKeys) : undefined,
+        purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
+        expectedResult: step.expectedResult ? injectTerms(step.expectedResult, termKeys) : undefined,
+      })),
+    }))
+    projectDirs.forEach((dir, i) => {
+      newCache.projects[path.relative(projectRoot, dir)] = projectHashes[i]
+    })
+  } else {
+    const dirtyRaw = await Promise.all(dirtyProjectDirs.map((dir) => compileProject(dir)))
+    const dirtyMapped = dirtyRaw.map((project) => ({
+      ...project,
+      steps: project.steps.map((step) => ({
+        ...step,
+        content: injectTerms(step.content, termKeys),
+        task: injectTerms(step.task, termKeys),
+        hint: step.hint ? injectTerms(step.hint, termKeys) : undefined,
+        purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
+        expectedResult: step.expectedResult ? injectTerms(step.expectedResult, termKeys) : undefined,
+      })),
+    }))
 
-  // Remove legacy index files
+    const unchangedProjects = projectDirs.filter((dir) => {
+      const key = path.relative(projectRoot, dir)
+      return !glossaryChanged && projectHashes[projectDirs.indexOf(dir)] === cache.projects[key]
+    })
+    const unchangedProjectsLoaded = await Promise.all(
+      unchangedProjects.map(async (dir) => {
+        try {
+          const meta = parseSimpleYaml(await readFile(path.join(dir, 'meta.yaml'), 'utf8'))
+          const id = String(meta.id)
+          const json = await readFile(path.join(projectsOutDir, `${id}.json`), 'utf8')
+          return JSON.parse(json)
+        } catch {
+          return null
+        }
+      })
+    )
+
+    compiledProjects = [...dirtyMapped, ...unchangedProjectsLoaded.filter(Boolean)]
+    dirtyProjectDirs.forEach((dir, i) => {
+      newCache.projects[path.relative(projectRoot, dir)] = projectHashes[projectDirs.indexOf(dir)]
+    })
+
+    if (dirtyProjectDirs.length > 0) {
+      const skipped = projectDirs.length - dirtyProjectDirs.length
+      console.log(`[incremental] ${dirtyProjectDirs.length} project(s) changed, ${skipped} skipped`)
+    }
+  }
+  compiledProjects.sort((a: any, b: any) => a.meta.order - b.meta.order)
+
+  // --- 打单输出 ---
+  const lessonsMeta = compiled.map(({ id, meta }: any) => ({ id, meta }))
+  const projectsMetaList = compiledProjects.map(({ id, meta, steps }: any) => ({ id, meta, stepCount: steps.length }))
+
   const { rm } = await import('node:fs/promises')
   await Promise.all([
     rm(legacyLessonsIndex, { force: true }),
@@ -866,17 +1077,20 @@ export async function main() {
 
   await Promise.all([
     atomicWriteFile(lessonsMetaFile, `${JSON.stringify(lessonsMeta, null, 2)}\n`),
-    ...compiled.map((l) =>
+    ...compiled.map((l: any) =>
       writeFile(path.join(lessonsOutDir, `${l.id}.json`), `${JSON.stringify(l, null, 2)}\n`),
     ),
     atomicWriteFile(projectsMetaFile, `${JSON.stringify(projectsMetaList, null, 2)}\n`),
-    ...compiledProjects.map((p) =>
+    ...compiledProjects.map((p: any) =>
       writeFile(path.join(projectsOutDir, `${p.id}.json`), `${JSON.stringify(p, null, 2)}\n`),
     ),
     atomicWriteFile(glossaryGeneratedFile, `${JSON.stringify(glossary, null, 2)}\n`),
     buildTaxonomy(),
     compileQuiz(),
   ])
+
+  await saveBuildCache(newCache)
+
   const quizData = JSON.parse(await readFile(generatedQuizFile, 'utf8'))
   console.log(
     `Compiled ${compiled.length} lesson(s), ${compiledProjects.length} project(s), ${quizData.gems?.length || 0} quiz gem(s) to ${path.relative(projectRoot, generatedDir)}`,
