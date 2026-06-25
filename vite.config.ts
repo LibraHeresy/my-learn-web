@@ -1,17 +1,75 @@
 /// <reference types="vitest/config" />
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, normalizePath, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { watch, type FSWatcher } from 'node:fs'
+import { readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { spawn, type ChildProcess } from 'node:child_process'
+
+type HmrServerLike = {
+  moduleGraph: {
+    getModulesByFile: (file: string) => Set<object> | undefined
+    invalidateModule: (mod: object) => void
+  }
+  ws: {
+    send: (payload: { type: string; path: string }) => void
+  }
+}
+
+export async function collectGeneratedJsonFiles(dir: string): Promise<string[]> {
+  const entries = await readdir(dir, { withFileTypes: true })
+  const nested = await Promise.all(
+    entries.map(async (entry) => {
+      const fullPath = resolve(dir, entry.name)
+      if (entry.isDirectory()) return collectGeneratedJsonFiles(fullPath)
+      if (entry.isFile() && entry.name.endsWith('.json')) return [fullPath]
+      return []
+    }),
+  )
+  return nested.flat()
+}
+
+export function invalidateModulesByFiles(server: HmrServerLike, filePaths: string[]): number {
+  const invalidated = new Set<object>()
+
+  for (const filePath of filePaths) {
+    const normalized = normalizePath(filePath)
+    const modules = server.moduleGraph.getModulesByFile(normalized) ?? server.moduleGraph.getModulesByFile(filePath)
+    if (!modules) continue
+    for (const mod of modules) {
+      if (invalidated.has(mod)) continue
+      invalidated.add(mod)
+      server.moduleGraph.invalidateModule(mod)
+    }
+  }
+
+  return invalidated.size
+}
+
+export function createSingleReloader(
+  send: (payload: { type: string; path: string }) => void,
+  delayMs = 80,
+): () => void {
+  let timer: ReturnType<typeof setTimeout> | null = null
+
+  return () => {
+    if (timer) return
+    timer = setTimeout(() => {
+      timer = null
+      send({ type: 'full-reload', path: '*' })
+    }, delayMs)
+  }
+}
 
 function contentWatchPlugin(): Plugin {
   let watcher: FSWatcher | null = null
   let running: ChildProcess | null = null
   let queued = false
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
-  let serverRef: any = null
+  let serverRef: HmrServerLike | null = null
+  let generatedDir = ''
+  const scheduleReload = createSingleReloader((payload) => serverRef?.ws.send(payload))
 
   function runBuild() {
     if (running) {
@@ -22,11 +80,20 @@ function contentWatchPlugin(): Plugin {
     running = spawn(process.execPath, ['--experimental-strip-types', 'scripts/build-content.ts'], {
       stdio: 'inherit',
     })
-    running.on('close', (code) => {
+    running.on('close', async (code) => {
       running = null
       if (code === 0) {
+        const generatedFiles = await collectGeneratedJsonFiles(generatedDir)
+        const extraModules = [
+          resolve(generatedDir, '..', 'content-loaders', 'lessons.ts'),
+          resolve(generatedDir, '..', 'content-loaders', 'projects.ts'),
+        ]
+        const invalidated = serverRef
+          ? invalidateModulesByFiles(serverRef, [...generatedFiles, ...extraModules])
+          : 0
         console.log('[content-watch] Build complete.')
-        serverRef?.ws?.send({ type: 'full-reload', path: '*' })
+        console.log(`[content-watch] Invalidated ${invalidated} module(s).`)
+        scheduleReload()
       } else {
         console.error(`[content-watch] Build failed (exit ${code}).`)
       }
@@ -43,7 +110,7 @@ function contentWatchPlugin(): Plugin {
     configureServer(server) {
       serverRef = server
       const contentDir = resolve(server.config.root, 'src/content')
-      const generatedDir = resolve(server.config.root, 'src/generated')
+      generatedDir = resolve(server.config.root, 'src/generated')
 
       watcher = watch(contentDir, { recursive: true }, (_event, filename) => {
         if (!filename) return
