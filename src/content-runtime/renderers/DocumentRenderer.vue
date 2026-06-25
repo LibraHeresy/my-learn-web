@@ -2,6 +2,7 @@
 import { resolveBlockComponent } from '../block-registry'
 import type { CompiledLesson, ContentBodyNode } from '../types'
 import InlineText from './InlineText.vue'
+import { isBlockquoteText, stripBlockquoteMarkers } from './text'
 import CodeBlock from './CodeBlock.vue'
 
 defineProps<{
@@ -25,6 +26,12 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
         >
           {{ node.text }}
         </component>
+
+        <blockquote v-else-if="node.type === 'paragraph' && isBlockquoteText(node.text)" class="md-blockquote">
+          <p class="doc-paragraph">
+            <InlineText :text="stripBlockquoteMarkers(node.text)" />
+          </p>
+        </blockquote>
 
         <p v-else-if="node.type === 'paragraph'" class="doc-paragraph">
           <InlineText :text="node.text" />

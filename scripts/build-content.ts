@@ -193,7 +193,7 @@ function injectTerms(text: string, termKeys: string[]): string {
   if (!text) return text
   if (!termKeys.length) return text
 
-  const protectRegex = /\{\{term:[^}]+\}\}|```[\s\S]*?```|`[^`\n]*`|\[[^\]]+\]\([^)]+\)/g
+  const protectRegex = /\{\{term:[^}]+\}\}|```[\s\S]*?```|:::\w+\{[^}]*\}|`[^`\n]*`|\[[^\]]+\]\([^)]+\)/g
   const protectedParts: Array<{ start: number; end: number; value: string }> = []
 
   for (const match of text.matchAll(protectRegex)) {
@@ -444,7 +444,9 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
       }
       const bname = name as BlockName
       const attrs = node.attributes as Record<string, string> | undefined
-      const blockAttrs: BlockAttrs | undefined = attrs?.title ? { title: attrs.title } : undefined
+      const blockAttrs: BlockAttrs | undefined = (attrs?.title || attrs?.emoji)
+        ? { title: attrs.title, emoji: attrs.emoji }
+        : undefined
       const children = (node.children ?? []) as unknown[]
       const content = children
         .map((c: any) => nodeSource(modified, c))

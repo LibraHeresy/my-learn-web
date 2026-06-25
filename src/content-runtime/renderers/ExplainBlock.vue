@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import type { BlockNode } from '../types'
 import InlineText from './InlineText.vue'
 import CodeBlock from './CodeBlock.vue'
-import { splitFencedCodeBlocks } from './text'
+import { isBlockquoteText, splitFencedCodeBlocks, stripBlockquoteMarkers } from './text'
 
 const props = defineProps<{
   node: BlockNode
@@ -43,6 +43,11 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
           </tr>
         </tbody>
       </table>
+      <blockquote v-else-if="isBlockquoteText(seg.text)" class="md-blockquote">
+        <p class="block-text">
+          <InlineText :text="stripBlockquoteMarkers(seg.text)" />
+        </p>
+      </blockquote>
       <p v-else class="block-text">
         <InlineText :text="seg.text" />
       </p>

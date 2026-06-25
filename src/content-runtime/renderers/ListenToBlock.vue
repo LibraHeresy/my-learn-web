@@ -100,7 +100,7 @@ const neteaseUrl = computed(() =>
 }
 
 .listen-icon {
-  font-size: 1.3rem;
+  font-size: var(--fs-lg);
   flex-shrink: 0;
 }
 

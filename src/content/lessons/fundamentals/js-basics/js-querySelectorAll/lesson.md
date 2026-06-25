@@ -38,7 +38,7 @@ cards.forEach(function(card) {
 :::
 
 :::example{title="看例子"}
-下面的代码有 5 张乐器卡片。三个按钮分别实现"全选高亮""取消高亮""切换 '弦乐' 类"：
+下面的代码有 5 张乐器卡片。三个按钮分别实现"全选高亮"、"取消高亮"、"切换 '弦乐' 类"：
 ```js
 // 高亮全部
 let cards = document.querySelectorAll(".card");

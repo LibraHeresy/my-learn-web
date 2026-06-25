@@ -180,9 +180,9 @@ button:disabled,
 .inline-code {
   background: var(--color-bg-warm);
   padding: 1px 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   font-family: var(--font-code);
-  font-size: 0.9em;
+  font-size: var(--fs-xs);
   color: var(--color-accent);
 }
 
@@ -198,11 +198,19 @@ pre {
 
 pre code {
   font-family: var(--font-code);
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
   line-height: 1.7;
-  color: #CDD6F4;
+  color: var(--color-editor-text);
   background: none;
   padding: 0;
+}
+
+/* ===== 引用块 ===== */
+.md-blockquote {
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--color-bg-warm);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 /* ===== 表格 ===== */

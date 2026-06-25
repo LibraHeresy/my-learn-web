@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import type { BlockNode } from '../types'
 import InlineText from './InlineText.vue'
 import CodeBlock from './CodeBlock.vue'
-import { splitFencedCodeBlocks } from './text'
+import { isBlockquoteText, splitFencedCodeBlocks, stripBlockquoteMarkers } from './text'
 
 const props = defineProps<{
   node: BlockNode
@@ -14,7 +14,7 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 
 <template>
   <section class="hint-block">
-    <h4 v-if="node.attrs?.title" class="hint-title">💡 {{ node.attrs.title }}</h4>
+    <h4 v-if="node.attrs?.title" class="hint-title">{{ node.attrs?.emoji || '💡' }} {{ node.attrs.title }}</h4>
     <template v-for="(seg, i) in segments" :key="i">
       <CodeBlock v-if="seg.type === 'code'" :language="seg.language" :code="seg.code" />
       <hr v-else-if="seg.type === 'hr'" class="block-hr" />
@@ -32,6 +32,11 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
         <thead><tr><th v-for="(h,j) in seg.headers" :key="j"><InlineText :text="h" /></th></tr></thead>
         <tbody><tr v-for="(row,ri) in seg.rows" :key="ri"><td v-for="(cell,ci) in row" :key="ci"><InlineText :text="cell" /></td></tr></tbody>
       </table>
+      <blockquote v-else-if="isBlockquoteText(seg.text)" class="md-blockquote">
+        <p class="hint-text">
+          <InlineText :text="stripBlockquoteMarkers(seg.text)" />
+        </p>
+      </blockquote>
       <p v-else class="hint-text">
         <InlineText :text="seg.text" />
       </p>
@@ -51,7 +56,7 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
 }
 
 .hint-title {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   font-weight: 600;
   color: var(--color-hint-title);
   margin: 0;

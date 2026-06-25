@@ -58,7 +58,7 @@ npm run dev           # 启动开发服务器
 
 :::hint{title="常见问题"}
 - **端口被占用？** Vite 会自动换一个端口（如 5174），看终端提示。
-- **`npm run dev` 报错？** 确认你已经 `cd` 到了 `music-collection` 目录里。
+- **npm run dev 报错？** 确认你已经 `cd` 到了 `music-collection` 目录里。
 - **浏览器没有自动打开？** 手动访问终端中显示的地址（通常是 `http://localhost:5173`）。
 - **修改代码没反应？** 确认你保存了文件（`Ctrl+S`），或者开启自动保存。
 :::

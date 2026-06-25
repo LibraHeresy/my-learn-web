@@ -11,6 +11,7 @@ function contentWatchPlugin(): Plugin {
   let running: ChildProcess | null = null
   let queued = false
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
+  let serverRef: any = null
 
   function runBuild() {
     if (running) {
@@ -25,6 +26,7 @@ function contentWatchPlugin(): Plugin {
       running = null
       if (code === 0) {
         console.log('[content-watch] Build complete.')
+        serverRef?.ws?.send({ type: 'full-reload', path: '*' })
       } else {
         console.error(`[content-watch] Build failed (exit ${code}).`)
       }
@@ -39,6 +41,7 @@ function contentWatchPlugin(): Plugin {
     name: 'content-watch',
     apply: 'serve',
     configureServer(server) {
+      serverRef = server
       const contentDir = resolve(server.config.root, 'src/content')
       const generatedDir = resolve(server.config.root, 'src/generated')
 
@@ -61,6 +64,11 @@ function contentWatchPlugin(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/my-learn-web/',
+  server: {
+    watch: {
+      ignored: ['**/src/generated/**'],
+    },
+  },
   plugins: [
     vue(),
     contentWatchPlugin(),

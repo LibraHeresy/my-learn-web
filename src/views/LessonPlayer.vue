@@ -76,14 +76,10 @@ const {
   goNext,
 } = useLessonNavigation(lessonId, lesson, all)
 
-// 同步当前课程 ID（独立 watcher，不影响代码初始化）
-watch(lesson, (l) => {
-  if (l) progressStore.currentLessonId = l.id
-})
-
-// 仅在课程切换时初始化代码（显式 watch，编辑操作不会触发）
+// 课程切换：同步 ID + 初始化代码
 watch(lesson, (l) => {
   if (!l) return
+  progressStore.currentLessonId = l.id
   if (l.meta.mode === 'sandbox') {
     const saved = progressStore.getUserCode(l.id)
     userCode.value = saved ? { ...saved } : { ...l.starter }
@@ -273,9 +269,7 @@ watch(lessonId, () => {
           @scroll="onContentScroll"
         >
           <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
-          <Transition name="slide-fade" mode="out-in">
-            <DocumentRenderer :key="lessonId" :lesson="lesson" />
-          </Transition>
+          <DocumentRenderer :key="lessonId" :lesson="lesson" />
 
           <LessonTerms :lesson="lesson" />
         </div>

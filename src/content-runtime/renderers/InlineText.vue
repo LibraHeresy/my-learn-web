@@ -60,7 +60,7 @@ const InlineToken = defineComponent({
   padding: 1px 6px;
   border-radius: var(--radius-xs);
   font-family: var(--font-code);
-  font-size: 0.92em;
+  font-size: var(--fs-xs);
   color: var(--color-accent);
 }
 </style>

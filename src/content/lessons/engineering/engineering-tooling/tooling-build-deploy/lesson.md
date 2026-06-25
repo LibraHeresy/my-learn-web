@@ -21,7 +21,8 @@
 npm run build
 ```
 运行后，项目根目录会多出一个 `dist/` 文件夹——里面就是最终要部署的文件。
-```dist/
+```
+dist/
 ├── index.html        # 入口页面
 ├── assets/
 │   ├── index-abc123.js   # 打包后的 JS

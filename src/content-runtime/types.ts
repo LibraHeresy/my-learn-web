@@ -48,6 +48,7 @@ export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 /** Block 支持的公共属性（可选标题） */
 export type BlockAttrs = {
   title?: string
+  emoji?: string
 }
 
 /** task 块内单条步骤 */

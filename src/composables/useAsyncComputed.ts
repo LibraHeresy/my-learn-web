@@ -4,17 +4,21 @@ export function useAsyncComputed<T>(factory: () => T | Promise<T>) {
   const state = ref<T | null>(null)
   const loading = ref(true)
   const error = ref<unknown>(null)
+  let version = 0
 
   watchEffect(async () => {
+    const v = ++version
     loading.value = true
     error.value = null
     try {
-      state.value = await factory()
+      const result = await factory()
+      if (v !== version) return
+      state.value = result
     } catch (e) {
+      if (v !== version) return
       error.value = e
-      state.value = null
     } finally {
-      loading.value = false
+      if (v === version) loading.value = false
     }
   })
 

@@ -30,7 +30,7 @@ composers.forEach(function(composer) {
 });
 document.querySelector("ul").innerHTML = html;
 ```
-forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。
+`forEach` 比 `for` 更简洁——你不用手动写 `i` 和 `i++`。
 :::
 
 :::example{title="看例子"}

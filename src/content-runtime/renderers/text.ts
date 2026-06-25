@@ -2,6 +2,33 @@ type InlineSegment =
   | { type: 'text'; value: string }
   | { type: 'code'; value: string }
 
+export function isBlockquoteText(text: string): boolean {
+  const normalized = text.replace(/\r\n/g, '\n')
+  const lines = normalized.split('\n')
+
+  let hasQuote = false
+  for (const line of lines) {
+    if (!line.trim()) continue
+    const t = line.trimStart()
+    if (!t.startsWith('>')) return false
+    hasQuote = true
+  }
+  return hasQuote
+}
+
+export function stripBlockquoteMarkers(text: string): string {
+  const normalized = text.replace(/\r\n/g, '\n')
+  const lines = normalized.split('\n')
+  return lines
+    .map((line) => {
+      const t = line.trimStart()
+      if (!t.startsWith('>')) return line
+      const without = t.slice(1)
+      return without.startsWith(' ') ? without.slice(1) : without
+    })
+    .join('\n')
+}
+
 function splitInlineCode(text: string): InlineSegment[] {
   const segments: InlineSegment[] = []
   let i = 0
@@ -151,22 +178,13 @@ export function parseInlineTokens(text: string): InlineToken[] {
   const clean = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\n{2,}/g, '\n')
   const base = splitInlineCode(clean)
   const out: InlineToken[] = []
-  let pending = ''
   for (const seg of base) {
-    if (seg.type === 'text') {
-      pending += seg.value
+    if (seg.type === 'code') {
+      out.push({ type: 'code', value: seg.value })
       continue
     }
-    // 检查 pending 中 ** 是否成对：未闭合时说明 code 在 strong 内部，拼回去一起解析
-    const stars = pending.match(/\*\*/g)
-    if (stars && stars.length % 2 === 1) {
-      pending += '`' + seg.value + '`'
-    } else {
-      if (pending) { out.push(...parseInlineText(pending)); pending = '' }
-      out.push({ type: 'code', value: seg.value })
-    }
+    out.push(...parseInlineText(seg.value))
   }
-  if (pending) out.push(...parseInlineText(pending))
   return out.length ? out : [{ type: 'text', value: text }]
 }
 

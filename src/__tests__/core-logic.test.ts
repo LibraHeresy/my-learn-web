@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useProgressStore } from '../stores/progress'
+import { isBlockquoteText, stripBlockquoteMarkers } from '../content-runtime/renderers/text'
 
 // ============================================================
 // 第二层：核心逻辑单元测试
@@ -181,6 +182,21 @@ describe('markdown 工具函数', () => {
     const { parseInline } = await getMarkdown()
     const result = parseInline('访问 https://test.com')
     expect(result).toContain('<a href="https://test.com"')
+  })
+})
+
+describe('blockquote 辅助函数', () => {
+  it('isBlockquoteText：只要存在非空行且所有非空行都以 > 开头，则视为引用块', () => {
+    expect(isBlockquoteText('> 单行')).toBe(true)
+    expect(isBlockquoteText('> 第一行\n> 第二行')).toBe(true)
+    expect(isBlockquoteText('\n> 第一行\n')).toBe(true)
+    expect(isBlockquoteText('普通文本\n> 引用')).toBe(false)
+  })
+
+  it('stripBlockquoteMarkers：移除每行开头的 > 与可选空格', () => {
+    expect(stripBlockquoteMarkers('> a')).toBe('a')
+    expect(stripBlockquoteMarkers('> a\n> b')).toBe('a\nb')
+    expect(stripBlockquoteMarkers('  > a\n> b')).toBe('a\nb')
   })
 })
 

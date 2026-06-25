@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { BlockNode } from '../types'
-import { splitFencedCodeBlocks } from './text'
+import { isBlockquoteText, splitFencedCodeBlocks, stripBlockquoteMarkers } from './text'
 import InlineText from './InlineText.vue'
 import CodeBlock from './CodeBlock.vue'
 
@@ -32,6 +32,11 @@ const segments = computed(() => splitFencedCodeBlocks(props.node.content || ''))
         <thead><tr><th v-for="(h,j) in seg.headers" :key="j"><InlineText :text="h" /></th></tr></thead>
         <tbody><tr v-for="(row,ri) in seg.rows" :key="ri"><td v-for="(cell,ci) in row" :key="ci"><InlineText :text="cell" /></td></tr></tbody>
       </table>
+      <blockquote v-else-if="isBlockquoteText(seg.text)" class="md-blockquote">
+        <p class="block-text">
+          <InlineText :text="stripBlockquoteMarkers(seg.text)" />
+        </p>
+      </blockquote>
       <p v-else class="block-text">
         <InlineText :text="seg.text" />
       </p>

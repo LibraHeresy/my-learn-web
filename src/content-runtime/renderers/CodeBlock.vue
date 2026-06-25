@@ -35,7 +35,7 @@ async function doCopy() {
   top: 0;
   left: 0;
   padding: 1px 8px;
-  font-size: 11px;
+  font-size: var(--fs-xs);
   font-weight: 700;
   font-family: var(--font-code);
   color: var(--color-text-inverse);
@@ -50,7 +50,7 @@ async function doCopy() {
   top: 2px;
   right: 4px;
   padding: 1px 6px;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: var(--color-text-inverse);
   background: rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-xs);
@@ -88,7 +88,7 @@ async function doCopy() {
     border-radius: var(--radius-sm);
   }
   .code-block code {
-    font-size: 0.7rem;
+    font-size: var(--fs-xs);
   }
 }
 </style>

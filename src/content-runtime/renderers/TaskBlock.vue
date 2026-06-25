@@ -56,16 +56,15 @@ function toggleStep(index: number) {
     </div>
     <div v-if="node.steps?.length" class="task-help">
       <button class="help-toggle" @click="helpOpen = !helpOpen">
-        {{ helpOpen ? '▾' : '▸' }} 🆘 卡住了？点这里
+        {{ helpOpen ? '▾' : '▸' }} 🔧 卡住了？点这里看看
       </button>
       <div v-if="helpOpen" class="help-body">
-        <p>别着急，试试这几步：</p>
         <ol>
-          <li>仔细检查<strong>大小写</strong>和<strong>拼写</strong>，一个字母不对都会报错</li>
-          <li>和上面 🔍 示例中的代码<strong>对比一下</strong>，看看区别在哪里</li>
-          <li>看预览区下方有没有<strong>红色错误提示</strong>——点击展开会显示具体建议</li>
-          <li>只改<strong>一小部分</strong>代码就点运行，逐步排查哪一步出的问题</li>
-          <li>检查是否混入了<strong>中文标点</strong>（，。；："）——代码只能用英文标点</li>
+          <li><strong>检查大小写和拼写</strong> — 一个字母不对都会报错</li>
+          <li><strong>和上面的示例对比</strong> — 看看代码哪里不一样</li>
+          <li><strong>看预览区下方的红色错误</strong> — 点击展开会显示修改建议</li>
+          <li><strong>每次只改一小部分</strong> 就点运行 — 逐步排查哪一步出的问题</li>
+          <li><strong>检查中文标点</strong> —，。；："" 代码只能用英文标点 ,.;:""</li>
         </ol>
       </div>
     </div>
@@ -119,7 +118,7 @@ function toggleStep(index: number) {
   border-radius: 50%;
   background: var(--color-gold);
   color: var(--color-text-inverse);
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -215,8 +214,7 @@ function toggleStep(index: number) {
 }
 
 .help-body {
-  padding: var(--sp-2) var(--sp-3);
-  margin-top: var(--sp-1);
+  padding: var(--sp-3);
   background: rgba(201, 169, 110, 0.08);
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
@@ -224,16 +222,11 @@ function toggleStep(index: number) {
   color: var(--color-text-light);
 }
 
-.help-body p {
-  margin-bottom: var(--sp-1);
-  font-weight: 600;
-}
-
 .help-body ol {
-  padding-left: var(--sp-5);
+  padding-left: var(--sp-4);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-1);
+  gap: var(--sp-2);
 }
 
 .help-body li {
@@ -256,7 +249,7 @@ function toggleStep(index: number) {
   .step-number {
     width: 20px;
     height: 20px;
-    font-size: 11px;
+    font-size: var(--fs-xs);
   }
   .purpose-box,
   .expected-box {

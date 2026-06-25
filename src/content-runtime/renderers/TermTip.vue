@@ -146,7 +146,7 @@ function onClick() {
 
 .term-explain {
   display: block;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: #fffaf2;
 }
@@ -156,7 +156,7 @@ function onClick() {
   margin-top: 8px;
   padding-top: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 12px;
+  font-size: var(--fs-xs);
   line-height: 1.5;
   color: var(--color-gold);
   font-style: italic;

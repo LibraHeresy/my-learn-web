@@ -21,20 +21,20 @@ Git 解决了这个混乱。有了 Git：
 :::
 
 :::explain{title="三个基本操作"}
-**1. `git init` — 初始化仓库**
+**1. git init** — 初始化仓库
 ```bash
 cd music-collection
 git init
 ```
 这会在项目中创建一个隐藏的 `.git` 文件夹——Git 的所有历史记录都存在这里。
-**2. `git add` + `git commit` — 保存快照**
+**2. git add + git commit** — 保存快照
 ```bash
 git add .                    # 把所有修改加入"暂存区"
 git commit -m "初始化项目"    # 创建一次提交（存档）
 ```
 每次 commit 需要一条消息（`-m "..."`），说明这次改了什么。
 - `-m` = message（消息）
-**3. `.gitignore` — 告诉 Git 忽略什么**
+**3. .gitignore** — 告诉 Git 忽略什么
 创建 `.gitignore` 文件（注意文件名前面有个点）：
 ```node_modules/
 dist/
