@@ -7,7 +7,6 @@ import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { useAsyncComputed } from '../composables/useAsyncComputed'
 import { useLessonNavigation } from '../composables/useLessonNavigation'
-import { useNotes } from '../composables/useNotes'
 import { encodeCode, decodeCode } from '../utils/shareCode'
 import type { UserCode } from '../types'
 // CodeEditor 按需加载：只在 sandbox 模式课程中使用，
@@ -17,6 +16,7 @@ import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
+import LessonTerms from '../components/LessonTerms.vue'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
@@ -121,6 +121,9 @@ watch(lessonId, () => {
   if (playerMainRef.value) {
     playerMainRef.value.scrollTop = 0
   }
+  if (contentPanelRef.value) {
+    contentPanelRef.value.scrollTop = 0
+  }
 })
 
 // ─── Wave 1.4: 面板全屏 ───────────────────────────────────────────────────
@@ -138,9 +141,6 @@ function onKeydown(e: KeyboardEvent) {
 }
 onMounted(() => document.addEventListener('keydown', onKeydown))
 onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
-
-// ─── Wave 2.1: 课程笔记 ───────────────────────────────────────────────────
-const { notes, notesOpen, toggleNotes } = useNotes(lessonId)
 
 // ─── Wave 2.2: 分享代码 ───────────────────────────────────────────────────
 const shareCopied = ref(false)
@@ -178,6 +178,22 @@ function onPreviewError(info: { lineno: number; message: string }) {
 // 运行新代码时清除上次错误
 watch(previewSrc, () => {
   previewErrorLine.value = 0
+})
+
+// ─── 阅读进度条 ─────────────────────────────────────────────────────────────
+const contentPanelRef = ref<HTMLDivElement>()
+const readingProgress = ref(0)
+
+function onContentScroll() {
+  if (!contentPanelRef.value) return
+  const el = contentPanelRef.value
+  const denom = el.scrollHeight - el.clientHeight
+  readingProgress.value = denom > 0 ? (el.scrollTop / denom) * 100 : 0
+}
+
+// 切换课程时重置进度
+watch(lessonId, () => {
+  readingProgress.value = 0
 })
 
 </script>
@@ -251,28 +267,17 @@ watch(previewSrc, () => {
       >
         <!-- 内容面板 + 笔记 -->
         <div
+          ref="contentPanelRef"
           class="panel-content"
           :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 5.33px)' }"
+          @scroll="onContentScroll"
         >
+          <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
           <Transition name="slide-fade" mode="out-in">
             <DocumentRenderer :key="lessonId" :lesson="lesson" />
           </Transition>
 
-          <!-- Wave 2.1: 课程笔记面板 -->
-          <div class="notes-section">
-            <button class="notes-toggle" @click="toggleNotes">
-              {{ notesOpen ? '▾' : '▸' }} 笔记
-            </button>
-            <Transition name="notes-slide">
-              <div v-if="notesOpen" class="notes-panel">
-                <textarea
-                  v-model="notes"
-                  class="notes-textarea"
-                  placeholder="在这里记录你的学习笔记…（自动保存）"
-                />
-              </div>
-            </Transition>
-          </div>
+          <LessonTerms :lesson="lesson" />
         </div>
 
         <template v-if="!isLocalMode && isSandboxMode">
@@ -440,10 +445,23 @@ watch(previewSrc, () => {
 
 .panel-content {
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  position: relative;
+}
+
+.reading-progress {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--color-gold);
+  border-radius: 0 2px 2px 0;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: width 0.15s ease-out;
 }
 
 .panel-editor, .panel-preview {
@@ -451,8 +469,8 @@ watch(previewSrc, () => {
   flex-shrink: 0;
 }
 .panel-editor {
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid var(--color-editor-border);
+  border-right: 1px solid var(--color-editor-border);
 }
 
 /* Wave 1.4: 全屏面板 */
@@ -474,46 +492,6 @@ watch(previewSrc, () => {
   gap: var(--sp-4);
 }
 
-/* ─── Wave 2.1: 笔记区 ─── */
-.notes-section {
-  flex-shrink: 0;
-  border-top: 1px solid var(--color-border-light);
-}
-.notes-toggle {
-  width: 100%;
-  padding: var(--sp-2) var(--sp-4);
-  text-align: left;
-  font-size: var(--fs-xs);
-  color: var(--color-text-light);
-  background: var(--color-panel);
-  transition: background var(--dur-fast);
-}
-.notes-toggle:hover { background: var(--color-bg-warm); color: var(--color-accent); }
-
-.notes-panel {
-  padding: 0 var(--sp-4) var(--sp-3);
-  background: var(--color-panel);
-}
-.notes-textarea {
-  width: 100%;
-  min-height: 100px;
-  max-height: 240px;
-  padding: var(--sp-2) var(--sp-3);
-  font-size: var(--fs-sm);
-  font-family: var(--font-body);
-  color: var(--color-text);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  resize: vertical;
-  line-height: 1.6;
-  transition: border-color var(--transition);
-}
-.notes-textarea:focus { outline: none; border-color: var(--color-gold); }
-
-.notes-slide-enter-active { transition: all 0.2s var(--ease-out); }
-.notes-slide-leave-active { transition: all 0.15s var(--ease-in); }
-.notes-slide-enter-from, .notes-slide-leave-to { opacity: 0; transform: translateY(-8px); }
 
 /* ─── 响应式 ─── */
 @media (max-width: 900px) {
@@ -552,7 +530,7 @@ watch(previewSrc, () => {
   .panel-editor {
     min-height: 320px;
     border-left: none; border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--color-editor-border);
   }
 
   .panel-preview { min-height: 360px; }

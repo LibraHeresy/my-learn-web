@@ -12,6 +12,7 @@ const emit = defineEmits<{
 }>();
 
 const iframeRef = ref<HTMLIFrameElement>();
+const loading = ref(false);
 
 function goBack() {
   iframeRef.value?.contentWindow?.history.back();
@@ -37,10 +38,12 @@ const errorState = ref<{
 const errorExpanded = ref(false);
 
 function getErrorType(msg: string): string {
-  if (msg.includes("ReferenceError")) return "引用错误";
   if (msg.includes("SyntaxError")) return "语法错误";
+  if (msg.includes("ReferenceError")) return "引用错误";
   if (msg.includes("TypeError")) return "类型错误";
   if (msg.includes("RangeError")) return "范围错误";
+  if (msg.includes("URIError")) return "地址编码错误";
+  if (msg.includes("InternalError")) return "引擎内部错误";
   return "运行时错误";
 }
 
@@ -69,10 +72,12 @@ function loadPreview(doc: string) {
     URL.revokeObjectURL(prevUrl);
     prevUrl = null;
   }
+  loading.value = true;
   const blob = new Blob([doc], { type: "text/html" });
   prevUrl = URL.createObjectURL(blob);
   iframe.src = prevUrl;
   iframe.onload = () => {
+    loading.value = false;
     if (prevUrl) URL.revokeObjectURL(prevUrl);
     prevUrl = null;
   };
@@ -134,6 +139,12 @@ watch(
       </div>
     </div>
     <div class="preview-frame-wrap">
+      <Transition name="loading-fade">
+        <div v-if="loading" class="preview-loading">
+          <span class="loading-notes">🎵</span>
+          <span class="loading-text">运行中…</span>
+        </div>
+      </Transition>
       <iframe
         ref="iframeRef"
         class="preview-iframe"
@@ -207,7 +218,7 @@ watch(
 .preview-nav-btn {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: var(--sp-1);
   padding: var(--sp-1) var(--sp-2);
   font-size: var(--fs-xs);
   color: var(--color-text-light);
@@ -263,7 +274,7 @@ watch(
 
 .error-indicator {
   font-size: var(--fs-xs);
-  color: #d4534a;
+  color: var(--color-error-accent);
   font-weight: 600;
   animation: error-blink 1.5s ease-in-out 3;
 }
@@ -290,11 +301,46 @@ watch(
   border: none;
 }
 
+/* ─── 加载动画 ─── */
+.preview-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 2;
+}
+
+.loading-notes {
+  font-size: 2rem;
+  animation: notes-bounce 0.6s ease-in-out infinite alternate;
+}
+
+.loading-text {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+@keyframes notes-bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.loading-fade-leave-active {
+  transition: opacity 0.3s var(--ease-out);
+}
+.loading-fade-leave-to {
+  opacity: 0;
+}
+
 /* ===== 错误面板 ===== */
 .error-panel {
   flex-shrink: 0;
-  border-top: 1px solid #d4534a;
-  background: #3d1f1f;
+  border-top: 1px solid var(--color-error-accent);
+  background: var(--color-error-panel-bg);
   cursor: pointer;
   user-select: none;
 }
@@ -308,12 +354,12 @@ watch(
 }
 
 .error-type-badge {
-  font-size: 11px;
+  font-size: var(--fs-xs);
   font-weight: 700;
-  background: #d4534a;
-  color: #fff;
+  background: var(--color-error-accent);
+  color: var(--color-text-inverse);
   padding: 1px 8px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   flex-shrink: 0;
   letter-spacing: 0.03em;
 }
@@ -321,7 +367,7 @@ watch(
 .error-msg-preview {
   flex: 1;
   font-size: 12px;
-  color: #f0c0b8;
+  color: var(--color-error-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -330,14 +376,14 @@ watch(
 
 .error-expand-icon {
   font-size: 12px;
-  color: #c08078;
+  color: var(--color-error-muted);
   flex-shrink: 0;
 }
 
 .error-dismiss {
   background: none;
   border: none;
-  color: #c08078;
+  color: var(--color-error-muted);
   font-size: 14px;
   cursor: pointer;
   padding: 0 4px;
@@ -346,7 +392,7 @@ watch(
 }
 
 .error-dismiss:hover {
-  color: #f0c0b8;
+  color: var(--color-error-text);
 }
 
 .error-detail {
@@ -366,24 +412,24 @@ watch(
 .error-label {
   font-size: 11px;
   font-weight: 600;
-  color: #c08078;
+  color: var(--color-error-muted);
   flex-shrink: 0;
   min-width: 56px;
 }
 
 .error-code {
-  font-size: 12px;
-  color: #f0c0b8;
+  font-size: var(--fs-xs);
+  color: var(--color-error-text);
   font-family: var(--font-code);
   word-break: break-all;
   background: rgba(0, 0, 0, 0.2);
-  padding: 2px 6px;
-  border-radius: 3px;
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-xs);
 }
 
 .error-value {
-  font-size: 12px;
-  color: #e8dcc8;
+  font-size: var(--fs-xs);
+  color: var(--color-editor-text);
   font-family: var(--font-code);
 }
 
@@ -392,8 +438,8 @@ watch(
 }
 
 .error-hint {
-  font-size: 12px;
-  color: #ffd580;
+  font-size: var(--fs-xs);
+  color: var(--color-error-hint);
   line-height: 1.5;
 }
 

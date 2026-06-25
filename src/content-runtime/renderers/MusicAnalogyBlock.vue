@@ -20,7 +20,7 @@ defineProps<{
 .analogy-box {
   display: flex;
   gap: var(--sp-3);
-  padding: var(--sp-4);
+  padding: var(--sp-3);
   background: var(--color-bg-warm);
   border-left: 3px solid var(--color-gold);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;

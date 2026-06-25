@@ -52,7 +52,7 @@ const neteaseUrl = computed(() =>
   display: flex;
   gap: var(--sp-3);
   padding: var(--sp-4);
-  background: #f5f9f0;
+  background: var(--color-listen-bg);
   border-radius: var(--radius-md);
 }
 

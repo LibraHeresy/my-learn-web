@@ -46,6 +46,7 @@ const buildCacheFile = path.join(generatedDir, '.build-cache.json')
 // ---------- 增量编译：文件 Hash 缓存 ----------
 
 interface BuildCache {
+  compiler: string
   glossary: string
   taxonomy: string
   lessons: Record<string, string>   // lessonDir 相对路径 -> hash
@@ -56,9 +57,17 @@ interface BuildCache {
 async function loadBuildCache(): Promise<BuildCache> {
   try {
     const raw = await readFile(buildCacheFile, 'utf8')
-    return JSON.parse(raw) as BuildCache
+    const parsed = JSON.parse(raw) as Partial<BuildCache>
+    return {
+      compiler: typeof parsed.compiler === 'string' ? parsed.compiler : '',
+      glossary: typeof parsed.glossary === 'string' ? parsed.glossary : '',
+      taxonomy: typeof parsed.taxonomy === 'string' ? parsed.taxonomy : '',
+      lessons: parsed.lessons && typeof parsed.lessons === 'object' ? (parsed.lessons as Record<string, string>) : {},
+      projects: parsed.projects && typeof parsed.projects === 'object' ? (parsed.projects as Record<string, string>) : {},
+      quiz: parsed.quiz && typeof parsed.quiz === 'object' ? (parsed.quiz as Record<string, string>) : {},
+    }
   } catch {
-    return { glossary: '', taxonomy: '', lessons: {}, projects: {}, quiz: {} }
+    return { compiler: '', glossary: '', taxonomy: '', lessons: {}, projects: {}, quiz: {} }
   }
 }
 
@@ -115,6 +124,7 @@ const allowedBlockNames = new Set<BlockName>([
   'task',
   'hint',
   'listen-to',
+  'recap',
 ])
 
 function isBlockName(value: string): value is BlockName {
@@ -246,6 +256,8 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
 
   return body.map((node) => {
     if (node.type === 'paragraph') {
+      const t = node.text.trimStart()
+      if (t.startsWith(':::') || t.startsWith('::::')) return node
       return { ...node, text: injectTerms(node.text, termKeys) }
     }
     if (node.type === 'heading') return node
@@ -328,12 +340,35 @@ function parseTaskSteps(rawInner: string): { content: string; steps: TaskStep[] 
   return { content: nonStepLines.join('\n').trim(), steps }
 }
 
+function normalizeDirectiveTitleEscapes(input: string): string {
+  return input.replace(
+    /^:::(?!:)(?!task\b)([a-z][\w-]*)\{([^}]*)\}[ \t]*(?:\r)?$/gmi,
+    (full, name: string, attrsRaw: string) => {
+      const m = attrsRaw.match(/(^|[,\s])title="((?:[^"\\]|\\.)*)"/)
+      if (!m) return full
+
+      const rawTitle = m[2]
+      if (!rawTitle.includes('\\"')) return full
+
+      const decodedTitle = rawTitle.replace(/\\(.)/g, '$1')
+      const safeTitle = decodedTitle.includes("'") ? decodedTitle.replace(/'/g, '’') : decodedTitle
+
+      const fixedAttrs = attrsRaw.replace(
+        /(^|[,\s])title="((?:[^"\\]|\\.)*)"/,
+        `$1title='${safeTitle}'`,
+      )
+      return `:::${name}{${fixedAttrs}}`
+    },
+  )
+}
+
 function parseLessonMarkdown(input: string): ContentBodyNode[] {
+  const normalized = normalizeDirectiveTitleEscapes(input)
   // ── Pre-extract :::task blocks (remark-directive doesn't handle multiple
   //    nested ::::step siblings correctly; pre-extract avoids the issue) ────
   const taskBlocks: BlockNode[] = []
   let taskIdx = 0
-  const modified = input.replace(
+  const modified = normalized.replace(
     /^:::task([^\n]*)\n([\s\S]*?)^:::[ \t]*(?:\r)?$/gm,
     (_, attrsLine, inner) => {
       const title = attrsLine.match(/\{.*?title="((?:[^"\\]|\\.)*)"/)?.[1]
@@ -700,7 +735,10 @@ export async function main() {
 
   // 加载增量编译缓存
   const cache = await loadBuildCache()
+  const compilerHash = await hashFiles([__filename])
+  const compilerChanged = compilerHash !== cache.compiler
   const newCache: BuildCache = {
+    compiler: compilerHash,
     glossary: cache.glossary,
     taxonomy: cache.taxonomy,
     lessons: { ...cache.lessons },
@@ -755,7 +793,7 @@ export async function main() {
 
   const dirtyLessonDirs = allLessonDirs.filter((dir, i) => {
     const key = path.relative(projectRoot, dir)
-    return glossaryChanged || lessonHashes[i] !== cache.lessons[key]
+    return compilerChanged || glossaryChanged || lessonHashes[i] !== cache.lessons[key]
   })
 
   // 重编译有变化的课程
@@ -777,7 +815,7 @@ export async function main() {
     // 读取没有变化的课程（从已生成 JSON 加载）
     const unchangedDirs = allLessonDirs.filter((dir) => {
       const key = path.relative(projectRoot, dir)
-      return !glossaryChanged && lessonHashes[allLessonDirs.indexOf(dir)] === cache.lessons[key]
+      return !compilerChanged && !glossaryChanged && lessonHashes[allLessonDirs.indexOf(dir)] === cache.lessons[key]
     })
     const unchangedLoaded = await Promise.all(
       unchangedDirs.map(async (dir) => {
@@ -820,7 +858,7 @@ export async function main() {
 
   const dirtyProjectDirs = projectDirs.filter((dir, i) => {
     const key = path.relative(projectRoot, dir)
-    return glossaryChanged || projectHashes[i] !== cache.projects[key]
+    return compilerChanged || glossaryChanged || projectHashes[i] !== cache.projects[key]
   })
 
   let compiledProjects
@@ -856,7 +894,7 @@ export async function main() {
 
     const unchangedProjects = projectDirs.filter((dir) => {
       const key = path.relative(projectRoot, dir)
-      return !glossaryChanged && projectHashes[projectDirs.indexOf(dir)] === cache.projects[key]
+      return !compilerChanged && !glossaryChanged && projectHashes[projectDirs.indexOf(dir)] === cache.projects[key]
     })
     const unchangedProjectsLoaded = await Promise.all(
       unchangedProjects.map(async (dir) => {

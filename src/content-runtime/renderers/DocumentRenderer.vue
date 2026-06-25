@@ -2,6 +2,7 @@
 import { resolveBlockComponent } from '../block-registry'
 import type { CompiledLesson, ContentBodyNode } from '../types'
 import InlineText from './InlineText.vue'
+import CodeBlock from './CodeBlock.vue'
 
 defineProps<{
   lesson: CompiledLesson
@@ -18,8 +19,8 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
     <div class="doc-body">
       <template v-for="(node, index) in lesson.body" :key="`${node.type}-${index}`">
         <component
-          :is="headingTag(node)"
           v-if="node.type === 'heading'"
+          :is="headingTag(node)"
           class="doc-heading"
         >
           {{ node.text }}
@@ -33,13 +34,14 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
           {{ node.text }}
         </p>
 
-        <pre v-else-if="node.type === 'code'" class="code-block"><code :class="`language-${node.language}`" v-text="node.code" /></pre>
+        <CodeBlock v-else-if="node.type === 'code'" :language="node.language" :code="node.code" />
 
         <component
-          :is="resolveBlockComponent(node.name)"
           v-else
+          :is="resolveBlockComponent(node.name)"
           :node="node"
         />
+
       </template>
     </div>
   </article>
@@ -47,7 +49,7 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 
 <style scoped>
 .content-doc {
-  max-width: 860px;
+  max-width: 720px;
   margin: 0 auto;
   padding: var(--sp-6);
 }
@@ -55,7 +57,7 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 .doc-body {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-5);
+  gap: var(--sp-6);
 }
 
 .doc-heading {
@@ -66,22 +68,19 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 .doc-paragraph,
 .doc-term {
   font-size: var(--fs-sm);
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--color-text);
 }
 
-.code-block {
-  padding: var(--sp-3);
-  border-radius: var(--radius-md);
-  background: var(--color-editor-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  overflow-x: auto;
+@media (max-width: 900px) {
+  .content-doc {
+    padding: var(--sp-4);
+  }
 }
 
-.code-block code {
-  font-family: var(--font-code);
-  font-size: var(--fs-xs);
-  color: var(--color-editor-text);
-  white-space: pre;
+@media (max-width: 640px) {
+  .content-doc {
+    padding: var(--sp-3);
+  }
 }
 </style>

@@ -148,22 +148,36 @@ function parseInlineText(text: string): InlineToken[] {
 }
 
 export function parseInlineTokens(text: string): InlineToken[] {
-  const base = splitInlineCode(text)
+  const clean = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\n{2,}/g, '\n')
+  const base = splitInlineCode(clean)
   const out: InlineToken[] = []
+  let pending = ''
   for (const seg of base) {
-    if (seg.type === 'code') {
-      out.push({ type: 'code', value: seg.value })
+    if (seg.type === 'text') {
+      pending += seg.value
       continue
     }
-    out.push(...parseInlineText(seg.value))
+    // 检查 pending 中 ** 是否成对：未闭合时说明 code 在 strong 内部，拼回去一起解析
+    const stars = pending.match(/\*\*/g)
+    if (stars && stars.length % 2 === 1) {
+      pending += '`' + seg.value + '`'
+    } else {
+      if (pending) { out.push(...parseInlineText(pending)); pending = '' }
+      out.push({ type: 'code', value: seg.value })
+    }
   }
+  if (pending) out.push(...parseInlineText(pending))
   return out.length ? out : [{ type: 'text', value: text }]
 }
+
+export type ListItem = { text: string; indent: number; children?: ListItem[] }
 
 export type BlockContentSegment =
   | { type: 'text'; text: string }
   | { type: 'code'; language: string; code: string }
   | { type: 'hr' }
+  | { type: 'table'; headers: string[]; rows: string[][] }
+  | { type: 'list'; items: ListItem[]; ordered: boolean }
 
 export function splitFencedCodeBlocks(content: string): BlockContentSegment[] {
   const normalized = content.replace(/\r\n/g, '\n')
@@ -177,10 +191,69 @@ export function splitFencedCodeBlocks(content: string): BlockContentSegment[] {
     if (text) out.push({ type: 'text', text })
   }
 
+  function isTableRow(line: string): boolean {
+    return /^\|.+\|$/.test(line.trim())
+  }
+  function isTableSep(line: string): boolean {
+    return /^\|[\s\-:|]+\|$/.test(line.trim())
+  }
+  function parseTableRow(line: string): string[] {
+    return line.trim().split('|').slice(1, -1).map(c => c.trim())
+  }
+
   let i = 0
   while (i < lines.length) {
     const line = lines[i]
     const trimmed = line.trim()
+    // Pipe table: consecutive |...| lines starting with header row
+    if (isTableRow(trimmed) && i + 2 < lines.length && isTableSep(lines[i + 1].trim()) && isTableRow(lines[i + 2].trim())) {
+      flushText()
+      const headers = parseTableRow(trimmed)
+      i += 2 // skip header + separator
+      const rows: string[][] = []
+      while (i < lines.length && isTableRow(lines[i].trim())) {
+        rows.push(parseTableRow(lines[i].trim()))
+        i += 1
+      }
+      out.push({ type: 'table', headers, rows })
+      continue
+    }
+
+    // Unordered/ordered list: consecutive lines starting with - or * or 1.
+    const ulMatch = trimmed.match(/^(\s*)[-*]\s+(.+)$/)
+    const olMatch = trimmed.match(/^(\s*)\d+\.\s+(.+)$/)
+    const listMatch = ulMatch || olMatch
+    if (listMatch) {
+      flushText()
+      const isOrdered = !!olMatch
+      const items: ListItem[] = []
+      while (i < lines.length) {
+        const li = lines[i].trimEnd()
+        const ulM = li.match(/^(\s*)[-*]\s+(.+)$/)
+        const olM = li.match(/^(\s*)\d+\.\s+(.+)$/)
+        if (!ulM && !olM) break
+        const m = ulM || olM!
+        const indent = m[1].length
+        const rawText = m[2]
+        // Build tree: deeper indent = child of previous item
+        const item: ListItem = { text: rawText, indent }
+        if (indent > 0 && items.length > 0) {
+          let parent = items[items.length - 1]
+          // Walk up to find the parent with smaller indent
+          for (let j = items.length - 1; j >= 0; j--) {
+            if (items[j].indent < indent) { parent = items[j]; break }
+          }
+          if (!parent.children) parent.children = []
+          parent.children.push(item)
+        } else {
+          items.push(item)
+        }
+        i += 1
+      }
+      out.push({ type: 'list', items, ordered: isOrdered })
+      continue
+    }
+
     // Horizontal rule: --- alone on a line
     if (trimmed === '---') {
       flushText()

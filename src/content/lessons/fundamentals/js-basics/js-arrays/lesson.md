@@ -42,7 +42,7 @@ composers.push("肖邦");
 text = composers.join(" · ");
 display.textContent = text;
 ```
-切换到 JS 标签页，输入一个名字点击添加，看列表实时更新。
+打开 JS 选项卡，输入一个名字点击添加，看列表实时更新。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -62,6 +62,10 @@ display.textContent = text;
 挑战：添加一个「删除最后一位」按钮。在 HTML 中添加 `<button id="removeBtn">删除最后</button>`，在 JS 中用 `composers.pop()` 删除数组最后一项，然后调用 `showList()` 刷新显示。记得加 `if (composers.length > 0)` 防止空数组出错
 ::::
 
+:::
+
+:::recap
+这一节你学会了用数组存储一组数据——用 `[]` 创建，每个值用逗号分开。用 `[0]` 取第一个（索引从 0 开始），用 `.push()` 在末尾添加新项，用 `.join()` 把整个数组拼成一段文字。就像一张歌单——可以把曲子放进去、加新曲子、一次性全部显示出来。现在你再也不需要一个一个手动管理同类的数据了。
 :::
 
 :::listen-to

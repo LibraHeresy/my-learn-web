@@ -45,7 +45,7 @@ btn.addEventListener("click", function() {
   display.textContent = `你点击了 ${count} 次`;   // 更新页面上的数字
 });
 ```
-切换到 JS 标签页和预览区，试试点击按钮！
+打开 JS 选项卡和预览区，试试点击按钮！
 :::
 
 :::task{title="动手试试 ✨"}
@@ -65,6 +65,10 @@ btn.addEventListener("click", function() {
 挑战：添加归零按钮。在 HTML 的 counter-box 容器中添加 `<button id="resetBtn">归零</button>`，在 JS 中用 `querySelector` 获取它，用 `addEventListener` 绑定点击事件，点击后将 `count` 重置为 0 并更新 `display.textContent`
 ::::
 
+:::
+
+:::recap
+这一节你学会了让页面响应用户操作——用 `addEventListener("click", 回调函数)` 给按钮绑定点击事件。找到元素、绑定事件、写回调函数——这就是前端交互开发的"三部曲"。每一行代码都在等用户的一个动作。现在你的网页不再是"只读"的静态页面了——用户可以点击按钮，页面会做出反应。
 :::
 
 :::listen-to

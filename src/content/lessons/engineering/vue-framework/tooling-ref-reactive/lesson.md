@@ -87,6 +87,10 @@ const count = computed(() => filteredPieces.value.length)
 就像从"手动挡"换成了"自动挡"——做的事一样，但省了很多操作。
 :::
 
+:::recap
+你学会了用 ref 创建响应式数据，用 computed 自动派生新值。数据变了，所有用到它的地方自动更新——在 <script setup> 里变量自动暴露给模板，你不再需要手动调用 render() 去更新 DOM。
+:::
+
 :::listen-to
 肖邦《即兴幻想曲》Op.66 — 左右手的节奏是 4 对 3，但听起来天衣无缝。ref 和 computed 的配合也是如此：ref 是右手的旋律（数据源），computed 是左手的琶音（自动派生的和声），Vue 让你不用手动协调它们。
 :::

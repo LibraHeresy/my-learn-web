@@ -104,6 +104,10 @@ import MusicCard from './components/MusicCard.vue'
 这就像音乐术语用意大利语标记——不是强制规定，但全世界通用的约定。
 :::
 
+:::recap
+你学会了 .vue 单文件组件的三段式结构——<script setup> 写逻辑，<template> 写结构，<style scoped> 写样式。每个组件一个文件，通过 import 引入使用，scoped 让样式互不干扰。
+:::
+
 :::listen-to
 维瓦尔第《四季·春》第一乐章 — 弦乐齐奏（template，主体旋律）、独奏小提琴的华彩（script，动态逻辑）、通奏低音的持续伴奏（style，底色与氛围）。三段各司其职，合在一起是一首完美的协奏曲。
 :::

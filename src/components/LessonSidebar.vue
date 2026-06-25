@@ -280,7 +280,7 @@ function expandToCurrent() {
 .sidebar-chapter {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-2);
+  gap: var(--sp-1);
 }
 
 .chapter-label {
@@ -309,7 +309,7 @@ function expandToCurrent() {
   align-items: flex-start;
   gap: var(--sp-2);
   text-align: left;
-  padding: var(--sp-2) var(--sp-2);
+  padding: var(--sp-1) var(--sp-2);
   border-radius: var(--radius-sm);
   background: transparent;
   border: 1px solid transparent;

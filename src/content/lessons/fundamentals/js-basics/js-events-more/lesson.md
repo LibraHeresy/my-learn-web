@@ -90,6 +90,10 @@ document.addEventListener("keydown", function(event) {
 
 :::
 
+:::recap
+这一节你学会了监听更多用户动作——不只有 `click`，还有 `input`（打字时实时触发）、`keydown`（按下键盘）、`mouseenter/mouseleave`（鼠标移入移出）。`event.target.value` 能拿到输入框的内容，`event.key` 能知道你按了哪个键，`event.preventDefault()` 能阻止表单提交时的页面刷新。现在你的网页可以听懂用户的各种"话"了——不只是点击，还有打字、按键、鼠标移动。
+:::
+
 :::listen-to
 拉威尔《波莱罗》— 同一旋律在不同乐器间传递（不同事件），小鼓从头到尾持续敲击（持续输入），长笛、单簧管、双簧管依次登场（依次触发），最终整个乐队一起爆发。
 :::

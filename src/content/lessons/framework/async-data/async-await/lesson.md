@@ -85,6 +85,10 @@ async function loadConcert() {
 ```
 :::
 
+:::recap
+你学会了用 async/await 让异步代码读起来像同步代码——await 等待 Promise 完成后，数据直接赋值给变量。错误处理回到了熟悉的 try/catch，多个独立的请求还可以用 Promise.all 并行执行，速度更快。
+:::
+
 :::listen-to
 莫扎特《费加罗的婚礼》序曲 — 短短 4 分钟，多个主题自然流畅地衔接，听感上浑然一体。async/await 让异步代码也有这种"行云流水"的阅读体验。
 :::

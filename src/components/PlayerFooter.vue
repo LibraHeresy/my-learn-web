@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 defineProps<{
   prevLabel: string
   nextLabel: string
@@ -11,11 +13,20 @@ defineProps<{
   isCompleted?: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   prev: []
   next: []
   complete: []
 }>()
+
+const completing = ref(false)
+
+function onComplete() {
+  if (completing.value) return
+  completing.value = true
+  emit('complete')
+  setTimeout(() => { completing.value = false }, 600)
+}
 </script>
 
 <template>
@@ -33,8 +44,8 @@ defineEmits<{
     <div class="footer-center-wrap">
       <button
         v-if="showComplete"
-        class="footer-btn footer-complete"
-        @click="$emit('complete')"
+        :class="['footer-btn', 'footer-complete', { 'footer-complete--pop': completing }]"
+        @click="onComplete"
       >
         <span v-if="isCompleted">✓ 已完成</span>
         <span v-else>标记完成</span>
@@ -104,6 +115,17 @@ defineEmits<{
 
 .footer-complete:hover {
   background: var(--color-success-bg);
+}
+
+.footer-complete--pop {
+  animation: complete-pop 0.6s var(--ease-spring);
+}
+
+@keyframes complete-pop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }
 
 .footer-center {

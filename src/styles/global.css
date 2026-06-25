@@ -40,7 +40,7 @@ body {
 /* ===== 标题 ===== */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--color-text);
 }
 
@@ -48,6 +48,8 @@ h1 { font-size: var(--fs-3xl); font-weight: 700; }
 h2 { font-size: var(--fs-2xl); font-weight: 600; }
 h3 { font-size: var(--fs-xl); font-weight: 600; }
 h4 { font-size: var(--fs-lg); font-weight: 600; }
+
+h2, h3, h4 { margin-top: var(--sp-4); }
 
 /* ===== 链接 ===== */
 a {

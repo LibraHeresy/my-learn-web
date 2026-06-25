@@ -99,6 +99,10 @@ export default defineConfig({
 });</code></pre><p>在代码中直接使用：<code>console.log("版本：", __APP_VERSION__);</code></p><p><code>define</code> 在编译时替换，适合版本号等固定值；<code>import.meta.env.VITE_*</code> 运行时读取，适合环境相关值。</p></div></details>[[/html]]
 :::
 
+:::recap
+你学会了用 .env 文件管理不同环境的配置——开发环境用本地 API 地址，生产环境用真实服务器地址。以 VITE_ 开头的变量可以在代码中通过 import.meta.env 读取，切换环境时配置自动生效。
+:::
+
 :::listen-to
 马勒《第八交响曲》千人交响曲 — 这部作品需要极大规模的编制，每次演出前必须根据演出场地的声学特性（就像环境变量）调整乐队的摆位和动态平衡。同一个总谱，不同的场地需要不同的配置。
 :::

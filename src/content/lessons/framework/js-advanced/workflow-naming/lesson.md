@@ -60,6 +60,10 @@ shuffleBtn.addEventListener("click", function() {
 
 :::
 
+:::recap
+你学会了好的命名规范——CSS 类名用 kebab-case（如 card-title），JS 变量用 camelCase（如 composerName），函数名用动词开头（如 playMusic）。好的命名让代码自己说话，不需要额外解释。
+:::
+
 :::listen-to
 肖邦《练习曲》Op.10 No.1 — 每一组琶音的指法都经过精心设计，让演奏如流水般自然。好的命名就像好的指法——"好的命名"让你读代码时如行云流水。
 :::

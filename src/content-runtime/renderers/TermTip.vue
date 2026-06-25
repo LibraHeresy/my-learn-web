@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps<{
   term: string
@@ -9,39 +9,92 @@ const props = defineProps<{
 
 const termRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
-const popX = ref(0)
-const popY = ref(0)
+const clicked = ref(false)
+const popLeft = ref(0)
+const popTop = ref(0)
 
 const POPOVER_WIDTH = 260
 const GAP = 10
 
-function onMouseEnter() {
+// ─── 共享全局 click-outside 管理器（单例，所有 TermTip 实例共用） ───
+interface TipState { el: HTMLElement | null; c: typeof clicked; v: typeof visible }
+const tipStates: TipState[] = []
+let globalOn = false
+
+function ensureGlobalListener() {
+  if (globalOn) return
+  globalOn = true
+  document.addEventListener('click', onGlobalClick, true)
+}
+
+function onGlobalClick(e: MouseEvent) {
+  const target = e.target as HTMLElement
+  const pop = document.querySelector('.term-popover')
+  for (const s of tipStates) {
+    if (!s.c.value) continue
+    if (s.el && !s.el.contains(target) && pop && !pop.contains(target)) {
+      s.c.value = false
+      s.v.value = false
+    }
+  }
+}
+
+const self: TipState = { el: null, c: clicked, v: visible }
+onMounted(() => {
+  self.el = termRef.value
+  tipStates.push(self)
+  ensureGlobalListener()
+})
+onBeforeUnmount(() => {
+  const idx = tipStates.indexOf(self)
+  if (idx >= 0) tipStates.splice(idx, 1)
+})
+// ───
+
+function updatePosition() {
   if (!termRef.value) return
   const rect = termRef.value.getBoundingClientRect()
-  const raw = rect.left + rect.width / 2
-  popX.value = Math.max(POPOVER_WIDTH / 2 + 8, Math.min(window.innerWidth - POPOVER_WIDTH / 2 - 8, raw))
-  popY.value = rect.bottom + GAP
+  const rawLeft = rect.left + rect.width / 2 - POPOVER_WIDTH / 2
+  popLeft.value = Math.max(8, Math.min(window.innerWidth - POPOVER_WIDTH - 8, rawLeft))
+  popTop.value = rect.bottom + GAP
+}
+
+function show() {
+  updatePosition()
   visible.value = true
 }
 
-function onMouseLeave() {
+function hide() {
+  if (clicked.value) return
   visible.value = false
+}
+
+function onClick() {
+  updatePosition()
+  if (clicked.value) {
+    clicked.value = false
+    visible.value = false
+  } else {
+    clicked.value = true
+    visible.value = true
+  }
 }
 </script>
 
 <template>
   <span
     ref="termRef"
-    class="term-tip"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
+    :class="['term-tip', { 'term-tip--active': clicked }]"
+    @mouseenter="show"
+    @mouseleave="hide"
+    @click.prevent="onClick"
   >
     <slot />
     <Teleport to="body">
       <Transition name="term-pop">
         <span v-if="visible"
           class="term-popover"
-          :style="{ top: popY + 'px', left: popX + 'px' }"
+          :style="{ top: popTop + 'px', left: popLeft + 'px' }"
         >
           <span class="term-title">🎼 {{ term }}</span>
           <span class="term-explain">{{ explanation }}</span>
@@ -57,7 +110,12 @@ function onMouseLeave() {
   position: relative;
   border-bottom: 1.5px dashed var(--color-gold);
   color: var(--color-accent);
-  cursor: help;
+  cursor: pointer;
+}
+
+.term-tip:hover::after,
+.term-tip--active::after {
+  opacity: 1;
 }
 </style>
 
@@ -65,16 +123,16 @@ function onMouseLeave() {
 <style>
 .term-popover {
   position: fixed;
-  transform: translateX(-50%);
   width: 260px;
   background: var(--color-editor-bg);
   color: var(--color-editor-text);
   border: 1px solid var(--color-gold);
-  border-radius: 8px;
-  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) 14px;
   box-shadow: var(--shadow-lg);
   pointer-events: auto;
   z-index: 9999;
+  will-change: transform, opacity;
 }
 
 .term-title {
@@ -111,17 +169,17 @@ function onMouseLeave() {
 
 .term-pop-enter-from {
   opacity: 0;
-  transform: translateX(-50%) translateY(-4px);
+  transform: translateY(-6px);
 }
 
 .term-pop-enter-to,
 .term-pop-leave-from {
   opacity: 1;
-  transform: translateX(-50%) translateY(-2px);
+  transform: translateY(0);
 }
 
 .term-pop-leave-to {
   opacity: 0;
-  transform: translateX(-50%) translateY(-4px);
+  transform: translateY(-6px);
 }
 </style>

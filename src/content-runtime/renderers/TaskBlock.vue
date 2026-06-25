@@ -1,19 +1,39 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { BlockNode } from '../types'
 import InlineText from './InlineText.vue'
 
 defineProps<{
   node: BlockNode
 }>()
+
+const completed = ref<Set<number>>(new Set())
+const helpOpen = ref(false)
+
+function toggleStep(index: number) {
+  const next = new Set(completed.value)
+  if (next.has(index)) {
+    next.delete(index)
+  } else {
+    next.add(index)
+  }
+  completed.value = next
+}
 </script>
 
 <template>
   <section class="task-block">
-    <h3 v-if="node.attrs?.title" class="block-title">{{ node.attrs.title }}</h3>
+    <h3 v-if="node.attrs?.title" class="block-title">✏️ {{ node.attrs.title }}</h3>
     <div v-if="node.steps?.length" class="steps-list">
-      <article v-for="(step, index) in node.steps" :key="index" class="step-card">
+      <article v-for="(step, index) in node.steps" :key="index" :class="['step-card', { 'step-card--done': completed.has(index) }]">
         <div class="step-header">
-          <span class="step-number">{{ index + 1 }}</span>
+          <button
+            :class="['step-number', { 'step-number--done': completed.has(index) }]"
+            :title="completed.has(index) ? '已完成' : '点击标记完成'"
+            @click="toggleStep(index)"
+          >
+            {{ completed.has(index) ? '✓' : index + 1 }}
+          </button>
           <div class="step-main">
             <p class="step-content">
               <InlineText :text="step.content" />
@@ -34,6 +54,21 @@ defineProps<{
         </div>
       </article>
     </div>
+    <div v-if="node.steps?.length" class="task-help">
+      <button class="help-toggle" @click="helpOpen = !helpOpen">
+        {{ helpOpen ? '▾' : '▸' }} 🆘 卡住了？点这里
+      </button>
+      <div v-if="helpOpen" class="help-body">
+        <p>别着急，试试这几步：</p>
+        <ol>
+          <li>仔细检查<strong>大小写</strong>和<strong>拼写</strong>，一个字母不对都会报错</li>
+          <li>和上面 🔍 示例中的代码<strong>对比一下</strong>，看看区别在哪里</li>
+          <li>看预览区下方有没有<strong>红色错误提示</strong>——点击展开会显示具体建议</li>
+          <li>只改<strong>一小部分</strong>代码就点运行，逐步排查哪一步出的问题</li>
+          <li>检查是否混入了<strong>中文标点</strong>（，。；："）——代码只能用英文标点</li>
+        </ol>
+      </div>
+    </div>
     <p v-else class="task-fallback">
       <InlineText :text="node.content || ''" />
     </p>
@@ -46,7 +81,7 @@ defineProps<{
   flex-direction: column;
   gap: var(--sp-3);
   padding: var(--sp-4);
-  background: #fff8f0;
+  background: var(--color-task-bg);
   border: 1px solid var(--color-gold-light);
   border-radius: var(--radius-md);
 }
@@ -54,16 +89,17 @@ defineProps<{
 .block-title {
   font-size: var(--fs-base);
   color: var(--color-accent);
+  margin-top: 0;
 }
 
 .steps-list {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
+  gap: var(--sp-4);
 }
 
 .step-card {
-  background: #fffdf9;
+  background: var(--color-task-card-bg);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -82,13 +118,33 @@ defineProps<{
   height: 24px;
   border-radius: 50%;
   background: var(--color-gold);
-  color: #fff;
+  color: var(--color-text-inverse);
   font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-code);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.step-number:hover {
+  transform: scale(1.1);
+}
+.step-number--done {
+  background: var(--color-success);
+}
+.step-number--done:hover {
+  transform: scale(0.95);
+}
+
+.step-card--done .step-content {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.step-card--done {
+  opacity: 0.7;
+  transition: opacity var(--transition);
 }
 
 .step-main {
@@ -113,13 +169,13 @@ defineProps<{
 }
 
 .purpose-box {
-  background: #f4f8fc;
-  border-left-color: #8ba4b8;
+  background: var(--color-purpose-bg);
+  border-left-color: var(--color-purpose-border);
 }
 
 .expected-box {
-  background: #f4f8f0;
-  border-left-color: #8ba87d;
+  background: var(--color-expected-bg);
+  border-left-color: var(--color-expected-border);
 }
 
 .purpose-label,
@@ -132,11 +188,81 @@ defineProps<{
 }
 
 .purpose-label {
-  color: #6b8a9e;
+  color: var(--color-purpose-text);
 }
 
 .expected-label {
-  color: #6b8a5e;
+  color: var(--color-expected-text);
+}
+
+/* ─── 帮助区 ─── */
+.task-help {
+  border-top: 1px solid var(--color-gold-light);
+  padding-top: var(--sp-2);
+}
+
+.help-toggle {
+  width: 100%;
+  padding: var(--sp-1) 0;
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+  background: none;
+  text-align: left;
+  transition: color var(--transition);
+}
+.help-toggle:hover {
+  color: var(--color-accent-light);
+}
+
+.help-body {
+  padding: var(--sp-2) var(--sp-3);
+  margin-top: var(--sp-1);
+  background: rgba(201, 169, 110, 0.08);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--color-text-light);
+}
+
+.help-body p {
+  margin-bottom: var(--sp-1);
+  font-weight: 600;
+}
+
+.help-body ol {
+  padding-left: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.help-body li {
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+}
+
+.help-body strong {
+  color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .task-block {
+    padding: var(--sp-3) var(--sp-2);
+  }
+  .step-header {
+    padding: var(--sp-2);
+    gap: var(--sp-2);
+  }
+  .step-number {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+  .purpose-box,
+  .expected-box {
+    margin: 0 var(--sp-2) var(--sp-2) var(--sp-2);
+    padding: var(--sp-1) var(--sp-3);
+  }
 }
 </style>
 

@@ -55,7 +55,7 @@ document.querySelector("#composer").textContent = composer;
 document.querySelector("#piece").textContent = piece;
 document.querySelector("#description").textContent = description;
 ```
-切换到 JS 标签页查看完整代码。运行后，JavaScript 会自动把信息填入页面。
+打开 JS 选项卡查看完整代码。运行后，JavaScript 会自动把信息填入页面。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -75,6 +75,10 @@ document.querySelector("#description").textContent = description;
 挑战：新增一个变量 `year`，存创作年份，并把它也显示在页面上
 ::::
 
+:::
+
+:::recap
+这一节你学会了用变量存储数据——`let` 声明可以修改的变量，`const` 声明不能改的常量。用反引号包裹的模板字符串（`` `...${变量}...` ``）比用 `+` 拼接文字更清晰。你还学会了用 `document.querySelector()` 找到页面中的元素，再用 `.textContent` 修改它的文字。现在你的 JS 代码可以把数据"送"到网页上显示了。
 :::
 
 :::listen-to

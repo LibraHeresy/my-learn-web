@@ -41,6 +41,7 @@ export type BlockType =
   | 'block:task'
   | 'block:hint'
   | 'block:listen-to'
+  | 'block:recap'
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 
@@ -107,6 +108,14 @@ export type ListenToBlockNode = {
   steps?: never
 }
 
+export type RecapBlockNode = {
+  type: 'block:recap'
+  name: 'recap'
+  content: string
+  attrs?: BlockAttrs
+  steps?: never
+}
+
 /**
  * 课程正文中的块节点（判别联合）。
  * 通过 `.type` 或 `.name` 字段收窄后可获得精确类型，例如：
@@ -119,6 +128,7 @@ export type BlockNode =
   | TaskBlockNode
   | HintBlockNode
   | ListenToBlockNode
+  | RecapBlockNode
 
 export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | BlockNode
 

@@ -47,7 +47,7 @@ export function useCodePreview(code: Ref<UserCode>) {
 
   // 从 localStorage 读取用户的实时预览偏好
   const savedLive = safeGetItem(LIVE_MODE_KEY)
-  const livePreviewMode = ref(savedLive.value === '1')
+  const livePreviewMode = ref(savedLive.value !== '0')
 
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
 

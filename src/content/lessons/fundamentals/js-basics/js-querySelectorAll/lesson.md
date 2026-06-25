@@ -50,7 +50,7 @@ cards.forEach(function(card) {
   card.classList.toggle("hidden", !card.classList.contains("strings"));
 });
 ```
-切换到 JS 标签页查看完整代码，预览区点击按钮试试批量效果。
+打开 JS 选项卡查看完整代码，预览区点击按钮试试批量效果。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -70,6 +70,10 @@ cards.forEach(function(card) {
 挑战：新增一个「高亮管乐」按钮。在 HTML 中添加按钮，在 JS 中用 `querySelector` 获取，绑定 click 事件，遍历所有卡片，用 `card.classList.contains("winds")` 判断是否是管乐类，只给管乐卡片加 `.highlighted` 类
 ::::
 
+:::
+
+:::recap
+这一节你学会了批量操作元素——`querySelectorAll` 选中所有匹配的元素（像指挥对全声部做统一手势），用 `forEach` 遍历后对每一个做操作。`classList.add/remove/toggle` 比直接改 `style` 更优雅——JS 管逻辑，CSS 管外观，各司其职。现在你不用一个一个处理元素了，一条指令就能操控一整组卡片。
 :::
 
 :::listen-to

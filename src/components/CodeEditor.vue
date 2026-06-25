@@ -58,9 +58,9 @@ function createEditorView(code: UserCode, tab: Tab) {
   if (!editorHost.value) return
 
   const tabLabels: Record<Tab, string> = {
-    html: '本课程无 HTML 代码',
-    css:  '本课程无 CSS 代码',
-    js:   '本课程无 JS 代码'
+    html: '这里暂时没有 HTML 代码——后面的课程会学到！先看教学内容吧 🎵',
+    css:  '这里暂时没有 CSS 代码——后面的课程会学到！先专注 HTML 吧 🎵',
+    js:   '这里暂时没有 JS 代码——别急，后面会越来越有趣 ✨'
   }
 
   editorView = new EditorView({
@@ -263,7 +263,7 @@ async function doFormat() {
   display: flex;
   gap: 0;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--color-editor-border);
   flex-shrink: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -276,7 +276,7 @@ async function doFormat() {
   font-size: var(--fs-sm);
   font-weight: 500;
   font-family: var(--font-code);
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--color-editor-text-dim);
   background: transparent;
   border-bottom: 2px solid transparent;
   border-radius: 0;
@@ -304,7 +304,7 @@ async function doFormat() {
   gap: 3px;
   padding: var(--sp-1) var(--sp-3);
   font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-editor-text-muted);
   background: transparent;
   border: none;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -316,12 +316,12 @@ async function doFormat() {
   border-right: none;
 }
 .editor-action-btn:hover {
-  color: #fff;
+  color: var(--color-text-inverse);
   background: rgba(255, 255, 255, 0.08);
 }
 
 .editor-action-btn--primary {
-  color: #fff;
+  color: var(--color-text-inverse);
   background: var(--color-gold);
 }
 .editor-action-btn--primary:hover {

@@ -67,6 +67,10 @@ margin: 0 auto;
 
 :::
 
+:::recap
+这一节你学会了各种居中方法——`text-align: center` 让文字居中，`margin: 0 auto` 让固定宽度的块级元素水平居中，Flexbox 的 `justify-content: center` 和 `align-items: center` 组合可以一键水平+垂直居中。现在你知道了：文字居中用 `text-align`，块元素居中用 Flexbox 或 `margin: auto`，再也不用手动调整距离了。
+:::
+
 :::listen-to
 莫扎特《G大调弦乐小夜曲》K.525 — 完美的对称结构和平衡感，每一个乐句都恰到好处，就像精心的页面布局。
 :::

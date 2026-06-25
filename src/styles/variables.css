@@ -29,6 +29,34 @@
   --color-accent-bg:     #FDF0F0;      /* 强调色浅底 */
   --color-accent-border: #E8C0C0;      /* 强调色边框 */
   --color-gold-bg:       #FFF8EC;      /* 金色浅底 */
+  --color-text-inverse:  #ffffff;      /* 深色/强调色底上的白色文字 */
+
+  /* ===== 编辑器深色面板专用 ===== */
+  --color-editor-border:      rgba(255, 255, 255, 0.08);
+  --color-editor-text-dim:    rgba(255, 255, 255, 0.45);
+  --color-editor-text-muted:  rgba(255, 255, 255, 0.6);
+
+  /* ===== 内容块配色 ===== */
+  --color-task-bg:        #fff8f0;     /* 任务块背景 */
+  --color-task-card-bg:   #fffdf9;     /* 任务步骤卡片背景 */
+  --color-purpose-bg:     #f4f8fc;     /* 目的说明背景 */
+  --color-purpose-border: #8ba4b8;     /* 目的说明边框 */
+  --color-purpose-text:   #6b8a9e;     /* 目的说明标签 */
+  --color-expected-bg:    #f4f8f0;     /* 预期结果背景 */
+  --color-expected-border:#8ba87d;     /* 预期结果边框 */
+  --color-expected-text:  #6b8a5e;     /* 预期结果标签 */
+  --color-hint-bg:        #fef9e7;     /* 提示块背景 */
+  --color-hint-border:    #f0d77b;     /* 提示块边框 */
+  --color-hint-title:     #8b7d3c;     /* 提示块标题 */
+  --color-listen-bg:      #f5f9f0;     /* 聆听块背景 */
+  --color-example-bg:     #f0f4f8;     /* 示例块背景（冷调，与讲解块暖调区分） */
+
+  /* ===== 错误面板配色 ===== */
+  --color-error-accent:   #d4534a;     /* 错误强调色 */
+  --color-error-panel-bg: #3d1f1f;     /* 错误面板背景 */
+  --color-error-text:     #f0c0b8;     /* 错误面板文字 */
+  --color-error-muted:    #c08078;     /* 错误面板弱文字 */
+  --color-error-hint:     #ffd580;     /* 错误提示文字 */
 
   /* ===== 字体 ===== */
   --font-heading:  'Source Han Serif SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
@@ -38,6 +66,7 @@
   /* ===== 字号 ===== */
   --fs-xs:     0.75rem;
   --fs-sm:     0.875rem;
+  --fs-body:   0.9375rem;   /* 正文阅读字号，介于 sm(14px) 和 base(16px) 之间 */
   --fs-base:   1rem;
   --fs-md:     1.125rem;
   --fs-lg:     1.25rem;

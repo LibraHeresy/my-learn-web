@@ -78,6 +78,10 @@ addPiece({ name: '雨滴', composer: '肖邦', period: '浪漫主义' })
 记得：`fetch` 需要 await，`response.json()` 也需要 await。别忘了用 try/catch 包裹。
 :::
 
+:::recap
+你学会了用 fetch() 让 JavaScript 和互联网上的服务器"对话"——发 GET 请求获取数据，发 POST 请求提交数据。请求需要两次 await（一次等网络响应，一次等 JSON 解析），还要用 try/catch 保护，防止网络出问题时程序崩溃。
+:::
+
 :::listen-to
 贝多芬《第五交响曲》第一乐章 — 那著名的"命运敲门声"，短短四个音就传递了强大的信息。fetch 请求也如此：一个简单的 GET 请求，就能带回丰富的数据。
 :::

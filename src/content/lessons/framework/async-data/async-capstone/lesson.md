@@ -77,6 +77,10 @@ https://itunes.apple.com/search?term=贝多芬&limit=10&country=cn
 下一步：登台篇。你将学习用工程化工具（npm、Vite、Vue）搭建专业项目。准备好了吗？
 :::
 
+:::recap
+这是异步篇的结业项目——你亲手做了一个音乐搜索器。用户输入关键词后，经过防抖等待，调用 iTunes Search API 获取歌曲信息，再把结果展示出来。你把 Promise、async/await、fetch、API 封装和防抖全部整合到了一起。
+:::
+
 :::listen-to
 维瓦尔第《四季·春》— 一个完整的协奏曲乐章，独奏与合奏交替，结构清晰、旋律优美。你的音乐搜索器也应该有这种"完整感"——输入、搜索、展示，一气呵成。
 :::

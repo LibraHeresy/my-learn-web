@@ -56,6 +56,10 @@ classList` 的优势：
 
 :::
 
+:::recap
+你学会了对比 innerHTML 和 createElement 两种渲染方式——innerHTML 适合一次性渲染静态内容，createElement 适合需要绑定事件、精细控制的场景。还学会了用 classList.add/remove/toggle 精确操控样式类。
+:::
+
 :::listen-to
 巴赫《音乐的奉献》— 这首作品中的每一行都是独立的声部线条，精确编织在一起。createElement 就像在五线谱上逐个添加音符——每个音符都可以独立地定位、装饰、甚至移除。
 :::

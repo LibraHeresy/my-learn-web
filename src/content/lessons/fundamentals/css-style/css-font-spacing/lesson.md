@@ -5,7 +5,7 @@
 :::
 
 :::explain{title="字体系列"}
-font-family 属性设置字体，font-size 设置字号，font-weight 设置粗细，line-height 设置行高，text-align 设置对齐方式。就像扬琴演奏中不同竹法带来不同音色——字体选择决定了文字的「气质」。
+font-family 属性设置字体，font-size 设置字号，font-weight 设置粗细，line-height 设置行高，text-align 设置对齐方式。就像穿正装和穿运动服给人完全不同的感觉——字体选择决定了文字的「气质」。
 ```css
 h1 {
   font-family: "Noto Serif SC", serif;
@@ -29,7 +29,7 @@ p {
 :::
 
 :::example{title="看例子"}
-下面这段 CSS 展示了字体和间距的综合运用。切换到 CSS 标签页查看：
+下面这段 CSS 展示了字体和间距的综合运用。打开 CSS 选项卡查看：
 ```css
 .card {
   font-family: "Noto Serif SC", serif;
@@ -83,6 +83,10 @@ p { font-size: 1rem; }            /* 16px */
 - 全屏布局 → `vw` / `vh`
 - 容器内比例 → `%`
 > 🎵 类比：`px` 像调音器上的刻度（精确但死板），`rem` 像移调后的音高（跟着基准音变），`vw` 像音乐厅的声场大小（跟着空间变）。
+:::
+
+:::recap
+这一节你学会了控制文字的字体和间距——`font-family` 选字体风格（衬线体典雅，无衬线体简洁），`line-height` 调行间距让文字透气，`letter-spacing` 调字间距，`text-align` 控制左中右对齐。你还了解了 CSS 中的长度单位：`px` 是固定像素，`rem` 跟着根字体走，`vw`/`vh` 跟着屏幕大小走。现在你可以把一段文字排得像书本一样舒服好读了。
 :::
 
 :::listen-to

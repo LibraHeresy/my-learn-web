@@ -6,6 +6,7 @@ import ListenToBlock from './renderers/ListenToBlock.vue'
 import MusicAnalogyBlock from './renderers/MusicAnalogyBlock.vue'
 import TaskBlock from './renderers/TaskBlock.vue'
 import HintBlock from './renderers/HintBlock.vue'
+import RecapBlock from './renderers/RecapBlock.vue'
 import UnsupportedBlock from './renderers/UnsupportedBlock.vue'
 
 const blockRegistry: Partial<Record<BlockName, Component>> = {
@@ -15,6 +16,7 @@ const blockRegistry: Partial<Record<BlockName, Component>> = {
   task: TaskBlock,
   hint: HintBlock,
   'listen-to': ListenToBlock,
+  recap: RecapBlock,
 }
 
 export function resolveBlockComponent(name: BlockName): Component {

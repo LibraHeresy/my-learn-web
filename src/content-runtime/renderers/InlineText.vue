@@ -58,9 +58,9 @@ const InlineToken = defineComponent({
 .inline-code {
   background: var(--color-bg-warm);
   padding: 1px 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   font-family: var(--font-code);
-  font-size: 0.9em;
+  font-size: 0.92em;
   color: var(--color-accent);
 }
 </style>

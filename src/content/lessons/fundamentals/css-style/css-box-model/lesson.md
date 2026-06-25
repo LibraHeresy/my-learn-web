@@ -10,7 +10,7 @@
 
 :::explain{title="盒模型的四层结构"}
 从内到外，每个元素有四层空间：
-[[html]]
+```html
 <div class="box-model-demo">
   <div class="bm-margin"><span class="bm-label">margin 外边距</span>
     <div class="bm-border"><span class="bm-label">border 边框</span>
@@ -20,7 +20,7 @@
     </div>
   </div>
 </div>
-[[/html]]
+```
 最外层 `margin`（外边距），往里一层 `border`（边框），再往里 `padding`（内边距），最里面是 `content`（内容）。理解这个层次关系就掌握了 CSS 布局的基础！
 :::
 
@@ -92,6 +92,10 @@
 试试给 `h2` 加一个 `margin-top: 0` 消除顶部多余间距
 ::::
 
+:::
+
+:::recap
+这一节你学会了一个非常重要的概念——盒模型。每个元素从内到外有四层：内容（`content`）、内边距（`padding`，内容到边框的距离）、边框（`border`）、外边距（`margin`，元素之间的距离）。记住一个窍门：`padding` 有背景色（在盒子里），`margin` 是透明的（盒子之外）。你还学会了用 `box-sizing: border-box` 避免宽度计算溢出。现在你理解网页里的每个元素都是一个"盒子"了。
 :::
 
 :::listen-to

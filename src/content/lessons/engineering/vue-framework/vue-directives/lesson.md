@@ -5,7 +5,7 @@
 :::
 
 :::explain{title="v-bind — 动态绑定属性"}
-Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑定到属性，v-if/v-show 控制显示隐藏，v-for 循环渲染列表，v-on（简写 @）监听事件，v-model 双向绑定表单。就像扬琴谱上的各种演奏记号，每个指令控制一种行为。v-bind 把 JS 表达式的值绑定到 HTML 属性上，简写是 :：
+Vue 指令是以 v- 开头的特殊属性——v-bind（简写 :）把数据绑定到属性，v-if/v-show 控制显示隐藏，v-for 循环渲染列表，v-on（简写 @）监听事件，v-model 双向绑定表单。就像遥控器上的各种按钮——每个按钮控制一种功能：音量键控制大小、频道键切换节目。v-bind 把 JS 表达式的值绑定到 HTML 属性上，简写是 :：
 ```html
 <!-- 完整写法 -->
 <img v-bind:src="imageUrl">
@@ -152,6 +152,10 @@ key 是 Vue 识别每个节点的唯一标识。没有 key 或 key 不唯一会�
 &lt;/template&gt;</code></pre><p>关键：<code>v-for="(track, index)"</code> 中 index 从 0 开始；<code>{{ index + 1 }}</code> 显示为 1,2,3...；<code>:key="track.id"</code> 始终用唯一 ID，不要用 index 做 key。</p></div></details>[[/html]]
 ::::
 
+:::
+
+:::recap
+你学会了 Vue 的核心指令——v-bind（:）绑定属性，v-if/v-show 控制显示隐藏，v-for 循环渲染列表，v-on（@）监听事件。这些指令就像乐谱上的演奏记号，各司其职，组合起来就能写出完整的页面。
 :::
 
 :::listen-to

@@ -5,7 +5,7 @@
 :::
 
 :::explain{title="背景颜色"}
-background-color 属性设置元素的背景色，border 设置边框，border-radius 设置圆角，box-shadow 设置阴影。就像给扬琴谱选暖色纸、加装饰边框——让页面更有层次感。
+background-color 属性设置元素的背景色，border 设置边框，border-radius 设置圆角，box-shadow 设置阴影。就像给照片选相框和背景纸——让画面更有层次感。
 ```css
 div {
   background-color: #FFFAF2;
@@ -41,7 +41,7 @@ div {
   color: #8B2E2E;            /* 文字颜色：暗红，像古典乐谱标题 */
 }
 ```
-切换到 CSS 标签页查看完整代码。
+打开 CSS 选项卡查看完整代码。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -61,6 +61,10 @@ div {
 试试把 `solid` 改成 `dashed`，看虚线边框
 ::::
 
+:::
+
+:::recap
+这一节你学会了给元素加背景和边框——`background-color` 像舞台幕布给卡片上底色，`border` 用三个值（粗细、样式、颜色）画出边框，`border-radius` 让尖角变圆角。边框样式可以是实线（`solid`）、虚线（`dashed`）或点线（`dotted`）。现在你可以做出有层次感、有装饰效果的卡片了。
 :::
 
 :::listen-to

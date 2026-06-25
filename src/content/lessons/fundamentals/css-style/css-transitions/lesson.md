@@ -5,7 +5,7 @@
 :::
 
 :::explain{title="transition — 平滑过渡"}
-transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。ease 是默认的时间曲线（慢→快→慢），linear 是匀速。就像扬琴曲的渐快或渐慢——不是突然切换速度，而是平滑过渡。
+transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐变而不是瞬间跳变。ease 是默认的时间曲线（慢→快→慢），linear 是匀速。就像汽车慢慢踩油门加速——不是突然从 0 飙到 100，而是平顺地变快。
 ```css
 .card {
   background: #FFFAF2;
@@ -92,6 +92,10 @@ transition 属性让 CSS 变化变得平滑——比如鼠标悬停时颜色渐�
 挑战：新建一个 `@keyframes spin`，用 `rotate` 做一个旋转动画
 ::::
 
+:::
+
+:::recap
+这一节你学会了让页面的变化变得平滑自然——`transition` 让颜色、大小等属性的切换不再瞬间跳变，而是像渐强音一样慢慢过渡。`transform` 可以移动（`translateY`）、缩放（`scale`）、旋转（`rotate`）元素。你还初步认识了 `@keyframes`，它能让动画自动循环播放，不需要鼠标悬停触发。现在你的网页元素可以优雅地流动起来了。
 :::
 
 :::listen-to

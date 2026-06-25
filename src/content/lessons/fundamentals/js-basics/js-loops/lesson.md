@@ -51,7 +51,7 @@ composers.forEach(function(name, index) {
 // innerHTML：把拼接好的 HTML 字符串插入页面
 document.querySelector("#list").innerHTML = html;
 ```
-切换到 JS 标签页查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。
+打开 JS 选项卡查看完整代码。4 张卡片由一个循环生成——如果加到 10 个也不用手动复制。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -71,6 +71,10 @@ document.querySelector("#list").innerHTML = html;
 挑战：在 `forEach` 循环内增加 `if` 条件判断，只显示名字长度大于 2 的作曲家（过滤掉单字名）。提示：在循环体内用 `if (name.length > 2)` 包裹 HTML 拼接代码
 ::::
 
+:::
+
+:::recap
+这一节你学会了用循环批量处理数据——`forEach` 遍历数组的每一项，对每一项都执行相同的操作。用 `for` 循环可以手动控制起始、停止和步进。你再也不用复制粘贴代码来处理每一条数据了——10 条数据和 100 条数据，代码量完全一样。现在你可以把一整组数据自动渲染成一整排卡片了。
 :::
 
 :::listen-to
