@@ -58,7 +58,8 @@ https://itunes.apple.com/search?term=贝多芬&limit=10&country=cn
 4. **处理状态** — loading、error、no results 三种状态
 5. **展示结果** — 歌曲名、歌手、封面图
 完成的代码结构应该像这样清晰分层：
-```用户输入 → debounce 等待 → api.searchMusic() → 更新 UI
+```
+用户输入 → debounce 等待 → api.searchMusic() → 更新 UI
 ```
 :::
 

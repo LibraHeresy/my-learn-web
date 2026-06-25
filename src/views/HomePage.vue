@@ -6,6 +6,7 @@ import { getAllProjects } from '../content-loaders/projects'
 import { useProgressStore } from '../stores/progress'
 import { getChapter } from '../content-loaders/taxonomy'
 import { prologueCards } from '../content-loaders/prologues'
+import type { HomeProjectCardItem } from '../content-runtime/types'
 import HomeJourneySection from '../components/home/HomeJourneySection.vue'
 import HomeProjectsSection from '../components/home/HomeProjectsSection.vue'
 import HomePrologueSection from '../components/home/HomePrologueSection.vue'
@@ -24,13 +25,13 @@ const projects = computed(() =>
     .sort((a, b) => a.meta.order - b.meta.order),
 )
 
-const projectsForSection = computed(() =>
+const projectsForSection = computed<HomeProjectCardItem[]>(() =>
   projects.value.map((p) => ({
     id: p.id,
     title: p.meta.title,
     subtitle: p.meta.subtitle,
     icon: p.meta.icon,
-    musicAnalogy: p.meta.musicAnalogy,
+    musicAnalogyBody: p.meta.musicAnalogyBody,
     listenTo: p.meta.listenTo,
     stepCount: p.stepCount,
   })),

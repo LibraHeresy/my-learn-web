@@ -113,15 +113,17 @@ describe('数据完整性', () => {
         const full = await getProject(p.id)
         expect(full, `project "${p.id}" 无法加载`).not.toBeNull()
         expect(full!.steps.length, `project "${p.id}" 没有步骤`).toBeGreaterThan(0)
+        expect(full!.meta.musicAnalogyBody?.length, `project "${p.id}" meta.musicAnalogyBody 缺失`).toBeGreaterThan(0)
       }
     })
 
-    it('所有 step 的 task 非空', async () => {
+    it('所有项目步骤都生成结构化正文字段', async () => {
       for (const p of projects) {
         const full = await getProject(p.id)
         expect(full, `project "${p.id}" 无法加载`).not.toBeNull()
         for (const s of full!.steps) {
-          expect(s.task.trim(), `project "${p.id}" step "${s.title}" task 为空`).not.toBe('')
+          expect(s.contentBody.length, `project "${p.id}" step "${s.title}" contentBody 缺失`).toBeGreaterThan(0)
+          expect(s.taskBody.length, `project "${p.id}" step "${s.title}" taskBody 缺失`).toBeGreaterThan(0)
         }
       }
     })

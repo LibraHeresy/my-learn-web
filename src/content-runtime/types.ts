@@ -1,5 +1,7 @@
 export type LessonMode = 'sandbox' | 'local'
 
+import type { UserCode } from '../types'
+
 export type ContentMeta = {
   id: string
   title: string
@@ -137,14 +139,10 @@ export type CompiledLesson = {
   id: string
   meta: ContentMeta
   body: ContentBodyNode[]
-  starter: {
-    html: string
-    css: string
-    js: string
-  }
+  starter: UserCode
 }
 
-export type ProjectMeta = {
+export type CompiledProjectMeta = {
   id: string
   title: string
   subtitle: string
@@ -154,26 +152,37 @@ export type ProjectMeta = {
   mode: LessonMode
   musicAnalogy: string
   listenTo?: string
+  musicAnalogyBody: ContentBodyNode[]
 }
 
-export type ProjectStep = {
+export type CompiledProjectStep = {
   title: string
-  content: string
-  task: string
-  hint?: string
-  purpose?: string
-  expectedResult?: string
-  starterCode?: { html: string; css: string; js: string }
+  starterCode?: UserCode
+  contentBody: ContentBodyNode[]
+  taskBody: ContentBodyNode[]
+  hintBody?: ContentBodyNode[]
+  purposeBody?: ContentBodyNode[]
+  expectedResultBody?: ContentBodyNode[]
 }
 
 export type CompiledProject = {
   id: string
-  meta: ProjectMeta
-  steps: ProjectStep[]
+  meta: CompiledProjectMeta
+  steps: CompiledProjectStep[]
 }
 
 export type ProjectListItem = {
   id: string
-  meta: ProjectMeta
+  meta: CompiledProjectMeta
+  stepCount: number
+}
+
+export type HomeProjectCardItem = {
+  id: string
+  title: string
+  subtitle: string
+  icon: string
+  musicAnalogyBody: ContentBodyNode[]
+  listenTo?: string
   stepCount: number
 }

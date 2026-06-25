@@ -12,11 +12,10 @@ import type {
   BlockNode,
   BlockType,
   CompiledLesson,
-  CompiledProject,
+  CompiledProjectMeta,
+  CompiledProjectStep,
   ContentBodyNode,
   ContentMeta,
-  ProjectMeta,
-  ProjectStep,
   TaskBlockNode,
   TaskStep,
 } from '../src/content-runtime/types'
@@ -554,7 +553,7 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
     },
   }
 }
-function toProjectMeta(data: Record<string, unknown>): ProjectMeta {
+function toProjectMeta(data: Record<string, unknown>): SourceProjectMeta {
   const required = ['id', 'title', 'subtitle', 'icon', 'track', 'order', 'mode', 'musicAnalogy'] as const
   for (const key of required) {
     if (!(key in data)) throw new Error(`Missing required project meta field: ${key}`)
@@ -570,9 +569,41 @@ function toProjectMeta(data: Record<string, unknown>): ProjectMeta {
     icon: String(data.icon),
     track: String(data.track),
     order: Number(data.order),
-    mode: mode as ProjectMeta['mode'],
+    mode: mode as SourceProjectMeta['mode'],
     musicAnalogy: String(data.musicAnalogy),
     listenTo: typeof data.listenTo === 'string' ? data.listenTo : undefined,
+  }
+}
+
+type ParsedProject = {
+  id: string
+  meta: SourceProjectMeta
+  steps: SourceProjectStep[]
+}
+
+type SourceProjectMeta = {
+  id: string
+  title: string
+  subtitle: string
+  icon: string
+  track: string
+  order: number
+  mode: 'sandbox' | 'local'
+  musicAnalogy: string
+  listenTo?: string
+}
+
+type SourceProjectStep = {
+  title: string
+  content: string
+  task: string
+  hint?: string
+  purpose?: string
+  expectedResult?: string
+  starterCode?: {
+    html: string
+    css: string
+    js: string
   }
 }
 
@@ -596,7 +627,7 @@ async function collectProjectDirs(root: string): Promise<string[]> {
   return result
 }
 
-async function compileProject(projectDir: string): Promise<CompiledProject> {
+async function compileProject(projectDir: string): Promise<ParsedProject> {
   const metaPath = path.join(projectDir, 'meta.yaml')
   const jsonPath = path.join(projectDir, 'project.json')
   const [metaRaw, jsonRaw] = await Promise.all([
@@ -604,7 +635,7 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
     readFile(jsonPath, 'utf8'),
   ])
 
-  let meta: ProjectMeta
+  let meta: SourceProjectMeta
   try {
     meta = toProjectMeta(yaml.load(metaRaw) as Record<string, unknown>)
   } catch (e) {
@@ -612,7 +643,7 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
     throw new Error(`Failed to parse ${path.relative(projectRoot, metaPath)}: ${msg}`)
   }
 
-  const parsed = JSON.parse(jsonRaw) as { steps?: ProjectStep[] }
+  const parsed = JSON.parse(jsonRaw) as { steps?: SourceProjectStep[] }
   if (!Array.isArray(parsed.steps)) {
     throw new Error(`Invalid project.json: missing steps array in ${path.relative(projectRoot, jsonPath)}`)
   }
@@ -621,6 +652,65 @@ async function compileProject(projectDir: string): Promise<CompiledProject> {
     id: meta.id,
     meta,
     steps: parsed.steps,
+  }
+}
+
+function compileProjectStepBodies(
+  projectId: string,
+  step: SourceProjectStep,
+  termKeys: string[],
+): CompiledProjectStep {
+  function compileRequiredField(fieldName: 'content' | 'task', value: string) {
+    const injected = injectTerms(value, termKeys)
+    try {
+      return {
+        body: parseLessonMarkdown(injected),
+      }
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      throw new Error(`Failed to parse project "${projectId}" step "${step.title}" field "${fieldName}": ${msg}`)
+    }
+  }
+
+  function compileOptionalField(fieldName: 'hint' | 'purpose' | 'expectedResult', value?: string) {
+    if (!value) return undefined
+    const injected = injectTerms(value, termKeys)
+    try {
+      return parseLessonMarkdown(injected)
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e)
+      throw new Error(`Failed to parse project "${projectId}" step "${step.title}" field "${fieldName}": ${msg}`)
+    }
+  }
+
+  const contentBody = compileRequiredField('content', step.content).body
+  const taskBody = compileRequiredField('task', step.task).body
+  const hintBody = compileOptionalField('hint', step.hint)
+  const purposeBody = compileOptionalField('purpose', step.purpose)
+  const expectedResultBody = compileOptionalField('expectedResult', step.expectedResult)
+
+  return {
+    title: step.title,
+    starterCode: step.starterCode,
+    contentBody,
+    taskBody,
+    hintBody,
+    purposeBody,
+    expectedResultBody,
+  }
+}
+
+function compileProjectMetaBody(meta: SourceProjectMeta, termKeys: string[]): CompiledProjectMeta {
+  const injectedMusicAnalogy = injectTerms(meta.musicAnalogy, termKeys)
+  try {
+    return {
+      ...meta,
+      musicAnalogy: injectedMusicAnalogy,
+      musicAnalogyBody: parseLessonMarkdown(injectedMusicAnalogy),
+    }
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e)
+    throw new Error(`Failed to parse project "${meta.id}" meta.musicAnalogy: ${msg}`)
   }
 }
 
@@ -868,14 +958,8 @@ export async function main() {
     const raw = await Promise.all(projectDirs.map((dir) => compileProject(dir)))
     compiledProjects = raw.map((project) => ({
       ...project,
-      steps: project.steps.map((step) => ({
-        ...step,
-        content: injectTerms(step.content, termKeys),
-        task: injectTerms(step.task, termKeys),
-        hint: step.hint ? injectTerms(step.hint, termKeys) : undefined,
-        purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
-        expectedResult: step.expectedResult ? injectTerms(step.expectedResult, termKeys) : undefined,
-      })),
+      meta: compileProjectMetaBody(project.meta, termKeys),
+      steps: project.steps.map((step) => compileProjectStepBodies(project.id, step, termKeys)),
     }))
     projectDirs.forEach((dir, i) => {
       newCache.projects[path.relative(projectRoot, dir)] = projectHashes[i]
@@ -884,14 +968,8 @@ export async function main() {
     const dirtyRaw = await Promise.all(dirtyProjectDirs.map((dir) => compileProject(dir)))
     const dirtyMapped = dirtyRaw.map((project) => ({
       ...project,
-      steps: project.steps.map((step) => ({
-        ...step,
-        content: injectTerms(step.content, termKeys),
-        task: injectTerms(step.task, termKeys),
-        hint: step.hint ? injectTerms(step.hint, termKeys) : undefined,
-        purpose: step.purpose ? injectTerms(step.purpose, termKeys) : undefined,
-        expectedResult: step.expectedResult ? injectTerms(step.expectedResult, termKeys) : undefined,
-      })),
+      meta: compileProjectMetaBody(project.meta, termKeys),
+      steps: project.steps.map((step) => compileProjectStepBodies(project.id, step, termKeys)),
     }))
 
     const unchangedProjects = projectDirs.filter((dir) => {

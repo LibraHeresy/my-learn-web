@@ -1,16 +1,9 @@
 <script setup lang="ts">
-import { parseInline } from '../../utils/markdown'
+import type { HomeProjectCardItem } from '../../content-runtime/types'
+import DocumentBodyRenderer from '../../content-runtime/renderers/DocumentBodyRenderer.vue'
 
 defineProps<{
-  projects: Array<{
-    id: string
-    title: string
-    subtitle: string
-    icon: string
-    musicAnalogy: string
-    listenTo?: string
-    stepCount: number
-  }>
+  projects: HomeProjectCardItem[]
 }>()
 
 const emit = defineEmits<{
@@ -43,7 +36,12 @@ const emit = defineEmits<{
           </div>
         </div>
 
-        <p class="project-analogy" v-html="parseInline(project.musicAnalogy)"></p>
+        <div class="project-analogy">
+          <DocumentBodyRenderer
+            v-if="project.musicAnalogyBody?.length"
+            :nodes="project.musicAnalogyBody"
+          />
+        </div>
 
         <div class="project-meta">
           <span v-if="project.stepCount > 0" class="project-steps">{{ project.stepCount }} 个步骤</span>
@@ -173,6 +171,21 @@ const emit = defineEmits<{
   color: var(--color-text-light);
   line-height: 1.6;
   margin: var(--sp-3) 0;
+}
+
+:deep(.project-analogy .content-doc) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+:deep(.project-analogy .doc-body) {
+  gap: var(--sp-2);
+}
+
+:deep(.project-analogy .doc-paragraph),
+:deep(.project-analogy .doc-term) {
+  color: var(--color-text-light);
 }
 
 .project-meta {

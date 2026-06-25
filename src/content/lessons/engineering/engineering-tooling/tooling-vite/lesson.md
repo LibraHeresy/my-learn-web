@@ -30,7 +30,8 @@ npm run dev           # 启动开发服务器
 ```
 浏览器会自动打开 `http://localhost:5173`，你会看到一个 Vue 的欢迎页面！
 **项目结构一览：**
-```music-collection/
+```
+music-collection/
 ├── index.html          # 入口 HTML
 ├── package.json        # 项目配置
 ├── vite.config.js      # Vite 配置

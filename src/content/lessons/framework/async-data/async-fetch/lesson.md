@@ -25,7 +25,8 @@ async function getPieces() {
   console.log('获取到的曲目：', data)
   return data
 }
-```**两个 await：** 第一个等网络响应，第二个等 JSON 解析。
+```
+**两个 await：** 第一个等网络响应，第二个等 JSON 解析。
 就像你先收到一个包裹（response），然后拆开包裹看里面的内容（.json()）。
 :::
 
@@ -45,7 +46,8 @@ async function addPiece(piece) {
 }
 // 使用
 addPiece({ name: '雨滴', composer: '肖邦', period: '浪漫主义' })
-```POST 类似寄信——你需要写地址（URL）、贴邮票（headers）、装信封（body）。
+```
+POST 类似寄信——你需要写地址（URL）、贴邮票（headers）、装信封（body）。
 :::
 
 :::example{title="HTTP 状态码 — 服务器的\"回应\""}

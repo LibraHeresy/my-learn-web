@@ -42,7 +42,8 @@ render(pieces);
 
 :::explain{title="为什么框架都用这个模式？"}
 Vue、React、Angular——所有现代前端框架的核心思想都是**数据驱动视图**。
-```数据 (Data)  ──→  渲染函数 (Render)  ──→  页面 (DOM)
+```
+数据 (Data)  ──→  渲染函数 (Render)  ──→  页面 (DOM)
     ↑                                         │
     └────── 用户操作 (Events) ──────────────────┘
 ```

@@ -6,7 +6,8 @@
 
 :::explain{title="为什么需要 Git？"}
 你可能经历过这种情况：
-```音乐收藏_v1.html
+```
+音乐收藏_v1.html
 音乐收藏_v2.html
 音乐收藏_v2_最终版.html
 音乐收藏_v2_真的最终版.html
@@ -36,7 +37,8 @@ git commit -m "初始化项目"    # 创建一次提交（存档）
 - `-m` = message（消息）
 **3. .gitignore** — 告诉 Git 忽略什么
 创建 `.gitignore` 文件（注意文件名前面有个点）：
-```node_modules/
+```
+node_modules/
 dist/
 .DS_Store
 ```

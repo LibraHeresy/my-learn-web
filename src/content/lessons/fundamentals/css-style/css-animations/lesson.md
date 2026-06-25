@@ -14,7 +14,8 @@
   75%  { transform: rotate(-5deg); }
   100% { transform: rotate(0deg); }
 }
-```百分比代表动画的进度（0% = 开始，100% = 结束）
+```
+百分比代表动画的进度（0% = 开始，100% = 结束）
 - 也可以用 from（= 0%）和 to（= 100%）
 - 每个关键帧可以定义任意多个 CSS 属性
 就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。
@@ -34,7 +35,8 @@
     forwards       /* animation-fill-mode: 结束后保持哪个状态 */
     running;       /* animation-play-state: running 或 paused */
 }
-```**常用 timing-function：**
+```
+**常用 timing-function：**
 - ease — 慢→快→慢（默认）
 - linear — 匀速
 - ease-in — 慢→快
@@ -61,7 +63,8 @@ transform: translateX(100px) rotate(45deg) scale(1.1);
 /* 设置旋转中心点 */
 transform-origin: center center;  /* 默认是元素中心 */
 transform-origin: top left;       /* 改为左上角 */
-```3D 变换（需要 perspective 才能看到深度效果）：
+```
+3D 变换（需要 perspective 才能看到深度效果）：
 ```css
 .container {
   perspective: 600px;  /* 透视距离——越小越夸张 */
@@ -70,7 +73,8 @@ transform-origin: top left;       /* 改为左上角 */
   transform: rotateY(30deg);   /* 绕 Y 轴旋转 */
   transform: rotateX(15deg);   /* 绕 X 轴翻转 */
 }
-```就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。
+```
+就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。
 :::
 
 :::example{title="看例子"}
@@ -100,7 +104,8 @@ transform-origin: top left;       /* 改为左上角 */
   45% { transform: scale(1.1); }
   60% { transform: scale(1); }
 }
-```看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。
+```
+看预览区——三张卡片各自执行不同的动画，播放/暂停按钮可以控制动画状态。
 :::
 
 :::task{title="动手试试 ✨"}

@@ -11,7 +11,8 @@ audio 标签可以在网页中嵌入音乐播放器——就像给你的网页�
 <audio controls src="音乐文件地址">
   你的浏览器不支持音频播放
 </audio>
-```- `controls` — 显示播放/暂停/音量控件
+```
+- `controls` — 显示播放/暂停/音量控件
 - `src` — 音频文件的地址
 - `autoplay` — 自动播放（浏览器通常会阻止）
 - `loop` — 循环播放
@@ -28,7 +29,8 @@ controls>
   <source src="music.ogg" type="audio/ogg">
   你的浏览器不支持音频播放
 </audio>
-```浏览器会从上到下尝试，播放第一个支持的格式。就像准备不同版本的乐谱给不同乐器！
+```
+浏览器会从上到下尝试，播放第一个支持的格式。就像准备不同版本的乐谱给不同乐器！
 :::
 
 :::explain{title="视频标签"}
@@ -37,7 +39,8 @@ controls>
 <video controls width="400" src="视频地址">
   你的浏览器不支持视频播放
 </video>
-```- `controls` — 显示播放控件
+```
+- `controls` — 显示播放控件
 - `width` / `height` — 设置播放器尺寸
 - 同样支持 `<source>` 提供多种格式
 现在你的网页可以像一个音乐播放器一样工作了！
@@ -52,7 +55,8 @@ controls>
   <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 <video controls width="320" src="视频地址"></video>
-```预览区现在有了一个可以点击播放的音乐播放器！
+```
+预览区现在有了一个可以点击播放的音乐播放器！
 :::
 
 :::hint{title="关于音频链接"}

@@ -1,4 +1,4 @@
-import { ref, watch, type Ref } from 'vue'
+import { ref, watch, onBeforeUnmount, type Ref } from 'vue'
 import type { UserCode } from '../types'
 import { errorGuardScript } from '../utils/errorGuard'
 import { safeGetItem, safeSetItem } from '../utils/storage'
@@ -78,6 +78,13 @@ export function useCodePreview(code: Ref<UserCode>) {
 
   // 初始自动渲染
   triggerPreview()
+
+  onBeforeUnmount(() => {
+    if (debounceTimer) {
+      clearTimeout(debounceTimer)
+      debounceTimer = null
+    }
+  })
 
   return { previewSrc, triggerPreview, livePreviewMode }
 }

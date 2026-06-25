@@ -22,13 +22,15 @@ ES6 引入了：
 const piece1 = pieces[0]
 const piece2 = pieces[1]
 const piece3 = pieces[2]
-```解构赋值让你一次取出：
+```
+解构赋值让你一次取出：
 ```js
 // 数组解构
 const [piece1, piece2, piece3] = pieces
 // 对象解构
 const { name, composer, period } = piece
-```就像从谱架上一次取下三本乐谱——整齐又高效。
+```
+就像从谱架上一次取下三本乐谱——整齐又高效。
 :::
 
 :::example{title="箭头函数 — 精简的\"旋律线\""}
@@ -45,7 +47,8 @@ const greet = name => {
   const message = '你好，' + name
   return message
 }
-```箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。
+```
+箭头函数就像用连音线简化了分散的音符——同样的旋律，更干净的记谱。
 **重要区别：箭头函数没有自己的 `this`。** 普通函数中的 `this` 取决于谁调用了它，而箭头函数的 `this` 继承自定义它的外层作用域。这在事件处理中尤其需要注意。
 :::
 
@@ -60,7 +63,8 @@ const all = [...classical, ...romantic]
 // 复制对象并修改
 const piece = { name: '月光', composer: '贝多芬' }
 const updated = { ...piece, period: '古典主义' }
-```就像把两个乐团的乐手合并成一个更大的乐团——不改变原来的，创造一个新的。
+```
+就像把两个乐团的乐手合并成一个更大的乐团——不改变原来的，创造一个新的。
 :::
 
 :::task{title="动手试试 ✨"}

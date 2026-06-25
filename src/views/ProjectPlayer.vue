@@ -4,9 +4,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { getAllProjects, getProject } from '../content-loaders/projects'
 import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
-import { parseInline, parseContent } from '../utils/markdown'
 import type { UserCode } from '../types'
 import type { CompiledProject } from '../content-runtime/types'
+import DocumentBodyRenderer from '../content-runtime/renderers/DocumentBodyRenderer.vue'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
@@ -186,24 +186,38 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
           <div :key="currentStep" class="step-panel">
             <div class="step-body">
               <h3 class="step-title">{{ currentStepData.title }}</h3>
-              <div class="step-content" v-html="parseContent(currentStepData.content)" />
+              <div class="step-content">
+                <DocumentBodyRenderer
+                  v-if="currentStepData.contentBody?.length"
+                  :nodes="currentStepData.contentBody"
+                />
+              </div>
               <div class="step-task">
                 <span class="step-task-label">你的任务</span>
-                <p v-html="parseInline(currentStepData.task)" />
+                <DocumentBodyRenderer
+                  v-if="currentStepData.taskBody?.length"
+                  :nodes="currentStepData.taskBody"
+                />
               </div>
-              <div v-if="currentStepData.purpose" class="purpose-box">
+              <div v-if="currentStepData.purposeBody?.length" class="purpose-box">
                 <span class="purpose-label">这一步的目的</span>
-                <div class="purpose-content" v-html="parseContent(currentStepData.purpose)" />
+                <div class="purpose-content">
+                  <DocumentBodyRenderer :nodes="currentStepData.purposeBody" />
+                </div>
               </div>
-              <div v-if="currentStepData.expectedResult" class="expected-box">
+              <div v-if="currentStepData.expectedResultBody?.length" class="expected-box">
                 <span class="expected-label">完成后你应该看到</span>
-                <div class="expected-content" v-html="parseContent(currentStepData.expectedResult)" />
+                <div class="expected-content">
+                  <DocumentBodyRenderer :nodes="currentStepData.expectedResultBody" />
+                </div>
               </div>
-              <div v-if="currentStepData.hint" class="step-hint-wrap">
+              <div v-if="currentStepData.hintBody?.length" class="step-hint-wrap">
                 <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
                   💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
                 </button>
-                <p v-if="hintExpanded" class="step-hint" v-html="parseInline(currentStepData.hint)" />
+                <div v-if="hintExpanded" class="step-hint">
+                  <DocumentBodyRenderer :nodes="currentStepData.hintBody" />
+                </div>
               </div>
             </div>
           </div>
@@ -414,6 +428,24 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
   overflow-wrap: break-word;
 }
 
+:deep(.step-content .content-doc),
+:deep(.step-task .content-doc),
+:deep(.purpose-content .content-doc),
+:deep(.expected-content .content-doc),
+:deep(.step-hint .content-doc) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+:deep(.step-content .doc-body),
+:deep(.step-task .doc-body),
+:deep(.purpose-content .doc-body),
+:deep(.expected-content .doc-body),
+:deep(.step-hint .doc-body) {
+  gap: var(--sp-2);
+}
+
 :deep(.step-content pre) {
   overflow-x: auto;
   white-space: pre-wrap;
@@ -452,6 +484,11 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
   margin: var(--sp-1) 0 0 0;
   font-size: var(--fs-sm);
   line-height: 1.6;
+}
+
+.step-task :deep(.doc-paragraph:first-child),
+.step-task :deep(.doc-term:first-child) {
+  margin-top: var(--sp-1);
 }
 
 .step-hint-wrap {

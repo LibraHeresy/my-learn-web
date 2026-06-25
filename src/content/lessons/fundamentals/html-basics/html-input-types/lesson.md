@@ -18,7 +18,8 @@ input 标签通过 type 属性可以变成单选按钮（radio）、多选按钮
   <input type="radio" id="romantic" name="period" value="romantic">
   <label for="romantic">浪漫主义时期</label>
 </fieldset>
-````name` 相同的 radio 互斥——就像单选题，只能圈一个答案。
+```
+`name` 相同的 radio 互斥——就像单选题，只能圈一个答案。
 :::
 
 :::explain{title="checkbox — 多选按钮"}
@@ -33,7 +34,8 @@ input 标签通过 type 属性可以变成单选按钮（radio）、多选按钮
   <input type="checkbox" id="cello" name="instrument" value="cello">
   <label for="cello">🎻 大提琴</label>
 </fieldset>
-```每个 checkbox 独立开/关——就像配器时选择用哪些乐器。
+```
+每个 checkbox 独立开/关——就像配器时选择用哪些乐器。
 :::
 
 :::explain{title="更多实用 input 类型"}

@@ -78,6 +78,7 @@ describe('页面冒烟测试', () => {
         expect(wrapper.find('.project-player').exists()).toBe(true)
       }
     )
+
   })
 
   // ---- 关键组件 ----
@@ -88,6 +89,16 @@ describe('页面冒烟测试', () => {
       const { default: DocumentRenderer } = await import('../content-runtime/renderers/DocumentRenderer.vue')
       const wrapper = mount(DocumentRenderer, {
         props: { lesson: lesson! },
+      })
+      expect(wrapper.find('.content-doc').exists()).toBe(true)
+    })
+
+    it('DocumentBodyRenderer 渲染', async () => {
+      const lesson = await getLesson(getAllLessons()[0].id)
+      expect(lesson).not.toBeNull()
+      const { default: DocumentBodyRenderer } = await import('../content-runtime/renderers/DocumentBodyRenderer.vue')
+      const wrapper = mount(DocumentBodyRenderer, {
+        props: { nodes: lesson!.body },
       })
       expect(wrapper.find('.content-doc').exists()).toBe(true)
     })

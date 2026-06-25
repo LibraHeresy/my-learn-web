@@ -78,7 +78,8 @@ const emit = defineEmits(["toggle-like", "delete"])
 </template>
 ```
 **数据流总结：**
-```父组件（拥有数据）
+```
+父组件（拥有数据）
   │
   │ Props ↓（传数据）
   │

@@ -34,14 +34,16 @@ npm（Node Package Manager）是 Node.js 自带的包管理器。它做三件事
     "vite": "^5.0.0"
   }
 }
-```- **name** — 项目名称
+```
+- **name** — 项目名称
 - **scripts** — 你可以运行的命令（`npm run dev` 就是运行这里定义的 `dev` 脚本）
 - **dependencies** — 项目运行需要的包（用户最终也会用到）
 - **devDependencies** — 只在开发时需要用的包（如 Vite、测试工具）
 创建 `package.json` 的命令：
 ```bash
 npm init -y
-````-y` 表示跳过所有问题，使用默认值。
+```
+`-y` 表示跳过所有问题，使用默认值。
 :::
 
 :::task{title="你的任务 ✨"}

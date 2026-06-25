@@ -13,7 +13,8 @@ let upper = names.map(function(name) {
 });
 // upper 是 ["BACH", "MOZART", "BEETHOVEN"]
 // names 没变！
-```就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。
+```
+就像把 C 大调移调到 D 大调——原曲还在，只是多了一个新版本。
 :::
 
 :::explain{title=".filter() — 筛选符合条件的元素"}
@@ -24,7 +25,8 @@ let after1800 = years.filter(function(year) {
   return year > 1800;
 });
 // after1800 是 [1810, 1862]
-```就像在管弦乐团中只挑出木管声部——其他声部还在，但你只需要木管。
+```
+就像在管弦乐团中只挑出木管声部——其他声部还在，但你只需要木管。
 :::
 
 :::explain{title="链式调用 — map 和 filter 组合"}
@@ -41,7 +43,8 @@ let names = composers
   .filter(function(c) { return c.year > 1800; })
   .map(function(c) { return c.name; });
 // names 是 ["贝多芬", "肖邦"]
-```就像先筛选出 19 世纪的作品，再把它们的标题提取出来——流水线操作！
+```
+就像先筛选出 19 世纪的作品，再把它们的标题提取出来——流水线操作！
 :::
 
 :::example{title="看例子"}
