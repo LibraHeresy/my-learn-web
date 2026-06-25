@@ -152,10 +152,7 @@ function goToProject(projectId: string) {
       :cards="prologueCards"
       @go-to-lesson="goToLesson"
     />
-    
-    <!-- 词汇复习 -->
-    <HomeVocabSection />
-    
+
     <!-- 底部 -->
     <footer class="home-footer">
       <p>用音乐的思维学代码，你会发现它们其实很像。</p>

@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useQuizStore } from '../stores/quiz'
 import { getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
 const gems = getGems()
 
 const store = useQuizStore()
 
-// 存储错误提示
-watch(() => store.lastError, (err) => {
-  if (err && typeof window !== 'undefined') {
-    window.alert(err)
-  }
-})
+const lastError = computed(() => store.lastError)
+function dismissLastError() {
+  store.lastError = null
+}
 
 type Page = 'home' | 'level' | 'result'
 const page = ref<Page>('home')
@@ -116,6 +114,13 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
 
 <template>
   <div class="quiz-page">
+    <Transition name="fade">
+      <div v-if="lastError" class="app-error-toast" role="alert">
+        <span class="app-error-toast__text">{{ lastError }}</span>
+        <button class="app-error-toast__close" @click="dismissLastError" title="关闭">✕</button>
+      </div>
+    </Transition>
+
     <!-- ===== HOME: 成就 + 宝石路径 ===== -->
     <template v-if="page === 'home'">
       <!-- 成就栏 -->

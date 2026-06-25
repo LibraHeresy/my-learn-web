@@ -143,6 +143,44 @@ button:disabled,
   opacity: 0;
 }
 
+.app-error-toast {
+  position: fixed;
+  left: 50%;
+  top: var(--sp-4);
+  transform: translateX(-50%);
+  max-width: min(720px, calc(100vw - var(--sp-6) * 2));
+  width: fit-content;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: rgba(255, 247, 245, 0.98);
+  border: 1px solid rgba(212, 83, 74, 0.25);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.app-error-toast__text {
+  font-size: var(--fs-xs);
+  color: var(--color-error-text);
+  line-height: 1.6;
+}
+
+.app-error-toast__close {
+  background: transparent;
+  color: var(--color-error-muted);
+  padding: 0 6px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.app-error-toast__close:hover {
+  color: var(--color-error-text);
+  background: rgba(212, 83, 74, 0.08);
+  border-radius: var(--radius-xs);
+}
+
 /* ===== 五线谱分隔线 ===== */
 .staff-divider {
   height: 4px;

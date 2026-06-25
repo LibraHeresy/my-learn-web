@@ -23,12 +23,10 @@ const route = useRoute()
 const router = useRouter()
 const progressStore = useProgressStore()
 
-// 存储错误提示
-watch(() => progressStore.lastError, (err) => {
-  if (err && typeof window !== 'undefined') {
-    window.alert(err)
-  }
-})
+const lastError = computed(() => progressStore.lastError)
+function dismissLastError() {
+  progressStore.lastError = null
+}
 
 const lessonId = computed(() => route.params.lessonId as string)
 const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
@@ -196,6 +194,13 @@ watch(lessonId, () => {
 
 <template>
   <div class="lesson-player">
+    <Transition name="fade">
+      <div v-if="lastError" class="app-error-toast" role="alert">
+        <span class="app-error-toast__text">{{ lastError }}</span>
+        <button class="app-error-toast__close" @click="dismissLastError" title="关闭">✕</button>
+      </div>
+    </Transition>
+
     <div v-if="lesson && isMobile" class="mobile-bar">
       <button v-if="!isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
       <span class="mobile-lesson-title">{{ lesson.meta.title }}</span>
