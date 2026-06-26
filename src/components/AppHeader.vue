@@ -34,20 +34,27 @@ function openSearch() {
     </div>
     <nav class="header-nav">
       <button class="search-btn" title="搜索课程 (Ctrl+K)" @click="openSearch">
-        🔍 <span class="search-label">搜索</span>
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <span class="search-label">搜索</span>
         <kbd class="search-kbd">Ctrl K</kbd>
       </button>
       <button
         :class="['nav-tab', { active: activeTab === 'learn' }]"
         @click="goHome"
+        title="学习"
+        aria-label="学习"
       >
-        📖 学习
+        <span class="nav-icon" aria-hidden="true">📖</span>
+        <span class="nav-label">学习</span>
       </button>
       <button
         :class="['nav-tab', { active: activeTab === 'quiz' }]"
         @click="goQuiz"
+        title="测验"
+        aria-label="测验"
       >
-        ✏️ 测验
+        <span class="nav-icon" aria-hidden="true">✏️</span>
+        <span class="nav-label">测验</span>
       </button>
     </nav>
     <GlobalSearch ref="searchRef" />
@@ -123,6 +130,12 @@ function openSearch() {
   transition: all var(--dur-fast);
 }
 
+.search-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .search-btn:hover {
   color: var(--color-text);
   border-color: var(--color-accent);
@@ -153,6 +166,9 @@ function openSearch() {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--dur-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
 }
 
 .nav-tab:hover {
@@ -171,9 +187,19 @@ function openSearch() {
     display: none;
   }
 
+  .search-label,
+  .search-kbd,
+  .nav-label {
+    display: none;
+  }
+
+  .search-btn {
+    padding: var(--sp-2);
+  }
+
   .nav-tab {
-    padding: var(--sp-1) var(--sp-3);
-    font-size: var(--fs-xs);
+    padding: var(--sp-2);
+    font-size: var(--fs-sm);
   }
 }
 </style>

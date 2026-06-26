@@ -34,12 +34,12 @@
 
 :::explain{title="两个常用的数学工具"}
 在写 JS 交互时，经常需要"随机选一个"。JavaScript 内置了两个好用的数学方法：
-**`Math.random()` — 生成随机数**
+`Math.random()` — 生成随机数
 ```js
 Math.random(); // 返回 0 到 1 之间的随机小数，比如 0.3847、0.9215
 ```
 每次调用都会返回不同的值，就像伸手到袋子里随机摸一颗糖。
-**`Math.floor()` — 向下取整**
+`Math.floor()` — 向下取整
 ```js
 Math.floor(3.8);  // 结果是 3
 Math.floor(7.1);  // 结果是 7

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AppHeader from './components/AppHeader.vue'
+import AiSelectionAssistant from './components/ai/AiSelectionAssistant.vue'
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import AppHeader from './components/AppHeader.vue'
         </Transition>
       </RouterView>
     </main>
+    <AiSelectionAssistant />
   </div>
 </template>
 

@@ -5,9 +5,18 @@ import InlineText from './InlineText.vue'
 import { isBlockquoteText, stripBlockquoteMarkers } from './text'
 import CodeBlock from './CodeBlock.vue'
 
-defineProps<{
+withDefaults(defineProps<{
   nodes: ContentBodyNode[]
-}>()
+  aiSelectable?: boolean
+  aiContextTitle?: string
+  aiContextDetail?: string
+  aiContextKind?: string
+}>(), {
+  aiSelectable: false,
+  aiContextTitle: '',
+  aiContextDetail: '',
+  aiContextKind: 'lesson',
+})
 
 function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' {
   if (node.type !== 'heading') return 'h2'
@@ -16,7 +25,13 @@ function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | '
 </script>
 
 <template>
-  <article class="content-doc">
+  <article
+    class="content-doc"
+    :data-ai-selectable="aiSelectable ? 'true' : undefined"
+    :data-ai-context-title="aiSelectable ? aiContextTitle : undefined"
+    :data-ai-context-detail="aiSelectable ? aiContextDetail : undefined"
+    :data-ai-context-kind="aiSelectable ? aiContextKind : undefined"
+  >
     <div class="doc-body">
       <template v-for="(node, index) in nodes" :key="`${node.type}-${index}`">
         <component

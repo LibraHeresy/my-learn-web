@@ -8,9 +8,32 @@ interface PanelWidths {
 }
 
 const MIN_PANEL_PCT = 15
+const DEFAULT_PANEL_WIDTHS: PanelWidths = { content: 42, editor: 30, preview: 28 }
+const TOTAL_PCT = 100
+const TOTAL_EPSILON = 0.5
 
-export function usePanelResize(storageKey: string, version: number = 1) {
-  const panelWidths = ref<PanelWidths>({ content: 40, editor: 30, preview: 30 })
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value)
+}
+
+function isValidPanelWidths(value: unknown): value is PanelWidths {
+  if (!value || typeof value !== 'object') return false
+  const v = value as Record<string, unknown>
+  const content = v.content
+  const editor = v.editor
+  const preview = v.preview
+  if (!isFiniteNumber(content) || !isFiniteNumber(editor) || !isFiniteNumber(preview)) return false
+  if (content < MIN_PANEL_PCT || editor < MIN_PANEL_PCT || preview < MIN_PANEL_PCT) return false
+  if (content > TOTAL_PCT || editor > TOTAL_PCT || preview > TOTAL_PCT) return false
+  return Math.abs((content + editor + preview) - TOTAL_PCT) <= TOTAL_EPSILON
+}
+
+export function usePanelResize(
+  storageKey: string,
+  version: number = 1,
+  defaultWidths: PanelWidths = DEFAULT_PANEL_WIDTHS,
+) {
+  const panelWidths = ref<PanelWidths>({ ...defaultWidths })
   const dragging = ref<'content-editor' | 'editor-preview' | null>(null)
   const playerMainRef = ref<HTMLDivElement>()
 
@@ -20,16 +43,18 @@ export function usePanelResize(storageKey: string, version: number = 1) {
       if (result.value) {
         const data = JSON.parse(result.value)
         if (data._version !== version) {
-          panelWidths.value = { content: 40, editor: 30, preview: 30 }
+          panelWidths.value = { ...defaultWidths }
           savePanelWidths()
           return
         }
-        const parsed = data.widths as PanelWidths
-        if (parsed.content && parsed.editor && parsed.preview) {
+        const parsed = data.widths
+        if (isValidPanelWidths(parsed)) {
           panelWidths.value = parsed
         }
       }
-    } catch { /* use defaults */ }
+    } catch {
+      panelWidths.value = { ...defaultWidths }
+    }
   }
 
   function savePanelWidths() {

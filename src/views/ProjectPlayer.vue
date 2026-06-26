@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getAllProjects, getProject } from '../content-loaders/projects'
 import { useCodePreview } from '../composables/useCodePreview'
@@ -11,6 +11,7 @@ import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
+import { useAiAssistant } from '../composables/useAiAssistant'
 
 const route = useRoute()
 const router = useRouter()
@@ -86,6 +87,19 @@ const hasCode = computed(() => {
 })
 const showEditor = computed(() => !isLocalMode.value && hasCode.value)
 
+const windowWidth = ref(window.innerWidth)
+function onResize() { windowWidth.value = window.innerWidth }
+onMounted(() => window.addEventListener('resize', onResize))
+onBeforeUnmount(() => window.removeEventListener('resize', onResize))
+
+const isCompactEditorLayout = computed(() => showEditor.value && windowWidth.value >= 901 && windowWidth.value < 1200)
+const rightTab = ref<'editor' | 'preview'>('editor')
+
+function switchRightTab(tab: 'editor' | 'preview') {
+  rightTab.value = tab
+  if (tab === 'preview') triggerPreview()
+}
+
 function goToStep(index: number) {
   if (index < 0 || index >= totalSteps.value) return
   currentStep.value = index
@@ -135,7 +149,18 @@ function goFooterNext() {
   }
 }
 
-const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-project-panel-widths', 2)
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
+  'code-score-project-panel-widths',
+  3,
+  { content: 60, editor: 20, preview: 20 },
+)
+const { sidebarOpen: aiSidebarOpen, toggleAiSidebar } = useAiAssistant()
+
+function aiSectionDetail(sectionLabel: string) {
+  const stepTitle = currentStepData.value?.title || '当前步骤'
+  return `${project.value?.meta.title || '项目'} · ${stepTitle} · ${sectionLabel}`
+}
+
 </script>
 
 <template>
@@ -182,49 +207,88 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
         class="panel-content"
         :style="{ width: showEditor ? 'calc(' + panelWidths.content + '% - 4px)' : '100%' }"
       >
-        <Transition name="slide-fade" mode="out-in">
-          <div :key="currentStep" class="step-panel">
-            <div class="step-body">
-              <h3 class="step-title">{{ currentStepData.title }}</h3>
-              <div class="step-content">
-                <DocumentBodyRenderer
-                  v-if="currentStepData.contentBody?.length"
-                  :nodes="currentStepData.contentBody"
-                />
-              </div>
-              <div class="step-task">
-                <span class="step-task-label">你的任务</span>
-                <DocumentBodyRenderer
-                  v-if="currentStepData.taskBody?.length"
-                  :nodes="currentStepData.taskBody"
-                />
-              </div>
-              <div v-if="currentStepData.purposeBody?.length" class="purpose-box">
-                <span class="purpose-label">这一步的目的</span>
-                <div class="purpose-content">
-                  <DocumentBodyRenderer :nodes="currentStepData.purposeBody" />
+        <div class="content-shell">
+          <Transition name="slide-fade" mode="out-in">
+            <div :key="currentStep" class="step-panel">
+              <div class="step-body">
+                <h3 class="step-title">{{ currentStepData.title }}</h3>
+                <div class="step-content">
+                  <DocumentBodyRenderer
+                    v-if="currentStepData.contentBody?.length"
+                    :nodes="currentStepData.contentBody"
+                    :ai-selectable="true"
+                    :ai-context-title="project.meta.title"
+                    :ai-context-detail="aiSectionDetail('步骤内容')"
+                    ai-context-kind="project"
+                  />
                 </div>
-              </div>
-              <div v-if="currentStepData.expectedResultBody?.length" class="expected-box">
-                <span class="expected-label">完成后你应该看到</span>
-                <div class="expected-content">
-                  <DocumentBodyRenderer :nodes="currentStepData.expectedResultBody" />
+                <div class="step-task">
+                  <span class="step-task-label">你的任务</span>
+                  <DocumentBodyRenderer
+                    v-if="currentStepData.taskBody?.length"
+                    :nodes="currentStepData.taskBody"
+                    :ai-selectable="true"
+                    :ai-context-title="project.meta.title"
+                    :ai-context-detail="aiSectionDetail('你的任务')"
+                    ai-context-kind="project"
+                  />
                 </div>
-              </div>
-              <div v-if="currentStepData.hintBody?.length" class="step-hint-wrap">
-                <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
-                  💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
-                </button>
-                <div v-if="hintExpanded" class="step-hint">
-                  <DocumentBodyRenderer :nodes="currentStepData.hintBody" />
+                <div v-if="currentStepData.purposeBody?.length" class="purpose-box">
+                  <span class="purpose-label">这一步的目的</span>
+                  <div class="purpose-content">
+                    <DocumentBodyRenderer
+                      :nodes="currentStepData.purposeBody"
+                      :ai-selectable="true"
+                      :ai-context-title="project.meta.title"
+                      :ai-context-detail="aiSectionDetail('这一步的目的')"
+                      ai-context-kind="project"
+                    />
+                  </div>
+                </div>
+                <div v-if="currentStepData.expectedResultBody?.length" class="expected-box">
+                  <span class="expected-label">完成后你应该看到</span>
+                  <div class="expected-content">
+                    <DocumentBodyRenderer
+                      :nodes="currentStepData.expectedResultBody"
+                      :ai-selectable="true"
+                      :ai-context-title="project.meta.title"
+                      :ai-context-detail="aiSectionDetail('完成后你应该看到')"
+                      ai-context-kind="project"
+                    />
+                  </div>
+                </div>
+                <div v-if="currentStepData.hintBody?.length" class="step-hint-wrap">
+                  <button class="step-hint-toggle" @click="hintExpanded = !hintExpanded">
+                    💡 {{ hintExpanded ? '收起提示' : '需要提示？' }}
+                  </button>
+                  <div v-if="hintExpanded" class="step-hint">
+                    <DocumentBodyRenderer
+                      :nodes="currentStepData.hintBody"
+                      :ai-selectable="true"
+                      :ai-context-title="project.meta.title"
+                      :ai-context-detail="aiSectionDetail('提示')"
+                      ai-context-kind="project"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Transition>
+          </Transition>
+
+          <button
+            class="content-ai-toggle"
+            type="button"
+            data-ai-assistant-toggle="true"
+            :aria-expanded="aiSidebarOpen"
+            :title="aiSidebarOpen ? '关闭 AI 助手' : '打开 AI 助手'"
+            @click="toggleAiSidebar"
+          >
+            AI
+          </button>
+        </div>
       </div>
 
-      <template v-if="showEditor">
+      <template v-if="showEditor && !isCompactEditorLayout">
         <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
 
         <div class="panel-editor" :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }">
@@ -240,6 +304,40 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 
         <div class="panel-preview" :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }">
           <LivePreview :srcdoc="previewSrc" />
+        </div>
+      </template>
+
+      <template v-else-if="showEditor && isCompactEditorLayout">
+        <div
+          class="panel-right"
+          :style="{ width: 'calc(' + (panelWidths.editor + panelWidths.preview) + '% - 4px)' }"
+        >
+          <div class="panel-right-tabs">
+            <button
+              type="button"
+              :class="['panel-right-tab', { active: rightTab === 'editor' }]"
+              @click="switchRightTab('editor')"
+            >
+              代码
+            </button>
+            <button
+              type="button"
+              :class="['panel-right-tab', { active: rightTab === 'preview' }]"
+              @click="switchRightTab('preview')"
+            >
+              预览
+            </button>
+          </div>
+          <div class="panel-right-body">
+            <CodeEditor
+              v-if="rightTab === 'editor'"
+              :key="projectId + '-' + currentStep + '-compact'"
+              :model-value="userCode"
+              @update:model-value="onCodeChange"
+              @run="triggerPreview"
+            />
+            <LivePreview v-else :srcdoc="previewSrc" />
+          </div>
         </div>
       </template>
     </div>
@@ -382,6 +480,71 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
 .panel-editor {
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.content-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.content-ai-toggle {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 260;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent-border);
+  background: rgba(255, 250, 242, 0.92);
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  transition: background var(--dur-fast), transform var(--dur-fast), right var(--dur-fast);
+}
+
+.content-ai-toggle:hover {
+  background: var(--color-accent-bg);
+}
+
+.panel-right {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-right-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--color-editor-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-right-tab {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-inverse);
+  font-size: var(--fs-xs);
+}
+
+.panel-right-tab.active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.panel-right-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .player-main.no-code,
@@ -651,4 +814,5 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code
     display: none;
   }
 }
+
 </style>

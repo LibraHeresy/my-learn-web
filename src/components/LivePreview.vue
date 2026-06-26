@@ -118,15 +118,12 @@ watch(
       <div class="preview-nav-btns">
         <button class="preview-nav-btn" @click="goBack" title="后退">
           <span class="nav-icon">←</span>
-          <span class="nav-text">后退</span>
         </button>
         <button class="preview-nav-btn" @click="goForward" title="前进">
           <span class="nav-icon">→</span>
-          <span class="nav-text">前进</span>
         </button>
         <button class="preview-nav-btn" @click="refresh" title="刷新">
           <span class="nav-icon">↻</span>
-          <span class="nav-text">刷新</span>
         </button>
         <!-- Wave 1.4: 全屏按钮 -->
         <button
@@ -134,7 +131,7 @@ watch(
           :title="isMaximized ? '退出全屏 (Esc)' : '全屏预览'"
           @click="emit('maximize')"
         >
-          {{ isMaximized ? "↙️ 退出全屏" : "↗️ 全屏" }}
+          {{ isMaximized ? "↙️" : "↗️" }}
         </button>
       </div>
     </div>

@@ -18,6 +18,7 @@ import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
 import LessonTerms from '../components/LessonTerms.vue'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
+import { useAiAssistant } from '../composables/useAiAssistant'
 
 const route = useRoute()
 const router = useRouter()
@@ -177,6 +178,7 @@ watch(previewSrc, () => {
 // ─── 阅读进度条 ─────────────────────────────────────────────────────────────
 const contentPanelRef = ref<HTMLDivElement>()
 const readingProgress = ref(0)
+const { sidebarOpen: aiSidebarOpen, toggleAiSidebar } = useAiAssistant()
 
 function onContentScroll() {
   if (!contentPanelRef.value) return
@@ -268,15 +270,29 @@ watch(lessonId, () => {
       >
         <!-- 内容面板 + 笔记 -->
         <div
-          ref="contentPanelRef"
           class="panel-content"
           :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 5.33px)' }"
-          @scroll="onContentScroll"
         >
-          <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
-          <DocumentRenderer :key="lessonId" :lesson="lesson" />
+          <div class="content-shell">
+            <div ref="contentPanelRef" class="content-scroll" @scroll="onContentScroll">
+              <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
+              <div class="content-inner">
+                <DocumentRenderer :key="lessonId" :lesson="lesson" />
+                <LessonTerms :lesson="lesson" />
+              </div>
+            </div>
 
-          <LessonTerms :lesson="lesson" />
+            <button
+              class="content-ai-toggle"
+              type="button"
+              data-ai-assistant-toggle="true"
+              :aria-expanded="aiSidebarOpen"
+              :title="aiSidebarOpen ? '关闭 AI 助手' : '打开 AI 助手'"
+              @click="toggleAiSidebar"
+            >
+              AI
+            </button>
+          </div>
         </div>
 
         <template v-if="!isLocalMode && isSandboxMode">
@@ -443,12 +459,51 @@ watch(lessonId, () => {
 .player-main.is-local .panel-content { max-width: 860px; margin: 0 auto; overflow: visible; }
 
 .panel-content {
-  overflow-y: auto;
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
   flex-shrink: 0;
   position: relative;
+}
+
+.content-shell {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.content-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.content-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content-ai-toggle {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: 260;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent-border);
+  background: rgba(255, 250, 242, 0.92);
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  transition: background var(--dur-fast), transform var(--dur-fast), right var(--dur-fast);
+}
+
+.content-ai-toggle:hover {
+  background: var(--color-accent-bg);
 }
 
 .reading-progress {
@@ -523,6 +578,14 @@ watch(lessonId, () => {
 
   .panel-content {
     border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .content-shell,
+  .content-scroll {
+    height: auto;
+  }
+
+  .content-scroll {
     overflow: visible;
   }
 

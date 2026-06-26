@@ -42,12 +42,12 @@ listEl.addEventListener("click", function(event) {
 :::
 
 :::explain{title="关键 API：closest() 和 matches()"}
-**`event.target`** — 实际被点击的元素（可能是卡片里的 h3、span、甚至卡片本身）
-**`.closest("选择器")`** — 从当前元素向上查找最近的匹配祖先
+`event.target` — 实际被点击的元素（可能是卡片里的 h3、span、甚至卡片本身）
+`.closest("选择器")` — 从当前元素向上查找最近的匹配祖先
 ```js
 event.target.closest(".card");  // 总能找到卡片容器，不管点的是里面的 h3 还是 span
 ```
-**`.matches("选择器")`** — 判断当前元素是否匹配选择器
+`.matches("选择器")` — 判断当前元素是否匹配选择器
 ```js
 if (event.target.matches("button")) {
   // 点击的是按钮
