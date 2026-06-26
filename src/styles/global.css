@@ -243,6 +243,33 @@ pre code {
   padding: 0;
 }
 
+/* ===== 全局关闭代码连字 ===== */
+:where(
+  code,
+  pre,
+  kbd,
+  samp,
+  .inline-code,
+  .code-block code,
+  .code-lang-tag,
+  .editor-tab,
+  .live-label,
+  .error-msg-preview,
+  .error-code,
+  .error-value,
+  .project-header-step,
+  .step-dot,
+  .chapter-count,
+  .footer-center,
+  .step-number,
+  .unsupported-name,
+  .cm-editor,
+  .cm-editor *
+) {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
 /* ===== 引用块 ===== */
 .md-blockquote {
   padding: var(--sp-2) var(--sp-3);

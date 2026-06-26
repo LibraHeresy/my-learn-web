@@ -3,8 +3,6 @@ import { continueSelectionConversation, explainSelection } from '../services/ai-
 import type { AiChatMessage, AiConversation, AiExplainRequest } from '../types/ai'
 import { safeGetItem, safeSetItem } from '../utils/storage'
 
-const MIN_SELECTION_LENGTH = 6
-const MAX_SELECTION_LENGTH = 500
 const MOBILE_BREAKPOINT = 900
 const VIEWPORT_PADDING = 12
 const TRIGGER_HEIGHT = 32
@@ -127,7 +125,7 @@ function readSelectionRequest(): AiExplainRequest | null {
   }
 
   const rawText = normalizeWhitespace(selection.toString())
-  if (rawText.length < MIN_SELECTION_LENGTH || rawText.length > MAX_SELECTION_LENGTH) {
+  if (!rawText) {
     return null
   }
 

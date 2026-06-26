@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue'
+import { computed, ref } from 'vue'
 import type { CompiledLesson, ContentBodyNode, TaskStep } from '../content-runtime/types'
 import { getGlossaryEntry } from '../content-loaders/glossary'
 
@@ -7,7 +7,6 @@ const props = defineProps<{
   lesson: CompiledLesson
 }>()
 
-const expanded = ref(false)
 const activeKey = ref<string | null>(null)
 
 function extractTerms(nodes: ContentBodyNode[]): string[] {
@@ -56,39 +55,29 @@ const activeTerm = computed(() => {
   return terms.value.find((t) => t.key === activeKey.value) || null
 })
 
-const termsBodyRef = ref<HTMLDivElement>()
-
-watch(expanded, async (v) => {
-  if (v) {
-    await nextTick()
-    termsBodyRef.value?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-  }
-})
 </script>
 
 <template>
-  <div v-if="terms.length" :class="['lesson-terms', { expanded }]">
-    <button class="terms-toggle" @click="expanded = !expanded">
+  <div v-if="terms.length" class="lesson-terms">
+    <div class="terms-title">
       📖 本节术语 ({{ terms.length }})
-    </button>
-    <Transition name="terms-fade">
-      <div ref="termsBodyRef" v-if="expanded" class="terms-body">
-        <button
-          v-for="t in terms"
-          :key="t.key"
-          :class="['term-chip', { 'term-chip--active': activeKey === t.key }]"
-          @click="activeKey = activeKey === t.key ? null : t.key"
-        >
-          {{ t.key }}
-        </button>
-        <Transition name="terms-detail">
-          <div v-if="activeTerm" class="term-detail">
-            <p class="term-detail-explain">{{ activeTerm.explanation }}</p>
-            <p v-if="activeTerm.analogy" class="term-detail-analogy">🎵 {{ activeTerm.analogy }}</p>
-          </div>
-        </Transition>
-      </div>
-    </Transition>
+    </div>
+    <div class="terms-body">
+      <button
+        v-for="t in terms"
+        :key="t.key"
+        :class="['term-chip', { 'term-chip--active': activeKey === t.key }]"
+        @click="activeKey = activeKey === t.key ? null : t.key"
+      >
+        {{ t.key }}
+      </button>
+      <Transition name="terms-detail">
+        <div v-if="activeTerm" class="term-detail">
+          <p class="term-detail-explain">{{ activeTerm.explanation }}</p>
+          <p v-if="activeTerm.analogy" class="term-detail-analogy">🎵 {{ activeTerm.analogy }}</p>
+        </div>
+      </Transition>
+    </div>
   </div>
 </template>
 
@@ -98,7 +87,7 @@ watch(expanded, async (v) => {
   flex-shrink: 0;
 }
 
-.terms-toggle {
+.terms-title {
   width: 100%;
   padding: var(--sp-2) var(--sp-4);
   text-align: left;
@@ -106,10 +95,6 @@ watch(expanded, async (v) => {
   font-weight: 600;
   color: var(--color-text-light);
   background: var(--color-panel);
-  transition: color var(--transition);
-}
-.terms-toggle:hover {
-  color: var(--color-gold);
 }
 
 .terms-body {
@@ -153,15 +138,6 @@ watch(expanded, async (v) => {
   border-top: 1px solid var(--color-border-light);
   color: var(--color-gold);
   font-style: italic;
-}
-
-.terms-fade-enter-active,
-.terms-fade-leave-active {
-  transition: all var(--dur-fast) var(--ease-out);
-}
-.terms-fade-enter-from,
-.terms-fade-leave-to {
-  opacity: 0;
 }
 
 .terms-detail-enter-active,

@@ -8,7 +8,7 @@
 表格由外到内有三层标签：
 - `<table>` — 整个表格的容器
 - `<tr>` — **表行**（table row），一行
--`<td>` — **表单元格**（table data），一个格子
+- `<td>` — **表单元格**（table data），一个格子
 ```html
 <!-- table：创建表格 -->
 <table>
