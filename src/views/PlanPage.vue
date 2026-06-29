@@ -1,10 +1,41 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlanStore } from '../stores/plan'
 import type { PlanTask, PlanWeek } from '../features/plan/types'
 
 const router = useRouter()
 const store = usePlanStore()
+
+onMounted(() => {
+  autoAdvance()
+})
+
+function autoAdvance() {
+  const currentDayDone = store.currentDay.tasks.every(t => store.isTaskCompleted(t))
+  if (!currentDayDone) return
+
+  // 在当前周找下一个未完成的天
+  const nextDay = store.currentWeek.days.find(
+    d => d.order > store.currentDay.order && !d.tasks.every(t => store.isTaskCompleted(t))
+  )
+  if (nextDay) {
+    store.setDay(nextDay.order)
+    return
+  }
+
+  // 当前周全部完成 → 推进到下一周
+  if (store.currentWeek.weekNumber >= 12) return
+
+  const nextWeek = store.weeks.find(w => w.weekNumber === store.currentWeek.weekNumber + 1)
+  if (!nextWeek) return
+
+  store.setWeek(nextWeek.weekNumber)
+  const firstIncomplete = nextWeek.days.find(d => !d.tasks.every(t => store.isTaskCompleted(t)))
+  if (firstIncomplete) {
+    store.setDay(firstIncomplete.order)
+  }
+}
 
 const taskTypeIcon: Record<string, string> = {
   lesson: '📖',

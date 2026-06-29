@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createMemoryHistory, createRouter } from 'vue-router'
+import { createPinia, setActivePinia } from 'pinia'
 
 vi.mock('../content-loaders/projects', () => {
   const emptyBody: any[] = []
@@ -65,6 +66,7 @@ async function flush() {
 
 describe('ProjectPlayer 导航', () => {
   it('第一步：prev 为上个项目；next 为下一步（显示下一步标题）', async () => {
+    setActivePinia(createPinia())
     const { default: ProjectPlayer } = await import('../views/ProjectPlayer.vue')
     const router = createRouter({
       history: createMemoryHistory(),
@@ -76,7 +78,7 @@ describe('ProjectPlayer 导航', () => {
     const pushSpy = vi.spyOn(router, 'push')
     pushSpy.mockClear()
 
-    const wrapper = mount(ProjectPlayer, { global: { plugins: [router] } })
+    const wrapper = mount(ProjectPlayer, { global: { plugins: [router, createPinia()] } })
     await flush()
 
     const prevBtn = wrapper.find('.footer-side .footer-btn')
@@ -96,6 +98,7 @@ describe('ProjectPlayer 导航', () => {
   })
 
   it('最后一步：next 为下个项目（显示下个项目标题），点击进入下个项目', async () => {
+    setActivePinia(createPinia())
     const { default: ProjectPlayer } = await import('../views/ProjectPlayer.vue')
     const router = createRouter({
       history: createMemoryHistory(),
@@ -107,7 +110,7 @@ describe('ProjectPlayer 导航', () => {
     const pushSpy = vi.spyOn(router, 'push')
     pushSpy.mockClear()
 
-    const wrapper = mount(ProjectPlayer, { global: { plugins: [router] } })
+    const wrapper = mount(ProjectPlayer, { global: { plugins: [router, createPinia()] } })
     await flush()
 
     const nextBtn = wrapper.find('.footer-side-right .footer-btn')

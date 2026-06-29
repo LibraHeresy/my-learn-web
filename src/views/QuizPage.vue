@@ -45,6 +45,11 @@ const resultPassed = computed(() => {
   return ld ? resultPct.value >= ld.threshold : false
 })
 const levelDef = computed(() => activeGem.value?.levels.find(l => l.level === activeLevel.value))
+const quizAiTitle = computed(() => activeGem.value ? `${activeGem.value.name} · 测验` : '测验')
+const quizQuestionDetail = computed(() => `第 ${currentIdx.value + 1} 题`)
+const quizQuestionOptionDetail = computed(() => `${quizQuestionDetail.value} · 选项`)
+const quizExplanationDetail = computed(() => `${quizQuestionDetail.value} · 解析`)
+const quizResultReviewDetail = computed(() => activeGem.value ? `${activeGem.value.name} · 错题回顾` : '错题回顾')
 
 function selectGem(gem: GemDef) {
   if (!store.isGemUnlocked(gem)) return
@@ -217,9 +222,21 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
             <span v-for="n in 3" :key="n" :class="['streak-dot', { filled: n <= store.getQuestionStreak(curQ.id) }]">●</span>
           </span>
         </div>
-        <h3 class="q-text">{{ curQ.question }}</h3>
+        <h3
+          class="q-text"
+          data-ai-selectable="true"
+          :data-ai-context-title="quizAiTitle"
+          :data-ai-context-detail="quizQuestionDetail"
+          data-ai-context-kind="quiz-question"
+        >{{ curQ.question }}</h3>
 
-        <div class="q-options">
+        <div
+          class="q-options"
+          data-ai-selectable="true"
+          :data-ai-context-title="quizAiTitle"
+          :data-ai-context-detail="quizQuestionOptionDetail"
+          data-ai-context-kind="quiz-option"
+        >
           <button
             v-for="(opt, i) in curQ.options" :key="i"
             :class="['opt-btn', {
@@ -234,7 +251,14 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
           </button>
         </div>
 
-        <div v-if="selected !== null" class="explain-box">
+        <div
+          v-if="selected !== null"
+          class="explain-box"
+          data-ai-selectable="true"
+          :data-ai-context-title="quizAiTitle"
+          :data-ai-context-detail="quizExplanationDetail"
+          data-ai-context-kind="quiz-explanation"
+        >
           <div class="explain-icon">{{ history[history.length-1]?.ok ? '✓' : '✗' }}</div>
           <div class="explain-text">{{ curQ.explanation }}</div>
         </div>
@@ -254,7 +278,14 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
         <div class="result-bar"><div class="result-fill" :style="{ width: resultPct + '%' }" /></div>
         <p class="result-threshold" v-if="activeGem">门槛 {{ levelDef?.threshold }}% {{ resultPassed ? '✓ 达标' : '✗ 未达标' }}</p>
 
-        <div class="result-review" v-if="history.filter(h=>!h.ok).length">
+        <div
+          class="result-review"
+          v-if="history.filter(h=>!h.ok).length"
+          data-ai-selectable="true"
+          :data-ai-context-title="quizAiTitle"
+          :data-ai-context-detail="quizResultReviewDetail"
+          data-ai-context-kind="quiz-result"
+        >
           <h4>📋 错题回顾</h4>
           <div v-for="(h, i) in history.filter(h=>!h.ok)" :key="i" class="review-item">
             <div class="review-q"><span class="review-badge">✗</span>{{ h.q.question }}</div>
