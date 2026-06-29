@@ -4,6 +4,7 @@ export interface AiExplainRequest {
   sectionTitle?: string
   sectionKind?: string
   surroundingText?: string
+  selectionMode?: 'text' | 'code'
 }
 
 export interface AiExplainResult {

@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
+import { useAiAssistant } from "../composables/useAiAssistant";
 
 const props = defineProps<{
   srcdoc: string;
   isMaximized?: boolean; // Wave 1.4: 外部控制全屏状态
+  aiContextTitle?: string;
+  aiContextDetail?: string;
+  aiContextKind?: string;
 }>();
 
 const emit = defineEmits<{
@@ -13,6 +17,7 @@ const emit = defineEmits<{
 
 const iframeRef = ref<HTMLIFrameElement>();
 const loading = ref(false);
+const { setExternalSelection, clearExternalSelection } = useAiAssistant();
 
 function goBack() {
   iframeRef.value?.contentWindow?.history.back();
@@ -63,10 +68,107 @@ function onMessage(e: MessageEvent) {
 }
 
 let prevUrl: string | null = null;
+let selectionCleanup: (() => void) | null = null;
+let selectionRaf = 0;
+
+function toAbsoluteRect(iframe: HTMLIFrameElement, rect: DOMRect): DOMRect {
+  const iframeRect = iframe.getBoundingClientRect();
+  return new DOMRect(
+    iframeRect.left + rect.left,
+    iframeRect.top + rect.top,
+    rect.width,
+    rect.height,
+  );
+}
+
+function updateSelectionFromIframe() {
+  if (!iframeRef.value) return;
+  const iframe = iframeRef.value;
+
+  try {
+    const doc = iframe.contentDocument;
+    const win = iframe.contentWindow;
+    if (!doc || !win) return;
+
+    const selection = win.getSelection();
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+      clearExternalSelection();
+      return;
+    }
+
+    const text = selection.toString().replace(/\s+/g, " ").trim();
+    if (!text) {
+      clearExternalSelection();
+      return;
+    }
+
+    const rect = selection.getRangeAt(0).getBoundingClientRect();
+    if (rect.width === 0 && rect.height === 0) {
+      clearExternalSelection();
+      return;
+    }
+
+    setExternalSelection(
+      {
+        selectedText: text,
+        pageTitle: props.aiContextTitle || document.title,
+        sectionTitle: props.aiContextDetail || "预览",
+        sectionKind: props.aiContextKind || "preview",
+        selectionMode: "text",
+      },
+      toAbsoluteRect(iframe, rect),
+    );
+  } catch {
+    clearExternalSelection();
+  }
+}
+
+function scheduleSelectionUpdate() {
+  if (selectionRaf) return;
+  selectionRaf = window.requestAnimationFrame(() => {
+    selectionRaf = 0;
+    updateSelectionFromIframe();
+  });
+}
+
+function installSelectionBridge() {
+  selectionCleanup?.();
+  selectionCleanup = null;
+
+  if (!iframeRef.value) return;
+  const iframe = iframeRef.value;
+
+  try {
+    const doc = iframe.contentDocument;
+    if (!doc) return;
+
+    const onSelectionChange = () => scheduleSelectionUpdate();
+    const onMouseUp = () => scheduleSelectionUpdate();
+    const onKeyUp = () => scheduleSelectionUpdate();
+    const onBlur = () => clearExternalSelection();
+
+    doc.addEventListener("selectionchange", onSelectionChange);
+    doc.addEventListener("mouseup", onMouseUp);
+    doc.addEventListener("keyup", onKeyUp);
+    iframe.addEventListener("blur", onBlur);
+
+    selectionCleanup = () => {
+      doc.removeEventListener("selectionchange", onSelectionChange);
+      doc.removeEventListener("mouseup", onMouseUp);
+      doc.removeEventListener("keyup", onKeyUp);
+      iframe.removeEventListener("blur", onBlur);
+    };
+  } catch {
+    clearExternalSelection();
+  }
+}
 
 function loadPreview(doc: string) {
   if (!iframeRef.value) return;
   const iframe = iframeRef.value;
+  selectionCleanup?.();
+  selectionCleanup = null;
+  clearExternalSelection();
   // Revoke previous blob URL to prevent memory leaks on rapid updates
   if (prevUrl) {
     URL.revokeObjectURL(prevUrl);
@@ -80,6 +182,7 @@ function loadPreview(doc: string) {
     loading.value = false;
     if (prevUrl) URL.revokeObjectURL(prevUrl);
     prevUrl = null;
+    installSelectionBridge();
   };
 }
 
@@ -93,6 +196,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("message", onMessage);
+  selectionCleanup?.();
+  if (selectionRaf) window.cancelAnimationFrame(selectionRaf);
 });
 
 watch(

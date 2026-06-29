@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build:content && vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "npm run build:content && vue-tsc -b && vite build",
     "build:content": "node --experimental-strip-types scripts/build-content.ts",
     "preview": "vite preview",
+    "typecheck": "vue-tsc -b",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest run",

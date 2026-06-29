@@ -7,6 +7,8 @@ import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import { useAsyncComputed } from '../composables/useAsyncComputed'
 import { useLessonNavigation } from '../composables/useLessonNavigation'
+import { useFocusTrap } from '../composables/useFocusTrap'
+import { useScrollLock } from '../composables/useScrollLock'
 import { encodeCode, decodeCode } from '../utils/shareCode'
 import type { UserCode } from '../types'
 // CodeEditor 按需加载：只在 sandbox 模式课程中使用，
@@ -18,7 +20,6 @@ import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
 import LessonTerms from '../components/LessonTerms.vue'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
-import { useAiAssistant } from '../composables/useAiAssistant'
 
 const route = useRoute()
 const router = useRouter()
@@ -48,6 +49,12 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 // ─── 侧边栏 ───────────────────────────────────────────────────────────────
 const sidebarExpanded = ref(false)
 const isMobile = computed(() => windowWidth.value < 901)
+const sidebarDialogRef = ref<HTMLElement | null>(null)
+const mobileSidebarOpen = computed(() => isMobile.value && sidebarExpanded.value)
+
+useScrollLock(mobileSidebarOpen)
+useFocusTrap(mobileSidebarOpen, sidebarDialogRef)
+
 const sidebarVariant = computed(() => {
   if (isMobile.value) return 'mobile'
   return sidebarExpanded.value ? 'expanded' : 'collapsed'
@@ -130,8 +137,13 @@ function setMaximized(panel: 'editor' | 'preview') {
 
 // Esc 退出全屏
 function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape' && maximized.value !== 'none') {
+  if (e.key !== 'Escape') return
+  if (maximized.value !== 'none') {
     maximized.value = 'none'
+    return
+  }
+  if (isMobile.value && sidebarExpanded.value) {
+    sidebarExpanded.value = false
   }
 }
 onMounted(() => document.addEventListener('keydown', onKeydown))
@@ -178,7 +190,6 @@ watch(previewSrc, () => {
 // ─── 阅读进度条 ─────────────────────────────────────────────────────────────
 const contentPanelRef = ref<HTMLDivElement>()
 const readingProgress = ref(0)
-const { sidebarOpen: aiSidebarOpen, toggleAiSidebar } = useAiAssistant()
 
 function onContentScroll() {
   if (!contentPanelRef.value) return
@@ -238,7 +249,12 @@ watch(lessonId, () => {
     </div>
 
     <Transition name="fade">
-      <div v-if="isMobile && sidebarExpanded" class="sidebar-overlay" @click="sidebarExpanded = false" />
+      <div
+        v-if="isMobile && sidebarExpanded"
+        class="sidebar-overlay"
+        aria-hidden="true"
+        @click="sidebarExpanded = false"
+      />
     </Transition>
 
     <div class="player-layout">
@@ -249,6 +265,11 @@ watch(lessonId, () => {
             visible: !isMobile,
             collapsed: sidebarVariant === 'collapsed'
           }]"
+          ref="sidebarDialogRef"
+          :role="isMobile ? 'dialog' : undefined"
+          :aria-modal="isMobile ? 'true' : undefined"
+          aria-label="课程目录"
+          tabindex="-1"
         >
           <LessonSidebar
             :variant="sidebarVariant"
@@ -281,17 +302,6 @@ watch(lessonId, () => {
                 <LessonTerms :lesson="lesson" />
               </div>
             </div>
-
-            <button
-              class="content-ai-toggle"
-              type="button"
-              data-ai-assistant-toggle="true"
-              :aria-expanded="aiSidebarOpen"
-              :title="aiSidebarOpen ? '关闭 AI 助手' : '打开 AI 助手'"
-              @click="toggleAiSidebar"
-            >
-              AI
-            </button>
           </div>
         </div>
 
@@ -300,6 +310,11 @@ watch(lessonId, () => {
           <div
             :class="['panel-editor', { 'is-maximized': maximized === 'editor' }]"
             :style="maximized === 'editor' ? {} : { width: 'calc(' + panelWidths.editor + '% - 5.33px)' }"
+            data-ai-selectable="true"
+            data-ai-selection-mode="code"
+            :data-ai-context-title="lesson.meta.title"
+            data-ai-context-detail="代码"
+            data-ai-context-kind="code"
           >
             <CodeEditor
               :key="lessonId"
@@ -320,10 +335,17 @@ watch(lessonId, () => {
           <div
             :class="['panel-preview', { 'is-maximized': maximized === 'preview' }]"
             :style="maximized === 'preview' ? {} : { width: 'calc(' + panelWidths.preview + '% - 5.33px)' }"
+            data-ai-selectable="true"
+            :data-ai-context-title="lesson.meta.title"
+            data-ai-context-detail="预览"
+            data-ai-context-kind="preview"
           >
             <LivePreview
               :srcdoc="previewSrc"
               :is-maximized="maximized === 'preview'"
+              :ai-context-title="lesson.meta.title"
+              ai-context-detail="预览"
+              ai-context-kind="preview"
               @maximize="setMaximized('preview')"
               @preview-error="onPreviewError"
             />
@@ -481,28 +503,6 @@ watch(lessonId, () => {
 .content-inner {
   display: flex;
   flex-direction: column;
-}
-
-.content-ai-toggle {
-  position: absolute;
-  top: var(--sp-3);
-  right: var(--sp-3);
-  z-index: 260;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid var(--color-accent-border);
-  background: rgba(255, 250, 242, 0.92);
-  color: var(--color-accent);
-  font-size: 11px;
-  font-weight: 700;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(8px);
-  transition: background var(--dur-fast), transform var(--dur-fast), right var(--dur-fast);
-}
-
-.content-ai-toggle:hover {
-  background: var(--color-accent-bg);
 }
 
 .reading-progress {

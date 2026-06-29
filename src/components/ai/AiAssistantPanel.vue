@@ -22,6 +22,7 @@ const {
 
 const messagesRef = ref<HTMLElement | null>(null)
 const lastMessageRef = ref<HTMLElement | null>(null)
+const historyOpen = ref(false)
 
 const setLastMessageRef: (
   refValue: Element | ComponentPublicInstance | null,
@@ -41,6 +42,20 @@ function onSubmitFollowUp() {
   void sendFollowUp(followUpInput.value)
 }
 
+function openHistory() {
+  if (conversations.value.length === 0) return
+  historyOpen.value = true
+}
+
+function closeHistory() {
+  historyOpen.value = false
+}
+
+function openHistoryConversation(conversationId: string) {
+  openConversation(conversationId)
+  closeHistory()
+}
+
 watch(
   () => [activeConversationId.value, activeConversation.value?.messages.length ?? 0],
   async () => {
@@ -53,11 +68,52 @@ watch(
 
 <template>
   <section :class="['ai-assistant-panel', `ai-assistant-panel--${mode}`]">
+    <div v-if="historyOpen" class="ai-assistant-history-overlay" @click.self="closeHistory">
+      <aside class="ai-assistant-history-drawer" role="dialog" aria-label="最近解释">
+        <header class="ai-assistant-history-drawer__header">
+          <span class="ai-assistant-history-drawer__title">最近解释</span>
+          <button class="ai-assistant-panel__ghost" type="button" @click="closeHistory">关闭</button>
+        </header>
+        <div class="ai-assistant-history-drawer__list">
+          <button
+            v-for="conversation in conversations"
+            :key="conversation.id"
+            :class="['ai-assistant-history-drawer__item', { active: conversation.id === activeConversationId }]"
+            type="button"
+            @click="openHistoryConversation(conversation.id)"
+          >
+            <span class="ai-assistant-history__title">{{ conversation.title }}</span>
+            <span class="ai-assistant-history__meta">
+              {{ conversation.anchor.sectionTitle || conversation.anchor.pageTitle }}
+            </span>
+          </button>
+        </div>
+      </aside>
+    </div>
+
     <header class="ai-assistant-panel__header">
       <div>
         <p class="ai-assistant-panel__eyebrow">AI 助手</p>
       </div>
       <div class="ai-assistant-panel__actions">
+        <button
+          v-if="mode === 'overlay'"
+          class="ai-assistant-panel__ghost ai-assistant-panel__drag"
+          type="button"
+          data-ai-drag-handle="true"
+          title="长按拖动窗口"
+          aria-label="长按拖动窗口"
+        >
+          拖动
+        </button>
+        <button
+          class="ai-assistant-panel__ghost"
+          type="button"
+          :disabled="conversations.length === 0"
+          @click="openHistory"
+        >
+          最近
+        </button>
         <button
           class="ai-assistant-panel__ghost"
           type="button"
@@ -69,26 +125,6 @@ watch(
         <button class="ai-assistant-panel__ghost" type="button" @click="closeSidebar">关闭</button>
       </div>
     </header>
-
-    <section v-if="conversations.length" class="ai-assistant-history">
-      <div class="ai-assistant-history__header">
-        <span>最近解释</span>
-      </div>
-      <div class="ai-assistant-history__list">
-        <button
-          v-for="conversation in conversations"
-          :key="conversation.id"
-          :class="['ai-assistant-history__item', { active: conversation.id === activeConversationId }]"
-          type="button"
-          @click="openConversation(conversation.id)"
-        >
-          <span class="ai-assistant-history__title">{{ conversation.title }}</span>
-          <span class="ai-assistant-history__meta">
-            {{ conversation.anchor.sectionTitle || conversation.anchor.pageTitle }}
-          </span>
-        </button>
-      </div>
-    </section>
 
     <template v-if="activeConversation">
       <section class="ai-assistant-anchor">
@@ -223,6 +259,7 @@ watch(
   gap: var(--sp-3);
   padding: var(--sp-4);
   background: rgba(255, 250, 242, 0.98);
+  position: relative;
 }
 
 .ai-assistant-panel__header,
@@ -268,36 +305,67 @@ watch(
   color: var(--color-accent);
 }
 
-.ai-assistant-history {
+.ai-assistant-panel__drag {
+  cursor: grab;
+  touch-action: none;
+}
+
+.ai-assistant-history-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(36, 25, 20, 0.06);
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.ai-assistant-history-drawer {
+  width: 240px;
+  height: 100%;
+  background: rgba(255, 250, 242, 0.98);
+  border-right: 1px solid var(--color-border-light);
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.ai-assistant-history-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.ai-assistant-history-drawer__title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-light);
+  font-weight: 700;
+}
+
+.ai-assistant-history-drawer__list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
 }
 
-.ai-assistant-history__header {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-text-light);
-}
-
-.ai-assistant-history__list {
-  display: flex;
-  gap: var(--sp-2);
-  overflow-x: auto;
-  padding-bottom: 2px;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-}
-
-.ai-assistant-history__item {
-  width: 160px;
-  flex: 0 0 160px;
+.ai-assistant-history-drawer__item {
   padding: var(--sp-2) var(--sp-3);
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-light);
   background: rgba(255, 255, 255, 0.55);
   text-align: left;
+}
+
+.ai-assistant-history-drawer__item.active {
+  background: var(--color-bg-warm);
 }
 
 .ai-assistant-history__item.active {

@@ -11,7 +11,6 @@ import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
-import { useAiAssistant } from '../composables/useAiAssistant'
 
 const route = useRoute()
 const router = useRouter()
@@ -154,7 +153,6 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
   3,
   { content: 60, editor: 20, preview: 20 },
 )
-const { sidebarOpen: aiSidebarOpen, toggleAiSidebar } = useAiAssistant()
 
 function aiSectionDetail(sectionLabel: string) {
   const stepTitle = currentStepData.value?.title || '当前步骤'
@@ -275,23 +273,21 @@ function aiSectionDetail(sectionLabel: string) {
             </div>
           </Transition>
 
-          <button
-            class="content-ai-toggle"
-            type="button"
-            data-ai-assistant-toggle="true"
-            :aria-expanded="aiSidebarOpen"
-            :title="aiSidebarOpen ? '关闭 AI 助手' : '打开 AI 助手'"
-            @click="toggleAiSidebar"
-          >
-            AI
-          </button>
         </div>
       </div>
 
       <template v-if="showEditor && !isCompactEditorLayout">
         <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
 
-        <div class="panel-editor" :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }">
+        <div
+          class="panel-editor"
+          :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
+          data-ai-selectable="true"
+          data-ai-selection-mode="code"
+          :data-ai-context-title="project.meta.title"
+          data-ai-context-detail="代码"
+          data-ai-context-kind="code"
+        >
           <CodeEditor
             :key="projectId + '-' + currentStep"
             :model-value="userCode"
@@ -302,8 +298,20 @@ function aiSectionDetail(sectionLabel: string) {
 
         <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
 
-        <div class="panel-preview" :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }">
-          <LivePreview :srcdoc="previewSrc" />
+        <div
+          class="panel-preview"
+          :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
+          data-ai-selectable="true"
+          :data-ai-context-title="project.meta.title"
+          data-ai-context-detail="预览"
+          data-ai-context-kind="preview"
+        >
+          <LivePreview
+            :srcdoc="previewSrc"
+            :ai-context-title="project.meta.title"
+            ai-context-detail="预览"
+            ai-context-kind="preview"
+          />
         </div>
       </template>
 
@@ -329,14 +337,37 @@ function aiSectionDetail(sectionLabel: string) {
             </button>
           </div>
           <div class="panel-right-body">
-            <CodeEditor
+            <div
               v-if="rightTab === 'editor'"
-              :key="projectId + '-' + currentStep + '-compact'"
-              :model-value="userCode"
-              @update:model-value="onCodeChange"
-              @run="triggerPreview"
-            />
-            <LivePreview v-else :srcdoc="previewSrc" />
+              class="panel-editor"
+              data-ai-selectable="true"
+              data-ai-selection-mode="code"
+              :data-ai-context-title="project.meta.title"
+              data-ai-context-detail="代码"
+              data-ai-context-kind="code"
+            >
+              <CodeEditor
+                :key="projectId + '-' + currentStep + '-compact'"
+                :model-value="userCode"
+                @update:model-value="onCodeChange"
+                @run="triggerPreview"
+              />
+            </div>
+            <div
+              v-else
+              class="panel-preview"
+              data-ai-selectable="true"
+              :data-ai-context-title="project.meta.title"
+              data-ai-context-detail="预览"
+              data-ai-context-kind="preview"
+            >
+              <LivePreview
+                :srcdoc="previewSrc"
+                :ai-context-title="project.meta.title"
+                ai-context-detail="预览"
+                ai-context-kind="preview"
+              />
+            </div>
           </div>
         </div>
       </template>
@@ -488,28 +519,6 @@ function aiSectionDetail(sectionLabel: string) {
   grid-template-columns: minmax(0, 1fr);
   height: 100%;
   min-height: 0;
-}
-
-.content-ai-toggle {
-  position: absolute;
-  top: var(--sp-3);
-  right: var(--sp-3);
-  z-index: 260;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  border: 1px solid var(--color-accent-border);
-  background: rgba(255, 250, 242, 0.92);
-  color: var(--color-accent);
-  font-size: 11px;
-  font-weight: 700;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(8px);
-  transition: background var(--dur-fast), transform var(--dur-fast), right var(--dur-fast);
-}
-
-.content-ai-toggle:hover {
-  background: var(--color-accent-bg);
 }
 
 .panel-right {

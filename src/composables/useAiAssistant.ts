@@ -8,6 +8,7 @@ const VIEWPORT_PADDING = 12
 const TRIGGER_HEIGHT = 32
 const TRIGGER_HALF_WIDTH = 44
 const STORAGE_KEY = 'ai-selection-conversations'
+const OVERLAY_POSITION_KEY = 'ai-overlay-position-v1'
 const MAX_CONVERSATIONS = 12
 export const AI_QUICK_PROMPTS = ['再通俗一点', '举个例子', '这段话为什么重要', '和相关概念有什么区别']
 
@@ -18,6 +19,9 @@ const buttonLeft = ref(0)
 const viewportWidth = ref(window.innerWidth)
 const viewportHeight = ref(window.innerHeight)
 const currentRequest = ref<AiExplainRequest | null>(null)
+const externalSelectionActive = ref(false)
+const overlayDragX = ref(0)
+const overlayDragY = ref(32)
 const conversations = ref<AiConversation[]>([])
 const activeConversationId = ref<string | null>(null)
 const loadingInitial = ref(false)
@@ -30,6 +34,7 @@ const activeConversation = computed(() =>
 )
 
 let loaded = false
+let overlayPositionLoaded = false
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max)
@@ -37,6 +42,11 @@ function clamp(value: number, min: number, max: number) {
 
 function normalizeWhitespace(text: string) {
   return text.replace(/\s+/g, ' ').trim()
+}
+
+function normalizeCodeSelection(text: string) {
+  const normalizedNewlines = text.replace(/\r\n/g, '\n')
+  return normalizedNewlines.trimEnd()
 }
 
 function createId() {
@@ -77,6 +87,7 @@ function findSelectableRoot(node: Node | null): HTMLElement | null {
 function clearSelectionAnchor() {
   buttonVisible.value = false
   currentRequest.value = null
+  externalSelectionActive.value = false
 }
 
 function closeSidebar() {
@@ -104,7 +115,21 @@ function positionButton(rect: DOMRect) {
   )
 }
 
-function extractSurroundingText(root: HTMLElement, selectedText: string) {
+function extractSurroundingText(root: HTMLElement, selectedText: string, mode: 'text' | 'code') {
+  if (mode === 'code') {
+    const source = (root.innerText || root.textContent || '').replace(/\r\n/g, '\n')
+    if (!source) return ''
+
+    const start = source.indexOf(selectedText)
+    if (start === -1) {
+      return source.slice(0, 420)
+    }
+
+    const contextStart = Math.max(0, start - 240)
+    const contextEnd = Math.min(source.length, start + selectedText.length + 240)
+    return source.slice(contextStart, contextEnd)
+  }
+
   const source = normalizeWhitespace(root.innerText || root.textContent || '')
   if (!source) return ''
 
@@ -118,20 +143,29 @@ function extractSurroundingText(root: HTMLElement, selectedText: string) {
   return source.slice(contextStart, contextEnd)
 }
 
+function readSelectionText(selection: Selection, mode: 'text' | 'code') {
+  const rawText = selection.toString()
+  if (mode === 'code') return normalizeCodeSelection(rawText)
+  return normalizeWhitespace(rawText)
+}
+
 function readSelectionRequest(): AiExplainRequest | null {
   const selection = window.getSelection()
   if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
     return null
   }
 
-  const rawText = normalizeWhitespace(selection.toString())
-  if (!rawText) {
-    return null
-  }
-
   const anchorRoot = findSelectableRoot(selection.anchorNode)
   const focusRoot = findSelectableRoot(selection.focusNode)
   if (!anchorRoot || !focusRoot || anchorRoot !== focusRoot) {
+    return null
+  }
+
+  const selectionMode: 'text' | 'code' =
+    anchorRoot.dataset.aiSelectionMode === 'code' ? 'code' : 'text'
+
+  const rawText = readSelectionText(selection, selectionMode)
+  if (!rawText) {
     return null
   }
 
@@ -147,23 +181,69 @@ function readSelectionRequest(): AiExplainRequest | null {
     pageTitle: anchorRoot.dataset.aiContextTitle || document.title,
     sectionTitle: anchorRoot.dataset.aiContextDetail || '',
     sectionKind: anchorRoot.dataset.aiContextKind || 'lesson',
-    surroundingText: extractSurroundingText(anchorRoot, rawText),
+    surroundingText: extractSurroundingText(anchorRoot, rawText, selectionMode),
+    selectionMode,
   }
 }
 
 function refreshSelectionState() {
   const request = readSelectionRequest()
   if (!request) {
-    clearSelectionAnchor()
+    if (!externalSelectionActive.value) {
+      clearSelectionAnchor()
+    }
     return
   }
 
+  externalSelectionActive.value = false
   currentRequest.value = request
   buttonVisible.value = true
 }
 
+function setExternalSelection(request: AiExplainRequest, rect: DOMRect) {
+  positionButton(rect)
+  externalSelectionActive.value = true
+  currentRequest.value = request
+  buttonVisible.value = true
+}
+
+function clearExternalSelection() {
+  if (!externalSelectionActive.value) return
+  externalSelectionActive.value = false
+  buttonVisible.value = false
+  currentRequest.value = null
+}
+
 function persistConversations() {
   safeSetItem(STORAGE_KEY, JSON.stringify(conversations.value.slice(0, MAX_CONVERSATIONS)))
+}
+
+function persistOverlayPosition() {
+  safeSetItem(
+    OVERLAY_POSITION_KEY,
+    JSON.stringify({
+      x: overlayDragX.value,
+      y: overlayDragY.value,
+    }),
+  )
+}
+
+function loadOverlayPosition() {
+  if (overlayPositionLoaded) return
+  overlayPositionLoaded = true
+  const result = safeGetItem(OVERLAY_POSITION_KEY)
+  if (!result.success || !result.value) return
+
+  try {
+    const parsed = JSON.parse(result.value) as { x?: unknown; y?: unknown }
+    const x = parsed?.x
+    const y = parsed?.y
+    if (typeof x === 'number' && Number.isFinite(x)) overlayDragX.value = x
+    if (typeof y === 'number' && Number.isFinite(y)) overlayDragY.value = y
+  } catch {
+    overlayDragX.value = 0
+    overlayDragY.value = 0
+  }
 }
 
 function loadConversations() {
@@ -306,6 +386,7 @@ function handleRouteChange() {
   buttonVisible.value = false
   currentRequest.value = null
   sidebarOpen.value = false
+  externalSelectionActive.value = false
 }
 
 function handleGlobalPointerDown(target: Node | null, insideAssistant: boolean) {
@@ -318,6 +399,17 @@ function setViewportSize(width: number, height: number) {
   viewportHeight.value = height
 }
 
+function setOverlayPosition(x: number, y: number) {
+  overlayDragX.value = x
+  overlayDragY.value = y
+}
+
+function resetOverlayPosition() {
+  overlayDragX.value = 0
+  overlayDragY.value = 70
+  persistOverlayPosition()
+}
+
 function formatAiTime(timestamp: number) {
   return new Date(timestamp).toLocaleTimeString('zh-CN', {
     hour: '2-digit',
@@ -327,6 +419,7 @@ function formatAiTime(timestamp: number) {
 
 export function useAiAssistant() {
   loadConversations()
+  loadOverlayPosition()
 
   return {
     buttonVisible,
@@ -341,10 +434,17 @@ export function useAiAssistant() {
     sendingFollowUp,
     followUpInput,
     isMobileSidebar,
+    overlayDragX,
+    overlayDragY,
     refreshSelectionState,
     handleRouteChange,
     handleGlobalPointerDown,
     setViewportSize,
+    setExternalSelection,
+    clearExternalSelection,
+    setOverlayPosition,
+    resetOverlayPosition,
+    persistOverlayPosition,
     explainCurrentSelection,
     sendFollowUp,
     openSidebar,

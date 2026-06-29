@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import Fuse, { type FuseResult } from 'fuse.js'
 import searchIndexData from '../generated/search-index.json'
+import { useFocusTrap } from '../composables/useFocusTrap'
+import { useScrollLock } from '../composables/useScrollLock'
 
 interface SearchItem {
   id: string
@@ -18,6 +20,10 @@ const query = ref('')
 const results = ref<FuseResult<SearchItem>[]>([])
 const activeIdx = ref(0)
 const inputRef = ref<HTMLInputElement | null>(null)
+const dialogRef = ref<HTMLElement | null>(null)
+
+useScrollLock(open)
+useFocusTrap(open, dialogRef, inputRef as unknown as typeof dialogRef)
 
 const fuse = new Fuse(searchIndexData as SearchItem[], {
   keys: [
@@ -45,7 +51,6 @@ function doSearch(q: string) {
 
 function openSearch() {
   open.value = true
-  nextTick(() => inputRef.value?.focus())
 }
 
 function closeSearch() {
@@ -90,7 +95,7 @@ defineExpose({ openSearch })
   <Teleport to="body">
     <Transition name="gs-fade">
       <div v-if="open" class="gs-backdrop" @click.self="closeSearch">
-        <div class="gs-dialog" role="dialog" aria-modal="true" aria-label="全局搜索">
+        <div ref="dialogRef" class="gs-dialog" role="dialog" aria-modal="true" aria-label="全局搜索" tabindex="-1">
           <div class="gs-search-row">
             <span class="gs-icon">🔍</span>
             <input
@@ -108,12 +113,18 @@ defineExpose({ openSearch })
             <li
               v-for="(r, i) in results"
               :key="r.item.id"
-              :class="['gs-result', { active: i === activeIdx }]"
-              @mouseenter="activeIdx = i"
-              @click="goToResult(r.item)"
+              class="gs-result-item"
             >
-              <div class="gs-result-title">{{ r.item.title }}</div>
-              <div class="gs-result-meta">{{ r.item.track }} / {{ r.item.chapter }}</div>
+              <button
+                type="button"
+                :class="['gs-result', { active: i === activeIdx }]"
+                @mouseenter="activeIdx = i"
+                @focus="activeIdx = i"
+                @click="goToResult(r.item)"
+              >
+                <div class="gs-result-title">{{ r.item.title }}</div>
+                <div class="gs-result-meta">{{ r.item.track }} / {{ r.item.chapter }}</div>
+              </button>
             </li>
           </ul>
           <div v-else-if="query.trim()" class="gs-empty">未找到相关课程</div>
@@ -194,7 +205,14 @@ defineExpose({ openSearch })
   overflow-y: auto;
 }
 
+.gs-result-item {
+  list-style: none;
+}
+
 .gs-result {
+  width: 100%;
+  text-align: left;
+  background: transparent;
   display: flex;
   flex-direction: column;
   gap: 2px;
