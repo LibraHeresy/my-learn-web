@@ -1,8 +1,20 @@
 {
   "steps": [
     {
+      "title": "开始前先确认发布目标",
+      "content": {
+        "mdFile": "steps/01.md"
+      },
+      "task": "先确认你的 `v2` 是否已经稳定可运行，再给自己选择这次至少做到标准版还是挑战版。",
+      "hint": "如果 `v2` 还有明显 bug，不要急着上部署。先把产品本身跑稳，再进入发布流程。",
+      "purpose": "很多人一提部署就只想到命令，但真正的工程化前提是：你知道自己要交付什么版本、交付到哪里、如何验证它上线成功。",
+      "expectedResult": "你明确了 `v3` 的目标是交付与发布，而不是继续无限加功能，也知道它和 `v2` 的关系是“上线版”而不是“另一个新项目”。"
+    },
+    {
       "title": "Git 初始化与首次提交",
-      "content": "在继续开发之前，先把 v2 的代码用 Git 管理起来。\n打开 VS Code 终端（在项目根目录）：\n```bash\n# 初始化 Git 仓库\ngit init\n# 查看哪些文件会被追踪\ngit status\n```你会看到一列红色的文件——这些是\"未追踪\"的文件。\n在暂存之前，先创建 `.gitignore` 文件，告诉 Git 哪些不需要管理：\n```# .gitignore\nnode_modules/\ndist/\n.DS_Store\n*.local\n````node_modules/` 有几万个文件，绝对不能提交到 Git——别人可以通过 `npm install` 重新下载。\n现在做第一次提交：\n```bash\ngit add .\ngit commit -m \"初始化音乐收藏 Vue 项目\"\ngit log --oneline\n```你会看到一条 commit 记录，前面有一个哈希值（如 `a1b2c3d`）。这是这次快照的\"身份证号\"。\n> 🎯 每一次 commit 都是一次\"存档\"。好的 commit 消息就像乐章标题，让你知道这一段写了什么。",
+      "content": {
+        "mdFile": "steps/02.md"
+      },
       "task": "在项目中初始化 Git，创建 `.gitignore`，把所有源码文件添加到第一次提交中。运行 `git log` 确认提交成功。",
       "hint": "如果误把 node_modules 提交了，可以这样移除：`git rm -r --cached node_modules`，然后 commit。`.gitignore` 只对未追踪的文件生效。",
       "purpose": "Git 是程序员的'乐谱存档系统'——每一次 commit 都是一次快照，记录了你项目在某一刻的完整状态。`.gitignore` 就像告诉档案管理员'node_modules 不用归档，别人能自己下载'。养成频繁提交的习惯，就像排练时录下每一次演奏，方便随时回听和改进。",
@@ -10,7 +22,9 @@
     },
     {
       "title": "分支开发工作流",
-      "content": "现在你的项目已经有了几个 commit，接下来的新功能应该在**分支**上开发——这是工程实践的核心习惯。\n**为什么需要分支？**\n想象你在改写一首交响曲的第三乐章——你不想在改的过程中搞坏原本已经能正常演出的版本。分支就是你的\"草稿本\"：在分支上随便折腾，搞砸了删掉重来，搞好了再合并回主分支。\n**实际操作：**\n```bash\n# 查看所有分支（当前是 main）\ngit branch\n# 创建并切换到新分支\ngit checkout -b feature/favorites\n# 确认在 feature/favorites 分支上\ngit branch\n```在 `feature/favorites` 分支上添加一个新功能：**收藏夹**——把标记为 ❤ 的曲目集中展示。\n这个功能需要：\n1. 一个\"显示收藏\"的切换按钮\n2. 一个 computed 来筛选 `liked === true` 的曲目\n3. 在筛选栏中集成这个切换\n在分支上开发完成后：\n```bash\ngit add .\ngit commit -m \"添加收藏夹功能：可以筛选已收藏的曲目\"\n# 切回 main 分支\ngit checkout main\n# 合并 feature/favorites 分支\ngit merge feature/favorites\n# 删除已合并的分支\ngit branch -d feature/favorites\n```> 🌿 分支是 Git 最强大的功能之一。大项目每天可能有几十个分支同时活跃——就像交响乐团的排练室里，弦乐组、管乐组、打击乐组可能同时在不同的房间排练。",
+      "content": {
+        "mdFile": "steps/03.md"
+      },
       "task": "创建 `feature/favorites` 分支，实现收藏夹切换功能（只显示已收藏曲目），commit 后合并回 main 分支。",
       "hint": "`git checkout -b <分支名>` 创建并切换分支。合并前确保你在目标分支上（`git checkout main`）。合并后用 `git log --oneline --graph` 可以看到分支历史。",
       "purpose": "分支是 Git 最强大的功能——它让你在'草稿本'上随意实验，不影响已经稳定的主版本。就像作曲家在同一首交响曲上尝试不同的配器版本，试好了合并到正式总谱，试不好直接丢弃。没有分支的 Git 就像没有排练室的乐团——只能在音乐厅直接冒险演出。",
@@ -23,7 +37,9 @@
     },
     {
       "title": "推送到 GitHub",
-      "content": "你的项目在本地已经管理得很好了——现在是时候把它发表到 GitHub 上，让世界看到你的作品。\n**第一步：在 GitHub 创建远程仓库**\n1. 打开 [github.com](https://github.com)，登录你的账号\n2. 点击右上角 ➕ → \"New repository\"\n3. 仓库名：`music-collection`\n4. 描述：🎵 我的音乐收藏 — 从 HTML/CSS/JS 到 Vue 组件化的学习之旅\n5. 设置为 **Public**\n6. **不要勾选** \"Add a README file\"（因为本地已有项目）\n7. 点击 \"Create repository\"\n**第二步：关联并推送**\nGitHub 会显示一段命令，复制并在终端中运行：\n```bash\ngit remote add origin https://github.com/你的用户名/music-collection.git\ngit branch -M main\ngit push -u origin main\n```解释：\n- `git remote add origin <URL>` — 告诉 Git\"远程仓库的地址\"，起名 `origin`\n- `git branch -M main` — 确保分支名是 `main`\n- `git push -u origin main` — 把本地的所有 commit 推送到 GitHub\n刷新 GitHub 页面——你的代码出现了！README 会自动渲染，目录结构清晰可见。\n之后每次 commit 后，只需 `git push` 即可同步。\n> 🌐 你的代码现在有了一个公开的\"家\"。GitHub 主页就是程序员的技术名片。",
+      "content": {
+        "mdFile": "steps/04.md"
+      },
       "task": "在 GitHub 创建公开仓库，将本地项目推送到远程。确认所有文件都已上传，README 能正常渲染。",
       "hint": "如果首次 push 时提示需要登录，在弹出的窗口中用 GitHub 账号授权。如果遇到 \"Permission denied\"，说明需要配置凭据——用 `gh auth login`（如果装了 GitHub CLI）或在 GitHub 设置中创建 Personal Access Token。",
       "purpose": "代码只有上传到 GitHub，才算真正'发表'——就像乐谱从个人抽屉里拿出来，放在了音乐图书馆的公开书架上。GitHub 不只是代码存储，更是你的技术名片：别人能看到你的项目、你的代码风格、你的 commit 习惯。这是你从'自己写着玩'到'参与技术社区'的第一步。",
@@ -31,7 +47,9 @@
     },
     {
       "title": "构建生产版本",
-      "content": "开发时我们用的是 Vite 的开发服务器（`npm run dev`），它有热更新和源码映射，很方便——但这些便利是以文件体积和性能为代价的。\n现在要构建给用户访问的\"生产版本\"：\n```bash\nnpm run build\n```运行后，项目根目录会多出一个 `dist/` 文件夹：\n```dist/\n├── index.html        # 入口页面（压缩后）\n├── assets/\n│   ├── index-abc123.js   # 打包后的 JS（变量名缩短、空格删除）\n│   └── index-def456.css  # 打包后的 CSS（选择器简化、注释移除）\n└── favicon.ico\n```对比一下：\n| | 开发版本（dev） | 生产版本（dist） |\n|---|---|---|\n| 文件大小 | 几百 KB（未压缩） | 几十 KB（压缩后） |\n| 加载速度 | 慢（多文件请求） | 快（合并后少量文件） |\n| 错误提示 | 详细的源码位置 | 压缩后的位置（难读） |\n| 热更新 | ✅ 有 | ❌ 无（已经是最终品） |\n**类比：**\n- 开发版本 = 排练时的笔记，潦草但你能看懂\n- 生产版本 = 正式演出的节目单，印刷精美，观众能看懂\n你可以用 `npx serve dist` 临时预览构建结果——这是你\"上线前最后的彩排\"。",
+      "content": {
+        "mdFile": "steps/05.md"
+      },
       "task": "运行 `npm run build`，查看 `dist/` 文件夹的内容。用 `npx serve dist` 预览构建后的版本，确认功能正常。",
       "hint": "构建后如果在本地预览发现路径问题（404），检查 `vite.config.js` 中的 `base` 配置。本地预览可以用 `npx vite preview`（Vite 内置的命令）。",
       "purpose": "开发版本和生产版本的关系，就像排练录音和正式唱片——前者有注释、有调试信息、方便修改，后者经过压缩和优化，是给最终听众的成品。理解这个区别很重要：你写的 Vue 单文件组件不会直接发给浏览器，而是经过 Vite 编译成浏览器原生能运行的 HTML/CSS/JS。",
@@ -39,7 +57,9 @@
     },
     {
       "title": "部署到 GitHub Pages",
-      "content": "构建完成，最后一个步骤——部署上线！\nGitHub Pages 是 GitHub 提供的免费静态网站托管服务。你把 `dist/` 的内容推上去，就能获得一个公开网址。\n**最简单的方式：使用 `gh-pages`**\n1. 安装 `gh-pages`：\n```bash\nnpm install -D gh-pages\n```2. 在 `vite.config.js` 中添加 base 配置：\n```js\nimport { defineConfig } from 'vite'\nimport vue from '@vitejs/plugin-vue'\nexport default defineConfig({\n  plugins: [vue()],\n  base: '/music-collection/'  // 你的仓库名\n})\n```3. 在 `package.json` 中添加部署脚本：\n```json\n{\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"vite build\",\n    \"deploy\": \"gh-pages -d dist\"\n  }\n}\n```4. 构建并部署：\n```bash\nnpm run build\nnpm run deploy\n```等待 1-2 分钟，访问：\n`https://你的用户名.github.io/music-collection/`\n**你的项目上线了！** 任何人都可以通过这个网址访问你的音乐收藏库。把链接发给朋友和家人，让他们看看你从零开始做出的东西。\n> 🎭 从\"Hello World\"到\"上线部署\"，你完成了前端开发中最完整的闭环。正如指挥家从第一次挥棒到谢幕——所有的练习，都是为了这一刻的演出。",
+      "content": {
+        "mdFile": "steps/06.md"
+      },
       "task": "配置 `vite.config.js` 的 base 路径，安装 `gh-pages`，构建并部署到 GitHub Pages。访问你的网址确认部署成功。",
       "hint": "如果页面打开是空白，按 F12 打开开发者工具看 Console 报错——通常是 base 路径配置有误。确保 `vite.config.js` 中的 `base` 和 GitHub 仓库名一致。部署后可能需要等 1-2 分钟才能看到更新。",
       "purpose": "部署是将你的作品从本地推向世界的关键一步。GitHub Pages 是免费、稳定的静态托管方案——你只需要把构建好的文件推到指定分支，它就帮你服务到公网。这一步让你体会到从前端开发的完整闭环：写代码 → 构建 → 部署 → 别人通过 URL 访问。这个流程是所有前端项目的标配。",
@@ -47,19 +67,33 @@
     },
     {
       "title": "CI/CD — 用 GitHub Actions 自动部署",
-      "content": "现在每次修改代码后，都要手动运行 `npm run build && npm run deploy`。能不能让这个过程自动化？\n这就是 CI/CD（持续集成/持续部署）——每次 `git push`，GitHub 自动帮你构建和部署。\n创建一个 `.github/workflows/deploy.yml` 文件：\n```yaml\nname: Deploy to GitHub Pages\non:\n  push:\n    branches: [main]\n# 授予 GITHUB_TOKEN 写入 Pages 的权限\npermissions:\n  contents: read\n  pages: write\n  id-token: write\njobs:\n  build-and-deploy:\n    runs-on: ubuntu-latest\n    environment:\n      name: github-pages\n      url: ${{ steps.deployment.outputs.page_url }}\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v4\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: 18\n      - name: Install dependencies\n        run: npm ci\n      - name: Build\n        run: npm run build\n      - name: Setup Pages\n        uses: actions/configure-pages@v4\n      - name: Upload artifact\n        uses: actions/upload-pages-artifact@v3\n        with:\n          path: ./dist\n      - name: Deploy to GitHub Pages\n        id: deployment\n        uses: actions/deploy-pages@v4\n```逐行解释：\n- `permissions` — 给 workflow 授权：读源码、写 Pages、获取临时身份令牌\n- `on.push.branches: [main]` — 当 main 分支有新 push 时触发\n- `environment` — 关联 GitHub Pages 环境，部署后可拿到最终 URL\n- `actions/checkout@v4` — 把代码下载到虚拟机\n- `actions/setup-node@v4` — 安装 Node.js\n- `npm ci` — 安装依赖（比 `npm install` 更快，适合 CI 环境）\n- `actions/configure-pages@v4` — 自动配置 Pages 设置\n- `actions/upload-pages-artifact@v3` — 把 `dist/` 打包上传为部署工件\n- `actions/deploy-pages@v4` — 将工件部署到 GitHub Pages\n> 💡 这里用的是 GitHub 官方 action，无需依赖第三方。\n创建这个文件后，提交并推送：\n```bash\ngit add .github/\ngit commit -m \"添加 GitHub Actions 自动部署\"\ngit push\n```然后打开 GitHub 仓库的 Settings → Pages，把 Source 改为 \"GitHub Actions\"。\n从此以后，你只需要 `git push`，GitHub 会自动：构建 → 部署 → 上线。这就是真正的工程化开发流程！",
+      "content": {
+        "mdFile": "steps/07.md"
+      },
       "task": "创建 `.github/workflows/deploy.yml`，配置 GitHub Actions 自动部署。修改一点代码，push 到 GitHub，观察 Actions 自动运行的过程。",
       "hint": "如果 Actions 运行失败，点击失败的 job 查看日志。常见错误：Node.js 版本不匹配（检查 `node-version`）、`npm ci` 失败（检查 `package-lock.json` 是否已提交）。别忘了在 Settings → Pages 中把 Source 切到 GitHub Actions。",
       "purpose": "手动部署容易忘、容易出错——CI/CD 用自动化替代了重复劳动。每次 git push 后，GitHub Actions 自动帮你构建和部署，就像请了一位舞台助理帮你完成每次演出的灯光和布景。这种'提交即部署'的流程是专业团队的标准实践，你从现在开始就走在正确的工程化道路上。",
       "expectedResult": "push 代码到 GitHub 后，Actions 标签页中出现一条正在运行的 workflow（黄色旋转图标 → 绿色对勾）。运行完成后，GitHub Pages 上的网站自动更新。修改页面 → git push → 等一两分钟 → 线上已更新，全程无需手动运行任何部署命令。"
     },
     {
-      "title": "作品展示与总结 — 你的\"毕业音乐会\"",
-      "content": "恭喜你来到了最后一站！🎉\n回顾你走过的路程：\n| 阶段 | 你做了什么 | 掌握的能力 |\n|---|---|---|\n| 乐理篇 | 写了第一行 HTML、CSS、JS | 前端三件套的基础 |\n| 合奏篇 | 学会了数据驱动、事件委托、localStorage | JS 操控 DOM 的核心技能 |\n| 登台篇 | 安装了 Node.js、Vite、Vue，学会了单文件组件 | 现代前端工程化工具链 |\n| v1 手工版 | 用 HTML/CSS/JS 从零搭建了音乐收藏库 | 基础技术的综合实战 |\n| v2 重构版 | 用 Vue 组件化思维重构了同一个应用 | 组件化、Props/Emits、Computed |\n| v3 协作版 | 加了 Git、GitHub、CI/CD | 版本管理、协作部署、自动化 |\n**你现在的能力：**\n- ✅ 能独立搭建一个完整的前端项目\n- ✅ 能用 Vue 3 进行组件化开发\n- ✅ 能用 Git 管理代码版本\n- ✅ 能部署项目到线上，让全世界看到\n**接下来你可以：**\n- 给音乐收藏库加更多功能（播放音乐片段、数据可视化、用户登录）\n- 学习 React 或 Angular（换个\"乐器\"试试）\n- 学习后端开发（Node.js、数据库）——让收藏库变成一个真正的全栈应用\n- 参与开源项目——你现在的 Git/GitHub 知识完全够用了\n> 🎼 每个音乐家都是从第一个音符开始的。你从 `<h1>Hello World</h1>` 走到了自动化部署——这不是终点，而是序曲的结束、第一乐章的起点。\n>\n> 继续写下去。你的\"代码乐章\"才刚刚翻开。",
-      "task": "回顾你的整个学习旅程。检查 GitHub 上的项目是否正常运行。如果可以，把链接分享给至少一个人——这是你的\"毕业演出\"。",
-      "hint": "如果想要一个更专业的项目 README，包含：项目名称和描述、功能列表、技术栈、如何运行（npm install && npm run dev）、在线演示链接。一个好的 README 是开源世界的\"节目单\"。",
-      "purpose": "回头看走过的路，才知道走了多远。从 `<h1>Hello World</h1>` 到 Vue 组件化开发、Git 版本管理、GitHub Pages 部署、CI/CD 自动化——这不是几门独立课程的堆砌，而是一条完整的职业能力成长线。分享你的作品不仅是对自己努力的肯定，更是打开参与技术社区的大门。每个音乐家都是从第一个音符开始的，你从第一行代码走到了自动化部署——这不是终点，而是序曲的结束、第一乐章的起点。",
-      "expectedResult": "GitHub 上的音乐收藏库正常运行，所有功能（添加、筛选、收藏切换、删除、刷新保留数据、收藏夹筛选）在线上也能正常工作。你把链接分享给了至少一个人，完成了从学习者到创造者的蜕变。这是你的'毕业音乐会'——掌声为你而响。"
+      "title": "这个项目真正有用的收获",
+      "content": {
+        "mdFile": "steps/08.md"
+      },
+      "task": "回头看一遍 `v1`、`v2`、`v3` 三个版本，确认你能说明：这个版本为什么能作为主项目，它和前两个版本最大的差别是什么。",
+      "hint": "这个项目最关键的不是包装得多完整，而是你是否已经具备“从开发走到交付”的完整理解。",
+      "purpose": "减掉重复模板之后，保留最关键的结论：你已经有了一个可以作为主项目的完整交付作品。",
+      "expectedResult": "你知道 `v3` 为什么重要，也知道它该怎样作为你的主项目继续向前承接。"
+    },
+    {
+      "title": "最终验收、上线检查与继续升级",
+      "content": {
+        "mdFile": "steps/09.md"
+      },
+      "task": "按上线检查清单完整走一遍，并把你的在线地址、仓库地址、README 三项都确认可访问。完成后，写下你准备继续升级的 1 个方向。",
+      "hint": "如果线上空白，优先查 `base` 配置；如果 Actions 失败，优先查日志，不要反复手猜配置问题。",
+      "purpose": "`v3` 的意义是把“我会做”变成“我能交付”。真正的结束不是代码写完，而是作品能被别人访问、理解、复现和继续维护。",
+      "expectedResult": "你完成了从本地开发到线上交付的完整闭环，并且手上拥有一个真正可以放进作品集、分享给别人、继续升级的项目。"
     }
   ]
 }

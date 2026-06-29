@@ -2,7 +2,7 @@ id: tooling-vscode
 title: "认识你的\"乐谱架\"：VS Code"
 track: engineering
 chapter: engineering-tooling
-order: 2
+order: 3
 mode: local
 musicAnalogy: "音乐家有谱架，程序员有编辑器。**VS Code** 不是普通的记事本——它就像智能谱架：自动帮你对齐音符、标记错误、提示下一个和弦。全世界绝大多数前端开发者每天都在用它。"
 listenTo: 巴赫《C大调前奏曲》BWV 846 — 这首曲子只用了一个简单的琶音模式，但包含了无限的可能性。VS Code 也是如此：表面看起来只是一个编辑器，但里面藏着能帮你做任何事的插件生态。

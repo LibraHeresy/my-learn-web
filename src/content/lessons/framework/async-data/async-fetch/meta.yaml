@@ -2,7 +2,7 @@ id: async-fetch
 title: "fetch — 与\"外面的世界\"对话"
 track: framework
 chapter: async-data
-order: 5
+order: 4
 mode: sandbox
 musicAnalogy: "至此你的音乐都在自己的琴房里。现在，打开窗户——听听外面的音乐，或者把你的琴声传出去。**fetch()** 就是这扇窗户：让 JavaScript 能和互联网上的服务器\"对话\"。"
 listenTo: "贝多芬《第五交响曲》第一乐章 — 那著名的\"命运敲门声\"，短短四个音就传递了强大的信息。fetch 请求也如此：一个简单的 GET 请求，就能带回丰富的数据。"

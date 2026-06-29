@@ -1,8 +1,20 @@
 {
   "steps": [
     {
+      "title": "开始前先确认路线",
+      "content": {
+        "mdFile": "steps/01.md"
+      },
+      "task": "先决定你这次至少做到最低完成线还是标准版；如果你已经做过 `music-showcase`，想一想这次和上一个项目最大的区别是什么。",
+      "hint": "如果你还不太稳，先不要追求太多附加功能。把列表、筛选、添加这三件事做扎实，比什么都重要。",
+      "purpose": "在进入第一个完整应用前先明确目标和位置，能避免一开始就把“练基础”和“做大而全”混在一起。",
+      "expectedResult": "你知道 `v1` 的核心目标是打通原生前端完整链路，也知道它会如何承接到后面的 `v2`。"
+    },
+    {
       "title": "环境准备 — 打开你的 VS Code",
-      "content": "从这个项目开始，我们走出在线编辑器，进入真正的开发环境。就像从练习室走上舞台——工具变了，但你的技能不变。\n**你需要：**\n- [VS Code](https://code.visualstudio.com/) 编辑器\n- 在你电脑上创建一个项目文件夹，如 `music-collection`\n**动手操作：**\n1. 打开 `VS Code` → `文件` → `打开文件夹` → 选择你创建的 `music-collection` 文件夹\n2. 在 `VS Code` 侧边栏（`Ctrl+B`）新建三个文件：`index.html`、`style.css`、`script.js`\n3. 在 `index.html` 中写入 HTML 骨架（输入 `!` 然后按 `Tab`，`VS Code` 会自动补全）\n4. 在 `<head>` 中用 `<link rel=\"stylesheet\" href=\"style.css\">` 关联 CSS\n5. 在 `<body>` 末尾用 `<script src=\"script.js\"></script>` 关联 JS\n完成后，在 `VS Code` 中右键 `index.html` → `Open with Live Server`（需要安装 `Live Server` 插件），或者直接用浏览器打开这个文件。\n> 💡 从现在开始，所有代码都在你本地的 `VS Code` 中编写。遇到问题先看 `VS Code` 的提示，再看浏览器的 `DevTools`（`F12`）。这就是真正的开发流程。",
+      "content": {
+        "mdFile": "steps/02.md"
+      },
       "task": "安装 `VS Code`，创建 `music-collection` 项目文件夹，新建 `index.html`、`style.css`、`script.js` 三个文件，并正确关联它们。用浏览器打开 `index.html` 确认基本结构能正常显示。",
       "hint": "`VS Code` 的 `! + Tab` 缩写叫 `Emmet`。如果没生效，检查文件是否以 `.html` 结尾。`Live Server` 插件在 `VS Code` 的扩展商店（`Ctrl+Shift+X`）搜索 `Live Server` 安装，它会在保存文件时自动刷新浏览器。",
       "purpose": "从在线编辑器切换到本地 IDE 是重要的一步。VS Code + 文件系统 + 浏览器 = 真正的开发环境。这一步让你建立起本地开发的基本工作流，后面所有的项目都基于此。",
@@ -10,7 +22,9 @@
     },
     {
       "title": "搭建收藏卡片",
-      "content": "万事开头难——但别担心，第一张卡片就像在五线谱上画出第一个音符。\n先用 HTML 写出**一张**音乐收藏卡片，包含：\n- 一首曲子的名称（用 `<h2>` 标题）\n- 作曲家的名字（用 `<p>` 段落）\n- 一张封面图片（用 `<img>` 标签）\n- 音乐时期/风格分类（用 `<span>` 标签，如\"巴洛克\"）\n把卡片包在一个 `<div>` 里，给它一个 class 名称，后面我们会用到。",
+      "content": {
+        "mdFile": "steps/03.md"
+      },
       "task": "在 HTML 编辑区写一张音乐卡片，包含曲名、作曲家、封面图和风格标签。",
       "hint": "如果图片不显示，检查 src 地址是否正确。建议使用维基百科或 Unsplash 上的音乐家图片链接。",
       "purpose": "从零搭建一张卡片——复习第一章学过的标签（`h2`、`p`、`img`、`span`），并用 `div` 包裹成一张完整的卡片。后面的 CSS 和 JS 都基于这张卡片的结构。",
@@ -23,7 +37,9 @@
     },
     {
       "title": "给卡片穿上衣服",
-      "content": "现在你的卡片有了内容，但看起来还有点\"朴素\"。CSS 就是卡片的服装设计师——给它圆角、阴影、颜色和字体，让它变得优雅。\n试着给 `.music-card` 添加：\n- `border-radius` — 圆角让卡片更柔和\n- `box-shadow` — 阴影让卡片\"浮\"起来\n- `padding` — 内边距让内容不贴边\n- `background` — 背景色营造温暖感\n- `max-width` — 限制卡片宽度，更好看\n也别忘了给 `.tag` 样式化——小标签可以加背景色和圆角。",
+      "content": {
+        "mdFile": "steps/04.md"
+      },
       "task": "在 CSS 编辑区美化你的卡片，使用圆角、阴影、内边距和背景色。给标签也加上样式。",
       "hint": "试试 `box-shadow: 0 4px 12px rgba(0,0,0,0.1)` —— 这是一组经典的卡片阴影参数。",
       "purpose": "这一步让你感受 CSS 的魔力——同样的 HTML 结构，加上几行样式就焕然一新。圆角让卡片柔和不生硬、阴影让卡片有了层次感、配色让卡片有了温度。就像给一段旋律加上和声与配器，同样的音符，完全不同的听感。CSS 就是网页的'配器师'。",
@@ -36,7 +52,9 @@
     },
     {
       "title": "变成收藏列表",
-      "content": "一张卡片是独奏，三张卡片就是室内乐。\n现在复制你的卡片 HTML，改成 3 张不同曲目的卡片（可以是你喜欢的任意曲子）。然后用 CSS Grid 把它们排列成响应式网格：\n```css\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 20px;\n}\n```把所有卡片包在一个 `<div class=\"card-grid\">` 容器里，Grid 会自动帮你排列——屏幕宽时放多列，窄时变成一列。",
+      "content": {
+        "mdFile": "steps/05.md"
+      },
       "task": "创建 3 张不同的音乐卡片，用 CSS Grid 排列成响应式网格。",
       "hint": "`minmax(280px, 1fr)` 的意思是：每列最小 280px，如果空间够就平分剩余空间。这是响应式的关键。",
       "purpose": "一张卡片是独奏，三张卡片就是室内乐。这一步教你用 CSS Grid 把多张卡片排列整齐，更重要的是理解响应式设计的核心思想——`auto-fill` 和 `minmax` 让卡片自动适应屏幕宽度，一行放不下就自动换行，完全不需要媒体查询。这是现代 CSS 布局最重要的技能之一。",
@@ -49,7 +67,9 @@
     },
     {
       "title": "加上分类筛选",
-      "content": "收藏多了就需要分类——就像整理乐谱按时期分册。\n现在用 JavaScript 来实现：点击页面上方的筛选按钮（\"全部\"、\"巴洛克\"、\"古典\"、\"浪漫\"等），只显示对应风格的卡片。\n核心思路：\n1. 给每个卡片的 `.tag` 或卡片容器添加表示风格的信息\n2. 点击按钮时，遍历所有卡片，匹配的显示，不匹配的隐藏\n3. 利用 `.tag` 的文本内容来判断卡片属于哪个时期\n你会用到 `querySelectorAll`、`addEventListener` 和 `element.style.display`。",
+      "content": {
+        "mdFile": "steps/06.md"
+      },
       "task": "添加分类筛选按钮，点击按钮时只显示对应风格的卡片。",
       "hint": "可以给卡片容器加 `data-period` 属性来标记时期（如 `<div class=\"music-card\" data-period=\"巴洛克\">`），然后 JS 中读取这个属性来判断。隐藏元素用 `card.style.display = \"none\"`，显示用 `card.style.display = \"\"`。",
       "purpose": "这是你的 JavaScript 第一次真正'操控'页面——不是简单地显示静态内容，而是根据用户的操作动态改变页面。筛选功能背后的核心模式（选中所有元素→遍历判断→修改显示/隐藏）几乎会出现在每一个前端交互中。这个循环是 DOM 操作的基本功，就像音阶练习之于演奏家。",
@@ -62,7 +82,9 @@
     },
     {
       "title": "添加收藏表单",
-      "content": "收藏不应该只有预设的三首——就像你的乐谱架，随时可以加入新的乐谱。\n现在添加一个表单，让你可以**输入新的曲目信息**并动态添加到卡片列表中。\n你需要：\n1. 一个表单（`<form>`），包含输入框：曲名、作曲家、图片 URL、风格\n2. 点击\"添加\"按钮时，用 JS 读取输入框的值\n3. 用 `document.createElement` 或模板字符串创建一张新卡片\n4. 把新卡片插入 `.card-grid` 容器中\n5. 添加后清空表单\n这是最有成就感的一步——你写的代码真的能\"创建\"东西了！",
+      "content": {
+        "mdFile": "steps/07.md"
+      },
       "task": "添加一个表单，让用户可以输入新曲目信息并动态生成卡片。",
       "hint": "使用 `document.createElement(\"div\")` 创建卡片容器，然后用 `classList.add(\"music-card\")` 添加 class，用 `innerHTML` 设置内容，最后用 `appendChild` 加入 Grid 容器。别忘了给表单加 `type=\"button\"` 或使用 `e.preventDefault()` 防止页面刷新。",
       "purpose": "从'显示静态数据'到'动态创建内容'是一大步。你学会了用 JavaScript 生成 HTML（`createElement` + `appendChild`），让页面不再是写死的，而是可以不断扩展的。这是前端交互的起点——用户不只是被动的观众，而是能主动丰富收藏的参与者。每一次添加，都是你的代码在'创作'。",
@@ -72,6 +94,26 @@
         "css": ".filter-bar {\n  text-align: center;\n  margin: 16px 0;\n}\n.filter-btn {\n  padding: 6px 18px;\n  margin: 0 4px;\n  border: 1.5px solid #C9A96E;\n  border-radius: 20px;\n  background: #fff;\n  color: #6B5A4E;\n  font-size: 0.85rem;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n.filter-btn.active,\n.filter-btn:hover {\n  background: #C9A96E;\n  color: #fff;\n}\n.add-form {\n  max-width: 600px;\n  margin: 0 auto 24px auto;\n  padding: 20px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.06);\n}\n.add-form h3 {\n  margin: 0 0 12px 0;\n  color: #3D2B1F;\n  font-size: 1rem;\n}\n.add-form input,\n.add-form select {\n  display: block;\n  width: 100%;\n  margin-bottom: 8px;\n  padding: 8px 12px;\n  border: 1px solid #DDD;\n  border-radius: 6px;\n  font-size: 0.9rem;\n  box-sizing: border-box;\n}\n.add-form button {\n  padding: 8px 24px;\n  background: #8B2E2E;\n  color: #fff;\n  border: none;\n  border-radius: 6px;\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background 0.2s;\n}\n.add-form button:hover {\n  background: #A04545;\n}\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 20px;\n  max-width: 960px;\n  margin: 0 auto;\n  padding: 20px;\n}\n.music-card {\n  padding: 20px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\n  background: #FFFDF7;\n  text-align: center;\n  transition: transform 0.2s;\n}\n.music-card:hover {\n  transform: translateY(-4px);\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);\n}\n.music-card img {\n  width: 100%;\n  height: 200px;\n  object-fit: cover;\n  border-radius: 8px;\n}\n.music-card h2 {\n  font-size: 1.1rem;\n  margin: 12px 0 4px 0;\n  color: #3D2B1F;\n}\n.music-card p {\n  color: #6B5A4E;\n  margin: 0 0 8px 0;\n}\n.tag {\n  display: inline-block;\n  padding: 2px 12px;\n  border-radius: 20px;\n  font-size: 0.8rem;\n  background: #F5EEE0;\n  color: #8B2E2E;\n}",
         "js": "// 添加收藏功能骨架 — 请完成下面的代码\nconst addBtn = document.querySelector(\"#addBtn\");\nconst cardGrid = document.querySelector(\"#cardGrid\");\naddBtn.addEventListener(\"click\", function() {\n  // 1. 读取输入框的值\n  const title = document.querySelector(\"#titleInput\").value.trim();\n  const composer = document.querySelector(\"#composerInput\").value.trim();\n  const image = document.querySelector(\"#imageInput\").value.trim();\n  const period = document.querySelector(\"#periodInput\").value;\n  \n  // 2. 验证必填字段\n  if (!title || !composer || !period) return;\n  \n  // 3. 用 document.createElement 创建新的 .music-card 元素\n  // 4. 设置卡片内容（img, h2, p, span.tag）\n  // 5. 把新卡片 appendChild 到 cardGrid 中\n  // 6. 清空输入框\n});"
       }
+    },
+    {
+      "title": "这个项目真正有用的收获",
+      "content": {
+        "mdFile": "steps/08.md"
+      },
+      "task": "回头看一遍列表、筛选和添加三条链路，确认你能说清每一部分分别由哪段代码负责。",
+      "hint": "这个项目的核心价值是原生前端基本功，不必现在就给它配完整的投递模板。",
+      "purpose": "减掉重复包装之后，保留真正有用的锚点：你已经开始理解页面从静态走向应用的过程。",
+      "expectedResult": "你知道 `v1` 最该记住的能力是什么，也知道它为什么是后面重构路线的重要基础。"
+    },
+    {
+      "title": "项目验收、手测与下一步",
+      "content": {
+        "mdFile": "steps/09.md"
+      },
+      "task": "按上面的清单完成一次项目自测，并记录至少 2 个你自己修掉的小问题。确认后，再进入 `music-collection-v2`。",
+      "hint": "只要你能稳定完成列表、筛选、添加三件事，就已经具备进入 Vue 重构版的基础。",
+      "purpose": "`v1` 的价值不在于炫技，而在于让你真正理解“原生前端是怎么把页面变活的”。完成验收后再进 `v2`，重构时会更清醒。",
+      "expectedResult": "你完成了一个原生前端的完整小应用，并且清楚知道哪些能力会在 `v2` 里保留，哪些写法会被 Vue 接管。"
     }
   ]
 }

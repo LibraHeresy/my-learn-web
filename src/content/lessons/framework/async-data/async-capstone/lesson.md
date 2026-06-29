@@ -78,6 +78,15 @@ https://itunes.apple.com/search?term=贝多芬&limit=10&country=cn
 下一步：登台篇。你将学习用工程化工具（npm、Vite、Vue）搭建专业项目。准备好了吗？
 :::
 
+:::explain{title="接下来怎么走"}
+完成这个结业项目后，不用在每一页里反复找路线，直接按首页的“成长路径”继续推进就行。当前只需要记住两条最直接的分支：
+
+- **想立刻把 API、状态、防抖和搜索体验做成一个完整作品：** 去 `music-searcher`
+- **想先把列表、筛选、表单和数据流这些应用基本盘练稳：** 去 `music-collection-v1`
+
+如果做项目时卡在 Promise、await、错误处理或防抖，再回来看本课对应的小节，不用把整课从头重看一遍。
+:::
+
 :::recap
 这是异步篇的结业项目——你亲手做了一个音乐搜索器。用户输入关键词后，经过防抖等待，调用 iTunes Search API 获取歌曲信息，再把结果展示出来。你把 Promise、async/await、fetch、API 封装和防抖全部整合到了一起。
 :::

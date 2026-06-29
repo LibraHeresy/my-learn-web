@@ -2,7 +2,7 @@ id: async-api-client
 title: "封装 API 客户端 — 打造你的\"专属乐务\""
 track: framework
 chapter: async-data
-order: 6
+order: 5
 mode: sandbox
 musicAnalogy: 专业乐团有乐务（stage manager），负责处理所有后勤——联系场地、安排排练、协调乐器。你不会让指挥跑去订盒饭。同样，把所有的 fetch 逻辑封装到专门的 API 模块中，让代码各司其职。
 listenTo: "柴可夫斯基《胡桃夹子》— 每个角色（糖梅仙子、花之圆舞曲、俄罗斯舞曲）都有明确的\"职责\"，合在一起却有统一的风格。好的 API 模块设计也是如此。"

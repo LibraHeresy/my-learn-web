@@ -2,7 +2,7 @@ id: async-search-debounce
 title: "防抖与搜索 — 别让\"乐团\"累坏了"
 track: framework
 chapter: async-data
-order: 7
+order: 6
 mode: sandbox
 musicAnalogy: "如果指挥每半秒就给乐团一个新指令，乐团会疯掉的。好的指挥一定会等前一个乐句结束再给下一个指示。**防抖（debounce）** 就是这个\"等待稳定再行动\"的智慧——用户在输入框打字时，不要每个字母都发请求，而是等用户停下来再发。"
 listenTo: "约翰·凯奇《4'33\"》— 这部作品提醒我们，**沉默和等待也是音乐的一部分**。防抖就是在合适的时机\"不做什么\"，这也是一种智慧。"

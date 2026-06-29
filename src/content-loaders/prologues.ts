@@ -56,4 +56,12 @@ export const prologueCards: PrologueCard[] = [
     tagline: '从 AlphaGo 到 Claude Code——AI 改变了写代码的方式，但没有改变写代码的本质。',
     thumbnailSrc: `${import.meta.env.BASE_URL}images/prologue-ai-era.svg`,
   },
+  {
+    id: 'music-to-frontend-map',
+    lessonId: 'music-to-frontend-map',
+    title: '迁移',
+    subtitle: '从音乐训练到前端能力',
+    tagline: '结构感、层次感、排练习惯与协作经验，不会消失，只会换一种作品形式继续发挥。',
+    thumbnailSrc: `${import.meta.env.BASE_URL}images/prologue-music-to-frontend-map.svg`,
+  },
 ]

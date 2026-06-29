@@ -2,7 +2,7 @@ id: tooling-github
 title: "GitHub — 把你的作品\"发布到音乐厅\""
 track: engineering
 chapter: engineering-tooling
-order: 9
+order: 10
 mode: local
 musicAnalogy: "到目前为止，你的乐谱（代码）只存在于自己的电脑上。**GitHub 就像是把乐谱出版发行**——你的作品有了一个公开的地址，别人可以看到、使用、甚至贡献。它也是程序员界的\"LinkedIn\"——你的 GitHub 主页就是你的技术名片。"
 listenTo: "马勒《第八交响曲\"千人\"》— 这部作品需要超过一千名表演者。没有任何一个乐团能独自完成——它需要多个合唱团、独唱家、乐团的**协作**。GitHub 让全球开发者以同样的方式协作：每个人贡献自己的一部分。"

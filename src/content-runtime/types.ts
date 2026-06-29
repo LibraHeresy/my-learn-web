@@ -36,6 +36,23 @@ export type CodeBlockNode = {
   code: string
 }
 
+export type ListItemNode = {
+  text: string
+  children?: ListItemNode[]
+}
+
+export type ListNode = {
+  type: 'list'
+  ordered: boolean
+  items: ListItemNode[]
+}
+
+export type TableNode = {
+  type: 'table'
+  headers: string[]
+  rows: string[][]
+}
+
 export type BlockType =
   | 'block:music-analogy'
   | 'block:explain'
@@ -133,7 +150,7 @@ export type BlockNode =
   | ListenToBlockNode
   | RecapBlockNode
 
-export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | BlockNode
+export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | ListNode | TableNode | BlockNode
 
 export type CompiledLesson = {
   id: string

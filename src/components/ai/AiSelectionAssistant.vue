@@ -345,7 +345,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .ai-selection-trigger {
   position: fixed;
-  z-index: 1200;
+  z-index: 1000;
   transform: translateX(-50%);
   padding: 6px 10px;
   border: 1px solid var(--color-accent-border);

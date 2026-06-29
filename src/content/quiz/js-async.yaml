@@ -177,14 +177,14 @@ levels:
         explanation: "const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。"
       - id: 186
         difficulty: 3
-        question: 防抖(debounce)是什么？什么时候用？
+        question: '你做搜索框时发现“每输入一个字就发一次请求”，Network 面板刷出很多记录。最合适的优化是什么？'
         options:
-          - 防代码崩溃
-          - 连续触发只执行最后一次。搜索框输入时减少请求次数
-          - 加密技术
-          - 防止重复提交
+          - '用 try/catch 包住 fetch'
+          - '给 input 监听加防抖，停止输入一小段时间后再请求'
+          - '把所有请求都改成 setInterval'
+          - '每次输入都先刷新页面'
         answer: 1
-        explanation: "用户输入\"贝多芬\"→连续触发 3 次→防抖后只发最后一次请求。用 setTimeout+clearTimeout 实现。"
+        explanation: '这是典型的实时搜索防抖场景。连续输入时先清掉旧定时器，等用户停下 300~500ms 再真正发请求，能显著减少无效请求。'
       - id: 187
         difficulty: 3
         question: "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？"
@@ -217,14 +217,14 @@ levels:
         explanation: fetch 先返回 Response(含状态码头信息)再调用.json()(本身返回 Promise)解析响应体。
       - id: 190
         difficulty: 3
-        question: async 函数中不加 await 会怎样？
+        question: '你在 async 函数里写了 `const data = fetch(url)`，后面直接 `console.log(data.results)` 却拿不到结果。最核心的原因是什么？'
         options:
-          - 报错
-          - Promise 不会等待直接返回 Promise 对象而非结果
-          - 自动 await
-          - 函数同步执行
+          - 'fetch 只能在 then 里用，不能在 async 里用'
+          - '没有 await，拿到的是 Promise 对象，不是已经解析好的结果'
+          - 'async 会自动把所有 Promise 展开'
+          - 'data.results 只有在 404 时才不存在'
         answer: 1
-        explanation: 不加 await 拿到的是 Promise 对象而非实际值。常见错误：以为拿到了数据实际拿到了 Promise。
+        explanation: '`fetch(url)` 先返回 Promise。只有 `await fetch(url)` 之后，才会拿到 Response；再继续 `await response.json()` 才是实际数据。'
       - id: 191
         difficulty: 3
         question: "`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？"

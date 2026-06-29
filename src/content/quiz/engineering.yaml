@@ -187,24 +187,24 @@ levels:
         explanation: 构建工具分析 import/export 静态依赖移除未被引用的代码减小包体积。前提是 ES6 模块(编译时确定依赖)。
       - id: 212
         difficulty: 3
-        question: 合并冲突(merge conflict)怎么处理？
+        question: '你执行 `git pull` 后看到 `<<<<<<< HEAD`、`=======`、`>>>>>>>`，下一步最正确的做法是什么？'
         options:
-          - 忽略
-          - 手动编辑冲突文件选择保留哪部分→标记已解决→commit
-          - 自动解决
-          - 删除文件重来
+          - '直接刷新 VS Code，等 Git 自动恢复'
+          - '手动编辑冲突区域，确认保留内容后重新 add / commit'
+          - '立刻删除整个文件，避免冲突'
+          - '不看内容，直接再次 git pull'
         answer: 1
-        explanation: "Git 无法自动合并时标记冲突区域(<<<<<<< ======= >>>>>>>)。手动选择保留内容→删除标记→add→commit。"
+        explanation: '这些标记说明 Git 无法自动合并。要先读懂两边差异，手动保留正确内容，删掉冲突标记，再 add 和 commit。'
       - id: 213
         difficulty: 3
-        question: 部署到 GitHub Pages 基本流程？
+        question: '你把 Vite 项目部署到 GitHub Pages 后页面一片空白，但本地 `npm run dev` 正常。最该优先排查哪一项？'
         options:
-          - 复制粘贴文件
-          - npm run build→配置 base→推送 gh-pages 分支或设置 GitHub Actions
-          - 直接上传 HTML
-          - 自动部署
+          - '浏览器是不是没联网'
+          - '`vite.config` 里的 `base` 是否和仓库名一致，再检查构建与 Pages 配置'
+          - '把 `node_modules` 一起传到 GitHub'
+          - '只要重新 `npm install` 就能解决'
         answer: 1
-        explanation: 1.设 base 路径 2.npm run build 3.将 dist 推送到 gh-pages 分支 4.GitHub Settings 开启 Pages。
+        explanation: 'GitHub Pages 空白页最常见原因是资源路径不对。Vite 项目先看 `base`，再确认 build 产物和 Pages 来源配置是否正确。'
       - id: 214
         difficulty: 3
         question: npx 和 npm 的区别？

@@ -2,7 +2,7 @@ id: async-await
 title: "async/await — 让异步代码\"看起来同步\""
 track: framework
 chapter: async-data
-order: 4
+order: 3
 mode: sandbox
 musicAnalogy: "Promise 的 `.then()` 链条就像看乐谱上的分谱——你要顺着每个声部找下去。而 async/await 就像看总谱——所有声部一目了然，从上到下顺序阅读，但实际演奏是同时发生的。"
 listenTo: "莫扎特《费加罗的婚礼》序曲 — 短短 4 分钟，多个主题自然流畅地衔接，听感上浑然一体。async/await 让异步代码也有这种\"行云流水\"的阅读体验。"

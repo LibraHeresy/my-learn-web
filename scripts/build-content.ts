@@ -103,10 +103,34 @@ async function hashLessonDir(lessonDir: string, mode: string): Promise<string> {
 }
 
 async function hashProjectDir(projectDir: string): Promise<string> {
-  return hashFiles([
-    path.join(projectDir, 'meta.yaml'),
-    path.join(projectDir, 'project.json'),
-  ])
+  const metaPath = path.join(projectDir, 'meta.yaml')
+  const jsonPath = path.join(projectDir, 'project.json')
+
+  const extraFiles: string[] = []
+  try {
+    const raw = await readFile(jsonPath, 'utf8')
+    const parsed = JSON.parse(raw) as { steps?: Array<Record<string, unknown>> }
+    if (Array.isArray(parsed.steps)) {
+      const fields = ['content', 'task', 'hint', 'purpose', 'expectedResult'] as const
+      for (const step of parsed.steps) {
+        for (const field of fields) {
+          const v = step[field]
+          if (!v || typeof v !== 'object') continue
+          const mdFile = (v as any).mdFile
+          if (typeof mdFile !== 'string') continue
+          if (!mdFile.endsWith('.md')) continue
+          const resolved = path.resolve(projectDir, mdFile)
+          const rel = path.relative(projectDir, resolved)
+          if (rel.startsWith('..') || path.isAbsolute(rel)) continue
+          extraFiles.push(resolved)
+        }
+      }
+    }
+  } catch {
+  }
+
+  const unique = Array.from(new Set([metaPath, jsonPath, ...extraFiles]))
+  return hashFiles(unique)
 }
 
 async function atomicWriteFile(filePath: string, data: string): Promise<void> {
@@ -139,48 +163,40 @@ type GlossaryEntry = {
   key: string
   explanation: string
   analogy?: string
+  priority?: 'core' | 'important' | 'extended'
+  related?: string[]
 }
 
 
 function parseGlossaryYaml(input: string): GlossaryEntry[] {
-  const entries: GlossaryEntry[] = []
-  const lines = input.split(/\r?\n/)
+  const parsed = yaml.load(input)
+  if (!Array.isArray(parsed)) return []
 
-  let current: Partial<GlossaryEntry> | null = null
-  for (const rawLine of lines) {
-    const line = rawLine.trimEnd()
-    if (!line || line.trimStart().startsWith('#')) continue
+  const allowedPriorities = new Set(['core', 'important', 'extended'])
 
-    const start = rawLine.match(/^\s*-\s+key:\s*(.*)\s*$/)
-    if (start) {
-      if (current?.key && typeof current.explanation === 'string') {
-        entries.push({
-          key: String(current.key),
-          explanation: String(current.explanation),
-          analogy: current.analogy ? String(current.analogy) : undefined,
-        })
-      }
-      current = { key: start[1].trim() }
-      continue
-    }
+  return parsed.flatMap((item) => {
+    if (!item || typeof item !== 'object') return []
 
-    if (!current) continue
-    const field = rawLine.match(/^\s+([A-Za-z][A-Za-z0-9]*):\s*(.*)\s*$/)
-    if (!field) continue
-    const [, key, value] = field
-    if (key === 'explanation') current.explanation = value.trim()
-    if (key === 'analogy') current.analogy = value.trim()
-  }
+    const record = item as Record<string, unknown>
+    if (typeof record.key !== 'string' || typeof record.explanation !== 'string') return []
 
-  if (current?.key && typeof current.explanation === 'string') {
-    entries.push({
-      key: String(current.key),
-      explanation: String(current.explanation),
-      analogy: current.analogy ? String(current.analogy) : undefined,
-    })
-  }
+    const priority =
+      typeof record.priority === 'string' && allowedPriorities.has(record.priority)
+        ? (record.priority as GlossaryEntry['priority'])
+        : undefined
 
-  return entries
+    const related = Array.isArray(record.related)
+      ? record.related.filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
+      : undefined
+
+    return [{
+      key: record.key,
+      explanation: record.explanation,
+      analogy: typeof record.analogy === 'string' ? record.analogy : undefined,
+      priority,
+      related: related?.length ? related : undefined,
+    }]
+  })
 }
 
 
@@ -262,6 +278,23 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
     if (node.type === 'heading') return node
     if (node.type === 'term') return node
     if (node.type === 'code') return node
+    if (node.type === 'list') {
+      return {
+        ...node,
+        items: node.items.map((item) => ({
+          ...item,
+          text: injectTerms(item.text, termKeys),
+          children: item.children?.map((c) => ({ ...c, text: injectTerms(c.text, termKeys) })),
+        })),
+      }
+    }
+    if (node.type === 'table') {
+      return {
+        ...node,
+        headers: node.headers.map((h) => injectTerms(h, termKeys)),
+        rows: node.rows.map((row) => row.map((cell) => injectTerms(cell, termKeys))),
+      }
+    }
 
     // 判别联合展开：保留 discriminant 并更新文本字段，用类型断言维持联合兼容性
     if (node.type === 'block:task') {
@@ -280,7 +313,7 @@ function applyGlossaryToBody(body: ContentBodyNode[], termKeys: string[]): Conte
     }
     const next: BlockNode = {
       ...(node as Exclude<BlockNode, TaskBlockNode>),
-      content: injectTerms(node.content, termKeys),
+      content: injectTerms((node as Exclude<BlockNode, TaskBlockNode>).content, termKeys),
     }
     return next
   })
@@ -382,6 +415,38 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
   const tree = mdProcessor.parse(modified) as { type: string; children: unknown[] }
   const body: ContentBodyNode[] = []
 
+  function tryParsePipeTable(text: string): { headers: string[]; rows: string[][] } | null {
+    const normalizedText = text.replace(/\r\n/g, '\n').trim()
+    const lines = normalizedText.split('\n').map((l) => l.trim())
+    if (lines.length < 3) return null
+
+    const isTableRow = (line: string) => /^\|.+\|$/.test(line)
+    const isTableSep = (line: string) => /^\|[\s\-:|]+\|$/.test(line)
+    const parseRow = (line: string) => line.split('|').slice(1, -1).map((c) => c.trim())
+
+    if (!isTableRow(lines[0])) return null
+    if (!isTableSep(lines[1])) return null
+    if (!isTableRow(lines[2])) return null
+    if (!lines.every((l, idx) => idx === 1 ? isTableSep(l) : isTableRow(l))) return null
+
+    const headers = parseRow(lines[0])
+    const rows = lines.slice(2).map(parseRow)
+    return { headers, rows }
+  }
+
+  function parseListNode(listNode: any, allowChildren: boolean): any {
+    const rawItems = (listNode.children ?? []) as any[]
+    const items = rawItems.map((li: any) => {
+      const liChildren = (li.children ?? []) as any[]
+      const main = liChildren.find((c: any) => c.type === 'paragraph') ?? liChildren[0]
+      const text = main ? nodeSource(modified, main) : ''
+      const nested = allowChildren ? liChildren.find((c: any) => c.type === 'list') : undefined
+      const children = nested ? (parseListNode(nested, false).items as any[]) : undefined
+      return { text, children }
+    })
+    return { type: 'list', ordered: Boolean(listNode.ordered), items }
+  }
+
   for (const rawNode of tree.children) {
     const node = rawNode as { type: string; [key: string]: unknown }
 
@@ -421,7 +486,18 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
           }
         }
       }
-      body.push({ type: 'paragraph', text: nodeSource(modified, node as any) })
+      const text = nodeSource(modified, node as any)
+      const table = tryParsePipeTable(text)
+      if (table) {
+        body.push({ type: 'table', headers: table.headers, rows: table.rows } as any)
+        continue
+      }
+      body.push({ type: 'paragraph', text })
+      continue
+    }
+
+    if (node.type === 'list') {
+      body.push(parseListNode(node as any, true))
       continue
     }
 
@@ -578,7 +654,7 @@ function toProjectMeta(data: Record<string, unknown>): SourceProjectMeta {
 type ParsedProject = {
   id: string
   meta: SourceProjectMeta
-  steps: SourceProjectStep[]
+  steps: ResolvedProjectStep[]
 }
 
 type SourceProjectMeta = {
@@ -594,6 +670,26 @@ type SourceProjectMeta = {
 }
 
 type SourceProjectStep = {
+  title: string
+  content: SourceMarkdownField
+  task: SourceMarkdownField
+  hint?: SourceMarkdownField
+  purpose?: SourceMarkdownField
+  expectedResult?: SourceMarkdownField
+  starterCode?: {
+    html: string
+    css: string
+    js: string
+  }
+}
+
+type SourceMarkdownField =
+  | string
+  | {
+    mdFile: string
+  }
+
+type ResolvedProjectStep = {
   title: string
   content: string
   task: string
@@ -627,6 +723,58 @@ async function collectProjectDirs(root: string): Promise<string[]> {
   return result
 }
 
+function isMarkdownFileRef(value: unknown): value is { mdFile: string } {
+  if (!value || typeof value !== 'object') return false
+  const record = value as Record<string, unknown>
+  return typeof record.mdFile === 'string'
+}
+
+function resolveProjectMdFilePath(projectDir: string, mdFile: string): string {
+  if (!mdFile.endsWith('.md')) throw new Error(`mdFile must end with .md`)
+  const resolved = path.resolve(projectDir, mdFile)
+  const rel = path.relative(projectDir, resolved)
+  if (rel.startsWith('..') || path.isAbsolute(rel)) {
+    throw new Error(`mdFile must be within the project directory`)
+  }
+  return resolved
+}
+
+async function readProjectMarkdownField(
+  projectDir: string,
+  jsonPath: string,
+  projectId: string,
+  stepTitle: string,
+  fieldName: 'content' | 'task' | 'hint' | 'purpose' | 'expectedResult',
+  value: SourceMarkdownField | undefined,
+  required: boolean,
+): Promise<string | undefined> {
+  if (value == null) {
+    if (required) {
+      throw new Error(
+        `Invalid project.json: missing required field "${fieldName}" in project "${projectId}" step "${stepTitle}" (${path.relative(projectRoot, jsonPath)})`,
+      )
+    }
+    return undefined
+  }
+
+  if (typeof value === 'string') return value
+  if (!isMarkdownFileRef(value)) {
+    throw new Error(
+      `Invalid project.json: field "${fieldName}" must be a string or { mdFile: string } in project "${projectId}" step "${stepTitle}" (${path.relative(projectRoot, jsonPath)})`,
+    )
+  }
+
+  const absPath = resolveProjectMdFilePath(projectDir, value.mdFile)
+  try {
+    return await readFile(absPath, 'utf8')
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e)
+    throw new Error(
+      `Failed to read ${path.relative(projectRoot, absPath)} referenced by project "${projectId}" step "${stepTitle}" field "${fieldName}" (${path.relative(projectRoot, jsonPath)}): ${msg}`,
+    )
+  }
+}
+
 async function compileProject(projectDir: string): Promise<ParsedProject> {
   const metaPath = path.join(projectDir, 'meta.yaml')
   const jsonPath = path.join(projectDir, 'project.json')
@@ -648,16 +796,48 @@ async function compileProject(projectDir: string): Promise<ParsedProject> {
     throw new Error(`Invalid project.json: missing steps array in ${path.relative(projectRoot, jsonPath)}`)
   }
 
+  const resolvedSteps: ResolvedProjectStep[] = await Promise.all(
+    parsed.steps.map(async (step, index) => {
+      const stepTitle = typeof step?.title === 'string' ? step.title : `#${index + 1}`
+
+      return {
+        title: stepTitle,
+        content: (await readProjectMarkdownField(
+          projectDir,
+          jsonPath,
+          meta.id,
+          stepTitle,
+          'content',
+          step?.content,
+          true,
+        )) as string,
+        task: (await readProjectMarkdownField(projectDir, jsonPath, meta.id, stepTitle, 'task', step?.task, true)) as string,
+        hint: await readProjectMarkdownField(projectDir, jsonPath, meta.id, stepTitle, 'hint', step?.hint, false),
+        purpose: await readProjectMarkdownField(projectDir, jsonPath, meta.id, stepTitle, 'purpose', step?.purpose, false),
+        expectedResult: await readProjectMarkdownField(
+          projectDir,
+          jsonPath,
+          meta.id,
+          stepTitle,
+          'expectedResult',
+          step?.expectedResult,
+          false,
+        ),
+        starterCode: step?.starterCode,
+      }
+    }),
+  )
+
   return {
     id: meta.id,
     meta,
-    steps: parsed.steps,
+    steps: resolvedSteps,
   }
 }
 
 function compileProjectStepBodies(
   projectId: string,
-  step: SourceProjectStep,
+  step: ResolvedProjectStep,
   termKeys: string[],
 ): CompiledProjectStep {
   function compileRequiredField(fieldName: 'content' | 'task', value: string) {
@@ -1012,15 +1192,26 @@ export async function main() {
   ])
 
   // --- 生成搜索索引 ---
-  function extractBodyText(body: any[]): string {
+  function extractBodyText(body: ContentBodyNode[]): string {
     const parts: string[] = []
     for (const node of body) {
-      if (node.text) parts.push(node.text)
-      if (node.content && typeof node.content === 'string') {
-        // 去採 {{term:xxx}} 标记
+      if ('text' in node && typeof node.text === 'string') parts.push(node.text)
+      if (node.type === 'list') {
+        for (const item of node.items) {
+          parts.push(item.text)
+          if (item.children) {
+            for (const c of item.children) parts.push(c.text)
+          }
+        }
+      }
+      if (node.type === 'table') {
+        parts.push(...node.headers)
+        for (const row of node.rows) parts.push(...row)
+      }
+      if ('content' in node && typeof node.content === 'string') {
         parts.push(node.content.replace(/\{\{term:[^}]+\}\}/g, (m: string) => m.slice(7, -2)))
       }
-      if (node.attrs?.title) parts.push(node.attrs.title)
+      if ('attrs' in node && (node as any).attrs?.title) parts.push((node as any).attrs.title)
     }
     return parts.join(' ').slice(0, 600)
   }

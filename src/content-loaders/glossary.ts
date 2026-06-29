@@ -4,6 +4,8 @@ export type GlossaryEntry = {
   key: string
   explanation: string
   analogy?: string
+  priority?: 'core' | 'important' | 'extended'
+  related?: string[]
 }
 
 const entries = glossary as GlossaryEntry[]
@@ -16,7 +18,7 @@ export function getGlossaryEntry(key: string): GlossaryEntry | null {
 }
 
 /** Returns [key, { explanation, analogy }][] tuples sorted by key length descending */
-export function getGlossaryTuples(): Array<[string, { explanation: string; analogy?: string }]> {
-  return sortedEntries.map(e => [e.key, { explanation: e.explanation, analogy: e.analogy }])
+export function getGlossaryTuples(): Array<[string, Omit<GlossaryEntry, 'key'>]> {
+  return sortedEntries.map(({ key, ...rest }) => [key, rest])
 }
 

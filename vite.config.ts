@@ -111,7 +111,11 @@ function contentWatchPlugin(): Plugin {
 
   return {
     name: 'content-watch',
-    apply: 'serve',
+    apply: (_config, env) => {
+      if (env.command !== 'serve') return false
+      if (env.mode === 'test') return false
+      return true
+    },
     configureServer(server) {
       serverRef = server
       const contentDir = resolve(server.config.root, 'src/content')

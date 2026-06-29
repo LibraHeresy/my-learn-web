@@ -1,8 +1,20 @@
 {
   "steps": [
     {
+      "title": "开始前先确认重构目标",
+      "content": {
+        "mdFile": "steps/01.md"
+      },
+      "task": "先回想 `v1` 里最让你觉得麻烦的 2 段代码，再带着这个问题进入重构：Vue 会怎么替你处理这些重复劳动？",
+      "hint": "如果你还没做完 `music-collection-v1`，建议先回去完成它，再来做 `v2`，这样你会更清楚 Vue 到底帮你省掉了什么。",
+      "purpose": "重构项目最怕把它误以为是“重新做一遍”。先明确这是迁移与重组，能帮助你抓住 Vue 的真正价值。",
+      "expectedResult": "你知道 `v2` 的重点不是功能更多，而是代码组织和数据流更清楚，也明白它和 `v1` 的关系。"
+    },
+    {
       "title": "创建 Vue 项目",
-      "content": "从零开始，用 Vite 脚手架创建一个 Vue 3 项目。\n打开终端，运行：\n```bash\nnpm create vite@latest music-collection-vue -- --template vue\ncd music-collection-vue\nnpm install\nnpm run dev\n```你会看到一个熟悉的浏览器页面——和之前「创建第一个 Vue 项目 — Vite 登场」一节讲的完全一样。\n现在打开 VS Code，看看 Vite 给你生成了什么：\n```music-collection-vue/\n├── index.html          # 入口 HTML\n├── package.json        # 项目配置和依赖\n├── vite.config.js      # Vite 构建配置\n├── src/\n│   ├── App.vue         # 根组件（你从这里开始改）\n│   ├── main.js         # 应用入口\n│   ├── components/     # 放组件的文件夹\n│   └── assets/         # 放图片等静态资源\n``` 🎻 这个脚手架就像一个\"空白总谱\"——纸张和五线谱已经准备好了，等你来谱写乐章。",
+      "content": {
+        "mdFile": "steps/02.md"
+      },
       "task": "用 Vite 创建 Vue 3 项目，启动开发服务器，确认能在浏览器中看到默认页面。",
       "hint": "如果 `npm create vite@latest` 命令不工作，确保你的 Node.js 版本是 18 或以上。用 `node -v` 查看版本。",
       "purpose": "这一步把你在'登台篇'学到的 Vite 脚手架技能付诸实践。Vite 生成的空白项目就像一个空白总谱——目录结构、配置文件、入口文件各就各位，等你来填充内容。理解项目的骨架结构很重要，因为后面所有开发都建立在这个基础上。",
@@ -10,7 +22,9 @@
     },
     {
       "title": "设计组件树",
-      "content": "在写任何代码之前，先做最重要的一步：**设计组件树**。\n回顾你在 v1 手工版中做的功能：\n1. 展示音乐收藏卡片列表\n2. 按时期筛选卡片\n3. 添加新的收藏\n用 Vue 的组件化思维，可以这样拆分：\n```App.vue（根组件 — 管理全部数据和状态）\n├── FilterBar.vue（筛选栏 — 接收当前筛选、发出切换事件）\n├── MusicCard.vue × N（单张卡片 — 接收曲目数据、发出收藏/删除事件）\n└── AddForm.vue（添加表单 — 接收输入、发出添加事件）\n```**拆分原则：**\n- 每个组件只做一件事\n- 数据放在最顶层的 App.vue（\"单一数据源\"）\n- 子组件通过 Props 接收数据，通过 Emits 通知父组件\n这就像乐团的分谱：\n- 指挥（App.vue）掌握总谱\n- 弦乐组（FilterBar）负责节奏的切换\n- 管乐组（MusicCard）各奏各的旋律\n- 打击乐组（AddForm）在关键时刻加入新的声部",
+      "content": {
+        "mdFile": "steps/03.md"
+      },
       "task": "在纸上画出你的组件树，标注每个组件的 Props（输入）和 Emits（输出）。然后创建 `src/components/` 文件夹，新建三个空的 `.vue` 文件。",
       "hint": "组件文件用 PascalCase 命名：`MusicCard.vue`、`FilterBar.vue`、`AddForm.vue`。这是 Vue 社区的约定，就像音乐术语用意大利语标记。",
       "purpose": "写代码之前先设计——这是工程师和'边写边想'的初学者的分水岭。组件树设计让你在动手之前就想清楚：数据放在哪？谁管状态？谁发事件？就像乐团的分谱——每个声部拿到的是属于自己的那一份，指挥（App.vue）掌握总谱。花 10 分钟画一张图，能省 1 小时的排错时间。",
@@ -23,7 +37,9 @@
     },
     {
       "title": "构建 MusicCard 组件",
-      "content": "现在开始写第一个组件——音乐收藏卡片。\n一张卡片需要从父组件接收这些数据（Props）：\n- `name` — 曲名\n- `composer` — 作曲家\n- `image` — 封面图片 URL\n- `period` — 时期/风格\n- `liked` — 是否已收藏（布尔值）\n同时，卡片会发出这些事件（Emits）：\n- `toggle-like` — 用户点击收藏按钮\n- `delete` — 用户点击删除按钮\n**规则不变：子组件不能直接修改 Props！** 它只能通过 emit 通知父组件。\n下面是一个 MusicCard 的完整实现：",
+      "content": {
+        "mdFile": "steps/04.md"
+      },
       "task": "创建 `src/components/MusicCard.vue`，实现带 Props 和 Emits 的音乐卡片组件。在卡片右上角放一个收藏按钮（♡/❤）和一个删除按钮（✕）。",
       "hint": "Props 用对象形式定义（带类型）：`defineProps({ name: String, composer: String, ... })`。模板中不需要 `.value`，直接 `{{ name }}` 即可。鼠标悬停时显示删除按钮，可以用 CSS 的 `:hover` 和 `opacity` 实现。",
       "purpose": "MusicCard 是你写的第一个真正的 Vue 组件——它接收数据（Props）展示内容，响应用户操作（Emits）通知父组件，但从不修改传入的数据（单向数据流）。这个组件就像乐团中的一位演奏家：拿到分谱（Props）就演奏，需要调整时举手示意指挥（Emits），但从来不擅自改总谱。",
@@ -36,7 +52,9 @@
     },
     {
       "title": "构建 FilterBar 组件",
-      "content": "筛选栏组件比卡片组件更\"内向\"——它不需要从父组件接收很多数据，但需要向父组件发出事件。\n**Props：**\n- `periods` — 所有可选的时期列表（数组）\n- `active` — 当前选中的时期（字符串）\n**Emits：**\n- `update:active` — 用户点击某个时期按钮时，告诉父组件\"我选了这个\"\n这样设计的好处是：FilterBar **不关心**外面怎么用——它只管展示按钮和响应用户点击。更换筛选逻辑、改变按钮样式，都不用改外面的 App.vue。这就是组件化的精髓：**封装变化**。\n实现时，用 `v-for` 循环渲染按钮，用动态 class 高亮当前选中的按钮：\n```vue\n<button\n  v-for=\"period in periods\"\n  :key=\"period\"\n  :class=\"{ active: active === period }\"\n  @click=\"$emit('update:active', period)\"\n>\n  {{ period }}\n</button>\n```",
+      "content": {
+        "mdFile": "steps/05.md"
+      },
       "task": "创建 `src/components/FilterBar.vue`，渲染一排时期筛选按钮。当前选中的按钮高亮显示。点击按钮时发出 `update:active` 事件。",
       "hint": "在 App.vue 中使用时，可以用 `v-model:active=\"selectedPeriod\"` 来双向绑定——这是 Vue 3 对 `update:` 前缀事件的语法糖。",
       "purpose": "FilterBar 体现了组件化的精髓——封装变化。这个组件不关心外面是谁在用、数据怎么来、结果怎么处理，只管展示一排按钮和处理点击。它的'接口'极其简洁：接收 periods 列表和 active 当前值，发出 update:active 事件。以后换样式、改交互，都只需改这一个文件，对全局零影响。",
@@ -49,7 +67,9 @@
     },
     {
       "title": "构建 AddForm 组件",
-      "content": "添加表单组件让用户可以输入新的曲目信息。这里会用到 Vue 的 `v-model` 指令——它比原生 JS 的 `querySelector + addEventListener` 简洁太多了。\n**组件内部数据（不需要 props）：**\n- `name`、`composer`、`image`、`period` — 四个表单字段，用 `ref` 管理\n**Emits：**\n- `add` — 用户提交表单时，把新曲目的数据对象发给父组件\n关键点：\n- 表单提交时，组装一个对象 `{ name, composer, image, period }` 发出去\n- 提交后清空所有输入框（把 ref 的值重置为空字符串）\n- 简单的表单验证：曲名和作曲家不能为空\n对比一下 v1 中实现添加功能需要写的代码——`document.getElementById`、`createElement`、`appendChild`——现在只需要 `v-model` + `emit`，代码量减少了 70%。",
+      "content": {
+        "mdFile": "steps/06.md"
+      },
       "task": "创建 `src/components/AddForm.vue`，包含四个输入字段（曲名、作曲家、图片URL、时期下拉框）和一个提交按钮。提交时验证数据、发出 `add` 事件、清空表单。",
       "hint": "用 `<select v-model=\"period\">` 绑定下拉框。如果图片 URL 为空，可以给一个默认的占位图：`https://placehold.co/400x200/E8D5B7/8B2E2E?text=No+Image`。",
       "purpose": "AddForm 展示了 Vue 的 `v-model` 有多么简洁——对比 v1 中需要手动 `querySelector` + `addEventListener` + 拼 HTML 的繁琐流程，现在只需 `v-model` 双向绑定 + `emit` 发送对象。代码量减少 70%，可读性提升 200%。这就是框架的核心价值：把重复劳动自动化，让你专注于业务逻辑。",
@@ -62,7 +82,9 @@
     },
     {
       "title": "组装 App.vue — 把所有组件\"合奏\"起来",
-      "content": "现在来到最关键的一步——在 App.vue 中把所有组件组装起来，让它们协同工作。\nApp.vue 扮演\"指挥\"的角色：\n1. **拥有所有数据**——`pieces` 数组（ref）和 `selectedPeriod` 状态（ref）\n2. **用 computed 做筛选**——根据 `selectedPeriod` 从 `pieces` 中筛出要显示的曲目\n3. **用 v-for 渲染卡片**——遍历筛选结果，给每个 MusicCard 传 props\n4. **处理子组件的事件**——`@add`、`@toggle-like`、`@delete`\n关键代码结构：\n```vue\n<script setup>\nimport { ref, computed } from 'vue'\nimport MusicCard from './components/MusicCard.vue'\nimport FilterBar from './components/FilterBar.vue'\nimport AddForm from './components/AddForm.vue'\nconst pieces = ref([\n  { id: 1, name: 'G大调第一无伴奏大提琴组曲', composer: '巴赫', ... },\n  // ... 更多初始数据\n])\nconst selectedPeriod = ref('全部')\nconst periods = computed(() => {\n  const set = new Set(pieces.value.map(p => p.period))\n  return ['全部', ...set]\n})\nconst filteredPieces = computed(() => {\n  if (selectedPeriod.value === '全部') return pieces.value\n  return pieces.value.filter(p => p.period === selectedPeriod.value)\n})\nfunction addPiece(data) { ... }\nfunction toggleLike(id) { ... }\nfunction deletePiece(id) { ... }\n</script>\n```注意 `periods` 这个 computed：它从 pieces 中**自动提取**所有不重复的时期——以后添加了新时期的曲目，筛选按钮会自动出现。这就是\"数据驱动\"的威力。",
+      "content": {
+        "mdFile": "steps/07.md"
+      },
       "task": "在 App.vue 中组装所有组件：引入 MusicCard、FilterBar、AddForm，用 computed 实现筛选，处理子组件发出的所有事件。",
       "hint": "给每首曲目一个唯一 ID（可以用自增数字或 `Date.now()`），方便在 `toggleLike` 和 `deletePiece` 中定位要修改的曲目。`v-for` 渲染时记得加 `:key=\"p.id\"`。",
       "purpose": "这是 Vue 组件化开发的高潮——所有子组件就位，App.vue 作为指挥将它们协调起来。`computed` 自动计算筛选结果、`v-for` 渲染卡片列表、事件处理函数修改数据。你看到的是数据在组件树中单向流动：子组件 emit 事件 → App.vue 修改 ref → computed 重新计算 → 模板自动更新。理解了这条流动路径，就理解了 Vue 的响应式灵魂。",
@@ -75,7 +97,9 @@
     },
     {
       "title": "数据持久化 — localStorage + watch",
-      "content": "最后一个关键功能：让数据在刷新后不丢失。\n在 v1 中，你手动调用 `localStorage.setItem` 来保存。Vue 有更好的方式——**watch**。\n`watch` 会自动\"监视\"一个响应式数据的变化，并在变化时执行你指定的函数。这就好比请了一个助手，时刻帮你盯着数据，一有变化就自动存档。\n```vue\n<script setup>\nimport { ref, watch } from 'vue'\nconst pieces = ref(loadFromStorage())\n// 从 localStorage 读取初始数据\nfunction loadFromStorage() {\n  const saved = localStorage.getItem('music-collection')\n  return saved ? JSON.parse(saved) : [/* 默认数据 */]\n}\n// 每当 pieces 变化，自动保存\nwatch(pieces, (newVal) => {\n  localStorage.setItem('music-collection', JSON.stringify(newVal))\n}, { deep: true })\n</script>\n```注意 `{ deep: true }` ——因为 `pieces` 是一个数组（引用类型），deep 模式让 watch 能检测到数组**内部**的变化（添加、删除、修改元素）。\n**对比 v1：**\n- v1：每次操作后手动调用保存函数 → 容易忘记\n- v2：watch 自动监听 → 永远不会漏掉\n> 🎉 到这里，你的 Vue 版音乐收藏库就完成了！它和 v1 手工版功能一样，但代码结构更清晰、更容易扩展。接下来可以把它推送到 GitHub 了。",
+      "content": {
+        "mdFile": "steps/08.md"
+      },
       "task": "用 watch 监听 pieces 的变化，自动保存到 localStorage。同时实现页面初始化时从 localStorage 读取数据。",
       "hint": "如果 `localStorage.getItem` 返回 `null`（第一次使用），就用默认的初始数据。`JSON.parse` 的参数需要判空，否则会报错。",
       "purpose": "数据持久化让应用有了'记忆'——刷新页面后数据不丢失。`watch` 比手动调用 `localStorage.setItem` 优雅得多：设置一次监听，之后所有数据变更都自动存档，永远不会漏掉。`{ deep: true }` 选项确保数组内部的增删改都能被检测到。这是声明式编程的又一次胜利：你只需描述'监控这个数据'，不用在每个修改点手动保存。",
@@ -88,7 +112,9 @@
     },
     {
       "title": "回顾与对比 — v1 vs v2",
-      "content": "恭喜你完成了 Vue 重构版！让我们来对比一下 v1 和 v2：\n| | v1 手工版 | v2 Vue 重构版 |\n|---|---|---|\n| 代码组织 | 一个 HTML 文件，HTML/CSS/JS 混在一起 | 三个 `.vue` 组件，各司其职 |\n| 数据管理 | 手动操作 DOM（`querySelector`、`createElement`） | 响应式数据（`ref`、`computed`），自动更新 DOM |\n| 筛选 | 手动遍历 DOM、设置 `display` | `computed` 自动计算，模板自动更新 |\n| 添加 | `createElement` + `appendChild` 拼接 HTML | `v-model` + `emit`，数据驱动 |\n| 持久化 | 每次操作后手动调用保存函数 | `watch` 自动监听，一劳永逸 |\n| 可维护性 | 功能多了容易混乱 | 组件独立，修改不影响其他部分 |\n| 可复用性 | 代码无法跨项目复用 | 组件可以在任何 Vue 项目中使用 |\n**关键转变：**\n你从\"告诉浏览器怎么做\"（命令式），转向了\"描述页面应该是什么样\"（声明式）。\n这就是 Vue 框架的核心价值：**你只需要关心数据，DOM 更新交给框架。**\n接下来，在 v3 中，你将学会如何把项目推送到 GitHub、部署到云端，让全世界都能看到你的作品。",
+      "content": {
+        "mdFile": "steps/09.md"
+      },
       "task": "回顾你的 v1 和 v2 代码，感受两种开发方式的差异。确认所有功能正常：添加、筛选、收藏切换、删除、刷新后数据保留。",
       "hint": "如果筛选栏中的时期列表没有更新，检查 `periods` computed 是否正确提取了所有不重复的时期。",
       "purpose": "比较是最好的学习方式。v1 是命令式——你告诉浏览器'怎么做'（找到这个元素、改它的样式、创建那个元素），v2 是声明式——你描述'应该是什么样'（筛选结果是这个数组、卡片用这条数据渲染）。从命令式到声明式的转变，是你从前端初学者迈向专业开发者的关键一步。理解了这一点，就理解了所有现代前端框架存在的意义。",
@@ -98,6 +124,26 @@
         "css": "",
         "js": ""
       }
+    },
+    {
+      "title": "这个项目真正有用的收获",
+      "content": {
+        "mdFile": "steps/10.md"
+      },
+      "task": "回头看一遍 `v1` 和 `v2`，确认你能用自己的话说明：为什么这里不再用手动 DOM 操作，Vue 在这个项目里到底解决了什么问题。",
+      "hint": "这个项目最有价值的不是框架名字，而是你是否真的理解重构收益和组件化组织方式。",
+      "purpose": "减掉通用包装之后，保留最值得带走的结论：你已经开始建立现代前端的组织方式，而不是只会把代码写出来。",
+      "expectedResult": "你知道 `v2` 真正该记住的是什么，也知道以后如果需要展示它，核心应围绕重构价值而不是模板化表达。"
+    },
+    {
+      "title": "项目验收、手测与下一步",
+      "content": {
+        "mdFile": "steps/11.md"
+      },
+      "task": "按上面的手测用例完整测一遍，并尝试向自己口述一次“v1 和 v2 的差别”。确认后再进入 `music-collection-v3`。",
+      "hint": "如果你已经能清楚说出“为什么 v2 不再需要手动 createElement / appendChild”，就说明重构目标真正达成了。",
+      "purpose": "`v2` 的价值不只是功能能跑，而是让你建立现代前端的组织方式。只有在验收时能讲清楚数据流，才算真的掌握。",
+      "expectedResult": "你完成了一个结构清楚的 Vue 应用，并且具备进入 Git、部署、CI/CD 的工程化下一步。"
     }
   ]
 }

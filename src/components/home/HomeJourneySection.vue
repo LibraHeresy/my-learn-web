@@ -16,7 +16,7 @@ const emit = defineEmits<{
 }>()
 
 const progressStore = useProgressStore()
-const expandedTrack = ref<string | null>(null)
+const expandedTracks = ref<string[]>([])
 
 const journeyTracks = tracks
   .filter((t) => ['fundamentals', 'framework', 'engineering', 'ai-collaboration'].includes(t.id))
@@ -41,9 +41,15 @@ function getTrackChapters(trackId: string) {
   )
 }
 
+function isTrackExpanded(trackId: string) {
+  return expandedTracks.value.includes(trackId)
+}
+
 function toggleTrack(trackId: string) {
-  const isExpanding = expandedTrack.value !== trackId
-  expandedTrack.value = isExpanding ? trackId : null
+  const isExpanding = !isTrackExpanded(trackId)
+  expandedTracks.value = isExpanding
+    ? [...expandedTracks.value, trackId]
+    : expandedTracks.value.filter((id) => id !== trackId)
   if (isExpanding) {
     nextTick(() => {
       const el = document.getElementById(`track-${trackId}`)
@@ -69,7 +75,7 @@ function toggleTrack(trackId: string) {
         :class="[
           'track-card',
           {
-            expanded: expandedTrack === track.id,
+            expanded: isTrackExpanded(track.id),
             draft: getTrackLessonCount(track.id) === 0,
           },
         ]"
@@ -94,7 +100,7 @@ function toggleTrack(trackId: string) {
                   已探索 {{ getTrackCompletedCount(track.id) }} 个乐章
                 </template>
               </span>
-              <span class="track-arrow" :class="{ open: expandedTrack === track.id }">▾</span>
+              <span class="track-arrow" :class="{ open: isTrackExpanded(track.id) }">▾</span>
             </template>
           </div>
         </div>
@@ -121,7 +127,7 @@ function toggleTrack(trackId: string) {
             'track-lessons',
             {
               'track-lessons--open':
-                expandedTrack === track.id && getTrackLessonCount(track.id) > 0,
+                isTrackExpanded(track.id) && getTrackLessonCount(track.id) > 0,
             },
           ]"
         >

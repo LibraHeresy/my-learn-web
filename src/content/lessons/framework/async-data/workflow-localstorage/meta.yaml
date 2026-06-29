@@ -2,7 +2,7 @@ id: workflow-localstorage
 title: "localStorage — 给数据一个\"永久的家\""
 track: framework
 chapter: async-data
-order: 1
+order: 7
 mode: sandbox
 musicAnalogy: "每次排练结束后，乐谱不会消失——它被归档保存，下次排练时翻出来继续用。**localStorage** 就是浏览器的\"归档柜\"：你把数据存进去，刷新页面、关闭浏览器、甚至重启电脑后，数据还在那里等你。"
 listenTo: 舒伯特《冬之旅》— 这部声乐套曲讲述一个流浪者的旅程，每首歌都是旅途的一段记忆。localStorage 就像主人公的日记——旅程中的每一个足迹都被保存下来，刷新页面就像翻开新的一页，但记忆永远保留。
