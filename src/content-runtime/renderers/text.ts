@@ -197,6 +197,12 @@ export type BlockContentSegment =
   | { type: 'table'; headers: string[]; rows: string[][] }
   | { type: 'list'; items: ListItem[]; ordered: boolean }
 
+export function isTextContentSegment(
+  segment: BlockContentSegment,
+): segment is Extract<BlockContentSegment, { type: 'text' }> {
+  return segment.type === 'text'
+}
+
 export function splitFencedCodeBlocks(content: string): BlockContentSegment[] {
   const normalized = content.replace(/\r\n/g, '\n')
   const lines = normalized.split('\n')

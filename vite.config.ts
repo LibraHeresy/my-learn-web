@@ -1,5 +1,5 @@
 /// <reference types="vitest/config" />
-import { defineConfig, normalizePath, type Plugin } from 'vite'
+import { defineConfig, normalizePath, type ModuleNode, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { watch, type FSWatcher } from 'node:fs'
@@ -7,13 +7,18 @@ import { readdir } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { spawn, type ChildProcess } from 'node:child_process'
 
+type ReloadPayload = {
+  type: 'full-reload'
+  path: string
+}
+
 type HmrServerLike = {
   moduleGraph: {
-    getModulesByFile: (file: string) => Set<object> | undefined
-    invalidateModule: (mod: object) => void
+    getModulesByFile: (file: string) => Set<ModuleNode> | undefined
+    invalidateModule: (mod: ModuleNode) => void
   }
   ws: {
-    send: (payload: { type: string; path: string }) => void
+    send: (payload: ReloadPayload) => void
   }
 }
 
@@ -31,7 +36,7 @@ export async function collectGeneratedJsonFiles(dir: string): Promise<string[]> 
 }
 
 export function invalidateModulesByFiles(server: HmrServerLike, filePaths: string[]): number {
-  const invalidated = new Set<object>()
+  const invalidated = new Set<ModuleNode>()
 
   for (const filePath of filePaths) {
     const normalized = normalizePath(filePath)
@@ -48,7 +53,7 @@ export function invalidateModulesByFiles(server: HmrServerLike, filePaths: strin
 }
 
 export function createSingleReloader(
-  send: (payload: { type: string; path: string }) => void,
+  send: (payload: ReloadPayload) => void,
   delayMs = 80,
 ): () => void {
   let timer: ReturnType<typeof setTimeout> | null = null

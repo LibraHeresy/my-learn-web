@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
+import type { ModuleNode } from 'vite'
 import {
   collectGeneratedJsonFiles,
   createSingleReloader,
@@ -35,8 +36,8 @@ describe('vite content watch helpers', () => {
   })
 
   it('invalidateModulesByFiles 按文件失效模块并自动去重', () => {
-    const modA = {}
-    const modB = {}
+    const modA = {} as ModuleNode
+    const modB = {} as ModuleNode
     const normalizedPath = 'D:/repo/src/generated/lessons-meta.json'
 
     const getModulesByFile = vi.fn((file: string) => {

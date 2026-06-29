@@ -2,7 +2,12 @@
 import { computed } from 'vue'
 import CodeBlock from '../../content-runtime/renderers/CodeBlock.vue'
 import InlineText from '../../content-runtime/renderers/InlineText.vue'
-import { isBlockquoteText, splitFencedCodeBlocks, stripBlockquoteMarkers } from '../../content-runtime/renderers/text'
+import {
+  isBlockquoteText,
+  isTextContentSegment,
+  splitFencedCodeBlocks,
+  stripBlockquoteMarkers,
+} from '../../content-runtime/renderers/text'
 
 const props = defineProps<{
   text: string
@@ -53,13 +58,16 @@ const segments = computed(() => splitFencedCodeBlocks(props.text || ''))
         </tbody>
       </table>
 
-      <blockquote v-else-if="isBlockquoteText(seg.text)" class="ai-markdown-content__blockquote">
+      <blockquote
+        v-else-if="isTextContentSegment(seg) && isBlockquoteText(seg.text)"
+        class="ai-markdown-content__blockquote"
+      >
         <p class="ai-markdown-content__paragraph">
           <InlineText :text="stripBlockquoteMarkers(seg.text)" />
         </p>
       </blockquote>
 
-      <p v-else class="ai-markdown-content__paragraph">
+      <p v-else-if="isTextContentSegment(seg)" class="ai-markdown-content__paragraph">
         <InlineText :text="seg.text" />
       </p>
     </template>
