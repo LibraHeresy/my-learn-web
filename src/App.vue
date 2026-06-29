@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
 import AiSelectionAssistant from './components/ai/AiSelectionAssistant.vue'
+
+const route = useRoute()
+const showAiAssistant = computed(() => ['lesson', 'quiz'].includes(route.name as string))
 </script>
 
 <template>
@@ -13,7 +18,7 @@ import AiSelectionAssistant from './components/ai/AiSelectionAssistant.vue'
         </Transition>
       </RouterView>
     </main>
-    <AiSelectionAssistant />
+    <AiSelectionAssistant v-if="showAiAssistant" />
   </div>
 </template>
 

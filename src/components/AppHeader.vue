@@ -8,6 +8,7 @@ const route = useRoute()
 const searchRef = ref<InstanceType<typeof GlobalSearch> | null>(null)
 
 const activeTab = computed(() => {
+  if (route.path.startsWith('/plan')) return 'plan'
   if (route.path.startsWith('/quiz')) return 'quiz'
   return 'learn'
 })
@@ -18,6 +19,10 @@ function goHome() {
 
 function goQuiz() {
   router.push('/quiz')
+}
+
+function goPlan() {
+  router.push('/plan')
 }
 
 function openSearch() {
@@ -55,6 +60,15 @@ function openSearch() {
       >
         <span class="nav-icon" aria-hidden="true">✏️</span>
         <span class="nav-label">测验</span>
+      </button>
+      <button
+        :class="['nav-tab', { active: activeTab === 'plan' }]"
+        @click="goPlan"
+        title="计划"
+        aria-label="计划"
+      >
+        <span class="nav-icon" aria-hidden="true">🗓️</span>
+        <span class="nav-label">计划</span>
       </button>
     </nav>
     <GlobalSearch ref="searchRef" />

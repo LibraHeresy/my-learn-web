@@ -6,6 +6,7 @@ import { useCodePreview } from '../composables/useCodePreview'
 import { usePanelResize } from '../composables/usePanelResize'
 import type { UserCode } from '../types'
 import type { CompiledProject } from '../content-runtime/types'
+import { useProjectProgressStore } from '../stores/projectProgress'
 import DocumentBodyRenderer from '../content-runtime/renderers/DocumentBodyRenderer.vue'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
@@ -14,6 +15,7 @@ import Resizer from '../components/Resizer.vue'
 
 const route = useRoute()
 const router = useRouter()
+const projectProgressStore = useProjectProgressStore()
 
 const projectId = computed(() => route.params.projectId as string)
 const project = ref<CompiledProject | null>(null)
@@ -33,6 +35,8 @@ watch(currentStep, () => {
 const emptyCode: UserCode = { html: '', css: '', js: '' }
 const userCode = ref<UserCode>({ ...emptyCode })
 const hintExpanded = ref(false)
+const totalSteps = computed(() => project.value?.steps.length || 0)
+const currentStepData = computed(() => project.value?.steps[currentStep.value] || null)
 
 const { previewSrc, triggerPreview } = useCodePreview(userCode)
 
@@ -51,7 +55,7 @@ watch(
     projectLoading.value = true
     projectError.value = null
     project.value = null
-    currentStep.value = 0
+    currentStep.value = projectProgressStore.getCurrentStep(id)
 
     try {
       project.value = await getProject(id)
@@ -63,7 +67,8 @@ watch(
     }
 
     if (project.value?.steps?.length) {
-      loadStepCode(0)
+      if (currentStep.value >= project.value.steps.length) currentStep.value = 0
+      loadStepCode(currentStep.value)
     } else {
       userCode.value = { ...emptyCode }
     }
@@ -71,12 +76,18 @@ watch(
   { immediate: true },
 )
 
+watch(
+  [projectId, currentStep, totalSteps],
+  ([id, step, total]) => {
+    if (!id || total <= 0) return
+    projectProgressStore.setCurrentStep(id, step)
+  },
+  { immediate: true },
+)
+
 function onCodeChange(code: UserCode) {
   userCode.value = code
 }
-
-const totalSteps = computed(() => project.value?.steps.length || 0)
-const currentStepData = computed(() => project.value?.steps[currentStep.value] || null)
 
 const isLocalMode = computed(() => project.value?.meta.mode === 'local')
 const hasCode = computed(() => {
@@ -146,6 +157,10 @@ function goFooterNext() {
   } else if (nextProject.value) {
     router.push(`/project/${nextProject.value.id}`)
   }
+}
+
+function markProjectComplete() {
+  projectProgressStore.markComplete(projectId.value)
 }
 
 const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
@@ -387,9 +402,11 @@ function aiSectionDetail(sectionLabel: string) {
       :prev-disabled="!prevProject && isFirstStep"
       :next-disabled="!nextProject && isLastStep"
       :center-label="`第 ${currentStep + 1}/${totalSteps} 步`"
-      :show-complete="false"
+      :show-complete="true"
+      :is-completed="projectProgressStore.isCompleted(projectId)"
       @prev="goFooterPrev"
       @next="goFooterNext"
+      @complete="markProjectComplete"
     />
   </div>
 </template>

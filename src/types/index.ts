@@ -10,3 +10,11 @@ export interface UserCode {
   css: string
   js: string
 }
+
+export interface ProjectProgress {
+  projectId: string
+  completed: boolean
+  currentStep: number
+  visitedSteps: number[]
+  lastVisited: number
+}
