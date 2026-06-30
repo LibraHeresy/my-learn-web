@@ -2,6 +2,7 @@ import { computed, ref } from 'vue'
 import { continueSelectionConversation, explainSelection } from '../services/ai-explain'
 import type { AiChatMessage, AiConversation, AiExplainRequest } from '../types/ai'
 import { safeGetItem, safeSetItem } from '../utils/storage'
+import { safeSlice } from '../utils/text'
 
 const MOBILE_BREAKPOINT = 900
 const VIEWPORT_PADDING = 12
@@ -55,7 +56,7 @@ function createId() {
 
 function createConversationTitle(request: AiExplainRequest) {
   const text = normalizeWhitespace(request.selectedText)
-  return text.length > 24 ? `${text.slice(0, 24)}...` : text
+  return text.length > 24 ? `${safeSlice(text, 0, 24)}...` : text
 }
 
 function createTextMessage(role: 'user' | 'assistant', text: string): AiChatMessage {
@@ -122,12 +123,12 @@ function extractSurroundingText(root: HTMLElement, selectedText: string, mode: '
 
     const start = source.indexOf(selectedText)
     if (start === -1) {
-      return source.slice(0, 420)
+      return safeSlice(source, 0, 420)
     }
 
     const contextStart = Math.max(0, start - 240)
     const contextEnd = Math.min(source.length, start + selectedText.length + 240)
-    return source.slice(contextStart, contextEnd)
+    return safeSlice(source, contextStart, contextEnd)
   }
 
   const source = normalizeWhitespace(root.innerText || root.textContent || '')
@@ -135,12 +136,12 @@ function extractSurroundingText(root: HTMLElement, selectedText: string, mode: '
 
   const start = source.indexOf(selectedText)
   if (start === -1) {
-    return source.slice(0, 260)
+    return safeSlice(source, 0, 260)
   }
 
   const contextStart = Math.max(0, start - 140)
   const contextEnd = Math.min(source.length, start + selectedText.length + 140)
-  return source.slice(contextStart, contextEnd)
+  return safeSlice(source, contextStart, contextEnd)
 }
 
 function readSelectionText(selection: Selection, mode: 'text' | 'code') {

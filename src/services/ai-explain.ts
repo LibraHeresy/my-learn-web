@@ -1,4 +1,5 @@
 import type { AiChatMessage, AiExplainRequest, AiExplainResult } from '../types/ai'
+import { safeSlice } from '../utils/text'
 
 const DEFAULT_DS_BASE_URL = 'https://api.deepseek.com'
 const DEFAULT_DS_MODEL = 'deepseek-chat'
@@ -78,7 +79,7 @@ function createMockExplanation(request: AiExplainRequest): AiExplainResult {
   const selection = normalizeWhitespace(request.selectedText)
   const sectionTitle = request.sectionTitle ? `${request.sectionTitle}` : '正文'
   const surrounding = request.surroundingText
-    ? request.surroundingText.slice(0, 120) + (request.surroundingText.length > 120 ? '...' : '')
+    ? safeSlice(request.surroundingText, 0, 120) + (request.surroundingText.length > 120 ? '...' : '')
     : ''
 
   return {
@@ -95,7 +96,7 @@ function createMockExplanation(request: AiExplainRequest): AiExplainResult {
 
 function createMockFollowUp(anchor: AiExplainRequest, userInput: string): string {
   return [
-    `围绕“${normalizeWhitespace(anchor.selectedText).slice(0, 24)}${anchor.selectedText.length > 24 ? '...' : ''}”这段内容，`,
+    `围绕”${safeSlice(normalizeWhitespace(anchor.selectedText), 0, 24)}${anchor.selectedText.length > 24 ? '...' : ''}”这段内容，`,
     `你刚刚问的是：${normalizeWhitespace(userInput)}`,
     '如果用更口语的话说，这通常是在继续追问它的含义、用法，或者它在当前知识点里为什么重要。',
     '当前还是本地 mock 兜底回复，用来先跑通对话交互。',
@@ -162,7 +163,7 @@ function sentenceSummary(text: string): string {
   const normalized = normalizeWhitespace(text)
   const match = normalized.match(/^(.+?[。！？.!?])/)
   if (match) return match[1]
-  return normalized.slice(0, 48) + (normalized.length > 48 ? '...' : '')
+  return safeSlice(normalized, 0, 48) + (normalized.length > 48 ? '...' : '')
 }
 
 function normalizeResult(input: Partial<AiExplainResult>, fallbackText: string): AiExplainResult {
