@@ -52,12 +52,8 @@ const quizExplanationDetail = computed(() => `${quizQuestionDetail.value} · 解
 const quizResultReviewDetail = computed(() => activeGem.value ? `${activeGem.value.name} · 错题回顾` : '错题回顾')
 
 function selectGem(gem: GemDef) {
-  if (!store.isGemUnlocked(gem)) return
   activeGem.value = gem
-  // Find first unlocked level
-  for (const l of gem.levels) {
-    if (store.isLevelUnlocked(gem.id, l.level)) { activeLevel.value = l.level; break }
-  }
+  activeLevel.value = gem.levels[0].level
 }
 
 function startLevel(gemId: string, level: number) {
@@ -96,7 +92,7 @@ function nextLevel() {
   const gem = activeGem.value!
   const levels = gem.levels
   const curIdx = levels.findIndex(l => l.level === activeLevel.value)
-  if (curIdx < levels.length - 1 && store.isLevelUnlocked(gem.id, levels[curIdx + 1].level)) {
+  if (curIdx < levels.length - 1) {
     activeLevel.value = levels[curIdx + 1].level
     startLevel(gem.id, activeLevel.value)
   }
@@ -150,18 +146,15 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
       <div v-for="tier in tiers" :key="tier.key" class="tier-section">
         <h3 class="tier-title">
           {{ tier.title }}
-          <span v-if="tier.requiredAchievement === false" class="tier-lock">🔒 需上一级成就</span>
         </h3>
         <div class="gem-path">
           <template v-for="(g, i) in tier.gems" :key="g.id">
             <span v-if="i > 0" class="path-line">━</span>
             <button
               :class="['gem-node', {
-                locked: !store.isGemUnlocked(g),
                 complete: store.isGemComplete(g.id),
                 active: activeGem?.id === g.id
               }]"
-              :disabled="!store.isGemUnlocked(g)"
               @click="selectGem(g)"
             >
               <span class="gem-icon">{{ g.icon }}</span>
@@ -179,7 +172,6 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
             v-for="l in activeGem.levels"
             :key="l.level"
             :class="['level-card', {
-              locked: !store.isLevelUnlocked(activeGem.id, l.level),
               passed: store.getLevelProgress(activeGem.id, l.level).passed
             }]"
           >
@@ -189,13 +181,11 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
               <span class="level-meta">{{ l.count }} 题 · 门槛 {{ l.threshold }}%</span>
             </div>
             <button
-              v-if="store.isLevelUnlocked(activeGem.id, l.level)"
               class="level-btn"
               @click="startLevel(activeGem!.id, l.level)"
             >
               {{ store.getLevelProgress(activeGem.id, l.level).passed ? '🔄 重玩' : '⚔️ 挑战' }}
             </button>
-            <span v-else class="level-lock">🔒</span>
           </div>
         </div>
       </div>
