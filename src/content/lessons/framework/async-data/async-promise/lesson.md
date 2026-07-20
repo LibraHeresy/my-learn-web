@@ -1,7 +1,7 @@
-# {{term:Promise}} — 给异步操作一个"承诺"
+# Promise — 给异步操作一个"承诺"
 
 :::analogy
-Promise 就像点了一份外卖——下单后拿到一个订单号（Promise）。外卖可能送到（resolve），也可能被取消（reject）。在结果出来前，你可以继续做其他事，不用一直在门口等。
+Promise 就像点外卖——下单后拿到一个订单号（Promise）。外卖可能送到（resolve），也可能被取消（reject）。在结果出来前，你可以继续做其他事，不用一直在门口等。订单号就是你对"结果"的引用。
 :::
 
 :::prerequisite
@@ -9,204 +9,316 @@ Promise 就像点了一份外卖——下单后拿到一个订单号（Promise�
 
 - **函数**：一段可以重复调用的代码块，接收输入、执行逻辑、返回结果
 - **回调函数**：作为参数传给另一个函数的函数，等时机到了被调用
-- **回调地狱**：多层嵌套的回调函数形成的"金字塔"代码，难以阅读和维护
-- **事件循环**：JavaScript 调度异步任务的运行机制
+- **Event Loop**：JavaScript 调度异步任务的运行机制
 :::
 
-:::explain{title="回调地狱 → Promise"}
-如果用传统的回调嵌套处理多个异步操作，代码会变成"金字塔"：
+## 1. 先看问题：没有 Promise 时，代码有多痛苦？
+
+假设你要做一个用户数据页面：先查用户信息，再根据用户 ID 查订单，再根据第一个订单查详情。用传统回调：
+
 ```js
-// 回调地狱 💀
-getUser(id, (user) => {
-  getOrders(user.id, (orders) => {
-    getDetails(orders[0].id, (details) => {
-      console.log(details)
+// ❌ 回调地狱（Callback Hell）——三个嵌套就让人头晕
+getUser(userId, function(user) {            // 第1步：查用户
+  getOrders(user.id, function(orders) {     // 第2步：拿到用户后查订单
+    getDetail(orders[0].id, function(detail) { // 第3步：查第一个订单的详情
+      showDetail(detail)                       // 第4步：终于可以显示了
+    }, function(err) {                         // 第3步的错误处理
+      console.log('查详情失败', err)
     })
+  }, function(err) {                           // 第2步的错误处理
+    console.log('查订单失败', err)
   })
+}, function(err) {                             // 第1步的错误处理
+  console.log('查用户失败', err)
 })
 ```
-Promise 用链式调用拉平了结构：
-```js
-// Promise 链式调用 ✨
-getUser(id)
-  .then(user => getOrders(user.id))
-  .then(orders => getDetails(orders[0].id))
-  .then(details => console.log(details))
-  .catch(err => console.log('出错了：', err))
-```
-就像从一团乱麻变成了清晰的一步接一步。
-:::
 
-:::example{title="Promise 的三种状态"}
-一个 Promise 有三种状态：
-| 状态 | 含义 | 通俗理解 |
-|------|------|----------|
-| pending | 等待结果 | 订单已提交，厨房正在做 |
-| fulfilled | 成功完成 | 外卖已送达，顺利开饭 |
-| rejected | 失败了 | 订单取消，需要重试 |
+**回调地狱的问题：**
+1. 代码向右层层缩进，像金字塔——3层就这样，实际项目可能5层以上
+2. 每个步骤都要单独处理错误——错误处理代码占了一半
+3. 想在两个异步操作之间加一个步骤？要重构整个嵌套结构
+4. 两个不依赖的异步操作想同时执行？回调做不到
+
+**实际工作中你会用这个来：**
+- 页面加载时依次获取"用户信息 → 权限 → 菜单列表"
+- 表单提交（校验 → 上传图片 → 提交表单），每一步依赖前一步的结果
+- 处理任何"先做 A，拿到结果后再做 B"的场景——这几乎每天都在发生
+
+## 2. 解决方案：Promise 拉平异步流程
+
 ```js
-const ticket = new Promise((resolve, reject) => {
-  const available = Math.random() > 0.3  // 70% 概率有票
-  setTimeout(() => {
-    if (available) {
-      resolve('🎫 订票成功！座位号：A-12')
+// ✅ Promise 链式调用——代码从上往下读，逻辑清晰
+getUser(userId)                              // 第1步：返回一个 Promise
+  .then(function(user) {                     // 第2步：.then() 接收 user
+    return getOrders(user.id)                // 第3步：返回新的 Promise
+  })
+  .then(function(orders) {                   // 第4步：.then() 接收 orders
+    return getDetail(orders[0].id)           // 第5步：返回新的 Promise
+  })
+  .then(function(detail) {                   // 第6步：.then() 接收 detail
+    showDetail(detail)                       // 第7步：终于可以显示
+  })
+  .catch(function(err) {                     // 第8步：任何一步出错都来这里
+    console.log('出错了：', err)             // 一个 catch 替代四个错误回调！
+  })
+```
+
+**为什么 Promise 更好：**
+- 代码是平的，不是金字塔——再长的链也不会向右缩进
+- 一个 `.catch()` 统一处理所有错误，不用每个步骤写一遍
+- 想在中间加一步？在链上插入一个 `.then()` 就行，不影响其他代码
+
+:::explain{title="resolve 和 reject 到底是什么？"}
+很多新手不理解 `new Promise((resolve, reject) => { ... })` 里的 `resolve` 和 `reject` 是什么。
+
+**它们就是 Promise 构造函数传给你的两个函数：**
+
+```js
+const promise = new Promise(function(resolve, reject) {
+  // resolve 和 reject 是两个函数，由 Promise 构造函数自动传进来
+  // resolve：调用它就表示"成功了"，把结果传出去
+  // reject：调用它就表示"失败了"，把错误传出去
+
+  // 模拟异步操作
+  setTimeout(function() {
+    const success = Math.random() > 0.3     // 70% 概率成功
+    if (success) {
+      resolve('订票成功！座位号：A-12')     // 调用 resolve → Promise 变成 fulfilled
     } else {
-      reject('😞 抱歉，已售罄')
+      reject('抱歉，已售罄')                // 调用 reject → Promise 变成 rejected
     }
   }, 1000)
 })
-ticket
-  .then(msg => console.log(msg))   // 成功走这里
-  .catch(err => console.log(err))  // 失败走这里
+
+// .then() 的第一个参数 = resolve 时调用
+// .then() 的第二个参数（或 .catch()）= reject 时调用
+promise.then(
+  function(msg) { console.log('成功：', msg) },   // resolve 走这里
+  function(err) { console.log('失败：', err) }    // reject 走这里
+)
 ```
+
+**一句话总结：** `resolve` 和 `reject` 是你决定 Promise 最终状态的开关——成功就调 `resolve(结果)`，失败就调 `reject(错误)`。
 :::
 
-:::example{title=".then() 的链式传递"}
-`.then()` 每次都返回一个新的 Promise，所以可以一直 `.then()` 下去——就像多米诺骨牌。
+:::example{title="Promise 的三种状态——外卖订单类比"}
+一个 Promise 只有三种互斥的状态，一旦确定就不可改变：
+
+| 状态 | 含义 | 外卖类比 | 触发条件 |
+|------|------|----------|----------|
+| **pending** | 等待结果 | 订单已提交，厨房正在做 | Promise 刚创建，还没调 resolve/reject |
+| **fulfilled** | 成功完成 | 外卖送到了 | 调了 resolve(value) |
+| **rejected** | 失败了 | 订单被取消 | 调了 reject(reason) 或抛出异常 |
+
 ```js
-fetchUserId('小明')
-  .then(id => fetchUserInfo(id))      // 返回新 Promise
-  .then(info => fetchFavorites(info))  // 再返回新 Promise
-  .then(favs => console.log('喜欢的曲子：', favs))
-  .catch(err => console.log('某一步失败了：', err))
+// 三种状态的完整演示
+const ticket = new Promise(function(resolve, reject) {
+  const available = Math.random() > 0.3       // 70% 概率有票
+  setTimeout(function() {                     // 模拟网络延迟
+    if (available) {
+      resolve('订票成功！座位号：A-12')       // → fulfilled
+    } else {
+      reject('抱歉，已售罄')                 // → rejected
+    }
+  }, 1000)
+})
+
+// 当前状态：pending（等 1 秒后才变）
+// 1 秒后：要么 fulfilled（输出 "订票成功！"），要么 rejected（输出 "抱歉"）
+ticket
+  .then(function(msg) { console.log(msg) })    // fulfilled 时执行
+  .catch(function(err) { console.log(err) })   // rejected 时执行
 ```
-关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。
 :::
 
-:::explain{title="Promise 组合器 — 同时处理多个 Promise"}
-现实开发中，你经常需要同时发起多个请求。JS 提供了四个组合器：
+:::explain{title=".then() 链的关键规则——每一步都返回新 Promise"}
+`.then()` 每次都返回一个**全新的 Promise**，所以你可以在后面继续 `.then()`：
+
+```js
+fetchUserId('小明')                          // 返回 Promise<id>
+  .then(function(id) {                       // 接收 id
+    return fetchUserInfo(id)                 // 返回 Promise<userInfo>
+  })                                         //   这个返回值被包装成新 Promise
+  .then(function(info) {                     // 接收 info（不是 id！）
+    return fetchFavorites(info.id)           // 返回 Promise<favorites>
+  })
+  .then(function(favs) {                     // 接收 favs
+    console.log('喜欢的曲子：', favs)         // 最终拿到数据
+  })
+  .catch(function(err) {                     // 链上任何一步出错都来这里
+    console.log('某一步失败了：', err)
+  })
+```
+
+**两个核心规则：**
+1. `.then()` 里 `return` 一个值 → 下一个 `.then()` 收到这个值
+2. `.then()` 里 `return` 一个 Promise → 下一个 `.then()` 等它完成后收到结果
+3. `.then()` 里抛异常 → 跳到最近的 `.catch()`
+:::
+
+:::explain{title="四个 Promise 组合器——同时处理多个异步操作"}
+实际项目中，你经常需要同时发起多个请求。JS 提供了四个组合器：
 
 **1. Promise.all — "全部完成才算完"**
 ```js
-// 同时请求三个 API，等全部返回后一起处理
-const [user, posts, comments] = await Promise.all([
-  fetch('/api/user').then(r => r.json()),
-  fetch('/api/posts').then(r => r.json()),
-  fetch('/api/comments').then(r => r.json())
+// 场景：页面初始化，需要用户信息、帖子列表、通知数量——三者同时请求
+const [user, posts, notifications] = await Promise.all([
+  fetch('/api/user').then(function(r) { return r.json() }),
+  fetch('/api/posts').then(function(r) { return r.json() }),
+  fetch('/api/notifications').then(function(r) { return r.json() })
 ])
-console.log('全部加载完成！')
+// 全部成功 → 拿到三个结果。任意一个失败 → 整个 all 失败
+// 使用场景：页面初始化、批量校验、需要全部数据才能渲染的页面
 ```
-⚠️ 只要有一个失败，整个 `Promise.all` 就 reject。适合：页面初始化时需要多组数据。
 
 **2. Promise.race — "谁先到算谁的"**
 ```js
-// 实现请求超时：如果 3 秒内 API 没回应就用默认数据
+// 场景：给请求加超时——3 秒没响应就报错
 const data = await Promise.race([
-  fetch('/api/slow-endpoint').then(r => r.json()),
-  new Promise((_, reject) => setTimeout(() => reject('请求超时！'), 3000))
+  fetch('/api/slow-endpoint').then(function(r) { return r.json() }),
+  new Promise(function(_, reject) {
+    setTimeout(function() { reject('请求超时！') }, 3000)
+  })
 ])
+// 使用场景：网络请求超时控制、从多个 CDN 选最快的
 ```
-适合：给网络请求加超时控制。
 
 **3. Promise.allSettled — "全部有结果，不管成败"**
 ```js
+// 场景：批量上传文件，需要知道每个文件的上传结果（成功 or 失败）
 const results = await Promise.allSettled([
-  fetch('/api/user'),
-  fetch('/api/broken-endpoint'),  // 这个可能 404
-  fetch('/api/posts')
+  uploadFile('a.pdf'),    // 可能成功
+  uploadFile('b.pdf'),    // 可能失败
+  uploadFile('c.pdf')     // 可能成功
 ])
 // results = [
-//   { status: "fulfilled", value: {...} },
-//   { status: "rejected", reason: "404 Not Found" },
-//   { status: "fulfilled", value: {...} }
+//   { status: "fulfilled", value: { url: "..." } },
+//   { status: "rejected", reason: "文件过大" },
+//   { status: "fulfilled", value: { url: "..." } }
 // ]
+// 使用场景：批量操作、需要完整报告的场景
 ```
-适合：批量操作，需要知道每个请求的结果（成功还是失败），不因一个失败而丢弃其他数据。
 
 **4. Promise.any — "有一个成功就行"**
 ```js
-// 从多个 CDN 镜像中找最快的那个
+// 场景：从多个 CDN 镜像加载同一份数据，谁快用谁
 const data = await Promise.any([
   fetch('https://cdn1.example.com/data.json'),
   fetch('https://cdn2.example.com/data.json'),
   fetch('https://cdn3.example.com/data.json')
-]).then(r => r.json())
+]).then(function(r) { return r.json() })
+// 使用场景：多 CDN 容灾、多个备用数据源
 ```
-适合：有多个备用源，只要有一个成功就行。
 :::
 
-:::task{title="动手试试 ✨"}
-::::step{purpose=".then() 是 Promise 的核心消费方式——在 fetch 请求成功后用 .then() 接收数据并渲染到页面。你将看到用户卡片从 API 获取并显示在页面上，而不是打印到控制台。" expected="输入 1，点击查询，加载动画后页面出现一张用户卡片，显示该用户的姓名、邮箱、电话和公司信息。"}
-实现 `searchUser()` 函数，用 fetch 请求 API 并将结果渲染到页面
+## 3. 常见错误
 
-打开 `script.js`，完成两个地方的代码：
+**错误 1：忘记 return——链断了**
 
-**1. `searchUser()` 函数：**
 ```js
-function searchUser(userId) {
-  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-    .then(response => response.json());
-}
+// ❌ 错误：.then() 里没有 return，下一个 .then() 收到 undefined
+getUser(1)
+  .then(function(user) {
+    getOrders(user.id)        // 没有 return！下一个 .then() 等不到结果
+  })
+  .then(function(orders) {
+    console.log(orders)       // undefined —— 因为上一步没有 return
+  })
+
+// ✅ 正确：必须 return
+getUser(1)
+  .then(function(user) {
+    return getOrders(user.id) // 有 return，链正常传递
+  })
+  .then(function(orders) {
+    console.log(orders)       // 正确拿到 orders
+  })
 ```
 
-**2. 按钮点击事件中的 Promise 调用：**
+**错误 2：在 Promise 链外使用链的结果**
+
 ```js
-btnEl.addEventListener('click', function () {
-  const userId = inputEl.value.trim();
-  showLoading();
-  searchUser(userId)
-    .then(user => {
-      hideLoading();
-      resultsEl.appendChild(renderCard(user));
-    });
-});
+// ❌ 错误：以为 .then() 后变量就赋值了
+let result
+getUser(1).then(function(user) {
+  result = user               // 异步的，这行还没执行
+})
+console.log(result)           // undefined —— .then() 还没跑！
+
+// ✅ 正确：在 .then() 里面使用结果
+getUser(1).then(function(user) {
+  console.log(user)           // 在回调里使用，确保数据已经到了
+  // 后续逻辑全写在这里
+})
 ```
 
-刷新页面，输入用户 ID（1-10），点击「查询」按钮，观察用户卡片出现在页面上。
+**错误 3：Promise.all 中一个失败就放弃全部**
+
+```js
+// ❌ 错误：用 Promise.all 做批量操作，一个 404 就全没了
+const results = await Promise.all([
+  fetch('/api/user/1'),
+  fetch('/api/user/999'),   // 这个返回 404，整个 all 就 reject 了
+  fetch('/api/user/3')      // 这个明明能成功，也被放弃了
+])
+
+// ✅ 正确：批量操作应该用 Promise.allSettled，每个结果都能看到
+const results = await Promise.allSettled([
+  fetch('/api/user/1'),
+  fetch('/api/user/999'),
+  fetch('/api/user/3')
+])
+// results 里每个都有 status，成功失败都清清楚楚
+```
+
+:::task{title="动手试试"}
+::::step{purpose="亲手创建 Promise 并经历 pending → fulfilled/rejected 的状态变化，这是理解 resolve/reject 本质的最佳方式。" expected="运行代码后 1 秒输出'订票成功！'或'已售罄'。多次运行以看到两种结果。"}
+打开 `script.js`，用 `new Promise((resolve, reject) => { ... })` 模拟一个订票功能：70% 概率成功，延迟 1 秒返回结果。用 `.then()` 和 `.catch()` 接收结果并输出
 ::::
 
-::::step{purpose=".catch() 是 Promise 错误处理的标准方式——网络请求可能失败，用 .catch() 在页面上显示错误信息，而不是让程序静默崩溃。用户能看到友好的错误提示。" expected="输入无效 ID（如 999），页面显示错误信息而不是空白。输入字母，同样显示错误提示，页面不会崩溃。"}
-添加 .catch() 错误处理，在页面上显示错误信息
-
-在按钮点击事件中的 Promise 链末尾添加 `.catch()`：
-```js
-.catch(err => {
-  showError('查询失败：' + err.message);
-});
-```
-
-分别测试：
-- 有效 ID（1）：用户卡片正常显示
-- 无效 ID（999）：页面显示错误提示
-- 空输入：API 返回 404，页面显示错误信息
-::::
-
-::::step{purpose="Promise 链通过 return 传递数据——查询完一个用户后，自动再查第二个用户，两张卡片依次出现在页面上。这展示了 .then() 链式调用的威力：数据在链上流动，无需嵌套。" expected="点击查询后，页面依次出现两张用户卡片——第一张是用户 1 的信息，短暂加载后出现第二张用户 2 的信息。链式调用串行完成。"}
-链式调用：查询完一个用户后自动查询第二个用户
-
-修改按钮点击事件，在第一个 `.then()` 中 `return searchUser(另一个ID)`，第二个 `.then()` 中渲染第二张卡片：
+::::step{purpose="Promise 链通过 return 传递数据——每个 .then() 里 return 一个 Promise，下一个 .then() 自动接收到其结果。链式调用把嵌套拉平。" expected="输入用户 ID 后，页面依次出现两张卡片——用户 N 和用户 N+1。第二个 .then() 里的 user2 是第二个 searchUser() 的结果。"}
+修改 `script.js` 中的搜索函数，用 Promise 链实现：查询用户 N → 拿到结果后自动查询用户 N+1 → 两张卡片都显示在页面上
 ```js
 searchUser(userId)
-  .then(user => {
-    hideLoading();
-    resultsEl.appendChild(renderCard(user));
-    return searchUser(Number(userId) + 1);  // 自动查询下一个用户
+  .then(function(user) {                     // 收到第一个用户
+    showCard(user)                            // 显示第一张卡片
+    return searchUser(Number(userId) + 1)     // 返回新 Promise，链继续
   })
-  .then(user2 => {
-    resultsEl.appendChild(renderCard(user2));
+  .then(function(user2) {                    // 收到第二个用户
+    showCard(user2)                           // 显示第二张卡片
   })
-  .catch(err => showError('查询失败：' + err.message));
+  .catch(function(err) {                     // 统一错误处理
+    showError('查询失败：' + err.message)
+  })
 ```
+::::
 
-输入 1，点击查询——先出现用户 1 的卡片，再出现用户 2 的卡片。
+::::step{purpose="Promise.all 是页面初始化的标配——多个不依赖的请求同时发出，等全部返回后一起渲染，比串行快得多。" expected="控制台输出用户、帖子、相册三组数据，耗时约为最慢那个请求的时间（而不是三者之和）。"}
+在 `script.js` 中用 `Promise.all` 同时请求三个不同的 API 端点，全部完成后输出结果，对比串行（一个一个 await）的执行时间
 ::::
 
 :::
 
-:::hint{title="提示"}
+:::hint{title="Promise 三个核心规则"}
 ```js
-searchUser(1)
-  .then(user => {
-    renderCard(user);           // 渲染第一个用户
-    return searchUser(2);       // 返回新的 Promise
-  })
-  .then(user2 => renderCard(user2))  // 渲染第二个用户
-  .catch(err => showError('查询失败：' + err.message))
+// 规则1：.then() 默认返回新 Promise，里面的 return 值传给下一个 .then()
+Promise.resolve(1)
+  .then(function(v) { return v + 1 })   // 返回 2
+  .then(function(v) { console.log(v) }) // 输出 2
+
+// 规则2：.then() 里 return 一个 Promise，下一个 .then() 等它完成
+Promise.resolve(1)
+  .then(function(v) { return fetchUser(v) })  // 返回 Promise
+  .then(function(user) { console.log(user) }) // 等 fetchUser 完成后拿到 user
+
+// 规则3：.catch() 捕获链上任何一步的错误
+Promise.resolve(1)
+  .then(function() { throw new Error('出错了') })  // 抛出错误
+  .then(function() { console.log('不会执行') })    // 跳过
+  .catch(function(err) { console.log(err) })        // 捕获错误
 ```
 :::
 
 :::recap
-你学会了用 Promise 处理异步操作——它有三种状态：等待中、成功、失败。用 .then() 链式调用替代层层嵌套的回调，用 .catch() 统一捕获错误，代码清晰多了。
+你学会了用 Promise 取代回调地狱——`.then()` 链让异步代码变平，`.catch()` 统一处理错误。`resolve` 和 `reject` 是 Promise 构造函数给你的两个函数，分别表示成功和失败。四种组合器对应不同场景：`Promise.all`（全部成功）、`Promise.race`（竞速）、`Promise.allSettled`（全部有结果）、`Promise.any`（一个成功就行）。实际工作中，Promise 是 fetch、定时器、事件监听等一切异步操作的基石。
 :::
-
-

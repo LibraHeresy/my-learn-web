@@ -1,7 +1,7 @@
-# {{term:防抖}}与搜索 — 别让服务器累坏了
+# 防抖与搜索 — 别让服务器累坏了
 
 :::analogy
-防抖（debounce）就像电梯门——有人进来就重新计时，等没人进出了才关门。用户打字搜索时也一样，不要每敲一个字母就发一次请求，等用户停下来再发。
+防抖（debounce）就像电梯关门——有人进来就重新计时，等没人进出了才关门。用户打字搜索时也一样，不要每敲一个字母就发一次请求，等用户停下来再发。
 :::
 
 :::prerequisite
@@ -10,96 +10,240 @@
 - **fetch()**：浏览器向服务器发送 HTTP 请求的函数
 - **setTimeout**：JavaScript 内置的定时器函数，延迟指定毫秒后执行回调
 - **clearTimeout**：取消由 setTimeout 设置的定时器
+- **闭包（Closure）**：内层函数记住并访问外层函数变量的能力
 :::
 
-:::explain{title="为什么需要防抖？"}
-场景：搜索框。用户输入"洗衣机"，来数数会触发几次请求：
-```
-洗 → 请求1
-洗衣 → 请求2
-洗衣机 → 请求3
-```
-如果每个字都发 API 请求：
-- 浪费网络资源
-- 服务器压力大
-- 返回顺序可能错乱（后发的请求可能先返回）
-**防抖：** 用户停止输入 N 毫秒后，才发一次请求。
-:::
+## 1. 先看问题：不给搜索加防抖，会发生什么？
 
-:::example{title="防抖函数实现"}
-防抖的核心：每次触发时清除上一个定时器，重新计时。
+做一个搜索框，用户输入"洗衣机"。最简单的实现：
+
 ```js
-function debounce(fn, delay = 300) {
-  let timer = null
-  return function(...args) {
-    clearTimeout(timer)            // 清除上次的定时器
-    timer = setTimeout(() => {     // 重新计时
-      fn.apply(this, args)
+// ❌ 没有防抖：每个字符都发一次请求
+const input = document.querySelector('#search-input')
+input.addEventListener('input', async function(e) {
+  const keyword = e.target.value            // 用户每敲一个字，这里就触发一次
+  const results = await fetch('/api/search?q=' + keyword)
+  showResults(results)
+})
+// 用户输入"洗衣机"时触发了 3 次请求：
+// "洗"   → 请求 1（还没返回）
+// "洗衣" → 请求 2（还没返回）
+// "洗衣机" → 请求 3（最新，但可能先返回）
+```
+
+**三个严重问题：**
+
+1. **浪费资源**——3 个请求里只有最后一个有用，前两个请求的结果被丢弃了
+2. **返回顺序错乱**——"洗衣机"的请求可能比"洗"的请求先返回（网络不稳定），导致最终显示的是"洗"的结果，而不是"洗衣机"的结果
+3. **服务器压力**——如果是 100 个用户同时搜索，每人敲 5 个字 = 500 个请求，但实际只需要 100 个
+
+**实际工作中你会用这个来：**
+- 搜索框（最经典的场景）
+- 窗口 resize 事件——用户拖拽窗口时，resize 事件每秒触发几十次，防抖后再重新计算布局
+- 滚动加载更多——不是每次滚动都触发，而是用户停下来后再判断是否需要加载
+
+## 2. 解决方案：防抖函数
+
+防抖的核心逻辑：**每次触发时取消上一次的等待，重新计时。只有最后一次触发后过了 N 毫秒，才真正执行。**
+
+```js
+// debounce —— 防抖函数
+function debounce(fn, delay) {
+  var timer = null                         // ① 闭包变量：保存定时器 ID
+                                            //    timer 被所有调用共享——这是关键！
+
+  return function() {                      // ② 返回一个"防抖版"的函数
+    var context = this                     // 保存 this
+    var args = arguments                   // 保存参数
+
+    clearTimeout(timer)                    // ③ 取消上次的等待
+                                            //    如果用户继续输入，这行会重复执行
+                                            //    导致上次的 setTimeout 永远不触发
+
+    timer = setTimeout(function() {        // ④ 启动新的等待
+      fn.apply(context, args)             // ⑤ 延迟结束后，真正执行业务函数
     }, delay)
   }
 }
-// 使用
-const search = debounce(async (keyword) => {
+// 为什么 timer 不会丢失？因为闭包——
+// 内层函数（return 的那个函数）记住了外层函数（debounce）的 timer 变量
+// 每次调用都是用同一个 timer，所以 cancel 和 restart 才能配合工作
+```
+
+**逐行理解执行过程：**
+
+```js
+// 用户输入"洗"（第 1 次调用）
+//   → clearTimeout(timer)     timer 还是 null，无事发生
+//   → timer = setTimeout(fn, 300)    启动一个 300ms 的倒计时
+
+// 用户输入"衣"（第 2 次调用，距上次 100ms）
+//   → clearTimeout(timer)     取消上一次的 300ms 倒计时！fn 不会执行了
+//   → timer = setTimeout(fn, 300)    重新启动 300ms 倒计时
+
+// 用户输入"机"（第 3 次调用，距上次 150ms）
+//   → clearTimeout(timer)     再次取消倒计时
+//   → timer = setTimeout(fn, 300)    再次重新启动
+
+// 用户停下来...
+//   → 300ms 后，倒计时到期，fn 执行——搜索"洗衣机"
+```
+
+:::explain{title="闭包——防抖能工作的秘密"}
+防抖函数之所以能"记住"上一次的 timer，靠的是**闭包（Closure）**：
+
+```js
+function debounce(fn, delay) {
+  var timer = null              // 外层函数的局部变量
+
+  return function() {           // 内层函数
+    clearTimeout(timer)         // 访问外层的 timer——这就是闭包
+    timer = setTimeout(...)     // 修改外层的 timer——闭包允许修改
+  }
+}
+// debounce 执行完毕后，按理说 timer 应该被销毁
+// 但内层函数仍持有 timer 的引用——这就是闭包
+// JS 引擎发现内层函数还要用 timer，就保留它不回收
+```
+
+**闭包的实用定义：** 函数"记住"了它出生时所在作用域的变量，即使那个作用域已经执行完毕。
+:::
+
+:::example{title="防抖 + API 搜索——完整示例"}
+```js
+// 1. 搜索 API 函数——每次搜索的实际逻辑
+async function searchAPI(keyword) {
   console.log('搜索：', keyword)
-  const result = await api.get(\`/search?q=\${keyword}\`)
-  displayResults(result)
-}, 500)
-// 用户在输入框打字
-input.addEventListener('input', (e) => {
-  search(e.target.value)  // 停止输入 500ms 后才真正搜索
+  const data = await api.get('/search?q=' + keyword)
+  renderResults(data)
+}
+
+// 2. 包装成防抖版——300ms 内重复调用只执行最后一次
+const debouncedSearch = debounce(searchAPI, 300)
+
+// 3. 绑定到输入框
+const input = document.querySelector('#search-input')
+input.addEventListener('input', function(e) {
+  const keyword = e.target.value.trim()    // 去掉首尾空格
+  if (keyword.length > 0) {
+    debouncedSearch(keyword)               // 调用防抖版——不会立即发请求
+  }
 })
+
+// 效果：
+// 用户快速输入"洗衣机" → 300ms 后只发一次请求："洗衣机"
+// 而不是 3 次请求："洗"、"洗衣"、"洗衣机"
 ```
 :::
 
-:::example{title="直观理解"}
-防抖就像等电梯：
-- 不断有人按关门键（每次按键触发 debounce）
-- 电梯不会立刻关门（清除之前的定时器）
-- 等最后一个人进来后，过几秒才关门（定时器到期，执行回调）
-在搜索场景中，用户连续输入"洗"→"衣"→"机"，每次输入都重置计时器。等用户停止输入 500ms 后，才发送搜索"洗衣机"的请求。
-:::
+## 3. 常见错误
 
-:::explain{title="闭包 — 函数\"记住\"外部变量的能力"}
-防抖函数之所以能工作，依赖一个重要的概念：**闭包（Closure）**。
-看防抖的结构：
+**错误 1：每次调用都创建新的防抖函数**
+
 ```js
+// ❌ 错误：在事件处理函数里创建防抖——每次 input 都新建 debounce
+//    新建的 debounce 有自己的 timer，互相独立，无法取消上一次的等待
+input.addEventListener('input', function(e) {
+  const debouncedSearch = debounce(searchAPI, 300)  // 每次都是新函数！
+  debouncedSearch(e.target.value)
+})
+// 结果：防抖完全失效，还是每个字符都发请求
+
+// ✅ 正确：在事件监听器外面创建防抖函数——只创建一次
+const debouncedSearch = debounce(searchAPI, 300)    // 只创建一次
+input.addEventListener('input', function(e) {
+  debouncedSearch(e.target.value)                    // 每次调用同一个函数
+})
+```
+
+**错误 2：timer 定义在返回函数里面——每次调用都是新 timer**
+
+```js
+// ❌ 错误：timer 在返回函数内部——每次调用创建新的局部变量
+function brokenDebounce(fn, delay) {
+  return function() {
+    var timer = null              // 每次调用都是新的 timer！
+    clearTimeout(timer)           // 清除的是刚创建的 null，没用
+    timer = setTimeout(fn, delay) // 启动新定时器——但上一个还在！
+  }
+}
+// 结果：clearTimeout 永远清的是 null，旧的 setTimeout 照常执行
+//    防抖完全失效——和直接调用 fn 没区别
+
+// ✅ 正确：timer 在返回函数外部（闭包变量）——所有调用共享
 function debounce(fn, delay) {
-  let timer = null           // 外层函数的变量
-  return function(...args) {  // 内层函数
-    clearTimeout(timer)       // 访问了外层的 timer！
-    timer = setTimeout(...)   // 修改了外层的 timer！
+  var timer = null              // 在返回函数外面！
+  return function() {
+    clearTimeout(timer)          // 现在清除的是上一次的 timer——有效！
+    timer = setTimeout(fn, delay)
   }
 }
 ```
-**闭包**就是：内层函数可以记住并访问外层函数的变量，即使外层函数已经执行完毕。就像团队成员各自记住自己的分工说明——活动结束后，说明书仍然在他们的记忆里。
-`timer` 变量被所有防抖调用共享——每次调用 `clearTimeout(timer)` 清除的都是同一个 timer，这正是防抖能取消上一次等待的关键。
-闭包是 JavaScript 中最强大的特性之一，你在事件处理、模块封装、数据缓存等场景都会用到它。
+
+**错误 3：忘记用闭包——timer 用全局变量替代**
+
+```js
+// ❌ 错误：timer 定义在全局——如果有多个搜索框就互相干扰了
+var globalTimer = null
+input1.addEventListener('input', function() {
+  clearTimeout(globalTimer)
+  globalTimer = setTimeout(search1, 300)
+})
+input2.addEventListener('input', function() {
+  clearTimeout(globalTimer)     // 取消了 input1 的定时器！
+  globalTimer = setTimeout(search2, 300)
+})
+
+// ✅ 正确：每个搜索框有自己的防抖函数，各自管理各自的 timer
+const debouncedSearch1 = debounce(search1, 300)  // timer1 独立
+const debouncedSearch2 = debounce(search2, 300)  // timer2 独立
+// 互不干扰
+```
+
+:::task{title="动手试试"}
+::::step{purpose="亲手实现 debounce 是理解闭包的最佳方式。timer 在闭包中，每次调用都取消+重启同一个 timer。这个模式在真实项目中反复出现。" expected="debounce 返回一个函数，该函数在连续被调用时只执行最后一次（延迟后）。"}
+打开 `script.js`，实现 `debounce(fn, delay)` 函数：
+- 外层声明 `var timer = null`
+- 返回的函数中先 `clearTimeout(timer)`，再 `timer = setTimeout(function() { fn.apply(this, arguments) }, delay)`
+- 用 `console.log` 验证 timer 在调用之间保持不变
+::::
+
+::::step{purpose="防抖+搜索是前端最经典的组合。没有防抖时每个字符都发请求，加了防抖只发一次——性能和用户体验同时提升。" expected="快速输入'春'→'春天'→'春天的故事'，停止输入 500ms 后，控制台只输出一次搜索请求。"}
+在 `script.js` 中实现完整搜索功能：
+1. 写一个 `searchAPI(keyword)` 函数（fetch 真实 API 或 console.log 模拟）
+2. 用 `const debouncedSearch = debounce(searchAPI, 500)` 包装
+3. 给搜索框绑定 input 事件，调用 `debouncedSearch(e.target.value)`
+4. 快速输入后停止，观察控制台输出次数
+::::
+
+::::step{purpose="比较防抖前后的网络请求数量，直观感受性能差异。真实项目里搜索框不做防抖是严重性能问题。" expected="无防抖：3个字符=3次 fetch。有防抖：3个字符只触发 1 次 fetch。Network 面板验证。"}
+分别在浏览器的 Network 面板中观察：不加防抖时搜索"洗衣机"有多少次请求，加防抖后有多少次请求。对比数量差异
+::::
+
 :::
 
-:::task{title="动手试试 ✨"}
-::::step{purpose="防抖利用{{term:闭包}}（Closure）让内层函数记住并访问外层的 timer 变量。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。" expected="debounce 返回一个新函数，这个函数在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。"}
-在 debounce 内部声明 let timer = null（闭包变量），返回的函数中先 clearTimeout(timer)，再 timer = setTimeout(() => fn(...args), delay)
-::::
+:::hint{title="防抖函数速记"}
+```js
+// 模板：直接用这个模式
+function debounce(fn, delay) {
+  var timer = null                           // ① 闭包变量——关键！
+  return function() {
+    clearTimeout(timer)                      // ② 取消上次
+    var context = this                       // ③ 保存 this 和参数
+    var args = arguments
+    timer = setTimeout(function() {          // ④ 重新计时
+      fn.apply(context, args)               // ⑤ 时间到了才执行
+    }, delay)
+  }
+}
 
-::::step{purpose="防抖函数是一个\"装饰器\"——它接收一个函数，返回一个被\"防抖化\"的新函数。原函数的功能不变，只是增加了\"等待稳定后再执行\"的行为。这种包装模式在工程中非常常见。" expected="debouncedSearch 的行为与 searchAPI 相同，但连续快速调用时只有最后一次会生效。"}
-用 const debouncedSearch = debounce(searchAPI, 500) 包装搜索函数
-::::
-
-::::step{purpose="在搜索场景中，用户在输入框快速打字时，debounce 避免了每个字符都发一次网络请求——只在用户停下来 500ms 后才真正搜索。这对节省流量和服务器资源至关重要。" expected="500ms 后控制台只输出一次 \"🔍 发送搜索请求：洗衣机\"，前两次调用被取消了。"}
-连续快速调用 debouncedSearch("洗") → debouncedSearch("洗衣") → debouncedSearch("洗衣机")，验证控制台只输出一次搜索请求
-::::
-
-:::
-
-:::hint{title="提示"}
-关键两步：
-1. 在返回的函数中 `clearTimeout(timer)` 取消上次的等待
-2. 然后 `timer = setTimeout(() => fn(...args), delay)` 重新开始等待
-`timer` 要存在闭包中（外层变量），这样每次调用都能访问到同一个 timer。
+// 使用
+const searchWithDebounce = debounce(function(keyword) {
+  // 实际的搜索逻辑
+}, 300)                                      // 300ms 内重复调用只执行最后一次
+```
 :::
 
 :::recap
-你学会了用防抖（debounce）控制函数的触发频率——每次调用都取消上一次的定时器，重新计时，等用户停止操作后才真正执行。在搜索框中，用户快速打字时不会每个字都发请求，只有停下来才搜索一次。防抖能工作，靠的是闭包——内层函数记住了外层函数的 timer 变量。
+你学会了防抖（debounce）——用 `setTimeout` 和 `clearTimeout` 控制函数执行频率。核心逻辑：每次触发时取消上一次的等待，重新计时；只有停止触发达到指定时间后才真正执行。防抖依赖闭包——`timer` 变量在外层声明，内层函数通过闭包反复访问和修改同一个 `timer`。实际工作中，搜索框是防抖最常见场景，此外还有窗口 resize、滚动加载等高频事件。不用防抖的话：浪费带宽、返回顺序错乱、服务器压力翻倍。
 :::
-
-
