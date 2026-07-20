@@ -2,7 +2,7 @@
   "steps": [
     {
       "title": "开始前先对齐前置能力",
-      "content": { "mdFile": "steps/01-prereq.md" },
+      "content": { "mdFile": "steps/01.md" },
       "task": "先确认你是否已经做过 《异步篇结业》。然后给自己选一个目标版本：最低完成线、标准版或挑战版。",
       "hint": "如果你还不能顺手解释 Promise、await 和 fetch 的关系，先回去复看 《异步篇结业》 会更稳。",
       "purpose": "异步项目最怕“概念没串起来就直接开做”。先确认前置能力和完成线，能显著降低中途迷路的概率。",
@@ -10,7 +10,7 @@
     },
     {
       "title": "了解 iTunes Search API",
-      "content": { "mdFile": "steps/02-api.md" },
+      "content": { "mdFile": "steps/02.md" },
       "task": "在浏览器中访问 iTunes Search API 的 URL，观察返回的 JSON 数据。理解每个字段的含义。",
       "hint": "JSON 看起来像 JS 对象，但它是字符串格式。`JSON.parse()` 可以将 JSON 字符串转为 JS 对象。字段名用英文是因为 API 是国际化的。\n> ⚠️ **关于 CORS**：浏览器出于安全考虑，禁止网页随意请求其他域名的数据——这叫同源策略。iTunes Search API 之所以可以跨域访问，是因为它设置了正确的 CORS 响应头（`Access-Control-Allow-Origin: *`），允许任何网站调用。如果直接用 `file://` 协议打开 HTML 文件，某些浏览器可能阻止 fetch 请求——建议使用 Live Server 或 `npx serve` 来本地预览。",
       "purpose": "API 是前端和互联网的接口——就像一根电话线连接了两个房间。这一步不急着写代码，而是先理解你要对话的对象：iTunes Search API 返回什么样的数据？每个字段代表什么？只有先摸清'对方说什么'，后面写请求代码时才能精准地提取需要的信息。探索 API 是每个前端开发者拿到新接口后的第一件事。",
@@ -23,7 +23,7 @@
     },
     {
       "title": "实现基础搜索功能",
-      "content": { "mdFile": "steps/03-basic-search.md" },
+      "content": { "mdFile": "steps/03.md" },
       "task": "创建一个 HTML 页面，包含输入框和搜索按钮。用 fetch 调用 iTunes API，将搜索结果渲染到页面上。",
       "hint": "用 `document.createElement` 或模板字符串生成结果列表的 HTML。每首结果显示：封面图（`artworkUrl100`）、歌名（`trackName`）、歌手（`artistName`）。",
       "purpose": "这是 fetch 的实战首秀——异步请求、await 等待、JSON 解析、DOM 渲染，四个环节串成一条完整的数据链路。理解这条链路上的每一步，以后调用任何 API（天气、地图、翻译）都是同样的模式。`encodeURIComponent` 处理中文参数这个细节，也是实际开发中必知必会的技巧。",
@@ -36,7 +36,7 @@
     },
     {
       "title": "实时搜索 + 防抖优化",
-      "content": { "mdFile": "steps/04-debounce.md" },
+      "content": { "mdFile": "steps/04.md" },
       "task": "实现实时搜索：移除搜索按钮，监听 input 事件 + 防抖（400ms），自动触发搜索。验证快速输入时只发一次请求。",
       "hint": "在 `Network` 面板（`F12` → `Network`）中可以直观地看到请求次数。快速输入一串文字，应该只看到一次 API 请求，而不是每次按键都有一行。",
       "purpose": "好的用户体验不是功能多，而是细节到位。实时搜索让用户省去点击按钮的动作，防抖让 API 不会被每次按键都触发一次请求——就像乐团指挥不会为每一个错音停下来，而是等一段结束后再做出调整。`clearTimeout` + `setTimeout` 这个经典组合，你会在无数前端场景中反复遇到。",
@@ -49,7 +49,7 @@
     },
     {
       "title": "处理各种状态",
-      "content": { "mdFile": "steps/05-states.md" },
+      "content": { "mdFile": "steps/05.md" },
       "task": "在你的搜索器中实现五种状态的展示：idle（空状态）、loading（加载中）、success（有结果）、empty（无结果）、error（错误）。",
       "hint": "可以用一个 `currentState` 变量追踪状态。每次状态变化时调用统一的 `render()` 函数。loading 状态可以在发请求前设置，成功/失败后在 try/catch 中设置。",
       "purpose": "前端工程师和教程练习者的分界线就在这里——专业应用永远不会让用户面对'什么都不发生'的空白页面。idle、loading、success、empty、error 这五种状态覆盖了用户可能遇到的每一种情况。这一步培养的是'边界思维'：不仅要处理风和日丽的正常流程，还要优雅地处理狂风暴雨的异常场景。",
@@ -62,7 +62,7 @@
     },
     {
       "title": "收尾与回顾",
-      "content": { "mdFile": "steps/06-recap.md" },
+      "content": { "mdFile": "steps/06.md" },
       "task": "确认搜索器的五种状态都能正常工作。尝试搜索中文（贝多芬）、英文（Mozart）、空字符串、故意断网——每种情况都应该有对应的提示。",
       "hint": "要测试错误状态，可以在 `DevTools` → `Network` 面板中切换到 `Offline` 模式，然后搜索。或者临时把 API URL 改成一个不存在的地址。",
       "purpose": "做完项目后的回顾比做项目本身更重要——把零散的技能点串成完整的知识图谱。async/await、fetch、try/catch、防抖、DOM 操作、状态管理——它们不是孤立的技巧，而是构成一个完整前端应用的六个支柱。理解它们之间的关系，比记住它们的语法更有用。这也是你从'会写'到'真懂'的转变。",
@@ -70,7 +70,7 @@
     },
     {
       "title": "这个项目真正有用的收获",
-      "content": { "mdFile": "steps/07-takeaway.md" },
+      "content": { "mdFile": "steps/07.md" },
       "task": "回头看一遍这条链路，确认你能用自己的话解释：请求什么时候发、为什么要防抖、错误和空结果分别怎么处理。",
       "hint": "这个项目真正有含金量的是异步和状态处理，不是那套固定的口述模板。",
       "purpose": "减掉包装之后，留下最关键的能力锚点：你已经开始具备处理真实数据流和边界状态的能力。",
@@ -78,7 +78,7 @@
     },
     {
       "title": "项目验收、手测与下一步",
-      "content": { "mdFile": "steps/08-verify-next.md" },
+      "content": { "mdFile": "steps/08.md" },
       "task": "按手测用例完整走一遍，并至少在 DevTools 里验证一次 Network 请求和一次错误状态。确认后，决定下一步进入 `music-collection-v1` 或 `music-collection-v2`。",
       "hint": "如果你已经能清楚解释五种状态和防抖流程，建议直接进 `music-collection-v2`；如果还不稳，先做 `music-collection-v1` 会更扎实。",
       "purpose": "异步项目最容易出现“看起来能跑，但边界没补齐”的问题。把验收、自测、排错写出来，才能把它真正变成一个完整作品。",
