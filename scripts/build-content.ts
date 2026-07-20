@@ -198,6 +198,7 @@ async function atomicWriteFile(filePath: string, data: string): Promise<void> {
 const allowedModes = new Set(["sandbox", "local"]);
 const allowedBlockNames = new Set<BlockName>([
   "analogy",
+  "prerequisite",
   "explain",
   "example",
   "task",

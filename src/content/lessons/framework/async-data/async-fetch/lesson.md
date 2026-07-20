@@ -4,6 +4,14 @@
 fetch() 就像浏览器伸出去的一只手——向互联网上的服务器要数据。你发一个请求（"给我这个API的数据"），服务器返回结果，你拿着数据更新页面。
 :::
 
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **Promise**：表示一个异步操作的结果——可能成功也可能失败
+- **async/await**：让异步代码读起来像同步代码的语法，用 await 等待 Promise 完成
+- **HTTP**：浏览器和服务器之间传输数据的协议
+:::
+
 :::explain{title="什么是 HTTP 请求？"}
 每次你打开网页，浏览器都在发 HTTP 请求：
 - **GET**：获取数据（"请给我这份设计图"）
@@ -156,7 +164,7 @@ form.addEventListener('submit', async (e) => {
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="fetch() 是浏览器内置的网络请求函数——这是你第一次让代码和\"外面的世界\"对话。它返回一个 Promise，所以需要 await。就像拨通一个电话——你发送请求（拨号），等待服务器响应（对方接听）。" expected="response 是一个 Response 对象，包含 status、ok、headers 等属性。如果网络正常，response.ok 为 true。"}
+::::step{purpose="fetch() 是浏览器内置的网络请求函数——这是你第一次让代码和\"外面的世界\"对话。它返回一个 {{term:Promise}}，所以需要 await。就像拨通一个电话——你发送请求（拨号），等待服务器响应（对方接听）。" expected="response 是一个 Response 对象，包含 status、ok、headers 等属性。如果网络正常，response.ok 为 true。"}
 用 const response = await fetch(url) 发送 GET 请求到 jsonplaceholder.typicode.com/posts
 ::::
 
@@ -164,7 +172,7 @@ form.addEventListener('submit', async (e) => {
 检查 response.ok——如果为 false，throw new Error 抛出错误；对成功的响应调用 response.json() 解析 JSON
 ::::
 
-::::step{purpose="网络请求可能失败（断网、服务器宕机、URL 写错），所以必须用 try/catch 保护。这是\"与外部世界对话\"的基本礼仪——你不知道对方会不会回应，但你要确保自己不崩溃。" expected="控制台输出前 3 条帖子数据，每条包含 id、title 等信息——这是真实的网络数据！"}
+::::step{purpose="网络请求可能失败（断网、服务器宕机、URL 写错），所以必须用 {{term:try/catch}} 保护。这是\"与外部世界对话\"的基本礼仪——你不知道对方会不会回应，但你要确保自己不崩溃。" expected="控制台输出前 3 条帖子数据，每条包含 id、title 等信息——这是真实的网络数据！"}
 用 .slice(0, 3) 取前 3 条数据返回，用 try/catch 包裹整个函数
 ::::
 

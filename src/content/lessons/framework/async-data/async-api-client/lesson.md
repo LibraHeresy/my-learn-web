@@ -4,6 +4,14 @@
 把所有的 fetch 逻辑封装到一个专门的 API 模块中，就像公司有专门的前台接待——所有请求走同一个入口，统一登记、统一转发，而不是每个人各接各的客人。
 :::
 
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **fetch()**：浏览器向服务器发送 HTTP 请求的函数
+- **Promise**：表示一个异步操作的结果——可能成功也可能失败
+- **async/await**：让异步代码读起来像同步代码的语法，用 await 等待 Promise 完成
+:::
+
 :::explain{title="为什么需要封装？"}
 之前我们把 fetch 直接写在业务逻辑里。随着项目变大，问题来了：
 - 每个接口都要重复写 `fetch(BASE_URL + '/...')`
@@ -63,7 +71,7 @@ const data = await api.get('/pieces')
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="封装的核心价值是\"写一次，到处用\"——所有请求共用一个 BASE_URL、一个错误处理逻辑、一个响应解析流程。就像公司的前台统一负责接待来访——登记、引导全由前台处理，各个部门不需要每次都自己下楼接人。" expected="api.get(\"/posts\") 返回一个 Promise，解析后得到帖子数组。"}
+::::step{purpose="封装的核心价值是\"写一次，到处用\"——所有请求共用一个 BASE_URL、一个错误处理逻辑、一个响应解析流程。就像公司的前台统一负责接待来访——登记、引导全由前台处理，各个部门不需要每次都自己下楼接人。" expected="api.get(\"/posts\") 返回一个 {{term:Promise}}，解析后得到帖子数组。"}
 实现 api.get(path)：内部用 fetch(BASE_URL + path) 发送请求，检查 response.ok，返回 response.json()
 ::::
 

@@ -4,6 +4,15 @@
 DOM 操作进阶就像用积木搭城堡——不只是摆好固定的积木块，而是可以随时加一块、拆一块、移动一块。createElement 是造新积木，remove 是拿掉一块。
 :::
 
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **DOM 基础**：用 `querySelector` 选取元素、修改 `textContent`
+- **函数**：封装 DOM 操作为可复用的逻辑
+- **事件**：用 `addEventListener` 响应用户交互
+:::
+
 :::explain{title="动态创建元素"}
 createElement 动态创建 HTML 元素，appendChild 把它添加进页面，remove 移除元素。就像盖房子时临时加一扇窗户——全新的元素出现在页面上。
 ```js

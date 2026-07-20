@@ -1,7 +1,14 @@
-# localStorage — 给数据一个"永久的家"
+# {{term:localStorage}} — 给数据一个"永久的家"
 
 :::analogy
 localStorage 就像浏览器的抽屉——你把数据存进去，关掉网页甚至重启电脑后，数据还在里面等你。适合保存用户设置、草稿、登录状态等。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **JSON 对象**：一种轻量级的数据交换格式，使用键值对表示结构化数据
+- **DOM 基础**：用 JavaScript 操作 HTML 页面元素和内容的能力
 :::
 
 :::explain{title="为什么需要 localStorage？"}
@@ -51,11 +58,11 @@ render(pieces);
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="localStorage 让页面数据跨越会话存活——就像把设计图归档保存，下次准备翻出来就能继续。JSON.parse 把字符串还原为真正的数组对象，|| [] 提供了数据不存在时的安全默认值。" expected="首次打开页面显示默认的 2 个项目，刷新后数据依然存在（目前还是默认数据，因为还没写保存逻辑）。"}
+::::step{purpose="localStorage 让页面数据跨越会话存活——就像把设计图归档保存，下次准备翻出来就能继续。{{term:JSON.parse}} 把字符串还原为真正的数组对象，|| [] 提供了数据不存在时的安全默认值。" expected="首次打开页面显示默认的 2 个项目，刷新后数据依然存在（目前还是默认数据，因为还没写保存逻辑）。"}
 页面启动时从 localStorage 加载数据：用 JSON.parse(localStorage.getItem("myPieces"))，如果为空则用默认数组
 ::::
 
-::::step{purpose="localStorage 只能存字符串，所以需要用 JSON.stringify 把对象\"打包\"成 JSON 格式。这就像把设计图装进文件夹再放进档案柜——需要使用时再 JSON.parse 取出来拆包。" expected="saveData() 调用后，在浏览器 DevTools → Application → Local Storage 中能看到 myPieces 键和对应的 JSON 字符串。"}
+::::step{purpose="localStorage 只能存字符串，所以需要用 {{term:JSON.stringify}} 把对象\"打包\"成 JSON 格式。这就像把设计图装进文件夹再放进档案柜——需要使用时再 JSON.parse 取出来拆包。" expected="saveData() 调用后，在浏览器 DevTools → Application → Local Storage 中能看到 myPieces 键和对应的 JSON 字符串。"}
 写一个 saveData() 函数：用 JSON.stringify 把 pieces 数组转成字符串，存入 localStorage
 ::::
 

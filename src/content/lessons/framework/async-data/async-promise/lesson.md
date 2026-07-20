@@ -1,7 +1,16 @@
-# Promise — 给异步操作一个"承诺"
+# {{term:Promise}} — 给异步操作一个"承诺"
 
 :::analogy
 Promise 就像点了一份外卖——下单后拿到一个订单号（Promise）。外卖可能送到（resolve），也可能被取消（reject）。在结果出来前，你可以继续做其他事，不用一直在门口等。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **函数**：一段可以重复调用的代码块，接收输入、执行逻辑、返回结果
+- **回调函数**：作为参数传给另一个函数的函数，等时机到了被调用
+- **回调地狱**：多层嵌套的回调函数形成的"金字塔"代码，难以阅读和维护
+- **事件循环**：JavaScript 调度异步任务的运行机制
 :::
 
 :::explain{title="回调地狱 → Promise"}
@@ -117,29 +126,82 @@ const data = await Promise.any([
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose=".then() 是 Promise 的核心消费方式——它注册一个回调，在异步操作成功后执行。就像你预订了一张活动门票后，不需要一直盯着售票窗口，.then() 相当于\"有票了通知我\"。" expected="约 800ms 后控制台输出搜索成功的结果对象 { keyword: \"春天\", results: [\"项目A\", \"项目B\", \"项目C\"] }。"}
-调用 searchMusic("春天")，用 .then(result => console.log(result)) 处理成功返回的数据
+::::step{purpose=".then() 是 Promise 的核心消费方式——在 fetch 请求成功后用 .then() 接收数据并渲染到页面。你将看到用户卡片从 API 获取并显示在页面上，而不是打印到控制台。" expected="输入 1，点击查询，加载动画后页面出现一张用户卡片，显示该用户的姓名、邮箱、电话和公司信息。"}
+实现 `searchUser()` 函数，用 fetch 请求 API 并将结果渲染到页面
+
+打开 `script.js`，完成两个地方的代码：
+
+**1. `searchUser()` 函数：**
+```js
+function searchUser(userId) {
+  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+    .then(response => response.json());
+}
+```
+
+**2. 按钮点击事件中的 Promise 调用：**
+```js
+btnEl.addEventListener('click', function () {
+  const userId = inputEl.value.trim();
+  showLoading();
+  searchUser(userId)
+    .then(user => {
+      hideLoading();
+      resultsEl.appendChild(renderCard(user));
+    });
+});
+```
+
+刷新页面，输入用户 ID（1-10），点击「查询」按钮，观察用户卡片出现在页面上。
 ::::
 
-::::step{purpose=".catch() 是 Promise 错误处理的标准方式——链上任何一步失败都会被它捕获。对比回调地狱中每个回调都需要单独处理错误，.catch() 一个地方搞定全链错误，代码简洁十倍。" expected="传入空字符串时，.catch() 捕获到 Error(\"搜索关键词不能为空\")，而不是程序崩溃。"}
-在 .then() 后面加 .catch(err => console.log(err))，然后分别测试有效关键词和空字符串
+::::step{purpose=".catch() 是 Promise 错误处理的标准方式——网络请求可能失败，用 .catch() 在页面上显示错误信息，而不是让程序静默崩溃。用户能看到友好的错误提示。" expected="输入无效 ID（如 999），页面显示错误信息而不是空白。输入字母，同样显示错误提示，页面不会崩溃。"}
+添加 .catch() 错误处理，在页面上显示错误信息
+
+在按钮点击事件中的 Promise 链末尾添加 `.catch()`：
+```js
+.catch(err => {
+  showError('查询失败：' + err.message);
+});
+```
+
+分别测试：
+- 有效 ID（1）：用户卡片正常显示
+- 无效 ID（999）：页面显示错误提示
+- 空输入：API 返回 404，页面显示错误信息
 ::::
 
-::::step{purpose="Promise 链通过 return 传递数据——每个 .then() 返回一个新的 Promise，数据在链上流动。这就像多米诺骨牌：第一张牌推倒第二张，数据从一步传递到下一步，中间无需嵌套。" expected="控制台先输出第一次搜索\"春天\"的结果，再输出第二次搜索\"春天\"的结果，两次调用串行完成。"}
-链式调用：searchMusic("春天").then(...) 中 return searchMusic("春天")，然后在下一个 .then() 中打印第二次搜索结果
+::::step{purpose="Promise 链通过 return 传递数据——查询完一个用户后，自动再查第二个用户，两张卡片依次出现在页面上。这展示了 .then() 链式调用的威力：数据在链上流动，无需嵌套。" expected="点击查询后，页面依次出现两张用户卡片——第一张是用户 1 的信息，短暂加载后出现第二张用户 2 的信息。链式调用串行完成。"}
+链式调用：查询完一个用户后自动查询第二个用户
+
+修改按钮点击事件，在第一个 `.then()` 中 `return searchUser(另一个ID)`，第二个 `.then()` 中渲染第二张卡片：
+```js
+searchUser(userId)
+  .then(user => {
+    hideLoading();
+    resultsEl.appendChild(renderCard(user));
+    return searchUser(Number(userId) + 1);  // 自动查询下一个用户
+  })
+  .then(user2 => {
+    resultsEl.appendChild(renderCard(user2));
+  })
+  .catch(err => showError('查询失败：' + err.message));
+```
+
+输入 1，点击查询——先出现用户 1 的卡片，再出现用户 2 的卡片。
 ::::
 
 :::
 
 :::hint{title="提示"}
 ```js
-searchMusic('春天')
-  .then(result => {
-    console.log('第一次搜索：', result)
-    return searchMusic('春天')  // 返回新的 Promise
+searchUser(1)
+  .then(user => {
+    renderCard(user);           // 渲染第一个用户
+    return searchUser(2);       // 返回新的 Promise
   })
-  .then(result => console.log('第二次搜索：', result))
-  .catch(err => console.log('搜索失败：', err))
+  .then(user2 => renderCard(user2))  // 渲染第二个用户
+  .catch(err => showError('查询失败：' + err.message))
 ```
 :::
 

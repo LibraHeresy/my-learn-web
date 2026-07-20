@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>循环 — 动态列表生成</title>
+  <title>闭包 — 计数器</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>商品列表</h1>
-  <p class="desc">通过循环将数组数据动态渲染为页面元素</p>
+  <h1>计数器工厂</h1>
+  <p class="desc">每个计数器通过闭包维护独立的私有计数</p>
 
-  <div id="list-container">
-    <!-- 列表项会动态插入到这里 -->
+  <div id="counter-container">
+    <!-- 计数器会动态插入到这里 -->
   </div>
 
   <div class="toolbar">
-    <button id="generate-btn">生成列表</button>
+    <button id="add-counter-btn">+ 创建新计数器</button>
   </div>
 
   <script src="script.js"></script>

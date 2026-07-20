@@ -1,7 +1,15 @@
-# async/await — 让异步代码"看起来同步"
+# {{term:async/await}} — 让{{term:异步代码}}"看起来同步"
 
 :::analogy
 async/await 让异步代码读起来像同步代码——就像你把"等外卖送到"写成了"先点餐、等送来、然后吃"，一步接一步，逻辑清晰，但实际等待并不阻塞其他事。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **Promise**：表示一个异步操作的结果——可能成功也可能失败
+- **.then()**：Promise 的方法，注册异步操作成功后要执行的回调
+- **函数**：一段可以重复调用的代码块，接收输入、执行逻辑、返回结果
 :::
 
 :::explain{title="async/await 是什么？"}
@@ -56,7 +64,7 @@ Promise.all() 就像同时往两台打印机发送文件——两台同时开工
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="async/await 让异步代码读起来像同步代码——从上到下、从左到右。await 会暂停当前函数的执行等待 Promise 完成，但不阻塞主线程。就像你在等快递送到——你在等，但不是只能干等，而是准备好了随时接上。" expected="concert 变量得到 { id: \"c001\", title: \"维也纳新年活动\", place: \"中心礼堂\" } 对象。"}
+::::step{purpose="async/await 让异步代码读起来像{{term:同步代码}}——从上到下、从左到右。await 会暂停当前函数的执行等待 {{term:Promise}} 完成，但不阻塞主线程。就像你在等快递送到——你在等，但不是只能干等，而是准备好了随时接上。" expected="concert 变量得到 { id: \"c001\", title: \"维也纳新年活动\", place: \"中心礼堂\" } 对象。"}
 用 async function 声明 loadConcert，内部用 const concert = await fetchConcert() 获取活动信息
 ::::
 
@@ -64,7 +72,7 @@ Promise.all() 就像同时往两台打印机发送文件——两台同时开工
 用 const program = await fetchProgram(concert.id) 获取项目单
 ::::
 
-::::step{purpose="async/await 让 try/catch 回归——不需要 .catch() 了。try 块里写正常流程，catch 块里处理异常，和同步代码的错误处理方式完全一致。之前学的错误处理知识在此无缝衔接。" expected="loadConcert() 调用后返回完整的活动+项目信息对象，或出错时返回 null，程序不会崩溃。"}
+::::step{purpose="async/await 让 {{term:try/catch}} 回归——不需要 .catch() 了。try 块里写正常流程，catch 块里处理异常，和同步代码的错误处理方式完全一致。之前学的错误处理知识在此无缝衔接。" expected="loadConcert() 调用后返回完整的活动+项目信息对象，或出错时返回 null，程序不会崩溃。"}
 用 try/catch 包裹 await 调用，出错时返回 null；成功时 return { concert, program }
 ::::
 

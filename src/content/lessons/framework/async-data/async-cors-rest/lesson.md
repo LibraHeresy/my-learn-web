@@ -1,7 +1,15 @@
-# CORS 与 REST — 理解浏览器和服务器如何对话
+# {{term:CORS}} 与 REST — 理解浏览器和服务器如何对话
 
 :::analogy
 CORS 就像门禁系统——不是你认识的人不让进。浏览器会用"预检"问服务器"我可以进去吗？"，服务器回答"可以"之后，真正的请求才会发出去。REST 则是双方约定好的"对话格式"——用 URL 指代资源，用 HTTP 方法表达意图。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **fetch()**：浏览器向服务器发送 HTTP 请求的函数
+- **HTTP 方法**：请求的操作类型，如 GET（获取）、POST（提交）、PUT（更新）、DELETE（删除）
+- **API**：应用程序接口，让不同软件之间进行数据交换的约定
 :::
 
 :::explain{title="这一节你会学到什么"}
@@ -230,7 +238,7 @@ fetch(corsProxy + targetUrl)
 
 ---
 
-## Part 2: REST API 概念
+## Part 2: {{term:REST API}} 概念
 
 :::explain{title="REST 是什么——约定，不是技术"}
 **REST（Representational State Transfer）** 是一种 API 设计风格，不是一门技术或协议。它是一套"大家约定俗成"的设计规范，让 API 使用者一看 URL 就知道怎么用。

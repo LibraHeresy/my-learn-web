@@ -54,6 +54,7 @@ export type TableNode = {
 
 export type BlockType =
   | 'block:analogy'
+  | 'block:prerequisite'
   | 'block:explain'
   | 'block:example'
   | 'block:task'
@@ -81,6 +82,14 @@ export type TaskStep = {
 export type AnalogyBlockNode = {
   type: 'block:analogy'
   name: 'analogy'
+  content: string
+  attrs?: BlockAttrs
+  steps?: never
+}
+
+export type PrerequisiteBlockNode = {
+  type: 'block:prerequisite'
+  name: 'prerequisite'
   content: string
   attrs?: BlockAttrs
   steps?: never
@@ -142,6 +151,7 @@ export type RecapBlockNode = {
  */
 export type BlockNode =
   | AnalogyBlockNode
+  | PrerequisiteBlockNode
   | ExplainBlockNode
   | ExampleBlockNode
   | TaskBlockNode

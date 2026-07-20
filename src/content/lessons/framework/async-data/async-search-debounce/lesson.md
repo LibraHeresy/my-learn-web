@@ -1,7 +1,15 @@
-# 防抖与搜索 — 别让服务器累坏了
+# {{term:防抖}}与搜索 — 别让服务器累坏了
 
 :::analogy
 防抖（debounce）就像电梯门——有人进来就重新计时，等没人进出了才关门。用户打字搜索时也一样，不要每敲一个字母就发一次请求，等用户停下来再发。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **fetch()**：浏览器向服务器发送 HTTP 请求的函数
+- **setTimeout**：JavaScript 内置的定时器函数，延迟指定毫秒后执行回调
+- **clearTimeout**：取消由 setTimeout 设置的定时器
 :::
 
 :::explain{title="为什么需要防抖？"}
@@ -69,7 +77,7 @@ function debounce(fn, delay) {
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="防抖利用闭包（Closure）让内层函数记住并访问外层的 timer 变量。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。" expected="debounce 返回一个新函数，这个函数在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。"}
+::::step{purpose="防抖利用{{term:闭包}}（Closure）让内层函数记住并访问外层的 timer 变量。每次调用时先清除上次的定时器，再启动新的——就像有人在电梯关门键上不停按，每次按都重新计时，直到没人按了才真正关门。" expected="debounce 返回一个新函数，这个函数在连续被调用时，只有最后一次调用（经过 delay 毫秒后）会触发 fn。"}
 在 debounce 内部声明 let timer = null（闭包变量），返回的函数中先 clearTimeout(timer)，再 timer = setTimeout(() => fn(...args), delay)
 ::::
 

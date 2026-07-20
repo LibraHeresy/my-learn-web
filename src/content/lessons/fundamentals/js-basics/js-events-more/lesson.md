@@ -4,6 +4,15 @@
 不只点击是事件——按下键盘、移动鼠标、滚动页面、输入文字，都是事件。就像你的手机能感应触摸、滑动、长按，网页也能感知用户的各种操作。
 :::
 
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **事件**：用 `addEventListener` 监听用户操作（如 click）
+- **函数**：事件触发时执行的代码逻辑
+- **DOM**：用 `querySelector` 找到页面元素并操作
+:::
+
 :::explain{title="不只是 click — 认识更多事件类型"}
 除了 click 点击事件外，还有很多常用事件类型：input（输入框内容变化）、keydown（键盘按下）、mouseenter（鼠标移入）、mouseleave（鼠标移出）、submit（表单提交）。addEventListener 的第一个参数是事件类型，除了 `"click"`，还有很多常用事件：
 - `"input"` — 输入框内容**每次变化**都触发

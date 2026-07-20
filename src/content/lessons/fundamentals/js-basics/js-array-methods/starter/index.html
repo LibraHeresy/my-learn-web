@@ -1,15 +1,42 @@
-<h1>数组方法实验室</h1>
-<div class="panel">
-  <div class="section">
-    <h2>原始列表</h2>
-    <p id="original"></p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组方法进阶</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>数组方法实验室</h1>
+  <p class="desc">对比原始数据与筛选/转换后的结果</p>
+
+  <div class="columns">
+    <div class="column">
+      <h2>全部数据</h2>
+      <div id="all-data" class="data-list">
+        <!-- 全部数据渲染到这里 -->
+      </div>
+    </div>
+    <div class="column">
+      <h2>筛选结果</h2>
+      <div id="filtered-data" class="data-list">
+        <!-- 筛选结果渲染到这里 -->
+      </div>
+    </div>
   </div>
-  <div class="section result">
-    <h2>处理结果</h2>
-    <p id="output"></p>
+
+  <div class="filters">
+    <span class="filter-label">快速筛选：</span>
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="electronics">电子产品</button>
+    <button class="filter-btn" data-filter="food">食品</button>
+    <button class="filter-btn" data-filter="clothing">服装</button>
   </div>
-</div>
-<div class="controls">
-  <input type="text" id="filterInput" placeholder="输入字母筛选...">
-  <button id="resetBtn">重置</button>
-</div>
+
+  <div class="search-row">
+    <input type="text" id="search-input" placeholder="输入关键词搜索...">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

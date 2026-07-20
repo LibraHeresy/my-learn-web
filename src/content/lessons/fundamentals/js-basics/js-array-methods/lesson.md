@@ -4,6 +4,15 @@
 .map() 就像给全班同学每人加一分——每个人都变了，但顺序不变；.filter() 就像从一堆简历里挑出符合条件的——不符合的筛掉，符合的留下。
 :::
 
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **数组**：创建数组、访问元素、获取长度
+- **循环**：用 `for` 遍历数组中的每个元素
+- **函数**：定义和调用函数，理解回调函数的概念
+:::
+
 :::explain{title=".map() — 把每个元素\"转换\"成新值"}
 数组方法让你像整理设计图一样操作数据——map 对每项做同样处理返回新数组，filter 筛选符合条件的项，reduce 将所有项累积为一个值。.map() 遍历数组中的每一项执行函数后**返回新数组**，原数组不变：
 ```js
@@ -65,20 +74,68 @@ document.querySelector("#output").innerHTML =
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="让你理解 `.filter()` 的灵活性——筛选条件完全由你定义，任何返回 true/false 的判断都可以作为过滤规则。就像HR可以根据「学历」「工作经验」「技能」任意筛选简历。" expected="处理结果区域只显示名字长度 6 个及以上的设计师（如 Beethoven、Debussy），短名字被过滤掉了。修改一个条件，输出结果完全不同。"}
-修改 `.filter()` 的筛选条件，把「筛选含 a 字母的」改成「只显示名字长度 >= 6 的设计师」。提示：用 `name.length >= 6` 替换原来的条件
+::::step{purpose="`.filter()` 的灵活性——筛选条件完全由你定义，任何返回 true/false 的判断都可以作为过滤规则。左侧全部数据不变，右侧筛选结果实时响应你选择的条件。就像在电商网站点击分类筛选商品。" expected="右侧「筛选结果」列只显示对应分类的商品。点击「电子产品」只看到笔记本、音箱、键盘；点击「食品」只看到面包、牛奶、咖啡。左侧全部数据始终不变。"}
+补全 `applyFilter()` 函数，实现分类筛选功能
+
+打开 `script.js`，在 `applyFilter(category)` 函数中完成筛选逻辑：
+```js
+function applyFilter(category) {
+  let filtered;
+  if (category === 'all') {
+    filtered = products;                         // 显示全部
+  } else {
+    filtered = products.filter(function(item) {  // 按分类筛选
+      return item.category === category;
+    });
+  }
+  renderProducts(filtered, '#filtered-data');
+}
+```
+完成后点击分类按钮（电子产品/食品/服装），观察右侧「筛选结果」列的变化。
 ::::
 
-::::step{purpose="`.map()` 对数组中每项做「同一种加工」——就像给清单每一项加上相同的勾选框。它是数据转换的核心工具，实际开发中 map 和 filter 经常搭配使用。" expected="输出区域每个名字前都加上了「设计师：」前缀，就像给每张卡片统一盖了一个印章。原数组仍然没变——只是生成了新的加工版本。"}
-用 `.map()` 给每个名字加上「设计师：」前缀，比如 "Bach" 变成 "设计师：Bach"。先做完 map 再做 join 拼接显示
+::::step{purpose="`.map()` 对数组中每项做「同一种加工」——比如把所有价格翻倍显示。原数组不变，只是生成了新的加工版本。了解 map 后你能对数据做任意转换再渲染。" expected="右侧显示的商品列表中，每个商品名称前都加上了「[热销]」前缀，价格也变成了原来的 2 倍——但左侧原始数据完全没变。"}
+用 `.map()` 对筛选结果做数据转换后渲染
+
+在 `applyFilter()` 中，筛选之后用 `.map()` 对数据做加工，例如把所有商品名加上前缀、价格翻倍：
+```js
+filtered = products
+  .filter(item => item.category === category)
+  .map(item => ({
+    ...item,
+    name: '[热销] ' + item.name,
+    price: item.price * 2
+  }));
+```
+比较左右两列：左侧原数据不变，右侧是加工后的版本。
 ::::
 
-::::step{purpose="链式调用是 JavaScript 最优雅的编程风格之一——就像流水线上的「传送带」，一个工序紧接下一个，形成流畅的数据处理流水线。不产生中间变量，代码更简洁清晰。" expected="一行代码链完成了筛选和转换两个操作，输出效果和分步写完全一样。你体验到了「流水线式」数据处理的优雅。"}
-用链式调用把 `.filter()` 和 `.map()` 串联起来，不用中间变量一步完成「筛选 + 转换」。直接在筛选结果后面 `.map()`
+::::step{purpose="链式调用是 JavaScript 最优雅的编程风格之一——就像流水线上的「传送带」，一个工序紧接下一个，形成流畅的数据处理流水线。不产生中间变量，代码更简洁清晰。" expected="右侧只显示价格 >= 100 且分类为 electronics 的商品。一个链式调用同时完成了筛选 + 二次筛选，效果和分步写完全一样，但代码更简洁。"}
+用链式调用组合多个 filter 和 map
+
+在 `applyFilter()` 中把 `.filter()` 和 `.map()` 串联起来，例如先按分类筛选，再筛掉低价商品：
+```js
+filtered = products
+  .filter(item => item.category === category)
+  .filter(item => item.price >= 100)
+  .map(item => ({ ...item, name: '【精选】' + item.name }));
+```
 ::::
 
-::::step{purpose="综合运用 `.filter()` + 事件监听 + DOM 更新——这是一套完整的「搜索过滤」交互模式。理解了这套模式，你就掌握了电商搜索、通讯录查找等常见功能的底层原理。" expected="输入不同字母，结果实时变化；清空输入框显示全部。数据过滤响应用户操作，实现了真正的交互式数据探索体验。"}
-挑战：在输入框中输入字母，实现实时筛选效果。输入「a」，只显示名字中含 a 的设计师；输入「ch」，只显示含 ch 的。输入框清空时显示全部
+::::step{purpose="综合运用 `.filter()` + 事件监听 + DOM 渲染——这是一套完整的「搜索过滤」交互模式。输入文字，结果实时变化，无需点击任何按钮。理解了这套模式，你就掌握了电商搜索、通讯录查找等常见功能的底层原理。" expected="在搜索框输入关键词，右侧筛选结果实时变化。输入「键盘」，右侧只显示「机械键盘」一项；清空输入框后恢复按分类按钮的筛选结果。"}
+挑战：补全搜索框输入事件，实现实时关键词搜索
+
+在 `script.js` 的搜索框 `input` 事件中，用 `products.filter()` 筛选名称包含输入关键词的商品：
+```js
+document.querySelector('#search-input').addEventListener('input', function () {
+  const keyword = this.value.trim().toLowerCase();
+  const filtered = products.filter(item =>
+    item.name.toLowerCase().includes(keyword)
+  );
+  renderProducts(filtered, '#filtered-data');
+});
+```
+输入不同关键词，观察右侧筛选结果实时变化。清空搜索框则恢复显示全部。
 ::::
 
 :::

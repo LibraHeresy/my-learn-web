@@ -1,7 +1,15 @@
-# 闭包 — 函数"记住"了它的出生地
+# {{term:闭包}} — 函数"记住"了它的出生地
 
 :::analogy
 闭包就像一个孩子记得他家的地址——即使搬到了另一个城市，他仍然知道老房子在哪。函数被创建时，会"记住"它所在作用域的所有变量，即使离开了那个作用域，它仍然能访问那些变量。
+:::
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **作用域**：变量在哪个花括号 {} 范围内有效
+- **函数**：一段可以重复调用的代码块，有输入（参数）和输出（返回值）
+- **回调函数**：作为参数传给另一个函数、在某个操作完成后被调用的函数
 :::
 
 :::explain{title="从一个神奇的现象开始"}
@@ -142,33 +150,34 @@ outer();
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="createCounter 是理解闭包的最小示例——一个外部函数返回内部函数，内部函数'记住'了外部函数的 count 变量。每次调用返回的函数，都是在对同一个 count 做加法。" expected="三次调用 counter() 分别输出 1、2、3，第二个新的计数器从 1 开始，独立计数。"}
-实现 createCounter 计数器工厂函数
+::::step{purpose="createCounter 是理解闭包的最小示例——在函数内部用 let 声明私有变量 count，返回的内部函数'记住'了这个 count。每次点击「计数+1」按钮，页面上的数字都会增加，因为闭包让你始终操作同一个私有变量。" expected="点击「计数+1」按钮，计数器卡片上的数字从 0 开始依次递增。页面默认已有一个计数器，验证它能正常计数。"}
+实现 `createCounter()` 函数，让页面上的计数器可以点击计数
+
+打开 `script.js`，在 `createCounter()` 函数体内完成实现：
+1. 用 `let count = 0` 声明私有计数变量
+2. `return function() { count++; return count; }` 返回内部函数
+
+完成后刷新页面，点击计数器卡片上的「计数+1」按钮，观察数字是否从 0 开始递增。
 
 ```js
 function createCounter() {
-  // 在这里声明 let count = 0
-  // 返回一个函数，让 count++ 并返回
+  let count = 0;            // 私有变量，外部无法访问
+  return function() {
+    count++;                // 闭包"记住"了 count
+    return count;
+  };
 }
-const counter = createCounter();
-console.log(counter()); // 应该输出 1
-console.log(counter()); // 应该输出 2
 ```
 ::::
 
-::::step{purpose="这个例子展示了闭包最实际的价值——封装私有状态。外部代码无法直接修改 tasks 数组，只能通过暴露的三个方法来操作，保护了数据完整性。" expected="addTask 能添加任务，getTasks 能获取所有任务，外部无法直接访问内部 tasks 数组。"}
-创建任务管理器——用闭包封装私有数据
+::::step{purpose="每次调用 createCounter() 都会创建一个全新的闭包{{term:作用域}}——就像每次都生成了一个独立的'小房间'。点击「创建新计数器」按钮会新增卡片，两张卡片的计数互不影响，这正是闭包的核心价值。" expected="两个计数器各自独立计数——卡片 A 点到 5 后，卡片 B 仍然从 0 开始计数，互不干扰。"}
+创建多个独立的计数器，验证闭包的作用域隔离
 
-```js
-function createTaskManager() {
-  const tasks = [];
-  // 返回一个对象，包含 addTask、completeTask、getTasks 三个方法
-}
-const manager = createTaskManager();
-manager.addTask('完成作业');
-manager.addTask('买菜');
-console.log(manager.getTasks());
-```
+点击页面底部的「+ 创建新计数器」按钮，生成全新的计数器卡片。分别点击两个计数器的按钮，你会发现：
+- 每个计数器维护自己独立的数字
+- 计数器 A 点到 10，完全不影响计数器 B
+
+这就是闭包的核心价值：**每次调用 `createCounter()` 都创建一个独立的作用域**。
 ::::
 
 :::

@@ -4,6 +4,15 @@
 ES6 就像手机系统大更新——还是那个操作系统，但多了很多新功能：箭头函数、模板字符串、解构赋值。用更少的代码做同样的事。
 :::
 
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **变量**：用来存储数据的容器，用 `let` 或 `const` 声明
+- **函数**：一段可以重复调用的代码块，有输入（参数）和输出（返回值）
+- **数组**：一组有序数据的集合，用 `[]` 表示，每个元素有索引
+- **对象**：键值对的集合，用 `{}` 表示，用来组织相关数据
+:::
+
 :::explain{title="为什么需要新语法？"}
 在 JS 基础篇中，你学会了用 `var` 声明变量、用 `function` 定义函数。但 JavaScript 一直在进化——2015 年发布的 ES6 是一次"革命性升级"。
 ES6 引入了：
@@ -121,15 +130,15 @@ const updated = { ...piece, period: '类型C' }
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="解构赋值让你一行代码取出多个属性，避免重复写 instrument.name、instrument.family。就像从文件柜里一次抽出三份文件，而不是一份一份拿——整齐又高效，也让代码意图更清晰。" expected="控制台输出 name、family、range 三个变量的正确值（工具A、电子类、100-240V）。"}
+::::step{purpose="{{term:解构赋值}}让你一行代码取出多个属性，避免重复写 instrument.name、instrument.family。就像从文件柜里一次抽出三份文件，而不是一份一份拿——整齐又高效，也让代码意图更清晰。" expected="控制台输出 name、family、range 三个变量的正确值（工具A、电子类、100-240V）。"}
 用解构赋值 const { name, family, range } = instrument 从对象中取出三个属性
 ::::
 
-::::step{purpose="箭头函数省略了 function 关键字，代码更短；模板字符串使用反引号和 ${} 插值，告别了繁琐的字符串拼接。这是现代 JavaScript 最常用的两种语法，几乎每一个项目中都会大量使用。" expected="describe(instrument) 返回\"工具A 是电子类，规格 100-240V\"，输出与原始 function 版本一致。"}
+::::step{purpose="{{term:箭头函数}}省略了 function 关键字，代码更短；模板字符串使用反引号和 ${} 插值，告别了繁琐的字符串拼接。这是现代 JavaScript 最常用的两种语法，几乎每一个项目中都会大量使用。" expected="describe(instrument) 返回\"工具A 是电子类，规格 100-240V\"，输出与原始 function 版本一致。"}
 用箭头函数重写 describe 函数，并用模板字符串（反引号）返回格式化的描述文字
 ::::
 
-::::step{purpose="展开运算符创建新对象而不修改原对象——这是函数式编程的重要理念：不改变原始数据。就像用一份设计图复印本做标注，原件保持不变，随时可以回到最初版本。" expected="新对象包含原 instrument 的所有属性（name, family, range）加上 players 属性，而原 instrument 对象保持不变。"}
+::::step{purpose="{{term:展开运算符}}创建新对象而不修改原对象——这是函数式编程的重要理念：不改变原始数据。就像用一份设计图复印本做标注，原件保持不变，随时可以回到最初版本。" expected="新对象包含原 instrument 的所有属性（name, family, range）加上 players 属性，而原 instrument 对象保持不变。"}
 用展开运算符 { ...instrument, players: "40人" } 给 instrument 对象添加新属性
 ::::
 

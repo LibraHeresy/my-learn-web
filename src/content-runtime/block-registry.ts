@@ -7,10 +7,12 @@ import AnalogyBlock from './renderers/AnalogyBlock.vue'
 import TaskBlock from './renderers/TaskBlock.vue'
 import HintBlock from './renderers/HintBlock.vue'
 import RecapBlock from './renderers/RecapBlock.vue'
+import PrerequisiteBlock from './renderers/PrerequisiteBlock.vue'
 import UnsupportedBlock from './renderers/UnsupportedBlock.vue'
 
 const blockRegistry: Partial<Record<BlockName, Component>> = {
   analogy: AnalogyBlock,
+  prerequisite: PrerequisiteBlock,
   explain: ExplainBlock,
   example: ExampleBlock,
   task: TaskBlock,

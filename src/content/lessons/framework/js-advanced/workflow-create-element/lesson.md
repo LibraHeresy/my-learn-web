@@ -4,6 +4,14 @@
 用 innerHTML 像复印一页文档——快但粗糙，改不了细节。createElement+appendChild 像用打字机一个字一个字敲——慢但精准，每个字都能单独修改和删除。
 :::
 
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **DOM基础**：浏览器把网页解析成一棵"节点树"，你可以用 JS 操作它
+- **函数**：一段可以重复调用的代码块，有输入（参数）和输出（返回值）
+- **innerHTML**：元素的一个属性，能直接读写标签内的 HTML 内容
+:::
+
 :::explain{title="innerHTML vs createElement — 两种渲染方式对比"}
 回顾第 4 章，你已经学会了 `createElement` + `appendChild` 来动态创建元素。现在我们来深入对比这两种方式，理解什么时候该用哪个：
 | 特性 | innerHTML | createElement |

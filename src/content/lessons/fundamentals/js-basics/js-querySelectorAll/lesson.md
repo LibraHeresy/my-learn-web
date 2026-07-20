@@ -4,6 +4,15 @@
 querySelector 像从班里点名一个人，querySelectorAll 像对全班说"所有第一排的同学站起来"——一条指令，同时操作一组元素。
 :::
 
+
+:::prerequisite
+**本节你需要知道这些词：**
+
+- **DOM 基础**：用 `querySelector` 选取单个元素
+- **循环**：用 `for` 遍历多个元素
+- **数组**：理解数组和类数组的概念
+:::
+
 :::explain{title="选中一组元素"}
 querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像老师对全班说「所有人翻开课本第10页」——一条指令，全班同时行动。
 ```js
