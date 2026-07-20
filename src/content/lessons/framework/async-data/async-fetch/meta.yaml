@@ -4,6 +4,5 @@ track: framework
 chapter: async-data
 order: 4
 mode: sandbox
-musicAnalogy: "至此你的音乐都在自己的琴房里。现在，打开窗户——听听外面的音乐，或者把你的琴声传出去。**fetch()** 就是这扇窗户：让 JavaScript 能和互联网上的服务器\"对话\"。"
-listenTo: "贝多芬《第五交响曲》第一乐章 — 那著名的\"命运敲门声\"，短短四个音就传递了强大的信息。fetch 请求也如此：一个简单的 GET 请求，就能带回丰富的数据。"
+analogy: fetch() 就像浏览器伸出去的一只手——向互联网上的服务器要数据。你发一个请求（"给我这个API的数据"），服务器返回结果，你拿着数据更新页面。
 estimatedMinutes: 0

@@ -9,8 +9,7 @@ export type ContentMeta = {
   chapter: string
   order: number
   mode: LessonMode
-  musicAnalogy: string
-  listenTo?: string
+  analogy: string
 }
 
 export type HeadingNode = {
@@ -54,12 +53,12 @@ export type TableNode = {
 }
 
 export type BlockType =
-  | 'block:music-analogy'
+  | 'block:analogy'
   | 'block:explain'
   | 'block:example'
   | 'block:task'
   | 'block:hint'
-  | 'block:listen-to'
+  | 'block:listen-to' // 已废弃，仅用于兼容旧课程内容
   | 'block:recap'
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
@@ -79,9 +78,9 @@ export type TaskStep = {
 
 // ---- 各块专属类型（判别联合成员）---- //
 
-export type MusicAnalogyBlockNode = {
-  type: 'block:music-analogy'
-  name: 'music-analogy'
+export type AnalogyBlockNode = {
+  type: 'block:analogy'
+  name: 'analogy'
   content: string
   attrs?: BlockAttrs
   steps?: never
@@ -142,12 +141,12 @@ export type RecapBlockNode = {
  * `if (node.type === 'block:task') { node.steps // TaskStep[] }`
  */
 export type BlockNode =
-  | MusicAnalogyBlockNode
+  | AnalogyBlockNode
   | ExplainBlockNode
   | ExampleBlockNode
   | TaskBlockNode
   | HintBlockNode
-  | ListenToBlockNode
+  | ListenToBlockNode // 已废弃，仅用于兼容旧课程
   | RecapBlockNode
 
 export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | ListNode | TableNode | BlockNode
@@ -167,9 +166,8 @@ export type CompiledProjectMeta = {
   track: string
   order: number
   mode: LessonMode
-  musicAnalogy: string
-  listenTo?: string
-  musicAnalogyBody: ContentBodyNode[]
+  analogy: string
+  analogyBody: ContentBodyNode[]
 }
 
 export type CompiledProjectStep = {
@@ -199,7 +197,6 @@ export type HomeProjectCardItem = {
   title: string
   subtitle: string
   icon: string
-  musicAnalogyBody: ContentBodyNode[]
-  listenTo?: string
+  analogyBody: ContentBodyNode[]
   stepCount: number
 }

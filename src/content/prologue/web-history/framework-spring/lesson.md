@@ -1,7 +1,7 @@
 # 爆发——JavaScript 成为平台
 
-:::music-analogy
-「V8 引擎如同管弦乐团的指挥——让每一个音符都在正确的时间响起。」
+:::analogy
+V8 引擎让 JavaScript 快了数十倍——就像给自行车装上了电动机，同样的动作，完全不同的速度。
 :::
 
 :::explain{title="一、Chrome 与 V8：Google 为什么要做浏览器？"}
@@ -51,7 +51,4 @@ Babel + webpack + npm 这三样东西，构成了前端工程化的基础设施�
 Chrome 的 V8 引擎让 JavaScript 跑得飞快，Node.js 让它跑出了浏览器——JavaScript 从此能写后端了。框架（React、Vue、Angular）的觉醒让前端从"面条代码"变成了工程化的专业领域。你不是在学一门"玩具语言"，而是在学世界上最活跃的编程生态。
 :::
 
-:::listen-to
-贝多芬《第五交响曲》— 从一个动机发展出整个交响世界，就像 JavaScript 从浏览器脚本变成了全平台语言。
-:::
 

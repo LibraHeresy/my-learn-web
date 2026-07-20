@@ -1,12 +1,12 @@
 # localStorage — 给数据一个"永久的家"
 
-:::music-analogy
-每次排练结束后，乐谱不会消失——它被归档保存，下次排练时翻出来继续用。**localStorage** 就是浏览器的"归档柜"：你把数据存进去，刷新页面、关闭浏览器、甚至重启电脑后，数据还在那里等你。
+:::analogy
+localStorage 就像浏览器的抽屉——你把数据存进去，关掉网页甚至重启电脑后，数据还在里面等你。适合保存用户设置、草稿、登录状态等。
 :::
 
 :::explain{title="为什么需要 localStorage？"}
 目前你写的所有页面都有一个共同的问题：**刷新页面后，所有数据都丢失了**。
-收藏的曲目？没了。输入的列表？清空了。计数器？归零了。
+收藏的项目？没了。输入的列表？清空了。计数器？归零了。
 这是因为 JavaScript 变量只存在于**当前页面会话**中。刷新页面等于重新开始——所有变量重新初始化。
 `localStorage` 解决的就是这个问题：它把数据存在浏览器里，和页面会话无关。
 ```js
@@ -26,14 +26,14 @@ localStorage 只能存储**字符串**。如果你要存数组或对象，需要
 ```js
 // 存对象/数组：先用 JSON.stringify 转成字符串
 let pieces = [
-  { name: "布兰登堡协奏曲", period: "巴洛克" },
-  { name: "夜曲 Op.9 No.2", period: "浪漫主义" }
+  { name: "项目A", period: "类型B" },
+  { name: "文档C", period: "类型A" }
 ];
 localStorage.setItem("myPieces", JSON.stringify(pieces));
 // 取对象/数组：先用 JSON.parse 转回对象
 let saved = JSON.parse(localStorage.getItem("myPieces"));
 // saved 现在是真正的数组，可以正常使用！
-console.log(saved[0].name);  // "布兰登堡协奏曲"
+console.log(saved[0].name);  // "项目A"
 ```
 **常用模式：加载 + 保存**
 ```js
@@ -51,16 +51,16 @@ render(pieces);
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="localStorage 让页面数据跨越会话存活——就像把乐谱归档保存，下次排练翻出来就能继续。JSON.parse 把字符串还原为真正的数组对象，|| [] 提供了数据不存在时的安全默认值。" expected="首次打开页面显示默认的 2 首曲目，刷新后数据依然存在（目前还是默认数据，因为还没写保存逻辑）。"}
+::::step{purpose="localStorage 让页面数据跨越会话存活——就像把设计图归档保存，下次准备翻出来就能继续。JSON.parse 把字符串还原为真正的数组对象，|| [] 提供了数据不存在时的安全默认值。" expected="首次打开页面显示默认的 2 个项目，刷新后数据依然存在（目前还是默认数据，因为还没写保存逻辑）。"}
 页面启动时从 localStorage 加载数据：用 JSON.parse(localStorage.getItem("myPieces"))，如果为空则用默认数组
 ::::
 
-::::step{purpose="localStorage 只能存字符串，所以需要用 JSON.stringify 把对象\"打包\"成 JSON 格式。这就像把乐谱装进文件夹再放进档案柜——需要使用时再 JSON.parse 取出来拆包。" expected="saveData() 调用后，在浏览器 DevTools → Application → Local Storage 中能看到 myPieces 键和对应的 JSON 字符串。"}
+::::step{purpose="localStorage 只能存字符串，所以需要用 JSON.stringify 把对象\"打包\"成 JSON 格式。这就像把设计图装进文件夹再放进档案柜——需要使用时再 JSON.parse 取出来拆包。" expected="saveData() 调用后，在浏览器 DevTools → Application → Local Storage 中能看到 myPieces 键和对应的 JSON 字符串。"}
 写一个 saveData() 函数：用 JSON.stringify 把 pieces 数组转成字符串，存入 localStorage
 ::::
 
-::::step{purpose="关键是\"在数据变化的每个地方都调用 saveData()\"——添加后、删除后、清空后。漏掉任何一处，数据就会丢失。这就像每次排练修改乐谱后都要归档，不然下次来谱子还是旧的。" expected="添加几首曲目后刷新浏览器，数据原封不动地显示——你的页面第一次真正\"拥有了记忆\"。"}
-在每次添加和删除曲目后调用 saveData()，刷新页面验证数据不丢
+::::step{purpose="关键是\"在数据变化的每个地方都调用 saveData()\"——添加后、删除后、清空后。漏掉任何一处，数据就会丢失。这就像每次准备修改设计图后都要归档，不然下次来说明书还是旧的。" expected="添加几个项目后刷新浏览器，数据原封不动地显示——你的页面第一次真正\"拥有了记忆\"。"}
+在每次添加和删除项目后调用 saveData()，刷新页面验证数据不丢
 ::::
 
 :::
@@ -69,7 +69,4 @@ render(pieces);
 你学会了用 localStorage 让数据"活过"页面刷新——存进去的数据即使关闭浏览器再打开也还在。因为 localStorage 只能存字符串，存对象或数组时需要先用 JSON.stringify 转换，读出来时再用 JSON.parse 还原。
 :::
 
-:::listen-to
-舒伯特《冬之旅》— 这部声乐套曲讲述一个流浪者的旅程，每首歌都是旅途的一段记忆。localStorage 就像主人公的日记——旅程中的每一个足迹都被保存下来，刷新页面就像翻开新的一页，但记忆永远保留。
-:::
 

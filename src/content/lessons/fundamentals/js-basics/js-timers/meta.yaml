@@ -4,6 +4,5 @@ track: fundamentals
 chapter: js-basics
 order: 14
 mode: sandbox
-musicAnalogy: "`setInterval` 就像**节拍器**——设定每分钟 60 拍，它每拍准时触发一次回调函数。`setTimeout` 则像乐谱中的**延长音记号（fermata）**——等一段时间，然后继续演奏。两者结合，你就可以在页面上创造节奏和时序。"
-listenTo: 菲利普·格拉斯《音乐的十二个部分》— 极简主义音乐用重复的节奏型不断叠加，精确的时间间隔驱动着音乐的推进，就像 setInterval 驱动的自动动画。
+analogy: setInterval 就像厨房计时器——设定每3分钟响一次，准时触发。setTimeout 像泡面的倒计时——等3分钟，然后做一件事。两者结合，你就能在页面上创造节奏和时序。
 estimatedMinutes: 0

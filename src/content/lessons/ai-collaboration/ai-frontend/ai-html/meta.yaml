@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-frontend
 order: 1
 mode: local
-musicAnalogy: 「AI 能把音符写下来，但只有懂乐理的人才知道这段旋律该配什么和弦。」
+analogy: AI 能生成一堆标签，但只有懂 HTML 的你才知道哪里该用 nav、哪里该用 article。工具负责量，你负责质——这是你和 AI 的分工。
 estimatedMinutes: 0

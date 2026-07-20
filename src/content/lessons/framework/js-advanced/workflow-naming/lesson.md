@@ -1,14 +1,14 @@
-# 命名就像给音符标注指法 — 让代码自己说话
+# 命名就像给收纳盒贴标签 — 让代码自己说话
 
-:::music-analogy
-乐谱上标注的指法标记让演奏者一眼就知道用哪个手指。同样，**好的变量名和类名让阅读代码的人（包括一个月后的你自己）一眼就知道这段代码在做什么**。命名是程序员最被低估的技能——它不改变功能，但能让你写代码的速度快 10 倍。
+:::analogy
+好的变量名就像快递单上写"书"而不是"物品001"——让读代码的人（包括一个月后的你自己）一眼就知道这是什么。命名不改变功能，但能让你写代码快十倍。
 :::
 
 :::explain{title="好名字 vs 坏名字"}
 来看一组对比：
 **❌ 坏命名（你一个月后根本看不懂）：**
 ```js
-let a = ["巴赫", "莫扎特", "贝多芬"];
+let a = ["", "", "春天"];
 let b = document.querySelector("#c");
 let d = document.querySelector("#e");
 d.addEventListener("click", function() {
@@ -18,7 +18,7 @@ d.addEventListener("click", function() {
 ```
 **✅ 好命名（任何人都看得懂）：**
 ```js
-let composers = ["巴赫", "莫扎特", "贝多芬"];
+let composers = ["", "", "春天"];
 let displayEl = document.querySelector("#composerDisplay");
 let shuffleBtn = document.querySelector("#shuffleBtn");
 shuffleBtn.addEventListener("click", function() {
@@ -50,11 +50,11 @@ shuffleBtn.addEventListener("click", function() {
 把 DOM 元素变量重命名：b → nameDisplay、c → shuffleBtn、d → msgEl、e → addBtn
 ::::
 
-::::step{purpose="数据变量的命名直接反映其内容——composers 明确是作曲家数组，randomIndex 清楚表达它是随机索引。就像乐谱上的标注\"mp\"比\"中等偏弱\"更好——精确、简短、无歧义。" expected="a 变成 composers，f 变成 randomIndex，变量名准确地描述了它们存储的内容。"}
+::::step{purpose="数据变量的命名直接反映其内容——composers 明确是设计师数组，randomIndex 清楚表达它是随机索引。就像快递单上写\"书\"比\"物品001\"更好——精确、简短、无歧义。" expected="a 变成 composers，f 变成 randomIndex，变量名准确地描述了它们存储的内容。"}
 把数据变量重命名：a → composers、f → randomIndex
 ::::
 
-::::step{purpose="函数名应该用动词开头来描述它做什么。showRandom() 明确是\"随机显示\"，addComposer() 明确是\"添加作曲家\"。好的函数名就是最好的注释——你甚至不需要读函数体就知道它的职责。" expected="函数名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。"}
+::::step{purpose="函数名应该用动词开头来描述它做什么。showRandom() 明确是\"随机显示\"，addComposer() 明确是\"添加设计师\"。好的函数名就是最好的注释——你甚至不需要读函数体就知道它的职责。" expected="函数名从 x 和 y 变成 showRandom 和 addComposer，读代码时逻辑一目了然，功能完全不变。"}
 把函数重命名：x() → showRandom()、y() → addComposer()
 ::::
 
@@ -64,7 +64,4 @@ shuffleBtn.addEventListener("click", function() {
 你学会了好的命名规范——CSS 类名用 kebab-case（如 card-title），JS 变量用 camelCase（如 composerName），函数名用动词开头（如 playMusic）。好的命名让代码自己说话，不需要额外解释。
 :::
 
-:::listen-to
-肖邦《练习曲》Op.10 No.1 — 每一组琶音的指法都经过精心设计，让演奏如流水般自然。好的命名就像好的指法——"好的命名"让你读代码时如行云流水。
-:::
 

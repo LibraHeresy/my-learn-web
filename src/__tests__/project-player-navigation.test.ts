@@ -14,8 +14,8 @@ vi.mock('../content-loaders/projects', () => {
     track: 'fundamentals',
     order,
     mode: 'local' as const,
-    musicAnalogy: '',
-    musicAnalogyBody: emptyBody,
+    analogy: '',
+    analogyBody: emptyBody,
   })
 
   const items = [

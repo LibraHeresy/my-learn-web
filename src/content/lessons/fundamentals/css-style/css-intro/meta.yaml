@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 1
 mode: sandbox
-musicAnalogy: "如果说 HTML 是乐谱上的音符，CSS 就是**演奏法记号**。它告诉浏览器：这个音符应该用什么力度（颜色）、多大音量（字号）来演奏。"
-listenTo: 德彪西《版画集》— 印象派音乐用音符描绘光影色彩，就像 CSS 为网页赋予视觉风格。
+analogy: 如果 HTML 是毛坯房的结构，CSS 就是装修——刷什么颜色、用什么字体、间距多大。HTML 决定"有什么"，CSS 决定"长什么样"。
 estimatedMinutes: 0

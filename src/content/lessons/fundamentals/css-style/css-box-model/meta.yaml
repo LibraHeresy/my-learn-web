@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 4
 mode: sandbox
-musicAnalogy: "每个 HTML 元素都是一个\"盒子\"，就像**音乐厅的声学布局**：\\n- `content`（内容）— 演奏区，音乐家所在的地方\\n- `padding`（内边距）— 舞台到墙壁的距离\\n- `border`（边框）— 音乐厅的墙壁\\n- `margin`（外边距）— 音乐厅之间的间隔"
-listenTo: "马勒《第八交响曲》\"千人交响曲\"— 感受庞大的空间感和层次感，就像盒模型的层层嵌套。"
+analogy: 每个元素都是一个盒子，就像快递包裹——content 是商品，padding 是泡沫填充，border 是纸箱，margin 是包裹之间的间距。
 estimatedMinutes: 0

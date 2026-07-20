@@ -5,8 +5,7 @@ icon: 🔍
 track: projects
 order: 3
 mode: local
-musicAnalogy: 打开窗户，聆听世界的声音——你的应用第一次与互联网上的真实数据对话。就像从独奏练习室走到音乐图书馆，你可以搜索任何一位作曲家、任何一首曲子。
-listenTo: 雷斯庇基《罗马的松树》— 作曲家通过音乐描绘远方的风景，正如你通过 API 获取远方的数据。一个请求，带回整个世界的音乐。
+analogy: 打开窗户，聆听世界的声音——你的应用第一次与互联网上的真实数据对话。就像从独奏练习室走到音乐图书馆，你可以搜索任何一位作曲家、任何一首曲子。
 prerequisiteTrackIds:
   - fundamentals
   - framework

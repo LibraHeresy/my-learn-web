@@ -1,7 +1,7 @@
-# 事件循环 — JavaScript 的"指挥家"
+# 事件循环 — JavaScript 的"调度员"
 
-:::music-analogy
-交响乐团的指挥决定了哪个声部何时进入——小提琴先起，然后木管加入，最后铜管收尾。JavaScript 也有一个"指挥家"叫 Event Loop（事件循环），它决定了代码的执行顺序：谁先上场，谁等着，谁最后谢幕。
+:::analogy
+JavaScript 就像只有一个收银台的超市——一次只能结一个人。Event Loop 就是排队规则：当前的人结完，下一个才能上。异步任务就像"你先去拿东西，好了回来继续"。
 :::
 
 :::explain{title="这一章你会学什么"}
@@ -32,7 +32,7 @@
 :::
 
 :::explain{title="JavaScript 是\"单线程\"的"}
-JavaScript 一次只能做一件事（单线程），就像你一个人没法同时弹钢琴和拉小提琴。
+JavaScript 一次只能做一件事（单线程），就像你只有一双手，没法同时打字和端杯子——一次只能做一件事。
 但浏览器不是只有 JS 引擎——它还有 Web API（定时器、网络请求等）。JS 把耗时任务"外包"给 Web API，自己继续执行后面的代码。
 任务完成后，Web API 把回调函数放进**任务队列**，Event Loop 检查主线程空闲了，就把队列里的任务取出来执行。
 **直观流程：**
@@ -48,11 +48,11 @@ JavaScript 一次只能做一件事（单线程），就像你一个人没法同
 :::example{title="setTimeout 不是\"暂停\""}
 看这段代码的执行顺序：
 ```js
-console.log('① 开始演奏')
+console.log('① 开始执行')
 setTimeout(() => {
-  console.log('③ 定音鼓进入')
+  console.log('③ 通知到达')
 }, 1000)
-console.log('② 弦乐继续')
+console.log('② 主线程继续')
 ```
 输出顺序是：① → ② → ③
 即使 `setTimeout` 的延迟是 0，结果也是 ① → ② → ③：
@@ -61,7 +61,7 @@ console.log('① 开始')
 setTimeout(() => console.log('③ 异步回调'), 0)
 console.log('② 继续')
 ```
-因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像指挥不会在小提琴拉到一半时突然让定音鼓插入。
+因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像收银员不会在扫描到一半时突然去接待另一个人。
 :::
 
 :::example{title="生活中的类比"}
@@ -83,7 +83,7 @@ console.log('② 继续')
 运行代码，打开控制台观察实际输出，与你的预测对比
 ::::
 
-::::step{purpose="理解\"同步代码优先于异步回调\"这个规则，你就能预测所有 setTimeout/Promise/fetch 的执行顺序。就像理解\"指挥先给弦乐起拍\"——节奏规则一旦内化，看任何总谱都不会乱。" expected="你能用自己的话解释：即使 setTimeout(fn, 0)，fn 也要先进任务队列，等调用栈清空后 Event Loop 才会取它执行。"}
+::::step{purpose="理解\"同步代码优先于异步回调\"这个规则，你就能预测所有 setTimeout/Promise/fetch 的执行顺序。就像理解"先到先服务"——排队规则一旦内化，看任何流程都不会乱。" expected="你能用自己的话解释：即使 setTimeout(fn, 0)，fn 也要先进任务队列，等调用栈清空后 Event Loop 才会取它执行。"}
 思考：为什么 setTimeout(fn, 0) 的回调排在 console.log("B") 之后？如果你理解了这个，就掌握了 Event Loop 的核心规则
 ::::
 
@@ -97,7 +97,4 @@ console.log('② 继续')
 你知道了 JavaScript 是单线程的，但通过 Event Loop 调度异步任务。同步代码总是先执行，异步回调要排队等着——即使 setTimeout 延迟设为 0，它的回调也要等所有同步代码跑完才会执行。
 :::
 
-:::listen-to
-拉威尔《波莱罗》— 同一段旋律在不同乐器间依次传递，每种乐器依次"异步"进入，完美诠释了顺序与调度的美感。
-:::
 

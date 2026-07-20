@@ -4,6 +4,5 @@ track: fundamentals
 chapter: js-basics
 order: 1
 mode: sandbox
-musicAnalogy: "如果 HTML 是乐谱、CSS 是演奏法记号，那么 JavaScript 就是**指挥家**——它让静态的乐谱动起来，控制演奏的节奏、顺序和互动。"
-listenTo: 斯特拉文斯基《春之祭》— 充满原始的生命力和节奏感，每一个节拍都在变化，就像 JavaScript 为页面注入的动态活力。
+analogy: 如果 HTML 是房子的骨架、CSS 是装修，那么 JavaScript 就是水电开关——它让页面"活"起来，能点击、能互动、能根据用户的操作做出反应。
 estimatedMinutes: 0

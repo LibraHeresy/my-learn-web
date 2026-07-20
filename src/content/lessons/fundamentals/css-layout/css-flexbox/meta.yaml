@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-layout
 order: 1
 mode: sandbox
-musicAnalogy: "Flexbox 是 CSS 中的布局利器，就像**指挥安排乐队座位**——可以横向排（木管在前，铜管在后），也可以纵向排（第一小提琴在左，第二小提琴在右）。"
-listenTo: "布里顿《青少年管弦乐队指南》— 一段音乐展示了不同乐器组在舞台上的位置，完美诠释了\"布局\"的概念。"
+analogy: Flexbox 就像整理书架——书可以横着排、竖着排、自动换行、均匀分布。不管书多书少，书架总能摆得整整齐齐。
 estimatedMinutes: 0

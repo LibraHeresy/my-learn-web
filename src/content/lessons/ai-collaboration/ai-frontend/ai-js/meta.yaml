@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-frontend
 order: 3
 mode: local
-musicAnalogy: 「AI 能即兴一段 solo，但只有你才知道这段 solo 该在哪个和弦进行里出现。」
+analogy: AI 能写出一段能运行的代码，但只有你才知道这段逻辑该放在哪里、什么时候触发。逻辑设计——这是你的主场。
 estimatedMinutes: 0

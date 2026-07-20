@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-basics
 order: 4
 mode: local
-musicAnalogy: 「好的演奏不是第一遍就完美——是指挥说'这里弱一点、那里慢一点'，乐团长反复练习，直到找到最好的那个版本。」
+analogy: 第一版 Prompt 几乎从来不是最优解。就像点菜——第一次说"来碗面"，第二次说"少辣多醋"，第三次说"面硬一点"。每次迭代都让你的需求更精准。
 estimatedMinutes: 0

@@ -5,8 +5,7 @@ icon: 🎻
 track: projects
 order: 4
 mode: local
-musicAnalogy: 独奏者已经熟练了曲子——现在是时候加入乐团了。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。
-listenTo: 拉威尔《波莱罗舞曲》— 同一段旋律在不同乐器组之间传递、叠加、变奏。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。
+analogy: 独奏者已经熟练了曲子——现在是时候加入乐团了。Vue 的组件就像乐团中的不同声部，各司其职又和谐统一。
 prerequisiteTrackIds:
   - fundamentals
   - framework

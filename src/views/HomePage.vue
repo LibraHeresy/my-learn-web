@@ -31,8 +31,7 @@ const projectsForSection = computed<HomeProjectCardItem[]>(() =>
     title: p.meta.title,
     subtitle: p.meta.subtitle,
     icon: p.meta.icon,
-    musicAnalogyBody: p.meta.musicAnalogyBody,
-    listenTo: p.meta.listenTo,
+    analogyBody: p.meta.analogyBody,
     stepCount: p.stepCount,
   })),
 )

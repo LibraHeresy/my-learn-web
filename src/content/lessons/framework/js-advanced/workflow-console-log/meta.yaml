@@ -4,6 +4,5 @@ track: framework
 chapter: js-advanced
 order: 4
 mode: sandbox
-musicAnalogy: "排练时，指挥会让某个声部单独演奏，以便听清楚每个音符。`console.log()` 就是你的\"排练监听\"——它让你在任何时刻、查看任何变量的值。当你不确定代码在做什么时，用 `console.log()` 看个究竟。"
-listenTo: "贝多芬《第七交响曲》第二乐章 — 著名的\"小快板\"，从一个低沉的重复音型开始，逐层叠加声部。每次新乐器加入都清晰可辨——就像 console.log 把每个变量的值一层层打印出来。"
+analogy: console.log() 就像在流水线上装了透明观察窗——你可以在任何时刻、查看任何变量的当前值。不确定代码在做什么？打个 log 看一眼，而不是瞎猜。
 estimatedMinutes: 0

@@ -4,8 +4,7 @@ track: fundamentals
 chapter: chapter-id
 order: 1
 mode: sandbox
-musicAnalogy: 一句音乐类比
-listenTo: 推荐聆听（可选）
+analogy: 一句生活化类比，帮助理解这个概念
 tags:
   - tag1
 estimatedMinutes: 0

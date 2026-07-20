@@ -4,6 +4,5 @@ track: fundamentals
 chapter: js-basics
 order: 6
 mode: sandbox
-musicAnalogy: "乐器不只有\"敲击\"一个动作——钢琴有按键(click)、弦乐有揉弦(input)、管乐有换气(change)、定音鼓有滚奏(keydown)。`addEventListener` 可以监听用户的各种动作，就像指挥同时关注每个声部的进入。"
-listenTo: 拉威尔《波莱罗》— 同一旋律在不同乐器间传递（不同事件），小鼓从头到尾持续敲击（持续输入），长笛、单簧管、双簧管依次登场（依次触发），最终整个乐队一起爆发。
+analogy: 不只点击是事件——按下键盘、移动鼠标、滚动页面、输入文字，都是事件。就像你的手机能感应触摸、滑动、长按，网页也能感知用户的各种操作。
 estimatedMinutes: 0

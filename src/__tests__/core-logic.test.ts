@@ -62,8 +62,8 @@ describe('Progress Store', () => {
 describe('useLessonNavigation', () => {
   async function mountHarness(options: {
     lessonId: string
-    lesson: { id: string; meta: { title: string; track: string; chapter: string; order: number; mode: 'sandbox' | 'local'; musicAnalogy: string } }
-    all: Array<{ id: string; meta: { title: string; track: string; chapter: string; order: number; mode: 'sandbox' | 'local'; musicAnalogy: string } }>
+    lesson: { id: string; meta: { title: string; track: string; chapter: string; order: number; mode: 'sandbox' | 'local'; analogy: string } }
+    all: Array<{ id: string; meta: { title: string; track: string; chapter: string; order: number; mode: 'sandbox' | 'local'; analogy: string } }>
   }) {
     const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/lesson/:lessonId', name: 'lesson', component: { template: '<div />' } }] })
     router.push(`/lesson/${options.lessonId}`)
@@ -92,10 +92,10 @@ describe('useLessonNavigation', () => {
   it('普通课程：首课 prevDisabled=true，prevLabel=上一课；nextLabel=下一课', async () => {
     const { wrapper } = await mountHarness({
       lessonId: 'l1',
-      lesson: { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
+      lesson: { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', analogy: 'm' } },
       all: [
-        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
-        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', musicAnalogy: 'm' } },
+        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', analogy: 'm' } },
+        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', analogy: 'm' } },
       ],
     })
 
@@ -109,10 +109,10 @@ describe('useLessonNavigation', () => {
   it('普通课程：跨章时 nextLabel=下一章', async () => {
     const { wrapper } = await mountHarness({
       lessonId: 'l1',
-      lesson: { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
+      lesson: { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', analogy: 'm' } },
       all: [
-        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
-        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c2', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
+        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', analogy: 'm' } },
+        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c2', order: 1, mode: 'sandbox', analogy: 'm' } },
       ],
     })
 
@@ -123,10 +123,10 @@ describe('useLessonNavigation', () => {
   it('序言：不显示 prev/next 标题，centerLabel 为 “第 x/y 篇”', async () => {
     const { wrapper } = await mountHarness({
       lessonId: 'p1',
-      lesson: { id: 'p1', meta: { title: 'P1', track: 'prologue', chapter: 'c-any', order: 1, mode: 'local', musicAnalogy: 'm' } },
+      lesson: { id: 'p1', meta: { title: 'P1', track: 'prologue', chapter: 'c-any', order: 1, mode: 'local', analogy: 'm' } },
       all: [
-        { id: 'p1', meta: { title: 'P1', track: 'prologue', chapter: 'c-any', order: 1, mode: 'local', musicAnalogy: 'm' } },
-        { id: 'p2', meta: { title: 'P2', track: 'prologue', chapter: 'c-any', order: 2, mode: 'local', musicAnalogy: 'm' } },
+        { id: 'p1', meta: { title: 'P1', track: 'prologue', chapter: 'c-any', order: 1, mode: 'local', analogy: 'm' } },
+        { id: 'p2', meta: { title: 'P2', track: 'prologue', chapter: 'c-any', order: 2, mode: 'local', analogy: 'm' } },
       ],
     })
 
@@ -141,11 +141,11 @@ describe('useLessonNavigation', () => {
   it('goPrev/goNext：仅在存在上一课/下一课时触发 router.push', async () => {
     const { wrapper, router } = await mountHarness({
       lessonId: 'l2',
-      lesson: { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', musicAnalogy: 'm' } },
+      lesson: { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', analogy: 'm' } },
       all: [
-        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', musicAnalogy: 'm' } },
-        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', musicAnalogy: 'm' } },
-        { id: 'l3', meta: { title: 'T3', track: 'fundamentals', chapter: 'c1', order: 3, mode: 'sandbox', musicAnalogy: 'm' } },
+        { id: 'l1', meta: { title: 'T1', track: 'fundamentals', chapter: 'c1', order: 1, mode: 'sandbox', analogy: 'm' } },
+        { id: 'l2', meta: { title: 'T2', track: 'fundamentals', chapter: 'c1', order: 2, mode: 'sandbox', analogy: 'm' } },
+        { id: 'l3', meta: { title: 'T3', track: 'fundamentals', chapter: 'c1', order: 3, mode: 'sandbox', analogy: 'm' } },
       ],
     })
 

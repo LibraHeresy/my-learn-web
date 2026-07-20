@@ -53,7 +53,7 @@ describe('数据完整性', () => {
         expect(l.meta.track, `"${l.id}" meta.track 缺失`).toBeTruthy()
         expect(l.meta.chapter, `"${l.id}" meta.chapter 缺失`).toBeTruthy()
         expect(l.meta.mode, `"${l.id}" meta.mode 缺失`).toBeTruthy()
-        expect(l.meta.musicAnalogy, `"${l.id}" meta.musicAnalogy 缺失`).toBeTruthy()
+        expect(l.meta.analogy, `"${l.id}" meta.analogy 缺失`).toBeTruthy()
         const full = await getLesson(l.id)
         expect(full, `"${l.id}" 无法加载`).not.toBeNull()
         expect(full!.body.length, `"${l.id}" body 为空`).toBeGreaterThan(0)
@@ -113,7 +113,7 @@ describe('数据完整性', () => {
         const full = await getProject(p.id)
         expect(full, `project "${p.id}" 无法加载`).not.toBeNull()
         expect(full!.steps.length, `project "${p.id}" 没有步骤`).toBeGreaterThan(0)
-        expect(full!.meta.musicAnalogyBody?.length, `project "${p.id}" meta.musicAnalogyBody 缺失`).toBeGreaterThan(0)
+        expect(full!.meta.analogyBody?.length, `project "${p.id}" meta.analogyBody 缺失`).toBeGreaterThan(0)
       }
     })
 

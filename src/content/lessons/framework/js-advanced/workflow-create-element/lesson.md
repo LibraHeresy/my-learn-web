@@ -1,7 +1,7 @@
 # DOM 渲染进阶 — innerHTML 对比与 classList 操控
 
-:::music-analogy
-用 `innerHTML` 像"复印一整页乐谱"——一次性把全部内容塞进页面，方便但不够精细。`createElement` + `appendChild` 则像"一个音符一个音符地写"——更慢但更精准，你可以单独修改任何一个音符，给它加表情、转调、甚至随时拿掉。
+:::analogy
+用 innerHTML 像复印一页文档——快但粗糙，改不了细节。createElement+appendChild 像用打字机一个字一个字敲——慢但精准，每个字都能单独修改和删除。
 :::
 
 :::explain{title="innerHTML vs createElement — 两种渲染方式对比"}
@@ -16,7 +16,7 @@
 **经验法则：**
 - 初始化页面、展示静态数据用 `innerHTML` 更简洁
 - 需要绑定事件、频繁更新、处理用户输入用 `createElement` 更安全灵活
-就像排练新曲子：第一次通读可以直接复印全谱（innerHTML），但之后要修改某几个小节的指法，就得逐个音符编辑（createElement）。
+就像装修房子：硬装阶段直接买成套家具（innerHTML），但之后想换掉其中一张椅子的颜色，就得能单独操作每一件（createElement）。
 :::
 
 :::explain{title="classList API — 精确操控样式类"}
@@ -38,7 +38,7 @@ classList` 的优势：
 - `className = 'xxx'` 会覆盖所有已有 class
 - `classList.add()` 只追加，不影响已有 class
 - `classList.toggle()` 一行搞定开关效果
-> 类比：`className` 像换一件新乐器的全部配件，`classList` 像微调——只给长笛加个弱音器、给小提琴上调一个琴码。
+> 类比：`className` 像把家里所有灯全换掉，`classList` 像只换其中一盏灯泡——精确操作，不影响其他。
 :::
 
 :::task{title="动手试试 ✨"}
@@ -46,12 +46,12 @@ classList` 的优势：
 把 render() 中的 innerHTML 方式改为 createElement + appendChild：创建 div.card、h3、span，用 appendChild 组装后挂载到页面
 ::::
 
-::::step{purpose="classList.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个按钮同时控制弱音器的装上和取下——按一下装上，再按一下取下。" expected="点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。"}
+::::step{purpose="classList.toggle 一行代码搞定开关效果，比手动判断 className 再赋值简洁得多。就像用一个开关控制灯的亮灭——按一下开灯，再按一下关灯。" expected="点击卡片后背景变为淡橙色、边框变为红色，再次点击恢复原样。"}
 给每张卡片绑定 click 事件，调用 classList.toggle("liked") 切换选中状态
 ::::
 
 ::::step{purpose="用 createElement 创建元素并即时绑定事件，新卡片的点击行为与初始卡片完全一致。这就是 createElement 相对于 innerHTML 的优势——事件在创建时就绑定了，不会丢失。" expected="新增的卡片点击后同样能切换 liked 样式，功能完全一致。"}
-确认动态添加的卡片（点击"添加随机曲目"）也能正常切换收藏状态
+确认动态添加的卡片（点击"添加随机条目"）也能正常切换收藏状态
 ::::
 
 :::
@@ -60,7 +60,4 @@ classList` 的优势：
 你学会了对比 innerHTML 和 createElement 两种渲染方式——innerHTML 适合一次性渲染静态内容，createElement 适合需要绑定事件、精细控制的场景。还学会了用 classList.add/remove/toggle 精确操控样式类。
 :::
 
-:::listen-to
-巴赫《音乐的奉献》— 这首作品中的每一行都是独立的声部线条，精确编织在一起。createElement 就像在五线谱上逐个添加音符——每个音符都可以独立地定位、装饰、甚至移除。
-:::
 

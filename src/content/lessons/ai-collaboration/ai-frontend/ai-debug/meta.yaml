@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-frontend
 order: 4
 mode: local
-musicAnalogy: 「好的排练不是不犯错——是每次犯错都知道为什么，然后下次不再犯。」
+analogy: 调试不是不犯错——是每次报错都能看懂原因，下次不再犯同样的错。AI 就是那个帮你翻译报错信息、分析根因的"老手"。
 estimatedMinutes: 0

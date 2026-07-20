@@ -4,6 +4,5 @@ track: fundamentals
 chapter: js-basics
 order: 7
 mode: sandbox
-musicAnalogy: "`if/else` 就像乐谱中的**反复记号**——满足条件就跳转，不满足就继续。也像**评委打分**：如果音准正确就给通过，否则请再练一遍。条件判断让代码有了\"决策能力\"。"
-listenTo: 巴赫《赋格的艺术》— 主题在每次出现时根据对位规则做出不同选择（进入、等待、转调），就像 if/else 根据条件执行不同的代码分支。
+analogy: if/else 就是人生的分岔路口——如果下雨，带伞；否则，不带。代码根据条件决定走哪条路，这就是程序的判断力。
 estimatedMinutes: 0

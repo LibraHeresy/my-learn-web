@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-basics
 order: 2
 mode: local
-musicAnalogy: 「手写汇编像敲击每一根琴弦——精准但低效。高级语言像看谱演奏——更快但依赖乐谱。Prompt 像指挥——你不演奏，但你知道应该是什么声音。」
+analogy: 编程思维的演变就像出行方式的进化——从走路（手写汇编）到开车（高级语言）再到叫车（Prompt）。你从"操作者"变成了"目的地设定者"。
 estimatedMinutes: 0

@@ -1,11 +1,11 @@
-# 批量 DOM 操作 — 指挥整个声部
+# 批量 DOM 操作 — 同时操作一组元素
 
-:::music-analogy
-`querySelector` 指一个元素就像指挥指向**一位独奏者**，而 `querySelectorAll` 就像指挥同时对**整个弦乐声部**做统一手势——用一条指令同时操作一群元素。
+:::analogy
+querySelector 像从班里点名一个人，querySelectorAll 像对全班说"所有第一排的同学站起来"——一条指令，同时操作一组元素。
 :::
 
 :::explain{title="选中一组元素"}
-querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像指挥同时命令整个弦乐声部做同一个动作。
+querySelectorAll 选中所有匹配选择器的元素，返回一个列表（NodeList）。可以用 forEach 遍历每个元素——就像老师对全班说「所有人翻开课本第10页」——一条指令，全班同时行动。
 ```js
 let cards = document.querySelectorAll(".card");
 ```
@@ -38,7 +38,7 @@ cards.forEach(function(card) {
 :::
 
 :::example{title="看例子"}
-下面的代码有 5 张乐器卡片。三个按钮分别实现"全选高亮"、"取消高亮"、"切换 '弦乐' 类"：
+下面的代码有 5 张工具卡片。三个按钮分别实现"全选高亮"、"取消高亮"、"切换 '弦乐' 类"：
 ```js
 // 高亮全部
 let cards = document.querySelectorAll(".card");
@@ -54,8 +54,8 @@ cards.forEach(function(card) {
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="让你感受 `querySelectorAll` + `forEach` 组合的「批量操作」威力——一条指令作用于所有匹配元素。就像指挥一挥手，整个弦乐声部同时起弓。这比手动操作每个元素高效得多。" expected="点击高亮全部 → 5 张卡片同时变为金色边框+阴影（`.highlighted` 类生效）；点击取消 → 全部恢复原状。批量操作一气呵成。"}
-点击「高亮全部」按钮，观察所有 5 张乐器卡片的边框和阴影同时亮起；再点击「取消高亮」，看它们同时恢复原状
+::::step{purpose="让你感受 `querySelectorAll` + `forEach` 组合的「批量操作」威力——一条指令作用于所有匹配元素。就像老师一声令下，全班同学同时翻开课本。这比手动操作每个元素高效得多。" expected="点击高亮全部 → 5 张卡片同时变为金色边框+阴影（`.highlighted` 类生效）；点击取消 → 全部恢复原状。批量操作一气呵成。"}
+点击「高亮全部」按钮，观察所有 5 张工具卡片的边框和阴影同时亮起；再点击「取消高亮」，看它们同时恢复原状
 ::::
 
 ::::step{purpose="`classList` 是操作元素 CSS 类的标准方式——添加、移除、切换类名比直接改 style 更优雅，因为样式统一在 CSS 中管理。这也是 CSS 和 JS 各司其职的最佳实践：CSS 管外观，JS 管逻辑。" expected="点击「只看弦乐」→ 弦乐卡片清晰，管乐卡片变半透明（opacity: 0.15）；点击「显示全部」→ 所有卡片恢复。过滤效果通过 toggle 类名实现。"}
@@ -73,10 +73,7 @@ cards.forEach(function(card) {
 :::
 
 :::recap
-这一节你学会了批量操作元素——`querySelectorAll` 选中所有匹配的元素（像指挥对全声部做统一手势），用 `forEach` 遍历后对每一个做操作。`classList.add/remove/toggle` 比直接改 `style` 更优雅——JS 管逻辑，CSS 管外观，各司其职。现在你不用一个一个处理元素了，一条指令就能操控一整组卡片。
+这一节你学会了批量操作元素——`querySelectorAll` 选中所有匹配的元素（像老师对全班做统一指令），用 `forEach` 遍历后对每一个做操作。`classList.add/remove/toggle` 比直接改 `style` 更优雅——JS 管逻辑，CSS 管外观，各司其职。现在你不用一个一个处理元素了，一条指令就能操控一整组卡片。
 :::
 
-:::listen-to
-斯特拉文斯基《春之祭》— 弦乐组全员同时奏响的强力和弦，一声令下全声部同步发力，就像 `querySelectorAll` 批量修改所有匹配元素的样式。
-:::
 

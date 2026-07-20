@@ -1,7 +1,7 @@
 # 居中与对齐 — 让页面更专业
 
-:::music-analogy
-页面居中对齐就像**指挥站在舞台中央**——视觉焦点集中、平衡和谐。而对齐方式的选择，就像决定乐团的排列：对称式、扇形、还是弧形分布。
+:::analogy
+居中就像拍照时把人放在画面正中间——视觉焦点集中、平衡舒服。CSS 里有多种居中方式，选哪种取决于你知道"盒子"的尺寸。
 :::
 
 :::explain{title="水平居中与垂直居中"}
@@ -34,7 +34,7 @@ margin: 0 auto;
 :::
 
 :::example{title="看例子"}
-下面的代码创建了一个居中的"演奏邀请卡"。`.wrapper` 使用 Flexbox 将卡片在页面中水平和垂直居中，`.card` 内的文字也居中对齐：
+下面的代码创建了一个居中的"活动邀请卡"。`.wrapper` 使用 Flexbox 将卡片在页面中水平和垂直居中，`.card` 内的文字也居中对齐：
 ```css
 .wrapper {
   display: flex;
@@ -71,7 +71,4 @@ margin: 0 auto;
 这一节你学会了各种居中方法——`text-align: center` 让文字居中，`margin: 0 auto` 让固定宽度的块级元素水平居中，Flexbox 的 `justify-content: center` 和 `align-items: center` 组合可以一键水平+垂直居中。现在你知道了：文字居中用 `text-align`，块元素居中用 Flexbox 或 `margin: auto`，再也不用手动调整距离了。
 :::
 
-:::listen-to
-莫扎特《G大调弦乐小夜曲》K.525 — 完美的对称结构和平衡感，每一个乐句都恰到好处，就像精心的页面布局。
-:::
 

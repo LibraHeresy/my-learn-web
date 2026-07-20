@@ -4,6 +4,5 @@ track: prologue
 chapter: web-history
 order: 2
 mode: local
-musicAnalogy: 「十天生出 JavaScript，就像即兴哼出的旋律成了传世经典。」
-listenTo: 斯特拉文斯基《春之祭》— 1913 年首演时引发骚乱，正如 JavaScript 在 1995 年横空出世，颠覆了人们对浏览器能做什么的全部认知。
+analogy: JavaScript 只用了十天设计出来——就像在餐巾纸上随手画的草图，后来却成了整个互联网的通用语言。
 estimatedMinutes: 0

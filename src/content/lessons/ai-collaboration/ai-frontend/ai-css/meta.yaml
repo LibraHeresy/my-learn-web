@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-frontend
 order: 2
 mode: local
-musicAnalogy: 「AI 能调出正确的音符，但只有你的耳朵知道这段音乐是太闹了还是太静了。」
+analogy: AI 能生成一堆样式代码，但只有你的眼睛才知道这个间距太多、那个颜色太跳。审美和判断力——这是 AI 替代不了的东西。
 estimatedMinutes: 0

@@ -4,6 +4,5 @@ track: fundamentals
 chapter: js-basics
 order: 9
 mode: sandbox
-musicAnalogy: "循环就像**固定音型（ostinato）**——一段模式反复执行，每次略有不同。也像**节拍器**，一拍一拍反复，直到乐曲结束。用 `for` 或 `forEach` 遍历数组中的每一项，对每一首都执行相同的操作。"
-listenTo: 拉威尔《波莱罗》— 同一个旋律反复 18 遍，每次配器都在变化（加一件新乐器），就像循环每次迭代对当前元素做不同处理。
+analogy: 循环就像流水线上的质检员——对每一个产品做同样的检查，直到整批检查完。用代码对列表中的每一项重复执行相同的操作。
 estimatedMinutes: 0

@@ -4,6 +4,5 @@ track: engineering
 chapter: vue-framework
 order: 2
 mode: local
-musicAnalogy: 乐谱上有各种演奏记号——f 代表强奏、p 代表弱奏、tr 是颤音、反复记号指定哪些小节要重复。Vue 指令就是模板中的演奏记号：v-if 是此处休止（这个声部不奏）、v-show 是加弱音器（还在但静默）、v-for 是反复记号（同一乐句重复多次）、v-bind 是连音线（把数据和 DOM 属性连起来）、v-html 是即兴华彩段（直接插入内容，但需谨慎）。
-listenTo: 帕格尼尼《24 首随想曲》— 每一首都是对一种特定演奏技巧（泛音、双音、拨弦、跳弓）的极致发挥。Vue 的每个指令就像一种特定的演奏技巧——各司其职，组合起来就是一场华丽的演出。
+analogy: Vue 指令就像交通标志——v-if 是"此路通/不通"，v-show 是"开灯/关灯"，v-for 是"重复N次"，v-bind 是"连接线"。每个指令做一件事，组合起来控制整个页面的行为。
 estimatedMinutes: 0

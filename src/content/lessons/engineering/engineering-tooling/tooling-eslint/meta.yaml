@@ -4,6 +4,5 @@ track: engineering
 chapter: engineering-tooling
 order: 8
 mode: local
-musicAnalogy: 乐团上台前需要调音——每把乐器校准到标准音高 A=440Hz。代码也需要调音：ESLint 是音准仪——检查有没有错音（语法错误、不良模式）；Prettier 是节拍器——确保节奏统一（缩进、引号、分号风格一致）。两个工具配合使用，让你的代码像专业乐团一样整齐统一。
-listenTo: 柏林爱乐乐团音乐会前的调音 — 各乐器组依次校准，双簧管给出标准音 A，其他乐器与之对齐。ESLint 就是那个标准音——所有代码都要对齐到它的规则。
+analogy: ESLint 是代码的拼写检查器——发现语法错误和不良写法；Prettier 是自动排版工具——统一缩进、引号、分号风格。两人配合，让你的代码像专业出版物一样整齐。
 estimatedMinutes: 0

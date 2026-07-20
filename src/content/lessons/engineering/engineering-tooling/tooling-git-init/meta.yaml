@@ -4,6 +4,5 @@ track: engineering
 chapter: engineering-tooling
 order: 9
 mode: local
-musicAnalogy: "作曲家写一部作品，通常会经历多个版本：草稿、修改稿、定稿、修订版……每一个版本都可能需要回头查看。**Git 就是这个\"版本档案柜\"**——你每完成一步就\"存档\"一次，随时可以回到任何历史版本，也随时知道\"谁在什么时候改了什么\"。"
-listenTo: 贝多芬《迪亚贝利变奏曲》Op.120 — 33 个变奏从同一个主题演化而来。每一个变奏就像 Git 中的一个 commit——从同一个起点出发，每次修改都留下清晰的记录。
+analogy: Git 就像文档的"另存为"历史记录——每完成一步就存档一次，随时可以回看之前的任何版本。再也不用担心改坏了回不去。
 estimatedMinutes: 0

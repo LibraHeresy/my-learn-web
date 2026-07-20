@@ -4,6 +4,5 @@ track: prologue
 chapter: web-history
 order: 3
 mode: local
-musicAnalogy: 「Ajax 让网页学会了呼吸——不需要刷新就能和世界对话。」
-listenTo: Miles Davis《Kind of Blue》— 现代爵士乐的开山之作，即兴与结构的完美平衡。
+analogy: Ajax 让网页不用刷新就能更新内容——就像手机收到消息不用重启就能看。浏览网页从"翻书"变成了"聊天"。
 estimatedMinutes: 0

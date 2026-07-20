@@ -1,7 +1,7 @@
 # 更多事件 — 倾听用户的每一种动作
 
-:::music-analogy
-乐器不只有"敲击"一个动作——钢琴有按键(click)、弦乐有揉弦(input)、管乐有换气(change)、定音鼓有滚奏(keydown)。`addEventListener` 可以监听用户的各种动作，就像指挥同时关注每个声部的进入。
+:::analogy
+不只点击是事件——按下键盘、移动鼠标、滚动页面、输入文字，都是事件。就像你的手机能感应触摸、滑动、长按，网页也能感知用户的各种操作。
 :::
 
 :::explain{title="不只是 click — 认识更多事件类型"}
@@ -33,7 +33,7 @@ document.addEventListener("keydown", function(event) {
   console.log(event.key); // 按下的键名，如 "Enter"、"a"
 });
 ```
-`event.target` 是触发事件的元素——就像知道是哪个乐器在发声。
+`event.target` 是触发事件的元素——就像快递单上写明是哪个包裹送达。
 :::
 
 :::explain{title="preventDefault — 阻止默认行为"}
@@ -78,7 +78,7 @@ document.addEventListener("keydown", function(event) {
 切换到预览区，在输入框中打字，观察下方「你输入的是」区域实时同步显示你敲的每一个字符
 ::::
 
-::::step{purpose="让你感受 `mouseenter` 和 `mouseleave` 这对「成双成对」的事件。它们总是在一起使用——就像音乐的渐强和渐弱，一个进入，一个退出，形成完整的互动闭环。" expected="鼠标移入卡片时，边框变为金色（#C9A96E），背景也微微泛黄；鼠标移出后恢复原状。这种反馈让用户感觉自己真的在和页面「对话」。"}
+::::step{purpose="让你感受 `mouseenter` 和 `mouseleave` 这对「成双成对」的事件。它们总是在一起使用——就像灯的渐亮和渐暗，一个进入，一个退出，形成完整的互动闭环。" expected="鼠标移入卡片时，边框变为金色（#C9A96E），背景也微微泛黄；鼠标移出后恢复原状。这种反馈让用户感觉自己真的在和页面「对话」。"}
 把鼠标移到「鼠标悬停卡片」上再移开，观察边框颜色和背景色的变化——移入时变为金色边框，移出时恢复原状
 ::::
 
@@ -96,7 +96,4 @@ document.addEventListener("keydown", function(event) {
 这一节你学会了监听更多用户动作——不只有 `click`，还有 `input`（打字时实时触发）、`keydown`（按下键盘）、`mouseenter/mouseleave`（鼠标移入移出）。`event.target.value` 能拿到输入框的内容，`event.key` 能知道你按了哪个键，`event.preventDefault()` 能阻止表单提交时的页面刷新。现在你的网页可以听懂用户的各种"话"了——不只是点击，还有打字、按键、鼠标移动。
 :::
 
-:::listen-to
-拉威尔《波莱罗》— 同一旋律在不同乐器间传递（不同事件），小鼓从头到尾持续敲击（持续输入），长笛、单簧管、双簧管依次登场（依次触发），最终整个乐队一起爆发。
-:::
 

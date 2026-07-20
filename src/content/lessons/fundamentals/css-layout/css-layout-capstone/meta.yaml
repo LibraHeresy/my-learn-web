@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-layout
 order: 6
 mode: sandbox
-musicAnalogy: 一场音乐会的海报需要精心布局：标题在顶端（header）、节目单在中央（main content）、赞助商在侧边栏（sidebar）、时间地点在底部（footer）。用 CSS 布局把这些元素安排在合适的位置，就像舞台监督把每个声部安排在正确的位置。
-listenTo: 穆索尔斯基《图画展览会》— 每一段音乐描绘一幅画，整部作品就像在画廊中漫步。你的音乐会页面也将引导访客从头到尾浏览内容——标题、节目单、演奏者介绍、购票信息，每个区域各就各位。
+analogy: 一场活动的海报需要精心布局：标题顶端、主内容中央、活动信息底部。用 CSS 把这些元素安排在合适的位置，让浏览体验流畅自然。
 estimatedMinutes: 0

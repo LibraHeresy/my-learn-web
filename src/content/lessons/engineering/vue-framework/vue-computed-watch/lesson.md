@@ -1,7 +1,7 @@
-# computed 与 watch — 自动跟进的"伴奏"
+# computed 与 watch — 自动计算的帮手与自动执行的哨兵
 
-:::music-analogy
-乐队中有两种伴奏方式：一种是钢琴跟着主旋律自动配和声（computed——自动计算，有缓存）；一种是鼓手听到变换后才改变节奏型（watch——观察变化，执行副作用）。两者各有用途，选对工具让你的"演奏"更流畅。
+:::analogy
+computed 就像收银机自动算总价——输入商品价格，自动得出总额，有缓存不重复算；watch 就像保安巡逻——看到异常情况才采取行动。各有用处。
 :::
 
 :::explain{title="computed — 自动计算的属性"}
@@ -10,18 +10,18 @@
 <script setup>
 import { ref, computed } from 'vue'
 const pieces = ref([
-  { name: '月光', period: '古典主义' },
-  { name: '夜曲', period: '浪漫主义' },
-  { name: '春', period: '巴洛克' },
-  { name: '致爱丽丝', period: '古典主义' },
+  { name: '春天', period: '类型C' },
+  { name: '报表', period: '类型A' },
+  { name: '春', period: '类型B' },
+  { name: '文档D', period: '类型C' },
 ])
 // computed：自动计算，有缓存
 const classicalPieces = computed(() => {
-  return pieces.value.filter(p => p.period === '古典主义')
+  return pieces.value.filter(p => p.period === '类型C')
 })
 </script>
 <template>
-  <p>古典主义曲目：{{ classicalPieces.length }} 首</p>
+  <p>类型C项目：{{ classicalPieces.length }} 首</p>
   <ul>
     <li v-for="p in classicalPieces" :key="p.name">{{ p.name }}</li>
   </ul>
@@ -35,14 +35,14 @@ classicalPieces` 会自动跟随 `pieces` 的变化重新计算。而且有**缓
 ```js
 // ❌ 普通函数：每次模板重渲染都重新计算
 function getClassical() {
-  return pieces.value.filter(p => p.period === '古典主义')
+  return pieces.value.filter(p => p.period === '类型C')
 }
 // ✅ computed：只在 pieces 变化时才重新计算
 const classicalPieces = computed(() => {
-  return pieces.value.filter(p => p.period === '古典主义')
+  return pieces.value.filter(p => p.period === '类型C')
 })
 ```
-就像乐谱翻页：函数式每次都从头到尾唱一遍来找古典曲目；computed 像在谱子上贴了标签——曲目单不变就不用重新翻。
+就像翻说明书找内容：函数式每次都从头到尾翻一遍来找古典项目；computed 像在说明书上贴了标签——项目单不变就不用重新翻。
 :::
 
 :::example{title="watch — 观察变化，执行操作"}
@@ -82,12 +82,12 @@ watch` 适合：
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="computed 从已有数据自动派生出新值并自带缓存。你只需要声明筛选逻辑（filter），Vue 在依赖（曲目列表或选中时期）变化时自动重新计算。这在合奏篇中需要你手动写筛选逻辑 + 手动调用 render——现在一行 computed 搞定。" expected="选择不同时期，曲目列表自动过滤，只显示匹配的曲目。"}
-添加 computed：根据用户选择的时期（period）筛选曲目列表
+::::step{purpose="computed 从已有数据自动派生出新值并自带缓存。你只需要声明筛选逻辑（filter），Vue 在依赖（项目列表或选中时期）变化时自动重新计算。这在协作篇中需要你手动写筛选逻辑 + 手动调用 render——现在一行 computed 搞定。" expected="选择不同时期，项目列表自动过滤，只显示匹配的项目。"}
+添加 computed：根据用户选择的时期（period）筛选项目列表
 ::::
 
-::::step{purpose="watch 用于在数据变化时执行副作用（如保存、发请求、操作 DOM）。这里用它监听曲目列表，自动将数据序列化到 localStorage——用户刷新页面后数据不会丢失。在合奏篇中你需要手动在每个修改点调用保存函数，现在只需一个 watch。" expected="添加/删除曲目后刷新页面，数据仍然存在（自动从 localStorage 恢复）。"}
-添加 watch：当曲目列表变化时，自动保存到 localStorage
+::::step{purpose="watch 用于在数据变化时执行副作用（如保存、发请求、操作 DOM）。这里用它监听项目列表，自动将数据序列化到 localStorage——用户刷新页面后数据不会丢失。在协作篇中你需要手动在每个修改点调用保存函数，现在只需一个 watch。" expected="添加/删除项目后刷新页面，数据仍然存在（自动从 localStorage 恢复）。"}
+添加 watch：当项目列表变化时，自动保存到 localStorage
 ::::
 
 :::
@@ -96,7 +96,4 @@ watch` 适合：
 你学会了 computed 和 watch 的区别——computed 用于自动计算派生值（如筛选列表），有缓存，依赖不变不重算。watch 用于监听数据变化后执行副作用（如保存到 localStorage、发 API 请求）。
 :::
 
-:::listen-to
-舒伯特《鳟鱼五重奏》— 五个乐器各有角色：钢琴提供和声基础（computed），低音提琴时而拨弦时而拉弓（watch 到主旋律变化时改变奏法）。听这首歌时想一下：谁在"计算"，谁在"观察"？
-:::
 

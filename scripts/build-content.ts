@@ -197,12 +197,12 @@ async function atomicWriteFile(filePath: string, data: string): Promise<void> {
 
 const allowedModes = new Set(["sandbox", "local"]);
 const allowedBlockNames = new Set<BlockName>([
-  "music-analogy",
+  "analogy",
   "explain",
   "example",
   "task",
   "hint",
-  "listen-to",
+  "listen-to", // 已废弃，保留兼容旧内容；不再出现在新课程中
   "recap",
 ]);
 
@@ -684,11 +684,14 @@ function toMeta(data: Record<string, unknown>): ContentMeta {
     "chapter",
     "order",
     "mode",
-    "musicAnalogy",
   ] as const;
   for (const key of required) {
     if (!(key in data)) throw new Error(`Missing required meta field: ${key}`);
   }
+
+  // 兼容 analogy 和旧字段 musicAnalogy
+  if (!("analogy" in data) && !("musicAnalogy" in data))
+    throw new Error(`Missing required meta field: analogy`);
 
   if (typeof data.order !== "number")
     throw new Error("meta.order must be a number");
@@ -703,8 +706,9 @@ function toMeta(data: Record<string, unknown>): ContentMeta {
     chapter: String(data.chapter),
     order: Number(data.order),
     mode: mode as ContentMeta["mode"],
-    musicAnalogy: String(data.musicAnalogy),
-    listenTo: typeof data.listenTo === "string" ? data.listenTo : undefined,
+    analogy: String(
+      "analogy" in data ? data.analogy : data.musicAnalogy
+    ),
   };
 }
 
@@ -790,12 +794,16 @@ function toProjectMeta(data: Record<string, unknown>): SourceProjectMeta {
     "track",
     "order",
     "mode",
-    "musicAnalogy",
   ] as const;
   for (const key of required) {
     if (!(key in data))
       throw new Error(`Missing required project meta field: ${key}`);
   }
+
+  // 兼容 analogy 和旧字段 musicAnalogy
+  if (!("analogy" in data) && !("musicAnalogy" in data))
+    throw new Error(`Missing required project meta field: analogy`);
+
   if (typeof data.order !== "number")
     throw new Error("project meta.order must be a number");
   const mode = String(data.mode);
@@ -810,8 +818,9 @@ function toProjectMeta(data: Record<string, unknown>): SourceProjectMeta {
     track: String(data.track),
     order: Number(data.order),
     mode: mode as SourceProjectMeta["mode"],
-    musicAnalogy: String(data.musicAnalogy),
-    listenTo: typeof data.listenTo === "string" ? data.listenTo : undefined,
+    analogy: String(
+      "analogy" in data ? data.analogy : data.musicAnalogy
+    ),
   };
 }
 
@@ -829,8 +838,7 @@ type SourceProjectMeta = {
   track: string;
   order: number;
   mode: "sandbox" | "local";
-  musicAnalogy: string;
-  listenTo?: string;
+  analogy: string;
 };
 
 type SourceProjectStep = {
@@ -1091,17 +1099,17 @@ function compileProjectMetaBody(
   meta: SourceProjectMeta,
   termKeys: string[],
 ): CompiledProjectMeta {
-  const injectedMusicAnalogy = injectTerms(meta.musicAnalogy, termKeys);
+  const injectedAnalogy = injectTerms(meta.analogy, termKeys);
   try {
     return {
       ...meta,
-      musicAnalogy: injectedMusicAnalogy,
-      musicAnalogyBody: parseLessonMarkdown(injectedMusicAnalogy),
+      analogy: injectedAnalogy,
+      analogyBody: parseLessonMarkdown(injectedAnalogy),
     };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     throw new Error(
-      `Failed to parse project "${meta.id}" meta.musicAnalogy: ${msg}`,
+      `Failed to parse project "${meta.id}" meta.analogy: ${msg}`,
     );
   }
 }

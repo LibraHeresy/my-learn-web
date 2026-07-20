@@ -38,14 +38,13 @@ const emit = defineEmits<{
 
         <div class="project-analogy">
           <DocumentBodyRenderer
-            v-if="project.musicAnalogyBody?.length"
-            :nodes="project.musicAnalogyBody"
+            v-if="project.analogyBody?.length"
+            :nodes="project.analogyBody"
           />
         </div>
 
         <div class="project-meta">
           <span v-if="project.stepCount > 0" class="project-steps">{{ project.stepCount }} 个步骤</span>
-          <span v-if="project.listenTo" class="project-listen">🎧 {{ project.listenTo }}</span>
         </div>
 
         <div class="project-actions">
@@ -203,11 +202,6 @@ const emit = defineEmits<{
   flex-shrink: 0;
   height: min-content;
   width: max-content;
-}
-
-.project-listen {
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .project-actions { display: flex; justify-content: flex-end; }

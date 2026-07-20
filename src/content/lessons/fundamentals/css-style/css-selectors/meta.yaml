@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 5
 mode: sandbox
-musicAnalogy: "选择器就像**指挥的手势**——指向特定的乐器组（元素），告诉它们该怎么演奏。`.class` 像指挥说\"弦乐组\"，`#id` 像说\"首席小提琴手\"，`:hover` 像说\"当我指向你的时候...\""
-listenTo: 布里顿《青少年管弦乐队指南》— 每一段变奏中，指挥逐一指向不同的乐器组，就像选择器精确选中页面中的元素。
+analogy: 选择器就像快递员按地址找人——.class 像"送到XX小区"（一类），#id 像"送给张三本人"（一个），:hover 像"当我把包裹递过去的时候"。
 estimatedMinutes: 0

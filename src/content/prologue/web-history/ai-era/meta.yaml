@@ -4,6 +4,5 @@ track: prologue
 chapter: web-history
 order: 6
 mode: local
-musicAnalogy: 「最快的工具不是跑得最快，而是知道什么时候该跑。」
-listenTo: John Cage《4分33秒》— 有时候沉默本身就是音乐，就像有时最好的代码是不写代码。
+analogy: AI 时代编程的核心不再是写代码的速度，而是提出正确问题的能力——从"会做题"变成了"会出题"。
 estimatedMinutes: 0

@@ -4,6 +4,5 @@ track: prologue
 chapter: web-history
 order: 4
 mode: local
-musicAnalogy: 「V8 引擎如同管弦乐团的指挥——让每一个音符都在正确的时间响起。」
-listenTo: 贝多芬《第五交响曲》— 从一个动机发展出整个交响世界，就像 JavaScript 从浏览器脚本变成了全平台语言。
+analogy: V8 引擎让 JavaScript 快了数十倍——就像给自行车装上了电动机，同样的动作，完全不同的速度。
 estimatedMinutes: 0

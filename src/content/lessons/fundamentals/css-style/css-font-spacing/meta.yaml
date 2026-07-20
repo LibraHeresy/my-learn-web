@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 3
 mode: sandbox
-musicAnalogy: "字体选择像**不同乐器的音色**——衬线体如小提琴般优雅，无衬线体如长笛般清晰。而 `letter-spacing` 和 `line-height` 则像音符间的**时值与呼吸**，决定了阅读的节奏。"
-listenTo: 圣桑《动物狂欢节》— 每种乐器代表一种动物，音色各具特色，就像不同字体传达不同的气质。
+analogy: 字体选择就像穿衣服——正式场合穿正装（衬线体），日常穿便装（无衬线体）。间距就像呼吸的节奏——太挤了读不进去，太散了断断续续。
 estimatedMinutes: 0

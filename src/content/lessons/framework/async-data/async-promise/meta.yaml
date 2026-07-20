@@ -4,6 +4,5 @@ track: framework
 chapter: async-data
 order: 2
 mode: sandbox
-musicAnalogy: "你预订了一张音乐会门票——你拿到了一个\"承诺\"（Promise）。这个承诺可能兑现（拿到票），也可能落空（售罄）。在结果出来之前，你可以继续做其他事。Promise 就是 JavaScript 给异步操作的结果打的\"包票\"。"
-listenTo: "舒伯特《未完成交响曲》— 这部作品只有两个乐章，却\"完成\"了震撼人心的表达。Promise 也有三种状态——进行中（pending）、兑现（fulfilled）、拒绝（rejected），每一种都是合理的。"
+analogy: Promise 就像点了一份外卖——下单后拿到一个订单号（Promise）。外卖可能送到（resolve），也可能被取消（reject）。在结果出来前，你可以继续做其他事，不用一直在门口等。
 estimatedMinutes: 0

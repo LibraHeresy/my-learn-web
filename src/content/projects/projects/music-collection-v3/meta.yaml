@@ -5,8 +5,7 @@ icon: 🎤
 track: projects
 order: 5
 mode: local
-musicAnalogy: 从排练厅走上音乐厅的舞台——Git 版本控制是你的排练记录，CI/CD 是你的演出流程，云端部署就是座无虚席的音乐厅。
-listenTo: "贝多芬《第九交响曲\"合唱\"》第四乐章 — 从器乐到人声，从个体到群体，所有力量汇聚成《欢乐颂》的洪流。Git、GitHub、CI/CD 就是你的乐团、音乐厅和全球巡演。"
+analogy: 从排练厅走上音乐厅的舞台——Git 版本控制是你的排练记录，CI/CD 是你的演出流程，云端部署就是座无虚席的音乐厅。
 prerequisiteTrackIds:
   - fundamentals
   - framework

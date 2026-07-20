@@ -4,6 +4,5 @@ track: framework
 chapter: async-data
 order: 1
 mode: sandbox
-musicAnalogy: "交响乐团的指挥决定了哪个声部何时进入——小提琴先起，然后木管加入，最后铜管收尾。JavaScript 也有一个\"指挥家\"叫 Event Loop（事件循环），它决定了代码的执行顺序：谁先上场，谁等着，谁最后谢幕。"
-listenTo: "拉威尔《波莱罗》— 同一段旋律在不同乐器间依次传递，每种乐器依次\"异步\"进入，完美诠释了顺序与调度的美感。"
+analogy: JavaScript 就像只有一个收银台的超市——一次只能结一个人。Event Loop 就是排队规则：当前的人结完，下一个才能上。异步任务就像"你先去拿东西，好了回来继续"。
 estimatedMinutes: 0

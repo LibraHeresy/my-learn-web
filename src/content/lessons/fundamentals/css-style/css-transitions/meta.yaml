@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 7
 mode: sandbox
-musicAnalogy: "动画就像音乐中的**渐强渐弱**（crescendo/diminuendo）——让变化平滑而自然。`transition` 像渐强记号，从 pp 到 ff 缓缓过渡；`@keyframes` 像精确的 **rubato**（弹性速度），自定义每个时间点的状态。"
-listenTo: "拉威尔《波莱罗》— 从极弱到极强，配器层层叠加，持续 15 分钟的渐强，完美诠释了\"过渡\"的艺术。"
+analogy: transition 让变化平滑过渡——就像灯光从亮到暗慢慢调，而不是啪地一下关掉。从一个状态到另一个状态，中间有个过程才自然。
 estimatedMinutes: 0

@@ -1,11 +1,11 @@
 # v-model 深入 — 双向绑定的"默契"
 
-:::music-analogy
-在四手联弹中，两位演奏者需要完美默契：一个人弹主旋律，另一个人同时配合，两人互相倾听、即时响应。`v-model` 就是数据和表单之间的"四手联弹"——用户输入，数据更新；数据变化，表单自动显示。
+:::analogy
+v-model 就像两个人手拉手——一个往前一步，另一个跟着往前；一个往后退，另一个跟着退。表单输入和数据之间就是这种同步关系：输入变了，数据跟着变；数据变了，输入框自动显示。
 :::
 
 :::explain{title="v-model 的本质"}
-v-model 是 Vue 最常用的双向绑定指令——它同时做了两件事：把数据绑定到表单元素（v-bind:value），并在用户输入时更新数据（v-on:input）。这就是双向绑定——数据和视图始终保持同步，就像四手联弹时两个演奏者实时呼应。
+v-model 是 Vue 最常用的双向绑定指令——它同时做了两件事：把数据绑定到表单元素（v-bind:value），并在用户输入时更新数据（v-on:input）。这就是双向绑定——数据和视图始终保持同步，就像两个人一起搬桌子——一个动，另一个跟着动。
 ```vue
 <!-- 这两行等价 -->
 <input v-model="name">
@@ -31,9 +31,9 @@ const options = ref([])        // 多选
   <!-- 下拉选择 -->
   <select v-model="selected">
     <option value="">选择时期</option>
-    <option>巴洛克</option>
-    <option>古典主义</option>
-    <option>浪漫主义</option>
+    <option>类型B</option>
+    <option>类型C</option>
+    <option>类型A</option>
   </select>
   <p>选中：{{ selected }}</p>
 </template>
@@ -51,15 +51,15 @@ const options = ref([])        // 多选
 <!-- .trim：自动去除首尾空格 -->
 <input v-model.trim="title">
 ```
-这些修饰符就像音符上的标记——`.lazy` 是延音记号，`.number` 是指法标注，`.trim` 是休止符前的渐弱。
+这些修饰符就像工具上的功能开关——`.lazy` 是「等你说完再记」，`.number` 是「自动转成数字」，`.trim` 是「自动去空格」。
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="v-model 是 Vue 提供的双向绑定语法糖：它同时做 v-bind:value（数据->视图）和 v-on:input（视图->数据）。一个指令替代了原来需要手动写的事件监听器和 DOM 操作。表单输入、数据更新、视图刷新——一条龙自动完成。" expected="在输入框中输入内容，下方实时显示输入的数据；提交后新曲目添加到列表中。"}
-添加曲目表单：曲名、作曲家、时期——三个输入框都用 v-model
+::::step{purpose="v-model 是 Vue 提供的双向绑定语法糖：它同时做 v-bind:value（数据->视图）和 v-on:input（视图->数据）。一个指令替代了原来需要手动写的事件监听器和 DOM 操作。表单输入、数据更新、视图刷新——一条龙自动完成。" expected="在输入框中输入内容，下方实时显示输入的数据；提交后新项目添加到列表中。"}
+添加项目表单：曲名、设计师、时期——三个输入框都用 v-model
 ::::
 
-::::step{purpose="v-model 不仅适用于文本输入，同样适用于 select 下拉框。选中的值自动同步到响应式变量，配合 computed 属性实现实时筛选。这比手动监听 change 事件再更新 DOM 简洁得多。" expected="从下拉框选择不同时期，曲目列表自动过滤显示。"}
+::::step{purpose="v-model 不仅适用于文本输入，同样适用于 select 下拉框。选中的值自动同步到响应式变量，配合 computed 属性实现实时筛选。这比手动监听 change 事件再更新 DOM 简洁得多。" expected="从下拉框选择不同时期，项目列表自动过滤显示。"}
 筛选下拉框：用 v-model 绑定选中的时期，配合 computed 筛选列表
 ::::
 
@@ -73,7 +73,4 @@ const options = ref([])        // 多选
 你学会了 v-model 双向绑定——表单输入框和 JS 数据自动同步，一个指令同时完成数据绑定和事件监听。文本、复选框、下拉框都能用 v-model，还有 .lazy、.number、.trim 修饰符可以精确控制行为。
 :::
 
-:::listen-to
-勃拉姆斯《匈牙利舞曲第一号》— 钢琴四手联弹的经典曲目。两个声部你来我往、相互呼应，正如 v-model 在前端数据和用户输入之间的"双向默契"。
-:::
 

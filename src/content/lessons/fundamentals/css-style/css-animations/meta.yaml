@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 8
 mode: sandbox
-musicAnalogy: 如果说 transition 是渐强记号（从 pp 平滑到 ff），那么 @keyframes 就是一段完整的节奏型——精确控制每个时间点的状态。animation 属性像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。
-listenTo: 斯特拉文斯基《春之祭》— 复杂的节奏型、不规则的拍号、多个声部的交错进行，就像页面中同时运行的多个 @keyframes 动画。每一个拍点都精确计算，却产生了震撼人心的效果。
+analogy: keyframes 让你精确控制动画的每一步——就像翻页动画书的每一帧。duration 是翻多快，让静态页面变成动态画面。
 estimatedMinutes: 0

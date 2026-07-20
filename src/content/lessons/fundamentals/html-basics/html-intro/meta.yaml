@@ -4,6 +4,5 @@ track: fundamentals
 chapter: html-basics
 order: 1
 mode: sandbox
-musicAnalogy: HTML 就像五线谱，它决定了页面上有什么内容。五线谱告诉演奏者弹什么音，HTML 告诉浏览器显示什么内容。
-listenTo: 巴赫《C大调前奏曲》BWV 846 — 结构清晰、简单纯粹，就像你即将写下的第一行 HTML。
+analogy: HTML 就像盖房子的骨架和砖墙——先有墙，才知道房间在哪、门窗怎么开。建网页也是：先用 HTML 把内容结构搭好，后面再装修。
 estimatedMinutes: 0

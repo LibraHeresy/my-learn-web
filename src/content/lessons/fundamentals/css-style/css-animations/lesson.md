@@ -1,10 +1,10 @@
 # CSS 动画深入 — 让页面充满律动
 
-:::music-analogy
-如果说 transition 是渐强记号（从 pp 平滑到 ff），那么 @keyframes 就是一段完整的节奏型——精确控制每个时间点的状态。animation 属性像乐谱上的演奏法标记：duration 是速度、delay 是休止符的长短、iteration-count 是反复次数、direction 是顺奏还是逆行。把多种动画组合起来，就像配器——让不同乐器的声部同时进行。
+:::analogy
+keyframes 让你精确控制动画的每一步——就像翻页动画书的每一帧。duration 是翻多快，让静态页面变成动态画面。
 :::
 
-:::explain{title="@keyframes — 定义动画的\"节奏型\""}
+:::explain{title="@keyframes — 定义动画的\"分解动作\""}
 还记得 transition 吗？它只能在两个状态之间平滑过渡（比如 hover 前 → hover 后）。@keyframes 让你定义**任意多个关键帧**，创建更复杂的动画：
 ```css
 @keyframes swing {
@@ -18,10 +18,10 @@
 百分比代表动画的进度（0% = 开始，100% = 结束）
 - 也可以用 from（= 0%）和 to（= 100%）
 - 每个关键帧可以定义任意多个 CSS 属性
-就像乐谱中精确标注了每个小节的力度和表情记号——你掌控着动画的每一帧。
+就像翻页动画书的每一页——你精确画好每个画面，连起来就是流畅的动画。
 :::
 
-:::explain{title="animation 属性 — 演奏法标记全解"}
+:::explain{title="animation 属性 — 动画控制参数全解"}
 定义好 @keyframes 后，用 animation 属性把它应用到元素上。它是 8 个子属性的简写：
 ```css
 .card {
@@ -74,13 +74,13 @@ transform-origin: top left;       /* 改为左上角 */
   transform: rotateX(15deg);   /* 绕 X 轴翻转 */
 }
 ```
-就像指挥要求小提琴组不只拉动琴弓（translate），还要微微转动琴身（rotate）来控制音色。
+就像操控遥控赛车——不只前进后退（translate），还要转弯（rotate）来调整方向。
 :::
 
 :::example{title="看例子"}
 下面的代码展示了三种经典动画效果：
 ```css
-/* 摇摆——像节拍器 */
+/* 摇摆——像不倒翁 */
 @keyframes swing {
   0%, 100% { transform: rotate(-3deg); }
   50% { transform: rotate(3deg); }
@@ -121,8 +121,8 @@ transform-origin: top left;       /* 改为左上角 */
 给 `heartbeat` 的 `animation-duration` 从 `1.5s` 改成 `0.8s`
 ::::
 
-::::step{purpose="三个关键参数组合：`rotate` 旋转、`linear` 匀速（不是默认的 ease）、`infinite` 无限循环——这就是黑胶唱片的视觉效果。" expected="元素持续匀速旋转，不会停下。你创造了第一个真正独立的 CSS 动画。"}
-挑战：写一个唱片旋转动画（`rotate` + `infinite` + `linear`）
+::::step{purpose="三个关键参数组合：`rotate` 旋转、`linear` 匀速（不是默认的 ease）、`infinite` 无限循环——这就是风车转动的视觉效果。" expected="元素持续匀速旋转，不会停下。你创造了第一个真正独立的 CSS 动画。"}
+挑战：写一个风车旋转动画（`rotate` + `infinite` + `linear`）
 ::::
 
 ::::step{purpose="`animation-fill-mode: forwards` 让动画结束后停在最后一帧；`none` 则回到初始状态。先改 `infinite` 为 `1`（只播一次）才能看出区别。" expected="`forwards` 时动画结束后元素停在终点位置不闪回；`none` 时播完后会闪回起点。"}
@@ -132,10 +132,7 @@ transform-origin: top left;       /* 改为左上角 */
 :::
 
 :::recap
-这一节你学会了用 `@keyframes` 创建复杂的动画——你可以定义任意多个关键帧，精确控制动画在 0%、25%、50%... 每一刻的状态。配合 `transform` 的旋转、缩放、位移，以及 `animation` 的各种参数（速度、循环次数、方向），你能让元素摇摆、淡入、心跳、甚至像黑胶唱片一样不停旋转。现在你的页面可以真正"动"起来了。
+这一节你学会了用 `@keyframes` 创建复杂的动画——你可以定义任意多个关键帧，精确控制动画在 0%、25%、50%... 每一刻的状态。配合 `transform` 的旋转、缩放、位移，以及 `animation` 的各种参数（速度、循环次数、方向），你能让元素摇摆、淡入、心跳、甚至像风车一样不停旋转。现在你的页面可以真正"动"起来了。
 :::
 
-:::listen-to
-斯特拉文斯基《春之祭》— 复杂的节奏型、不规则的拍号、多个声部的交错进行，就像页面中同时运行的多个 @keyframes 动画。每一个拍点都精确计算，却产生了震撼人心的效果。
-:::
 

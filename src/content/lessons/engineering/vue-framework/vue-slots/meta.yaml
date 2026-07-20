@@ -4,6 +4,5 @@ track: engineering
 chapter: vue-framework
 order: 9
 mode: local
-musicAnalogy: "协奏曲中有华彩乐段（Cadenza）——作曲家留出空白，由独奏者自由发挥。**Slot（插槽）** 就是组件的\"华彩乐段\"：组件定义框架，使用者在 Slot 中填入自定义内容。这让组件既统一又灵活。"
-listenTo: 莫扎特《第21钢琴协奏曲》第二乐章 — 协奏曲的形式本身就诠释了 Slot 的思想：管弦乐队提供结构（组件框架），钢琴在 Slot 中填入独奏内容。两者完美融合。
+analogy: Slot（插槽）就像填空题的空白横线——组件定义好"这里有一个空位"，使用者在空位上填入自己的内容。这让组件既有统一的框架，又能灵活变化内容。
 estimatedMinutes: 0

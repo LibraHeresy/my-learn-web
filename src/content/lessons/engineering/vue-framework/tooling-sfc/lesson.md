@@ -1,7 +1,7 @@
 # 单文件组件 — .vue 文件的三段式
 
-:::music-analogy
-一份完整的乐器分谱包含三个部分：**乐谱内容**（template，演奏什么）、**演奏标记**（script，怎么演奏——强弱、速度）、**声部说明**（style，这个声部的音色特征）。Vue 的单文件组件（`.vue` 文件）恰好也是三段：`<template>`、`<script setup>`、`<style scoped>`——合在一起，就是一个独立的、可复用的组件。
+:::analogy
+一个 .vue 文件就像一个完整的商品包装盒——里面有产品本身（template）、使用说明书（script）、外观设计图（style）。三个部分各司其职，合在一起就是一个可复用的组件。
 :::
 
 :::explain{title="这一章你会学什么"}
@@ -17,7 +17,7 @@
 :::explain{title="为什么这章重要"}
 Vue 不是在替代 HTML、CSS、JavaScript，而是在帮你更高层次地组织它们。  
 在工程语境里，这些概念会反复出现：**组件**、**响应式**、**声明式渲染**、**单文件组件（SFC）**。  
-如果前面的工程化章节是搭好舞台，这一章就是开始真正排练一支乐队。
+如果前面的工程化章节是搭好基础，这一章就是开始真正组建一个团队。
 :::
 
 :::hint{title="给刚从原生 JS 过来的你"}
@@ -87,27 +87,27 @@ defineProps(["name", "composer"])
 import MusicCard from './components/MusicCard.vue'
 </script>
 <template>
-  <MusicCard name="夜曲 Op.9 No.2" composer="肖邦" />
-  <MusicCard name="月光" composer="德彪西" />
+  <MusicCard name="文档C" composer="张三" />
+  <MusicCard name="春天" composer="德彪西" />
 </template>
 ```
 注意：组件名在模板中写成 PascalCase（`<MusicCard>`），Vue 会自动识别。
 :::
 
 :::task{title="你的任务 ✨"}
-::::step{purpose=".vue 文件是 Vue 工程化的基本组织单元。每个组件一个文件，<template>、<script setup>、<style scoped> 三段式让你的代码结构清晰，容易维护。就像乐团中每个声部有自己的分谱——各司其职，互不干扰。" expected="项目中出现 src/components/HelloMusic.vue 文件，内含完整的三段式结构。"}
+::::step{purpose=".vue 文件是 Vue 工程化的基本组织单元。每个组件一个文件，<template>、<script setup>、<style scoped> 三段式让你的代码结构清晰，容易维护。就像团队中每个模块有自己的分工说明——各司其职，互不干扰。" expected="项目中出现 src/components/HelloMusic.vue 文件，内含完整的三段式结构。"}
 在 src/components/ 下新建 HelloMusic.vue 文件
 ::::
 
-::::step{purpose="组件的内容通过 <template> 中的 HTML 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 DOM。这是声明式编程的核心——你负责描述界面，Vue 负责渲染。" expected="页面上出现你选择的音乐名言文字。"}
-在组件中显示一句你最喜欢的音乐名言
+::::step{purpose="组件的内容通过 <template> 中的 HTML 和 {{ }} 插值来声明。你描述的是「结果长什么样」，而不是手动操作 DOM。这是声明式编程的核心——你负责描述界面，Vue 负责渲染。" expected="页面上出现你选择的名言文字。"}
+在组件中显示一句你最喜欢的名言
 ::::
 
 ::::step{purpose="组件之间通过 ES module 的 import 语法相互引用，这是工程化与 CDN 方式最大的不同。import 后，组件名在模板中自动可用，不需要 components 注册步骤。这让你可以像搭积木一样组合页面。" expected="App.vue 中成功导入 HelloMusic，页面上能看到该组件渲染的内容。"}
 在 App.vue 中 import 并使用 <HelloMusic /> 组件
 ::::
 
-::::step{purpose="<style scoped> 让 CSS 只作用于当前组件，不会「污染」其他组件的样式。这是工程化的核心优势之一——你可以放心地给每个组件写样式，不用担心样式冲突。就像每个声部的排练标记只对该声部生效。" expected="HelloMusic.vue 中的文字有了自定义的字体、颜色和边框样式。"}
+::::step{purpose="<style scoped> 让 CSS 只作用于当前组件，不会「污染」其他组件的样式。这是工程化的核心优势之一——你可以放心地给每个组件写样式，不用担心样式冲突。就像每个模块的准备标记只对该模块生效。" expected="HelloMusic.vue 中的文字有了自定义的字体、颜色和边框样式。"}
 给组件添加 scoped 样式（字体、颜色、边框等）
 ::::
 
@@ -123,14 +123,11 @@ import MusicCard from './components/MusicCard.vue'
 - ✅ `HelloMusic.vue`
 - ❌ `musicCard.vue`（虽然也能用，但不推荐）
 - ❌ `music-card.vue`（同上）
-这就像音乐术语用意大利语标记——不是强制规定，但全世界通用的约定。
+这就像交通信号灯用红黄绿三色——不是强制规定，但全世界通用的约定。
 :::
 
 :::recap
 你学会了 .vue 单文件组件的三段式结构——<script setup> 写逻辑，<template> 写结构，<style scoped> 写样式。每个组件一个文件，通过 import 引入使用，scoped 让样式互不干扰。
 :::
 
-:::listen-to
-维瓦尔第《四季·春》第一乐章 — 弦乐齐奏（template，主体旋律）、独奏小提琴的华彩（script，动态逻辑）、通奏低音的持续伴奏（style，底色与氛围）。三段各司其职，合在一起是一首完美的协奏曲。
-:::
 

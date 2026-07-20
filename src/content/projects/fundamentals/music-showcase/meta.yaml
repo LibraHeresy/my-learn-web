@@ -3,7 +3,7 @@ title: 音乐展示页 - 你的第一个小作品
 track: fundamentals
 order: 1
 mode: local
-musicAnalogy: 这是一次小型独奏排练：把结构、样式和一点点交互组合成完整作品。
+analogy: 这是一次小型独奏排练：把结构、样式和一点点交互组合成完整作品。
 tags:
   - html
   - css

@@ -4,6 +4,5 @@ track: fundamentals
 chapter: css-style
 order: 2
 mode: sandbox
-musicAnalogy: "背景颜色像**舞台的幕布**，边框像**画框**，它们为内容营造氛围和层次感——就像不同颜色的幕布会影响观众对乐曲的第一印象。"
-listenTo: 柴可夫斯基《胡桃夹子》— 糖果仙子的宫殿有华丽的金色装饰，想象一下用 CSS 来描绘它。
+analogy: 背景颜色就像墙面的油漆，边框就像画框——它们为内容营造氛围和边界，就像不同的墙色和画框影响你对一幅画的第一印象。
 estimatedMinutes: 0

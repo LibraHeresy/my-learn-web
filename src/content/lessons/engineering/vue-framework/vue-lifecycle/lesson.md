@@ -1,7 +1,7 @@
-# Vue 生命周期 — 组件的乐章结构
+# Vue 生命周期 — 组件的阶段结构
 
-:::music-analogy
-每首乐曲都有固定的结构——序奏呈示主题、展开部发展变化、再现部回归、尾声收束。Vue 组件也有自己的乐章结构（生命周期）：创建（setup）→ 挂载到 DOM（onMounted）→ 数据更新（onUpdated）→ 即将销毁（onBeforeUnmount）→ 已销毁（onUnmounted）。每个阶段都有对应的钩子函数，让你在正确的时间点执行正确的代码。
+:::analogy
+每个 Vue 组件都有固定的生命周期——创建、挂载到页面、更新数据、销毁。就像人的一生：出生、成年、工作、退休。每个阶段有对应的钩子函数，让你在正确的时间做正确的事。
 :::
 
 :::explain{title="什么是生命周期？"}
@@ -25,10 +25,10 @@ onUnmounted() → 组件已销毁
 - onMounted — 组件挂载完成后（操作 DOM、发请求、启定时器）
 - onBeforeUnmount — 组件销毁前（清理定时器、取消请求、移除事件监听）
 - watch / watchEffect — 响应式数据变化时自动执行
-> 🎼 就像在奏鸣曲的呈示部结束时要做转调，在再现部开始前要回到原调——生命周期的每个节点都有它特定的音乐任务。
+> 就像人的一生——出生时初始化、成年后开始工作、退休前做清理——生命周期的每个节点都有它特定的任务。
 :::
 
-:::explain{title="onMounted — 登台时刻"}
+:::explain{title="onMounted — 组件就绪时刻"}
 `onMounted` 是使用最频繁的钩子。在 `<script setup>` 中，**顶层的代码在组件创建时执行**，但此时 DOM 还不存在。任何需要操作 DOM 的代码必须放在 onMounted 中：
 ```vue
 <script setup>
@@ -52,7 +52,7 @@ onMounted(() => {
 - 添加全局事件监听（scroll、resize、keydown）
 :::
 
-:::explain{title="onBeforeUnmount — 谢幕前的清理"}
+:::explain{title="onBeforeUnmount — 销毁前的清理"}
 组件销毁前，必须清理你在 onMounted 中创建的东西——否则会导致内存泄露或意外行为：
 ```vue
 <script setup>
@@ -75,10 +75,10 @@ onBeforeUnmount(() => {
 - removeEventListener — 移除全局事件监听
 - 取消未完成的 fetch 请求（用 AbortController）
 - 销毁第三方库实例（如图表、地图）
-> 🎭 演出结束后的收琴——提琴手松弓毛、管乐手清理乐器、钢琴家合上琴盖。不清理的话，乐器会受损（内存泄露），下次演出也会出问题。
+> 就像下班前要关电脑、锁抽屉、倒垃圾——定时器要清除、事件监听要移除、请求要取消。不清理的话，资源会泄漏（内存泄露），下次使用也会出问题。
 :::
 
-:::explain{title="watch 与 watchEffect — 自动跟进的伴奏"}
+:::explain{title="watch 与 watchEffect — 自动跟进的哨兵"}
 虽然 watch 不是严格的生命周期钩子，但它和生命周期密切相关——它监听数据变化并在正确的时机执行。
 **watch：** 明确指定要监听的数据源
 ```vue
@@ -160,7 +160,7 @@ watch(isRunning, (running) => {
 修改 onMounted 中的 startClock——让时钟初始以 1.5 倍速运行
 ::::
 
-::::step{purpose="watch 让你在特定数据变化时执行副作用。监听 time 并在 time % 60 === 0 时输出标记，是 watch 的典型用法——它明确指定监听源，并能拿到新值和旧值。" expected="控制台在每次整分钟时打印一个 🎵 符号。"}
+::::step{purpose="watch 让你在特定数据变化时执行副作用。监听 time 并在 time % 60 === 0 时输出标记，是 watch 的典型用法——它明确指定监听源，并能拿到新值和旧值。" expected="控制台在每次整分钟时打印一个提示符号。"}
 用 watch 监听 time 的变化，在整分钟时打印 🎵
 ::::
 
@@ -191,7 +191,4 @@ watchEffect(() => {
 你学会了 Vue 组件的生命周期——onMounted 在组件挂载后执行（适合请求数据、启动定时器），onBeforeUnmount 在销毁前清理（必须清除定时器和事件监听，否则会内存泄露）。成对使用这两个钩子是 Vue 开发的铁律。
 :::
 
-:::listen-to
-贝多芬《第五交响曲》全四个乐章 — 第一乐章：命运的动机登场（setup/onMounted），第二乐章：变奏展开（响应式更新），第三乐章：谐谑曲的神秘过渡（onBeforeUnmount），第四乐章：辉煌的凯旋（组件完成使命）。一部交响曲的生命周期，和 Vue 组件的生命周期如出一辙。
-:::
 

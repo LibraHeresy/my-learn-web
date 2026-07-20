@@ -4,5 +4,5 @@ track: ai-collaboration
 chapter: ai-project
 order: 2
 mode: local
-musicAnalogy: 「乐团已经就座，乐器已经调好——现在只需要你的第一个手势。」
+analogy: AI 能帮你一键生成项目结构、配置文件、基础代码——就像搬进一间已经装修好的毛坯房，你不用从砌墙开始，直接开始软装。
 estimatedMinutes: 0
