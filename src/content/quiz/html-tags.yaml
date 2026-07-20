@@ -15,7 +15,7 @@ levels:
     questions:
       - id: 1
         difficulty: 1
-        question: 下面哪个是单标签，不需要写结束标签？
+        question: "下面哪个是单标签，不需要写结束标签？"
         options:
           - "<p>"
           - "<img>"
@@ -25,44 +25,94 @@ levels:
         explanation: "<img> 是单标签，不需要 </img>。p、div、h1 都是双标签，必须成对出现。"
       - id: 2
         difficulty: 1
-        question: h1~h6 数字越大代表什么？
+        question: "h1~h6 数字越大代表什么？"
         options:
-          - 字越大
-          - 字越小
-          - 颜色越深
-          - 越重要
+          - "字越大"
+          - "字越小"
+          - "颜色越深"
+          - "越重要"
         answer: 1
-        explanation: h1 最大（一级标题），h6 最小。数字越大，字号越小。
+        explanation: "h1 最大（一级标题），h6 最小。数字越大，字号越小。"
       - id: 3
         difficulty: 1
-        question: 无序列表用哪个标签？
+        question: "无序列表用哪个标签？"
         options:
           - "<ol>"
           - "<list>"
           - "<ul>"
           - "<dl>"
         answer: 2
-        explanation: ul=unordered list，前面是圆点。ol=ordered list，前面是数字。
+        explanation: "ul=unordered list，前面是圆点。ol=ordered list，前面是数字。"
       - id: 4
         difficulty: 1
         question: "表格中 <tr> 代表什么？"
         options:
-          - 表格
-          - 表头
-          - 一行
-          - 一个格子
+          - "表格"
+          - "表头"
+          - "一行"
+          - "一个格子"
         answer: 2
-        explanation: tr=table row（表格行）。一个 tr 是一行，里面放 td 或 th。
+        explanation: "tr=table row（表格行）。一个 tr 是一行，里面放 td 或 th。"
       - id: 5
         difficulty: 1
-        question: 下面哪个是合法的 HTML 注释？
+        question: "下面哪个是合法的 HTML 注释？"
         options:
-          - // 注释
+          - "// 注释"
           - "/* 注释 */"
           - "<!-- 注释 -->"
           - "# 注释"
         answer: 2
         explanation: "HTML 注释格式是 <!-- -->。// 是 JS 注释，/* */ 是 CSS 注释。"
+      - id: 26
+        difficulty: 1
+        question: "<a> 标签的 href 属性作用是什么？"
+        options:
+          - "设置文字颜色"
+          - "指定链接跳转的目标地址"
+          - "设置字体大小"
+          - "定义锚点名称"
+        answer: 1
+        explanation: "href（Hypertext REFerence）指定链接的目标 URL。没有 href 的 <a> 只是锚点占位符，不是真正的超链接。"
+      - id: 27
+        difficulty: 1
+        question: "下面哪个标签用于显示图片？"
+        options:
+          - "<image>"
+          - "<img>"
+          - "<pic>"
+          - "<photo>"
+        answer: 1
+        explanation: "<img> 是标准图片标签。注意是 img 不是 image。<image> 在 SVG 中使用，HTML 中不是标准图片标签。"
+      - id: 28
+        difficulty: 1
+        question: "<ol> 列表项用什么标签？"
+        options:
+          - "<li>"
+          - "<ol>"
+          - "<dl>"
+          - "<dt>"
+        answer: 0
+        explanation: "ol（ordered list）和 ul 的子项都是 <li>。ol 自动加数字序号，ul 加圆点。"
+      - id: 29
+        difficulty: 1
+        question: "<head> 和 <body> 的关系？"
+        options:
+          - "head 在 body 里面"
+          - "两者并列，head 放元信息，body 放可见内容"
+          - "head 已废弃"
+          - "只有 body 是必须的"
+        answer: 1
+        explanation: "<html> 根元素下 head 和 body 并列。head 放 title/meta/link 等元信息，body 放页面可见内容。"
+      - id: 30
+        difficulty: 1
+        question: "标题标签 h1~h6 应该在页面中如何使用？"
+        options:
+          - "h1 越大越好"
+          - "h1 是页面主标题（通常一个），h2~h6 按层级嵌套使用"
+          - "随便用"
+          - "h6 最重要"
+        answer: 1
+        explanation: "h1 代表页面最高级标题，通常一个页面只有一个。h2 是 h1 的子标题，以此类推，形成文档大纲（Document Outline），对 SEO 和无障碍都重要。"
 
   - level: 2
     type: elite
@@ -71,84 +121,134 @@ levels:
     questions:
       - id: 6
         difficulty: 2
-        question: strong 和 b 都加粗，语义区别？
+        question: "strong 和 b 都加粗，语义区别？"
         options:
-          - 完全相同
-          - strong 表示重要内容有语义，b 只是视觉加粗
-          - b 有语义
-          - strong 已废弃
+          - "完全相同"
+          - "strong 表示重要内容有语义，b 只是视觉加粗"
+          - "b 有语义"
+          - "strong 已废弃"
         answer: 1
         explanation: "strong 有语义，屏幕阅读器会重读。b 只是视觉加粗。就像重音记号 > 和用粗笔写谱子的区别。"
       - id: 7
         difficulty: 2
-        question: article 和 section 什么时候用 article？
+        question: "article 和 section 什么时候用 article？"
         options:
-          - 都一样
-          - 内容可独立分发复用时用 article
-          - article 更大
-          - section 已废弃
+          - "都一样"
+          - "内容可独立分发复用时用 article"
+          - "article 更大"
+          - "section 已废弃"
         answer: 1
-        explanation: article 是可独立分发的内容块（如博客文章）。section 是页面内的主题区块。
+        explanation: "article 是可独立分发的内容块（如博客文章）。section 是页面内的主题区块。"
       - id: 8
         difficulty: 2
-        question: main 标签一个页面应出现几次？
+        question: "main 标签一个页面应出现几次？"
         options:
-          - 任意次数
-          - 只应一次
-          - 至少两次
-          - 只在首页
+          - "任意次数"
+          - "只应一次"
+          - "至少两次"
+          - "只在首页"
         answer: 1
-        explanation: main 代表页面主要内容，每个页面只应有一个 main。
+        explanation: "main 代表页面主要内容，每个页面只应有一个 main。"
       - id: 9
         difficulty: 2
-        question: thead 和 tbody 分开写的好处？
+        question: "thead 和 tbody 分开写的好处？"
         options:
-          - 没有实际作用
-          - 方便分别设置样式，浏览器可逐步渲染
-          - 为了 SEO
-          - 必须分开
+          - "没有实际作用"
+          - "方便分别设置样式，浏览器可逐步渲染"
+          - "为了 SEO"
+          - "必须分开"
         answer: 1
-        explanation: 方便分别设置样式（如表头粘性），浏览器渲染大表格可逐步显示 tbody。
+        explanation: "方便分别设置样式（如表头粘性），浏览器渲染大表格可逐步显示 tbody。"
       - id: 10
         difficulty: 2
-        question: audio 不写 controls 会怎样？
+        question: "audio 不写 controls 会怎样？"
         options:
-          - 无法播放
-          - 能播放但没有播放/暂停按钮
-          - 自动播放
-          - 报错
+          - "无法播放"
+          - "能播放但没有播放/暂停按钮"
+          - "自动播放"
+          - "报错"
         answer: 1
-        explanation: controls 是布尔属性——写了就有控件，不写就没有。用户无法操作播放。
+        explanation: "controls 是布尔属性——写了就有控件，不写就没有。用户无法操作播放。"
       - id: 11
         difficulty: 2
-        question: 下面哪个是正确的 ul 嵌套？
+        question: "下面哪个是正确的 ul 嵌套？"
         options:
           - "<ul><li>项目</li></ul>"
           - "<ul><div>项目</div></ul>"
           - "<li><ul>项目</ul></li>"
           - "<ol><li>项目</ol></li>"
         answer: 0
-        explanation: ul 的直接子元素必须是 li。div 不能直接放在 ul 中。
+        explanation: "ul 的直接子元素必须是 li。div 不能直接放在 ul 中。"
       - id: 12
         difficulty: 2
         question: "<p>Hello<br>World</p> 渲染几行？"
         options:
-          - 1行
-          - 2行
-          - 3行
-          - 报错
+          - "1行"
+          - "2行"
+          - "3行"
+          - "报错"
         answer: 1
-        explanation: br 在文字中插入换行。Hello 和 World 分两行显示，但在同一个 p 段落内。
+        explanation: "br 在文字中插入换行。Hello 和 World 分两行显示，但在同一个 p 段落内。"
       - id: 13
         difficulty: 2
         question: "<div class=\"a b c\"> 有几个 class？"
         options:
           - "1个，名字是\"a b c\""
-          - 3个：a、b、c
-          - 语法错误
-          - 只有第一个生效
+          - "3个：a、b、c"
+          - "语法错误"
+          - "只有第一个生效"
         answer: 1
         explanation: "class 用空格分隔多个类名。\"a b c\" 是三个独立的类。"
+      - id: 31
+        difficulty: 2
+        question: "<figure> 和 <figcaption> 配合使用，下面哪个场景最合适？"
+        options:
+          - "包裹导航菜单"
+          - "包裹带说明文字的图片/图表/代码块"
+          - "包裹表单"
+          - "包裹页脚"
+        answer: 1
+        explanation: "figure 用于包裹独立的内容单元（图片、图表、代码片段等），figcaption 为其提供标题/说明。两者配合构成语义化的\"图文组合\"。"
+      - id: 32
+        difficulty: 2
+        question: "<time> 标签的 datetime 属性做什么？"
+        options:
+          - "设置时区"
+          - "提供机器可读的标准化时间格式"
+          - "定时刷新页面"
+          - "设置超时"
+        answer: 1
+        explanation: "datetime 属性提供 ISO 8601 格式的标准化时间（如 \"2024-01-15\"），方便搜索引擎和浏览器解析。显示内容可以是 \"2024年1月15日\" 等人性化格式。"
+      - id: 33
+        difficulty: 2
+        question: "<video> 标签不写 controls 会怎样？和 audio 一样吗？"
+        options:
+          - "无法播放"
+          - "能播放但没有控制条，和 audio 行为一致"
+          - "自动播放"
+          - "video 必须有 controls"
+        answer: 1
+        explanation: "和 audio 一样，controls 是布尔属性。不写=没有播放/暂停/音量等控制条。通常应加上 controls 让用户能操作。"
+      - id: 34
+        difficulty: 2
+        question: "<details> 和 <summary> 组合的效果？"
+        options:
+          - "弹窗"
+          - "可展开/折叠的内容区域，summary 为标题"
+          - "Tab 切换"
+          - "已废弃"
+        answer: 1
+        explanation: "details 创建原生展开/折叠组件无需 JS。summary 是始终可见的标题，点击展开 details 内其他内容。open 属性默认展开。"
+      - id: 35
+        difficulty: 2
+        question: "<abbr> 标签配合 title 属性的作用？"
+        options:
+          - "加粗文字"
+          - "标记缩写并提供全称提示"
+          - "改变字体"
+          - "已废弃"
+        answer: 1
+        explanation: "abbr 标记缩写词如 <abbr title=\"HyperText Markup Language\">HTML</abbr>。悬停时 title 显示全称，屏幕阅读器也可读出。"
 
   - level: 3
     type: boss
@@ -157,107 +257,107 @@ levels:
     questions:
       - id: 14
         difficulty: 3
-        question: 一段纯 div 导航页如何改写为语义化？
+        question: "一段纯 div 导航页如何改写为语义化？"
         options:
-          - 把 class 名改成语义化即可
+          - "把 class 名改成语义化即可"
           - "<div class=\"header\">→<header> 等，换标签"
-          - 全部换成 section
-          - 不需要改
+          - "全部换成 section"
+          - "不需要改"
         answer: 1
-        explanation: 把 div 换为对应的语义化标签 header/nav/main/footer。语义化让机器（搜索引擎、屏幕阅读器）理解页面结构。
+        explanation: "把 div 换为对应的语义化标签 header/nav/main/footer。语义化让机器（搜索引擎、屏幕阅读器）理解页面结构。"
       - id: 15
         difficulty: 3
         question: "<ul><p>列表项</p></ul> 有什么问题？"
         options:
-          - 完全没问题
-          - ul 的直接子元素只能是 li 不能是 p
-          - 应该用 ol
-          - p 不能放在任何列表里
+          - "完全没问题"
+          - "ul 的直接子元素只能是 li 不能是 p"
+          - "应该用 ol"
+          - "p 不能放在任何列表里"
         answer: 1
         explanation: "ul/ol 的直接子元素必须是 li。如果需要段落，写成 <ul><li><p>列表项</p></li></ul>。"
       - id: 16
         difficulty: 2
         question: "<img src=\"x.jpg\"> 和 <img src=\"x.jpg\" alt=\"\"> 区别？"
         options:
-          - 完全一样
-          - 前者不写 alt 阅读器可能读文件名，后者表示纯装饰阅读器跳过
-          - 前者报错
-          - alt 可以不写
+          - "完全一样"
+          - "前者不写 alt 阅读器可能读文件名，后者表示纯装饰阅读器跳过"
+          - "前者报错"
+          - "alt 可以不写"
         answer: 1
         explanation: "不写 alt 屏幕阅读器可能读文件名。alt=\"\" 表示纯装饰，让阅读器跳过。alt=\"描述\" 提供有意义的替代信息。"
       - id: 17
         difficulty: 3
         question: "<td colspan=\"2\"> 和 rowspan=\"2\" 各做什么？"
         options:
-          - colspan 跨行 rowspan 跨列
-          - colspan 水平跨列 rowspan 垂直跨行
-          - 两者功能相同
-          - 已废弃
+          - "colspan 跨行 rowspan 跨列"
+          - "colspan 水平跨列 rowspan 垂直跨行"
+          - "两者功能相同"
+          - "已废弃"
         answer: 1
-        explanation: colspan 横向跨越多列，rowspan 纵向跨越多行。值表示跨几个单元格。
+        explanation: "colspan 横向跨越多列，rowspan 纵向跨越多行。值表示跨几个单元格。"
       - id: 18
         difficulty: 2
-        question: 如何在一个 audio 中提供 MP3 和 OGG 两种格式？
+        question: "如何在一个 audio 中提供 MP3 和 OGG 两种格式？"
         options:
-          - 写两个 audio
+          - "写两个 audio"
           - "内部用多个 <source> 标签"
-          - 逗号分隔路径
-          - 不支持多格式
+          - "逗号分隔路径"
+          - "不支持多格式"
         answer: 1
         explanation: "用多个 <source> 子标签，浏览器选第一个能播放的格式。就像备简谱和五线谱两份——哪个能读用哪个。"
       - id: 19
         difficulty: 2
         question: "<br> 和 <p> 都能换行，核心区别？"
         options:
-          - br 是段落 p 是换行
-          - br 行内换行无间距，p 段落分隔有间距
-          - 完全相同
-          - br 只能在 p 内
+          - "br 是段落 p 是换行"
+          - "br 行内换行无间距，p 段落分隔有间距"
+          - "完全相同"
+          - "br 只能在 p 内"
         answer: 1
-        explanation: br 在文字内强制换行无段落间距。p 标记完整段落自动在段落间加间距。br 是单标签。
+        explanation: "br 在文字内强制换行无段落间距。p 标记完整段落自动在段落间加间距。br 是单标签。"
       - id: 20
         difficulty: 3
         question: "<p>第一段<p>第二段</p></p> 浏览器会渲染成什么？"
         options:
-          - 嵌套的两个 p
-          - 两个并列的 p（p 不能嵌套）
-          - 报错
-          - 只显示第一段
+          - "嵌套的两个 p"
+          - "两个并列的 p（p 不能嵌套）"
+          - "报错"
+          - "只显示第一段"
         answer: 1
         explanation: "p 不能嵌套。浏览器遇第二个 <p> 时自动闭合第一个，实际 DOM 中它们是两个并列 p。"
       - id: 21
         difficulty: 2
         question: "<button disabled> 和普通按钮区别？"
         options:
-          - 前者灰色不可点击
-          - 前者隐藏
-          - 没有区别
-          - 前者是旧写法
+          - "前者灰色不可点击"
+          - "前者隐藏"
+          - "没有区别"
+          - "前者是旧写法"
         answer: 0
         explanation: "disabled 让按钮变灰不可点击，表单提交时不发送它的值。用于\"条件不满足暂时不能点\"。"
       - id: 22
         difficulty: 2
         question: "<input readonly> 和 disabled 区别？"
         options:
-          - 完全一样
-          - readonly 可选中复制可提交值，disabled 完全不可交互不提交
-          - readonly 更强
-          - disabled 可提交
+          - "完全一样"
+          - "readonly 可选中复制可提交值，disabled 完全不可交互不提交"
+          - "readonly 更强"
+          - "disabled 可提交"
         answer: 1
-        explanation: readonly 可选中复制，表单提交发送值。disabled 灰色不可交互提交时不发送。
+        explanation: "readonly 可选中复制，表单提交发送值。disabled 灰色不可交互提交时不发送。"
       - id: 23
         difficulty: 1
         question: "&lt; 在 HTML 中显示为什么？"
         options:
-          - <
+          - "<"
           - ">"
           - "&"
-          - 报错
+          - "报错"
         answer: 0
         explanation: "&lt;=less than，显示为 <。因为 < 在 HTML 中有特殊含义（标签开头），要用实体表示。"
       - id: 24
         difficulty: 2
-        question: 链接新标签页打开 target 写什么？
+        question: "链接新标签页打开 target 写什么？"
         options:
           - "target=\"new\""
           - "target=\"_blank\""
@@ -269,10 +369,186 @@ levels:
         difficulty: 2
         question: "<meta charset=\"UTF-8\"> 不写会怎样？"
         options:
-          - 页面无法显示
-          - 中文可能乱码
-          - 无影响
-          - 图片加载失败
+          - "页面无法显示"
+          - "中文可能乱码"
+          - "无影响"
+          - "图片加载失败"
         answer: 1
         explanation: "charset 声明字符编码。不写浏览器可能用错编码导致中文乱码。就像乐谱不标\"五线谱\"还是\"简谱\"。"
+      - id: 36
+        difficulty: 3
+        question: "下面代码有什么语义问题？<div class=\"header\"><div class=\"nav\"><ul>...</ul></div></div>"
+        options:
+          - "完全没问题"
+          - "应该用 <header> 包裹 <nav>，两个 div 都可以替换为语义化标签"
+          - "ul 不能放在 div 中"
+          - "应该全部用 section"
+        answer: 1
+        explanation: "<header> 替代 div.header，<nav> 替代 div.nav。语义化标签比 div+class 更明确地告诉机器\"这是页头+导航\"。"
+      - id: 37
+        difficulty: 3
+        question: "<blockquote> 和 <q> 区别？什么时候用哪个？"
+        options:
+          - "完全相同"
+          - "blockquote 块级引用（长引用），q 行内引用（短引用）会自动加引号"
+          - "q 已废弃"
+          - "blockquote 只用于代码"
+        answer: 1
+        explanation: "blockquote 是块级元素用于较长引用（整段话），通常缩进显示。q 是行内元素用于短引用（句子内），浏览器自动加引号。两者都可配合 cite 属性标注来源。"
+      - id: 38
+        difficulty: 2
+        question: "<pre> 和 <code> 区别？组合使用呢？"
+        options:
+          - "完全相同"
+          - "pre 保留空格和换行，code 标记代码语义。pre>code 组合显示格式化代码块"
+          - "pre 已废弃"
+          - "code 只能放一行"
+        answer: 1
+        explanation: "pre=预格式化保留空格和换行。code=标记这是代码（语义）。<pre><code>组合</code></pre> 是标准代码块写法。单用 code 适合行内代码片段。"
+      - id: 39
+        difficulty: 3
+        question: "<dl>/<dt>/<dd> 三件套的使用场景？"
+        options:
+          - "无序列表"
+          - "描述列表：术语(dt)与描述(dd)的配对，如词汇表、FAQ、元数据展示"
+          - "有序列表"
+          - "已废弃"
+        answer: 1
+        explanation: "dl=description list。dt=term 定义术语。dd=description 描述内容。常用于：词汇表、FAQ（Q=dt, A=dd）、商品参数表、元数据（键=dt, 值=dd）。"
+      - id: 40
+        difficulty: 3
+        question: "<script> 放在 <head> 中 vs 放在 </body> 前有什么区别？"
+        options:
+          - "完全一样"
+          - "在 head 中会阻塞 HTML 解析（除非加 defer/async），在 body 底部HTML先渲染用户更快看到页面"
+          - "head 更快"
+          - "不能放在 body 中"
+        answer: 1
+        explanation: "head 中的 script 默认同步加载执行会阻塞页面渲染→白屏时间变长。body 底部=先渲染 HTML 再加载 JS→用户感知更快。现代做法：head+defer 或 type=\"module\"。"
+
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 表单与交互
+    questions:
+      - id: 41
+        difficulty: 2
+        question: "<form> 的 action 和 method 属性各做什么？"
+        options:
+          - "action=动画 method=方法"
+          - "action=提交目标URL method=HTTP请求方式(GET/POST)"
+          - "action=操作 method=格式"
+          - "都不需要"
+        answer: 1
+        explanation: "action 指定表单数据发送到哪个 URL。method 指定 HTTP 方法：GET（数据在 URL 中，适合搜索/筛选）或 POST（数据在请求体中，适合登录/提交）。"
+      - id: 42
+        difficulty: 2
+        question: "<input> 的 type 属性有哪些常用值？（选最全的）"
+        options:
+          - "text, password, submit"
+          - "text, password, email, number, date, tel, url, search, range, color, file, checkbox, radio, submit, reset, button"
+          - "只有 text 和 password"
+          - "type 属性已废弃"
+        answer: 1
+        explanation: "HTML5 提供了丰富的 input type：text/password/email/number/date/tel/url/search/range/color/file/checkbox/radio/submit/reset/button 等。不同 type 会触发不同的虚拟键盘（移动端）和浏览器内置验证。"
+      - id: 43
+        difficulty: 2
+        question: "<input type=\"email\"> 和 type=\"text\" 有什么区别？"
+        options:
+          - "完全相同"
+          - "email 类型浏览器会自动校验 @ 格式，移动端弹出含 @ 键的键盘"
+          - "email 更慢"
+          - "email 类型已废弃"
+        answer: 1
+        explanation: "type=\"email\" 触发浏览器内置邮箱格式验证（需含 @ 和域名），提交时自动校验。移动端键盘会显示 @ 和 . 键方便输入。还可搭配 multiple 属性允许多个邮箱。"
+      - id: 44
+        difficulty: 2
+        question: "<input required> 和 <input pattern=\"[A-Z]{3}\\d{4}\"> 的验证时机？"
+        options:
+          - "只在服务端"
+          - "表单提交时浏览器自动校验，不通过则阻止提交并显示提示"
+          - "输入时实时校验"
+          - "不校验"
+        answer: 1
+        explanation: "required 和 pattern 是 HTML5 原生表单验证。提交时浏览器自动检查，不符合则阻止提交并弹出默认提示信息（可用 title 属性自定义提示）。配合 :invalid 和 :valid 伪类可做视觉反馈。"
+      - id: 45
+        difficulty: 2
+        question: "<select> 和 <datalist> 区别？"
+        options:
+          - "完全相同"
+          - "select 限定选项（下拉选择），datalist 提供建议列表但允许自由输入（自动补全）"
+          - "datalist 已废弃"
+          - "select 只能单选"
+        answer: 1
+        explanation: "select>option 是严格的下拉选择，用户只能选列表中的值。datalist 配合 input list 属性使用，提供自动补全建议但用户可以输入任意值。"
+      - id: 46
+        difficulty: 2
+        question: "<textarea> 和 <input type=\"text\"> 什么时候用 textarea？"
+        options:
+          - "完全相同"
+          - "textarea 用于多行文本（留言、简介），input text 用于单行（用户名、搜索）"
+          - "textarea 已废弃"
+          - "任何时候都可以"
+        answer: 1
+        explanation: "textarea 支持多行输入，可用 rows/cols 设置尺寸（推荐用 CSS width/height）。input text 只能单行。textarea 的默认值写在标签之间而非 value 属性。"
+      - id: 47
+        difficulty: 3
+        question: "<button type=\"submit\"> vs type=\"button\"> vs type=\"reset\"> 区别？"
+        options:
+          - "完全相同"
+          - "submit 提交表单（默认type！）/ button 普通按钮不提交 / reset 重置所有输入为初始值"
+          - "reset 提交表单"
+          - "type 不区分"
+        answer: 1
+        explanation: "关键点：button 的默认 type 是 submit！如果 form 中的 button 不写 type且不想提交，必须显式写 type=\"button\"。reset 清空用户输入恢复初始值（很少使用因容易误点）。"
+      - id: 48
+        difficulty: 3
+        question: "<input autocomplete> 和 autofocus 各做什么？"
+        options:
+          - "自动完成和自动聚焦"
+          - "autocomplete 控制浏览器是否保存/自动填写（on/off/具体类型），autofocus 页面加载后自动聚焦该元素"
+          - "两者相同"
+          - "已废弃"
+        answer: 1
+        explanation: "autocomplete=\"off\" 可关闭浏览器自动填充（对敏感字段有用）。autocomplete=\"email\" 提示浏览器用邮箱类型填充。autofocus 页面加载后自动聚焦（一个页面最好只有一个）。"
+      - id: 49
+        difficulty: 3
+        question: "表单中 name 属性为什么重要？"
+        options:
+          - "不重要"
+          - "name 是提交时数据的键名。没有 name 的字段不会出现在提交数据中"
+          - "name 设置样式"
+          - "name 和 id 完全相同"
+        answer: 1
+        explanation: "表单提交时，name=键，value=值，组成键值对发送给服务器。没有 name 属性=该字段不参与提交。name 和 id 不同：name 用于表单提交，id 用于关联 label 和 JS 选取。"
+      - id: 50
+        difficulty: 2
+        question: "<input min=\"1\" max=\"100\" step=\"5\"> 各属性含义？"
+        options:
+          - "最小值/最大值/步长，允许输入 1,6,11,...96"
+          - "最小值/最大值/标题"
+          - "已废弃"
+          - "min/max 只用于 date"
+        answer: 0
+        explanation: "min/max 限定数值范围，step 规定每次增减的步长。step=\"5\" 表示只接受 5 的倍数（配合 min=\"1\"=1,6,11...）。适用于 type=\"number\" 和 type=\"range\"。"
+      - id: 51
+        difficulty: 3
+        question: "<input type=\"checkbox\"> 的 value 和 checked 属性如何协作？"
+        options:
+          - "value 总被提交"
+          - "勾选时提交 name=value，未勾选时不提交任何数据"
+          - "checked 决定 value"
+          - "不需要 value"
+        answer: 1
+        explanation: "checked 控制是否选中。value 定义选中时提交的值。未勾选时该字段完全不发送（HTTP 请求中无此项）。如需\"未勾选也传值\"，可配合隐藏 input 用同一 name。"
+      - id: 52
+        difficulty: 3
+        question: "关于表单无障碍，以下哪个做法是错的？"
+        options:
+          - "用 <label> 关联每个输入框"
+          - "用 placeholder 代替 label"
+          - "错误提示用颜色+文字双重标识"
+          - "fieldset+legend 分组相关字段"
+        answer: 1
+        explanation: "placeholder 不能替代 label！placeholder 在输入后消失、颜色浅对比度低、屏幕阅读器支持不一致。始终用 <label> 关联每个输入框。placeholder 是辅助提示不是标签。"
 

@@ -1,12 +1,9 @@
-# 安全宝石
-
 gem:
   id: security
   name: 安全宝石
   icon: 🔒
   achievement: senior
   order: 15
-
 levels:
   - level: 1
     type: normal
@@ -42,8 +39,37 @@ levels:
           - 压缩文件
           - SEO 优化
         answer: 1
-        explanation: "HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为\"不安全\"。"
-
+        explanation: HTTPS=TLS 加密的 HTTP。防止中间人攻击(窃听/篡改数据)。现代浏览器标记 HTTP 为"不安全"。
+      - difficulty: 1
+        question: CORS（跨域资源共享）是什么？
+        options:
+          - 安全漏洞
+          - 浏览器安全机制限制跨域请求。服务器通过 Access-Control-Allow-Origin 头授权
+          - JS 库
+          - 新协议
+        answer: 1
+        explanation: CORS 是浏览器同源策略的扩展机制。跨域请求需服务器返回 Access-Control-Allow-Origin 头授权。预检请求(OPTIONS)检查服务器是否允许该跨域请求。
+        id: 442
+      - difficulty: 1
+        question: HTTPS 证书的作用和验证流程？
+        options:
+          - 装饰
+          - 证书=网站身份证由 CA 签发。浏览器验证证书链确认网站身份后建立 TLS 加密连接
+          - 加速网站
+          - 不需要
+        answer: 1
+        explanation: HTTPS 证书(TLS/SSL)由受信任的 CA 颁发。验证链：网站证书→中间证书→根证书。浏览器验证通过后建立加密连接(非对称加密交换密钥→对称加密传输数据)。Let's Encrypt 提供免费证书。
+        id: 443
+      - difficulty: 1
+        question: 前端安全中最容易被忽略的点？
+        options:
+          - XSS
+          - npm 依赖安全漏洞(npm audit)+敏感信息泄露(console.log/错误堆栈)+硬编码密钥
+          - CSRF
+          - 都没有
+        answer: 1
+        explanation: 常见疏忽：1)不审查依赖漏洞(npm audit 一堆 warning) 2)生产代码含 console.log 泄露数据 3)源码硬编码 API key(即使前端打包也能被看到) 4)错误页面暴露技术栈版本。
+        id: 444
   - level: 2
     type: elite
     threshold: 60
@@ -54,11 +80,11 @@ levels:
         question: innerHTML 设置用户输入为什么危险？
         options:
           - 不危险
-          - "用户输入 <script>alert(1)</script> 会被执行→XSS 攻击。用 textContent 或 DOMPurify 清理"
+          - 用户输入 <script>alert(1)</script> 会被执行→XSS 攻击。用 textContent 或 DOMPurify 清理
           - 只有 IE 危险
           - innerHTML 已废弃
         answer: 1
-        explanation: "innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。"
+        explanation: innerHTML 解析 HTML→用户注入的 <script> 会执行→窃取信息/重定向/篡改页面。textContent 安全(自动转义)。
       - id: 324
         difficulty: 2
         question: CSP(Content Security Policy)做什么？
@@ -99,7 +125,36 @@ levels:
           - 只限制大小
         answer: 1
         explanation: 文件类型检查 MIME type 而非仅扩展名。限制大小防止 DOS。文件名不可信(可能含路径穿越)。服务端扫描病毒。
-
+      - difficulty: 2
+        question: CSP 的 nonce 和 hash 机制如何工作？
+        options:
+          - 随机数
+          - nonce=一次性随机数匹配内联脚本；hash=脚本内容的 SHA 哈希匹配。允许特定内联脚本执行完成
+          - 密码
+          - 不需要
+        answer: 1
+        explanation: CSP 默认禁止内联脚本。nonce 机制：<script nonce="random123"> 和 CSP 头中 nonce-random123 匹配才执行。hash 机制：CSP 头中 sha256-xxx 和脚本内容的 SHA256 哈希匹配。每次页面加载 nonce 不同防注入。
+        id: 445
+      - difficulty: 2
+        question: Secure Cookie 和 httpOnly Cookie 各防什么？
+        options:
+          - 无区别
+          - Secure=只通过 HTTPS 发送防窃听；httpOnly=JS 无法访问防 XSS 窃取
+          - 都是加密
+          - 已废弃
+        answer: 1
+        explanation: Secure：Cookie 只在 HTTPS 连接中发送→中间人无法窃听。httpOnly：禁止 document.cookie 访问→XSS 注入的脚本无法读取。SameSite：控制跨站请求是否发送→防 CSRF。三个属性组合使用。
+        id: 446
+      - difficulty: 2
+        question: iframe 安全：sandbox 属性怎么用？
+        options:
+          - 没用
+          - sandbox 限制 iframe 内容的行为权限。如 sandbox="allow-scripts allow-same-origin" 精细控制
+          - 自动安全
+          - 已废弃
+        answer: 1
+        explanation: iframe sandbox 属性限制嵌入内容的权限：allow-scripts(允许 JS)、allow-same-origin(同源)、allow-forms(表单)、allow-popups(弹窗)。不写任何值=最严格(禁止所有)。嵌入不受信任内容时必须用。
+        id: 447
   - level: 3
     type: boss
     threshold: 60
@@ -107,14 +162,14 @@ levels:
     questions:
       - id: 328
         difficulty: 3
-        question: "以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`"
+        question: 以下 URL 存在什么安全问题？`https://site.com?name=<script>alert(1)</script>`
         options:
           - 无问题
           - 若服务端将 name 参数直接输出到 HTML→反射型 XSS。应转义 HTML 实体
           - URL 太长
           - 参数名错误
         answer: 1
-        explanation: "反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。"
+        explanation: 反射型 XSS：用户输入被服务端原样输出到页面。防御：输出时转义(<→&lt;等)。或设置 CSP 禁止内联脚本。
       - id: 329
         difficulty: 3
         question: JWT Token 存在 localStorage 有什么风险？如何改进？
@@ -144,7 +199,7 @@ levels:
           - CSS 问题
           - 无法防御
         answer: 1
-        explanation: "攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。"
+        explanation: 攻击者将目标网站嵌在透明 iframe 中用户以为是点按钮实际是点转账。防御：服务端设 X-Frame-Options:DENY 或 CSP frame-ancestors。
       - id: 332
         difficulty: 3
         question: 前端密码传输安全？明文 vs 哈希？
@@ -175,4 +230,98 @@ levels:
           - 安全不关前端事
         answer: 1
         explanation: 前端安全六要：转义输出防 XSS、校验输入(配合后端)、HTTPS 加密、httpOnly Cookie、CSP 头、避免 eval/innerHTML 直接拼接用户输入。
-
+      - difficulty: 3
+        question: SQL 注入 vs XSS：本质区别？前端需要关心 SQL 注入吗？
+        options:
+          - 相同
+          - SQL 注入攻击数据库(服务端)；XSS 攻击用户浏览器。前端不直接防 SQL 注入但需了解：输入校验+参数化查询
+          - 前端负责 SQL
+          - 前端不管
+        answer: 1
+        explanation: SQL 注入=恶意 SQL 语句注入数据库查询→后端防线(参数化查询/ORM)。XSS=恶意 JS 注入页面→前端防线(输出转义/CSP)。前端间接影响 SQL：用户输入传给后端前做格式校验（如邮箱格式）。
+        id: 448
+      - difficulty: 3
+        question: Token 存储：localStorage vs sessionStorage vs Cookie 安全对比？
+        options:
+          - 都一样
+          - localStorage 持久但 XSS 可读。Cookie(httpOnly) XSS 安全但 CSRF 需 SameSite。sessionStorage 关闭标签清除
+          - localStorage 最好
+          - token 不需要
+        answer: 1
+        explanation: localStorage：持久存储但 XSS 可读→不适合敏感 token。httpOnly Cookie：JS 读不了→防 XSS 窃取+加 Secure/SameSite。sessionStorage：关闭标签页即清除比 localStorage 略安全。推荐：token 放 httpOnly Secure SameSite Cookie。
+        id: 449
+      - difficulty: 3
+        question: 前端如何防范中间人攻击（MITM）？
+        options:
+          - 前端做不了
+          - HTTPS 加密传输(HTTP→HTTPS 重定向+HSTS)+证书验证。前端确保所有请求用 https://
+          - 用 VPN
+          - 不管
+        answer: 1
+        explanation: MITM=攻击者在通信中间窃听/篡改数据。前端防线：1)所有请求用 HTTPS(绝对不用 http) 2)HSTS 头强制浏览器用 HTTPS 3)证书 pinning(高级) 4)敏感操作验证服务端指纹。核心：TLS 加密确保通信不被窃听。
+        id: 450
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 实战安全
+    questions:
+      - difficulty: 2
+        question: Content-Type 响应头的作用？设置错误的安全风险？
+        options:
+          - 没用
+          - Content-Type 告诉浏览器如何解析响应。错误设置如 text/html→JSON 被当 HTML 解析→可能 XSS
+          - 仅供参考
+          - 不重要
+        answer: 1
+        explanation: 服务器必须设正确的 Content-Type。如 JSON 接口返回 Content-Type:text/html→浏览器尝试解析 HTML→攻击者可在 JSON 中嵌入 HTML 标签→XSS。始终设 application/json。X-Content-Type-Options:nosniff 防 MIME 嗅探。
+        id: 451
+      - difficulty: 3
+        question: OAuth 2.0 的隐含流（Implicit Flow）为什么被废弃？
+        options:
+          - 没问题
+          - Token 直接在 URL 片段中返回→浏览器历史/日志可泄露。改用授权码流（PKCE）更安全
+          - 太慢
+          - 不需要
+        answer: 1
+        explanation: Implicit Flow 将 access token 直接返回到浏览器→URL 片段可被 JS 读取/浏览器历史记录泄露。PKCE（Proof Key for Code Exchange）先用授权码交换 token→token 不出现在 URL 中→更安全。SPA 应用推荐 PKCE。
+        id: 452
+      - difficulty: 3
+        question: 正则表达式 ReDoS（正则拒绝服务）是什么？
+        options:
+          - 语法错误
+          - 恶意输入匹配极慢的正则(exponential backtracking)→CPU 100%→服务不可用。常见于输入校验
+          - 新攻击
+          - 不用担心
+        answer: 1
+        explanation: ReDoS=正则表达式灾难性回溯。如 /^(a+)+$/ 匹配 "aaaaaaaaab" 时回溯次数爆炸。前端影响：输入校验卡死浏览器。防御：避免嵌套量词((a+)+)、使用正则测试工具检查、对用户输入加超时限制。
+        id: 453
+      - difficulty: 2
+        question: 子资源完整性（SRI）做什么？
+        options:
+          - 校验代码
+          - 给 script/link 加 integrity 属性(hash)→浏览器校验文件内容和 hash 匹配→防 CDN 篡改
+          - 加速加载
+          - 不用
+        answer: 1
+        explanation: <script src="..." integrity="sha384-xxx" crossorigin="anonymous">。浏览器下载文件后计算哈希与 integrity 对比→不匹配拒绝执行。防止 CDN 被入侵篡改文件。结合 crossorigin 使用。
+        id: 454
+      - difficulty: 3
+        question: 前端安全检查清单：上线前应检查哪些项？
+        options:
+          - 不需要
+          - HTTPS 强制+CSP 头配置+依赖漏洞审计(npm audit)+敏感信息扫描+输入输出安全审查
+          - 只检查代码
+          - 后端负责
+        answer: 1
+        explanation: 上线前安全清单：1)HTTPS 强制(HSTS) 2)CSP 头限制 3)npm audit/npm audit fix 修复已知漏洞 4)代码中无硬编码密钥/Token 5)用户输入做转义和校验 6)第三方脚本审查 7)安全头检查(X-Frame-Options/CORS 等)。
+        id: 455
+      - difficulty: 2
+        question: 敏感操作（支付/修改密码）为什么要二次确认？
+        options:
+          - 体验差
+          - 防止 CSRF 攻击=攻击者诱导用户执行非预期操作。二次确认(密码/验证码)确保用户明确意图
+          - 无必要
+          - 后端做
+        answer: 1
+        explanation: 关键操作（转账/改密码/删除账号）不能仅靠已登录状态。CSRF 可利用登录态伪造请求。防御：1)要求重新输入密码 2)短信/邮箱验证码 3)CSRF Token 验证。用户意图确认+CSRF 防护。
+        id: 456

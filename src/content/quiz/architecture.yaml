@@ -225,4 +225,179 @@ levels:
           - 已废弃
         answer: 1
         explanation: "Feature Flag=用配置控制功能可见性。新功能先对 5%用户开放→观察→逐步放量。任何用户反馈可立即关闭回滚。"
+      - id: 370
+        difficulty: 1
+        question: 前端里的"关注点分离"指什么？
+        options:
+          - 代码分行写
+          - HTML 管结构、CSS 管样式、JS 管交互——各司其职不混在一起
+          - 团队分开坐
+          - 文件放不同文件夹
+        answer: 1
+        explanation: 关注点分离=每层代码只做自己的事。HTML 不写样式，CSS 不写内容，JS 不做结构。违反例：在 JS 里拼接大段 HTML。
+      - id: 371
+        difficulty: 1
+        question: 为什么 JS 应该放在 body 底部或使用 defer？
+        options:
+          - 习惯
+          - JS 下载和解析会阻塞 HTML 渲染。放底部或 defer→先渲染页面再执行 JS→用户更快看到内容
+          - 放哪都一样
+          - 顶部更快
+        answer: 1
+        explanation: script 标签会阻塞 DOM 构建。放在 body 末尾或用 defer 属性→浏览器先解析 HTML 显示内容→再执行 JS。用户感知速度更快。
+      - id: 372
+        difficulty: 2
+        question: 前端如何做权限控制？(路由守卫+组件级)
+        options:
+          - 前端不控权限
+          - 路由守卫(beforeEach 检查 token/角色→阻拦或放行)+组件级(v-if="hasPermission")。前端只做展示层拦截真正权限在后端
+          - 权限全在前端
+          - 只靠后端
+        answer: 1
+        explanation: 前端权限=UI 层拦截防止用户看到不该看的页面/按钮。但后端才是真正的安全层。路由守卫检查登录状态和角色；组件级用 v-if 控制按钮/功能显示。
+      - id: 373
+        difficulty: 2
+        question: 前端缓存策略有哪些？各自适用场景？
+        options:
+          - 不缓存
+          - localStorage(持久化用户数据)/sessionStorage(标签页临时数据)/Memory(页面内状态)/Service Worker(离线缓存)/HTTP 缓存(静态资源)
+          - 只用 localStorage
+          - 缓存没用
+        answer: 1
+        explanation: 不同场景选不同缓存：用户偏好→localStorage；表单草稿→sessionStorage；组件状态→内存；离线支持→Service Worker；静态资源→HTTP 缓存头(Cache-Control)。
+      - id: 374
+        difficulty: 2
+        question: 什么是依赖注入(DI)？在前端有什么体现？
+        options:
+          - 没用
+          - 不在组件内部创建依赖而是从外部传入。Vue 的 provide/inject 和 props 都是 DI 的简单形式。好处：解耦好测试
+          - 只有后端有
+          - 已废弃
+        answer: 1
+        explanation: 依赖注入=组件不自己创建依赖(如 API 实例)而是从外部接收。Vue 中 props 和 provide/inject 就是 DI。好处：替换依赖方便(测试时注入 mock)。
+      - id: 375
+        difficulty: 2
+        question: 为什么说"不要过早优化"？
+        options:
+          - 优化不重要
+          - 过早优化=在不知道瓶颈在哪时就做性能优化→浪费时间和代码复杂度。先写清晰正确的代码→测量性能→针对性优化
+          - 任何时间都要优化
+          - 只优化一次
+        answer: 1
+        explanation: 在功能完成前不要花大量时间做性能优化。先用可读方式实现功能→用 DevTools 找到真正的性能瓶颈→有针对性地优化。大多数代码不需要极致优化。
+      - id: 376
+        difficulty: 3
+        question: 大前端项目的性能架构怎么设计？
+        options:
+          - 不做性能
+          - 路由懒加载+组件异步加载+图片懒加载+虚拟滚动(长列表)+CDN+按需加载第三方库+Tree Shaking
+          - 只做加载
+          - 只做运行时
+        answer: 1
+        explanation: 性能架构是多层的：加载层(路由/组件/图片都懒加载)→传输层(CDN+Gzip/Brotli)→渲染层(虚拟滚动/避免不必要渲染)→构建层(Tree Shaking/代码分割)。每层各司其职。
+      - id: 377
+        difficulty: 3
+        question: 前端可访问性(a11y)架构要点？
+        options:
+          - 不重要
+          - 语义化 HTML 做基础→ARIA 补充自定义组件→键盘导航(可聚焦+可见焦点)→颜色对比度→屏幕阅读器测试→焦点管理
+          - 只加 aria-label
+          - 后端负责
+        answer: 1
+        explanation: 可访问性从架构开始：1.基础层用语义标签(button 而非 div onclick)2.自定义组件加 ARIA 属性 3.所有交互支持键盘(Tab/Enter/Esc)4.颜色对比度≥4.5:1 5.焦点不丢失(弹窗/路由切换后焦点管理)。
+      - id: 378
+        difficulty: 3
+        question: 前端国际化(i18n)架构考虑？
+        options:
+          - 只翻译文字
+          - 文本提取到语言文件→日期/数字/货币用 Intl API→RTL 布局支持→按需加载语言包→URL 或 Cookie 存储语言偏好
+          - 后端做
+          - 不必要
+        answer: 1
+        explanation: i18n 不只是翻译文字：日期格式(中:2024年1月 vs 英:Jan 2024)、数字格式(中:1,234.56 vs 德:1.234,56)、布局方向(RTL 语言如阿拉伯语)、时区处理。好的架构把这些维度都覆盖。
+      - id: 379
+        difficulty: 3
+        question: 前端监控体系应该包含哪些维度？
+        options:
+          - 只记录错误
+          - 错误监控(Sentry)+性能监控(LCP/FID/CLS)+用户行为(关键路径转化率)+接口监控(API 请求成功率/耗时)+自定义业务指标
+          - 只看性能
+          - 不需要监控
+        answer: 1
+        explanation: 完整监控=错误(线上 bug 自动上报)+性能(Core Web Vitals 持续追踪)+用户行为(关键流程的转化/放弃率)+接口(API 成功率/响应时间分布)。数据驱动优化而非凭感觉。
+      - id: 380
+        difficulty: 3
+        question: 微前端架构的优缺点和适用场景？
+        options:
+          - 微前端总是好的
+          - 优点：独立部署/技术栈无关/团队自治。缺点：复杂度增加/性能开销/样式隔离难。适用：多团队大型项目。小项目不要用
+          - 微前端已过时
+          - 所有项目都用
+        answer: 1
+        explanation: 微前端=将一个应用拆分为多个独立子应用各自开发部署。优势在大型多团队项目(独立发布/技术栈灵活)。代价：额外加载开销/通信复杂/样式隔离需要方案(Shadow DOM/CSS Module)。小型项目单体架构足矣。
 
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 性能与安全架构
+    questions:
+      - id: 381
+        difficulty: 3
+        question: 什么是 CDN？前端为什么用它？
+        options:
+          - 一种数据库
+          - Content Delivery Network(内容分发网络)——将静态资源(JS/CSS/图片)分布到全球节点服务器，用户从最近的节点下载速度快延迟低
+          - 打包工具
+          - CSS 框架
+        answer: 1
+        explanation: CDN=全球分布的静态资源服务器网络。用户访问时自动路由到最近的节点→减少网络延迟→页面加载更快。常用 CDN：Cloudflare、jsDelivr、unpkg。
+      - id: 382
+        difficulty: 3
+        question: 为什么生产环境要开启 Gzip 或 Brotli 压缩？
+        options:
+          - 看起来专业
+          - 文本资源(HTML/CSS/JS/JSON)可压缩 60-80%→传输体积大幅减小→页面加载更快。Brotli 比 Gzip 压缩率更高 15-20%
+          - 压缩没用
+          - 只压缩图片
+        answer: 1
+        explanation: Gzip/Brotli 是 HTTP 内容压缩。文本类资源压缩率极高(JS 文件可从 200KB 压缩到 50KB)。Brotli 压缩率更高但压缩更慢→通常构建时预压缩。服务器配置后自动生效。
+      - id: 383
+        difficulty: 3
+        question: 什么是 CSP(Content Security Policy)？前端怎么配置？
+        options:
+          - 一种 CSS 框架
+          - HTTP 响应头或 meta 标签——告诉浏览器哪些来源的资源可以加载/执行。防止 XSS 和数据注入攻击。script-src/style-src/img-src 等指令精确控制
+          - JavaScript 库
+          - 打包配置
+        answer: 1
+        explanation: CSP=内容安全策略，浏览器执行的白名单机制。script-src 'self' 只允许同源脚本→阻止内联 XSS。img-src * 允许任意图片源。配置在服务器响应头或 HTML meta 标签中。
+      - id: 384
+        difficulty: 3
+        question: 什么是 Service Worker？在前端架构中的作用？
+        options:
+          - 后端服务
+          - 浏览器后台运行的 JS 线程——拦截网络请求实现离线缓存、推送通知、后台同步。PWA 的核心技术。独立于页面生命周期
+          - CSS 工具
+          - 已废弃
+        answer: 1
+        explanation: Service Worker=浏览器和服务器之间的代理层。可以缓存资源实现离线访问、拦截请求返回缓存(即使网络不可用)、接收推送通知。Workbox 是 Google 提供的简化库。
+      - id: 385
+        difficulty: 3
+        question: Tree Shaking 的原理和前提条件？
+        options:
+          - 删除文件
+          - 构建工具分析 import/export 依赖树→移除未被引用的代码(死代码)。前提：使用 ES Module(import/export)而非 CommonJS(require)
+          - 手动删除代码
+          - 压缩代码
+        answer: 1
+        explanation: Tree Shaking=消除未使用代码。构建工具(如 Vite/Rollup/webpack)从入口文件开始追踪所有 import→标记被使用的导出→删除未引用的。必须用 ES Module 语法(静态分析)CommonJS 的动态 require 无法 Tree Shake。
+      - id: 386
+        difficulty: 3
+        question: 前端安全中如何防止敏感信息泄露？
+        options:
+          - 不管
+          - 不用前端存储敏感数据(API key/密码)→敏感操作走后端→HTTPS 加密传输→环境变量(仅构建时注入)→代码审查防止硬编码→CSP 限制数据外传
+          - 加密后存 localStorage
+          - 前端管不了安全
+        answer: 1
+        explanation: 前端不存储密钥类敏感数据。API 调用通过后端代理。构建时通过环境变量注入非敏感配置。开启 CSP 的 connect-src 限制数据发送目标。代码审查检查是否有 secret/token 硬编码。

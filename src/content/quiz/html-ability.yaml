@@ -19,50 +19,80 @@ levels:
         options:
           - "class 用 . id 用 #"
           - "class 用 # id 用 ."
-          - 都用 .
+          - "都用 ."
           - "都用 #"
         answer: 0
         explanation: "类选择器用 .class名，ID 选择器用 #id名。记忆：class=分类(点号)，id=身份证(井号)。"
       - id: 27
         difficulty: 1
-        question: 下面哪些是全局属性？
+        question: "下面哪些是全局属性？"
         options:
-          - src 和 href
-          - class 和 id
-          - alt 和 controls
-          - colspan 和 rowspan
+          - "src 和 href"
+          - "class 和 id"
+          - "alt 和 controls"
+          - "colspan 和 rowspan"
         answer: 1
-        explanation: class 和 id 是全局属性，任何标签都能用。src 是 img/audio/video 特有，href 是 a/link 特有。
+        explanation: "class 和 id 是全局属性，任何标签都能用。src 是 img/audio/video 特有，href 是 a/link 特有。"
       - id: 28
         difficulty: 1
-        question: 布尔属性需要写值吗？举一个例子
+        question: "布尔属性需要写值吗？举一个例子"
         options:
           - "需要，如 disabled=\"true\""
-          - 不需要，只要出现就生效如 disabled
-          - 必须有值
-          - 布尔属性已废弃
+          - "不需要，只要出现就生效如 disabled"
+          - "必须有值"
+          - "布尔属性已废弃"
         answer: 1
         explanation: "布尔属性只关心\"有\"还是\"没有\"，不关心值。disabled/checked/controls/loop 都是布尔属性。"
       - id: 29
         difficulty: 1
         question: "data-* 属性做什么？JS 怎么读？"
         options:
-          - 设置样式
-          - 存储自定义数据，用 dataset 读取
-          - 定义动画
-          - 声明编码
+          - "设置样式"
+          - "存储自定义数据，用 dataset 读取"
+          - "定义动画"
+          - "声明编码"
         answer: 1
         explanation: "data-* 在元素上存自定义信息，JS 通过 element.dataset.xxx 读取。<div data-id=\"1\">→el.dataset.id。"
       - id: 30
         difficulty: 2
-        question: class 可以多个元素共用吗？id 呢？
+        question: "class 可以多个元素共用吗？id 呢？"
         options:
-          - 都可以
-          - class 可共用，id 必须唯一
-          - class 必须唯一
-          - 都不可以
+          - "都可以"
+          - "class 可共用，id 必须唯一"
+          - "class 必须唯一"
+          - "都不可以"
         answer: 1
-        explanation: class=琴竹分类，多根弦可共用。id=琴弦编号，全琴唯一。
+        explanation: "class=琴竹分类，多根弦可共用。id=琴弦编号，全琴唯一。"
+      - id: 53
+        difficulty: 1
+        question: "lang 属性写在哪个标签？作用是什么？"
+        options:
+          - "<body>"
+          - "<html lang=\"zh-CN\">，声明页面语言帮助搜索引擎和屏幕阅读器"
+          - "<head>"
+          - "不需要"
+        answer: 1
+        explanation: "lang 属性声明页面主语言。zh-CN=简体中文，en=英语。屏幕阅读器据此选择正确的语音引擎，搜索引擎据此判断目标受众。"
+      - id: 54
+        difficulty: 2
+        question: "tabindex 属性接受哪些值？各代表什么？"
+        options:
+          - "0/1/2"
+          - "-1（不可Tab到达但可JS聚焦）/ 0（按DOM顺序）/ 正数（手动指定顺序，不推荐）"
+          - "只有 true/false"
+          - "已废弃"
+        answer: 1
+        explanation: "tabindex=\"-1\"：不能用 Tab 到达但可用 JS focus() 聚焦。tabindex=\"0\"：按 DOM 自然顺序。tabindex=\"1,2,3...\"：手动控制顺序→难以维护且破坏自然阅读顺序，强烈不推荐。"
+      - id: 55
+        difficulty: 2
+        question: "contenteditable 属性做什么？"
+        options:
+          - "让元素可被用户直接编辑（所见即所得编辑器基础）"
+          - "设置内容"
+          - "加密内容"
+          - "复制内容"
+        answer: 0
+        explanation: "contenteditable=\"true\" 让元素变为可编辑区域，用户可直接在页面上修改文字。富文本编辑器（如 Quill、ProseMirror）底层依赖此属性。"
 
   - level: 2
     type: elite
@@ -71,74 +101,104 @@ levels:
     questions:
       - id: 31
         difficulty: 2
-        question: 一个元素可以有多个 class 吗？
+        question: "一个元素可以有多个 class 吗？"
         options:
-          - 不可以
-          - 可以，用空格分隔
-          - 可以，用逗号分隔
-          - 可以，写多个 class 属性
+          - "不可以"
+          - "可以，用空格分隔"
+          - "可以，用逗号分隔"
+          - "可以，写多个 class 属性"
         answer: 1
         explanation: "class=\"card highlight active\"——用空格分隔多个类名，这个元素同时属于三个类。"
       - id: 32
         difficulty: 2
-        question: style 属性 vs 外部 CSS——为什么推荐后者？
+        question: "style 属性 vs 外部 CSS——为什么推荐后者？"
         options:
-          - style 更快
-          - 外部 CSS 可复用/好维护/职责分离
-          - 没有区别
-          - style 是旧写法
+          - "style 更快"
+          - "外部 CSS 可复用/好维护/职责分离"
+          - "没有区别"
+          - "style 是旧写法"
         answer: 1
-        explanation: 内联 style 只作用一个元素无法复用且优先级过高难覆盖。外部 CSS 统一管理维护方便。
+        explanation: "内联 style 只作用一个元素无法复用且优先级过高难覆盖。外部 CSS 统一管理维护方便。"
       - id: 33
         difficulty: 2
         question: "hidden 属性和 display:none 效果一样吗？"
         options:
-          - 完全一样
+          - "完全一样"
           - "hidden 是 HTML 属性层隐藏，display:none 是 CSS 层"
-          - hidden 只隐藏文字
+          - "hidden 只隐藏文字"
           - "display:none 不可恢复"
         answer: 1
         explanation: "效果类似。但 hidden 优先级低——若 CSS 设 display:block，hidden 会被覆盖。"
       - id: 34
         difficulty: 2
-        question: title 属性(全局属性)的作用？
+        question: "title 属性(全局属性)的作用？"
         options:
-          - 设置页面标题
-          - 鼠标悬停时显示提示文字
-          - 定义 CSS 样式
-          - 声明字符编码
+          - "设置页面标题"
+          - "鼠标悬停时显示提示文字"
+          - "定义 CSS 样式"
+          - "声明字符编码"
         answer: 1
-        explanation: title 是全局属性——任何元素悬停时显示提示。和 alt 不同：alt 是图片加载失败时显示，title 是悬停时显示。
+        explanation: "title 是全局属性——任何元素悬停时显示提示。和 alt 不同：alt 是图片加载失败时显示，title 是悬停时显示。"
       - id: 35
         difficulty: 2
         question: "属性值必须加引号吗？<img src=photo.jpg> 合法吗？"
         options:
-          - 必须加
-          - 不必须，HTML5 允许不加引号
-          - 只有数字值可省略
-          - 不加引号是 HTML4
+          - "必须加"
+          - "不必须，HTML5 允许不加引号"
+          - "只有数字值可省略"
+          - "不加引号是 HTML4"
         answer: 1
-        explanation: HTML5 允许属性值不加引号（只要值中无空格或特殊字符）。但最佳实践是始终加引号避免意外。
+        explanation: "HTML5 允许属性值不加引号（只要值中无空格或特殊字符）。但最佳实践是始终加引号避免意外。"
       - id: 36
         difficulty: 2
-        question: 一个元素能同时有 class 和 id 吗？
+        question: "一个元素能同时有 class 和 id 吗？"
         options:
-          - 不能
-          - 可以，它们不冲突
-          - 只能二选一
-          - id 会覆盖 class
+          - "不能"
+          - "可以，它们不冲突"
+          - "只能二选一"
+          - "id 会覆盖 class"
         answer: 1
         explanation: "class 和 id 可以同时存在。class 用于样式分组，id 用于唯一标识和 JS 选取。<div class=\"card\" id=\"card1\">"
       - id: 37
         difficulty: 2
         question: "checked=\"false\" 和完全不写 checked 的区别？"
         options:
-          - 前者不选中
-          - 前者仍然选中！布尔属性只看出现不看值
-          - 完全相同
+          - "前者不选中"
+          - "前者仍然选中！布尔属性只看出现不看值"
+          - "完全相同"
           - "checked=\"false\" 语法错误"
         answer: 1
         explanation: "checked=\"false\" 仍然是选中状态！布尔属性只关心\"有没有出现\"不看值。想不选中需要完全移除 checked。"
+      - id: 56
+        difficulty: 2
+        question: "<input type=\"number\"> 的 value 是字符串还是数字？"
+        options:
+          - "数字"
+          - "始终是字符串。JS 读取时需用 parseInt/parseFloat 转换"
+          - "取决于浏览器"
+          - "自动转换"
+        answer: 1
+        explanation: "HTML 属性值始终是字符串。input.value 返回字符串 \"42\" 而非数字 42。需要数值计算时必须用 parseInt/parseFloat/Number 转换。"
+      - id: 57
+        difficulty: 2
+        question: "spellcheck 属性做什么？"
+        options:
+          - "检查 JS 错误"
+          - "控制浏览器是否对元素内容进行拼写检查（默认对可编辑区域开启）"
+          - "检查链接"
+          - "已废弃"
+        answer: 1
+        explanation: "spellcheck=\"true/false\" 控制浏览器拼写检查。在 input/textarea/contenteditable 元素上生效。对姓名、代码、邮箱等字段可设为 false 避免红色波浪线。"
+      - id: 58
+        difficulty: 2
+        question: "translate 属性有什么用？"
+        options:
+          - "自动翻译页面"
+          - "translate=\"no\" 告诉翻译工具不要翻译该元素内容（如品牌名、代码）"
+          - "设置语言"
+          - "已废弃"
+        answer: 1
+        explanation: "translate=\"no\" 指示 Google 翻译等工具跳过该元素。常用于：品牌名称、代码片段、专有名词、诗歌等不应被机器翻译的内容。"
 
   - level: 3
     type: boss
@@ -149,52 +209,52 @@ levels:
         difficulty: 3
         question: "<img src=\"x.jpg\" alt=\"\"> 图片加载失败时用户看到什么？"
         options:
-          - 看到空 alt 文字
-          - 看到裂图图标无替代文字
-          - 看到空白
-          - 看到文件名
+          - "看到空 alt 文字"
+          - "看到裂图图标无替代文字"
+          - "看到空白"
+          - "看到文件名"
         answer: 1
         explanation: "alt=\"\" 表示纯装饰，阅读器跳过。加载失败时浏览器显示裂图图标无替代文字。alt=\"描述\" 才会显示描述。"
       - id: 39
         difficulty: 3
         question: "<a href=\"wikipedia.org\"> 和 href=\"https://wikipedia.org\"> 区别？"
         options:
-          - 都正常跳转
-          - 前者被当作相对路径(网站内文件)，后者正常跳转
-          - 都报错
-          - 前者自动补全
+          - "都正常跳转"
+          - "前者被当作相对路径(网站内文件)，后者正常跳转"
+          - "都报错"
+          - "前者自动补全"
         answer: 1
         explanation: "无 https:// 时浏览器把 wikipedia.org 当作你网站内的相对路径→404。必须写完整 URL。"
       - id: 40
         difficulty: 3
         question: "<label for=\"email\"> 但 input id=\"userEmail\"→点 label 会？"
         options:
-          - 正常聚焦
-          - 什么都不发生，for 和 id 不匹配
-          - 自动纠错
-          - 聚焦最近输入框
+          - "正常聚焦"
+          - "什么都不发生，for 和 id 不匹配"
+          - "自动纠错"
+          - "聚焦最近输入框"
         answer: 1
         explanation: "label 的 for 必须等于 input 的 id——这对\"钥匙和锁\"必须一模一样才会生效。不匹配点击无反应。"
       - id: 41
         difficulty: 2
-        question: radio 同组互斥靠什么属性？
+        question: "radio 同组互斥靠什么属性？"
         options:
-          - type
-          - name 属性相同
-          - id 相同
-          - value 相同
+          - "type"
+          - "name 属性相同"
+          - "id 相同"
+          - "value 相同"
         answer: 1
-        explanation: 同组 radio 的 name 必须相同，浏览器据此判断互斥——选一个其他自动取消。
+        explanation: "同组 radio 的 name 必须相同，浏览器据此判断互斥——选一个其他自动取消。"
       - id: 42
         difficulty: 2
-        question: placeholder 和 value 区别？
+        question: "placeholder 和 value 区别？"
         options:
-          - placeholder 是默认值
-          - placeholder 是灰色提示不提交，value 是实际值会提交
-          - 完全相同
-          - value 是提示 placeholder 是值
+          - "placeholder 是默认值"
+          - "placeholder 是灰色提示不提交，value 是实际值会提交"
+          - "完全相同"
+          - "value 是提示 placeholder 是值"
         answer: 1
-        explanation: placeholder 是输入框为空时的灰色提示，用户输入后消失且不提交。value 是输入框实际值，会提交。
+        explanation: "placeholder 是输入框为空时的灰色提示，用户输入后消失且不提交。value 是输入框实际值，会提交。"
       - id: 43
         difficulty: 3
         question: "<input type=\"checkbox\" checked> 选中的值是什么？"
@@ -207,22 +267,158 @@ levels:
         explanation: "checkbox 不写 value 属性时，选中提交的默认值是 \"on\"。想提交自定义值需设 value=\"自定义值\"。"
       - id: 44
         difficulty: 2
-        question: fieldset+legend 的用途？
+        question: "fieldset+legend 的用途？"
         options:
-          - 已废弃
-          - 把表单控件分组圈起来，legend 写组标题
-          - 设置样式
-          - 验证表单
+          - "已废弃"
+          - "把表单控件分组圈起来，legend 写组标题"
+          - "设置样式"
+          - "验证表单"
         answer: 1
-        explanation: fieldset 把一组相关表单控件圈在一起(画框)，legend 是框上的标题。让表单更有条理。
+        explanation: "fieldset 把一组相关表单控件圈在一起(画框)，legend 是框上的标题。让表单更有条理。"
       - id: 45
         difficulty: 3
         question: "<input required> 和 <input pattern=\"[0-9]+\"> 各做什么？"
         options:
-          - required 必填，pattern 正则校验格式
-          - 完全相同
-          - required 已废弃
-          - pattern 是密码专用
+          - "required 必填，pattern 正则校验格式"
+          - "完全相同"
+          - "required 已废弃"
+          - "pattern 是密码专用"
         answer: 0
-        explanation: required 表示该字段必填。pattern 用正则表达式限制输入格式。两者可组合：必填且必须匹配格式。
+        explanation: "required 表示该字段必填。pattern 用正则表达式限制输入格式。两者可组合：必填且必须匹配格式。"
+      - id: 59
+        difficulty: 3
+        question: "<form novalidate> 什么场景下使用？"
+        options:
+          - "总是使用"
+          - "需要自定义验证逻辑或分步保存草稿时，关闭浏览器默认验证"
+          - "移动端专用"
+          - "已废弃"
+        answer: 1
+        explanation: "novalidate 禁用浏览器原生表单验证。场景：1) 使用自定义 JS 验证库（如 Validator.js）替代浏览器默认样式；2) \"保存草稿\"功能允许用户暂存不完整数据；3) 多步骤表单需在不同步骤校验不同字段。"
+      - id: 60
+        difficulty: 3
+        question: "表单提交时，<input type=\"file\"> 需要什么特殊设置？"
+        options:
+          - "不需要"
+          - "form 必须设置 enctype=\"multipart/form-data\"，method 必须是 POST"
+          - "只能用 GET"
+          - "type=\"file\" 已废弃"
+        answer: 1
+        explanation: "上传文件必须：1) method=\"POST\"（GET 有 URL 长度限制）；2) enctype=\"multipart/form-data\"（将文件二进制数据分割成多部分发送）。缺一不可。"
+      - id: 61
+        difficulty: 3
+        question: "<input list=\"cities\"><datalist id=\"cities\">——这两个元素怎么关联？"
+        options:
+          - "用 class"
+          - "input 的 list 属性值等于 datalist 的 id 值"
+          - "用 name"
+          - "自动关联"
+        answer: 1
+        explanation: "input 的 list 属性值和 datalist 的 id 值必须一致。这和 label for / input id 的关联方式类似。datalist 提供建议选项但允许用户自由输入。"
+
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 实战场景
+    questions:
+      - id: 62
+        difficulty: 2
+        question: "<title> 标签对 SEO 的作用？"
+        options:
+          - "不重要"
+          - "title 是搜索结果中最显眼的元素，也是浏览器标签页文字。应包含关键词且每页唯一"
+          - "标题越长越好"
+          - "title 只显示在浏览器"
+        answer: 1
+        explanation: "title 是 SEO 最重要的元素之一：1) 搜索结果标题（约50-60字符截断）；2) 浏览器标签页显示；3) 社交分享默认标题。每个页面应有唯一、描述性强、含关键词的 title。"
+      - id: 63
+        difficulty: 2
+        question: "<meta name=\"description\"> 有什么作用？"
+        options:
+          - "没有任何作用"
+          - "搜索结果标题下方的描述摘要，影响点击率（非直接排名因素）"
+          - "必须和 title 一样"
+          - "定义页面关键词排名"
+        answer: 1
+        explanation: "meta description 是搜索结果标题下方的描述文字。虽然不是直接排名因素，但好的描述能提高点击率（CTR）→间接影响 SEO。建议 120-160 字符，每页唯一，自然包含关键词。"
+      - id: 64
+        difficulty: 3
+        question: "<meta name=\"robots\"> 有哪些常用值？"
+        options:
+          - "index/follow"
+          - "index/noindex（是否收录） 和 follow/nofollow（是否跟踪链接）的组合"
+          - "只有 allow/deny"
+          - "已废弃"
+        answer: 1
+        explanation: "robots meta 控制搜索引擎行为：index（收录）/noindex（不收录），follow（跟踪链接）/nofollow（不跟踪）。常见组合：noindex,nofollow（完全隐藏），index,follow（默认全开放）。"
+      - id: 65
+        difficulty: 3
+        question: "Open Graph（OG）meta 标签做什么？举例。"
+        options:
+          - "设置字体"
+          - "控制页面在社交平台（微信/Facebook/Twitter）分享时的标题、描述、缩略图预览"
+          - "优化加载速度"
+          - "已废弃"
+        answer: 1
+        explanation: "OG 标签控制社交分享卡片：og:title（分享标题）、og:description（分享描述）、og:image（分享缩略图 1200x630px 最佳）、og:url（规范 URL）、og:type（内容类型 article/website）。Twitter 需额外 twitter:card 标签。"
+      - id: 66
+        difficulty: 2
+        question: "<link rel=\"canonical\"> 解决什么问题？"
+        options:
+          - "加快加载"
+          - "解决重复内容问题：多个 URL 指向相同内容时，告诉搜索引擎哪个是\"主版本\""
+          - "定义样式"
+          - "已废弃"
+        answer: 1
+        explanation: "同一内容可能被多个 URL 访问（如 ?sort=price、/product/123、/product/123?ref=ad）。canonical URL 告诉搜索引擎哪个是\"规范版本\"，集中排名权重避免被判定为重复内容。"
+      - id: 67
+        difficulty: 2
+        question: "<nav> 里应该放什么？什么不该放？"
+        options:
+          - "放所有链接"
+          - "放主导航链接块（网站菜单/目录）。页面底部链接、社交媒体链接等次要导航可用 footer 包裹"
+          - "只放 ul"
+          - "放表单"
+        answer: 1
+        explanation: "nav 用于\"主要导航块\"。一个页面可有多个 nav（如主导航+面包屑+分页）。不重要链接群不需要 nav 包裹。用 aria-label 区分多个 nav（如 \"主导航\" \"面包屑\"）。"
+      - id: 68
+        difficulty: 3
+        question: "一个博客文章页，从 SEO 角度语义结构应该怎样？"
+        options:
+          - "全部用 div"
+          - "<article> 包裹文章 → 内有 <header>（标题/日期/作者）→ <h1> → 正文用 <p>/<section> → <footer>（标签/版权）。外层 <main> 放核心内容"
+          - "只需要 <p>"
+          - "语义化不重要"
+        answer: 1
+        explanation: "标准博客结构：<main><article>→<header>（h1+time+作者）→正文内容（用 section/h2 分隔章节）→<footer>（标签/分享）。搜索引擎据此理解：这是文章、这是标题、这是作者、这是发布时间。"
+      - id: 69
+        difficulty: 3
+        question: "<h1> 可以多次出现吗？h1 和 title 可以不同吗？"
+        options:
+          - "不可以"
+          - "HTML5 允许每个 sectioning 元素（article/section）有自己的 h1。实际建议一个页面一个 h1。h1 和 title 可以不同（title 更侧重搜索点击，h1 是页面主标题）"
+          - "必须完全相同"
+          - "h1 已废弃"
+        answer: 1
+        explanation: "HTML5 规范允许 article/section 内有各自的 h1-h6 层级，但屏幕阅读器和 SEO 工具支持不完美→实际最佳实践仍是每页一个 h1。title（搜索结果标题）和 h1（页面显示标题）可略有不同：title 更精简含品牌名，h1 更具体。"
+      - id: 70
+        difficulty: 2
+        question: "<link rel=\"preload\"> 和 <link rel=\"prefetch\"> 区别？"
+        options:
+          - "完全相同"
+          - "preload 预加载当前页面需要的资源（高优先级）。prefetch 预取未来导航可能需要的资源（低优先级空闲时加载）"
+          - "prefetch 更快"
+          - "preload 已废弃"
+        answer: 1
+        explanation: "preload=当前页面必须的资源，尽快加载（如首屏字体、关键 CSS）。prefetch=用户下一步可能访问的页面资源，浏览器空闲时才加载。preconnect=提前建立连接（DNS+TCP+TLS），适合第三方域名。"
+      - id: 71
+        difficulty: 3
+        question: "移动端页面缺少 viewport meta 标签会怎样？"
+        options:
+          - "完全正常"
+          - "手机浏览器会以桌面宽度(约980px)渲染后缩小显示→文字极小用户需放大才能阅读"
+          - "页面崩溃"
+          - "只在 iOS 有问题"
+        answer: 1
+        explanation: "缺 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> 时，手机浏览器默认以 980px（iPad/桌面宽度）渲染页面再缩小→用户看到的是迷你桌面版网站文字小如蚂蚁必须双指放大。这是移动端最常见的问题之一。"
 

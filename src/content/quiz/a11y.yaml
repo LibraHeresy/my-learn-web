@@ -15,34 +15,64 @@ levels:
     questions:
       - id: 370
         difficulty: 1
-        question: WCAG 四原则？
+        question: "WCAG 四原则？"
         options:
-          - 快/好/省/美
-          - 可感知/可操作/可理解/健壮(POUR)
-          - 加载/渲染/交互/反馈
-          - 设计/开发/测试/部署
+          - "快/好/省/美"
+          - "可感知/可操作/可理解/健壮(POUR)"
+          - "加载/渲染/交互/反馈"
+          - "设计/开发/测试/部署"
         answer: 1
-        explanation: Perceivable 可感知(能被看到听到)。Operable 可操作(键盘可用)。Understandable 可理解。Robust 健壮(兼容各种设备)。
+        explanation: "Perceivable 可感知(能被看到听到)。Operable 可操作(键盘可用)。Understandable 可理解。Robust 健壮(兼容各种设备)。"
       - id: 371
         difficulty: 1
-        question: alt 属性对无障碍的重要性？
+        question: "alt 属性对无障碍的重要性？"
         options:
-          - 不重要
+          - "不重要"
           - "屏幕阅读器读出 alt 文字让视障用户\"看到\"图片。没有 alt→用户不知道图片内容"
-          - 只影响 SEO
-          - 只装饰图片需要
+          - "只影响 SEO"
+          - "只装饰图片需要"
         answer: 1
         explanation: "alt 让视障用户通过屏幕阅读器理解图片内容。信息性图片必须有描述性 alt。纯装饰图片用 alt=\"\"让阅读器跳过。"
       - id: 372
         difficulty: 1
-        question: 键盘导航为什么重要？
+        question: "键盘导航为什么重要？"
         options:
-          - 不重要
-          - 运动障碍用户无法用鼠标只能键盘操作。所有交互元素应可通过 Tab 访问 Enter/Space 激活
-          - 只有高级用户用键盘
-          - 键盘太慢
+          - "不重要"
+          - "运动障碍用户无法用鼠标只能键盘操作。所有交互元素应可通过 Tab 访问 Enter/Space 激活"
+          - "只有高级用户用键盘"
+          - "键盘太慢"
         answer: 1
-        explanation: 许多用户依赖键盘(运动障碍/视障/习惯)。确保所有可交互元素可通过 Tab 键到达并可通过键盘操作(Enter/Esc/方向键)。
+        explanation: "许多用户依赖键盘(运动障碍/视障/习惯)。确保所有可交互元素可通过 Tab 键到达并可通过键盘操作(Enter/Esc/方向键)。"
+      - id: 391
+        difficulty: 1
+        question: "WCAG 2.1 有三个符合级别 A / AA / AAA，分别代表什么？"
+        options:
+          - "分数等级"
+          - "A=最低要求（否则部分用户无法访问）。AA=推荐标准（大多数无障碍法规要求，如 WCAG 2.1 AA）。AAA=最高标准（最难达到，不是所有内容都需要）"
+          - "AAA 最简单"
+          - "只有 AA 有效"
+        answer: 1
+        explanation: "A=基础无障碍（如非文本内容有替代文本）。AA=全球公认标准（法律诉讼和多数法规以此为基准，如对比度 4.5:1）。AAA=最高级别（如对比度 7:1、手语翻译等）→理想但不必所有内容强制。目标：满足 AA 并尽可能达到部分 AAA。"
+      - id: 392
+        difficulty: 1
+        question: "为什么\"跳过导航\"（Skip to Content）链接对键盘用户重要？"
+        options:
+          - "不重要"
+          - "键盘用户每次访问新页面都需要 Tab 通过所有导航链接才能到达正文→极其耗时。跳过导航链接让用户直接跳到主要内容区域"
+          - "只用于移动端"
+          - "自动生效"
+        answer: 1
+        explanation: "视障/键盘用户每访问一个新页面要从头 Tab 过数十个导航链接→数十次按键后才能看到正文。Skip Link=页面第一个可聚焦元素，点击跳转到 main 内容区。实现：<a href=\"#main-content\" class=\"skip-link\">跳到内容</a>，目标区加 id=\"main-content\"。"
+      - id: 393
+        difficulty: 2
+        question: "WCAG 的\"可操作\"原则包含哪些具体要求？"
+        options:
+          - "只键盘"
+          - "1) 所有功能可通过键盘操作；2) 给用户足够时间阅读和使用内容；3) 不设计会导致癫痫发作的内容（闪烁≤3次/秒）；4) 帮助用户导航、找到内容、知道当前位置；5) 除键盘外支持其他输入方式（触摸、语音等）"
+          - "只鼠标"
+          - "可操作=power"
+        answer: 1
+        explanation: "可操作（Operable）=四个准则：1) 键盘可访问（所有交互不用鼠标也能完成）；2) 充足时间（可调整时限、暂停滚动）；3) 防癫痫（不设计>3次/秒闪烁）；4) 可导航（有方法知道\"我在哪\"\"我能去哪\"如面包屑、清晰标题、多个导航方式）。"
 
   - level: 2
     type: elite
@@ -51,54 +81,94 @@ levels:
     questions:
       - id: 373
         difficulty: 2
-        question: 语义化 HTML 如何帮助无障碍？
+        question: "语义化 HTML 如何帮助无障碍？"
         options:
-          - 无帮助
-          - 原生语义标签(button/input/a)自带键盘交互和 ARIA 角色。用 div 模拟按钮需手动加所有功能
-          - 只帮助 SEO
-          - 语义化过时
+          - "无帮助"
+          - "原生语义标签(button/input/a)自带键盘交互和 ARIA 角色。用 div 模拟按钮需手动加所有功能"
+          - "只帮助 SEO"
+          - "语义化过时"
         answer: 1
         explanation: "<button>自动支持键盘 focus 和 Enter/Space 激活。用 <div onclick>=\"...\">需要手动加 tabindex/role/keydown→容易遗漏。优先用原生语义标签。"
       - id: 374
         difficulty: 2
-        question: ARIA 的作用？什么时候需要？
+        question: "ARIA 的作用？什么时候需要？"
         options:
-          - 替代 HTML
+          - "替代 HTML"
           - "当 HTML 原生语义不够用时补充无障碍信息。如 role=\"tab\" aria-selected=\"true\"。能用原生就不用 ARIA"
-          - 不需要
-          - 总需要
+          - "不需要"
+          - "总需要"
         answer: 1
-        explanation: ARIA 补充 HTML 语义不足。但能用原生 HTML 标签就不用 ARIA。错误 ARIA 比没有更差。第一条 ARIA 规则：不用 ARIA 当 HTML 已够用。
+        explanation: "ARIA 补充 HTML 语义不足。但能用原生 HTML 标签就不用 ARIA。错误 ARIA 比没有更差。第一条 ARIA 规则：不用 ARIA 当 HTML 已够用。"
       - id: 375
         difficulty: 2
-        question: 颜色对比度标准？
+        question: "颜色对比度标准？"
         options:
-          - 无所谓
+          - "无所谓"
           - "WCAG AA:正文 4.5:1 大文字 3:1。WCAG AAA:7:1。可用 Chrome DevTools 检查对比度"
-          - 只影响美观
-          - 越鲜艳越好
+          - "只影响美观"
+          - "越鲜艳越好"
         answer: 1
-        explanation: 对比度不够→低视力用户看不清文字。浅灰文字在白色背景上→对比度可能不及格。工具：Chrome DevTools 颜色选择器显示对比度分数。
+        explanation: "对比度不够→低视力用户看不清文字。浅灰文字在白色背景上→对比度可能不及格。工具：Chrome DevTools 颜色选择器显示对比度分数。"
       - id: 376
         difficulty: 2
-        question: focus 样式为什么不能去掉？
+        question: "focus 样式为什么不能去掉？"
         options:
           - "可以去掉:focus{outline:none}"
-          - 键盘用户靠 focus 指示器知道当前位置。去掉→键盘用户不知道该操作哪个元素
-          - focus 不好看
-          - 去掉提升美观
+          - "键盘用户靠 focus 指示器知道当前位置。去掉→键盘用户不知道该操作哪个元素"
+          - "focus 不好看"
+          - "去掉提升美观"
         answer: 1
         explanation: "永远不要完全移除 focus 样式。可用 :focus-visible 替代只键盘导航时显示。`:focus{outline:none}` 对键盘用户极度不友好。"
       - id: 377
         difficulty: 2
-        question: aria-label 和 aria-labelledby 区别？
+        question: "aria-label 和 aria-labelledby 区别？"
         options:
-          - 完全相同
-          - aria-label=直接用字符串提供标签。aria-labelledby=引用其他元素 ID 作为标签
-          - aria-labelledby 更快
-          - aria-label 已废弃
+          - "完全相同"
+          - "aria-label=直接用字符串提供标签。aria-labelledby=引用其他元素 ID 作为标签"
+          - "aria-labelledby 更快"
+          - "aria-label 已废弃"
         answer: 1
         explanation: "aria-label=\"关闭\"直接在元素上设标签。aria-labelledby=\"id1\"引用页面已有元素的内容作为标签(避免重复文本)。"
+      - id: 394
+        difficulty: 2
+        question: "role 属性有哪些常用的 Landmark（地标）角色？"
+        options:
+          - "没有"
+          - "banner（页头）/ navigation（导航）/ main（主要内容）/ complementary（侧边栏）/ contentinfo（页脚）/ search（搜索）/ form（表单）/ region（通用区域）"
+          - "只有 button"
+          - "role 已废弃"
+        answer: 1
+        explanation: "Landmark roles 帮助屏幕阅读器快速跳转：role=\"banner\"=页头（通常<header>）、role=\"navigation\"（<nav>）、role=\"main\"（<main>）、role=\"complementary\"=侧边栏（<aside>）、role=\"contentinfo\"=页脚（<footer>）。用原生语义标签时会自动获得这些 role 无需手动添加。"
+      - id: 395
+        difficulty: 2
+        question: "aria-expanded、aria-pressed、aria-current 各自什么场景使用？"
+        options:
+          - "不需要"
+          - "aria-expanded=\"true/false\" 用于展开/折叠元素（菜单、手风琴）。aria-pressed=\"true/false\" 用于切换按钮（如加粗按钮）。aria-current=\"page\" 标记当前导航页（面包屑/分页）"
+          - "全部相同"
+          - "已废弃"
+        answer: 1
+        explanation: "三个常用状态 ARIA：1) aria-expanded 用于可展开组件（下拉菜单/FAQ折叠→告诉阅读器当前是开是关）；2) aria-pressed 用于切换按钮（toggle button 如文字加粗按钮 On/Off 状态）；3) aria-current 标示当前位置（导航当前页、面包屑当前级、步骤条当前步）。"
+      - id: 396
+        difficulty: 3
+        question: "aria-hidden=\"true\" 做什么？和 display:none 的区别？"
+        options:
+          - "完全相同"
+          - "aria-hidden=\"true\" 仅对屏幕阅读器隐藏（视觉上仍可见）。display:none 对视觉和阅读器都隐藏。aria-hidden 用于：纯装饰性图标、重复内容、modal 背景等。视觉可见但阅读器应忽略的内容"
+          - "aria-hidden 隐藏元素"
+          - "两者相同"
+        answer: 1
+        explanation: "aria-hidden=\"true\"=告诉屏幕阅读器忽略此元素（但视觉上仍显示）。display:none=视觉隐藏+阅读器跳过。典型场景：1) 装饰图标（图标字体旁边已有文字说明→图标应 aria-hidden）；2) Modal 打开时背景内容应 aria-hidden=\"true\" 避免阅读器读到后方内容。"
+      - id: 397
+        difficulty: 3
+        question: "aria-live 区域如何使用？polite 和 assertive 区别？"
+        options:
+          - "不需要"
+          - "aria-live=\"polite\"=等屏幕阅读器说完当前内容再播报（适合状态更新）。aria-live=\"assertive\"=立即打断播报（适合紧急错误通知）。配合 aria-atomic=\"true\" 播报整个区域而非仅变化部分"
+          - "assive 已废弃"
+          - "只用于输入框"
+        answer: 1
+        explanation: "aria-live 让动态内容变化被阅读器自动播报。polite=等待用户空闲时播报→适合：搜索结果更新、购物车数量变化。assertive=立即打断→适合：表单提交失败、会话即将过期等紧急通知。aria-atomic=true=播报整个区域内容而非只变化部分。role=\"alert\"=隐式 aria-live=\"assertive\"+aria-atomic=\"true\"。"
 
   - level: 3
     type: boss
@@ -109,70 +179,206 @@ levels:
         difficulty: 3
         question: "以下 tab 顺序有问题吗？`<input><button style=\"position:absolute;left:-999px\">隐藏</button><input>`"
         options:
-          - 没问题
+          - "没问题"
           - "视觉隐藏但 DOM 顺序不变的按钮仍可被 Tab 到→键盘用户困惑焦点\"消失了\"。视觉隐藏元素应同时从 tab 顺序移除(tabindex=-1)"
-          - 隐藏元素自动跳过
+          - "隐藏元素自动跳过"
           - "position:absolute 自动移除"
         answer: 1
         explanation: "视觉隐藏但 DOM 中仍存在的元素依然可被 Tab 键聚焦→键盘用户看不到焦点。隐藏不可交互元素时同步设 tabindex=-1 或使用 display:none。"
       - id: 379
         difficulty: 3
-        question: 动态内容更新(如 AJAX 加载)如何让屏幕阅读器知晓？
+        question: "动态内容更新(如 AJAX 加载)如何让屏幕阅读器知晓？"
         options:
-          - 自动知晓
+          - "自动知晓"
           - "用 aria-live 区域(如 aria-live=\"polite\")播报内容变化。重要消息用 assertive"
-          - 刷新页面
-          - 不需要通知
+          - "刷新页面"
+          - "不需要通知"
         answer: 1
-        explanation: 屏幕阅读器不会自动感知动态内容变化。用 aria-live 属性让浏览器在指定区域内容变化时通知阅读器。polite=等当前操作完成播报。
+        explanation: "屏幕阅读器不会自动感知动态内容变化。用 aria-live 属性让浏览器在指定区域内容变化时通知阅读器。polite=等当前操作完成播报。"
       - id: 380
         difficulty: 3
-        question: 以下 modal 对话框缺少什么无障碍特性？
+        question: "以下 modal 对话框缺少什么无障碍特性？"
         options:
-          - 不缺
+          - "不缺"
           - "打开时焦点应移入 modal；关闭时焦点回退到触发按钮；ESC 关闭；点击背景关闭；aria-modal=\"true\"；body 滚动锁定"
-          - 只需 ESC
-          - 只需关闭按钮
+          - "只需 ESC"
+          - "只需关闭按钮"
         answer: 1
-        explanation: 完整 modal 无障碍：1.焦点陷阱(Tab 在 modal 内循环)2.ESC 关闭 3.aria-modal 标识 4.背景不可滚动 5.关闭后焦点回到触发元素。
+        explanation: "完整 modal 无障碍：1.焦点陷阱(Tab 在 modal 内循环)2.ESC 关闭 3.aria-modal 标识 4.背景不可滚动 5.关闭后焦点回到触发元素。"
       - id: 381
         difficulty: 3
-        question: 表单错误信息如何让屏幕阅读器感知？
+        question: "表单错误信息如何让屏幕阅读器感知？"
         options:
-          - 只显示红色
+          - "只显示红色"
           - "错误信息关联到对应输入框(aria-describedby)。提交时聚焦第一个有错误的输入框。错误信息用 role=\"alert\""
-          - 不需要
-          - 颜色区分即可
+          - "不需要"
+          - "颜色区分即可"
         answer: 1
         explanation: "仅靠颜色(红色)不可访问→色盲用户看不出。用 aria-describedby 关联错误文案到输入框。aria-invalid=\"true\"标记无效输入。role=\"alert\"自动播报。"
       - id: 382
         difficulty: 3
-        question: 前端无障碍检查清单(简版)？
+        question: "前端无障碍检查清单(简版)？"
         options:
-          - 不管
-          - 1.语义标签 2.图片 alt 3.键盘可操作 4.focus 可见 5.颜色对比度 6.表单标签关联 7.ARIA 正确使用 8.动态内容 aria-live
-          - 无障碍不重要
-          - 只需测 Chrome
+          - "不管"
+          - "1.语义标签 2.图片 alt 3.键盘可操作 4.focus 可见 5.颜色对比度 6.表单标签关联 7.ARIA 正确使用 8.动态内容 aria-live"
+          - "无障碍不重要"
+          - "只需测 Chrome"
         answer: 1
-        explanation: 8 项快速检查：正确的 HTML 标签→图片有 alt→键盘可操作→focus 可见→颜色对比够→表单 label 关联→ARIA 不过度→动态内容可感知。
+        explanation: "8 项快速检查：正确的 HTML 标签→图片有 alt→键盘可操作→focus 可见→颜色对比够→表单 label 关联→ARIA 不过度→动态内容可感知。"
       - id: 383
         difficulty: 3
-        question: 使用 icon font 图标需要注意什么无障碍问题？
+        question: "使用 icon font 图标需要注意什么无障碍问题？"
         options:
-          - 没问题
-          - 纯图标按钮没有文字→屏幕阅读器不知道这是什么。给图标加 aria-label 或放入隐藏文字
-          - 图标自动可访问
-          - 不需要处理
+          - "没问题"
+          - "纯图标按钮没有文字→屏幕阅读器不知道这是什么。给图标加 aria-label 或放入隐藏文字"
+          - "图标自动可访问"
+          - "不需要处理"
         answer: 1
         explanation: "<button><i class=\"icon-close\"></i></button>→阅读器读出\"按钮\"但不知道做什么。加 aria-label=\"关闭\"或用 visually-hidden 文字。"
       - id: 384
         difficulty: 3
-        question: 无障碍(ARIA)的第一条规则？
+        question: "无障碍(ARIA)的第一条规则？"
         options:
-          - 总用 ARIA
-          - 不要使用 ARIA 如果能用原生 HTML 替代。错误 ARIA 比没有更差
-          - ARIA 总是好的
-          - ARIA 已废弃
+          - "总用 ARIA"
+          - "不要使用 ARIA 如果能用原生 HTML 替代。错误 ARIA 比没有更差"
+          - "ARIA 总是好的"
+          - "ARIA 已废弃"
         answer: 1
         explanation: "ARIA 第一条规则：如果可以用原生 HTML 元素/属性就不要用 ARIA。原生 button 比 div role=\"button\"好一万倍。滥用 ARIA 降低可访问性。"
+      - id: 398
+        difficulty: 3
+        question: "关于 ARIA 的\"命名计算\"（Accessible Name Computation），以下哪项理解正确？"
+        options:
+          - "不重要"
+          - "元素的\"无障碍名称\"有优先级：aria-labelledby > aria-label > 原生标签机制(label for/id) > title > placeholder。阅读器读出的名字来自这个计算链"
+          - "任何属性都行"
+          - "只看 aria-label"
+        answer: 1
+        explanation: "无障碍名称（Accessible Name）决定了屏幕阅读器\"叫这个元素什么\"。优先级：1) aria-labelledby（引用其他元素文字，最高）；2) aria-label（直接写在元素上）；3) 原生机制（<label for>关联、alt 属性、按钮内文字）；4) title 属性（最低、最不可靠）。placeholder 不应作为唯一标签来源。"
+      - id: 399
+        difficulty: 3
+        question: "前端如何测试无障碍？（选不合适的做法）"
+        options:
+          - "只用颜色区分错误（如红框标记必填字段）是最不合适的做法"
+          - "使用 axe DevTools / Lighthouse 自动检测 + 手动键盘 Tab 测试 + 屏幕阅读器(NVDA/VoiceOver)手动测试"
+          - "检查颜色对比度"
+          - "测试键盘完整操作流程"
+        answer: 0
+        explanation: "只用颜色传达信息是无障碍大忌→色盲用户无法区分。正确测试流程：1) 自动检测（axe DevTools / Lighthouse）→覆盖 ~30% 问题；2) 键盘全流程测试（Tab/Enter/Esc/方向键）；3) 屏幕阅读器实测（免费 NVDA for Windows / VoiceOver for Mac）；4) 颜色对比度检查工具。"
+      - id: 400
+        difficulty: 3
+        question: "以下 HTML 有什么问题：<span class=\"btn\" onclick=\"submit()\">提交</span>？"
+        options:
+          - "完全没问题"
+          - "用 span 做按钮→键盘无法聚焦（tabindex 缺失）、Enter/Space 不触发、屏幕阅读器不识别为按钮。应该用 <button type=\"submit\"> 获得原生键盘+语义支持"
+          - "缺少颜色"
+          - "只要 onclick 就行"
+        answer: 1
+        explanation: "div/span 做按钮是无障碍\"重灾区\"：1) 不可聚焦（需添加 tabindex=\"0\"）；2) Enter/Space 键不触发（需手动监听 keydown）；3) 阅读器读作\"点击此处\"不知道是按钮（需 role=\"button\"）；4) 提交表单无效。原生 <button> 自动获得全部→始终优先用原生标签。"
+
+  - level: 4
+    type: boss
+    threshold: 60
+    name: ARIA与实战
+    questions:
+      - id: 401
+        difficulty: 2
+        question: "屏幕阅读器（如 NVDA/VoiceOver）是如何\"阅读\"网页的？"
+        options:
+          - "读源代码"
+          - "基于无障碍树（Accessibility Tree）→浏览器从 DOM 构建一棵简化的语义树，阅读器遍历这棵树逐元素读出名称、角色、状态、值。语义化的 HTML 产出更准确的树"
+          - "读 CSS"
+          - "随机朗读"
+        answer: 1
+        explanation: "浏览器为每个页面构建无障碍树（Accessibility Tree）=DOM 的语义化简化版（类似 DOM 的影子版本）。阅读器导航这棵树：读出元素角色（按钮/链接/标题）+名称（标签/文字）+状态（已展开/已选中）+值（输入框内容）。语义化 HTML 产出准确的树，div+ARIA 容易漏→No ARIA is better than bad ARIA。"
+      - id: 402
+        difficulty: 2
+        question: "WAI-ARIA 的五个规则中最重要的是哪条？为什么？"
+        options:
+          - "随便用 ARIA"
+          - "第一条最重要：能用原生 HTML 就不用 ARIA。因为原生标签免费赠送键盘交互+语义角色+状态管理，ARIA 只是\"补充剂\"不是\"替代品\""
+          - "所有规则平等"
+          - "ARIA 规则不重要"
+        answer: 1
+        explanation: "ARIA 五规则：1) 优先用原生 HTML（最重要！）；2) 不要改变原生语义除非必须；3) 所有交互元素必须键盘可操作；4) 不要对可聚焦元素用 role=\"presentation\" 或 aria-hidden=\"true\"；5) 所有交互元素必须有可访问名称。规则1核心：\"ARIA 是拐杖不是翅膀\"。"
+      - id: 403
+        difficulty: 3
+        question: "用 div 模拟一个自定义 Select 组件，需要添加哪些 ARIA 属性？（最少集合）"
+        options:
+          - "只要 role=\"listbox\""
+          - "role=\"combobox\" + aria-expanded + aria-haspopup=\"listbox\" + aria-controls + aria-activedescendant（或 roving tabindex 管理选项） + 每个 option 设 role=\"option\" + aria-selected"
+          - "只要 tabindex"
+          - "不需要 ARIA"
+        answer: 1
+        explanation: "自定义 Select 的 ARIA 清单：1) 触发器 role=\"combobox\"；2) aria-expanded 表示弹出状态；3) aria-haspopup=\"listbox\"；4) aria-controls 指向弹出列表 ID；5) 弹出列表 role=\"listbox\"；6) 选项 role=\"option\"+aria-selected；7) 键盘管理（上下键/Enter/Esc）。如此复杂的 ARIA→强烈建议直接使用原生 <select>。"
+      - id: 404
+        difficulty: 3
+        question: "表单错误信息的无障碍最佳实践？"
+        options:
+          - "用红色文字"
+          - "1) 错误信息和字段关联 aria-describedby；2) 错误列表放在表单顶部并设 role=\"alert\"+tabindex=\"-1\" 聚焦；3) 字段设 aria-invalid=\"true\"；4) 错误信息文字具体（\"邮箱格式不正确\"而非\"输入错误\"）"
+          - "不需要处理"
+          - "只用 placeholder"
+        answer: 1
+        explanation: "表单错误无障碍完整方案：1) aria-describedby=\"email-error\" 关联错误信息到输入框→聚焦输入框时阅读器播报错误；2) 表单顶部错误摘要 role=\"alert\"（自动播报）；3) aria-invalid=\"true\" 标记无效字段；4) 错误信息具体、有帮助（\"密码需要至少8个字符\"不是\"格式错误\"）；5) 视觉提示不只用颜色（红色框+错误图标+文字）。"
+      - id: 405
+        difficulty: 2
+        question: "焦点管理（Focus Management）在 SPA（单页应用）中的重要性？"
+        options:
+          - "不重要"
+          - "SPA 页面切换无整页刷新→路由变化后焦点仍停留在原位置→阅读器/键盘用户不知道页面已变化。需手动将焦点移到新页面标题或主要内容区"
+          - "自动处理"
+          - "只影响键盘"
+        answer: 1
+        explanation: "SPA 路由切换不会触发浏览器默认的\"新页面焦点重置\"。解决方案：路由变化后 → 1) 将焦点发送到新页面的 h1 或 main 容器（需 tabindex=\"-1\" 使其可编程聚焦但不参与 Tab 顺序）；2) 更新 document.title；3) 如果原触发元素在 DOM 中已不存在→焦点跳到 body。"
+      - id: 406
+        difficulty: 3
+        question: "如何测试屏幕阅读器的实际效果？推荐工具？"
+        options:
+          - "无法测试"
+          - "Windows：NVDA（免费开源最常用）+ Firefox/Chrome。Mac/iOS：VoiceOver（内置 Cmd+F5 开启）。操作：Tab/方向键导航→听播报内容→验证语义正确。同时用 Chrome DevTools 无障碍面板查看无障碍树"
+          - "只需 Lighthouse"
+          - "只需要自动测试"
+        answer: 1
+        explanation: "推荐测试流程：1) 自动工具（axe DevTools 浏览器扩展+Lighthouse）→快速发现 30-40% 问题；2) 键盘手动测试（Tab/Shift+Tab/Enter/Esc/方向键完整流程）；3) 屏幕阅读器实测（NVDA 免费 for Windows/Cmd+F5 开启 VoiceOver for Mac）；4) DevTools 无障碍面板（Elements>Accessibility 查看每个元素的无障碍属性）。自动工具无法替代手动测试。"
+      - id: 407
+        difficulty: 2
+        question: "什么是焦点陷阱（Focus Trap）？何时需要？"
+        options:
+          - "永远不需要"
+          - "焦点陷阱=Tab 键在某个容器内循环无法跳出（Modal/对话框/下拉菜单打开时）。需要时：Modal 打开时焦点应在 Modal 内循环→防止键盘用户 Tab 到背景内容。关闭时释放焦点回触发按钮"
+          - "Bug 需要修复"
+          - "只在表单中"
+        answer: 1
+        explanation: "Modal 对话框核心无障碍特性：打开时焦点移入→Tab 在 Modal 内循环（第一个→最后一个→第一个）→Shift+Tab 反向→Esc 关闭→焦点回到触发按钮。实现要点：查询所有可聚焦子元素、监听 keydown Tab、首尾元素间循环。有现成库（如 focus-trap、@reach/dialog）但了解原理重要。"
+      - id: 408
+        difficulty: 3
+        question: "关于无障碍的常见误区，哪个说法是正确的？"
+        options:
+          - "无障碍只对盲人有用"
+          - "无障碍覆盖多类残障：视觉（盲/低视力/色盲）、听觉（聋/重听）、运动（无法使用鼠标/精细动作困难）、认知（阅读障碍/注意力障碍/记忆力障碍）。约15%人口有某种形式的残障，但无障碍实际上改善所有人的体验"
+          - "无障碍让网站变丑"
+          - "无障碍只需 alt 属性"
+        answer: 1
+        explanation: "无障碍（a11y）覆盖广泛：1) 视觉障碍（屏幕阅读器/放大/高对比度）；2) 听觉障碍（字幕/文字替代音频）；3) 运动障碍（键盘/语音/开关输入）；4) 认知障碍（清晰布局/简单语言/一致性）。临时性障碍（手臂骨折）和情境限制（阳光下看不清屏幕/嘈杂环境听不到音频）也受益。设计 for 极端→改善所有体验。"
+      - id: 409
+        difficulty: 2
+        question: "图片的 alt 文本应该怎么写？描述性、装饰性、信息性图片有何不同？"
+        options:
+          - "只写\"图片\""
+          - "信息性图片（传达内容）：描述图片传达的信息而非外观（\"柱状图显示2024年销售额增长20%\"）。装饰性图片（纯视觉装饰）：alt=\"\"（空字符串）让阅读器跳过。功能性图片（链接/按钮内图片）：描述功能（\"返回首页\"）"
+          - "全部 alt=\"\""
+          - "alt 不重要"
+        answer: 1
+        explanation: "alt 文本写得好=替代图片传达同样信息。信息性图片：描述图中\"什么信息\"而非\"图长什么样\"。装饰性图片：alt=\"\"（null，不是空格！）让阅读器跳过。功能性图片（如 logo 链接到首页）：alt=\"首页\"（描述功能不是\"Logo 图片\"）。图片包含文字时 alt 必须包含同样的文字。"
+      - id: 410
+        difficulty: 3
+        question: "如何实现一个无障碍的 Tabs（标签切换）组件？核心 ARIA 属性有哪些？"
+        options:
+          - "只用 div"
+          - "role=\"tablist\" 包裹 → 每个标签 role=\"tab\"+aria-selected+aria-controls 指向面板ID → 每个面板 role=\"tabpanel\"+aria-labelledby 指向标签ID → 键盘支持左右方向键切换标签"
+          - "只需要 CSS"
+          - "Tabs 不需要无障碍"
+        answer: 1
+        explanation: "无障碍 Tabs 完整方案：1) 容器 role=\"tablist\"+aria-label；2) 每个标签 role=\"tab\"+aria-selected=\"true/false\"+aria-controls=\"panel1\"+tabindex（选中=0 未选=-1）+id=\"tab1\"；3) 每个面板 role=\"tabpanel\"+aria-labelledby=\"tab1\"+tabindex=\"0\"（面板可聚焦）；4) 键盘：左右箭头切换标签、Home/End 首尾、Tab 进入面板内容。"
 

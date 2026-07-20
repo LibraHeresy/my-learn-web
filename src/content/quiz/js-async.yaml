@@ -6,7 +6,6 @@ gem:
   icon: ⏳
   achievement: mid
   order: 8
-
 levels:
   - level: 1
     type: normal
@@ -55,7 +54,7 @@ levels:
         explanation: pending(进行中)→fulfilled(成功)或 rejected(失败)。状态一旦改变不可逆。
       - id: 175
         difficulty: 1
-        question: "fetch(\"/api\")返回什么？"
+        question: fetch("/api")返回什么？
         options:
           - 数据对象
           - Promise 对象
@@ -63,7 +62,88 @@ levels:
           - 原始数据
         answer: 1
         explanation: fetch()返回 Promise resolve 后得 Response 对象。需.json()或.text()提取数据。
-
+      - id: 418
+        difficulty: 1
+        question: setTimeout() 的返回值是什么？有什么用途？
+        options:
+          - undefined
+          - 一个数字 ID，可用于 clearTimeout(id) 取消定时器
+          - Promise 对象
+          - 回调函数本身
+        answer: 1
+        explanation: setTimeout() 返回一个数字（浏览器）或对象（Node.js）作为定时器 ID。将此 ID 传给 clearTimeout() 即可在回调执行前取消定时器。setInterval 同理，用 clearInterval(id) 取消。
+      - id: 419
+        difficulty: 1
+        question: setInterval 的最小间隔实际是多少？设为 0 会怎样？
+        options:
+          - 0ms 立即连续执行
+          - 浏览器最小约 4ms（嵌套超过5层后），设为 0 也会被强制抬高
+          - 精确按设定值执行
+          - 设为 0 会报错
+        answer: 1
+        explanation: HTML5 规范：setInterval 嵌套超过 5 层后最小间隔强制为 4ms。设为 0 也会被浏览器限制为最小值。在后台标签页中还会被进一步节流到至少 1000ms。
+      - id: 420
+        difficulty: 1
+        question: |-
+          以下代码输出顺序是什么？
+          `console.log("A"); setTimeout(() => console.log("B"), 0); console.log("C");`
+        options:
+          - A, B, C
+          - A, C, B
+          - B, A, C
+          - C, A, B
+        answer: 1
+        explanation: 同步代码先执行完毕（A, C），然后事件循环才会从任务队列中取出 setTimeout 的回调执行（B）。即使延迟设为 0，回调也是异步执行的。
+      - id: 421
+        difficulty: 1
+        question: 什么是回调函数（Callback）？
+        options:
+          - 立即执行的函数
+          - 作为参数传递给其他函数、在某个时刻被调用的函数
+          - 只能用于定时器的函数
+          - 异步函数的别名
+        answer: 1
+        explanation: 回调函数是作为参数传入另一个函数的函数，在特定时机被"回调"执行。常见于事件处理、定时器、异步操作。回调是 JS 异步编程的基础模式，但嵌套过多会导致"回调地狱"。
+      - id: 422
+        difficulty: 2
+        question: 嵌套 setTimeout 和 setInterval 哪个更可靠？为什么？
+        options:
+          - setInterval 更可靠
+          - 嵌套 setTimeout 更可靠：每次执行完再设下一个，避免回调堆积
+          - 两者完全相同
+          - 取决于浏览器
+        answer: 1
+        explanation: setInterval 不管上次回调是否执行完，到时间就触发，可能导致回调堆积。用递归 setTimeout（在回调中再次调用 setTimeout）可在前一次执行完后再设下一次，确保不会重叠。
+      - id: 423
+        difficulty: 2
+        question: requestAnimationFrame 是什么？和 setTimeout(fn, 16) 有什么区别？
+        options:
+          - 完全相同
+          - rAF 在浏览器下次重绘前执行回调（约 60fps），会自动与屏幕刷新率同步；setTimeout 不保证与渲染同步
+          - rAF 更慢
+          - rAF 只能用于动画
+        answer: 1
+        explanation: requestAnimationFrame 由浏览器在重绘前调用，频率与屏幕刷新率匹配（通常 60fps），且页面不可见时会暂停。适合做动画。setTimeout 不考虑渲染时机，可能导致掉帧或无效计算。
+      - id: 424
+        difficulty: 1
+        question: '`new Promise((resolve, reject) => {})` 中 resolve 和 reject 的作用？'
+        options:
+          - 两者相同
+          - resolve(value) 将 Promise 状态改为 fulfilled；reject(reason) 改为 rejected
+          - resolve 取消 Promise
+          - reject 重新开始 Promise
+        answer: 1
+        explanation: Promise 构造函数接收一个执行器函数，执行器接收 resolve 和 reject 两个参数。调用 resolve(value) 使 Promise 成功，调用 reject(reason) 使 Promise 失败。状态一旦改变就不可逆。
+      - id: 425
+        difficulty: 2
+        question: '`setTimeout(fn, 1000)` 中 fn 能保证在第 1000ms 准确执行吗？'
+        options:
+          - 能，精确到毫秒
+          - 不能，1000ms 是"最早"执行时间，主线程忙时会延迟
+          - 只在 Chrome 中精确
+          - 误差不超过 1ms
+        answer: 1
+        explanation: setTimeout 的延迟是最小等待时间。回调被放入任务队列，必须等待：1) 当前同步代码执行完 2) 前面的微任务队列清空 3) 前面的宏任务执行完。实际执行时间 = 延迟 + 排队等待时间。
   - level: 2
     type: elite
     threshold: 70
@@ -98,7 +178,7 @@ levels:
           - undefined
           - 取决于内部
         answer: 1
-        explanation: "async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。"
+        explanation: async function f(){return 1}→f()返回 Promise{1}。async 函数始终返回 Promise。
       - id: 179
         difficulty: 2
         question: await 只能在什么函数中使用？
@@ -121,7 +201,7 @@ levels:
         explanation: fetch 只有网络故障(断网 DNS 失败)时 reject。404/500 等 HTTP 错误仍 resolve 需手动检查 res.ok。
       - id: 181
         difficulty: 2
-        question: "Promise.all([p1,p2,p3])何时 resolve？"
+        question: Promise.all([p1,p2,p3])何时 resolve？
         options:
           - 第一个完成
           - 全部完成
@@ -131,7 +211,7 @@ levels:
         explanation: 全部 resolve→返回所有结果数组。任何一个 reject→立即 reject。
       - id: 182
         difficulty: 2
-        question: "try{await fetch(url)}catch(e){} 能捕获什么？"
+        question: try{await fetch(url)}catch(e){} 能捕获什么？
         options:
           - HTTP 404
           - 网络错误(断网等)
@@ -148,8 +228,67 @@ levels:
           - JS 引擎 bug
           - 一种设计模式
         answer: 1
-        explanation: "回调嵌套导致代码横向增长(\"金字塔\")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。"
-
+        explanation: 回调嵌套导致代码横向增长("金字塔")难以理解和调试。Promise.then 链和 async/await 将异步代码拉平。
+      - id: 426
+        difficulty: 2
+        question: '`Promise.resolve(42)` 和 `Promise.reject("err")` 的作用？'
+        options:
+          - 创建新的 pending Promise
+          - 快捷创建已成功/已失败的 Promise
+          - 取消 Promise 链
+          - 等同于 new Promise()
+        answer: 1
+        explanation: Promise.resolve(value) 返回一个立即 resolve 的 Promise（value 本身是 thenable 时展开）。Promise.reject(reason) 返回一个立即 reject 的 Promise。常用于测试或初始化 Promise 链。
+      - id: 427
+        difficulty: 2
+        question: 在 `.catch()` 之后还能接 `.then()` 吗？
+        options:
+          - 不能，catch 是链的终点
+          - 可以，catch 返回一个 Promise，其后的 then 会继续执行
+          - 会导致错误
+          - 取决于 Promise 状态
+        answer: 1
+        explanation: catch() 也是 then(undefined, onRejected) 的语法糖，它返回一个新的 Promise。如果 catch 中没有抛出错误，返回的 Promise 会 resolve，后续的 then 可以继续链式调用。这允许在错误处理后恢复链条。
+      - id: 428
+        difficulty: 3
+        question: Promise 构造函数中执行器（executor）的代码是同步还是异步执行的？
+        options:
+          - 异步执行
+          - 同步执行（new Promise 时立即执行，但 resolve/reject 的回调是异步的）
+          - 有时同步有时异步
+          - 取决于参数
+        answer: 1
+        explanation: new Promise(executor) 调用时，executor 函数会立即同步执行。但 .then()/.catch() 中的回调始终是异步（微任务）执行的。这意味着 Promise 构造器中的同步代码在创建时立即运行。
+      - id: 429
+        difficulty: 2
+        question: '`promise.finally(() => console.log("done"))` 中 finally 何时执行？有哪些特点？'
+        options:
+          - 只在成功时执行
+          - 无论 fulfilled 还是 rejected 都会执行；不接收参数，不改变返回值
+          - 只在失败时执行
+          - finally 已废弃
+        answer: 1
+        explanation: finally() 无论 Promise 是成功还是失败都会执行，适合做清理操作（如关闭 loading）。finally 的回调不接收任何参数（不知道成功还是失败），且其返回值（除了抛出的错误和返回的 rejected Promise）不会影响链的最终结果。
+      - id: 430
+        difficulty: 2
+        question: Promise 链中某个 then 抛出错误但没有 catch 会怎样？
+        options:
+          - 错误被静默忽略
+          - 错误会沿着链向下传递，直到被 catch 捕获；如果链末尾也没有 catch，会触发 unhandledrejection 事件
+          - 程序崩溃
+          - 错误自动转为 resolve
+        answer: 1
+        explanation: Promise 链中的错误会沿着链向下冒泡，跳过中间的 then（只跳过成功回调），直到遇到 catch。若链末端也没有 catch，浏览器会触发 unhandledrejection 事件（Node.js 中可能终止进程）。这比回调模式的错误吞没好得多。
+      - id: 431
+        difficulty: 3
+        question: '`Promise.all` 和直接串行 await 有什么区别？何时该用哪个？'
+        options:
+          - 完全相同
+          - Promise.all 并发执行多个 Promise；串行 await 一个一个等待。当请求之间没有依赖时，用 Promise.all 总耗时取决于最慢的请求
+          - 串行 await 更快
+          - Promise.all 只能用于 2 个以下
+        answer: 1
+        explanation: const [a,b] = await Promise.all([f1(), f2()]) 同时发起两个请求，总耗时 = max(请求1时间, 请求2时间)。而 await f1(); await f2(); 是串行的，总耗时 = 请求1时间 + 请求2时间。无依赖的请求始终应使用 Promise.all 并发。
   - level: 3
     type: boss
     threshold: 60
@@ -164,7 +303,7 @@ levels:
           - 用 .catch()
           - 自动处理
         answer: 1
-        explanation: "try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。"
+        explanation: try{await fetch(url)}catch(e){处理错误}。和同步代码错误处理写法一致。
       - id: 185
         difficulty: 3
         question: 多个独立 await 可以并行吗？怎么提高性能？
@@ -174,30 +313,30 @@ levels:
           - 自动并行
           - 并行会出错
         answer: 1
-        explanation: "const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。"
+        explanation: const[a,b]=await Promise.all([fetch(u1),fetch(u2)])同时发出两个请求而非等待第一个完成再发第二个。
       - id: 186
         difficulty: 3
-        question: '你做搜索框时发现“每输入一个字就发一次请求”，Network 面板刷出很多记录。最合适的优化是什么？'
+        question: 你做搜索框时发现“每输入一个字就发一次请求”，Network 面板刷出很多记录。最合适的优化是什么？
         options:
-          - '用 try/catch 包住 fetch'
-          - '给 input 监听加防抖，停止输入一小段时间后再请求'
-          - '把所有请求都改成 setInterval'
-          - '每次输入都先刷新页面'
+          - 用 try/catch 包住 fetch
+          - 给 input 监听加防抖，停止输入一小段时间后再请求
+          - 把所有请求都改成 setInterval
+          - 每次输入都先刷新页面
         answer: 1
-        explanation: '这是典型的实时搜索防抖场景。连续输入时先清掉旧定时器，等用户停下 300~500ms 再真正发请求，能显著减少无效请求。'
+        explanation: 这是典型的实时搜索防抖场景。连续输入时先清掉旧定时器，等用户停下 300~500ms 再真正发请求，能显著减少无效请求。
       - id: 187
         difficulty: 3
-        question: "`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？"
+        question: '`console.log(1);setTimeout(()=>console.log(2),0);console.log(3)`顺序？'
         options:
-          - "1,2,3"
-          - "1,3,2"
-          - "2,1,3"
-          - "3,2,1"
+          - 1,2,3
+          - 1,3,2
+          - 2,1,3
+          - 3,2,1
         answer: 1
-        explanation: "同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。"
+        explanation: 同步代码先跑:1→3。setTimeout(fn,0)中 fn 入宏任务队列等同步执行完→2。
       - id: 188
         difficulty: 3
-        question: "`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？"
+        question: '`new Promise(r=>{r(1);r(2)}).then(console.log)`输出？'
         options:
           - 1 和 2
           - 只有 1(Promise 状态一旦改变不可逆)
@@ -207,7 +346,7 @@ levels:
         explanation: Promise 状态一旦从 pending→fulfilled 就不可再变。第二次 r(2)被忽略。
       - id: 189
         difficulty: 3
-        question: "`fetch(url).then(r=>r.json())`为什么需要两步？"
+        question: '`fetch(url).then(r=>r.json())`为什么需要两步？'
         options:
           - 设计缺陷
           - 第一步得 Response 对象第二步解析 JSON 体(异步)
@@ -217,17 +356,17 @@ levels:
         explanation: fetch 先返回 Response(含状态码头信息)再调用.json()(本身返回 Promise)解析响应体。
       - id: 190
         difficulty: 3
-        question: '你在 async 函数里写了 `const data = fetch(url)`，后面直接 `console.log(data.results)` 却拿不到结果。最核心的原因是什么？'
+        question: 你在 async 函数里写了 `const data = fetch(url)`，后面直接 `console.log(data.results)` 却拿不到结果。最核心的原因是什么？
         options:
-          - 'fetch 只能在 then 里用，不能在 async 里用'
-          - '没有 await，拿到的是 Promise 对象，不是已经解析好的结果'
-          - 'async 会自动把所有 Promise 展开'
-          - 'data.results 只有在 404 时才不存在'
+          - fetch 只能在 then 里用，不能在 async 里用
+          - 没有 await，拿到的是 Promise 对象，不是已经解析好的结果
+          - async 会自动把所有 Promise 展开
+          - data.results 只有在 404 时才不存在
         answer: 1
         explanation: '`fetch(url)` 先返回 Promise。只有 `await fetch(url)` 之后，才会拿到 Response；再继续 `await response.json()` 才是实际数据。'
       - id: 191
         difficulty: 3
-        question: "`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？"
+        question: '`setTimeout(fn,1000)`能保证 fn 在 1000ms 时准时执行吗？'
         options:
           - 能
           - 不能——延迟是最小等待时间实际可能更长(取决于事件队列)
@@ -267,7 +406,7 @@ levels:
         explanation: JS 引擎单线程但浏览器提供 Web API(定时器/网络请求等)在其他线程执行。完成后回调推入 JS 任务队列等执行。
       - id: 195
         difficulty: 3
-        question: "addEventListener(\"click\",async(e)=>{await fetch(...)})这样写对吗？"
+        question: addEventListener("click",async(e)=>{await fetch(...)})这样写对吗？
         options:
           - 对回调可以是 async
           - 错 addEventListener 不支持 async
@@ -275,4 +414,210 @@ levels:
           - 必须用.then
         answer: 0
         explanation: 事件回调可以是 async 函数。但需要注意：如果用户快速多次点击会有多个并发 fetch。可能需要防抖。
-
+      - id: 432
+        difficulty: 3
+        question: async 函数中没有 await 语句，它的行为和普通函数有区别吗？
+        options:
+          - 没有区别
+          - async 函数仍然返回 Promise，即使内部没有 await；返回值被自动包装为 Promise
+          - 没有 await 时 async 关键字无效
+          - 报错：async 必须有 await
+        answer: 1
+        explanation: async 函数始终返回 Promise。即使内部没有 await，`async function f(){return 1}` 也返回 Promise.resolve(1)。不过在这种情况下，函数内部代码仍是同步执行的（一直执行到首个 await 为止）。
+      - id: 433
+        difficulty: 3
+        question: 为什么 `[1,2,3].forEach(async (id) => { await fetch(...) })` 有陷阱？
+        options:
+          - 代码会报错
+          - forEach 不会等待 async 回调完成；所有 fetch 同时发起但 forEach 不会返回 Promise，外部无法 await 它们全部完成
+          - forEach 回调不能是 async
+          - fetch 只能在 for 循环中用
+        answer: 1
+        explanation: forEach 不关心回调的返回值，即使回调是 async 函数也不会等待。如果你需要顺序执行或等待所有异步操作完成，应使用 for...of 循环 + await，或 Promise.all + map。
+      - id: 434
+        difficulty: 3
+        question: async 函数中错误处理的两种方式：try/catch 和 .catch() 各有什么特点？
+        options:
+          - 完全相同
+          - try/catch 可以包裹多个 await，清晰直观。.catch() 链式调用，适合在调用处处理。两者可结合使用
+          - try/catch 不适用于 async
+          - .catch() 在 async 中无效
+        answer: 1
+        explanation: 在 async 函数中，可以用 try/catch 包裹 await 表达式，像同步代码一样处理错误。也可以直接在 await 表达式后面 .catch()。try/catch 更适合需要细粒度错误处理的场景，.catch() 更简洁适合统一兜底。
+      - id: 435
+        difficulty: 3
+        question: 什么是顶层 await（Top-level await）？在什么环境可用？
+        options:
+          - await 只能在 async 函数中使用
+          - 在 ES 模块（.mjs 或 type:"module"）中，可以直接在模块顶层使用 await，无需包装在 async 函数中
+          - 在所有 JS 文件中都可用
+          - 已废弃的特性
+        answer: 1
+        explanation: 顶层 await 是 ES2022 特性，仅在 ES 模块中可用（非 CommonJS）。它允许模块顶层使用 await，使模块加载变为异步。这在动态导入配置、初始化数据库连接等场景非常有用。注意：导入含顶层 await 的模块会阻塞该模块及其依赖模块的执行。
+      - id: 436
+        difficulty: 3
+        question: '`await` 之后的代码是同步还是异步执行的？'
+        options:
+          - 同步执行，和普通代码一样
+          - await 之后的代码作为微任务执行（相当于 .then() 回调），是异步的
+          - 一半同步一半异步
+          - 取决于 Promise 状态
+        answer: 1
+        explanation: await 表达式会暂停 async 函数的执行，等待 Promise resolve。resolve 后，await 之后的代码会被放入微任务队列中执行，而不是立即同步执行。这意味着 await 之后代码的执行时机类似于 .then() 回调。
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 异步综合
+    questions:
+      - id: 437
+        difficulty: 2
+        question: 微任务（Microtask）和宏任务（Macrotask）有哪些？执行顺序如何？
+        options:
+          - 宏任务先执行
+          - 每个宏任务执行完后，会清空所有微任务队列，然后才执行下一个宏任务；Promise.then 和 queueMicrotask 是微任务
+          - 同时执行
+          - 随机执行
+        answer: 1
+        explanation: 宏任务：setTimeout、setInterval、I/O、UI 渲染。微任务：Promise.then/catch/finally、queueMicrotask、MutationObserver。事件循环：执行一个宏任务→清空所有微任务→可能渲染→下一个宏任务。微任务总是在下一个宏任务之前清空。
+      - id: 438
+        difficulty: 3
+        question: '`Promise.all` 和 `Promise.allSettled` 的核心区别？'
+        options:
+          - 完全相同
+          - all：任一 reject 则整体 reject；allSettled：等待全部完成（无论成败），返回每个结果的状态和值
+          - allSettled 更快
+          - all 可以处理失败
+        answer: 1
+        explanation: Promise.all([p1, p2]) 如果 p1 reject，整个立即 reject，不再等 p2。Promise.allSettled([p1, p2]) 等待所有 Promise 完成（无论成败），返回 [{status:"fulfilled", value:...}, {status:"rejected", reason:...}]。适合需要全部结果、不容忍单个失败的场景。
+      - id: 439
+        difficulty: 2
+        question: '`Promise.race([p1, p2])` 的行为？'
+        options:
+          - 等待所有完成
+          - 返回最先完成的 Promise 的结果（无论成功或失败）
+          - 返回最后一个完成的结果
+          - 随机返回
+        answer: 1
+        explanation: Promise.race() 返回第一个 settled（完成或失败）的 Promise 的结果。常用于超时控制：Promise.race([fetch(url), timeout(5000)])。注意：其他 Promise 仍会继续执行，只是结果被忽略。
+      - id: 440
+        difficulty: 3
+        question: '`Promise.any([p1, p2, p3])` 的行为？和 race 有什么区别？'
+        options:
+          - 和 race 完全相同
+          - 返回第一个 fulfilled 的 Promise；如果全部 reject，则 AggregateError。与 race 不同：race 返回第一个 settled（无论成败）
+          - 返回所有成功的结果
+          - 已废弃
+        answer: 1
+        explanation: Promise.any() 是 ES2021 引入的。与 race 的关键区别：race 返回第一个 settled（无论成功失败），any 忽略 reject 只等第一个成功。如果所有都失败，抛出 AggregateError 包含所有错误。适合"多个源取最快成功"的场景。
+      - id: 441
+        difficulty: 3
+        question: AbortController 和 fetch 如何配合使用？
+        options:
+          - 无法配合
+          - 将 AbortController.signal 传入 fetch 的 options；调用 controller.abort() 取消请求，fetch 会抛出 AbortError
+          - AbortController 是独立的
+          - 只能取消 setTimeout
+        answer: 1
+        explanation: 'const controller = new AbortController(); fetch(url, { signal: controller.signal }); controller.abort() 取消请求。常用于用户离开页面时取消未完成的请求，或实现请求超时。fetch 被取消后 Promise 会 reject 一个 AbortError（name 为 "AbortError"）。'
+      - id: 442
+        difficulty: 3
+        question: 什么是竞态条件（Race Condition）？在前端异步中如何出现？
+        options:
+          - 只有后端才有的问题
+          - 多个异步操作完成顺序不确定，导致结果被旧数据覆盖。例如快速切换标签页，先发的请求后返回覆盖了新请求的结果
+          - 异步代码必定出现
+          - 浏览器会自动处理
+        answer: 1
+        explanation: 例如：用户快速切换两个标签，先请求A再请求B。如果B先返回渲染，然后A后返回覆盖B的结果，用户看到的是旧数据。解决方案：使用 AbortController 取消旧请求，或用 token/版本号忽略过时响应。
+      - id: 443
+        difficulty: 2
+        question: '`queueMicrotask()` 是什么？和 Promise.then 有什么关系？'
+        options:
+          - 是宏任务
+          - 将回调加入微任务队列，等价于 Promise.resolve().then(fn)，但更直接高效
+          - 已废弃
+          - 是 setTimeout 的别名
+        answer: 1
+        explanation: queueMicrotask(fn) 直接向微任务队列添加回调。效果与 Promise.resolve().then(fn) 相同但更直接（不创建 Promise 对象）。适用于需要异步但又要尽快（在当前宏任务结束后）执行的场景。
+      - id: 444
+        difficulty: 3
+        question: |-
+          以下代码输出顺序？
+          `Promise.resolve().then(() => console.log(1)); setTimeout(() => console.log(2), 0); console.log(3);`
+        options:
+          - 1, 2, 3
+          - 3, 1, 2
+          - 3, 2, 1
+          - 2, 1, 3
+        answer: 1
+        explanation: 同步代码先执行：console.log(3)。然后清空微任务队列：Promise.then 输出 1。最后执行下一个宏任务：setTimeout 输出 2。顺序：3, 1, 2。这是事件循环中最常考的排序题。
+      - id: 445
+        difficulty: 3
+        question: Async Generator（异步生成器）`async function*` 的作用？
+        options:
+          - 和普通函数完全一样
+          - 逐个 yield 异步值，for await...of 遍历时自动等待每个 yield 的 Promise
+          - 只能用在 Node.js
+          - 已废弃的实验特性
+        answer: 1
+        explanation: async function* 创建异步生成器，yield 的值如果是 Promise，在 for await...of 遍历时会自动 await。适合处理分页 API、流式数据等"逐批获取"的异步数据源场景。
+      - id: 446
+        difficulty: 2
+        question: '`Promise.resolve().then(() => { console.log(1); }).then(() => { console.log(2); }); console.log(3);` 输出顺序？'
+        options:
+          - 1, 2, 3
+          - 3, 1, 2
+          - 1, 3, 2
+          - 3, 2, 1
+        answer: 1
+        explanation: 同步 console.log(3) 先执行。每个 .then() 的回调都是微任务，但它们是链式的：第一个 then 的回调执行完，返回的 Promise resolve 后，第二个 then 的回调才会进入微任务队列。所以虽然都是微任务，链式 then 会保证顺序：3, 1, 2。
+      - id: 447
+        difficulty: 3
+        question: 同一个 Promise 上绑定多个 `.then()` 会怎样？执行顺序？
+        options:
+          - 只有第一个 then 会执行
+          - 所有 then 都会执行，按注册顺序依次调用，但它们共享同一个 resolve 值
+          - 会报错
+          - 随机执行一个
+        answer: 1
+        explanation: 同一个 Promise 可以注册多个 .then()，它们都会在 Promise resolve 后被调用（按注册顺序）。这与链式 then 不同：多个独立 then 各自独立接收同一个值，而非前一个 then 的返回值。每个 then 的返回值不影响其他 then。
+      - id: 448
+        difficulty: 3
+        question: Promise 中错误被"吞掉"（Swallowing）是什么意思？如何避免？
+        options:
+          - 错误会自动修复
+          - Promise 构造函数中的同步错误和 then 回调中的错误会被 Promise 捕获，但若没有 catch，错误不会抛到全局。避免：始终在链末尾加 catch，或在 async 函数中用 try/catch
+          - 错误会被浏览器忽略
+          - JS 引擎会自动处理
+        answer: 1
+        explanation: Promise 内部错误（包括 throw 和 rejected）不会像同步代码那样中断程序，而是使 Promise 变为 rejected。如果链条中没有 catch 处理，错误就"被吞了"——不会崩溃，但你也永远不知道出了错。始终在链末端加 catch，否则浏览器会发 unhandledrejection 警告。
+      - id: 449
+        difficulty: 2
+        question: '`new Promise(executor)` 和 `async function` 可以互相转换吗？'
+        options:
+          - 完全不同的概念
+          - 可以：async 函数本质上是返回 Promise 的语法糖；任何 Promise 链都可以用 async/await 重写
+          - 只能单向转换
+          - async 函数更弱
+        answer: 1
+        explanation: async 函数是创建返回 Promise 的函数的语法糖。`async function f(){return 1}` ≈ `function f(){return Promise.resolve(1)}`。async/await 使异步代码看起来像同步代码，但底层仍是 Promise。理解这一点有助于调试和问题定位。
+      - id: 450
+        difficulty: 3
+        question: MutationObserver 的回调是微任务还是宏任务？
+        options:
+          - 宏任务
+          - 微任务——MutationObserver 的回调进入微任务队列，在同轮事件循环中执行
+          - 同步执行
+          - 取决于浏览器
+        answer: 1
+        explanation: MutationObserver 的回调是微任务，与 Promise.then 同一优先级。这意味着 DOM 变化后，MutationObserver 回调会在当前宏任务结束、下一个宏任务开始前执行（在渲染之前）。这确保了在下一帧渲染前可以批量处理所有 DOM 变更。
+      - id: 451
+        difficulty: 2
+        question: 防抖（Debounce）在异步场景中如何应用？核心原理是什么？
+        options:
+          - 重复执行同一个操作
+          - 连续触发时只执行最后一次：每次触发清除之前的定时器，重新计时。适合搜索框输入、窗口 resize
+          - 立即执行所有操作
+          - 只在同步代码中使用
+        answer: 1
+        explanation: 防抖：function debounce(fn, delay) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); } }。用户停止操作 delay 毫秒后才执行。适合减少高频事件触发的异步请求。

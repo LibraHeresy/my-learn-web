@@ -1,12 +1,9 @@
-# AI 协作宝石
-
 gem:
   id: ai-collab
   name: AI 协作宝石
   icon: 🤖
   achievement: mid
   order: 12
-
 levels:
   - level: 1
     type: normal
@@ -22,7 +19,7 @@ levels:
           - 有自我意识
           - 能创造知识
         answer: 1
-        explanation: "大语言模型本质\"下一个词预测器\"。根据训练数据和上下文计算每个可能 token 的概率。"
+        explanation: 大语言模型本质"下一个词预测器"。根据训练数据和上下文计算每个可能 token 的概率。
       - id: 262
         difficulty: 1
         question: 什么是 AI 幻觉(Hallucination)？
@@ -52,7 +49,7 @@ levels:
           - 只写关键词
           - 越长越好
         answer: 1
-        explanation: "角色(\"你是前端专家\")+上下文(\"我在做音乐教学网站\")+任务(\"写一个 CSS 动画\")+格式约束(\"输出完整代码\")。"
+        explanation: 角色("你是前端专家")+上下文("我在做音乐教学网站")+任务("写一个 CSS 动画")+格式约束("输出完整代码")。
       - id: 265
         difficulty: 1
         question: AI 写的代码能直接复制粘贴用吗？
@@ -62,8 +59,27 @@ levels:
           - 绝对不能
           - 简单代码可以直接用
         answer: 1
-        explanation: "AI 生成的代码像\"初稿\"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。"
-
+        explanation: AI 生成的代码像"初稿"需人工审核测试理解。AI 可能产生幻觉(编造 API)/过时语法/安全问题。
+      - difficulty: 1
+        question: 什么是 Token？Token 和字数的关系？
+        options:
+          - Token=字符
+          - Token 是 AI 处理文本的最小单位。中文 1 字约 1-2 token，英文 1 词约 1-3 token
+          - Token=字节
+          - 无关
+        answer: 1
+        explanation: AI 不直接处理"字"而是将文本切分为 token 序列。中文 1 汉字≈1-2 token，英文 1000 词≈1300 token。Token 数决定上下文容量和费用。
+        id: 413
+      - difficulty: 1
+        question: AI 的上下文窗口（Context Window）是什么？满了会怎样？
+        options:
+          - 无限
+          - AI 一次能"看到"的最大 token 量。超出后旧内容被遗忘（丢失早期对话约束）
+          - 无限制
+          - 自动扩容
+        answer: 1
+        explanation: 上下文窗口=AI 的工作记忆。超过限制后最早的内容被丢弃→AI"忘记"最开始的要求。所以长对话需定期总结或开新对话。典型窗口：128K-200K token。
+        id: 414
   - level: 2
     type: elite
     threshold: 70
@@ -88,7 +104,7 @@ levels:
           - 只贴代码
           - 不需要贴报错
         answer: 1
-        explanation: "三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图(\"我想让按钮点击后变色\")。"
+        explanation: 三要素：1.报错全文(不要截断)2.相关代码(不要整个项目)3.你的意图("我想让按钮点击后变色")。
       - id: 268
         difficulty: 2
         question: AI 擅长什么前端任务？不擅长什么？
@@ -114,7 +130,7 @@ levels:
         question: 让 AI 解释代码 vs 让 AI 写代码→Prompt 有什么不同？
         options:
           - 完全相同
-          - "解释代码：给代码+问\"这段代码在做什么\"。写代码：给需求+约束+示例"
+          - 解释代码：给代码+问"这段代码在做什么"。写代码：给需求+约束+示例
           - 解释代码不能用 AI
           - 写代码不能用 AI
         answer: 1
@@ -124,7 +140,7 @@ levels:
         question: AI 对话中为什么不能一次塞太多无关内容？
         options:
           - AI 记性好
-          - "上下文窗口有限→无关内容挤占空间→AI\"忘记\"前面的重要信息。保持对话聚焦"
+          - 上下文窗口有限→无关内容挤占空间→AI"忘记"前面的重要信息。保持对话聚焦
           - AI 能处理任意长度
           - 多给 AI 数据更好
         answer: 1
@@ -139,7 +155,39 @@ levels:
           - 问另一个 AI
         answer: 1
         explanation: AI 可能给出看似合理但实际不可行的方案。用已有知识判断查阅文档确认在小范围测试代码。
-
+      - difficulty: 2
+        question: Prompt 中的 Few-shot 和 Zero-shot 区别？
+        options:
+          - 相同
+          - Zero-shot=不给示例直接问；Few-shot=给 2-3 个示例再问。Few-shot 通常准确率更高
+          - 没有区别
+          - Zero-shot 更好
+        answer: 1
+        explanation: |-
+          Zero-shot："把这句话翻译成英文"。Few-shot："输入：你好→Hello
+          输入：谢谢→Thank you
+          输入：再见→？"。Few-shot 通过示例定义输出格式和风格准确率更高。
+        id: 415
+      - difficulty: 2
+        question: 什么是 Prompt Chaining（链式提示）？
+        options:
+          - 连续提问
+          - 将复杂任务拆解为多步每步一个 Prompt 前一步输出做后一步输入。比一步搞定更可靠
+          - 缩写
+          - 不需要
+        answer: 1
+        explanation: 复杂任务拆解：第1步生成大纲→第2步根据大纲写各段落→第3步润色全文。每步可验证和修正比一个 Prompt 全生成质量高。AI 编码也同理：先设计方案再分文件实现。
+        id: 416
+      - difficulty: 2
+        question: AI Code Review 能替代人工 Review 吗？
+        options:
+          - 完全可以
+          - 不能替代——AI 能发现明显问题（未用变量/简单安全漏洞）但缺少项目上下文和业务判断
+          - 部分可以
+          - AI 不懂代码
+        answer: 1
+        explanation: AI Review 速度快善于发现：未使用变量/已知漏洞模式/代码风格问题。但不擅长：业务逻辑正确性/架构合理性/团队约定/性能陷阱。最佳：AI 做第一轮过滤人工做深度审查。
+        id: 417
   - level: 3
     type: boss
     threshold: 60
@@ -157,19 +205,19 @@ levels:
         explanation: AI 辅助全流程但人始终做决策和审查。AI 做执行(写代码/查文档/解释错误)。人是导演 AI 是演员。
       - id: 274
         difficulty: 3
-        question: 'AI 建议你安装一个听起来很合理的包，但你在 npm 上根本搜不到。此时最正确的处理是什么？'
+        question: AI 建议你安装一个听起来很合理的包，但你在 npm 上根本搜不到。此时最正确的处理是什么？
         options:
-          - '先装上试试，报错再说'
-          - '暂停执行，去 npm 或官方文档核实，再把核实结果反馈给 AI 修正方案'
-          - '不用查，直接换另一个名字相近的包'
-          - '说明 AI 不可靠，以后完全不用'
+          - 先装上试试，报错再说
+          - 暂停执行，去 npm 或官方文档核实，再把核实结果反馈给 AI 修正方案
+          - 不用查，直接换另一个名字相近的包
+          - 说明 AI 不可靠，以后完全不用
         answer: 1
-        explanation: '这是典型的 AI 幻觉场景。不要直接执行，先用权威来源核实包是否存在、API 是否真实，再把结果带回给 AI 继续迭代。'
+        explanation: 这是典型的 AI 幻觉场景。不要直接执行，先用权威来源核实包是否存在、API 是否真实，再把结果带回给 AI 继续迭代。
       - id: 275
         difficulty: 3
         question: AI 辅助项目规划→Prompt 应包含什么？
         options:
-          - "\"帮我做一个项目\""
+          - '"帮我做一个项目"'
           - 功能列表+目标用户+技术栈偏好+时间约束+期望输出格式
           - 只写项目名
           - 越长越好
@@ -177,14 +225,14 @@ levels:
         explanation: 详细描述需求：功能清单/用户群体/技术栈偏好/时间预算/期望输出(需求文档/技术方案/任务拆解)。
       - id: 276
         difficulty: 3
-        question: 'AI 一次性给你生成了 5 个组件，但命名、交互和样式口径都不统一。更稳妥的推进方式是什么？'
+        question: AI 一次性给你生成了 5 个组件，但命名、交互和样式口径都不统一。更稳妥的推进方式是什么？
         options:
-          - '先全部合进项目，后面再慢慢收拾'
-          - '逐个组件审查和收口，先固定命名/样式/边界规则，再继续生成后续组件'
-          - '让 AI 再随机重写一遍，希望它自己统一'
-          - '只要能运行，一致性不重要'
+          - 先全部合进项目，后面再慢慢收拾
+          - 逐个组件审查和收口，先固定命名/样式/边界规则，再继续生成后续组件
+          - 让 AI 再随机重写一遍，希望它自己统一
+          - 只要能运行，一致性不重要
         answer: 1
-        explanation: 'AI 批量生成最容易出现风格漂移。先把第一个组件的命名、接口、样式约束定稳，再按同一模板逐个推进，质量更可控。'
+        explanation: AI 批量生成最容易出现风格漂移。先把第一个组件的命名、接口、样式约束定稳，再按同一模板逐个推进，质量更可控。
       - id: 277
         difficulty: 3
         question: 以下关于 AI 辅助开发的说法哪个最正确？
@@ -225,4 +273,108 @@ levels:
           - 只是代码量不同
         answer: 1
         explanation: AI 输出质量取决于使用者的审查能力。合格者能发现幻觉/安全问题/不合理设计修正后提升质量。不合格者盲从 AI 产出有隐患的代码。
-
+      - difficulty: 3
+        question: AI 生成代码后你最该做的三件事是什么？
+        options:
+          - 直接合入
+          - 1.读懂逻辑 2.本地运行测试 3.检查安全/性能/边界情况。绝不盲从
+          - 保存就行
+          - 不需要检查
+        answer: 1
+        explanation: 三必须：1)理解每行代码在做什么（不理解不提交）2)本地跑通所有测试 3)检查边界：空值处理/错误路径/安全问题/性能。AI 是副驾驶人是机长。
+        id: 418
+      - difficulty: 3
+        question: 如何让 AI 写出更符合你项目风格的代码？
+        options:
+          - AI 自动匹配
+          - 提供项目代码示例作为上下文+明确约束（命名/文件结构/技术栈）+迭代修正
+          - 做不到
+          - 只靠描述
+        answer: 1
+        explanation: 1)贴 1-2 个项目现有组件作为风格示例 2)明确约束："用 Composition API+TypeScript+文件名 PascalCase" 3)AI 生成后指出偏差再让它修正。通过上下文引导 AI 对齐项目风格。
+        id: 419
+  - level: 4
+    type: boss
+    threshold: 60
+    name: Prompt进阶
+    questions:
+      - difficulty: 2
+        question: 什么是 Chain-of-Thought（思维链）Prompt？
+        options:
+          - 长 Prompt
+          - 要求 AI 逐步推理而非直接给答案。加"让我们一步一步思考"提升复杂推理准确度
+          - 短 Prompt
+          - 无意义
+        answer: 1
+        explanation: CoT=让 AI 展示推理过程。如"先分析错误原因→列出可能的修复方案→选择最优方案并解释→输出代码"。分步推理极大减少跳步错误。适合数学/逻辑/复杂调试。
+        id: 420
+      - difficulty: 2
+        question: 为什么给 AI 提供"反例"（不该做什么）很重要？
+        options:
+          - 不重要
+          - 边界约束让 AI 避免常见错误。如"不要用 eval""不要修改原始数组""不要引入新依赖"
+          - 影响不大
+          - 不需要
+        answer: 1
+        explanation: AI 不知道你的项目约束。明确禁止："用 Vue 3 语法别用 Options API"、"别引入 lodash 用原生方法"、"别修改 props"。反例+正例结合效果最好。
+        id: 421
+      - difficulty: 3
+        question: AI 产生幻觉时如何识别和纠正？
+        options:
+          - AI 不会错
+          - 认识信号：API 搜不到/逻辑矛盾/版本号不对。纠正：贴官方文档/报错信息让 AI 修正
+          - 忽略就行
+          - 重启对话
+        answer: 1
+        explanation: 幻觉信号：1)不存在的 npm 包/API 2)逻辑自相矛盾 3)版本号/参数不对。纠正流程：1)指出错误并提供权威来源 2)要求 AI 重新检查 3)还错→开新对话或换搜索工具。始终验证。
+        id: 422
+      - difficulty: 3
+        question: 处理大型任务时如何与 AI 高效迭代？
+        options:
+          - 一次搞定
+          - 分解→各子任务独立对话（专业上下文）→每个子任务验证整合→主对话只做统筹
+          - 慢慢做
+          - AI 自动分解
+        answer: 1
+        explanation: 大任务拆解策略：1)主对话定义方案和任务清单 2)每个子任务开独立对话（上下文聚焦不相互污染）3)完成后回主对话整合。避免单一对话越来越长导致 AI"失忆"。
+        id: 423
+      - difficulty: 2
+        question: 什么场景不适合用 AI？
+        options:
+          - 都适合
+          - 需要精准业务判断/高安全要求代码/超长上下文任务/创新架构设计应谨慎使用
+          - 没有不适合
+          - 只适合写注释
+        answer: 1
+        explanation: AI 不适合：1)不理解的代码让你写（你审不了）2)安全敏感模块（加密/权限）不验证就用 3)需要深入项目上下文的一致性重构 4)探索性创新架构（AI 基于已有模式）。AI 是加速器不是决策者。
+        id: 424
+      - difficulty: 2
+        question: 如何给 AI 提供有效的"角色设定"？
+        options:
+          - 不重要
+          - '"你是资深 Vue3+TS 前端专家精通性能优化"。角色+专业领域+偏好风格'
+          - 随便写
+          - 角色无用
+        answer: 1
+        explanation: 角色设定影响 AI 的回答质量和技术倾向。好的角色设定：1)身份（资深前端工程师）2)技术栈专长（Vue3/TS/Vite）3)风格偏好（注重可维护性和类型安全）。避讳："你是什么都能做的 AI"。
+        id: 425
+      - difficulty: 3
+        question: 与 AI 协作的"回合制"策略是什么？
+        options:
+          - 不断发问
+          - 你给约束→AI 生成→你审查反馈→AI 修正。每轮加一个关注点不一次提很多要求
+          - AI 主导
+          - 不需要策略
+        answer: 1
+        explanation: 高效策略像乒乓球：1)给清晰约束让 AI 生成 2)审查后只反馈一个主要问题 3)AI 修正 4)再反馈下一个问题。一次只聚焦一个改进点避免 AI 顾此失彼。复杂任务分多个回合逐步逼近。
+        id: 426
+      - difficulty: 3
+        question: 如何评估 AI 工具在项目中的 ROI（投入产出比）？
+        options:
+          - 不用评估
+          - AI 价值=加速重复劳动（脚手架/样板代码/正则/CSS 属性值）+减少查文档时间。但需额外审查成本
+          - 完全信任
+          - AI 无成本
+        answer: 1
+        explanation: AI 投入：学习使用+审查代码+修正错误+token 费用。AI 产出：加速标准代码编写+快速解释陌生代码+排错建议。ROI 高的场景：样式/CSS、标准 API 调用、正则、单元测试模板。ROI 低的场景：核心业务逻辑、安全代码、创新架构。
+        id: 427

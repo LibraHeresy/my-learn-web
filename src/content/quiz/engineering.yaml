@@ -1,12 +1,9 @@
-# 工程化宝石
-
 gem:
   id: engineering
   name: 工程化宝石
   icon: 🏗️
   achievement: mid
   order: 9
-
 levels:
   - level: 1
     type: normal
@@ -63,7 +60,36 @@ levels:
           - dev 已废弃
         answer: 1
         explanation: dev=开发模式(热更新不压缩方便调试)。build=生产构建(压缩 tree-shaking 输出到 dist)。
-
+      - difficulty: 1
+        question: Yarn 和 pnpm 与 npm 的主要区别？
+        options:
+          - 完全一样
+          - Yarn=更快/离线缓存；pnpm=硬链接节省磁盘空间。三者核心功能相同（包管理）
+          - npm 更快
+          - Yarn 已废弃
+        answer: 1
+        explanation: npm/Yarn/pnpm 都是 JS 包管理器。Yarn 引入离线缓存和确定性安装。pnpm 用硬链接共享依赖节省磁盘空间且安装更快。三者兼容同一 package.json。
+        id: 393
+      - difficulty: 1
+        question: 什么是 Monorepo？前端常用什么工具管理？
+        options:
+          - 单一仓库
+          - 一个仓库管理多个项目的代码组织方式。常用工具：pnpm workspaces、Turborepo、Nx
+          - 多仓库
+          - Git submodule
+        answer: 1
+        explanation: Monorepo=一个 Git 仓库包含多个项目/包。优势：共享代码/统一工具链/原子化提交。工具：pnpm workspaces（轻量）、Turborepo（构建缓存）、Nx（大型项目）。
+        id: 394
+      - difficulty: 1
+        question: ESLint 和 Prettier 分工？为什么两者都要？
+        options:
+          - 只用 ESLint
+          - ESLint=代码质量（bug/规范）；Prettier=代码格式（缩进/引号）。互补不重叠
+          - 只用 Prettier
+          - 不都需要
+        answer: 1
+        explanation: ESLint 检查代码逻辑问题（未用变量/错误模式）。Prettier 统一格式（换行/分号/引号）。ESLint 管"对错"，Prettier 管"美观"。配合用 eslint-config-prettier 避免冲突。
+        id: 395
   - level: 2
     type: elite
     threshold: 70
@@ -124,11 +150,11 @@ levels:
         question: 默认导出 vs 命名导出区别？
         options:
           - 相同
-          - "默认导出 import xx from；命名导出 import{xx}from。一个模块可多个命名导出但只能一个默认导出"
+          - 默认导出 import xx from；命名导出 import{xx}from。一个模块可多个命名导出但只能一个默认导出
           - 默认导出更多
           - 命名导出已废弃
         answer: 1
-        explanation: "export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。"
+        explanation: export default xxx→import xxx from。export const xxx→import{xxx}from。命名导出可多个。
       - id: 207
         difficulty: 2
         question: Git branch 的作用？
@@ -139,7 +165,36 @@ levels:
           - 替代 commit
         answer: 1
         explanation: 分支=代码的独立开发线。在主分支外创建分支开发新功能不影响主线完成后合并(merge)回去。
-
+      - difficulty: 2
+        question: Vite 的依赖预构建（pre-bundle）做了什么？为什么需要？
+        options:
+          - 无操作
+          - 用 esbuild 将 CommonJS/UMD 依赖转为 ESM 并合并碎片模块。减少请求数和转换开销
+          - 压缩代码
+          - 删除依赖
+        answer: 1
+        explanation: Vite 开发时用 esbuild 预构建 node_modules 中的依赖：1)转 CommonJS→ESM 2)合并碎片模块（lodash 数百文件→一个）。减少浏览器请求数避免瀑布式加载。
+        id: 396
+      - difficulty: 2
+        question: Git merge 和 rebase 区别？各自适用场景？
+        options:
+          - 相同
+          - merge=创建合并提交保留分支历史；rebase=将提交接到目标分支顶部形成线性历史
+          - rebase 已废弃
+          - merge 更强
+        answer: 1
+        explanation: merge 保留完整分支历史（有合并节点）适合公共分支。rebase 重写提交历史形成干净直线适合个人分支整理。黄金法则：不要 rebase 已推送的公共分支。
+        id: 397
+      - difficulty: 2
+        question: Git stash 做什么？常用场景？
+        options:
+          - 保存到远程
+          - 临时保存工作区修改（不提交）恢复干净工作区。切换分支/拉代码前临时保存
+          - 提交代码
+          - 删除修改
+        answer: 1
+        explanation: git stash=暂存当前修改（不提交）清空工作区。git stash pop 恢复。场景：工作中途需要切分支处理紧急 bug 但不想提交半成品。
+        id: 398
   - level: 3
     type: boss
     threshold: 60
@@ -187,24 +242,24 @@ levels:
         explanation: 构建工具分析 import/export 静态依赖移除未被引用的代码减小包体积。前提是 ES6 模块(编译时确定依赖)。
       - id: 212
         difficulty: 3
-        question: '你执行 `git pull` 后看到 `<<<<<<< HEAD`、`=======`、`>>>>>>>`，下一步最正确的做法是什么？'
+        question: 你执行 `git pull` 后看到 `<<<<<<< HEAD`、`=======`、`>>>>>>>`，下一步最正确的做法是什么？
         options:
-          - '直接刷新 VS Code，等 Git 自动恢复'
-          - '手动编辑冲突区域，确认保留内容后重新 add / commit'
-          - '立刻删除整个文件，避免冲突'
-          - '不看内容，直接再次 git pull'
+          - 直接刷新 VS Code，等 Git 自动恢复
+          - 手动编辑冲突区域，确认保留内容后重新 add / commit
+          - 立刻删除整个文件，避免冲突
+          - 不看内容，直接再次 git pull
         answer: 1
-        explanation: '这些标记说明 Git 无法自动合并。要先读懂两边差异，手动保留正确内容，删掉冲突标记，再 add 和 commit。'
+        explanation: 这些标记说明 Git 无法自动合并。要先读懂两边差异，手动保留正确内容，删掉冲突标记，再 add 和 commit。
       - id: 213
         difficulty: 3
-        question: '你把 Vite 项目部署到 GitHub Pages 后页面一片空白，但本地 `npm run dev` 正常。最该优先排查哪一项？'
+        question: 你把 Vite 项目部署到 GitHub Pages 后页面一片空白，但本地 `npm run dev` 正常。最该优先排查哪一项？
         options:
-          - '浏览器是不是没联网'
+          - 浏览器是不是没联网
           - '`vite.config` 里的 `base` 是否和仓库名一致，再检查构建与 Pages 配置'
-          - '把 `node_modules` 一起传到 GitHub'
-          - '只要重新 `npm install` 就能解决'
+          - 把 `node_modules` 一起传到 GitHub
+          - 只要重新 `npm install` 就能解决
         answer: 1
-        explanation: 'GitHub Pages 空白页最常见原因是资源路径不对。Vite 项目先看 `base`，再确认 build 产物和 Pages 来源配置是否正确。'
+        explanation: GitHub Pages 空白页最常见原因是资源路径不对。Vite 项目先看 `base`，再确认 build 产物和 Pages 来源配置是否正确。
       - id: 214
         difficulty: 3
         question: npx 和 npm 的区别？
@@ -224,5 +279,149 @@ levels:
           - 存储配置
           - 已废弃
         answer: 1
-        explanation: "scripts 定义项目常用命令如\"dev\":\"vite\"→npm run dev 执行 vite。可自定义任意脚本。"
-
+        explanation: scripts 定义项目常用命令如"dev":"vite"→npm run dev 执行 vite。可自定义任意脚本。
+      - difficulty: 3
+        question: Webpack 和 Vite 的核心架构差异？
+        options:
+          - 相同
+          - Webpack=Bundle（先打包再启动）；Vite=No-Bundle（ESM 按需编译）。Vite 冷启动快
+          - Webpack 更快
+          - Vite 已废弃
+        answer: 1
+        explanation: Webpack 先打包全部模块再启动 dev server（大项目慢）。Vite 利用浏览器原生 ESM，按需编译单个模块（冷启动快）。生产构建都用 Rollup（Vite）/Webpack。
+        id: 399
+      - difficulty: 3
+        question: Git 冲突发生的原因？解决冲突的标准流程？
+        options:
+          - Git 故障
+          - 两个分支改了同一文件的同一区域→Git 无法自动合并。解决：git status 找冲突文件→手动编辑去掉 <<< === >>> 标记→git add→git commit
+          - 没有原因
+          - 自动解决
+        answer: 1
+        explanation: 冲突不是错误是 Git 的求助信号。流程：1)git status 定位冲突文件 2)打开文件找 <<<<<<< HEAD 标记 3)手动选择保留哪边（或合并两边）4)删除标记 5)git add 标记已解决 6)git commit 完成合并。
+        id: 400
+      - difficulty: 3
+        question: HMR（Hot Module Replacement）原理？Vite 如何实现？
+        options:
+          - 刷新页面
+          - 修改代码时只替换变更模块不刷新页面保持应用状态。Vite 用 WebSocket 推送变更+ESM 边界精确替换
+          - 重启服务
+          - 手动刷新
+        answer: 1
+        explanation: Vite HMR 流程：文件变更→esbuild 快速编译→WebSocket 推送→浏览器收到后精确替换该模块。不刷新页面不丢失状态。比 Webpack HMR 更快因为只处理变更模块。
+        id: 401
+      - difficulty: 3
+        question: semver（语义化版本）规则：1.2.3 各数字含义？^ 和 ~ 前缀区别？
+        options:
+          - 无所谓
+          - 主版本.次版本.修订号。^=允许次版本和修订号升级（不同主版本）；~=只允许修订号升级
+          - 版本无所谓
+          - ^和~一样
+        answer: 1
+        explanation: 1.2.3=主版本(不兼容 API 变更).次版本(兼容新功能).修订号(Bug 修复)。^1.2.3 允许 >=1.2.3 <2.0.0。~1.2.3 允许 >=1.2.3 <1.3.0。package-lock.json 锁定精确版本。
+        id: 402
+  - level: 4
+    type: boss
+    threshold: 60
+    name: CI/CD与部署
+    questions:
+      - difficulty: 2
+        question: CI/CD 分别代表什么？核心价值？
+        options:
+          - 连续集成与连续部署
+          - CI=持续集成（自动构建测试）；CD=持续交付/部署（自动发布）。核心：自动化重复流程减少人工失误
+          - 代码检查
+          - 只有部署
+        answer: 1
+        explanation: CI（Continuous Integration）：每次提交自动构建+测试+检查→快速发现问题。CD（Continuous Delivery/Deployment）：通过测试后自动(或手动审批后)部署到生产环境。
+        id: 403
+      - difficulty: 2
+        question: GitHub Actions 的基本结构？
+        options:
+          - 只有 script
+          - workflow(.yml)→job(运行环境)→step(执行单元)→action(可复用步骤)
+          - 只有 yml
+          - 没有结构
+        answer: 1
+        explanation: Workflow 定义在 .github/workflows/*.yml。触发条件(on:push)。包含 jobs 运行在 runner 上。每个 job 有 steps 执行命令或调用 actions(uses:actions/checkout@v4)。
+        id: 404
+      - difficulty: 2
+        question: 前端项目构建优化：哪些手段能减小生产包体积？
+        options:
+          - 无所谓
+          - tree-shaking+代码分割+压缩(terser/esbuild)+按需引入+Gzip/Brotli+分析工具排查
+          - 只压缩
+          - 不用优化
+        answer: 1
+        explanation: 组合拳：1)tree-shaking 删除未用代码 2)路由懒加载拆分 chunk 3)生产压缩(JS/CSS/HTML) 4)UI 库按需引入 5)CDN 资源 6)Gzip/Brotli 传输压缩 7)rollup-plugin-visualizer 分析大模块。
+        id: 405
+      - difficulty: 3
+        question: Tree Shaking 的原理和失效场景？
+        options:
+          - 总是有效
+          - 基于 ES6 import/export 静态分析删除未引用代码。副作用(sideEffects)代码可能被保留；CommonJS 无法 tree-shake
+          - 对 CSS 有效
+          - 不需要配置
+        answer: 1
+        explanation: 构建工具分析 import 依赖图→标记未引用的 export→删除。失效：1)CommonJS(动态 require) 2)副作用代码(如 polyfill 直接修改变量) 3)package.json 未标记 sideEffects。
+        id: 406
+      - difficulty: 3
+        question: 懒加载（动态 import）对构建产物的影响？
+        options:
+          - 无影响
+          - 构建工具将动态 import 的模块拆分为独立 chunk。用户访问对应路由/功能时才加载该 chunk
+          - 增加体积
+          - 减少 chunk
+        answer: 1
+        explanation: 动态 import() 告诉构建工具创建代码分割点。每个 import() 生成独立 chunk。好处：首屏只加载必要代码→更快。代价：后续跳转需额外请求(可用 prefetch 预加载)。
+        id: 407
+      - difficulty: 3
+        question: source map 是什么？生产环境应该启用吗？
+        options:
+          - 不需要
+          - 映射压缩后代码到源代码便于调试。生产环境不应公开但可上传到错误监控平台
+          - 必须启用
+          - 已废弃
+        answer: 1
+        explanation: source map 将压缩混淆的代码映射回源码。生产环境：不公开(暴露源码)但可生成 hidden-source-map 上传到 Sentry 等错误监控平台用于线上错误定位。
+        id: 408
+      - difficulty: 2
+        question: 环境变量在前端项目中的处理？.env 文件各变体？
+        options:
+          - 只有一个
+          - .env=通用 .env.development=开发 .env.production=生产。Vite 通过 import.meta.env 访问；前缀 VITE_
+          - 不需要
+          - 手写
+        answer: 1
+        explanation: .env 文件按模式加载。Vite 中变量需 VITE_ 前缀才能在客户端代码访问 import.meta.env.VITE_API_URL。注意：前端环境变量在构建时内联到代码中非运行时读取。
+        id: 409
+      - difficulty: 3
+        question: Docker 部署前端应用的基本流程？
+        options:
+          - 不需要
+          - 编写 Dockerfile(基于 Nginx)→构建镜像→推送镜像仓库→部署平台拉取运行
+          - 只有 Docker
+          - 不用镜像
+        answer: 1
+        explanation: '1) npm run build 生成 dist 2) Dockerfile: FROM nginx 复制 dist 到 /usr/share/nginx/html 3) docker build -t app . 4) docker push 到 registry 5) 部署平台拉取镜像运行。Nginx 配置 SPA 路由回退。'
+        id: 410
+      - difficulty: 3
+        question: Brotli 和 Gzip 压缩的区别？前端怎么配置？
+        options:
+          - 相同
+          - Brotli 压缩率比 Gzip 高 15-20%但压缩速度较慢。一般由 CDN/反向代理处理
+          - Gzip 更好
+          - 不需要
+        answer: 1
+        explanation: Brotli 压缩后体积更小但压缩耗时更长。最佳实践：构建时预压缩（vite-plugin-compression）生成 .br/.gz 文件+服务器/CDN 优先返回 .br。现代浏览器都支持 Brotli。
+        id: 411
+      - difficulty: 2
+        question: 前端部署后用户看到旧版本怎么办？
+        options:
+          - 不管
+          - 文件名 Hash+index.html 不缓存。旧文件被新 hash 文件替代自然更新
+          - 用户手动刷新
+          - 改 URL
+        answer: 1
+        explanation: Vite 构建自动给 JS/CSS 文件加 content hash。新版本部署后新 HTML 引用新 hash 文件→用户下次访问获取新版本。index.html 设 Cache-Control:no-cache 每次验证。
+        id: 412

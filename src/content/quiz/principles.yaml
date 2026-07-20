@@ -1,12 +1,9 @@
-# 原理宝石
-
 gem:
   id: principles
   name: 原理宝石
   icon: 🧠
   achievement: senior
   order: 13
-
 levels:
   - level: 1
     type: normal
@@ -53,7 +50,26 @@ levels:
           - 随机
         answer: 1
         explanation: 宏任务：setTimeout/setInterval/事件。微任务：Promise.then/MutationObserver。微任务在当前宏任务后立即全部执行。
-
+      - difficulty: 1
+        question: DOM 和 CSSOM 的构建过程？
+        options:
+          - 同时构建
+          - HTML→DOM 树(CSS 不阻塞)；CSS→CSSOM 树(CSS 阻塞)。两者完成→合并为渲染树
+          - CSS 先
+          - 无关
+        answer: 1
+        explanation: 浏览器解析 HTML 构建 DOM 树（边下载边解析）。遇到 CSS 构建 CSSOM 树（CSS 是渲染阻塞资源——CSSOM 不完整不渲染）。DOM+CSSOM 完成→构建渲染树→布局→绘制。
+        id: 473
+      - difficulty: 1
+        question: async 和 defer 脚本的区别？
+        options:
+          - 相同
+          - async=下载完立即执行(执行顺序不定)；defer=下载完等 HTML 解析完再执行(顺序执行)
+          - defer 更快
+          - async 已废弃
+        answer: 1
+        explanation: 普通 script 阻塞 HTML 解析。async：异步下载→下载完立即暂停 HTML 解析执行→继续解析(不保证执行顺序)。defer：异步下载→等 HTML 完全解析完后按顺序执行。多数情况用 defer。
+        id: 474
   - level: 2
     type: elite
     threshold: 60
@@ -78,7 +94,7 @@ levels:
           - 只有 3D transform
           - opacity 不加速
         answer: 1
-        explanation: "创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。"
+        explanation: 创建合成层(GraphicsLayer)的元素由 GPU 独立处理。transform:translateZ(0)或 will-change 可手动提升到合成层。
       - id: 287
         difficulty: 2
         question: Vue 响应式原理(简化)？
@@ -108,7 +124,7 @@ levels:
           - 加速所有动画
           - 已废弃
         answer: 1
-        explanation: "will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。"
+        explanation: will-change:transform 提前创建合成层。但每个合成层消耗 GPU 内存→滥用导致页面卡顿。动画结束后应移除。
       - id: 290
         difficulty: 2
         question: CSS 解析会阻塞 JS 执行吗？渲染呢？
@@ -119,7 +135,36 @@ levels:
           - CSS 和 JS 互不影响
         answer: 1
         explanation: JS 执行是单线程的会阻塞 DOM 构建和渲染。CSS 不阻塞 DOM 构建但阻塞渲染(等 CSS 加载完再渲染防闪烁)。
-
+      - difficulty: 2
+        question: Vue 的虚拟 DOM 和 diff 算法做了哪些优化？
+        options:
+          - 简单对比
+          - 1)同层对比(O(n)) 2)静态标记(跳过不更新节点) 3)patchFlag 精准更新 4)block tree 优化
+          - 暴力对比
+          - 不优化
+        answer: 1
+        explanation: Vue3 VDOM 优化：1)同层 Tree Diff(O(n)) 2)编译时静态标记(静态节点不参与 diff) 3)patchFlag 标记动态绑定的类型(CLASS/TEXT/PROPS) 4)Block Tree 只 diff 动态节点。大幅减少不必要的对比。
+        id: 475
+      - difficulty: 2
+        question: 为什么说"CSS 选择器从右往左匹配"？
+        options:
+          - 从左往右
+          - 浏览器从最右的选择器开始匹配逐个向左验证祖先。这样能快速排除大多数不匹配的元素
+          - 没有方向
+          - 从中间
+        answer: 1
+        explanation: .container .list .item 浏览器先找所有 .item→验证父级是否有 .list→再验证祖先是否有 .container。从右往左能快速过滤不匹配元素：如果某元素不是 .item 直接跳过效率高。选择器越短越深匹配越快。
+        id: 476
+      - difficulty: 2
+        question: 浏览器垃圾回收(GC)对前端性能的影响？
+        options:
+          - 无影响
+          - 频繁创建销毁对象→GC 频繁运行→主线程暂停→页面卡顿。避免：复用对象/减少闭包泄漏/及时清理引用
+          - 不关心
+          - GC 不影响
+        answer: 1
+        explanation: JS GC 标记-清除算法。大量临时对象(如循环中 new 对象)→触发频繁 GC→主线程暂停(stop-the-world)→掉帧。优化：1)对象池复用 2)及时清理事件监听/定时器(防泄漏导致 GC 无法回收) 3)避免在动画循环中创建大量对象。
+        id: 477
   - level: 3
     type: boss
     threshold: 60
@@ -147,12 +192,12 @@ levels:
         explanation: Vue2 用 defineProperty(无法检测新增属性需 Vue.set)。Vue3 用 Proxy 可拦截所有操作包括新增/删除/数组索引。
       - id: 293
         difficulty: 3
-        question: "以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`"
+        question: 以下代码输出顺序？`Promise.resolve().then(()=>console.log(1));setTimeout(()=>console.log(2));console.log(3)`
         options:
-          - "1,2,3"
-          - "3,1,2"
-          - "1,3,2"
-          - "2,3,1"
+          - 1,2,3
+          - 3,1,2
+          - 1,3,2
+          - 2,3,1
         answer: 1
         explanation: 同步 3→微任务 1→宏任务 2。同：同步→微任务→宏任务。
       - id: 294
@@ -169,12 +214,12 @@ levels:
         difficulty: 3
         question: 以下关于浏览器渲染的说法哪个错误？
         options:
-          - "display:none 不生成渲染树"
-          - "visibility:hidden 的元素仍占据布局空间"
-          - "opacity:0 的元素仍响应点击事件"
+          - display:none 不生成渲染树
+          - visibility:hidden 的元素仍占据布局空间
+          - opacity:0 的元素仍响应点击事件
           - transform 平移后的元素不占原文档流空间
         answer: 2
-        explanation: "opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。"
+        explanation: opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。
       - id: 296
         difficulty: 3
         question: Vue 的 nextTick 原理？什么时候用？
@@ -184,7 +229,7 @@ levels:
           - 延迟 1 秒
           - 废弃了
         answer: 1
-        explanation: "修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。"
+        explanation: 修改数据后 DOM 更新是异步的。nextTick(()=>{})确保在 Vue 更新完 DOM 后再操作 DOM(如聚焦输入框)。
       - id: 297
         difficulty: 3
         question: CSS 动画 vs JS 动画→各自的优势和适用场景？
@@ -215,4 +260,108 @@ levels:
           - 层越多越好
         answer: 1
         explanation: 合成层=独立的 GPU 纹理。每层消耗显存。大量合成层→显存耗尽→页面崩溃。动画结束后应移除不必要的合成层。
-
+      - difficulty: 3
+        question: 事件委托（Event Delegation）的原理和优势？
+        options:
+          - 直接绑定
+          - 把事件监听器绑定在父元素上利用事件冒泡处理子元素事件。减少监听器数量+动态元素自动生效
+          - 每个绑定
+          - 不需要
+        answer: 1
+        explanation: 不用给每个按钮加 click 监听→在父容器加一个 click 监听→通过 event.target 判断点击了哪个按钮。优势：1)内存少(一个监听器) 2)动态添加的元素自动有效 3)代码简洁。Vue 自动用事件委托处理列表中的事件。
+        id: 478
+      - difficulty: 3
+        question: 函数节流(throttle)和函数防抖(debounce)的内部实现原理？
+        options:
+          - 复杂算法
+          - throttle=用时间戳判断上次执行时间；debounce=用 setTimeout 延迟执行并每次清除上次定时器
+          - 不用定时器
+          - 只用一个
+        answer: 1
+        explanation: throttle 实现：记录 lastTime 每次调用检查 now-lastTime>=delay→执行+更新 lastTime。debounce 实现：每次调用 clearTimeout(prev)+setTimeout(fn,delay)→持续触发时不断重置定时器只有停止后才执行。
+        id: 479
+      - difficulty: 3
+        question: 为什么会出现"内存泄漏"？前端常见的内存泄漏场景？
+        options:
+          - 不会泄漏
+          - 不再使用的对象仍被引用→GC 无法回收。常见：1)未清理定时器 2)闭包引用大对象 3)事件监听未解绑 4)DOM 引用残留
+          - 不重要
+          - 自动回收
+        answer: 1
+        explanation: 内存泄漏=对象"不需要了"但仍有引用→GC 不回收→内存持续增长。常见场景：1)setInterval 不 clear 2)组件销毁前未 removeEventListener 3)闭包持有大型数据 4)已移除 DOM 的 JS 引用。SPA 路由切换时注意组件清理。
+        id: 480
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 架构模式
+    questions:
+      - difficulty: 2
+        question: MVC 和 MVVM 的核心区别？前端为什么用 MVVM？
+        options:
+          - 相同
+          - MVC=Model-View-Controller(用户→Controller→Model→View)；MVVM=ViewModel 替代 Controller 双向绑定
+          - MVC 更好
+          - 没用
+        answer: 1
+        explanation: MVC：Controller 处理用户输入更新 Model 再更新 View（手动 DOM 操作）。MVVM：ViewModel 自动同步 Model 和 View（数据绑定→改数据自动更新 UI）。Vue/Angular 是 MVVM 框架减少 DOM 操作代码。
+        id: 481
+      - difficulty: 2
+        question: 观察者模式（Observer/Pub-Sub）在前端的应用场景？
+        options:
+          - 只有框架
+          - Vue 响应式系统(数据→观察者→更新)；EventEmitter(组件通信)；MutationObserver(DOM 监听)
+          - 没有应用
+          - 已废弃
+        answer: 1
+        explanation: 观察者模式前端应用：1)Vue 响应式（数据变化→自动通知依赖更新）2)Event Bus（组件间事件通信）3)MutationObserver（DOM 变化监听）4)IntersectionObserver（元素可见性）5)Redux/Zustand 的 subscribe。
+        id: 482
+      - difficulty: 2
+        question: 依赖注入（DI）在前端有哪些体现？
+        options:
+          - 没有
+          - Vue 的 provide/inject；Angular 的 DI 容器；React Context。作用：解耦组件和依赖
+          - 只有后端
+          - 不需要
+        answer: 1
+        explanation: 前端 DI：1)Vue provide/inject（祖先提供依赖后代注入）2)Angular 依赖注入系统（构造函数注入服务）3)React Context（提供/消费数据）。优势：组件不直接依赖具体实现→可替换→易测试。
+        id: 483
+      - difficulty: 1
+        question: 单一职责原则（SRP）在前端组件设计中的体现？
+        options:
+          - 一个组件做所有事
+          - 一个组件只负责一件事。如 UserCard 只负责展示用户信息不负责请求数据
+          - 无关
+          - 多个职责
+        answer: 1
+        explanation: SRP=一个组件/函数只有一个变化原因。如：UserAvatar（只展示头像）、UserInfo（只展示信息）、UserContainer（组合两者+请求数据）。拆分后各司其职→易维护易测试易复用。
+        id: 484
+      - difficulty: 2
+        question: 开闭原则（OCP）如何应用在前端开发中？
+        options:
+          - 不开不闭
+          - 对扩展开放对修改关闭。通过插槽(slots)/组合(composition)/配置对象扩展功能而非修改原有代码
+          - 与前端无关
+          - 只适用于后端
+        answer: 1
+        explanation: OCP 前端实践：1)Vue 插槽让父组件扩展子组件内容不改子组件代码 2)组件 props 支持自定义配置不改组件内部 3)组合函数(composables)扩展逻辑不改原函数。设计可从外部注入行为而非内部硬编码。
+        id: 485
+      - difficulty: 2
+        question: 组合优于继承在前端中的实际体现？
+        options:
+          - 继承更好
+          - Vue3 Composition API 用组合函数替代 mixins；React Hooks 替代 HOC。组合更灵活无命名冲突
+          - 组合无用
+          - 一样
+        answer: 1
+        explanation: 继承问题：多层继承链脆弱/命名冲突/复用困难。组合：1)Vue3 composables 将逻辑抽成独立函数组合使用（useMouse+useFetch）2)React Hooks 同理念 3)组件组合（大组件由小组件组合而成）。比继承更灵活更容易测试。
+        id: 486
+      - difficulty: 3
+        question: MVC/MVVM/Flux 三种架构模式在前端的演化？
+        options:
+          - 随便用
+          - MVC(混乱)→MVVM(Vue/Angular 双向绑定)→Flux(Redux/Pinia 单向数据流)。趋势：数据流越来越可预测
+          - MVC 最好
+          - 不需要架构
+        answer: 1
+        explanation: 演化路径：MVC（早期 jQuery 手动同步数据视图容易混乱）→ MVVM（Vue/Angular 数据绑定简化同步但大型应用数据流复杂）→ Flux/单向数据流（Redux/Pinia/Zustand 数据单向流动可预测可调试）。现代：MVVM 组件+集中状态管理混合。
+        id: 487

@@ -1,12 +1,9 @@
-# Vue 基础宝石
-
 gem:
   id: vue-basic
   name: Vue 基础宝石
   icon: 💚
   achievement: mid
   order: 10
-
 levels:
   - level: 1
     type: normal
@@ -25,34 +22,34 @@ levels:
         explanation: SFC 单文件组件=template+script setup+style scoped。
       - id: 217
         difficulty: 1
-        question: "{{ }}在 Vue 模板中做什么？"
+        question: '{{ }}在 Vue 模板中做什么？'
         options:
           - 注释
           - 文本插值——显示 JS 表达式的值
           - 属性绑定
           - 条件判断
         answer: 1
-        explanation: "{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。"
+        explanation: '{{ message }}将变量值渲染到页面。可写简单 JS 表达式如{{count+1}}。'
       - id: 218
         difficulty: 1
         question: v-bind 的作用和简写？
         options:
           - 条件渲染
-          - "动态绑定 HTML 属性简写为 :"
+          - '动态绑定 HTML 属性简写为 :'
           - 循环渲染
           - 事件监听
         answer: 1
-        explanation: "v-bind:src=\"url\"等价于 :src=\"url\"。把 JS 表达式的值绑定到 HTML 属性上。"
+        explanation: v-bind:src="url"等价于 :src="url"。把 JS 表达式的值绑定到 HTML 属性上。
       - id: 219
         difficulty: 1
         question: v-on 的作用和简写？
         options:
           - 属性绑定
-          - "事件监听简写为 @"
+          - 事件监听简写为 @
           - 条件渲染
           - 循环
         answer: 1
-        explanation: "v-on:click=\"fn\"等价于 @click=\"fn\"。监听 DOM 事件执行对应方法。"
+        explanation: v-on:click="fn"等价于 @click="fn"。监听 DOM 事件执行对应方法。
       - id: 220
         difficulty: 1
         question: ref() 作用？
@@ -63,7 +60,46 @@ levels:
           - 定义路由
         answer: 1
         explanation: ref()创建响应式引用。script中用.value读写，template中Vue自动解包直接用变量名。
-
+      - difficulty: 1
+        question: v-html 的作用和风险？
+        options:
+          - 设置文本
+          - 渲染 HTML 字符串到页面——有 XSS 风险
+          - 绑定属性
+          - 条件渲染
+        answer: 1
+        explanation: v-html 将字符串作为 HTML 渲染。如果内容来自用户输入可能包含恶意脚本→XSS 风险。优先用 {{ }} 文本插值。
+        id: 350
+      - difficulty: 1
+        question: Vue 模板中的 v-once 指令做什么？
+        options:
+          - 一次性事件
+          - 只渲染一次元素和组件，后续不再响应数据变化
+          - 执行一次函数
+          - 绑定一次属性
+        answer: 1
+        explanation: v-once 让元素/组件只渲染一次。首次渲染后视作静态内容，后续数据变化不再重新渲染。适用于静态内容优化。
+        id: 351
+      - difficulty: 1
+        question: Vue SFC 中 <style scoped> 的原理？
+        options:
+          - CSS 压缩
+          - 给组件元素加唯一属性（data-v-xxx），CSS 选择器追加该属性实现样式隔离
+          - JS 动态注入
+          - 服务器处理
+        answer: 1
+        explanation: scoped 样式通过 PostCSS 给每个选择器追加 [data-v-xxx] 属性选择器，同时给模板元素加上对应的 data-v-xxx 属性，实现组件级样式隔离。
+        id: 352
+      - difficulty: 1
+        question: v-cloak 指令解决什么问题？
+        options:
+          - 性能问题
+          - Vue 未加载完成时模板花括号闪烁问题
+          - 安全漏洞
+          - 样式冲突
+        answer: 1
+        explanation: v-cloak 配合 CSS [v-cloak]{display:none} 隐藏未编译的模板标签。Vue 编译完成后自动移除 v-cloak 属性。防止用户看到 {{ }} 原始标记。
+        id: 353
   - level: 2
     type: elite
     threshold: 70
@@ -74,14 +110,14 @@ levels:
         question: v-if 和 v-show 区别？DOM层面？
         options:
           - 完全相同
-          - "v-if 移除/创建 DOM；v-show 始终存在只是 display:none"
+          - v-if 移除/创建 DOM；v-show 始终存在只是 display:none
           - v-show 更强
           - v-if 已废弃
         answer: 1
         explanation: v-if=false元素从DOM移除(切换开销大)。v-show=false仍存于DOM只切CSS(切换快)。频繁切用v-show条件少变用v-if。
       - id: 222
         difficulty: 2
-        question: "v-for 为什么需要 :key？用 index 做 key的问题？"
+        question: v-for 为什么需要 :key？用 index 做 key的问题？
         options:
           - 性能优化
           - key 帮助 Vue 识别每个节点做高效 diff。用 index 做 key 在列表重排时导致错误复用和状态错乱
@@ -94,11 +130,11 @@ levels:
         question: v-model 实质是什么？
         options:
           - 魔法
-          - "v-bind:value + v-on:input 的语法糖"
+          - v-bind:value + v-on:input 的语法糖
           - v-if+v-show
           - v-for+v-bind
         answer: 1
-        explanation: "v-model=\"name\"等价于:value=\"name\" @input=\"name=$event.target.value\"。双向绑定=数据→视图+视图→数据。"
+        explanation: v-model="name"等价于:value="name" @input="name=$event.target.value"。双向绑定=数据→视图+视图→数据。
       - id: 224
         difficulty: 2
         question: computed 和 method 区别？
@@ -134,7 +170,7 @@ levels:
         question: Emits 的作用？
         options:
           - 父传子
-          - "子组件向父组件发送事件通知(如\"我完成了\")"
+          - 子组件向父组件发送事件通知(如"我完成了")
           - 双向绑定
           - 定义样式
         answer: 1
@@ -148,8 +184,47 @@ levels:
           - 更快
           - 已废弃
         answer: 1
-        explanation: "<style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。"
-
+        explanation: <style scoped>通过属性选择器(data-v-xxx)将CSS作用域限制在当前组件内不污染全局。
+      - difficulty: 2
+        question: v-for 可以遍历哪些数据类型？
+        options:
+          - 只能数组
+          - 数组（item, index）、对象（value, key, index）、数字范围
+          - 只能对象
+          - 只能数字
+        answer: 1
+        explanation: v-for 可以遍历：数组 v-for="(item,index) in arr"、对象 v-for="(value,key,index) in obj"、数字范围 v-for="n in 10"（1到10）。
+        id: 354
+      - difficulty: 2
+        question: v-bind 动态绑定多个属性怎么做？
+        options:
+          - 逐个写 v-bind
+          - v-bind="对象" 一次性绑定多个属性
+          - 用 JS 循环
+          - 不支持
+        answer: 1
+        explanation: v-bind="obj" 不带参数时将一个对象的所有属性绑定到元素。如 v-bind="{id:'a',class:'b'}" 等价于 :id="'a'" :class="'b'"。
+        id: 355
+      - difficulty: 2
+        question: v-model 在不同表单元素上的默认事件和属性？
+        options:
+          - 都一样
+          - text/textarea 用 value+input；checkbox/radio 用 checked+change；select 用 value+change
+          - 都用 change
+          - 都用 input
+        answer: 1
+        explanation: v-model 是智能语法糖：input text→:value+@input；checkbox→:checked+@change；radio→:checked+@change；select→:value+@change。编译器自动选对组合。
+        id: 356
+      - difficulty: 2
+        question: computed 的 setter 什么时候用？举例
+        options:
+          - 不需要
+          - 需要"反向"修改计算属性时。如 v-model 绑定 computed
+          - 只用 getter
+          - 已废弃
+        answer: 1
+        explanation: computed 默认只有 getter。需要 setter 时传入 {get(){}, set(val){}}。典型场景：v-model 绑定 computed 属性需要可写。
+        id: 357
   - level: 3
     type: boss
     threshold: 60
@@ -167,14 +242,14 @@ levels:
         explanation: ref 可包装任何类型(基本类型/对象)需.value访问。reactive 只包装对象直接访问。推荐用 ref(统一写法)。
       - id: 230
         difficulty: 3
-        question: "以下 Vue 代码问题在哪？`<div v-for=\"item in list\">{{item}}</div>`"
+        question: 以下 Vue 代码问题在哪？`<div v-for="item in list">{{item}}</div>`
         options:
           - 语法错
-          - "缺少 :key 属性"
+          - 缺少 :key 属性
           - v-for 不能用
           - 没问题
         answer: 1
-        explanation: "v-for 应始终加 :key=\"唯一标识\"。Vue 用 key 追踪每个节点的身份以高效更新。"
+        explanation: v-for 应始终加 :key="唯一标识"。Vue 用 key 追踪每个节点的身份以高效更新。
       - id: 231
         difficulty: 3
         question: v-model 修饰符 .lazy .number .trim 各做什么？
@@ -197,24 +272,24 @@ levels:
         explanation: Props 从父流向子只读。子组件不能直接修改 props。需要修改时 emit 事件让父组件更新。
       - id: 233
         difficulty: 3
-        question: "`<div :class=\"{active:isActive}\">` 中 active 什么时候生效？"
+        question: '`<div :class="{active:isActive}">` 中 active 什么时候生效？'
         options:
           - 总是生效
           - isActive 为 true 时
           - isActive 为 false 时
           - 永不生效
         answer: 1
-        explanation: "对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class=\"[base,dynamic]\"。"
+        explanation: 对象语法：{className:条件}。isActive=true 时 active 类生效。可同时用数组语法:class="[base,dynamic]"。
       - id: 234
         difficulty: 3
-        question: "Vue 模板中 {{}} 和 v-text 的区别？"
+        question: Vue 模板中 {{}} 和 v-text 的区别？
         options:
           - 完全相同
-          - "{{}}可能闪烁(未编译前显示花括号)；v-text 不会。功能等价"
+          - '{{}}可能闪烁(未编译前显示花括号)；v-text 不会。功能等价'
           - v-text 更快
-          - "{{}} 已废弃"
+          - '{{}} 已废弃'
         answer: 1
-        explanation: "功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。"
+        explanation: 功能相同都设置文本内容。{{}}在Vue未加载完时可能闪现(用v-cloak解决)。v-text不闪现。
       - id: 235
         difficulty: 3
         question: computed 的缓存何时失效？
@@ -227,14 +302,14 @@ levels:
         explanation: computed 自动追踪依赖数据。依赖不变→返回缓存值→不重新计算。依赖变了→自动重新计算→更新缓存。
       - id: 236
         difficulty: 3
-        question: "`watch(x,(newVal,oldVal)=>{...})` 参数是什么？"
+        question: '`watch(x,(newVal,oldVal)=>{...})` 参数是什么？'
         options:
           - 无参数
           - newVal=变化后的值 oldVal=变化前的值
           - 只有 newVal
           - 只有 oldVal
         answer: 1
-        explanation: "watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。"
+        explanation: watch 回调接收(newValue,oldValue)可对比新旧值做处理如保存到 localStorage。
       - id: 237
         difficulty: 3
         question: 以下哪项是 Vue 的单向数据流？
@@ -257,17 +332,17 @@ levels:
         explanation: v-if/v-else-if/v-else 必须作为相邻的兄弟元素不能有其他元素插入其间否则链断裂。
       - id: 239
         difficulty: 3
-        question: "<script setup> 和普通 <script> 区别？"
+        question: <script setup> 和普通 <script> 区别？
         options:
           - 完全相同
           - setup 中顶层变量/函数自动暴露给模板无需 return。更简洁
           - 普通 script 更快
           - setup 已废弃
         answer: 1
-        explanation: "<script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。"
+        explanation: <script setup>是 Composition API 的语法糖。定义的变量和函数自动可在模板中使用。代码更少更清晰。
       - id: 240
         difficulty: 3
-        question: "`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？"
+        question: '`<div v-once>{{message}}</div>`中修改 message 会更新显示吗？'
         options:
           - 会
           - 不会——v-once 只渲染一次后续不再响应数据变化
@@ -275,4 +350,158 @@ levels:
           - 报错
         answer: 1
         explanation: v-once 让元素/组件只渲染一次后续数据变化时不重新渲染。用于静态内容优化性能。
-
+      - difficulty: 3
+        question: shallowRef 和 ref 区别？什么时候用？
+        options:
+          - 相同
+          - shallowRef 只有 .value 层面的响应性，深层属性变化不触发更新。大数据量或只整体替换时用
+          - shallowRef 更快
+          - 已废弃
+        answer: 1
+        explanation: ref 会深度响应式处理。shallowRef 只追踪 .value 的变化，内部属性修改不触发更新。适合：1)大数据列表只整体替换 2)第三方对象不需要深度响应。
+        id: 358
+      - difficulty: 3
+        question: watchEffect 和 watch 的核心区别？
+        options:
+          - 相同
+          - watchEffect 自动追踪依赖立即执行；watch 需显式指定数据源惰性执行
+          - watchEffect 更快
+          - 已废弃
+        answer: 1
+        explanation: watchEffect(()=>{}) 自动追踪回调中用到的响应式数据并立即执行一次。watch(x,fn) 需指定监听源且默认惰性（变化才触发）。watch 可获取新旧值，watchEffect 不能。
+        id: 359
+      - difficulty: 3
+        question: Vue 模板中事件修饰符 .stop .prevent .once .capture 各做什么？
+        options:
+          - 无作用
+          - .stop=阻止冒泡 .prevent=阻止默认 .once=只触发一次 .capture=捕获阶段触发
+          - CSS 修饰
+          - 已废弃
+        answer: 1
+        explanation: '@click.stop=event.stopPropagation()、.prevent=event.preventDefault()、.once=只触发一次后自动解绑、.capture=在捕获阶段而非冒泡阶段触发。'
+        id: 360
+      - difficulty: 3
+        question: 以下代码 const obj = reactive({a:1}); const b = obj.a; b = 2; obj.a 会变吗？为什么？
+        options:
+          - 会
+          - 不会——解构 reactive 属性得到的是普通值，断开响应性连接
+          - obj.a 会变
+          - 取决于情况
+        answer: 1
+        explanation: reactive 对象的属性被单独赋值给变量时，变量是普通值（基本类型按值传递）。修改变量不影响原对象。要保持响应性需用 toRef 或 toRefs。
+        id: 361
+      - difficulty: 3
+        question: Vue 的异步组件 defineAsyncComponent 做什么？
+        options:
+          - 定义同步组件
+          - 定义一个只在需要时才加载的异步组件。参数为返回 import() 的函数
+          - 定义路由
+          - 已废弃
+        answer: 1
+        explanation: defineAsyncComponent(()=>import("./X.vue")) 创建异步组件。组件只在渲染时才加载代码，减少首屏体积。可配置加载中/错误状态的显示组件。
+        id: 362
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 组件通信
+    questions:
+      - difficulty: 2
+        question: defineProps 如何声明带类型、默认值和校验的 props？
+        options:
+          - defineProps([...])
+          - defineProps({propName:{type,default,required,validator}})
+          - defineProps<Type>()
+          - 无法声明
+        answer: 1
+        explanation: defineProps({name:{type:String,required:true},age:{type:Number,default:18,validator(v){return v>0}}})。TS 下也可用 defineProps<{name:string}>() 纯类型语法。
+        id: 363
+      - difficulty: 2
+        question: defineEmits 如何声明带参数和校验的事件？
+        options:
+          - defineEmits(["event"])
+          - defineEmits({event:(payload)=>{return true/false}})
+          - defineEmits<{(e:"event",val:number):void}>()
+          - 无法声明
+        answer: 1
+        explanation: defineEmits({submit:(data)=>{return data.name&&data.age}}) 对象语法支持运行时校验。返回 false 则控制台警告但不阻止事件。纯类型可用 TS 泛型语法。
+        id: 364
+      - difficulty: 3
+        question: provide/inject 怎么实现响应式数据传递？
+        options:
+          - provide 的值自动响应式
+          - provide 传 ref 对象本身（不是 .value），后代 inject 后拿到 ref 直接使用
+          - inject 自带响应式
+          - 不支持响应式
+        answer: 1
+        explanation: provide(key, refValue) 传 ref 对象本身（不是 .value），后代 inject(key) 后拿到的是同一个 ref 直接使用。也可 provide(key, computed(()=>data)) 传计算属性。
+        id: 365
+      - difficulty: 3
+        question: 组件 v-model 的实现原理？如何在子组件中支持？
+        options:
+          - 自动双向
+          - 父 :modelValue + @update:modelValue；子 defineProps(["modelValue"])+defineEmits(["update:modelValue"])
+          - 直接修改 prop
+          - 无法实现
+        answer: 1
+        explanation: 父 <Child v-model="val"> 等价 <Child :modelValue="val" @update:modelValue="val=$event">。子需声明 modelValue prop 并在值变化时 emit("update:modelValue",newVal)。Vue3 支持多个 v-model:title="title"。
+        id: 366
+      - difficulty: 3
+        question: defineExpose 做什么？什么时候需要？
+        options:
+          - 暴露样式
+          - 向父组件暴露子组件内部方法/属性。用 <ref> 获取组件实例后调用
+          - 暴露路由
+          - 不需要
+        answer: 1
+        explanation: script setup 默认封闭。defineExpose({reset,validate}) 暴露方法后，父组件通过 const child=ref(null); child.value.reset() 调用。应少用——优先用 props/emits 通信。
+        id: 367
+      - difficulty: 2
+        question: useAttrs() 返回什么？典型使用场景？
+        options:
+          - 返回 props
+          - 返回父组件传递的非 props 属性（class/style/id/事件等）。用于透传属性
+          - 返回事件
+          - 返回插槽
+        answer: 1
+        explanation: useAttrs() 获取父组件传的所有非 props 声明属性（class、style、id、data-*、事件等）。常用于 UI 库封装——把 attrs 透传给内部原生元素 v-bind="attrs"。
+        id: 368
+      - difficulty: 2
+        question: Props 单向数据流—子组件需要用 prop 值初始化本地数据怎么做？
+        options:
+          - 直接改 prop
+          - 用 prop 作为 computed 或 watch 的初始值创建本地副本
+          - emit 回父
+          - 不能做
+        answer: 1
+        explanation: 子组件不应直接修改 prop。需要本地状态时用 const localData = ref(props.initialValue) 创建副本。注意后续 prop 变化不会自动同步本地副本——用 watch 手动同步。
+        id: 369
+      - difficulty: 3
+        question: 组件通信方式总结：何时用 props/emits、provide/inject、Pinia、路由参数？
+        options:
+          - 都用 Pinia
+          - 父子用 props/emits；祖先跨层用 provide/inject；全局共享用 Pinia；页面间用路由参数/query
+          - 都用 provide/inject
+          - 都用 props
+        answer: 1
+        explanation: 决策树：直接父子→props+emits；跨层级（祖先→深层后代）→provide/inject；全局状态（多组件共享）→Pinia；页面间传递→路由 params/query。
+        id: 370
+      - difficulty: 2
+        question: 组件 v-model 的修饰符如何在子组件中处理？
+        options:
+          - 自动处理
+          - 通过 prop modelModifiers 对象判断。如 modelModifiers.capitalize 为 true 时应用修饰逻辑
+          - 不支持
+          - 手动处理
+        answer: 1
+        explanation: 父 <Child v-model.capitalize="val"> 时，子组件可声明 modelModifiers prop。子组件在 emit 前检查 modelModifiers?.capitalize，若为 true 则对值应用大写逻辑。
+        id: 371
+      - difficulty: 3
+        question: slots 相关：useSlots() 返回什么？如何判断某个插槽是否有内容？
+        options:
+          - 返回插槽内容
+          - 返回 slots 对象；slots.default 存在即默认插槽有内容；slots.header?.() 调用具名插槽
+          - 返回字符串
+          - 无法判断
+        answer: 1
+        explanation: useSlots() 返回所有插槽函数对象。if(slots.header) 判断父组件是否传了 header 插槽。slots.default?.() 渲染默认插槽。常在子组件中用 v-if="$slots.header" 决定是否渲染插槽容器。
+        id: 372

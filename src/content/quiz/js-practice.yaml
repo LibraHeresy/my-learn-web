@@ -6,7 +6,6 @@ gem:
   icon: 🔧
   achievement: junior
   order: 6
-
 levels:
   - level: 1
     type: normal
@@ -42,7 +41,7 @@ levels:
           - 数组
           - HTML 源码
         answer: 0
-        explanation: "通过 id 获取唯一元素返回元素对象或 null。比 querySelector(\"#id\")稍快。"
+        explanation: 通过 id 获取唯一元素返回元素对象或 null。比 querySelector("#id")稍快。
       - id: 134
         difficulty: 1
         question: addEventListener 做什么？
@@ -52,10 +51,10 @@ levels:
           - 创建元素
           - 删除元素
         answer: 1
-        explanation: "给元素绑定事件监听器：element.addEventListener(\"click\",callback)。"
+        explanation: 给元素绑定事件监听器：element.addEventListener("click",callback)。
       - id: 135
         difficulty: 1
-        question: "[1,2,3].includes(2) 返回？"
+        question: '[1,2,3].includes(2) 返回？'
         options:
           - true
           - false
@@ -63,7 +62,76 @@ levels:
           - 报错
         answer: 0
         explanation: includes 判断数组是否含某值返回 true/false。
-
+      - id: 452
+        difficulty: 1
+        question: '`element.style.color` 和 `getComputedStyle(element).color` 的区别？'
+        options:
+          - 完全相同
+          - element.style 只能读取内联样式（行内 style 属性）；getComputedStyle() 返回最终计算样式（含 CSS 样式表）
+          - getComputedStyle 更快
+          - element.style 已废弃
+        answer: 1
+        explanation: element.style 只反映元素行内 style 属性的值，无法获取 CSS 文件中定义的样式。getComputedStyle(element) 返回包含所有最终计算样式的对象（只读）。要获取元素实际显示的样式，始终用 getComputedStyle。
+      - id: 453
+        difficulty: 1
+        question: '`element.dataset` 是什么？如何使用？'
+        options:
+          - 已废弃的属性
+          - 访问元素 data-* 属性的便捷方式：data-user-id 对应 dataset.userId（驼峰命名）
+          - 用于存储 CSS 变量
+          - 只能读取不能设置
+        answer: 1
+        explanation: dataset 是 DOM 元素的属性，可读写所有 data-* 自定义属性。`<div data-user-id="123">` 对应 element.dataset.userId = "123"（连字符自动转驼峰）。是存储与元素关联数据的最佳实践方式。
+      - id: 454
+        difficulty: 1
+        question: '`element.remove()` 和 `parent.removeChild(element)` 的区别？'
+        options:
+          - 完全相同
+          - element.remove() 直接从 DOM 中删除自身（无需访问父元素）；removeChild 需要从父元素调用
+          - remove() 已废弃
+          - removeChild 更简单
+        answer: 1
+        explanation: element.remove() 是现代 DOM API（ES5+），直接删除元素自身，无需获取父节点。parent.removeChild(child) 是传统 API，必须先获取父元素。remove() 更简洁，但返 undefined；removeChild 返回被删除的元素引用。
+      - id: 455
+        difficulty: 2
+        question: '`element.insertAdjacentHTML(position, html)` 中 position 有哪几种？和 innerHTML 比有什么优势？'
+        options:
+          - 只有一种
+          - beforebegin/afterbegin/beforeend/afterend 四种；相比 innerHTML 不会重新解析整个元素内容，更高效
+          - 只能添加到末尾
+          - 已废弃
+        answer: 1
+        explanation: 四个位置：beforebegin（元素前）、afterbegin（第一个子元素前）、beforeend（最后一个子元素后，类似 append）、afterend（元素后）。insertAdjacentHTML 只解析新 HTML 并插入，不影响已有子元素的事件和状态。innerHTML += "..." 则会重新解析整个内容。
+      - id: 456
+        difficulty: 1
+        question: '`element.closest(selector)` 的作用？'
+        options:
+          - 查找子元素
+          - 向上遍历 DOM 树，查找最近的匹配祖先元素（含自身）
+          - 查找兄弟元素
+          - 和 querySelector 相同
+        answer: 1
+        explanation: element.closest(selector) 从元素自身开始，向上遍历 DOM 树，返回第一个匹配选择器的祖先元素。常用于事件委托中判断点击的元素是否在某个容器内。找不到返回 null。
+      - id: 457
+        difficulty: 1
+        question: '`element.matches(selector)` 的作用？'
+        options:
+          - 修改 CSS
+          - 检查元素是否匹配给定的 CSS 选择器，返回 true/false
+          - 和 closest 相同
+          - 已废弃
+        answer: 1
+        explanation: element.matches("#myId") 或 element.matches(".active") 判断元素自身是否匹配选择器。常用于事件委托中检测 e.target 是否匹配特定选择器。不查祖先，只查自身。
+      - id: 458
+        difficulty: 1
+        question: '`element.setAttribute("class", "foo")` 和 `element.className = "foo"` 和 `element.classList.add("foo")` 哪种方式更好？'
+        options:
+          - setAttribute 最好
+          - classList 最好：可精细控制单个类名（add/remove/toggle/contains），不影响其他类
+          - className 最好
+          - 三者完全相同
+        answer: 1
+        explanation: classList 是最佳实践：add/remove 不影响其他类名。className = "foo" 会覆盖所有已有类。setAttribute("class", "foo") 同 className。始终使用 classList 操作 CSS 类。
   - level: 2
     type: elite
     threshold: 70
@@ -104,7 +172,7 @@ levels:
         question: createElement+appendChild 流程？
         options:
           - 直接写 HTML
-          - "let el=document.createElement(\"div\")→设置属性内容→parent.appendChild(el)"
+          - let el=document.createElement("div")→设置属性内容→parent.appendChild(el)
           - 只能创建 div
           - appendChild 已废弃
         answer: 1
@@ -149,7 +217,56 @@ levels:
           - 已废弃
         answer: 1
         explanation: 不在每个子元素绑事件而在父元素绑通过 e.target 判断点击哪个。新添加子元素自动继承事件。
-
+      - id: 459
+        difficulty: 2
+        question: 事件捕获（Capture）和冒泡（Bubble）的区别？addEventListener 第三个参数的作用？
+        options:
+          - 没有区别
+          - 捕获：从外到内（window→目标）；冒泡：从内到外（目标→window）。addEventListener 第三个参数 true=捕获阶段，false/默认=冒泡阶段
+          - 冒泡已废弃
+          - 捕获用来阻止事件
+        answer: 1
+        explanation: DOM 事件三阶段：捕获→目标→冒泡。大多数事件处理器在冒泡阶段触发。addEventListener(type, fn, true) 在捕获阶段触发。实际开发中极少需要捕获阶段，通常使用冒泡+事件委托。
+      - id: 460
+        difficulty: 2
+        question: 如何创建和触发自定义事件（CustomEvent）？
+        options:
+          - JS 不支持自定义事件
+          - 'new CustomEvent("myevent", {detail: {...}})，element.dispatchEvent(event) 触发'
+          - 只能使用内置事件
+          - 用 setTimeout 模拟
+        answer: 1
+        explanation: 'const event = new CustomEvent("my-event", { detail: { key: "value" }, bubbles: true }); element.dispatchEvent(event); 自定义事件可实现组件间解耦通信。detail 属性传递自定义数据。'
+      - id: 461
+        difficulty: 2
+        question: input 事件和 change 事件的区别？
+        options:
+          - 完全相同
+          - input：每次输入实时触发；change：失去焦点且值改变时触发。对文本框用 input 做实时搜索
+          - change 每次输入都触发
+          - input 已废弃
+        answer: 1
+        explanation: input 事件在<input>/<textarea>值每次变化时立即触发（包括粘贴、拖拽等）。change 事件在元素失去焦点且值发生变化时触发。对于实时搜索、表单验证等场景，使用 input 事件。对于<select>和 checkbox，两者行为相同。
+      - id: 462
+        difficulty: 2
+        question: passive 事件监听器是什么？有什么好处？
+        options:
+          - 事件不触发
+          - 告诉浏览器事件处理器不会调用 preventDefault()，浏览器可以立即滚动而不等 JS 执行完
+          - 事件更慢
+          - 已废弃的特性
+        answer: 1
+        explanation: 'addEventListener("touchstart", fn, { passive: true }) 告诉浏览器：这个事件不会阻止默认行为（如滚动）。浏览器可以立即开始滚动而不必等待 JS 执行完毕，大幅提升滚动性能。移动端 touchstart/touchmove 建议始终用 passive。'
+      - id: 463
+        difficulty: 2
+        question: addEventListener 的 once 选项有什么用？
+        options:
+          - 重复绑定事件
+          - 事件处理器只执行一次，执行后自动移除监听器
+          - 阻止事件冒泡
+          - 和 removeEventListener 相同
+        answer: 1
+        explanation: 'addEventListener("click", fn, { once: true }) 使 fn 只执行一次，执行完毕自动调用 removeEventListener。常用于只需要触发一次的场景（如引导提示、一次性动画），免去手动 removeEventListener 的麻烦。'
   - level: 3
     type: boss
     threshold: 60
@@ -164,7 +281,7 @@ levels:
           - slice 修改原数组
           - 都不修改
         answer: 1
-        explanation: "splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。"
+        explanation: splice(start,delCount,...items)修改原数组。slice(start,end)返回新数组。
       - id: 145
         difficulty: 3
         question: push/pop 和 shift/unshift 区别？
@@ -177,10 +294,10 @@ levels:
         explanation: push(末尾添加)/pop(末尾删)/unshift(开头添加)/shift(开头删)。push/pop 类似栈操作快。
       - id: 146
         difficulty: 3
-        question: "[1,2,3].join(\"-\") 和 \"a,b,c\".split(\",\") 各返回？"
+        question: '[1,2,3].join("-") 和 "a,b,c".split(",") 各返回？'
         options:
           - join 返回数组 split 返回字符串
-          - "join 返回\"1-2-3\"数组→字符串；split 返回[\"a\",\"b\",\"c\"]字符串→数组"
+          - join 返回"1-2-3"数组→字符串；split 返回["a","b","c"]字符串→数组
           - 都返回字符串
           - 都返回数组
         answer: 1
@@ -194,7 +311,7 @@ levels:
           - 两者相同
           - 无法实现
         answer: 1
-        explanation: "innerHTML+=\"...\" 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。"
+        explanation: innerHTML+="..." 简便但会导致已有元素状态丢失。createElement+appendChild 安全保留已有状态。
       - id: 148
         difficulty: 3
         question: e.target 和 e.currentTarget 区别？
@@ -224,7 +341,7 @@ levels:
           - every=至少一个
           - some 已废弃
         answer: 1
-        explanation: "[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。"
+        explanation: '[1,2,3].some(x=>x>2)→true。every(x=>x>2)→false(1 不满足)。'
       - id: 151
         difficulty: 3
         question: 如何在事件处理函数中阻止 a 标签默认跳转？
@@ -240,34 +357,34 @@ levels:
         question: 如何把 NodeList 转成数组？
         options:
           - 无法转换
-          - "[...nodeList]或 Array.from(nodeList)"
+          - '[...nodeList]或 Array.from(nodeList)'
           - .toArray()
           - .array()
         answer: 1
-        explanation: "扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。"
+        explanation: 扩展运算符[...nodeList]或 Array.from(nodeList)将类数组转为真正的 Array 以使用 map/filter。
       - id: 153
         difficulty: 2
-        question: "\"hello\".slice(1,3) 返回？"
+        question: '"hello".slice(1,3) 返回？'
         options:
-          - "\"el\""
-          - "\"ell\""
-          - "\"h\""
-          - "\"lo\""
+          - '"el"'
+          - '"ell"'
+          - '"h"'
+          - '"lo"'
         answer: 0
-        explanation: "slice(1,3)截取索引[1,3)=\"el\"。索引从 0 开始。"
+        explanation: slice(1,3)截取索引[1,3)="el"。索引从 0 开始。
       - id: 154
         difficulty: 2
-        question: "\"hello\".replace(\"h\",\"H\") 返回？"
+        question: '"hello".replace("h","H") 返回？'
         options:
-          - "\"Hello\""
-          - "\"hello\""
-          - "\"HELLO\""
-          - "[\"Hello\"]"
+          - '"Hello"'
+          - '"hello"'
+          - '"HELLO"'
+          - '["Hello"]'
         answer: 0
-        explanation: "replace 替换第一个匹配项。\"hello\".replace(\"l\",\"L\")→\"heLlo\"。"
+        explanation: replace 替换第一个匹配项。"hello".replace("l","L")→"heLlo"。
       - id: 155
         difficulty: 2
-        question: "[1,2,3].indexOf(4) 返回？"
+        question: '[1,2,3].indexOf(4) 返回？'
         options:
           - 4
           - -1(未找到)
@@ -275,4 +392,207 @@ levels:
           - undefined
         answer: 1
         explanation: indexOf 返回首次出现索引未找到返回-1。includes 直接返回 true/false 更语义化。
-
+      - id: 464
+        difficulty: 3
+        question: MutationObserver 是什么？用于什么场景？
+        options:
+          - 观察 CSS 变化
+          - 监听 DOM 树的变化（子节点增删、属性修改、文本变化），异步批量回调
+          - 替代 addEventListener
+          - 已废弃
+        answer: 1
+        explanation: 'const observer = new MutationObserver(callback); observer.observe(element, {childList: true, attributes: true, subtree: true})。用于在无法直接控制的 DOM 变化时做出响应（如第三方库修改了 DOM、contenteditable 编辑器等）。回调是微任务，批量处理变更。'
+      - id: 465
+        difficulty: 3
+        question: IntersectionObserver 是什么？如何用于图片懒加载？
+        options:
+          - 检测鼠标位置
+          - 检测元素是否进入视口（viewport）；当 img 元素进入视口时设置 src 实现懒加载
+          - 检测元素大小
+          - 已废弃
+        answer: 1
+        explanation: IntersectionObserver 高效检测元素与视口（或祖先元素）的交叉状态。用于懒加载：observer.observe(img) → 当 img 进入视口，回调中 img.src = img.dataset.src。比监听 scroll 事件性能好得多，浏览器在空闲时回调。
+      - id: 466
+        difficulty: 2
+        question: '`[1, 2, 3, 4, 5].copyWithin(0, 3)` 返回什么？'
+        options:
+          - '[1,2,3,4,5]'
+          - '[4, 5, 3, 4, 5]（从索引3开始复制到索引0位置）'
+          - '[3,4,5,1,2]'
+          - 报错
+        answer: 1
+        explanation: copyWithin(target, start, end) 将数组自身的一部分浅复制到另一位置，不改变数组长度。copyWithin(0, 3) 将索引3开始的元素 [4,5] 复制到索引0处，覆盖前两个元素。这是一个会修改原数组的变异方法。
+      - id: 467
+        difficulty: 3
+        question: '`[1, [2, [3, 4]]].flat()` 和 `[1, [2, [3, 4]]].flat(2)` 各返回什么？'
+        options:
+          - 都返回 [1,2,3,4]
+          - flat()→[1,2,[3,4]]（默认拍平1层）；flat(2)→[1,2,3,4]（拍平2层）
+          - flat() 报错
+          - flat 返回原数组
+        answer: 1
+        explanation: flat(depth) 按指定深度拍平嵌套数组，默认为 1。flat(1)→[1,2,[3,4]]；flat(2)→[1,2,3,4]。flat(Infinity) 完全拍平任意层。flatMap(fn) = map(fn) + flat(1)，一步完成映射和拍平。
+      - id: 468
+        difficulty: 2
+        question: '`[1, 2, 3].reduce((acc, x) => acc + x, "")` 结果和 `[1,2,3].reduce((acc, x) => acc + x, 0)` 有什么区别？'
+        options:
+          - 结果相同
+          - 初始值 "" 导致字符串拼接："123"（字符串）；初始值 0 导致数值累加：6（数字）
+          - 都会报错
+          - reduce 不能用于字符串
+        answer: 1
+        explanation: reduce 的初始值决定了累加器的类型。初始值为 "" 时，第一次 acc=""+1="1", 然后 "1"+2="12", 最后 "12"+3="123"。初始值为 0 时是数字加法。reduce 非常灵活，可以返回任意类型（对象、Map 等）。
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 工程实践
+    questions:
+      - id: 469
+        difficulty: 2
+        question: localStorage.setItem/getItem 的基本用法？数据存储有什么限制？
+        options:
+          - 可以存储任意 JS 对象
+          - 存储键值对（字符串类型），非字符串需 JSON.stringify/parse；容量约 5-10MB，同源共享
+          - 数据永久不过期
+          - 可以跨域访问
+        answer: 1
+        explanation: localStorage.setItem("key", "value") 存储字符串。要存对象需 JSON.stringify。存储限制约 5-10MB（不同浏览器不同）。数据永久保存直到手动清除或代码删除。同源的所有标签页共享同一 localStorage。
+      - id: 470
+        difficulty: 3
+        question: localStorage 和 sessionStorage 的区别？
+        options:
+          - 完全相同
+          - localStorage 永久存储（手动清除）；sessionStorage 仅在当前浏览器标签页会话期间有效，关闭标签页即清除
+          - sessionStorage 容量更大
+          - localStorage 更快
+        answer: 1
+        explanation: sessionStorage 数据在页面会话结束时清除（关闭标签页/窗口），但页面刷新时保留。localStorage 数据持久保留。两者其他 API 完全相同，容量和同源限制也相同。sessionStorage 适合临时状态（如表单草稿）。
+      - id: 471
+        difficulty: 2
+        question: '`JSON.stringify(value, replacer, space)` 中 replacer 参数的作用？'
+        options:
+          - 无用参数
+          - 可以过滤或转换序列化的属性：可以是属性名数组（白名单）或转换函数
+          - 控制缩进
+          - 已废弃
+        answer: 1
+        explanation: JSON.stringify(obj, ["name","age"]) 只序列化指定的属性。JSON.stringify(obj, (key, value) => ...) 可在序列化过程中转换每个值（如处理 Date 对象）。第三个参数 space 控制缩进（数字或字符串），让输出可读。
+      - id: 472
+        difficulty: 3
+        question: '`JSON.parse()` 解析失败会怎样？如何处理？'
+        options:
+          - 返回 null
+          - 抛出 SyntaxError；必须用 try/catch 包裹 JSON.parse() 来安全处理可能不合法的 JSON 字符串
+          - 返回 undefined
+          - 静默失败
+        answer: 1
+        explanation: JSON.parse 对不合法的 JSON 字符串（如缺少引号、尾部逗号、单引号等）会抛出 SyntaxError。处理外部数据（API 响应、localStorage 读取）时，始终用 try { JSON.parse(str) } catch(e) { /* 处理错误 */ }。
+      - id: 473
+        difficulty: 2
+        question: 防抖（Debounce）函数的实现思路？
+        options:
+          - 使用 setInterval
+          - 每次调用清除之前的定时器，重新设置延迟定时器。连续触发时只有最后一次会在延迟后执行
+          - 递归调用 setTimeout
+          - 使用 Promise.all
+        answer: 1
+        explanation: 核心：let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); }。输入框搜索、窗口 resize 等高频事件非常适合防抖。
+      - id: 474
+        difficulty: 3
+        question: 节流（Throttle）和防抖（Debounce）的核心区别？各自适用场景？
+        options:
+          - 完全相同
+          - 防抖：连续触发只执行最后一次（搜索输入）。节流：固定时间间隔内最多执行一次（滚动事件、按钮限频）
+          - 节流更快
+          - 防抖只用于定时器
+        answer: 1
+        explanation: 防抖（debounce）：等用户停止操作后再执行。适合搜索建议（等用户停止输入）。节流（throttle）：无论触发多频繁，保证每隔 N 毫秒最多执行一次。适合滚动加载、resize 重算布局（需要持续更新但不需每次触发）。
+      - id: 475
+        difficulty: 2
+        question: '`console.table(data)` 和 `console.group(name)` 的使用场景？'
+        options:
+          - 没有实际用途
+          - console.table 以表格形式展示对象数组，更直观；console.group/groupEnd 创建可折叠的日志分组
+          - console.table 只能用于数字
+          - 已废弃
+        answer: 1
+        explanation: console.table([{name:"A", age:20}, {name:"B", age:25}]) 以表格呈现数组对象，列对齐。console.group("用户操作") + console.log(...) + console.groupEnd() 将相关日志分组，可折叠展开。这些都是专业调试的重要工具。
+      - id: 476
+        difficulty: 3
+        question: debugger 语句和浏览器断点（Breakpoint）有什么区别？如何使用？
+        options:
+          - 完全相同
+          - debugger 语句在代码中硬编码断点，浏览器遇到时暂停；DevTools 断点是开发时手动设置，不修改源代码
+          - debugger 已废弃
+          - 断点只在 Chrome 可用
+        answer: 1
+        explanation: 在代码中插入 debugger; 语句，浏览器 DevTools 打开时会在此暂停执行（等同手动断点）。优点：可在特定条件下用 if(condition){debugger;} 做条件断点。注意：生产环境部署前应移除所有 debugger 语句。
+      - id: 477
+        difficulty: 2
+        question: try/catch/finally 完整错误处理模式？finally 何时一定执行？
+        options:
+          - finally 在 catch 后才执行
+          - try { 可能出错的代码 } catch(e) { 错误处理 } finally { 无论是否出错都执行的清理代码 }。finally 在 try/catch 之后，即使 try 中有 return 也会执行
+          - finally 可选
+        answer: 1
+        explanation: finally 块中的代码无论 try 是否抛出错误、catch 是否执行，甚至 try/catch 中有 return，都会在方法返回前执行。适合做清理操作：关闭连接、移除 loading 状态等。唯一的例外是 try 中调用了 process.exit() 这类暴力退出。
+      - id: 478
+        difficulty: 3
+        question: 如何创建自定义错误类？有什么好处？
+        options:
+          - 无法创建自定义错误
+          - class ApiError extends Error { constructor(message, statusCode) { super(message); this.name = "ApiError"; this.statusCode = statusCode; } }
+          - 只能使用 Error 类
+          - 自定义错误只在 Node.js 中可用
+        answer: 1
+        explanation: 通过继承 Error 类创建语义化错误类型（如 ApiError、ValidationError、TimeoutError），在 catch 中用 instanceof 区分错误类型做不同处理。比用字符串匹配 error.message 更可靠。注意：TS 中需调整 prototype 链。
+      - id: 479
+        difficulty: 3
+        question: 事件处理器中抛出错误会发生什么？如何处理？
+        options:
+          - 错误被忽略
+          - addEventListener 的回调中抛出的错误不会被外部 try/catch 捕获（事件回调是异步执行的）；需要在回调内部处理，或使用全局 window.onerror
+          - 程序崩溃
+          - 浏览器自动重试
+        answer: 1
+        explanation: 事件处理器是异步触发的，外部 try/catch 无法捕获其中的错误。解决方案：1) 在事件回调内部用 try/catch；2) window.addEventListener("error", ...) 全局捕获；3) window.onerror 兜底。React/Vue 等框架有自己的错误边界机制。
+      - id: 480
+        difficulty: 2
+        question: '`performance.now()` 和 `Date.now()` 的区别？适用于什么场景？'
+        options:
+          - 完全相同
+          - performance.now() 返回高精度时间戳（微秒级），适合性能测量；Date.now() 返回毫秒级时间戳，适合业务逻辑
+          - performance.now() 精度更低
+          - Date.now() 已废弃
+        answer: 1
+        explanation: performance.now() 返回从页面加载开始的高精度时间（微秒级别），不受系统时间调整影响，专门用于性能测量。Date.now() 返回 Unix 时间戳（毫秒），受系统时钟影响。做性能测试始终用 performance.now()。
+      - id: 481
+        difficulty: 3
+        question: 前端常见的内存泄漏场景有哪些？
+        options:
+          - JS 不会内存泄漏
+          - 遗忘的定时器/事件监听器、闭包中保持大对象引用、DOM 引用保留（已删除的 DOM 被 JS 变量引用）、全局变量累积
+          - 只有 IE 有
+          - 内存泄漏自动修复
+        answer: 1
+        explanation: 常见泄漏：1) setInterval 忘记 clearInterval；2) addEventListener 忘记 removeEventListener；3) 闭包持有不再需要的 DOM 引用；4) 全局变量或模块作用域变量不断累积数据；5) 分离的 DOM 树（JS 仍引用已从页面移除的 DOM）。现代浏览器 DevTools 的 Memory 面板可检测泄漏。
+      - id: 482
+        difficulty: 2
+        question: querySelector 和 getElementById 在性能上有区别吗？
+        options:
+          - 完全相同
+          - getElementById 通常比 querySelector("#id") 快（直接哈希查找），但差异在正常页面中可忽略
+          - querySelector 更快
+          - getElementById 已废弃
+        answer: 1
+        explanation: getElementById 是浏览器最早优化的 DOM API，直接通过 ID 哈希表查找，理论上最快。querySelector 需要解析 CSS 选择器字符串。在绝大多数场景差异可忽略不计（微秒级），选择可读性更好的即可。批量操作或高频调用时，可优先考虑 getElementById。
+      - id: 483
+        difficulty: 3
+        question: 深拷贝的几种方式：`JSON.parse(JSON.stringify(obj))` 和 `structuredClone(obj)` 的区别？
+        options:
+          - 完全相同
+          - JSON 方式无法处理函数、undefined、Symbol、Date、RegExp、循环引用；structuredClone 支持更多类型（含循环引用）但也不支持函数和 Symbol
+          - structuredClone 已废弃
+          - JSON 方式可以拷贝一切
+        answer: 1
+        explanation: JSON.parse(JSON.stringify()) 简单但有大量限制：丢失 undefined/函数/Symbol/Date 转字符串/NaN→null/infinity→null/循环引用报错。structuredClone() 是新的原生 API（2022+），支持循环引用、Date、RegExp、Map、Set、ArrayBuffer 等，但同样不支持函数。深度场景考虑 lodash.cloneDeep。

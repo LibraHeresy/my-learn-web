@@ -1,12 +1,9 @@
-# Vue 进阶宝石
-
 gem:
   id: vue-advanced
   name: Vue 进阶宝石
   icon: 💙
   achievement: mid
   order: 11
-
 levels:
   - level: 1
     type: normal
@@ -18,14 +15,14 @@ levels:
         question: Vue Router 作用？
         options:
           - 管理 CSS
-          - "前端路由——切换\"页面\"不刷新浏览器"
+          - 前端路由——切换"页面"不刷新浏览器
           - 状态管理
           - 构建工具
         answer: 1
         explanation: Vue Router 实现 SPA 页面切换不刷新浏览器。不同 URL 路径显示不同组件。
       - id: 242
         difficulty: 1
-        question: "<router-link> 和 <a> 区别？"
+        question: <router-link> 和 <a> 区别？
         options:
           - 完全相同
           - router-link 无刷新跳转；a 标签会整页刷新
@@ -35,7 +32,7 @@ levels:
         explanation: router-link 是 Vue Router 提供的组件点击时无刷新切换路由。普通 a 标签会刷新整页。
       - id: 243
         difficulty: 1
-        question: "动态路由 /user/:id 怎么获取 id？"
+        question: 动态路由 /user/:id 怎么获取 id？
         options:
           - 从 URL 手动解析
           - useRoute().params.id
@@ -53,7 +50,36 @@ levels:
           - 构建
         answer: 1
         explanation: Pinia=Vue 的状态管理库。在组件间共享响应式数据(用户信息/购物车等)不通过 props 逐层传递。
-
+      - difficulty: 1
+        question: Vue Router 中路由的嵌套（children）怎么写？
+        options:
+          - 不需要嵌套
+          - 在路由配置中定义 children 数组，子路由的 path 相对父路由
+          - 单独定义
+          - 用 name 属性
+        answer: 1
+        explanation: routes=[{path:"/user",component:User,children:[{path:"profile",component:Profile}]}]。子路由 path 不写 /。父组件需 <router-view> 渲染子路由。
+        id: 373
+      - difficulty: 1
+        question: 路由的 name 属性有什么用？
+        options:
+          - 只是标识
+          - 用 router.push({name:"home"}) 跳转，不依赖 URL 路径字符串
+          - 没作用
+          - 用于 CSS
+        answer: 1
+        explanation: 命名路由让跳转不硬编码路径。router.push({name:"user",params:{id:1}}) 比 push("/user/1") 更易维护——路径变了跳转代码不用改。
+        id: 374
+      - difficulty: 1
+        question: Pinia store 的两种写法：Options Store vs Setup Store？
+        options:
+          - 只有一种
+          - 'Options: state/getters/actions 选项对象；Setup: 用 ref/computed/function 组合更灵活'
+          - 不兼容
+          - 已废弃
+        answer: 1
+        explanation: Options Store 类似 Vuex 风格。Setup Store 用 Composition API 语法写 store，和组件写法一致更灵活。官方推荐 Setup Store。
+        id: 375
   - level: 2
     type: elite
     threshold: 70
@@ -78,7 +104,7 @@ levels:
           - 定义事件
           - 样式隔离
         answer: 1
-        explanation: "slot 让组件接收\"模板内容\"而非数据。子组件留\"空位\"，父组件填充内容。具名插槽有多个名称不同的空位。"
+        explanation: slot 让组件接收"模板内容"而非数据。子组件留"空位"，父组件填充内容。具名插槽有多个名称不同的空位。
       - id: 247
         difficulty: 2
         question: composable(组合函数)是什么？举例
@@ -98,7 +124,7 @@ levels:
           - 只有 actions
           - 只有 getters
         answer: 1
-        explanation: "store=defineStore(\"name\",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。"
+        explanation: store=defineStore("name",()=>{const s=ref();function a(){};return{s,a}})。setup 风格 store 和组件写法一致。
       - id: 249
         difficulty: 2
         question: ref 和 reactive 的区别？解构 reactive 会怎样？
@@ -108,7 +134,7 @@ levels:
           - ref 更快
           - reactive 已废弃
         answer: 1
-        explanation: "const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。"
+        explanation: const state=reactive({a:1});let{a}=state→a 不是响应式的！解构打断响应性。用 toRefs()将属性转 ref 保留响应性。
       - id: 250
         difficulty: 2
         question: onBeforeUnmount 用途？
@@ -129,7 +155,36 @@ levels:
           - push 已废弃
         answer: 1
         explanation: push=添加新历史记录(用户可点后退)。replace=替换当前记录(后退不会回到这一页)。登录后常用 replace 防止回退到登录页。
-
+      - difficulty: 2
+        question: Pinia store 中 $patch 方法做什么？
+        options:
+          - 打补丁
+          - 批量修改 store 中多个属性一次完成，比逐个赋值更高效
+          - 创建 store
+          - 删除 store
+        answer: 1
+        explanation: store.$patch({name:"a",age:20}) 一次性更新多个属性。devtools 中将多个变更合并为一个记录。也可传函数 store.$patch((state)=>{state.count++})。
+        id: 376
+      - difficulty: 2
+        question: 如何让 Pinia store 的数据在组件销毁后仍保持？
+        options:
+          - 自动保持
+          - Pinia store 默认在创建它的组件外保持状态。但需注意不要在 setup 外创建 store 导致 SSR 状态污染
+          - 手动保存
+          - 做不到
+        answer: 1
+        explanation: Pinia store 是模块级的单例，组件销毁 store 不会销毁。但 SSR 时需用 Pinia 的 state 序列化/注水机制避免状态污染。客户端 SPA 中 store 一直存活。
+        id: 377
+      - difficulty: 2
+        question: Vue Router 的路由元信息 meta 怎么用？
+        options:
+          - 保存 URL
+          - 存储路由额外信息如 requiresAuth、title。在导航守卫中读取 meta 做权限控制
+          - 加速路由
+          - 已废弃
+        answer: 1
+        explanation: routes=[{path:"/admin",meta:{requiresAuth:true}}]。router.beforeEach((to,from)=>{if(to.meta.requiresAuth&&!isLogin)return"/login"})。常用来做权限校验和页面标题设置。
+        id: 378
   - level: 3
     type: boss
     threshold: 60
@@ -154,23 +209,23 @@ levels:
           - 渲染页面
           - 存储状态
         answer: 1
-        explanation: "router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。"
+        explanation: router.beforeEach((to,from,next)=>{})在每次路由切换前执行。可判断用户是否登录未登录重定向到登录页。
       - id: 254
         difficulty: 3
-        question: "`<style scoped>` 的原理？"
+        question: '`<style scoped>` 的原理？'
         options:
           - 随机数
           - Vue 给组件元素加唯一属性(data-v-xxx)CSS 选择器追加该属性选择器
           - CSS in JS
           - PostCSS
         answer: 1
-        explanation: "Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。"
+        explanation: Vue 编译时给每个 scoped 样式追加[data-v-xxx]属性选择器并给组件模板元素加对应属性使样式只匹配当前组件。
       - id: 255
         difficulty: 3
-        question: "`<script setup>` 中如何声明 props 和 emits？"
+        question: '`<script setup>` 中如何声明 props 和 emits？'
         options:
           - 无法声明
-          - "defineProps({...})和 defineEmits([...])"
+          - defineProps({...})和 defineEmits([...])
           - 用 this.$props
           - 在 template 中声明
         answer: 1
@@ -200,7 +255,7 @@ levels:
         question: Vue Router 的懒加载怎么做？
         options:
           - 无法实现
-          - "component:()=>import(\"./View.vue\")——路由被访问时才加载组件代码"
+          - component:()=>import("./View.vue")——路由被访问时才加载组件代码
           - 手动加载
           - 自动加载
         answer: 1
@@ -214,10 +269,10 @@ levels:
           - 替代 ref
           - 已废弃
         answer: 1
-        explanation: "const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。"
+        explanation: const{a,b}=toRefs(reactive({a:1,b:2}))→a 和 b 都是 ref 保持响应性。不解构响应性丢失。
       - id: 260
         difficulty: 3
-        question: "`<KeepAlive>` 组件做什么？"
+        question: '`<KeepAlive>` 组件做什么？'
         options:
           - 缓存路由
           - 缓存被切换走的组件实例不销毁保留其状态。切回来时恢复之前的状态
@@ -225,4 +280,148 @@ levels:
           - 存储数据
         answer: 1
         explanation: KeepAlive 包裹动态组件/路由视图缓存被切走的组件。用户回到该组件时之前的状态(滚动位置/输入内容/数据)仍在。
-
+      - difficulty: 3
+        question: watch 的 deep:true 和 immediate:true 各做什么？
+        options:
+          - 无作用
+          - deep=深度监听对象嵌套属性；immediate=创建时立即执行一次回调
+          - 都监听深层
+          - 已废弃
+        answer: 1
+        explanation: watch(source,fn,{deep:true}) 递归遍历对象所有嵌套属性追踪变化。{immediate:true} 在 watch 创建时立即执行一次回调（不等变化）。deep 对大型对象有性能开销。
+        id: 379
+      - difficulty: 3
+        question: 动态路由 /user/:id 的参数变化时组件会重新创建吗？
+        options:
+          - 会
+          - 默认不会——组件被复用。若需要在参数变化时重新获取数据用 watch(()=>route.params.id,fn) 或 onBeforeRouteUpdate
+          - 一定会
+          - 看情况
+        answer: 1
+        explanation: 同一路由不同参数时 Vue Router 复用组件实例以提升性能。要在 params 变化时重新获取数据：watch(()=>route.params.id, fetchUser) 或用 onBeforeRouteUpdate 守卫。
+        id: 380
+      - difficulty: 3
+        question: Pinia 中 getters 和 actions 的区别及各自使用场景？
+        options:
+          - 相同
+          - getters=派生计算（类似 computed），纯函数返回计算后数据；actions=业务逻辑（类似 methods），可异步、可修改 state
+          - getters 更快
+          - actions 已废弃
+        answer: 1
+        explanation: getters 从 state 派生数据（全名=姓+名）。actions 执行业务操作（登录请求→更新 token→获取用户信息）。getters 有缓存，actions 无缓存。
+        id: 381
+      - difficulty: 3
+        question: Vue Router 的 hash 模式和 history 模式区别？
+        options:
+          - 相同
+          - 'hash=URL 带 # 不会被发送到服务器，适合无服务器配置的静态部署；history=干净 URL 但需服务器回退配置'
+          - hash 更快
+          - history 已废弃
+        answer: 1
+        explanation: hash 模式 URL 如 /#/about，# 后内容浏览器不发给服务器→所有路由返回 index.html。history 模式如 /about 需服务器配置 fallback。history 更美观但部署要求高。
+        id: 382
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 进阶模式
+    questions:
+      - difficulty: 3
+        question: composable（组合函数）命名规范和设计原则？
+        options:
+          - 随意命名
+          - 以 use 开头、只做一件事、返回 ref/reactive 而非普通值、在 setup 或生命周期中调用
+          - 必须叫 useXxx
+          - 不需要规范
+        answer: 1
+        explanation: 命名 useXxx 表意明确。原则：1)单一职责 2)返回响应式数据 3)可组合（composable 可调用其他 composable）4)在 setup/生命周期中同步调用。如 useMouse()、useFetch()。
+        id: 383
+      - difficulty: 3
+        question: <Teleport> 组件做什么？典型场景？
+        options:
+          - 传送数据
+          - 将组件模板内容"传送"到 DOM 中指定位置渲染。如弹窗渲染到 body 下避免 overflow:hidden 裁剪
+          - 传送事件
+          - 已废弃
+        answer: 1
+        explanation: <Teleport to="body"><Modal/></Teleport> 将 Modal 渲染到 body 结束前。解决弹窗被父元素 overflow:hidden 裁剪的问题。to 可以是 CSS 选择器。
+        id: 384
+      - difficulty: 2
+        question: <Suspense> 组件的基本用法？
+        options:
+          - 错误边界
+          - 包裹异步组件，提供加载中（fallback）和加载完成的插槽
+          - 路由守卫
+          - 已废弃
+        answer: 1
+        explanation: '<Suspense><template #default><AsyncComp/></template><template #fallback><Loading/></template></Suspense>。在异步组件加载完前显示 fallback 内容。目前为实验性功能。'
+        id: 385
+      - difficulty: 2
+        question: <KeepAlive> 的 include/exclude/max 属性怎么用？
+        options:
+          - 只有缓存
+          - include=缓存名单（组件名）；exclude=排除名单；max=最大缓存数量（LRU 策略淘汰）
+          - 不需要属性
+          - 已废弃
+        answer: 1
+        explanation: <KeepAlive include="CompA,CompB" exclude="CompC" :max="10">。include 可传字符串/正则/数组。max 限制缓存实例数，超出按 LRU 淘汰最久未用的。
+        id: 386
+      - difficulty: 3
+        question: defineAsyncComponent 的加载状态和错误处理怎么配置？
+        options:
+          - 不能配置
+          - defineAsyncComponent({loader,loadingComponent,errorComponent,delay,timeout})
+          - 自动处理
+          - 手动处理
+        answer: 1
+        explanation: defineAsyncComponent({loader:()=>import("./X.vue"),loadingComponent:Spinner,delay:200,errorComponent:ErrorPage,timeout:3000})。delay 避免闪烁，timeout 超时处理。
+        id: 387
+      - difficulty: 3
+        question: nextTick 的实现原理？和 setTimeout 区别？
+        options:
+          - 相同
+          - nextTick 将回调推入微任务队列在 DOM 更新后同步执行。setTimeout 是宏任务在下一轮事件循环执行
+          - nextTick 更快
+          - 无区别
+        answer: 1
+        explanation: nextTick 优先用 Promise.then（微任务）保证在当前 tick 的 DOM 更新后立即执行。setTimeout 是宏任务要到下一轮事件循环。操作 DOM 用 nextTick 而非 setTimeout。
+        id: 388
+      - difficulty: 2
+        question: watchEffect 和 watch 的选择：什么场景用哪个？
+        options:
+          - 随便用
+          - 简单自动追踪用 watchEffect（组件初始化时发请求）。需要旧值对比/手动控制触发时机用 watch（监听路由参数变化）
+          - 只用一个
+          - 都废弃
+        answer: 1
+        explanation: watchEffect 写起来简洁自动收集依赖→适合"数据变了就执行某操作"。watch 明确指定监听源获取新旧值→适合"知道具体监听什么需要对比"。
+        id: 389
+      - difficulty: 3
+        question: Vue 的 customRef() 做什么？什么场景用？
+        options:
+          - 自定义组件引用
+          - 创建自定义 ref 显式控制依赖追踪和触发更新的时机。如防抖 ref
+          - 自定义路由
+          - 已废弃
+        answer: 1
+        explanation: customRef((track,trigger)=>({get(){track();return val},set(v){val=v;trigger()}}))。可控制何时收集依赖(track)何时触发更新(trigger)。如实现防抖 ref：输入停止 500ms 后才更新。
+        id: 390
+      - difficulty: 2
+        question: Vue 应用中的错误处理：onErrorCaptured 和 errorHandler 区别？
+        options:
+          - 相同
+          - onErrorCaptured=组件级错误捕获（捕获子组件错误）；app.config.errorHandler=全局错误处理器
+          - 只用一个
+          - 无需处理
+        answer: 1
+        explanation: onErrorCaptured 在组件中捕获所有后代组件错误返回 false 阻止向上传播。app.config.errorHandler 全局兜底。两者配合：组件边界用 onErrorCaptured，全局用 errorHandler 做日志上报。
+        id: 391
+      - difficulty: 3
+        question: 渲染函数 h() 和 JSX 与 template 模板的选择？
+        options:
+          - template 最好
+          - template 适合大多数场景（声明式可编译优化）；h()/JSX 适合需要完全 JS 灵活性的动态渲染场景
+          - h() 更好
+          - JSX 已废弃
+        answer: 1
+        explanation: template 是声明式写法编译时可优化（静态提升/补丁标记）。h()/JSX 是命令式写法更灵活（根据条件动态生成不同结构的 VNode）。绝大多数场景用 template 即可。
+        id: 392

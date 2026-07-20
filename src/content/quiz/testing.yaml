@@ -1,12 +1,9 @@
-# 测试宝石
-
 gem:
   id: testing
   name: 测试宝石
   icon: 🧪
   achievement: senior
   order: 16
-
 levels:
   - level: 1
     type: normal
@@ -43,7 +40,36 @@ levels:
           - npm 包
         answer: 1
         explanation: E2E=端到端测试。用 Playwright/Cypress 模拟真实用户在浏览器中操作整个应用。最接近真实场景但最慢最脆弱。
-
+      - difficulty: 1
+        question: describe、it/test、expect 分别做什么？
+        options:
+          - 都是测试
+          - describe=测试套件(分组)；it/test=单个测试用例；expect=断言(验证结果)
+          - 都是断言
+          - 都是用例
+        answer: 1
+        explanation: describe("模块名",()=>{}) 组织相关测试。it("行为描述",()=>{}) 定义单个测试。expect(result).toBe(expected) 验证结果。典型结构：describe 套件→it 用例→expect 断言。
+        id: 457
+      - difficulty: 1
+        question: test.each 和 describe.each 做什么？
+        options:
+          - 重复执行
+          - 参数化测试：相同逻辑多组输入数据分别运行。避免复制粘贴测试代码
+          - 重复描述
+          - 没用
+        answer: 1
+        explanation: test.each([[1,1,2],[2,2,4]])("add(%i,%i)=%i",(a,b,expected)=>{expect(add(a,b)).toBe(expected)})。同样测试逻辑跑多组输入。describe.each 同理对描述套件分组。
+        id: 458
+      - difficulty: 1
+        question: 覆盖率（Coverage）的四种常用类型？
+        options:
+          - 只有行
+          - 行覆盖率+分支覆盖率+函数覆盖率+语句覆盖率。行覆盖率最常用但分支覆盖率更能反映质量
+          - 只有分支
+          - 只有函数
+        answer: 1
+        explanation: 四种覆盖率：1)语句/行(执行过的代码行) 2)分支(if/else 各分支都测了) 3)函数(每个函数调用过) 4)条件(布尔子表达式都覆盖)。行覆盖率高但分支覆盖可能很低。关注分支覆盖率更体现测试质量。
+        id: 459
   - level: 2
     type: elite
     threshold: 60
@@ -81,14 +107,14 @@ levels:
         explanation: 快照=组件渲染输出的序列化版本。下次测试对比快照自动发现 UI 意外变化。不能替代行为测试(只检测变化不判断对错)。
       - id: 341
         difficulty: 2
-        question: "测试覆盖率 100% 是好目标吗？"
+        question: 测试覆盖率 100% 是好目标吗？
         options:
           - 是必须
           - 不是——追求覆盖率数字导致写无意义测试。重要的代码都被测试覆盖即可
           - 越高越好
           - 不需要覆盖率
         answer: 1
-        explanation: "100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。"
+        explanation: 100% 覆盖率不等于好测试(可能只执行了代码未验证行为)。关注测试质量(边界条件/错误路径)而非数字。
       - id: 342
         difficulty: 2
         question: Mock/Stub/Spy 的区别？
@@ -99,7 +125,36 @@ levels:
           - Mock 已废弃
         answer: 1
         explanation: Stub 简单替代(只返回值)。Mock 更强大(预设期望+验证是否按预期调用)。Spy 不改变行为只记录(如是否被调用过)。
-
+      - difficulty: 2
+        question: Vue Test Utils 中 shallowMount 和 mount 区别？
+        options:
+          - 相同
+          - shallowMount=浅渲染：子组件存根(stub)不渲染；mount=完整渲染：子组件正常渲染
+          - mount 更快
+          - shallowMount 已废弃
+        answer: 1
+        explanation: shallowMount 只渲染组件本身子组件地方显示存根(stub)→测试更隔离更快。mount 渲染组件及其所有子组件→更接近真实场景。原则：测当前组件逻辑用 shallowMount，测组件交互/集成用 mount。
+        id: 460
+      - difficulty: 2
+        question: Jest/Vitest 中 beforeAll/beforeEach/afterEach/afterAll 的作用域？
+        options:
+          - 全局
+          - 每个 describe 套件内独立作用域。beforeEach 在每个 it 前执行；beforeAll 只执行一次
+          - 文件内
+          - 无所谓
+        answer: 1
+        explanation: beforeEach(()=>{}) 在每个 it 前执行（常用初始化/重置数据）。afterEach 每个 it 后清理。beforeAll 套件开始执行一次（昂贵操作如连接 DB）。作用域：在哪个 describe 内声明就在哪个 describe 内生效。
+        id: 461
+      - difficulty: 2
+        question: 测试替身：Dummy/Fake/Stub/Spy/Mock 区别总结？
+        options:
+          - 一样
+          - Dummy=占位(参数)；Fake=简化实现(内存DB)；Stub=预设返回值；Spy=记录调用；Mock=预设期望+验证
+          - 只有 Mock
+          - 已废弃
+        answer: 1
+        explanation: Dummy：只占位不用的参数。Fake：工作但简化的实现（如用数组替代数据库）。Stub：返回预设值（不验证调用方式）。Spy：记录被调用情况（调用次数/参数）。Mock：预设期望并验证（最严格）。
+        id: 462
   - level: 3
     type: boss
     threshold: 60
@@ -140,7 +195,7 @@ levels:
         question: 测试命名规范为什么重要？
         options:
           - 不重要
-          - "好测试名=被测对象+场景+期望结果。\"点击提交按钮且表单为空应显示错误信息\""
+          - 好测试名=被测对象+场景+期望结果。"点击提交按钮且表单为空应显示错误信息"
           - 随便命名
           - 命名无所谓
         answer: 1
@@ -175,4 +230,108 @@ levels:
           - 测试免费
         answer: 1
         explanation: 快速迭代的原型/UI 细节不稳定时过度测试导致大量时间更新测试。测试稳定接口和核心逻辑减少琐碎测试。
-
+      - difficulty: 3
+        question: 为什么测试异步代码需要特别注意？常见坑？
+        options:
+          - 不需要
+          - 异步未完成断言已结束→假通过。必须 await 异步操作或用 done() 回调确保测试等异步完成
+          - 异步简单
+          - 没有坑
+        answer: 1
+        explanation: 陷阱：测试函数执行完但 Promise 还没 resolve→断言没执行测试"通过"。解决：1)async/await 2)waitFor 等待 UI 更新 3)返回 Promise 让测试框架等待。确保测试覆盖 resolve 和 reject 两条路径。
+        id: 463
+      - difficulty: 3
+        question: 快照测试的优缺点：何时应该用何时不该？
+        options:
+          - 都应该
+          - 适用：稳定的 UI 组件(页头/页脚)发现意外变更。不适用：动态内容/频繁变化的组件(测试变维护负担)
+          - 都不该用
+          - 无所谓
+        answer: 1
+        explanation: 适用快照：1)稳定少变的 UI 组件 2)配置/JSON 输出验证。不适用：1)动态内容(时间/随机值) 2)频繁迭代的组件(每次改都更新快照→无意义) 3)包含第三方组件(版本更新导致大量测试失败)。
+        id: 464
+      - difficulty: 3
+        question: 测试一个 Vue 组件的用户交互流程（点击→输入→提交）怎么写？
+        options:
+          - 直接测
+          - mount→找元素(wrapper.find)→trigger 事件(click/input)→nextTick 等更新→断言 emit/UI 变化
+          - 不用测
+          - 手动测试
+        answer: 1
+        explanation: 交互测试流程：1)const wrapper=mount(Comp,{props}) 2)wrapper.find("#input").setValue("text") 3)wrapper.find("button").trigger("click") 4)await nextTick() 5)expect(wrapper.emitted("submit")[0]).toEqual(["text"])。
+        id: 465
+  - level: 4
+    type: boss
+    threshold: 60
+    name: 测试实战
+    questions:
+      - difficulty: 2
+        question: 集成测试和单元测试的核心区别？什么时候写集成测试？
+        options:
+          - 相同
+          - 单元测试=隔离测试单个模块(Mock 外部依赖)；集成测试=测试多个模块协作(少 Mock)
+          - 没有区别
+          - 只写单元测试
+        answer: 1
+        explanation: 单元测试：隔离测试单一函数/组件（mock 外部依赖）。集成测试：测试多个模块如何协作（真实组合）。写集成测试时机：1)测试 API 层的请求/响应流程 2)组件+store 协作 3)数据流跨多组件传递。
+        id: 466
+      - difficulty: 2
+        question: 测试数据管理策略：工厂函数 vs 固定数据文件？
+        options:
+          - 随便
+          - 工厂函数=动态生成测试数据易定制；固定文件=一致性好但难定制。推荐工厂函数
+          - 固定文件
+          - 不需要
+        answer: 1
+        explanation: 工厂函数如 createTestUser({name:"a"}) 可覆盖特定字段其余用默认值。vs 固定 JSON 文件所有测试共享→一个测试改数据可能影响其他测试。工厂函数清晰表明测试依赖了哪些数据。
+        id: 467
+      - difficulty: 3
+        question: 如何测试复杂的异步工作流（多个 API 调用依次依赖）？
+        options:
+          - 手动
+          - Mock 链式 API 返回→每次调用返回预设值→验证调用顺序和参数→确保错误路径也覆盖
+          - 不测试
+          - 只测一个
+        answer: 1
+        explanation: 1)Mock API 函数分别返回预设值 2)依次调用→await 等待 3)验证每次调用的参数和顺序 4)还要测试中间某步失败时的处理。可用 msw(Mock Service Worker)模拟服务端来测试完整请求流。
+        id: 468
+      - difficulty: 3
+        question: TDD（测试驱动开发）在实际项目中的挑战和应对？
+        options:
+          - 没挑战
+          - 挑战：需求不明确时难以先写测试/UI 快速迭代时测试维护成本高。应对：核心逻辑用 TDD+UI 后补测试
+          - 不适合前端
+          - 不需要 TDD
+        answer: 1
+        explanation: TDD 现实挑战：1)探索性开发时接口不确定→先写代码再补测试 2)UI 快速迭代→先实现后补核心逻辑测试 3)纯函数/工具函数→最适合 TDD。务实策略：核心业务逻辑 TDD + UI 组件后补测试 + E2E 覆盖关键路径。
+        id: 469
+      - difficulty: 2
+        question: 何时用 Mock 何时用真实实现？
+        options:
+          - 全部 Mock
+          - Mock：外部服务(API/DB)、无法控制的行为(时间/随机)、慢操作。真实：纯函数、简单工具类
+          - 全部真实
+          - 随便
+        answer: 1
+        explanation: Mock 原则：1)外部依赖(API/数据库/文件系统) 2)不可控(时间 Date.now/随机 Math.random) 3)极慢操作。不 Mock：纯函数/简单工具类/组件内部状态——这些用真实实现测试更有价值且不慢。
+        id: 470
+      - difficulty: 3
+        question: 测试覆盖率 80% 但线上 Bug 依然频繁→可能原因？
+        options:
+          - 覆盖率不够高
+          - 测试质量低——只覆盖了执行路径未验证行为正确性。可能缺少边界条件测试和错误路径覆盖
+          - 需要 100%
+          - 测试无用
+        answer: 1
+        explanation: 覆盖率陷阱：高覆盖率!=好测试。常见问题：1)只执行代码不验证结果(expect 不够严格) 2)不测边界条件(null/空字符串/极端值) 3)不测错误路径(API 失败/网络超时) 4)只测 happy path。关注测试质量非数量。
+        id: 471
+      - difficulty: 2
+        question: 如何在 CI/CD 中集成测试？
+        options:
+          - 不需要
+          - 在 CI 流程中加入测试步骤：提交→npm ci→npm test→通过→构建部署。阻断不通过测试的部署
+          - 手动测试
+          - 单独运行
+        answer: 1
+        explanation: CI 流水线：1)npm ci(干净安装) 2)npm run lint(代码检查) 3)npm test(运行测试) 4)测试通过→构建→部署。测试不通过→构建失败→通知开发者→阻止不通过测试的代码上线。
+        id: 472
