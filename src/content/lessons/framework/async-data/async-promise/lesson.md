@@ -64,6 +64,58 @@ fetchUserId('小明')
 关键点：`.catch()` 会捕获链上**任何一步**的错误。就像一张安全网——不管哪个环节出问题，都能兜住。
 :::
 
+:::explain{title="Promise 组合器 — 同时处理多个 Promise"}
+现实开发中，你经常需要同时发起多个请求。JS 提供了四个组合器：
+
+**1. Promise.all — "全部完成才算完"**
+```js
+// 同时请求三个 API，等全部返回后一起处理
+const [user, posts, comments] = await Promise.all([
+  fetch('/api/user').then(r => r.json()),
+  fetch('/api/posts').then(r => r.json()),
+  fetch('/api/comments').then(r => r.json())
+])
+console.log('全部加载完成！')
+```
+⚠️ 只要有一个失败，整个 `Promise.all` 就 reject。适合：页面初始化时需要多组数据。
+
+**2. Promise.race — "谁先到算谁的"**
+```js
+// 实现请求超时：如果 3 秒内 API 没回应就用默认数据
+const data = await Promise.race([
+  fetch('/api/slow-endpoint').then(r => r.json()),
+  new Promise((_, reject) => setTimeout(() => reject('请求超时！'), 3000))
+])
+```
+适合：给网络请求加超时控制。
+
+**3. Promise.allSettled — "全部有结果，不管成败"**
+```js
+const results = await Promise.allSettled([
+  fetch('/api/user'),
+  fetch('/api/broken-endpoint'),  // 这个可能 404
+  fetch('/api/posts')
+])
+// results = [
+//   { status: "fulfilled", value: {...} },
+//   { status: "rejected", reason: "404 Not Found" },
+//   { status: "fulfilled", value: {...} }
+// ]
+```
+适合：批量操作，需要知道每个请求的结果（成功还是失败），不因一个失败而丢弃其他数据。
+
+**4. Promise.any — "有一个成功就行"**
+```js
+// 从多个 CDN 镜像中找最快的那个
+const data = await Promise.any([
+  fetch('https://cdn1.example.com/data.json'),
+  fetch('https://cdn2.example.com/data.json'),
+  fetch('https://cdn3.example.com/data.json')
+]).then(r => r.json())
+```
+适合：有多个备用源，只要有一个成功就行。
+:::
+
 :::task{title="动手试试 ✨"}
 ::::step{purpose=".then() 是 Promise 的核心消费方式——它注册一个回调，在异步操作成功后执行。就像你预订了一张活动门票后，不需要一直盯着售票窗口，.then() 相当于\"有票了通知我\"。" expected="约 800ms 后控制台输出搜索成功的结果对象 { keyword: \"春天\", results: [\"项目A\", \"项目B\", \"项目C\"] }。"}
 调用 searchMusic("春天")，用 .then(result => console.log(result)) 处理成功返回的数据

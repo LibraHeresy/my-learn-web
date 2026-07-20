@@ -1,0 +1,8 @@
+id: async-ui-states
+title: "异步 UI 的三种状态 — loading、error、empty"
+track: framework
+chapter: async-data
+order: 10
+mode: local
+analogy: 每个异步操作就像在餐厅点菜——点完菜（触发请求）、等上菜（loading）、菜上桌（success）、服务员说"卖完了"（error）、菜单上没这道菜（empty）。用户在每一步都应该看到对应的提示。一个专业的页面会处理好这三种状态。
+estimatedMinutes: 0

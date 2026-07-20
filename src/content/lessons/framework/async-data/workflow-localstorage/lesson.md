@@ -67,6 +67,8 @@ render(pieces);
 
 :::recap
 你学会了用 localStorage 让数据"活过"页面刷新——存进去的数据即使关闭浏览器再打开也还在。因为 localStorage 只能存字符串，存对象或数组时需要先用 JSON.stringify 转换，读出来时再用 JSON.parse 还原。
+
+> 💡 **重要限制：** localStorage 每个域名只有约 **5MB** 的存储空间，超出会抛出 `QuotaExceededError`。它是**同步**的——大量数据读写会阻塞页面。如果存储需要超过 5MB 或需要索引查询，应使用 IndexedDB。另外，`sessionStorage` 和 localStorage 用法一样，但关闭浏览器标签页后数据就没了——适合存临时状态。
 :::
 
 

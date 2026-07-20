@@ -64,6 +64,37 @@ console.log('② 继续')
 因为 `setTimeout` 的回调**一定会等**主线程的同步代码全部执行完才运行。就像收银员不会在扫描到一半时突然去接待另一个人。
 :::
 
+:::explain{title="宏任务 vs 微任务 — 排队的\"VIP通道\""}
+上面讲的 `setTimeout` 回调进入的是**宏任务队列**（Task Queue）。但 Promise 的回调（`.then()`、`catch`）走的是**微任务队列**（Microtask Queue）——一个优先级更高的 VIP 通道：
+
+```
+宏任务（MacroTask）：setTimeout、setInterval、DOM 事件
+微任务（MicroTask）：Promise.then/catch、queueMicrotask
+```
+
+**关键规则：每个宏任务执行完后，会立即清空所有微任务，然后才执行下一个宏任务。**
+
+```js
+console.log('① 开始')
+
+setTimeout(() => {
+  console.log('④ 宏任务：setTimeout')
+}, 0)
+
+Promise.resolve().then(() => {
+  console.log('② 微任务：Promise.then')
+})
+
+console.log('③ 同步代码')
+
+// 输出顺序：① → ③ → ② → ④
+```
+
+**为什么是 ①③②④？** 因为同步代码最先执行 → 然后清空微任务队列（②）→ 最后才处理宏任务（④）。微任务有插队特权！
+
+这也是为什么 `Promise.resolve().then(...)` 比 `setTimeout(..., 0)` 先执行——微任务队列总是优先于宏任务队列。
+:::
+
 :::example{title="生活中的类比"}
 你去咖啡店点一杯拿铁：
 1. 你点单（同步代码）

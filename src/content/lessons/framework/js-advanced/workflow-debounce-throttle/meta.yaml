@@ -1,0 +1,8 @@
+id: workflow-debounce-throttle
+title: 防抖与节流 — 控制函数执行的节奏
+track: framework
+chapter: js-advanced
+order: 16
+mode: local
+analogy: 防抖就像电梯门——有人进来就重新计时，等没人进出了才关门。节流就像地铁闸机——不管多少人涌过来，每分钟只放固定数量的人通过。这两个模式让你控制函数执行的频率，提升页面性能。
+estimatedMinutes: 0

@@ -15,6 +15,59 @@ ES6 引入了：
 这些新语法让代码**更短、更清晰、更不容易出错**。
 :::
 
+:::explain{title="可选链 ?. — 安全访问深层属性"}
+当你访问嵌套对象的属性时，如果中间某个属性是 `null` 或 `undefined`，程序会报错。可选链 `?.` 让你安全访问：
+```js
+const user = { name: "张三" };
+
+// ❌ 旧写法：冗长且容易遗漏
+let city;
+if (user && user.address && user.address.city) {
+  city = user.address.city;
+}
+
+// ✅ 可选链：遇到 null/undefined 就返回 undefined，不报错
+const city = user?.address?.city;  // undefined（因为没有 address）
+```
+
+可选链也适用于函数调用和数组访问：
+```js
+user?.getInfo?.();        // 如果 getInfo 不存在，不调用
+const first = arr?.[0];   // 如果 arr 是 null/undefined，返回 undefined
+```
+:::
+
+:::explain{title="空值合并 ?? — 只在 null/undefined 时用默认值"}
+`||`（或）对所有 falsy 值（0、""、false）都返回默认值，`??` 只在 `null`/`undefined` 时返回默认值：
+```js
+// ❌ || 的问题：0 和 "" 可能是合法值
+const count = 0 || 10;   // 10（0 被当成了 falsy！）
+const name = "" || "匿名"; // "匿名"（空字符串被当成了 falsy！）
+
+// ✅ ?? 只把 null/undefined 视为"空"
+const count = 0 ?? 10;   // 0（0 是合法值）
+const name = "" ?? "匿名"; // ""（空字符串是合法值）
+const city = null ?? "北京"; // "北京"（null 才用默认值）
+```
+
+**规则：`||` 在"任何 falsy 值"时回退，`??` 只在"确实没有值"（null/undefined）时回退。**
+:::
+
+:::example{title="可选链 + 空值合并组合使用"}
+两者经常一起用——安全访问 + 智能默认值：
+```js
+// 从 API 响应中安全提取数据
+const response = { data: { user: { name: "张三" } } };
+const userName = response?.data?.user?.name ?? "未登录";
+
+// 场景：用户可能没填地址
+const user = { name: "张三" };  // 没有 address
+const city = user?.address?.city ?? "未知城市";
+console.log(city);  // "未知城市"（不会报错）
+```
+这就是现代 JS 中处理"可能不存在的值"的标准写法。
+:::
+
 :::example{title="解构赋值 — 从\"抽屉\"里取东西"}
 想象你有一个文件夹，里面有多份文档。以前你要一首一首拿：
 ```js

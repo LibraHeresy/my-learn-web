@@ -1,0 +1,8 @@
+id: async-cors-rest
+title: "CORS 与 REST — 理解浏览器和服务器如何对话"
+track: framework
+chapter: async-data
+order: 9
+mode: local
+analogy: CORS 就像门禁系统——不是你认识的人不让进。浏览器会用"预检"问服务器"我可以进去吗？"，服务器回答"可以"之后，真正的请求才会发出去。REST 则是双方约定好的"对话格式"——用 URL 指代资源，用 HTTP 方法表达意图。
+estimatedMinutes: 0

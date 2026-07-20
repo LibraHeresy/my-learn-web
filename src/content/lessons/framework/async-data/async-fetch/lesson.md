@@ -50,6 +50,100 @@ addPiece({ name: '文档X', composer: '张三', period: '类型A' })
 POST 类似寄信——你需要写地址（URL）、贴邮票（headers）、装信封（body）。
 :::
 
+:::explain{title="PUT 和 DELETE — 更新和删除数据"}
+除了 GET 和 POST，实际项目中最常用的是 PUT（更新）和 DELETE（删除）：
+
+```js
+// PUT：更新整条数据（传完整的更新后对象）
+async function updatePiece(id, updatedData) {
+  const response = await fetch(`https://api.example.com/pieces/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedData)
+  })
+  if (!response.ok) throw new Error('更新失败')
+  return await response.json()
+}
+
+// DELETE：删除数据（通常不需要 body）
+async function deletePiece(id) {
+  const response = await fetch(`https://api.example.com/pieces/${id}`, {
+    method: 'DELETE'
+  })
+  if (!response.ok) throw new Error('删除失败')
+  return true
+}
+```
+**CRUD 口诀：**
+| 操作 | HTTP方法 | 口诀 |
+|------|----------|------|
+| Create | POST | 新建数据 |
+| Read | GET | 读取数据 |
+| Update | PUT/PATCH | 更新数据 |
+| Delete | DELETE | 删除数据 |
+:::
+
+:::explain{title="URLSearchParams — 安全地构建查询参数"}
+API 请求经常需要传查询参数（如搜索关键词、分页页码）。不要手动拼字符串——用 `URLSearchParams`：
+```js
+// ❌ 手动拼接：特殊字符会出问题
+const url = `https://api.example.com/search?q=${keyword}&page=${page}`
+
+// ✅ URLSearchParams：自动处理编码
+const params = new URLSearchParams({
+  q: keyword,    // 自动编码中文和特殊字符
+  page: 1,
+  limit: 10
+})
+const url = `https://api.example.com/search?${params}`
+// → https://api.example.com/search?q=%E6%98%A5%E5%A4%A9&page=1&limit=10
+```
+:::
+
+:::explain{title="AbortController — 取消正在进行的请求"}
+用户快速输入搜索词时，上一次的请求还没返回——与其收到过时的结果，不如直接取消：
+```js
+let controller = null  // 保存当前的 controller
+
+async function search(keyword) {
+  if (controller) controller.abort()  // 取消上一次请求
+  controller = new AbortController()
+
+  try {
+    const response = await fetch(`/api/search?q=${keyword}`, {
+      signal: controller.signal  // 把 signal 传给 fetch
+    })
+    const data = await response.json()
+    render(data)
+  } catch (err) {
+    if (err.name === 'AbortError') return  // 被取消是正常的，忽略
+    console.error(err)  // 真正的错误才需要处理
+  }
+}
+```
+这就是"竞态条件"的解决方案——始终只关注最新一次请求的结果。
+:::
+
+:::explain{title="FormData — 用 fetch 提交表单"}
+如果要上传文件或提交 HTML 表单，使用 `FormData`：
+```js
+// 从 HTML 表单创建 FormData
+const form = document.querySelector('form')
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const formData = new FormData(form)  // 自动收集所有表单字段
+  // 也可以手动添加
+  formData.append('avatar', fileInput.files[0])  // 文件上传
+
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    body: formData  // 不要设置 Content-Type！浏览器自动处理
+  })
+  const result = await response.json()
+})
+```
+:::
+
 :::example{title="HTTP 状态码 — 服务器的\"回应\""}
 服务器会返回一个状态码，告诉请求的结果：
 | 状态码 | 含义 | 比喻 |

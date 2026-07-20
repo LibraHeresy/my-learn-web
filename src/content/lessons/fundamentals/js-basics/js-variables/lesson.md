@@ -18,6 +18,45 @@ let year = 1830;
 - `1830` — 数字，不需要引号
 :::
 
+:::explain{title="let、const、var — 三种声明方式"}
+`let` 和 `const` 是 ES6 引入的现代声明方式，`var` 是旧写法。它们有一个关键区别——**作用域**：
+
+```js
+// let/const：块级作用域——只在所在的 {} 内有效
+if (true) {
+  let x = 10;
+  const y = 20;
+  console.log(x);  // 10 ✓
+}
+console.log(x);  // ❌ ReferenceError: x 未定义！
+
+// var：函数作用域——在 {} 外也能访问
+if (true) {
+  var z = 30;
+}
+console.log(z);  // 30 ✓（var 会"穿透"花括号）
+```
+
+**为什么不用 var？** `var` 会在 for 循环、if 判断等场景中产生意料之外的行为——变量"泄露"到花括号外面。`let`/`const` 更安全、更符合直觉。
+
+**什么时候用 const？** 如果这个变量的值不会重新赋值，就用 `const`。这既是给读代码的人一个信号——"这个值不会变"，也能防止意外修改。
+
+```js
+const MAX_COUNT = 100;  // 常量——不会改，用 const
+let counter = 0;         // 变量——会变，用 let
+```
+
+**暂时性死区（TDZ）：** `let`/`const` 声明的变量在声明前不能使用：
+```js
+console.log(a);  // ❌ ReferenceError（let 未声明不能提前用）
+let a = 5;
+
+console.log(b);  // undefined（var 被"提升"了，但不报错）
+var b = 5;
+```
+记住一点：**声明变量始终用 let 或 const，放在使用之前。**
+:::
+
 :::explain{title="拼接字符串"}
 用 `+` 号可以把字符串和变量拼接在一起：
 ```js

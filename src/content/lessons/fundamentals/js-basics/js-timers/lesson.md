@@ -34,6 +34,42 @@ clearTimeout(timer);  // 不执行了
 `setTimeout` 适合：延迟提示、debounce、定时检查
 :::
 
+:::explain{title="setTimeout 递归循环 — 更安全的\"延迟循环\""}
+`setInterval` 有一个隐患：如果回调函数执行时间超过间隔时间，任务会**重叠执行**。更好的做法是用 `setTimeout` **递归调用**自己：
+
+```js
+// ❌ setInterval：任务可能重叠
+setInterval(() => {
+  fetchData();  // 如果 fetchData 耗时 2 秒...
+}, 1000);       // ...每 1 秒就触发一次，会造成堆积！
+
+// ✅ setTimeout 递归：任务完成后才启动下一次
+function delayedLoop() {
+  fetchData();
+  setTimeout(delayedLoop, 1000);  // 等当前任务完成后再等 1 秒
+}
+delayedLoop();  // 启动循环
+```
+
+这就是学员常问的"延迟循环"——每次执行完再等 N 秒执行下一次，**不会重叠**。
+
+**什么时候用哪个？**
+- 简单定时显示（计数器、时钟）→ `setInterval` 就够了
+- 涉及网络请求、可能耗时的操作 → 用 `setTimeout` 递归
+- 需要随时停止循环 → 用 `setTimeout` 递归，配合条件判断：
+
+```js
+let shouldStop = false;
+function loop() {
+  if (shouldStop) return;  // 条件满足就停
+  console.log("执行中...");
+  setTimeout(loop, 1000);
+}
+// 3 秒后停止
+setTimeout(() => { shouldStop = true; }, 3000);
+loop();
+:::
+
 :::example{title="看例子"}
 下面的代码实现了一个节拍器：点击"开始"按钮，计数器每秒 +1；点击"暂停"停止：
 ```js

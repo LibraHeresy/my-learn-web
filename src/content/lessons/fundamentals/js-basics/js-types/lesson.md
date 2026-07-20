@@ -53,6 +53,46 @@ console.log(5 <= 3);  // false
 比较结果常用于 `if` 条件判断中——这就是下一节课要学的！
 :::
 
+:::explain{title="=== vs == — 严格相等与松散相等"}
+`===`（三个等号）是**严格相等**——值和类型都必须一样：
+```js
+console.log(5 === 5);     // true
+console.log(5 === "5");   // false（数字 vs 字符串，类型不同）
+console.log(0 === false); // false（数字 vs 布尔，类型不同）
+```
+
+`==`（两个等号）是**松散相等**——会先做类型转换再比较：
+```js
+console.log(5 == "5");    // true（"5" 被转成了数字 5）
+console.log(0 == false);  // true（false 被转成了 0）
+console.log("" == false); // true（空字符串被转成了 false）
+```
+**永远用 `===`！** `==` 的类型转换规则复杂且容易出 bug。整个课程和整个行业的标准做法都是用 `===`。
+:::
+
+:::explain{title="truthy 和 falsy — 在 if 条件中谁是\"真\"谁\"假\""}
+当你把任何值放在 `if (...)` 中时，JavaScript 会把它转换成布尔值。以下 6 个值是 **falsy**（被视为 false）：
+
+```js
+false、0、""（空字符串）、null、undefined、NaN
+```
+
+**其他所有值都是 truthy**（被视为 true），包括空数组 `[]`、空对象 `{}`、负数、字符串 `"0"` 等：
+```js
+if ("hello") { /* 会执行——非空字符串是 truthy */ }
+if (0)       { /* 不执行——0 是 falsy */ }
+if ("")      { /* 不执行——空字符串是 falsy */ }
+if ([])      { /* 会执行——空数组仍是 truthy */ }
+```
+
+这个知识点在表单验证中非常实用：
+```js
+let userName = input.value.trim();
+if (!userName) {  // 如果用户名为空（falsy），提示填入
+  alert("请输入用户名");
+}
+```
+
 :::example{title="看例子"}
 下面的代码练习了数据类型和运算符：
 ```js
