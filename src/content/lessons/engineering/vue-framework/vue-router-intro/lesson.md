@@ -248,7 +248,7 @@ function replacePage() {
 </template>
 ```
 
-**`useRoute` vs `useRouter`：**
+**useRoute vs useRouter：**
 - `useRoute()` -- 读取当前路由信息（只读）-- 获取 params、query、path 等
 - `useRouter()` -- 操作路由（跳转、后退、前进）-- 调用 push、replace、back 等
 - 类比：`useRoute` 是地图（告诉你现在在哪），`useRouter` 是司机（带你去要去的地方）
@@ -331,7 +331,7 @@ app.use(router)
 app.mount('#app')
 ```
 
-**错误 2：`useRoute` 和 `useRouter` 搞混**
+**错误 2：useRoute 和 useRouter 搞混**
 ```js
 // ❌ useRoute 没有 push 方法！
 const route = useRoute()

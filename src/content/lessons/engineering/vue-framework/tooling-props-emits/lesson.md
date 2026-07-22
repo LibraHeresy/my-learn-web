@@ -29,7 +29,7 @@ window.tracks = [...]  // 挂在 window 上，任何组件都能改
 :::explain{title="方案：Props -- 父组件给子组件传数据"}
 **数据流向：父 → 子（只读）**
 
-**子组件 `MusicCard.vue` -- 声明自己需要什么数据：**
+**子组件 MusicCard.vue -- 声明自己需要什么数据：**
 ```vue
 <script setup>
 // defineProps 声明：我需要这些数据
@@ -64,7 +64,7 @@ console.log(props.name)   // 可以在 JS 中读取，但不能修改！
 </style>
 ```
 
-**父组件 `App.vue` -- 传递数据给子组件：**
+**父组件 App.vue -- 传递数据给子组件：**
 ```vue
 <script setup>
 import { ref } from 'vue'
@@ -111,7 +111,7 @@ const pieces = ref([
 
 子组件**不能直接修改**父组件传过来的数据。它只能发出事件"通知"父组件："嘿，用户点了收藏按钮"，由父组件决定怎么处理。
 
-**子组件 `MusicCard.vue` -- 发出事件：**
+**子组件 MusicCard.vue -- 发出事件：**
 ```vue
 <script setup>
 // 声明 props（接收数据）
@@ -143,7 +143,7 @@ const emit = defineEmits(['toggle-like', 'delete'])
 </template>
 ```
 
-**父组件 `App.vue` -- 监听事件并处理：**
+**父组件 App.vue -- 监听事件并处理：**
 ```vue
 <template>
   <MusicCard

@@ -31,7 +31,7 @@ return user.Name
 1. **空格不一致** — `cart=[]` 没有空格，但 `let total=0` 有，读起来忽紧忽松
 2. **缺少分号** — 有的行以分号结尾（`};`），有的行没有（`return user.Name`）
 3. **双引号换单引号** — `"added"` 用了双引号（通常约定用单引号）
-4. **`var` 而不是 `let/const`** — `var unusedVariable` 是旧的声明方式，`let`/`const` 是现代的
+4. **var 而不是 let/const** — `var unusedVariable` 是旧的声明方式，`let`/`const` 是现代的
 5. **定义但未使用的变量** — `unusedVariable` 和 `getUserName` 定义了但从未被调用
 6. **可能的 bug** — `user.Name` 大概率应该是 `user.name`（JS 的常规命名是小驼峰）
 7. **缺少尾逗号** — `{product,quantity}` 如果再加属性，diff 会多一行（尾逗号让 git diff 更干净）
@@ -83,7 +83,7 @@ npm install -D prettier
 - `-D` — 安装为开发依赖（用户不需要格式化工具）
 - `prettier` — 代码格式化工具本身
 
-**第二步：创建 Prettier 配置文件 `.prettierrc`**
+**第二步：创建 Prettier 配置文件 .prettierrc**
 
 在项目根目录新建 `.prettierrc`（JSON 格式）：
 
@@ -104,7 +104,7 @@ npm install -D prettier
 - `trailingComma: "es5"` — 尾逗号。`{ a: 1, b: 2, }` 最后那个逗号，让以后添加属性时 git diff 只显示新增的那一行。
 - `printWidth: 100` — 一行太长了 Prettier 会自动换行，保证代码在任何屏幕上可读。
 
-**第三步：创建 `.prettierignore`**
+**第三步：创建 .prettierignore**
 
 在项目根目录新建 `.prettierignore`：
 ```
@@ -151,7 +151,7 @@ ESLint 某些规则也管格式（如缩进），和 Prettier 的规则冲突。
 npm install -D eslint-config-prettier
 ```
 
-**踩坑 3：`.prettierrc` 没生效**
+**踩坑 3：.prettierrc 没生效**
 
 检查：文件名前面**有**一个点（`.prettierrc`，不是 `prettierrc`）。文件要放在**项目根目录**（和 `package.json` 同级）。改配置后需要重新保存文件才能看到新格式效果。
 

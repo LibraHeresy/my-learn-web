@@ -84,7 +84,7 @@ node -e "console.log('你好，工程化！')"
 :::
 
 :::hint{title="常见安装错误及解决办法"}
-**错误 1：`'node' 不是内部或外部命令` (Windows) 或 `command not found: node` (Mac)**
+**错误 1：'node' 不是内部或外部命令 (Windows) 或 command not found: node (Mac)**
 
 原因：安装时没有勾选 "Add to PATH"，或者安装后没有重启终端。
 

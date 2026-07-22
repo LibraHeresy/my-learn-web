@@ -154,7 +154,7 @@ export default defineConfig({
 :::
 
 :::hint{title="Vite 新手最常见的 4 个错误"}
-**错误 1：`npm create vite` 之后直接 `npm run dev`，但忘了 `npm install`**
+**错误 1：npm create vite 之后直接 npm run dev，但忘了 npm install**
 
 Vite 生成项目后不会自动安装依赖。必须先在项目目录里运行 `npm install`，否则终端报 "vite: command not found"。正确顺序：
 ```bash
@@ -164,11 +164,11 @@ npm install     # 这一步不能省！
 npm run dev     # 现在可以了
 ```
 
-**错误 2：终端不在项目目录里就运行 `npm run dev`**
+**错误 2：终端不在项目目录里就运行 npm run dev**
 
 `npm run dev` 必须在包含 `package.json` 的文件夹里运行。如果终端根目录不对，先用 `pwd` 确认位置，用 `cd` 进入项目目录。
 
-**错误 3：把 `localhost:5173` 当成公开网址发给别人**
+**错误 3：把 localhost:5173 当成公开网址发给别人**
 
 `localhost` 是你自己电脑上的地址，别人访问不到。想让别人看到你的网站，需要部署（后面课程会讲）。
 

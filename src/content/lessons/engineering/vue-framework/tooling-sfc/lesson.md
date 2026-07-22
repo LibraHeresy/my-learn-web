@@ -89,7 +89,7 @@ p {
 :::example{title="组件引入 -- 像搭积木一样组合页面"}
 定义好 `.vue` 组件后，在别的组件里 `import` 就能用：
 
-**定义子组件 `MusicCard.vue`：**
+**定义子组件 MusicCard.vue：**
 ```vue
 <script setup>
 // defineProps 声明"我需要哪些数据"
@@ -115,7 +115,7 @@ defineProps({
 </style>
 ```
 
-**父组件 `App.vue` 中使用：**
+**父组件 App.vue 中使用：**
 ```vue
 <script setup>
 // import 后，组件名在模板中自动可用
@@ -133,7 +133,7 @@ import MusicCard from './components/MusicCard.vue'
 :::
 
 :::explain{title="常见错误"}
-**错误 1：忘记 `scoped`，样式泄漏到全局**
+**错误 1：忘记 scoped，样式泄漏到全局**
 ```vue
 <!-- ❌ 没有 scoped，这些样式会作用到整个页面 -->
 <style>
@@ -146,7 +146,7 @@ h3 { color: red; }
 </style>
 ```
 
-**错误 2：`<script setup>` 里写错了位置**
+**错误 2：<script setup> 里写错了位置**
 ```vue
 <script setup>
 // ✅ 变量和函数写在这里，顶层就是 setup 作用域

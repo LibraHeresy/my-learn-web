@@ -9,7 +9,7 @@
 
 - **CSS 基本规则**：`选择器 { 属性: 值; }` 的句式已经熟悉
 - **背景和边框**：`background-color`、`border`、`border-radius`——上一节刚学过
-- **`<div>` 元素**：块级容器，是用来演示盒模型的最佳材料
+- **<div> 元素**：块级容器，是用来演示盒模型的最佳材料
 :::
 
 :::explain{title="本节目标"}
@@ -86,7 +86,7 @@
 }
 ```
 
-**这就是 `box-sizing: border-box` 要解决的问题：**
+**这就是 box-sizing: border-box 要解决的问题：**
 
 ```css
 .card {
@@ -126,7 +126,7 @@
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：`padding` 和 `margin` 傻傻分不清**
+**错误 1：padding 和 margin 傻傻分不清**
 ```css
 /* 想给卡片内部增加留白 */
 .card {
@@ -136,7 +136,7 @@
 ```
 你修改 `padding` 和 `margin` 后，在 DevTools 里看看元素的颜色标记——`padding` 区域有背景色，`margin` 区域是透明的。这是最直观的区分方式。
 
-**错误 2：`margin-top` 和 `margin-bottom` 都写了，以为会叠加**
+**错误 2：margin-top 和 margin-bottom 都写了，以为会叠加**
 ```css
 .card-1 { margin-bottom: 20px; }
 .card-2 { margin-top: 30px; }
@@ -144,7 +144,7 @@
 ```
 这是 margin collapsing（外边距合并）——相邻的上下 margin 不会累加，而是取其中更大的值。这是 CSS 的设计行为，不是 bug。
 
-**错误 3：给行内元素（如 `span`、`a`）设置上下 margin**
+**错误 3：给行内元素（如 span、a）设置上下 margin**
 ```css
 a {
   margin-top: 20px;    /* ❌ 行内元素的上下 margin 无效 */

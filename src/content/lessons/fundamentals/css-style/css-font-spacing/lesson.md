@@ -167,7 +167,7 @@ h1 {
 }
 ```
 
-**错误 2：`line-height` 给太小**
+**错误 2：line-height 给太小**
 ```css
 p {
   font-size: 16px;
@@ -185,7 +185,7 @@ body {
 ```
 如果你的页面同时有中英文，把中文字体写在前面，英文会 fallback 到后面的无衬线体。
 
-**错误 4：`text-align: justify` 在中文中造成奇怪的字间距**
+**错误 4：text-align: justify 在中文中造成奇怪的字间距**
 ```css
 p {
   text-align: justify;  /* ❌ 两端对齐会让中文字间距变得不均匀 */

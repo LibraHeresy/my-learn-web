@@ -43,13 +43,13 @@ app.js              ← 主入口，引入上面三个文件，组装起来
 
 现在修搜索 bug？打开 `api.js`。渲染出问题了？打开 `render.js`。每个文件不超过 100 行，职责清晰。
 
-**模块化的两个关键技术：`export`（把东西给出去）和 `import`（把东西拿进来）。**
+**模块化的两个关键技术：export（把东西给出去）和 import（把东西拿进来）。**
 :::
 
 :::example{title="逐行拆解：从巨型文件到四个干净模块"}
 以下是一个音乐搜索器的完整模块化过程。每个文件的每一行都有注释。
 
-**第一步：`utils.js` — 通用工具（和音乐无关，任何项目都能用）**
+**第一步：utils.js — 通用工具（和音乐无关，任何项目都能用）**
 
 ```js
 // utils.js — 所有通用工具函数都在这里
@@ -69,7 +69,7 @@ export function truncateText(text, maxLength) {
 export const API_URL = 'https://itunes.apple.com/search'
 ```
 
-**第二步：`api.js` — 数据请求（只关心"怎么拿数据"）**
+**第二步：api.js — 数据请求（只关心"怎么拿数据"）**
 
 ```js
 // api.js — 所有的网络请求逻辑都在这里
@@ -98,7 +98,7 @@ export async function searchTracks(keyword) {
 }
 ```
 
-**第三步：`render.js` — DOM 操作（只关心"怎么在页面上显示"）**
+**第三步：render.js — DOM 操作（只关心"怎么在页面上显示"）**
 
 ```js
 // render.js — 所有 DOM 操作都在这里
@@ -133,7 +133,7 @@ export function renderTracks(tracks, container) {
 }
 ```
 
-**第四步：`app.js` — 主入口（组装所有模块，不自己干活）**
+**第四步：app.js — 主入口（组装所有模块，不自己干活）**
 
 ```js
 // app.js — 程序的"调度中心"，不自己做具体工作

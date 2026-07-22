@@ -9,7 +9,7 @@
 
 - `transition`：知道 `transition` 让属性变化平滑过渡（上一节内容）
 - `transform`：知道 `translateY()`、`scale()`、`rotate()` 这些变换函数
-- **伪类 `:hover`**：知道鼠标悬停时触发样式变化
+- **伪类 :hover**：知道鼠标悬停时触发样式变化
 :::
 
 :::explain{title="本节目标"}
@@ -29,7 +29,7 @@
 - 一个加载转圈：旋转 0° → 360° → 继续转，永不停止
 - 一个弹跳进入：从屏幕下方弹上来 → 超过目标位置 → 回弹 → 停在目标位置
 
-**这些效果用 `transition` 做不到——或者做起来非常笨拙。这就是 `@keyframes` 要解决的问题。**
+**这些效果用 transition 做不到——或者做起来非常笨拙。这就是 @keyframes 要解决的问题。**
 :::
 
 :::explain{title="二、@keyframes — 定义动画的"分解动作""}
@@ -62,7 +62,7 @@
 
 **效果：** 卡片持续脉动——从完整不透明放大到 1.05 倍半透明，再缩回原始状态。2 秒一个周期，无限循环。
 
-**`@keyframes` 的本质：** 你定义几个"关键帧"（关键时间点的状态），浏览器自动计算并填充中间的所有过渡帧。百分比代表时间进度——0% 是开始，100% 是结束，50% 是中间。`from` = 0%，`to` = 100%。
+**@keyframes 的本质：** 你定义几个"关键帧"（关键时间点的状态），浏览器自动计算并填充中间的所有过渡帧。百分比代表时间进度——0% 是开始，100% 是结束，50% 是中间。`from` = 0%，`to` = 100%。
 :::
 
 :::explain{title="三、逐句拆解 animation 属性"}
@@ -140,9 +140,9 @@ animation-fill-mode: both;
 | **典型场景** | hover 变色、按钮反馈、卡片悬浮 | 加载动画、心跳脉动、入场动画 |
 
 **一个简单的决策规则：**
-- 用户交互触发 + 两个状态 → **用 `transition`**（更简单，性能更好）
-- 需要自动播放 + 多于两个状态 + 需要循环 → **用 `@keyframes`**
-- 页面加载时的入场动画 → **用 `@keyframes`**（配合 `animation-fill-mode: forwards`）
+- 用户交互触发 + 两个状态 → **用 transition**（更简单，性能更好）
+- 需要自动播放 + 多于两个状态 + 需要循环 → **用 @keyframes**
+- 页面加载时的入场动画 → **用 @keyframes**（配合 `animation-fill-mode: forwards`）
 :::
 
 :::example{title="看例子"}
@@ -194,7 +194,7 @@ animation-fill-mode: both;
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：`@keyframes` 名字写错或者不匹配**
+**错误 1：@keyframes 名字写错或者不匹配**
 ```css
 @keyframes pulse { ... }
 .card {
@@ -203,7 +203,7 @@ animation-fill-mode: both;
 ```
 `animation-name` 必须和 `@keyframes` 后面的名字完全一致（大小写敏感）。
 
-**错误 2：忘记写 `animation-duration`**
+**错误 2：忘记写 animation-duration**
 ```css
 .card {
   animation: pulse infinite;  /* ❌ 没有 duration！默认是 0s，动画瞬间完成 */
@@ -211,7 +211,7 @@ animation-fill-mode: both;
 ```
 如果只写名字不给时长，动画时长是 0s——什么也看不到。`animation-duration` 是必填的。
 
-**错误 3：`forwards` 和 `infinite` 同时使用**
+**错误 3：forwards 和 infinite 同时使用**
 ```css
 .card {
   animation: fadeIn 1s ease both infinite;  /* ❌ 无限循环没有"最后" */
@@ -219,7 +219,7 @@ animation-fill-mode: both;
 ```
 `forwards` 是"停在最后一帧"，`infinite` 是"永不停止"——这两个参数逻辑上矛盾。`infinite` 动画不需要 `fill-mode`。
 
-**错误 4：在 `@keyframes` 中对不可过渡的属性做动画**
+**错误 4：在 @keyframes 中对不可过渡的属性做动画**
 ```css
 @keyframes bad {
   0%   { display: block; }   /* ❌ display 不支持动画 */

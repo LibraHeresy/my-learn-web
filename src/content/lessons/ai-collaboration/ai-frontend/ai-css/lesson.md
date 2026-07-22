@@ -47,7 +47,7 @@ AI 默认生成桌面端样式。移动端适配不会自动出现，除非你�
 
 检查项：
 - **冗余。** `margin: 0; padding: 0;` 在 8 个选择器里重复？
-- **`!important`。** 任何 `!important` 都是技术债务——现在用着爽，未来 debug 火葬场。
+- **!important。** 任何 `!important` 都是技术债务——现在用着爽，未来 debug 火葬场。
 - **浏览器兼容。** 用了 `gap` 在 flex 布局里？Safari 老版本不支持。用了 `aspect-ratio`？检查 caniuse.com。
 - **关键 CSS。** 首屏渲染需要的样式有没有内联？非首屏的样式是否可以异步加载？
 

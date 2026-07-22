@@ -143,7 +143,7 @@ Grid 也能居中，而且代码更短：
 
 **局限：** 只对单行文字有效，多行文字会溢出。多行文字垂直居中请用 Flexbox。
 
-**`text-align` 的常见误区：**
+**text-align 的常见误区：**
 ```css
 /* ❌ 很多人以为这样能让 div 居中——不行！ */
 .my-div { text-align: center; }
@@ -167,7 +167,7 @@ Grid 也能居中，而且代码更短：
 }
 ```
 
-**`margin: auto` 生效的三个条件，缺一不可：**
+**margin: auto 生效的三个条件，缺一不可：**
 1. 元素必须是**块级元素**（`display: block`）
 2. 元素必须有**明确的宽度**（`width` 不能是 `auto`）
 3. 元素不能是 `position: absolute` 或 `fixed`
@@ -237,7 +237,7 @@ Grid 也能居中，而且代码更短：
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：给块级元素设置 `text-align: center`，期望它自己居中**
+**错误 1：给块级元素设置 text-align: center，期望它自己居中**
 
 ```css
 /* ❌ 错误：text-align 只影响容器内的文字和行内元素，不影响容器自身位置 */
@@ -247,7 +247,7 @@ Grid 也能居中，而且代码更短：
 .wrapper { display: flex; justify-content: center; }
 ```
 
-**错误 2：`margin: 0 auto` 没有设宽度**
+**错误 2：margin: 0 auto 没有设宽度**
 
 ```css
 /* ❌ 错误：div 默认宽度是 100%，auto 没有剩余空间可以分配 */
@@ -277,7 +277,7 @@ div {
 }
 ```
 
-**错误 4：用 `line-height` 做多行文字垂直居中**
+**错误 4：用 line-height 做多行文字垂直居中**
 
 ```css
 /* ❌ 错误：line-height = 容器高度时，多行文字会溢出 */

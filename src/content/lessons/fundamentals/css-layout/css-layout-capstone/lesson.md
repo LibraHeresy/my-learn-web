@@ -489,7 +489,7 @@
 @media (max-width: 639px) { .features { /* 手机 */ } }
 ```
 
-**错误 3：`position: sticky` 的导航栏挡住了后面的内容**
+**错误 3：position: sticky 的导航栏挡住了后面的内容**
 
 ```css
 /* ❌ 错误：sticky 导航栏覆盖了 hero 区域的顶部 */

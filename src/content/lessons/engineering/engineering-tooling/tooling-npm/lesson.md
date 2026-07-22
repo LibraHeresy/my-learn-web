@@ -120,15 +120,15 @@ npm install -g npm-check    # -g 表示全局安装（不推荐，除非必要�
 :::hint{title="npm 新手最常踩的 3 个坑"}
 **坑 1：把 node_modules 上传到 Git**
 
-`node_modules` 文件夹通常会膨胀到 200-500 MB（一个包依赖另一个包，层层嵌套）。**永远不要把 `node_modules` 提交到 Git。** 正确做法：
+`node_modules` 文件夹通常会膨胀到 200-500 MB（一个包依赖另一个包，层层嵌套）。**永远不要把 node_modules 提交到 Git。** 正确做法：
 1. 创建 `.gitignore` 文件，写入一行 `node_modules/`
 2. 别人拿到你的项目后，运行 `npm install`，npm 会根据 `package.json` 自动下载所有依赖
 
-**坑 2：`npm install` 报错"EACCES"或权限不足**
+**坑 2：npm install 报错"EACCES"或权限不足**
 
 Mac/Linux 上如果用 `sudo npm install` 会导致后续权限问题。解决方案：不要用 `sudo`。如果已经出了问题，搜索"npm fix permissions"重置权限。
 
-**坑 3：`package.json` 和 `package-lock.json` 傻傻分不清**
+**坑 3：package.json 和 package-lock.json 傻傻分不清**
 - `package.json` — 你手动编写的"依赖清单"（"我需要 dayjs，大概 ^2.0.0"）
 - `package-lock.json` — npm 自动生成的"精确锁定文件"（"dayjs 的具体版本是 2.0.1，它的依赖 A 是 1.3.2..."）
 - 两个文件都要提交到 Git。`package-lock.json` 确保团队所有人安装的依赖版本完全一致。

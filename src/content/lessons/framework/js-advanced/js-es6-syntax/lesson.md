@@ -300,7 +300,7 @@ const s2 = `你好，${name}`; // "你好，张三"
 :::
 
 :::task{title="动手试试 — 在 script.js 中完成"}
-本练习的所有代码都在 **`script.js`** 中。`index.html` 用来在浏览器中预览结果（用 Live Server 或直接打开），`style.css` 是页面样式，不需要修改。
+本练习的所有代码都在 **script.js** 中。`index.html` 用来在浏览器中预览结果（用 Live Server 或直接打开），`style.css` 是页面样式，不需要修改。
 
 ::::step{purpose="解构赋值让你一行代码取出多个属性，避免重复写 instrument.name、instrument.family。就像从文件柜里一次抽出三份文件，而不是一份一份拿。" expected="控制台输出 name、family、range 三个变量的正确值（小提琴、弦乐、G3-E6）。"}
 在 `script.js` 中，用 **解构赋值** `const { name, family, range } = instrument` 从 `instrument` 对象中取出三个属性，打印到控制台

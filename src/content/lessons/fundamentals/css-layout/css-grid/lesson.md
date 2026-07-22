@@ -94,9 +94,9 @@ Grid 的核心思路是"先画网格，再放元素"：
 
 **逐行拆解：**
 
-**① `display: grid`** — 开启 Grid 布局。父元素变成网格容器，子元素自动变成网格项目
+**① display: grid** — 开启 Grid 布局。父元素变成网格容器，子元素自动变成网格项目
 
-**② `grid-template-columns` — 定义列的数量和宽度**
+**② grid-template-columns — 定义列的数量和宽度**
 这是 Grid 最重要的属性。它决定了"这个网格有几列，每列多宽"：
 
 ```css
@@ -111,7 +111,7 @@ grid-template-columns: repeat(3, minmax(0, 1fr)); /* 加强版：最小 0，最�
 - `repeat(4, 1fr)` — 4 列等宽
 - `200px 1fr` — 第一列固定 200px，第二列占满剩余空间（侧边栏布局！）
 
-**③ `grid-template-rows` — 定义行的高度**
+**③ grid-template-rows — 定义行的高度**
 通常不需要显式定义每一行——Grid 会自动创建行来容纳内容。但当你需要特定行有固定高度时：
 
 ```css
@@ -119,7 +119,7 @@ grid-template-rows: auto 200px;     /* 第一行高度自适应内容，第二�
 grid-template-rows: repeat(3, 150px); /* 三行，每行 150px */
 ```
 
-**④ `gap` — 行列间距**
+**④ gap — 行列间距**
 
 Grid 的 `gap` 支持两个值：第一个是行间距，第二个是列间距：
 ```css
@@ -270,7 +270,7 @@ Grid 负责**页面大骨架**（行和列的结构），Flexbox 负责**局部�
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：`repeat(3, 1fr)` 写成了 `repeat(3, fr)`**
+**错误 1：repeat(3, 1fr) 写成了 repeat(3, fr)**
 
 ```css
 /* ❌ 错误：fr 必须有数字 */
@@ -280,7 +280,7 @@ grid-template-columns: repeat(3, fr);    /* 无效！浏览器不认识 fr */
 grid-template-columns: repeat(3, 1fr);   /* 3 列等宽 */
 ```
 
-**错误 2：`grid-column: span 2` 让元素超出列数**
+**错误 2：grid-column: span 2 让元素超出列数**
 
 ```css
 /* 在一个 3 列网格中：*/
@@ -298,7 +298,7 @@ grid-template-columns: repeat(3, 1fr);
 
 `span` 跨列时，Grid 会尝试在当前行找到足够的空间，找不到就换行——这是符合预期的行为，但容易踩坑。
 
-**错误 3：混淆 `grid-template-areas` 中的名称和 CSS 类名**
+**错误 3：混淆 grid-template-areas 中的名称和 CSS 类名**
 
 ```css
 /* grid-template-areas 使用的名称可以任意命名，但必须在子元素上用 grid-area 引用 */
@@ -312,7 +312,7 @@ grid-template-columns: repeat(3, 1fr);
 .sidebar { grid-area: side; }
 ```
 
-**错误 4：Grid 子元素中的 `margin` 可能产生意外空隙**
+**错误 4：Grid 子元素中的 margin 可能产生意外空隙**
 
 ```css
 /* Grid 子元素之间的间距由 gap 控制，不需要 margin */

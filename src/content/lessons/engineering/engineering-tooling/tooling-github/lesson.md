@@ -118,7 +118,7 @@ git pull origin main --allow-unrelated-histories
 
 **更好的做法：创建仓库时不要勾选任何东西。**
 
-**坑 2：把 `git clone` 和 `git init` 两个操作搞混**
+**坑 2：把 git clone 和 git init 两个操作搞混**
 
 ```bash
 # 场景 A：先有本地项目，想上传到 GitHub

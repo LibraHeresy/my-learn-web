@@ -297,7 +297,7 @@ watch(user, (newVal) => {
 
 :::hint{title="记住两条铁律"}
 1. **onMounted 负责创建，onBeforeUnmount 负责销毁** -- 成对出现，缺一不可
-2. **凡是 `addEventListener`、`setInterval`、`fetch`，都要有对应的 `removeEventListener`、`clearInterval`、`abort`**
+2. **凡是 addEventListener、setInterval、fetch，都要有对应的 removeEventListener、clearInterval、abort**
 
 违反任何一条，你的应用就会有内存泄漏。组件销毁了但资源还在跑，用户用得越久，浏览器越卡。
 :::

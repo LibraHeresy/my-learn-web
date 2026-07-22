@@ -23,7 +23,7 @@
 :::
 
 :::explain{title="解决方案：构建 (build) → 部署 (deploy) 两步走"}
-**第一步：构建 (`npm run build`)**
+**第一步：构建 (npm run build)**
 
 把开发代码变成用户可以访问的生产文件：
 
@@ -40,7 +40,7 @@ Vite 执行以下操作：
 
 构建结果全部输出到 `dist/` 文件夹（dist = distribution，分发）。
 
-**第二步：部署 (`npm run deploy`)**
+**第二步：部署 (npm run deploy)**
 
 把 `dist/` 文件夹上传到服务器。最简单的免费方案：GitHub Pages。
 :::
@@ -168,11 +168,11 @@ base: 'music-collection'     // 错误：缺少斜杠
 base: './'                   // 错误：相对路径在 GitHub Pages 上行为不确定
 ```
 
-**错误 2：构建报错，但 `npm run dev` 一切正常**
+**错误 2：构建报错，但 npm run dev 一切正常**
 
 开发服务器宽松（容忍小错误），构建过程严格（所有检查都会执行）。构建报错时仔细看终端输出的错误信息——TypeScript 类型错误、未使用的导入等都会被构建拦截。
 
-**错误 3：`npm run deploy` 后 GitHub Pages 没有更新**
+**错误 3：npm run deploy 后 GitHub Pages 没有更新**
 
 - 检查仓库 Settings → Pages → Branch 是否选中 `gh-pages`
 - 等 1-5 分钟——GitHub Pages 部署不是即时的

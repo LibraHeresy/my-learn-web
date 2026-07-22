@@ -110,7 +110,7 @@ cd my music app        # 错误：终端理解为 cd my，然后看不懂 music
 cd "my music app"      # 正确：引号告诉终端"这是一个整体"
 cd my\ music\ app      # 也行：反斜杠转义空格（Mac/Linux）
 ```
-**这就是为什么项目文件夹建议用连字符命名（`my-music-app`）而不是空格（`my music app`）。**
+**这就是为什么项目文件夹建议用连字符命名（my-music-app）而不是空格（my music app）。**
 
 **错误 3：终端很安静，以为卡住了**
 

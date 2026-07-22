@@ -92,7 +92,7 @@ function guess(num) {
 - 右侧 **Watch 面板**：添加自定义表达式，实时追踪（如 `target - num`）
 - **Console 面板**：直接输入变量名回车，测试表达式
 
-**回到猜数字的例子：在 `if (num > target)` 这行设一个断点。** 点击按钮后程序暂停，右侧 Scope 面板清清楚楚显示：num = 50, target = 73, score = 100, attempts = 1。所有变量一目了然，零行 console.log。
+**回到猜数字的例子：在 if (num > target) 这行设一个断点。** 点击按钮后程序暂停，右侧 Scope 面板清清楚楚显示：num = 50, target = 73, score = 100, attempts = 1。所有变量一目了然，零行 console.log。
 
 :::
 

@@ -79,7 +79,7 @@ function addTrack(title, composer) {
 - 第 17 行 `{{ count }}` -- 在 `<template>` 中**不需要** `.value`，Vue 自动帮你解包
 - 第 21 行 `v-for="track in tracks"` -- 当 `tracks.value` 数组被 `push` 新元素时，这个列表自动重新渲染
 
-**核心规则：JS 中用 `.value`，模板中不用 `.value`。**
+**核心规则：JS 中用 .value，模板中不用 .value。**
 
 **和原生 JS 的本质区别：**
 ```js
@@ -226,7 +226,7 @@ const filtered = computed(() => {
 :::
 
 :::explain{title="常见错误"}
-**错误 1：在 JS 中忘了 `.value`**
+**错误 1：在 JS 中忘了 .value**
 ```js
 const count = ref(0)
 
@@ -315,8 +315,8 @@ list.value = ['x', 'b', 'c']
 
 :::hint{title="<script setup> 的便利"}
 `<script setup>` 是 Vue 3 推荐的写法。相比 Options API：
-- **不需要 `return`** -- 顶层变量和函数自动暴露给模板
-- **不需要 `.value`** -- 在 `<template>` 中 ref 自动解包
+- **不需要 return** -- 顶层变量和函数自动暴露给模板
+- **不需要 .value** -- 在 `<template>` 中 ref 自动解包
 - **import 的组件直接可用** -- 不需要 `components` 注册步骤
 
 就像从手动挡换成了自动挡 -- 做的事一样，但省了很多重复操作。

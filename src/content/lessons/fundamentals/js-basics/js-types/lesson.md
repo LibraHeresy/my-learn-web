@@ -75,7 +75,7 @@ console.log(5 == "5");    // true（"5" 被转成了数字 5）
 console.log(0 == false);  // true（false 被转成了 0）
 console.log("" == false); // true（空字符串被转成了 false）
 ```
-**永远用 `===`！** `==` 的类型转换规则复杂且容易出 bug。整个课程和整个行业的标准做法都是用 `===`。
+**永远用 ===！** `==` 的类型转换规则复杂且容易出 bug。整个课程和整个行业的标准做法都是用 `===`。
 :::
 
 :::explain{title="truthy 和 falsy — 在 if 条件中谁是\"真\"谁\"假\""}

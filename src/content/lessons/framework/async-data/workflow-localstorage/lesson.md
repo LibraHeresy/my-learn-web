@@ -106,7 +106,7 @@ function toggleTodo(id) {
 render()
 ```
 
-**为什么 `|| []` 很重要？**
+**为什么 || [] 很重要？**
 
 ```js
 // 第一次打开页面时，localStorage 里什么都没有

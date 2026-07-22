@@ -95,7 +95,7 @@ function getFullName(lastName, firstName) {  // ← 函数签名：名字 + 参�
 4. `{ ... }` — 函数体。花括号里的代码就是函数真正执行的内容
 5. `return` — 返回值语句。`return` 后面的表达式的值会成为函数调用的结果。也就是说，`let result = getFullName("王", "小明")` 这行代码执行后，`result` 的值就是 `return` 后面那个 `fullName` 的值
 
-**`return` 特别重要——它是函数的"出口"：**
+**return 特别重要——它是函数的"出口"：**
 ```js
 function add(a, b) {
   return a + b;        // 计算 a+b，然后把结果送出去
@@ -169,7 +169,7 @@ document.getElementById("card-container").innerHTML = card1 + card2 + card3;
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：忘记 `()` 调用函数**
+**错误 1：忘记 () 调用函数**
 ```js
 function sayHi() {
   console.log("你好！");
@@ -180,7 +180,7 @@ sayHi();  // ✅ 输出：你好！() 才是"执行"的意思
 ```
 函数名不加 `()` 时，它只是一个"指向函数的变量"，不会被调用。加了 `()` 才会执行。
 
-**错误 2：`return` 之后写代码**
+**错误 2：return 之后写代码**
 ```js
 function calc(x) {
   return x * 2;            // return 执行后，函数立即结束

@@ -86,13 +86,13 @@ Flexbox 的魔法主要在**父元素**上。把父元素想象成"书架"，子
 
 **每个属性的详细说明：**
 
-**`flex-direction` — 决定"书是横着排还是竖着放"**
+**flex-direction — 决定"书是横着排还是竖着放"**
 - `row`（默认）— 横向排列，从左到右。就像书架上的一排书
 - `column` — 纵向排列，从上到下。就像书摞成一叠
 - `row-reverse` — 横向排列，但从右到左
 - `column-reverse` — 纵向排列，但从下到上
 
-**`justify-content` — 决定"书在书架横梁上怎么分布"**
+**justify-content — 决定"书在书架横梁上怎么分布"**
 - `flex-start` — 都靠左（或靠上）挤在一起
 - `flex-end` — 都靠右（或靠下）
 - `center` — 整体居中
@@ -100,13 +100,13 @@ Flexbox 的魔法主要在**父元素**上。把父元素想象成"书架"，子
 - `space-around` — 每个元素左右间距相等（首尾的间距是中间的一半）
 - `space-evenly` — 所有间距完全相等（包括首尾到边缘的距离）
 
-**`align-items` — 决定"书在书架纵梁上怎么对齐"**
+**align-items — 决定"书在书架纵梁上怎么对齐"**
 - `stretch`（默认）— 拉伸到和最高的元素一样高
 - `flex-start` — 顶部对齐
 - `flex-end` — 底部对齐
 - `center` — 垂直居中（最常用！配合 `justify-content: center` 实现完美居中）
 
-**`gap` — 统一设置间距**
+**gap — 统一设置间距**
 
 一个值同时控制行间距和列间距，不再需要 `margin-right` + `:last-child` 的 hack：
 ```css
@@ -116,7 +116,7 @@ Flexbox 的魔法主要在**父元素**上。把父元素想象成"书架"，子
 }
 ```
 
-**`flex-wrap` — 放不下时换行**
+**flex-wrap — 放不下时换行**
 
 默认情况下，Flexbox 会把所有子元素挤在一行。设置 `flex-wrap: wrap` 后，一行放不下就自动折到下一行：
 ```css
@@ -196,7 +196,7 @@ Flexbox 的魔法主要在**父元素**上。把父元素想象成"书架"，子
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：给子元素设置 `display: flex` 而不是父元素**
+**错误 1：给子元素设置 display: flex 而不是父元素**
 
 ```css
 /* ❌ 错误：给子元素设置 flex，它们各自成为弹性容器，但不会横向排列 */
@@ -208,14 +208,14 @@ Flexbox 的魔法主要在**父元素**上。把父元素想象成"书架"，子
 
 Flexbox 是**父元素控制子元素排列**的机制。`display: flex` 必须设置在你想让它"管理排列"的那个容器上。
 
-**错误 2：混淆 `justify-content` 和 `align-items`**
+**错误 2：混淆 justify-content 和 align-items**
 
 记住这个口诀：**justify 跟着主轴走，align 跟着交叉轴走**。
 - 主轴默认是横向（`flex-direction: row`），所以 `justify-content` 默认控制水平位置
 - 交叉轴垂直于主轴，所以 `align-items` 默认控制垂直位置
 - 如果把 `flex-direction` 改成 `column`，主轴和交叉轴会互换——`justify-content` 变成控制垂直，`align-items` 变成控制水平
 
-**错误 3：忘记 `flex-wrap`，导致元素被挤扁**
+**错误 3：忘记 flex-wrap，导致元素被挤扁**
 
 ```css
 /* ❌ 没有 flex-wrap：10 张卡片全部挤在一行，每张被压得很窄 */
@@ -232,7 +232,7 @@ Flexbox 是**父元素控制子元素排列**的机制。`display: flex` 必须�
 }
 ```
 
-**错误 4：用 `margin` 代替 `gap`**
+**错误 4：用 margin 代替 gap**
 
 ```css
 /* ❌ 旧时代写法：每个子元素加 margin，最后一个去掉 */
@@ -293,7 +293,7 @@ footer > div {
 }
 ```
 
-这些场景的共同模式：**找到父容器 → 加 `display: flex` → 用 `justify-content` / `align-items` / `gap` 控制排列**。
+这些场景的共同模式：**找到父容器 → 加 display: flex → 用 justify-content / align-items / gap 控制排列**。
 :::
 
 :::task{title="动手试试 ✨"}

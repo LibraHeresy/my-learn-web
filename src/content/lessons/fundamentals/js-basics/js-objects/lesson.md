@@ -183,7 +183,7 @@ renderCards(employees);
 
 打开 `script.js`，先读一遍整个文件（用 `fs.readFileSync` 或在编辑器中打开）。理解 `employees` 数组的结构和 `renderCards()` 函数的签名。
 
-**第 1 步：在 `employees` 数组中新增一位员工：**
+**第 1 步：在 employees 数组中新增一位员工：**
 ```js
 const employees = [
   { name: '张伟', department: '技术部', position: '前端工程师', email: 'zhangwei@example.com' },
@@ -194,7 +194,7 @@ const employees = [
 ];
 ```
 
-**第 2 步：在 `renderCards()` 函数中补全 forEach 循环逻辑：**
+**第 2 步：在 renderCards() 函数中补全 forEach 循环逻辑：**
 ```js
 function renderCards(dataList) {
   const gallery = document.querySelector('#gallery');

@@ -166,7 +166,7 @@ transition: all 0.3s ease-in-out;
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：`transition` 写在 `:hover` 里**
+**错误 1：transition 写在 :hover 里**
 ```css
 .card {
   background: #FFFAF2;
@@ -193,7 +193,7 @@ transition: all 0.3s ease-in-out;
 ```
 Hover 交互推荐 0.15s-0.3s。更大的动画（如模态框弹出）可以用 0.3s-0.5s。超过 1 秒的过渡会让用户觉得"这个页面是不是有问题"。
 
-**错误 4：对性能敏感属性使用 `transition: all`**
+**错误 4：对性能敏感属性使用 transition: all**
 ```css
 .card {
   transition: all 0.3s ease;  /* ⚠️ 浏览器可以处理，但不够精准 */
@@ -235,12 +235,12 @@ Hover 交互推荐 0.15s-0.3s。更大的动画（如模态框弹出）可以用
 
 :::recap
 回顾本节你学会的内容：
-- **`transition` 的作用**：让 CSS 属性变化从"瞬间跳变"变成"平滑渐变"
+- **transition 的作用**：让 CSS 属性变化从"瞬间跳变"变成"平滑渐变"
 - **四个子属性**：`property`（哪些属性）、`duration`（多久）、`timing-function`（速度曲线）、`delay`（等待）
 - **缓动函数**：`ease`（默认，最自然）、`linear`（匀速）、`ease-in`（加速）、`ease-out`（减速）
-- **`transition` 写在默认状态，不是 `:hover` 里**——否则移出时没有过渡
+- **transition 写在默认状态，不是 :hover 里**——否则移出时没有过渡
 - **推荐时长**：hover 交互 0.15s-0.3s，大动画 0.3s-0.5s
-- **`transform` + `transition` 是黄金搭档**：位移、缩放、旋转配合平滑过渡，创造优雅的交互
+- **transform + transition 是黄金搭档**：位移、缩放、旋转配合平滑过渡，创造优雅的交互
 
 下一节你将学习 CSS 动画——用 `@keyframes` 创建自动播放、多步骤、循环往复的动画效果。
 :::

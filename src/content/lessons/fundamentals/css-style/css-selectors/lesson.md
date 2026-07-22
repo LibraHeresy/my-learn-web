@@ -8,7 +8,7 @@
 **本节你需要知道这些词：**
 
 - **CSS 基本规则**：`选择器 { 属性: 值; }` 的句式已经熟练
-- **HTML 的 `class` 和 `id` 属性**：`class="card"` 是给元素贴标签，`id="title"` 是给元素唯一的身份证号
+- **HTML 的 class 和 id 属性**：`class="card"` 是给元素贴标签，`id="title"` 是给元素唯一的身份证号
 - **盒模型**：知道每个元素有四层空间——上一节刚学过
 :::
 
@@ -110,7 +110,7 @@ h2, h3 { font-family: "Noto Serif SC", serif; }
 .card:nth-child(3) { border-left-color: #5B8C5A; }  /* 第3张 */
 ```
 
-**`:nth-child` 的威力：** 不需要给每张卡片单独加 `class`，CSS 自动按位置给它们不同的样式。卡片从 3 张增加到 10 张时，你只需要复制 HTML（不改 CSS），前 3 张自动有颜色。
+**:nth-child 的威力：** 不需要给每张卡片单独加 `class`，CSS 自动按位置给它们不同的样式。卡片从 3 张增加到 10 张时，你只需要复制 HTML（不改 CSS），前 3 张自动有颜色。
 :::
 
 :::explain{title="五、选择器权重（特异性）基础"}
@@ -162,19 +162,19 @@ h1                  /* (0, 0, 1) — 权重最低 */
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：类选择器忘记写 `.`**
+**错误 1：类选择器忘记写 .**
 ```css
 card { color: red; }   /* ❌ 浏览器以为 card 是一个 HTML 标签 */
 .card { color: red; }  /* ✅ 这样才选中 class="card" */
 ```
 
-**错误 2：ID 选择器忘记写 `#`**
+**错误 2：ID 选择器忘记写 #**
 ```css
 title { font-size: 2rem; }  /* ❌ 浏览器以为 title 是标签名 */
 #title { font-size: 2rem; } /* ✅ 选中 id="title" 的元素 */
 ```
 
-**错误 3：`:nth-child` 从 1 开始计数，不是从 0**
+**错误 3：:nth-child 从 1 开始计数，不是从 0**
 ```css
 .card:nth-child(0) { ... }   /* ❌ 不会选中任何元素 */
 .card:nth-child(1) { ... }   /* ✅ 选中第一个子元素 */

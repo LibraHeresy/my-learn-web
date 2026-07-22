@@ -228,10 +228,10 @@ function createCounter() {
 :::
 
 :::task{title="动手试试 — 在 script.js 中实现 createCounter"}
-本练习在 **`script.js`** 中完成。打开 `index.html`（用 Live Server 或直接拖入浏览器），你会看到一个计数器卡片。
+本练习在 **script.js** 中完成。打开 `index.html`（用 Live Server 或直接拖入浏览器），你会看到一个计数器卡片。
 
 ::::step{purpose="createCounter 是理解闭包的最小示例——在函数内部用 let 声明私有变量 count，返回的内部函数'记住'了这个 count。每次点击「计数+1」按钮，页面上的数字都会增加，因为闭包让你始终操作同一个私有变量。" expected="点击「计数+1」按钮，计数器卡片上的数字从 0 开始依次递增。页面默认已有第一个计数器，验证它能正常计数。"}
-打开 **`script.js`**，在 `createCounter()` 函数体内完成实现：
+打开 **script.js**，在 `createCounter()` 函数体内完成实现：
 1. 用 `let count = 0` 声明私有计数变量
 2. `return function() { count++; return count; }` 返回内部函数（闭包）
 完成后刷新页面，点击「计数+1」按钮，观察数字是否从 0 开始递增。

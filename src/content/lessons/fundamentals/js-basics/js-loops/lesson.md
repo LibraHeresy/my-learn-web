@@ -50,18 +50,18 @@ for (let i = 0; i < products.length; i++) {
 }
 ```
 
-**第一部分：`let i = 0`（初始化）** — "我们从哪里开始？"
+**第一部分：let i = 0（初始化）** — "我们从哪里开始？"
 - 创建一个计数器变量 `i`，初始值设为 0
 - 因为数组索引从 0 开始，所以 `i` 也从 0 开始
 - 这一句**只在循环开始前执行一次**
 
-**第二部分：`i < products.length`（条件）** — "什么时候停？"
+**第二部分：i < products.length（条件）** — "什么时候停？"
 - 每次循环开始前都会检查这个条件
 - 条件为 `true` → 执行循环体；条件为 `false` → 退出循环
 - `products.length` 是 5，所以当 `i` 变成 5 时（5 < 5 是 `false`），循环结束
 - 这一句决定了循环跑多少轮
 
-**第三部分：`i++`（增量）** — "每轮结束后做什么？"
+**第三部分：i++（增量）** — "每轮结束后做什么？"
 - 每轮循环结束后执行，把 `i` 加 1
 - `i++` 等价于 `i = i + 1`
 - 如果你忘了写 `i++`，`i` 永远是 0，条件永远是 `0 < 5`（永远为 `true`）→ **无限循环**
@@ -93,8 +93,8 @@ products.forEach(function(item, index) {
 ```
 
 `forEach` 自动把你的回调函数作用在数组的每一项上，并传入两个参数：
-- **第一个参数（`item`）**：当前项的值——"蓝牙耳机"、"机械键盘"……
-- **第二个参数（`index`）**：当前项的索引——0、1、2……（可选，不需要时可以省略）
+- **第一个参数（item）**：当前项的值——"蓝牙耳机"、"机械键盘"……
+- **第二个参数（index）**：当前项的索引——0、1、2……（可选，不需要时可以省略）
 
 **for 和 forEach 对比：**
 
@@ -176,7 +176,7 @@ document.querySelector('#generate-btn').addEventListener('click', renderList);
 
 打开 `script.js`，先读一遍整个文件（用 `fs.readFileSync` 或者直接在编辑器中打开）。理解 `products` 数组的结构和 `renderList()` 函数的位置。
 
-**第 1 步：在 `products` 数组中新增一个商品：**
+**第 1 步：在 products 数组中新增一个商品：**
 ```js
 const products = [
   { name: '蓝牙耳机', price: 299 },
@@ -188,7 +188,7 @@ const products = [
 ];
 ```
 
-**第 2 步：在 `renderList()` 函数中补全 forEach 循环逻辑：**
+**第 2 步：在 renderList() 函数中补全 forEach 循环逻辑：**
 ```js
 function renderList() {
   const container = document.querySelector('#list-container');

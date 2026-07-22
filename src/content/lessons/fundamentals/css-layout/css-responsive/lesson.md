@@ -61,7 +61,7 @@
 }
 ```
 
-**最常用的条件是 `min-width` 和 `max-width`：**
+**最常用的条件是 min-width 和 max-width：**
 
 ```css
 /* 基础样式：手机端（默认） */
@@ -91,12 +91,12 @@
 2. `@media (min-width: 640px)` — "当屏幕宽度最小 640px 时"。换句话说：640px 及以上的屏幕才走这里的样式
 3. `@media (min-width: 1024px)` — "当屏幕宽度最小 1024px 时"。1024px 及以上屏幕会同时应用基础样式 + 640px 样式 + 1024px 样式
 
-**`min-width` 的思维模型：**
+**min-width 的思维模型：**
 - 基础样式 = 给最小的屏幕写的（手机）
 - 每加一个 `@media (min-width: ...)` = 屏幕变大时"增强"样式
 - 这叫**移动端优先（mobile-first）**——先保证小屏能用，再为大屏做增强
 
-**`max-width` 的反向思维：**
+**max-width 的反向思维：**
 ```css
 /* 桌面端优先（旧做法，不推荐）——先写大屏，再为小屏覆盖 */
 .desktop-card { width: 300px; }
@@ -312,7 +312,7 @@ html {
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：忘记 `viewport` meta 标签**
+**错误 1：忘记 viewport meta 标签**
 
 ```html
 <!-- ❌ 错误：没加这行，手机上的 @media 查询全废 -->
@@ -329,7 +329,7 @@ html {
 
 每次新建 HTML 文件时，第一件事就是复制这行 `viewport` meta 标签。
 
-**错误 2：`min-width` 和 `max-width` 搞混**
+**错误 2：min-width 和 max-width 搞混**
 
 ```css
 /* ❌ 错误：想在大屏上放大字体，却用了 max-width */

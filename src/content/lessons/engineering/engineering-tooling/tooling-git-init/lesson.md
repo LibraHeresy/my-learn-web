@@ -147,7 +147,7 @@ Date:   Sat Jul 20 14:30:00 2026 +0800
 :::
 
 :::hint{title="Git 新手最常犯的 4 个错误"}
-**错误 1：`git add .` 之后忘记 `git commit`，以为已经存档了**
+**错误 1：git add . 之后忘记 git commit，以为已经存档了**
 
 `git add .` 只是把修改放进"购物车"（暂存区），还没结账。"结账"是 `git commit`。两个步骤缺一个，修改就没有真正存档。
 
@@ -168,9 +168,9 @@ git commit -m "优化首页加载速度：图片懒加载 + 代码分割"
 
 **错误 3：commit 了 node_modules**
 
-50 MB 的 `node_modules` 不小心 commit 了，Git 仓库瞬间膨胀，push 到 GitHub 要等 10 分钟。**解决方案：项目开始前就创建 `.gitignore`，写入 `node_modules/`。** 如果已经 commit 了，搜索"git remove node_modules from history"处理。
+50 MB 的 `node_modules` 不小心 commit 了，Git 仓库瞬间膨胀，push 到 GitHub 要等 10 分钟。**解决方案：项目开始前就创建 .gitignore，写入 node_modules/。** 如果已经 commit 了，搜索"git remove node_modules from history"处理。
 
-**错误 4：在错误的目录运行 `git init`**
+**错误 4：在错误的目录运行 git init**
 
 在桌面或用户目录跑了 `git init`，导致整个桌面变成了一个 Git 仓库。解决方案：删除那个目录下的 `.git` 文件夹即可"撤销" git init。
 :::

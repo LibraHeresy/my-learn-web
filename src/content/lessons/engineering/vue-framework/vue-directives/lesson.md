@@ -283,7 +283,7 @@ const filtered = computed(() => {
 <div v-if="isAdmin" class="admin-panel">
 ```
 
-**错误 4：`{{ }}` 里写了复杂逻辑**
+**错误 4：{{ }} 里写了复杂逻辑**
 ```html
 <!-- ❌ 模板里塞了太多 JS 逻辑，可读性差 -->
 <p>{{ items.filter(i => i.price > 100).map(i => i.name).join(', ') }}</p>

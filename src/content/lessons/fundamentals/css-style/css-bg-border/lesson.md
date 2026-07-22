@@ -130,7 +130,7 @@
 :::
 
 :::example{title="常见错误——看看你踩过几个坑？"}
-**错误 1：`border` 三个值顺序写错**
+**错误 1：border 三个值顺序写错**
 ```css
 .card {
   border: #D4C5A9 solid 2px;  /* ❌ 虽然也能工作，但惯例是 粗细 样式 颜色 */
@@ -138,7 +138,7 @@
 ```
 虽然浏览器有时能容错，但按"粗细 → 样式 → 颜色"的顺序写，别人（和未来的你）一眼就能读懂。
 
-**错误 2：把 `background-color` 写成 `background`**
+**错误 2：把 background-color 写成 background**
 ```css
 .card {
   background: #FFFAF2;  /* ✅ 这是简写，能工作 */
@@ -147,7 +147,7 @@
 ```
 `background` 是简写属性，会重置所有背景相关属性。如果你在一个地方设 `background-color`，另一个地方设 `background-image`，**不要**用 `background` 简写——用单独的 `background-color` 和 `background-image`。
 
-**错误 3：`border-radius` 给太大值看不出效果**
+**错误 3：border-radius 给太大值看不出效果**
 ```css
 .card {
   border-radius: 500px;  /* 如果元素宽200px，500px的圆角和100px没区别 */
@@ -155,7 +155,7 @@
 ```
 当 `border-radius` 的值超过元素尺寸的一半时，浏览器会自动截断。不必写天文数字。
 
-**错误 4：忘记 `padding`，文字紧贴边框**
+**错误 4：忘记 padding，文字紧贴边框**
 ```css
 .card {
   border: 2px solid #D4C5A9;
