@@ -1,4 +1,4 @@
-# "异步 UI 的三种状态 — loading、error、empty"
+# 异步 UI 的三种状态 — loading、error、empty
 
 :::analogy
 每个异步操作就像去餐厅点菜——点完菜在等（loading）、菜上桌了开吃（success）、服务员说"卖完了"（error）、菜单上有但厨房没备货（empty）。一个专业的页面，用户在每一步都应该看到对应的提示，而不是盯着空白屏幕怀疑人生。
