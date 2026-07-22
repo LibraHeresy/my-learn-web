@@ -26,9 +26,14 @@ const allProjects = computed(() => getAllProjects())
 const currentStep = ref(0)
 watch(currentStep, () => {
   nextTick(() => {
-    if (!playerMainRef.value) return
-    const scrollEl = playerMainRef.value.querySelector('.step-body') || playerMainRef.value.querySelector('.panel-content')
-    if (scrollEl) (scrollEl as HTMLElement).scrollTop = 0
+    // 等待过渡动画完成后再滚动
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!playerMainRef.value) return
+        const scrollEl = playerMainRef.value.querySelector('.panel-content') as HTMLElement | null
+        if (scrollEl) scrollEl.scrollTop = 0
+      })
+    })
   })
 })
 
@@ -530,6 +535,7 @@ function aiSectionDetail(sectionLabel: string) {
 .panel-content {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .panel-editor {
@@ -538,6 +544,14 @@ function aiSectionDetail(sectionLabel: string) {
 }
 
 .content-shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Transition 组件 wrapper 必须参与 flex 链，否则 step-panel 的 flex:1 不生效 */
+.content-shell > * {
   flex: 1;
   min-height: 0;
   display: flex;
@@ -582,13 +596,34 @@ function aiSectionDetail(sectionLabel: string) {
 .player-main.no-code,
 .player-main.is-local {
   display: block;
-  overflow-y: auto;
 }
 
 .player-main.is-local .panel-content,
 .player-main.no-code .panel-content {
   max-width: 860px;
+  height: 100%;
   margin: 0 auto;
+  display: block;
+  overflow-y: auto;
+  flex: none;
+}
+
+.player-main.no-code .content-shell,
+.player-main.is-local .content-shell {
+  flex: none;
+  display: block;
+}
+
+.player-main.no-code .step-panel,
+.player-main.is-local .step-panel {
+  flex: none;
+  display: block;
+}
+
+.player-main.no-code .step-body,
+.player-main.is-local .step-body {
+  flex: none;
+  overflow: visible;
 }
 
 /* ===== 步骤面板 ===== */
@@ -602,8 +637,6 @@ function aiSectionDetail(sectionLabel: string) {
 
 .step-body {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
   min-height: 0;
   min-width: 0;
   padding: var(--sp-4);
