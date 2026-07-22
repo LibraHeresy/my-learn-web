@@ -483,18 +483,21 @@ watch(lessonId, () => {
 .panel-content {
   overflow: hidden;
   flex-shrink: 0;
-  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-shell {
-  position: relative;
-  height: 100%;
+  flex: 1;
   min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
 }
 
 .content-scroll {
+  flex: 1;
   min-height: 0;
   overflow-y: auto;
   overflow-x: auto;
@@ -520,6 +523,8 @@ watch(lessonId, () => {
 .panel-editor, .panel-preview {
   overflow: hidden;
   flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
 }
 .panel-editor {
   border-left: 1px solid var(--color-editor-border);

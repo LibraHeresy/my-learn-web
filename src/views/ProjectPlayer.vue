@@ -166,7 +166,7 @@ function markProjectComplete() {
 const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
   'code-score-project-panel-widths',
   3,
-  { content: 60, editor: 20, preview: 20 },
+  { content: 42, editor: 30, preview: 28 },
 )
 
 function aiSectionDetail(sectionLabel: string) {
@@ -523,6 +523,13 @@ function aiSectionDetail(sectionLabel: string) {
 .panel-preview {
   overflow: hidden;
   flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .panel-editor {
@@ -531,11 +538,10 @@ function aiSectionDetail(sectionLabel: string) {
 }
 
 .content-shell {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  height: 100%;
+  flex: 1;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .panel-right {
@@ -589,7 +595,8 @@ function aiSectionDetail(sectionLabel: string) {
 .step-panel {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   background: var(--color-panel);
 }
 
@@ -597,6 +604,7 @@ function aiSectionDetail(sectionLabel: string) {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  min-height: 0;
   min-width: 0;
   padding: var(--sp-4);
 }
