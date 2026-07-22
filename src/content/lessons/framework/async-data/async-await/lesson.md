@@ -12,14 +12,22 @@ async/await 就像把"点外卖"写成了"先下单、等送到、然后吃"—�
 - **Event Loop**：JavaScript 调度异步任务的运行机制
 :::
 
-## 1. 先看问题：Promise 链很长时，代码仍然不够直观
+:::explain{title="本节目标"}
+学完本节，你将能够：
+- 用 `async` 声明异步函数，用 `await` 等待 Promise 完成并直接拿到结果
+- 解释为什么 `await` 只暂停当前函数，不阻塞主线程——这是最大的误区
+- 判断异步操作该串行（有依赖）还是并行（无依赖），并用 `Promise.all` 实现并行
+- 用 `try/catch` 替代 `.catch()` 处理异步错误，回归同步代码习惯
+- 将 Promise 链重构为 async/await 写法，大幅提升代码可读性
+:::
 
+:::explain{title="一、先看问题：Promise 链很长时，代码仍然不够直观"}
 你已经学会了 Promise 链，它能拉平回调。但看一个真实场景——页面加载时依次获取数据：
 
 ```js
 // 虽然比回调地狱好多了，但 .then() 链还是有点绕
 function loadPage() {
-  return fetchUser('小明')                      // .then() 里套 .then()
+  return fetchUser('小明')
     .then(function(user) {
       return fetchPosts(user.id)
     })
@@ -29,7 +37,7 @@ function loadPage() {
     .then(function(comments) {
       // 问题：这里能用 user.name 吗？不能——user 在上面的作用域里丢了
       console.log('评论数：', comments.length)
-      return renderPage(comments)               // 需要渲染的数据分散在不同 .then() 里
+      return renderPage(comments)
     })
     .catch(function(err) {
       console.log('加载失败', err)
@@ -40,14 +48,9 @@ function loadPage() {
 // 2. 前一步的数据（如 user）在后面 .then() 里拿不到——数据在链上丢失了
 // 3. 逻辑是"把一个大任务切成多个 .then()"，不太直觉
 ```
+:::
 
-**实际工作中你会用这个来：**
-- 页面初始化：依次加载用户信息 → 根据角色加载菜单 → 根据菜单加载数据
-- 表单提交流程：校验 → 上传文件 → 提交 → 跳转
-- 任何"先 A 后 B，B 依赖 A 的结果"的场景
-
-## 2. 解决方案：async/await 让异步代码像同步代码一样读
-
+:::explain{title="二、解决方案：async/await 让异步代码像同步代码一样读"}
 ```js
 // ✅ async/await：从上往下读，和同步代码一模一样
 async function loadPage() {                      // async 声明这是一个异步函数
@@ -69,8 +72,9 @@ async function loadPage() {                      // async 声明这是一个异�
 1. 不需要 `return` 来传数据——`await` 直接把 Promise 的结果赋给变量
 2. 所有变量都在同一个作用域——`user`、`posts`、`comments` 都能互访
 3. 错误处理用 `try/catch`——和同步代码的习惯完全一致
+:::
 
-:::explain{title="关键认知：await 暂停执行，但不阻塞线程"}
+:::explain{title="三、关键认知：await 暂停执行，但不阻塞线程"}
 这是新手最容易搞混的一点：
 
 ```js
@@ -93,7 +97,7 @@ demo()
 - 函数内的代码暂停，但主线程继续——如果你同时启动了另一个 `async` 函数，它照样跑
 :::
 
-:::example{title="串行 vs 并行——到底用哪个？"}
+:::example{title="看例子：串行 vs 并行——到底用哪个？"}
 `await` 默认是**串行**的（一个接一个等）。但如果两个请求互不依赖，应该**并行**：
 
 ```js
@@ -123,16 +127,13 @@ async function loadPage() {
     fetchFavorites(user.id),                         // 所以并行
     fetchNotifications(user.id)
   ])
-  // 总计：800ms + max(600, 400, 300)ms = 1400ms
-  // 如果全部串行：800+600+400+300 = 2100ms，慢了 50%
 }
 ```
 
 **判断规则：** B 需要 A 的结果 → 串行。B 和 C 互不依赖 → 并行。
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？"}
 **错误 1：忘记 await——拿到 Promise 对象而不是数据**
 
 ```js
@@ -159,10 +160,7 @@ async function loadPage() {
 }
 // ✅ 正确：并行请求，只要 ~500ms
 async function loadPage() {
-  const [posts, notifications] = await Promise.all([
-    fetchPosts(),
-    fetchNoti()
-  ])
+  const [posts, notifications] = await Promise.all([fetchPosts(), fetchNoti()])
 }
 ```
 
@@ -180,9 +178,8 @@ async function loadUsers(ids) {
 
 // ✅ 正确：map + Promise.all，并行执行
 async function loadUsers(ids) {
-  const promises = ids.map(function(id) { return fetchUser(id) })  // 全部发出
-  const users = await Promise.all(promises)                        // 一起等
-  return users                                                      // 10 个请求 → 1 倍时间
+  const promises = ids.map(id => fetchUser(id))  // 全部发出
+  return await Promise.all(promises)              // 一起等
 }
 ```
 
@@ -193,7 +190,6 @@ async function loadUsers(ids) {
 async function loadUser() {
   const user = await fetch('/api/user/999')  // 如果 404，这里抛异常
   console.log(user.name)                     // 永远不会执行
-  // 错误没人处理，用户看到白屏——不知道发生了什么
 }
 
 // ✅ 正确：try/catch 包裹
@@ -202,13 +198,44 @@ async function loadUser() {
     const user = await fetch('/api/user/999')
     console.log(user.name)
   } catch (err) {
-    console.error('加载用户失败：', err)       // 记录到控制台（开发调试）
-    showErrorMessage('用户加载失败，请重试')    // 告诉用户（用户体验）
+    console.error('加载用户失败：', err)
+    showErrorMessage('用户加载失败，请重试')
   }
 }
 ```
+:::
 
-:::task{title="动手试试"}
+:::explain{title="四、实际工作中你会怎么用？"}
+async/await 是现代前端处理异步的**标准写法**——几乎所有 API 调用都用它：
+
+- **页面初始化**：依次加载用户信息 → 根据角色加载菜单 → 根据菜单加载数据
+- **表单提交**：校验 → 上传文件 → 提交 → 跳转，用 try/catch 集中处理所有错误
+- **串行 vs 并行**：B 依赖 A → `await` 串行；B 和 C 独立 → `Promise.all` 并行
+- **面试高频**：能讲清楚 async/await 和 Promise 链的关系，以及为什么 async 函数返回 Promise
+
+**async/await 速查：**
+```js
+// async 函数自动返回 Promise
+async function getData() { return 'hello' }  // 等价于 Promise.resolve('hello')
+
+// await 只能用在 async 函数里
+const data = await getData()                 // data = 'hello'
+
+// 错误处理：try/catch
+try { const data = await fetchData() } catch (err) { /* 失败 */ }
+
+// 并行多个请求
+const [a, b, c] = await Promise.all([getA(), getB(), getC()])
+
+// 给单个请求加超时
+const result = await Promise.race([
+  fetchData(),
+  new Promise((_, reject) => setTimeout(() => reject('超时'), 5000))
+])
+```
+:::
+
+:::task{title="动手试试 ✨"}
 ::::step{purpose="亲手对比 Promise 链和 async/await 两种写法，感受代码可读性的差异。同一个逻辑，async/await 把嵌套拉成了直线。" expected="两种写法得到完全相同的 concert 对象，但 async/await 版本不用嵌套 .then()。"}
 打开 `script.js`，先写一个 Promise 链版的 `loadConcert()`，再写一个 async/await 版。对比两段代码的行数和可读性
 ::::
@@ -224,37 +251,6 @@ async function loadUser() {
 在 `script.js` 中实现两个版本的 `loadUsers(ids)`：串行版（for 循环里 await）和并行版（map + Promise.all）。用 `console.time` 分别计时，体会性能差异
 ::::
 
-:::
-
-:::hint{title="async/await 速查"}
-```js
-// async 函数自动返回 Promise
-async function getData() {
-  return 'hello'                    // 等价于 return Promise.resolve('hello')
-}
-getData().then(function(v) { console.log(v) }) // 'hello'
-
-// await 只能用在 async 函数里
-const data = await getData()        // data = 'hello'
-
-// 错误处理：try/catch
-try {
-  const data = await fetchData()
-} catch (err) {
-  // fetchData 失败时来这里
-}
-
-// 并行多个请求
-const [a, b, c] = await Promise.all([getA(), getB(), getC()])
-
-// 给单个请求加超时
-const result = await Promise.race([
-  fetchData(),
-  new Promise(function(_, reject) {
-    setTimeout(function() { reject('超时') }, 5000)
-  })
-])
-```
 :::
 
 :::recap

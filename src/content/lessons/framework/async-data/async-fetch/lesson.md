@@ -12,8 +12,16 @@
 - **JSON**：浏览器和服务器之间最常用的数据格式
 :::
 
-## 1. 先看问题：没有 fetch 时，数据和页面是割裂的
+:::explain{title="本节目标"}
+学完本节，你将能够：
+- 用 `fetch()` 发送 GET、POST、PUT、DELETE 四种 HTTP 请求
+- 解释为什么 fetch 需要两次 `await`（一次等网络，一次等 JSON 解析）
+- 用 `response.ok` 正确判断请求是否成功，区分不同的 HTTP 状态码
+- 用 `URLSearchParams` 安全构建查询参数，用 `AbortController` 取消过时请求
+- 用 `FormData` 上传文件，用 `try/catch` 处理网络错误
+:::
 
+:::explain{title="一、先看问题：没有 fetch 时，数据和页面是割裂的"}
 前面你学的所有东西——变量、函数、DOM 操作——数据都在你的代码里写死了：
 
 ```js
@@ -30,14 +38,9 @@ const posts = [
 - 你的页面只能展示写死的数据，刷新一万遍也是一样的内容
 - 用户搜索、提交表单、翻页——全是假的，数据根本没离开过浏览器
 - 你写的所有"功能"都是模拟的，不是真正的应用
+:::
 
-**实际工作中你会用这个来：**
-- 页面加载时从后端 API 拉取数据并渲染到页面上
-- 用户提交登录表单，把用户名密码 POST 到后端验证
-- 搜索框输入关键词，实时请求搜索结果
-- 上传文件、提交订单、更新个人信息——全部走 fetch
-
-:::explain{title="fetch 的基本结构——四个关键部分"}
+:::explain{title="二、fetch 的基本结构——四个关键部分"}
 ```js
 // fetch 请求的完整结构
 async function fetchData() {
@@ -68,7 +71,7 @@ async function fetchData() {
 - 忘记第二个 await 的话，`data` 是一个 Promise 对象，不是真正的数据
 :::
 
-:::example{title="GET 请求——获取数据（最常用）"}
+:::example{title="看例子：GET 请求——获取数据（最常用）"}
 ```js
 // GET：从服务器取数据——相当于"请给我这份文件"
 async function getPosts() {
@@ -156,7 +159,7 @@ async function deletePost(id) {
 | Delete | DELETE | 通常无 | 删除评论、取消订单 |
 :::
 
-:::explain{title="HTTP 状态码——服务器给你\"打个分\""}
+:::explain{title="三、HTTP 状态码——服务器给你\"打个分\""}
 每次请求，服务器都会返回一个三位数字的状态码，告诉你结果：
 
 | 状态码 | 含义 | 通俗解释 | response.ok |
@@ -175,14 +178,15 @@ async function deletePost(id) {
 **口诀：** 2xx 成功，4xx 你的问题（前端），5xx 服务器的问题。`response.ok` 只在 200-299 时为 `true`。
 :::
 
-:::explain{title="URLSearchParams —— 安全构建查询参数"}
+:::explain{title="四、进阶技巧：URLSearchParams、AbortController、FormData"}
+**URLSearchParams —— 安全构建查询参数**
+
 API 请求经常带参数（搜索关键词、分页页码）。**不要手动拼字符串**——遇到中文、空格、特殊字符会出问题：
 
 ```js
 // ❌ 手动拼接：中文和特殊字符会导致 URL 不合法
 const keyword = '春天'
 const url = 'https://api.example.com/search?q=' + keyword
-// URL 中的中文不规范，某些服务器会拒绝
 
 // ✅ URLSearchParams：自动处理编码
 const params = new URLSearchParams({
@@ -193,19 +197,19 @@ const params = new URLSearchParams({
 const url = 'https://api.example.com/search?' + params
 // → https://api.example.com/search?q=%E6%98%A5%E5%A4%A9&page=1&limit=10
 ```
-:::
 
-:::explain{title="AbortController —— 取消过时的请求"}
+**AbortController —— 取消过时的请求**
+
 用户快速输入搜索词时，上一次的请求还没返回——与其收到过时结果，不如直接取消：
 
 ```js
-let controller = null                     // 保存当前的 AbortController
+let controller = null
 
 async function search(keyword) {
   if (controller) {
     controller.abort()                    // 取消上一次还在飞行中的请求
   }
-  controller = new AbortController()      // 创建新的控制器
+  controller = new AbortController()
 
   try {
     const response = await fetch('/api/search?q=' + keyword, {
@@ -217,25 +221,19 @@ async function search(keyword) {
     if (err.name === 'AbortError') {
       return                              // 请求被取消是正常的，不处理
     }
-    console.error('搜索失败：', err)      // 真正的错误才需要处理
+    console.error('搜索失败：', err)
   }
 }
-// 结合防抖使用——用户在搜索框快速输入时，旧的请求被 abort 掉
-// 始终只渲染最新的搜索结果
 ```
-:::
 
-:::explain{title="FormData —— 用 fetch 上传文件"}
-提交包含文件的表单时，用 `FormData` 替代 JSON：
+**FormData —— 用 fetch 上传文件**
 
 ```js
-// 从 HTML 表单创建 FormData
 const form = document.querySelector('#upload-form')
 form.addEventListener('submit', async function(e) {
-  e.preventDefault()                       // 阻止页面刷新
+  e.preventDefault()
 
   const formData = new FormData(form)      // 自动收集所有表单字段
-  // 也可以手动追加文件
   formData.append('avatar', fileInput.files[0])
 
   const response = await fetch('/api/upload', {
@@ -246,12 +244,10 @@ form.addEventListener('submit', async function(e) {
   console.log('上传结果：', result)
 })
 // 关键：用 FormData 时不要手动设置 Content-Type header
-// 浏览器需要自动添加 boundary 参数，手动设置会破坏它
 ```
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？"}
 **错误 1：忘记检查 response.ok**
 
 ```js
@@ -325,8 +321,31 @@ catch (err) {
   }
 }
 ```
+:::
 
-:::task{title="动手试试"}
+:::explain{title="五、实际工作中你会怎么用？"}
+fetch 几乎出现在每一个页面中——它是前端和后端之间的"信使"：
+
+- **页面加载时**：用 GET 从后端拉取数据（列表、详情、配置），渲染到页面上
+- **用户提交表单时**：用 POST 把数据发给后端（登录、注册、下单、评论）
+- **编辑和删除**：用 PUT/PATCH 更新数据，用 DELETE 删除数据
+- **搜索框**：结合 `AbortController` 和防抖，确保用户只看到最新搜索结果
+- **文件上传**：用 `FormData` 处理上传，不要手动设 `Content-Type`
+- **封装 API 客户端**：把 fetch 逻辑抽成 `api.get()` / `api.post()` 等函数，统一管理 BASE_URL、错误处理、token 注入——这就是下一节的内容
+
+**fetch 三步口诀：**
+```js
+// 1. 发请求
+const response = await fetch(url, options)
+// 2. 检查响应
+if (!response.ok) { throw new Error('失败：' + response.status) }
+// 3. 解析数据
+const data = await response.json()
+// 别忘了 try/catch 保护
+```
+:::
+
+:::task{title="动手试试 ✨"}
 ::::step{purpose="第一次让代码和真实的外部世界对话——fetch 返回的 Response 对象包含了状态码、请求头等完整信息，你需要拆两步才能拿到数据。" expected="response.status 为 200，response.ok 为 true。解析后的 data 是一个包含 100 条帖子的数组。"}
 打开 `script.js`，用 `async/await` 发一个 GET 请求到 `https://jsonplaceholder.typicode.com/posts`，打印 `response.status`、`response.ok` 和解析后的数据长度
 ::::
@@ -339,21 +358,6 @@ catch (err) {
 把前面的 GET 请求抽取成 `getPosts()` 函数，包含完整的 try/catch、ok 检查、JSON 解析。然后故意把 URL 改成不存在的地址，观察错误处理的效果
 ::::
 
-:::
-
-:::hint{title="fetch 三步口诀"}
-```js
-// 1. 发请求
-const response = await fetch(url, options)
-
-// 2. 检查响应
-if (!response.ok) { throw new Error('失败：' + response.status) }
-
-// 3. 解析数据
-const data = await response.json()  // 或 .text() / .blob() / .formData()
-
-// 别忘了 try/catch 保护
-```
 :::
 
 :::recap

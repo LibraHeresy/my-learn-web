@@ -15,8 +15,17 @@
 - **localStorage**：持久化搜索历史
 :::
 
-## 1. 我们要做什么
+:::explain{title="本节目标"}
+学完本节，你将独立完成一个完整的音乐搜索应用：
+- 用 fetch 调用 iTunes Search API，获取真实的音乐数据
+- 用 async/await 编写清晰的异步流程
+- 用防抖优化搜索频率，避免每次按键都发请求
+- 用状态对象管理 loading、error、empty、success 四种 UI 状态
+- 用 localStorage 持久化搜索历史，刷新页面不丢失
+- 采用模块化架构（api.js / debounce.js / app.js），每层职责清晰
+:::
 
+:::explain{title="一、我们要做什么"}
 一个完整的音乐搜索应用。用户输入关键词，应用调用 iTunes Search API，展示搜索结果。
 
 **功能清单：**
@@ -29,7 +38,7 @@
 这个项目就是初级前端工程师日常工作的缩影——对接真实 API、处理异步流程、管理 UI 状态、优化用户体验。面试时你说"我用过 fetch"，不如说"我独立完成了一个搜索应用，包含防抖、状态管理、错误处理"。
 :::
 
-:::explain{title="iTunes Search API —— 免费、公开、无需注册"}
+:::explain{title="二、iTunes Search API —— 免费、公开、无需注册"}
 Apple 提供的免费音乐搜索 API：
 
 ```
@@ -61,7 +70,7 @@ https://itunes.apple.com/search?term=周杰伦&limit=10&country=cn
 ```
 :::
 
-:::example{title="代码架构——四层清晰分工"}
+:::example{title="看例子：代码架构——四层清晰分工"}
 不要把所有代码塞在一个文件里。好的架构让每层职责明确：
 
 ```
@@ -221,25 +230,17 @@ document.querySelector('#search-input').addEventListener('input', debouncedSearc
 // ⑥ 搜索历史（localStorage）
 function saveSearchHistory(keyword) {
   var history = JSON.parse(localStorage.getItem('searchHistory')) || []
-  // 去重：如果已存在就删掉旧的
   history = history.filter(function(k) { return k !== keyword })
-  // 加到最前面
   history.unshift(keyword)
-  // 只保留最近 5 条
   history = history.slice(0, 5)
-  // 保存
   localStorage.setItem('searchHistory', JSON.stringify(history))
-  // 重新渲染历史列表
   renderHistory()
 }
 
 function renderHistory() {
   var history = JSON.parse(localStorage.getItem('searchHistory')) || []
   var el = document.querySelector('#search-history')
-  if (history.length === 0) {
-    el.innerHTML = ''
-    return
-  }
+  if (history.length === 0) { el.innerHTML = ''; return }
   el.innerHTML = '<p>最近搜索：</p>' + history.map(function(k) {
     return '<button class="history-item" onclick="searchFromHistory(\'' + k + '\')">' + k + '</button>'
   }).join('')
@@ -256,7 +257,7 @@ renderHistory()
 ```
 :::
 
-:::explain{title="技能检查清单 —— 看看你掌握了什么"}
+:::explain{title="三、技能检查清单 —— 看看你掌握了什么"}
 这个项目里，你实际用到了前面 9 节学到的几乎所有内容：
 
 | 技能 | 在项目中的体现 | 对应章节 |
@@ -273,7 +274,7 @@ renderHistory()
 | try/catch | API 调用和搜索执行都带错误处理 | 错误处理 |
 :::
 
-:::explain{title="这个项目如何证明你的能力"}
+:::explain{title="四、这个项目如何证明你的能力"}
 面试官问"你有什么项目经验"时，你可以说：
 
 **"我独立完成了一个音乐搜索应用。用户输入歌手名后经过防抖处理调用 Apple iTunes API，实现了 loading/错误/空结果/正常展示四种状态切换。搜索历史用 localStorage 持久化。项目用了模块化架构：API 层封装网络请求，防抖层控制调用频率，状态层管理 UI。"**
@@ -281,8 +282,7 @@ renderHistory()
 这一句话包含的技术点：fetch、async/await、防抖、状态管理、localStorage、模块化——这些正是初级前端岗位最常要求的能力。
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？"}
 **错误 1：把所有代码写在一个函数里**
 
 ```js
@@ -331,11 +331,27 @@ async function doSearch() {
   state.results = []                      // 清掉上次的结果
   state.keyword = ''                      // 清掉上次的关键词
   render()
-  // ...
 }
 ```
+:::
 
-:::task{title="动手实现 —— 你的结业项目"}
+:::explain{title="五、实现路线图"}
+按这个顺序做，每步可独立验证：
+
+```
+1. api.js          ← 先让 fetch 能跑通，console.log 验证数据
+2. debounce.js     ← 独立测试防抖函数（用 console.log 即可）
+3. state + render  ← 不接真实 API，用假数据测试四种状态
+4. doSearch()      ← 串联 api + state + render
+5. 事件绑定        ← input 事件 + 防抖包装
+6. 搜索历史        ← localStorage 读写 + 渲染
+7. 美化 + 边界处理 ← 空输入保护、特殊字符、网络错误
+```
+
+**每一层做完后独立测试，不要等到所有代码写完再调试。**
+:::
+
+:::task{title="动手实现 —— 你的结业项目 ✨"}
 ::::step{purpose="API 封装是工程化的第一步——把 network 细节隐藏在 api 模块里，调用者只需传入关键词就能获得结果。这是真实项目中所有后端对接的标准做法。" expected="调用 searchMusic('周杰伦') 返回数组，每条包含 trackName、artistName、artworkUrl100、collectionName。"}
 创建 `api.js`，实现 `searchMusic(keyword)`：
 - 用 `URLSearchParams` 构建查询参数（term、limit=20、country=cn、media=music）
@@ -367,22 +383,6 @@ async function doSearch() {
 验证：搜索多个关键词，刷新页面，历史依然显示。点击历史按钮可快速搜索
 ::::
 
-:::
-
-:::hint{title="实现路线图"}
-按这个顺序做，每步可独立验证：
-
-```
-1. api.js          ← 先让 fetch 能跑通，console.log 验证数据
-2. debounce.js     ← 独立测试防抖函数（用 console.log 即可）
-3. state + render  ← 不接真实 API，用假数据测试四种状态
-4. doSearch()      ← 串联 api + state + render
-5. 事件绑定        ← input 事件 + 防抖包装
-6. 搜索历史        ← localStorage 读写 + 渲染
-7. 美化 + 边界处理 ← 空输入保护、特殊字符、网络错误
-```
-
-**每一层做完后独立测试，不要等到所有代码写完再调试。**
 :::
 
 :::recap

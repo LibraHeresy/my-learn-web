@@ -12,12 +12,16 @@ CORS 就像小区门禁系统——你（浏览器里的 JS）想去隔壁小区
 - **Promise**：表示一个异步操作的结果
 :::
 
----
+:::explain{title="本节目标"}
+学完本节，你将能够：
+- 解释什么是同源策略，为什么浏览器需要 CORS 机制
+- 区分"请求被发出"和"JS 能读取响应"——这是 CORS 最大的误区
+- 说出简单请求和预检请求（OPTIONS）的区别，以及什么操作会触发预检
+- 在开发环境中用 Vite 代理解决跨域问题
+- 用 RESTful 风格设计 API 的 URL 和 HTTP 方法
+:::
 
-## Part 1: CORS（跨域资源共享）
-
-## 1. 先看问题：为什么你的 fetch 莫名其妙失败了？
-
+:::explain{title="一、CORS 篇：为什么你的 fetch 莫名其妙失败了？"}
 开发时最常见的心碎时刻——你写好 fetch，打开页面，控制台一片红：
 
 ```
@@ -35,13 +39,9 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource.
 - 你在本地开发好好的，部署到线上后接口全挂
 - 你打开 Network 面板看到请求返回了 200 和数据，但 JS 拿不到——你以为是代码写错了
 - 你花半天排查"为什么 axios/fetch 报错"——其实是后端没配 CORS
+:::
 
-**实际工作中你会用这个来：**
-- 前后端分离开发时，前端在 `localhost:3000`，后端在 `localhost:8080`——不同端口 = 跨域
-- 排查"为什么上线后接口调不通"——99% 是 CORS 没配
-- 配置开发代理（Vite proxy）绕过本地开发时的 CORS 问题
-
-:::explain{title="同源策略——浏览器的安全底线"}
+:::explain{title="二、同源策略——浏览器的安全底线"}
 **同源策略（Same-Origin Policy）** 是浏览器最核心的安全机制：一个网页只能读取来自**同源**的响应。
 
 "同源"需要三个条件**完全一致**：
@@ -61,26 +61,25 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource.
 - 服务器到服务器的通信（同源策略只存在于浏览器中）
 :::
 
-:::explain{title="关键误解：浏览器不是阻止请求发出！"}
+:::explain{title="三、关键误解 + CORS 怎么解决"}
+**关键误解：浏览器不是阻止请求发出！**
+
 这是 CORS 最大的误区。事实是：
 
 - **请求照样到达服务器**，服务器也处理并返回了响应
 - **浏览器阻止的是 JS 读取响应**——响应在浏览器手里，但不交给你的 JS
 
-你在 Network 面板能看到请求（状态码 200、有完整返回数据），但 Console 报 CORS 错误——这就是原因。
+你在 Network 面板能看到请求（状态码 200、有完整返回数据），但 Console 报 CORS 错误——这就是原因。就像一封信：邮局照样送，对方照样收，但收发室大爷看了一眼寄件人，说"你不是这栋楼的，信不能给你"。
 
-就像一封信：邮局照样送，对方照样收，但收发室大爷看了一眼寄件人，说"你不是这栋楼的，信不能给你"。
-:::
+**CORS 怎么解决——服务器加 HTTP 头**
 
-:::explain{title="CORS 怎么解决——服务器加 HTTP 头"}
 CORS 是**服务器端**的配置，不是你前端能"绕过"的。最简单的配置——服务器在响应里加：
 
 ```
 Access-Control-Allow-Origin: *
 ```
-意思是"任何网站都可以读我的数据"（`*` 是通配符）。
+意思是"任何网站都可以读我的数据"（`*` 是通配符）。如果要限定特定域名：
 
-如果要限定特定域名：
 ```
 Access-Control-Allow-Origin: https://mysite.com
 ```
@@ -96,10 +95,11 @@ Access-Control-Allow-Origin: https://mysite.com
 | `Access-Control-Max-Age` | 预检结果缓存多久（秒） | `3600` |
 :::
 
-:::explain{title="简单请求 vs 预检请求（Preflight）"}
+:::explain{title="四、简单请求 vs 预检请求（Preflight）"}
 浏览器把跨域请求分为两类：
 
 **1. 简单请求（不发预检）**
+
 满足**全部**条件才算简单请求：
 - 方法必须是 GET、HEAD 或 POST
 - 只使用这些请求头：`Accept`、`Accept-Language`、`Content-Language`、`Content-Type`（且值只能是 `text/plain`、`multipart/form-data`、`application/x-www-form-urlencoded`）
@@ -108,6 +108,7 @@ Access-Control-Allow-Origin: https://mysite.com
 流程：**发请求 → 服务器返回 → 浏览器检查 CORS 头 → 决定给不给 JS**
 
 **2. 预检请求（先发 OPTIONS 探路）**
+
 只要不满足上面任何一条，浏览器先发一个 `OPTIONS` 请求：
 
 ```
@@ -130,7 +131,7 @@ Access-Control-Request-Headers: Content-Type, Authorization
 这就是为什么你发 JSON POST 请求时，Network 面板里能看到**两条请求**——第一条是 OPTIONS，第二条才是真正的 POST。
 :::
 
-:::example{title="开发环境解决 CORS——Vite 代理"}
+:::example{title="看例子：开发环境解决 CORS——Vite 代理"}
 实际项目中，开发时后端可能还没配 CORS。前端用开发服务器的代理转发来绕过去：
 
 ```js
@@ -156,8 +157,7 @@ export default {
 **生产环境怎么做？** 让后端正确配置 CORS 响应头，或者用 Nginx 做反向代理统一转发。
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？（CORS）"}
 **错误 1：以为前端能绕过 CORS**
 
 ```js
@@ -194,13 +194,9 @@ fetch('/api/data', {
 })
 // 如果你在 Network 里看到两条请求（OPTIONS + POST），不要惊讶，这是正常的
 ```
+:::
 
----
-
-## Part 2: REST API 概念
-
-## 1. 先看问题：没有规范的 API 长什么样？
-
+:::explain{title="五、REST 篇：没有规范的 API 长什么样？"}
 ```js
 // ❌ 非 RESTful：每个人凭感觉设计 URL，毫无规律
 GET    /getAllPosts           // 动词在 URL 里
@@ -221,8 +217,9 @@ DELETE /posts/1        // 删除帖子 1
 GET    /users/1/posts  // 用户 1 的帖子（嵌套关系）
 // 好处：URL 结构本身就在说明"这是谁的数据、做什么操作"
 ```
+:::
 
-:::explain{title="REST 核心原则——URL 是名词，HTTP 方法是动词"}
+:::explain{title="六、REST 核心原则——URL 是名词，HTTP 方法是动词"}
 REST 不是一门技术，而是一套**设计规范**。核心就两条：
 
 1. **URL 只用名词复数**，代表"资源"（Resource）
@@ -241,7 +238,9 @@ REST 不是一门技术，而是一套**设计规范**。核心就两条：
 - 实际项目里 PATCH 更常用——"只改手机号"比"把全部信息再发一遍"合理
 :::
 
-:::example{title="查询参数——分页、搜索、排序、筛选"}
+:::example{title="看例子：查询参数 + JSONPlaceholder 实战"}
+**查询参数——分页、搜索、排序、筛选**
+
 列表接口用查询参数控制返回数据：
 
 ```js
@@ -257,18 +256,13 @@ GET /posts?sort=createdAt&order=desc
 // 组合使用（常见）
 GET /posts?page=1&limit=20&status=published&sort=createdAt&order=desc
 
-// 用 URLSearchParams 安全构建（前面学过）
-const params = new URLSearchParams({           // 自动处理特殊字符编码
-  page: 1,
-  limit: 20,
-  status: 'published'
-})
+// 用 URLSearchParams 安全构建
+const params = new URLSearchParams({ page: 1, limit: 20, status: 'published' })
 const url = 'https://api.example.com/posts?' + params
-// → https://api.example.com/posts?page=1&limit=20&status=published
 ```
-:::
 
-:::example{title="实战：JSONPlaceholder — 一个标准的 RESTful API"}
+**实战：JSONPlaceholder — 一个标准的 RESTful API**
+
 [JSONPlaceholder](https://jsonplaceholder.typicode.com) 是免费的练习 API，结构是标准 REST 设计：
 
 ```
@@ -281,13 +275,6 @@ const url = 'https://api.example.com/posts?' + params
            /posts                           POST        创建帖子（模拟）
            /posts/1                         PUT         更新帖子 1（模拟）
            /posts/1                         DELETE      删除帖子 1（模拟）
-
-评论       /comments                        GET         获取 500 条评论
-           /comments?postId=1               GET         帖子 1 的评论
-
-用户       /users                           GET         获取 10 个用户
-           /users/1                         GET         获取用户 1
-           /users/1/albums                  GET         用户 1 的相册（嵌套资源）
 ```
 
 **设计亮点：**
@@ -296,7 +283,25 @@ const url = 'https://api.example.com/posts?' + params
 - 嵌套资源表达了数据之间的关系
 :::
 
-:::task{title="动手试试"}
+:::explain{title="七、实际工作中你会怎么用？"}
+**CORS：** 前后端分离开发时，前端在 `localhost:3000`，后端在 `localhost:8080`——不同端口就是跨域。排查"为什么上线后接口调不通"——99% 是 CORS 没配。开发时用 Vite 代理转发绕过，生产环境让后端正确配置 `Access-Control-Allow-Origin`。
+
+**REST：** 你每天都要设计或调用 RESTful API。好的 API 设计让人不看文档也能猜到接口功能——URL 本身就在说明"这是谁的数据、做什么操作"。实际团队中，前后端会一起约定 API 规范，REST 就是通用的"共同语言"。
+
+**CORS + REST 记忆口诀：**
+
+CORS 三句话：
+1. 浏览器不拦请求，拦的是 JS 读响应
+2. CORS 是服务器在响应里加 HTTP 头，前端改不了
+3. 开发时用 Vite 代理，生产环境后端配 CORS
+
+REST 三句话：
+1. URL 里只放名词复数，动词用 HTTP 方法
+2. CRUD 映射：POST / GET / PUT或PATCH / DELETE
+3. 查询参数用 `?key=value&key2=value2`
+:::
+
+:::task{title="动手试试 ✨"}
 ::::step{purpose="亲手触发 CORS 成功和失败，直观理解'CORS 是服务器决定的'。jsonplaceholder 开放 CORS，所以成功；大多数商业网站不开放，所以被拦。" expected="jsonplaceholder 返回数据；另一个未开放 CORS 的网站报 CORS 错误。"}
 打开浏览器控制台，分别运行：
 ```js
@@ -328,18 +333,6 @@ fetch('https://www.baidu.com')
 在控制台中用 `URLSearchParams` 构建带参数的 URL，请求 userId=1 且只取 5 条的帖子，用 fetch 验证返回结果
 ::::
 
-:::
-
-:::hint{title="CORS + REST 记忆口诀"}
-**CORS 三句话：**
-1. 浏览器不拦请求，拦的是 JS 读响应
-2. CORS 是服务器在响应里加 HTTP 头，前端改不了
-3. 开发时用 Vite 代理，生产环境后端配 CORS
-
-**REST 三句话：**
-1. URL 里只放名词复数，动词用 HTTP 方法
-2. CRUD 映射：POST / GET / PUT或PATCH / DELETE
-3. 查询参数用 `?key=value&key2=value2`
 :::
 
 :::recap

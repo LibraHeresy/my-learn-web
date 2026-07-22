@@ -12,8 +12,16 @@ Promise 就像点外卖——下单后拿到一个订单号（Promise）。外�
 - **Event Loop**：JavaScript 调度异步任务的运行机制
 :::
 
-## 1. 先看问题：没有 Promise 时，代码有多痛苦？
+:::explain{title="本节目标"}
+学完本节，你将能够：
+- 用 Promise 替代回调函数，把嵌套的"回调地狱"拉平成链式调用
+- 解释 `resolve` 和 `reject` 的作用——它们是控制 Promise 最终状态的开关
+- 说出 Promise 的三种状态（pending / fulfilled / rejected）及其转换规则
+- 用 `.then()` 链传递数据，用 `.catch()` 统一处理错误
+- 用 `Promise.all` / `Promise.allSettled` / `Promise.race` 处理多个异步操作
+:::
 
+:::explain{title="一、先看问题：没有 Promise 时，代码有多痛苦？"}
 假设你要做一个用户数据页面：先查用户信息，再根据用户 ID 查订单，再根据第一个订单查详情。用传统回调：
 
 ```js
@@ -38,14 +46,9 @@ getUser(userId, function(user) {            // 第1步：查用户
 2. 每个步骤都要单独处理错误——错误处理代码占了一半
 3. 想在两个异步操作之间加一个步骤？要重构整个嵌套结构
 4. 两个不依赖的异步操作想同时执行？回调做不到
+:::
 
-**实际工作中你会用这个来：**
-- 页面加载时依次获取"用户信息 → 权限 → 菜单列表"
-- 表单提交（校验 → 上传图片 → 提交表单），每一步依赖前一步的结果
-- 处理任何"先做 A，拿到结果后再做 B"的场景——这几乎每天都在发生
-
-## 2. 解决方案：Promise 拉平异步流程
-
+:::explain{title="二、解决方案：Promise 拉平异步流程"}
 ```js
 // ✅ Promise 链式调用——代码从上往下读，逻辑清晰
 getUser(userId)                              // 第1步：返回一个 Promise
@@ -67,8 +70,9 @@ getUser(userId)                              // 第1步：返回一个 Promise
 - 代码是平的，不是金字塔——再长的链也不会向右缩进
 - 一个 `.catch()` 统一处理所有错误，不用每个步骤写一遍
 - 想在中间加一步？在链上插入一个 `.then()` 就行，不影响其他代码
+:::
 
-:::explain{title="resolve 和 reject 到底是什么？"}
+:::explain{title="三、resolve 和 reject 到底是什么？"}
 很多新手不理解 `new Promise((resolve, reject) => { ... })` 里的 `resolve` 和 `reject` 是什么。
 
 **它们就是 Promise 构造函数传给你的两个函数：**
@@ -101,7 +105,7 @@ promise.then(
 **一句话总结：** `resolve` 和 `reject` 是你决定 Promise 最终状态的开关——成功就调 `resolve(结果)`，失败就调 `reject(错误)`。
 :::
 
-:::example{title="Promise 的三种状态——外卖订单类比"}
+:::example{title="看例子：Promise 的三种状态——外卖订单类比"}
 一个 Promise 只有三种互斥的状态，一旦确定就不可改变：
 
 | 状态 | 含义 | 外卖类比 | 触发条件 |
@@ -131,7 +135,7 @@ ticket
 ```
 :::
 
-:::explain{title=".then() 链的关键规则——每一步都返回新 Promise"}
+:::explain{title="四、.then() 链的关键规则——每一步都返回新 Promise"}
 `.then()` 每次都返回一个**全新的 Promise**，所以你可以在后面继续 `.then()`：
 
 ```js
@@ -150,13 +154,13 @@ fetchUserId('小明')                          // 返回 Promise<id>
   })
 ```
 
-**两个核心规则：**
+**三个核心规则：**
 1. `.then()` 里 `return` 一个值 → 下一个 `.then()` 收到这个值
 2. `.then()` 里 `return` 一个 Promise → 下一个 `.then()` 等它完成后收到结果
 3. `.then()` 里抛异常 → 跳到最近的 `.catch()`
 :::
 
-:::explain{title="四个 Promise 组合器——同时处理多个异步操作"}
+:::explain{title="五、四个 Promise 组合器——同时处理多个异步操作"}
 实际项目中，你经常需要同时发起多个请求。JS 提供了四个组合器：
 
 **1. Promise.all — "全部完成才算完"**
@@ -168,7 +172,6 @@ const [user, posts, notifications] = await Promise.all([
   fetch('/api/notifications').then(function(r) { return r.json() })
 ])
 // 全部成功 → 拿到三个结果。任意一个失败 → 整个 all 失败
-// 使用场景：页面初始化、批量校验、需要全部数据才能渲染的页面
 ```
 
 **2. Promise.race — "谁先到算谁的"**
@@ -180,12 +183,11 @@ const data = await Promise.race([
     setTimeout(function() { reject('请求超时！') }, 3000)
   })
 ])
-// 使用场景：网络请求超时控制、从多个 CDN 选最快的
 ```
 
 **3. Promise.allSettled — "全部有结果，不管成败"**
 ```js
-// 场景：批量上传文件，需要知道每个文件的上传结果（成功 or 失败）
+// 场景：批量上传文件，需要知道每个文件的上传结果
 const results = await Promise.allSettled([
   uploadFile('a.pdf'),    // 可能成功
   uploadFile('b.pdf'),    // 可能失败
@@ -196,7 +198,6 @@ const results = await Promise.allSettled([
 //   { status: "rejected", reason: "文件过大" },
 //   { status: "fulfilled", value: { url: "..." } }
 // ]
-// 使用场景：批量操作、需要完整报告的场景
 ```
 
 **4. Promise.any — "有一个成功就行"**
@@ -207,12 +208,10 @@ const data = await Promise.any([
   fetch('https://cdn2.example.com/data.json'),
   fetch('https://cdn3.example.com/data.json')
 ]).then(function(r) { return r.json() })
-// 使用场景：多 CDN 容灾、多个备用数据源
 ```
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？"}
 **错误 1：忘记 return——链断了**
 
 ```js
@@ -248,7 +247,6 @@ console.log(result)           // undefined —— .then() 还没跑！
 // ✅ 正确：在 .then() 里面使用结果
 getUser(1).then(function(user) {
   console.log(user)           // 在回调里使用，确保数据已经到了
-  // 后续逻辑全写在这里
 })
 ```
 
@@ -268,55 +266,44 @@ const results = await Promise.allSettled([
   fetch('/api/user/999'),
   fetch('/api/user/3')
 ])
-// results 里每个都有 status，成功失败都清清楚楚
 ```
+:::
 
-:::task{title="动手试试"}
+:::explain{title="六、实际工作中你会怎么用？"}
+Promise 是 JavaScript 异步编程的基石——fetch、定时器、事件监听等一切异步操作都建立在 Promise 之上：
+
+- **页面加载时依次获取数据**："用户信息 → 权限 → 菜单列表"——用 `.then()` 链串联
+- **表单提交**：校验 → 上传图片 → 提交表单，每一步依赖前一步的结果
+- **页面初始化**：需要多个不相关的数据时，用 `Promise.all` 同时请求，比串行快 3-5 倍
+- **批量操作**：上传多个文件用 `Promise.allSettled`，每个结果都能看到，不会一个失败全放弃
+- **给请求加超时**：用 `Promise.race` 竞速——网络请求 vs 超时计时器
+
+**Promise 三个核心规则速记：**
+```js
+// 规则1：.then() 默认返回新 Promise，里面的 return 值传给下一个 .then()
+Promise.resolve(1).then(v => v + 1).then(v => console.log(v)) // 输出 2
+
+// 规则2：.then() 里 return 一个 Promise，下一个 .then() 等它完成
+Promise.resolve(1).then(v => fetchUser(v)).then(user => console.log(user))
+
+// 规则3：.catch() 捕获链上任何一步的错误
+Promise.resolve(1).then(() => { throw new Error('出错了') }).catch(err => console.log(err))
+```
+:::
+
+:::task{title="动手试试 ✨"}
 ::::step{purpose="亲手创建 Promise 并经历 pending → fulfilled/rejected 的状态变化，这是理解 resolve/reject 本质的最佳方式。" expected="运行代码后 1 秒输出'订票成功！'或'已售罄'。多次运行以看到两种结果。"}
 打开 `script.js`，用 `new Promise((resolve, reject) => { ... })` 模拟一个订票功能：70% 概率成功，延迟 1 秒返回结果。用 `.then()` 和 `.catch()` 接收结果并输出
 ::::
 
-::::step{purpose="Promise 链通过 return 传递数据——每个 .then() 里 return 一个 Promise，下一个 .then() 自动接收到其结果。链式调用把嵌套拉平。" expected="输入用户 ID 后，页面依次出现两张卡片——用户 N 和用户 N+1。第二个 .then() 里的 user2 是第二个 searchUser() 的结果。"}
+::::step{purpose="Promise 链通过 return 传递数据——每个 .then() 里 return 一个 Promise，下一个 .then() 自动接收到其结果。链式调用把嵌套拉平。" expected="输入用户 ID 后，页面依次出现两张卡片——用户 N 和用户 N+1。"}
 修改 `script.js` 中的搜索函数，用 Promise 链实现：查询用户 N → 拿到结果后自动查询用户 N+1 → 两张卡片都显示在页面上
-```js
-searchUser(userId)
-  .then(function(user) {                     // 收到第一个用户
-    showCard(user)                            // 显示第一张卡片
-    return searchUser(Number(userId) + 1)     // 返回新 Promise，链继续
-  })
-  .then(function(user2) {                    // 收到第二个用户
-    showCard(user2)                           // 显示第二张卡片
-  })
-  .catch(function(err) {                     // 统一错误处理
-    showError('查询失败：' + err.message)
-  })
-```
 ::::
 
 ::::step{purpose="Promise.all 是页面初始化的标配——多个不依赖的请求同时发出，等全部返回后一起渲染，比串行快得多。" expected="控制台输出用户、帖子、相册三组数据，耗时约为最慢那个请求的时间（而不是三者之和）。"}
-在 `script.js` 中用 `Promise.all` 同时请求三个不同的 API 端点，全部完成后输出结果，对比串行（一个一个 await）的执行时间
+在 `script.js` 中用 `Promise.all` 同时请求三个不同的 API 端点，全部完成后输出结果，对比串行的执行时间
 ::::
 
-:::
-
-:::hint{title="Promise 三个核心规则"}
-```js
-// 规则1：.then() 默认返回新 Promise，里面的 return 值传给下一个 .then()
-Promise.resolve(1)
-  .then(function(v) { return v + 1 })   // 返回 2
-  .then(function(v) { console.log(v) }) // 输出 2
-
-// 规则2：.then() 里 return 一个 Promise，下一个 .then() 等它完成
-Promise.resolve(1)
-  .then(function(v) { return fetchUser(v) })  // 返回 Promise
-  .then(function(user) { console.log(user) }) // 等 fetchUser 完成后拿到 user
-
-// 规则3：.catch() 捕获链上任何一步的错误
-Promise.resolve(1)
-  .then(function() { throw new Error('出错了') })  // 抛出错误
-  .then(function() { console.log('不会执行') })    // 跳过
-  .catch(function(err) { console.log(err) })        // 捕获错误
-```
 :::
 
 :::recap

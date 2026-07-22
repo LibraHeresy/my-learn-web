@@ -12,8 +12,16 @@ localStorage 就像浏览器的抽屉——你把数据存进去，关掉网页�
 - **JSON.parse**：把 JSON 字符串还原成 JS 对象/数组
 :::
 
-## 1. 先看问题：刷新页面，数据全没了
+:::explain{title="本节目标"}
+学完本节，你将能够：
+- 用 `setItem` / `getItem` / `removeItem` / `clear` 操作 localStorage
+- 解释为什么 localStorage 只能存字符串，以及为什么要用 JSON.stringify/parse 转换
+- 实现"启动时读取 + 修改后保存"的标准持久化模式
+- 区分 localStorage（永久）和 sessionStorage（关闭标签页即清除）的使用场景
+- 注意 5MB 容量限制和不要存敏感信息的安全原则
+:::
 
+:::explain{title="一、先看问题：刷新页面，数据全没了"}
 你写了一个简单的待办列表，用户添加了几条任务：
 
 ```js
@@ -37,9 +45,9 @@ function addTodo(text) {
 - 保存草稿：用户在表单里填了一半，刷新后数据还在——用户体验大幅提升
 - 缓存数据：上次请求的列表数据存下来，下次打开页面先显示缓存，再更新
 - 记录状态：用户是否看过引导页、是否关闭了某个公告
+:::
 
-## 2. localStorage 基础操作
-
+:::explain{title="二、localStorage 基础操作"}
 ```js
 // 四个核心 API——增、查、删、清
 localStorage.setItem('userName', '小明')        // 存：键值对，都是字符串
@@ -67,7 +75,7 @@ console.log(saved.name)                         // "小明"——正常的 JS �
 ```
 :::
 
-:::explain{title="最常用的模式：加载时读取 + 修改后保存"}
+:::explain{title="三、最常用的模式：加载时读取 + 修改后保存"}
 几乎所有使用 localStorage 的场景都遵循这个模式：
 
 ```js
@@ -95,14 +103,9 @@ function deleteTodo(id) {
 
 function toggleTodo(id) {
   var todo = todos.find(function(t) { return t.id === id })
-  if (todo) {
-    todo.done = !todo.done
-    saveTodos()                              // ← 状态变化也要保存
-    render()
-  }
+  if (todo) { todo.done = !todo.done; saveTodos(); render() }
 }
 
-// ④ 页面初次渲染：用加载的数据
 render()
 ```
 
@@ -116,7 +119,9 @@ render()
 ```
 :::
 
-:::explain{title="sessionStorage —— localStorage 的\"孪生兄弟\""}
+:::explain{title="四、sessionStorage 和 5MB 容量限制"}
+**sessionStorage —— localStorage 的"孪生兄弟"**
+
 用法一模一样，差别只在生命周期：
 
 | 对比 | localStorage | sessionStorage |
@@ -126,15 +131,8 @@ render()
 | 作用域 | 同域名下所有标签页共享 | 只在当前标签页有效 |
 | 典型用途 | 主题偏好、草稿、缓存 | 表单多步骤向导、临时筛选条件 |
 
-```js
-// sessionStorage 用法和 localStorage 完全相同
-sessionStorage.setItem('tempForm', JSON.stringify(formData))
-var saved = JSON.parse(sessionStorage.getItem('tempForm'))
-// 区别：用户关闭标签页后，tempForm 就没了——这正是想要的
-```
-:::
+**5MB 容量限制和注意事项**
 
-:::explain{title="5MB 容量限制和注意事项"}
 localStorage 每个域名约 **5MB** 存储空间。超出会抛出 `QuotaExceededError`：
 
 ```js
@@ -146,14 +144,12 @@ function safeSetItem(key, value) {
   } catch (err) {
     if (err.name === 'QuotaExceededError') {
       console.warn('localStorage 已满！', err)
-      return false                        // 写入失败，让调用方处理
+      return false
     }
-    throw err                            // 其他错误还是抛出去
+    throw err
   }
 }
 ```
-
-**使用 localStorage 的注意事项：**
 
 | 注意点 | 说明 |
 |--------|------|
@@ -164,8 +160,7 @@ function safeSetItem(key, value) {
 | 用户可清除 | 不要存"唯一"的关键数据，用户清除浏览器数据就没了 |
 :::
 
-## 3. 常见错误
-
+:::example{title="常见错误——看看你踩过几个坑？"}
 **错误 1：忘记 JSON.parse —— 拿到字符串而不是对象**
 
 ```js
@@ -182,7 +177,7 @@ console.log(list.length)                   // 3——正确
 **错误 2：第一次读取时没处理 null**
 
 ```js
-// ❌ 错误：第一次打开页面，getItem 返回 null，JSON.parse(null) 返回 null
+// ❌ 错误：第一次打开页面，getItem 返回 null
 var todos = JSON.parse(localStorage.getItem('myTodos'))
 todos.push('新任务')                        // TypeError: Cannot read property 'push' of null
 
@@ -195,60 +190,56 @@ todos.push('新任务')                        // 正常——todos 至少是空
 
 ```js
 // ❌ 错误：addTodo 里调了 save，deleteTodo 里忘了
-function addTodo(text) {
-  todos.push(text)
-  saveTodos()                               // 保存了 ✓
-  render()
-}
+function addTodo(text) { todos.push(text); saveTodos(); render() }
 function deleteTodo(id) {
-  todos = todos.filter(function(t) { return t.id !== id })
-  // 忘记 saveTodos()！刷新后删除的数据又回来了 ✗
+  todos = todos.filter(t => t.id !== id)
+  // 忘记 saveTodos()！刷新后删除的数据又回来了
   render()
 }
 
 // ✅ 正确：每个修改数据的地方都调用 saveTodos()
 ```
-
 :::
 
-:::task{title="动手试试"}
-::::step{purpose="localStorage 让页面数据跨越会话——刷新、关闭浏览器再打开，数据都还在。这是让页面'有记忆'的第一步。" expected="首次打开显示默认 2 条数据。刷新页面，仍然是 2 条。"}
-打开 `script.js`，实现数据持久化：
-1. 页面启动时从 localStorage 读取 `myTodos`，用 `JSON.parse` 还原，`|| []` 兜底
-2. 用读取到的数据渲染列表
-3. 验证刷新页面后数据不变（目前还是初始数据，因为还没写保存逻辑）
-::::
+:::explain{title="五、实际工作中你会怎么用？"}
+localStorage 是前端"有记忆"的基础——不需要服务器的数据持久化都靠它：
 
-::::step{purpose="JSON.stringify 把对象'打包'成字符串存进 localStorage。为什么需要这步？因为 localStorage 只认字符串，不认 JS 对象。" expected="添加一条任务后，打开 DevTools → Application → Local Storage，看到 myTodos 键对应的值是 JSON 字符串。"}
-实现 `saveTodos()` 函数：`localStorage.setItem('myTodos', JSON.stringify(todos))`。在添加任务后调用它。打开浏览器 DevTools 的 Application → Local Storage 面板验证数据已写入
-::::
+- **用户偏好**：主题颜色、语言选择、字体大小——用户下次打开页面自动应用
+- **表单草稿**：用户填了一半关掉页面，下次打开自动恢复——大幅提升体验
+- **缓存数据**：上次请求的列表数据先显示，再后台更新——减少白屏时间
+- **搜索历史**：结合 JSON.stringify/parse 存取最近搜索关键词
 
-::::step{purpose="关键的纪律：在所有修改数据的地方都调用 saveTodos()。新增后、删除后、修改后——漏掉任何一处，刷新时数据就丢了。" expected="添加 3 条任务、删除 1 条、标记 1 条完成。刷新页面后，数据原封不动——你的页面真正'拥有了记忆'。"}
-在删除任务、修改任务状态的所有位置都加上 `saveTodos()`。验证刷新后所有增减改操作结果都被保留
-::::
-
-:::
-
-:::hint{title="localStorage 最佳实践"}
+**localStorage 最佳实践模板：**
 ```js
 // 1. 读取：始终带默认值
 var data = JSON.parse(localStorage.getItem('key')) || []
 
 // 2. 写入：包装 try/catch（防止容量溢出）
 function saveData(value) {
-  try {
-    localStorage.setItem('key', JSON.stringify(value))
-  } catch (err) {
-    console.warn('保存失败：', err)
-  }
+  try { localStorage.setItem('key', JSON.stringify(value)) }
+  catch (err) { console.warn('保存失败：', err) }
 }
 
 // 3. 删除：可以清理过期数据（配合时间戳）
 function saveWithTimestamp(key, value) {
-  var data = { value: value, timestamp: Date.now() }
-  localStorage.setItem(key, JSON.stringify(data))
+  localStorage.setItem(key, JSON.stringify({ value, timestamp: Date.now() }))
 }
 ```
+:::
+
+:::task{title="动手试试 ✨"}
+::::step{purpose="localStorage 让页面数据跨越会话——刷新、关闭浏览器再打开，数据都还在。这是让页面'有记忆'的第一步。" expected="首次打开显示默认 2 条数据。刷新页面，仍然是 2 条。"}
+打开 `script.js`，实现数据持久化：页面启动时从 localStorage 读取 `myTodos`，用 `JSON.parse` 还原，`|| []` 兜底
+::::
+
+::::step{purpose="JSON.stringify 把对象'打包'成字符串存进 localStorage。为什么需要这步？因为 localStorage 只认字符串。" expected="添加一条任务后，打开 DevTools → Application → Local Storage，看到 myTodos 键对应的值是 JSON 字符串。"}
+实现 `saveTodos()` 函数：`localStorage.setItem('myTodos', JSON.stringify(todos))`。在添加任务后调用它。打开浏览器 DevTools 验证
+::::
+
+::::step{purpose="关键的纪律：在所有修改数据的地方都调用 saveTodos()。新增后、删除后、修改后——漏掉任何一处，刷新时数据就丢了。" expected="添加 3 条任务、删除 1 条、标记 1 条完成。刷新页面后，数据原封不动。"}
+在删除任务、修改任务状态的所有位置都加上 `saveTodos()`。验证刷新后所有增减改操作结果都被保留
+::::
+
 :::
 
 :::recap
