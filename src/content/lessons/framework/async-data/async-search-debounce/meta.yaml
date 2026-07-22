@@ -1,5 +1,5 @@
 id: async-search-debounce
-title: "防抖与搜索 — 别让\"乐团\"累坏了"
+title: 防抖与搜索 — 别让服务器累坏了
 track: framework
 chapter: async-data
 order: 6

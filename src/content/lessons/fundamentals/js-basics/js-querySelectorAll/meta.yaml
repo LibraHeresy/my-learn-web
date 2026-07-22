@@ -1,5 +1,5 @@
 id: js-querySelectorAll
-title: 批量 DOM 操作 — 指挥整个声部
+title: 批量 DOM 操作 — 同时操作一组元素
 track: fundamentals
 chapter: js-basics
 order: 11

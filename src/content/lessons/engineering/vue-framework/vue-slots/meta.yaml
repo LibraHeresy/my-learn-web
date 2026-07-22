@@ -1,5 +1,5 @@
 id: vue-slots
-title: "插槽（Slots）— 组件的\"自由声部\""
+title: 插槽（Slots）— 组件的灵活占位符
 track: engineering
 chapter: vue-framework
 order: 9

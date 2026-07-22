@@ -1,5 +1,5 @@
 id: workflow-event-delegation
-title: "事件委托 — 让\"指挥\"替你监听每一个\"乐手\""
+title: 事件委托 — 让父元素替你监听每一个子元素
 track: framework
 chapter: js-advanced
 order: 9

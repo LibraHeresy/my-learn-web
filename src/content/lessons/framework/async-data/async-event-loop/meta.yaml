@@ -1,5 +1,5 @@
 id: async-event-loop
-title: "事件循环 — JavaScript 的\"指挥家\""
+title: 事件循环 — JavaScript 的调度员
 track: framework
 chapter: async-data
 order: 1

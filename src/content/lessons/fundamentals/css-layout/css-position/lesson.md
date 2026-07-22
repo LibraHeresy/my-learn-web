@@ -1,4 +1,4 @@
-# Position 定位 — 控制元素的位置
+# Position 定位 — 控制元素的舞台位置
 
 :::analogy
 定位属性就像不同角色的站位——`static` 是正常排队的人，`relative` 是可以微调站姿但队伍位置不变的人，`absolute` 是站到指定坐标的 VIP，`fixed` 是钉在屏幕上的水印，`sticky` 是滚到一定位置就粘住的便利贴。

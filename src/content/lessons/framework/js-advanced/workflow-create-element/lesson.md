@@ -1,4 +1,4 @@
-# DOM 渲染进阶 -- innerHTML vs createElement
+# DOM 渲染进阶 — innerHTML 对比与 classList 操控
 
 :::analogy
 innerHTML 像复印机--复制一整页文档，快但改不了细节。createElement 像活字印刷--一个字一个字排，慢但每个字都能独立修改、删除或替换。

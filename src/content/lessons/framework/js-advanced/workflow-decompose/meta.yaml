@@ -1,5 +1,5 @@
 id: workflow-decompose
-title: 拆分函数 — 把大段乐谱分成清晰的乐章
+title: 拆分函数 — 把大段代码分成清晰的段落
 track: framework
 chapter: js-advanced
 order: 7
