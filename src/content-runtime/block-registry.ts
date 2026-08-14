@@ -7,6 +7,8 @@ import TaskBlock from './renderers/TaskBlock.vue'
 import HintBlock from './renderers/HintBlock.vue'
 import RecapBlock from './renderers/RecapBlock.vue'
 import PrerequisiteBlock from './renderers/PrerequisiteBlock.vue'
+import DiagramBlock from './renderers/DiagramBlock.vue'
+import PredictBlock from './renderers/PredictBlock.vue'
 import UnsupportedBlock from './renderers/UnsupportedBlock.vue'
 
 const blockRegistry: Partial<Record<BlockName, Component>> = {
@@ -17,6 +19,8 @@ const blockRegistry: Partial<Record<BlockName, Component>> = {
   task: TaskBlock,
   hint: HintBlock,
   recap: RecapBlock,
+  diagram: DiagramBlock,
+  predict: PredictBlock,
 }
 
 export function resolveBlockComponent(name: BlockName): Component {

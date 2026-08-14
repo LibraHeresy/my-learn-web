@@ -60,6 +60,8 @@ export type BlockType =
   | 'block:task'
   | 'block:hint'
   | 'block:recap'
+  | 'block:diagram'
+  | 'block:predict'
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 
@@ -67,6 +69,8 @@ export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
 export type BlockAttrs = {
   title?: string
   emoji?: string
+  /** predict 块的答案文字（先想后看折叠内容） */
+  answer?: string
 }
 
 /** task 块内单条步骤 */
@@ -74,6 +78,8 @@ export type TaskStep = {
   content: string
   purpose?: string
   expected?: string
+  /** 自动验收断言（如 "h1" / ".card:text:巴赫" / "#gallery:count:3"），可选 */
+  assert?: string
 }
 
 // ---- 各块专属类型（判别联合成员）---- //
@@ -135,6 +141,24 @@ export type RecapBlockNode = {
   steps?: never
 }
 
+/** 概念示意图块：content 为内嵌 SVG 源码（构建期跳过术语注入） */
+export type DiagramBlockNode = {
+  type: 'block:diagram'
+  name: 'diagram'
+  content: string
+  attrs?: BlockAttrs
+  steps?: never
+}
+
+/** 预测输出块：content 为题目与代码，attrs.answer 为折叠答案 */
+export type PredictBlockNode = {
+  type: 'block:predict'
+  name: 'predict'
+  content: string
+  attrs?: BlockAttrs
+  steps?: never
+}
+
 /**
  * 课程正文中的块节点（判别联合）。
  * 通过 `.type` 或 `.name` 字段收窄后可获得精确类型，例如：
@@ -148,6 +172,8 @@ export type BlockNode =
   | TaskBlockNode
   | HintBlockNode
   | RecapBlockNode
+  | DiagramBlockNode
+  | PredictBlockNode
 
 export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | ListNode | TableNode | BlockNode
 

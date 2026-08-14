@@ -205,6 +205,8 @@ const allowedBlockNames = new Set<BlockName>([
   "task",
   "hint",
   "recap",
+  "diagram",
+  "predict",
 ]);
 
 function isBlockName(value: string): value is BlockName {
@@ -359,6 +361,8 @@ function applyGlossaryToBody(
     if (node.type === "heading") return node;
     if (node.type === "term") return node;
     if (node.type === "code") return node;
+    // SVG 配图内容不做术语注入（避免 {{term:xxx}} 破坏 SVG 结构）
+    if (node.type === "block:diagram") return node;
     if (node.type === "list") {
       return {
         ...node,
@@ -457,10 +461,14 @@ function parseTaskSteps(rawInner: string): {
       const expected = attrsRaw
         .match(/expected="((?:[^"\\]|\\.)*)"/)?.[1]
         ?.replace(/\\(.)/g, "$1");
+      const assert = attrsRaw
+        .match(/assert="((?:[^"\\]|\\.)*)"/)?.[1]
+        ?.replace(/\\(.)/g, "$1");
       steps.push({
         content: stepLines.join("\n").trim(),
         purpose: purpose || undefined,
         expected: expected || undefined,
+        assert: assert || undefined,
       });
       i += 1; // skip closing ::::
       continue;
@@ -655,8 +663,12 @@ function parseLessonMarkdown(input: string): ContentBodyNode[] {
       const bname = name as BlockName;
       const attrs = node.attributes as Record<string, string> | undefined;
       const blockAttrs: BlockAttrs | undefined =
-        attrs?.title || attrs?.emoji
-          ? { title: attrs.title, emoji: attrs.emoji }
+        attrs?.title || attrs?.emoji || attrs?.answer
+          ? {
+              title: attrs.title,
+              emoji: attrs.emoji,
+              answer: attrs.answer,
+            }
           : undefined;
       const children = (node.children ?? []) as unknown[];
       const content = children
@@ -737,6 +749,41 @@ async function collectLessonDirs(root: string): Promise<string[]> {
   return result;
 }
 
+// local 模式课程的"开始前准备"清单（按章节定制，构建期自动注入正文头部）
+const LOCAL_PREP: Record<string, string> = {
+  "engineering-tooling":
+    "本节在本地动手：需要安装 VS Code、Node.js，并打开终端。完成标准：按步骤操作后看到预期输出。",
+  "vue-framework":
+    "本节在本地动手：需要 Node.js 与 npm/yarn，用终端创建并运行 Vue 项目。",
+  "ai-basics":
+    "本节在本地动手：准备一个 AI 对话工具（豆包、DeepSeek 等），跟着步骤实际操作。",
+  "ai-frontend":
+    "本节在本地动手：准备 AI 工具与 VS Code，把 AI 生成的代码在本地运行验证。",
+  "ai-project":
+    "本节在本地动手：准备 AI 工具、VS Code 与终端，按步骤完成并部署项目。",
+  "js-advanced":
+    "本节在本地动手：用浏览器 DevTools 的控制台或本地 HTML 文件跟着步骤实操。",
+  "async-data":
+    "本节在本地动手：用浏览器 DevTools 的控制台或本地 HTML 文件跟着步骤实操。",
+};
+
+function injectLocalPrep(
+  body: ContentBodyNode[],
+  mode: string,
+  chapter: string,
+): ContentBodyNode[] {
+  if (mode !== "local") return body;
+  const prep = LOCAL_PREP[chapter];
+  if (!prep) return body;
+  const prepBlock: ContentBodyNode = {
+    type: "block:hint",
+    name: "hint",
+    attrs: { title: "开始前准备 🧰" },
+    content: prep,
+  } as ContentBodyNode;
+  return [prepBlock, ...body];
+}
+
 async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
   const metaPath = path.join(lessonDir, "meta.yaml");
   const lessonPath = path.join(lessonDir, "lesson.md");
@@ -778,7 +825,7 @@ async function compileLesson(lessonDir: string): Promise<CompiledLesson> {
   return {
     id: meta.id,
     meta,
-    body,
+    body: injectLocalPrep(body, meta.mode, meta.chapter),
     starter: {
       html,
       css,
