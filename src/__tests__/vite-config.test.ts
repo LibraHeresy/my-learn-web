@@ -38,10 +38,10 @@ describe('vite content watch helpers', () => {
   it('invalidateModulesByFiles 按文件失效模块并自动去重', () => {
     const modA = {} as ModuleNode
     const modB = {} as ModuleNode
-    const normalizedPath = 'D:/repo/src/generated/lessons-meta.json'
+    const filePath = 'src/generated/lessons-meta.json'
 
     const getModulesByFile = vi.fn((file: string) => {
-      if (file === normalizedPath) return new Set([modA, modB])
+      if (file === filePath) return new Set([modA, modB])
       return undefined
     })
     const invalidateModule = vi.fn()
@@ -51,7 +51,7 @@ describe('vite content watch helpers', () => {
         moduleGraph: { getModulesByFile, invalidateModule },
         ws: { send: vi.fn() },
       },
-      ['D:\\repo\\src\\generated\\lessons-meta.json', 'D:\\repo\\src\\generated\\lessons-meta.json'],
+      [filePath, filePath],
     )
 
     expect(count).toBe(2)
