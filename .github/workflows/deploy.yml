@@ -3,33 +3,43 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  workflow_dispatch:
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  NODE_OPTIONS: --max_old_space_size=4096
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
+          node-version-file: .nvmrc
+          cache: yarn
 
-      - run: npm install
-      - run: npm run build:content
-      - run: npm run build
+      # 缓存内容编译产物：内容未变时复用，build:content 增量编译秒过
+      # （内容/编译脚本变化会使 key miss，自动全量重编译）
+      - uses: actions/cache@v4
+        with:
+          path: src/generated
+          key: generated-${{ hashFiles('src/content/**', 'scripts/build-content.ts') }}
+          restore-keys: |
+            generated-
+
+      - run: yarn install --frozen-lockfile
+
+      # lint 不依赖内容产物，先跑以获得最快反馈
+      - run: yarn lint
+      # 显式编译内容，供 test 读取 generated 数据
+      - run: yarn build:content
+      - run: yarn test
+      # build 内部会再次执行 build:content（增量秒过）+ vue-tsc + vite build
+      - run: yarn build
 
       - uses: actions/configure-pages@v5
 
@@ -37,5 +47,16 @@ jobs:
         with:
           path: dist
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
       - uses: actions/deploy-pages@v4
         id: deployment
