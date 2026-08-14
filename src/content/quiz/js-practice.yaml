@@ -91,7 +91,7 @@ levels:
           - remove() 已废弃
           - removeChild 更简单
         answer: 1
-        explanation: element.remove() 是现代 DOM API（ES5+），直接删除元素自身，无需获取父节点。parent.removeChild(child) 是传统 API，必须先获取父元素。remove() 更简洁，但返 undefined；removeChild 返回被删除的元素引用。
+        explanation: element.remove() 是现代 DOM 规范（DOM Living Standard）提供的 API，直接删除元素自身，无需获取父节点。parent.removeChild(child) 是传统 API，必须先获取父元素。remove() 更简洁，但返 undefined；removeChild 返回被删除的元素引用。
       - id: 455
         difficulty: 2
         question: '`element.insertAdjacentHTML(position, html)` 中 position 有哪几种？和 innerHTML 比有什么优势？'

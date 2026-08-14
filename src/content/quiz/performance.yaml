@@ -15,11 +15,11 @@ levels:
         question: Core Web Vitals 三个核心指标？
         options:
           - 加载速度
-          - LCP(最大内容绘制)/FID(首次输入延迟)/CLS(累计布局偏移)
+          - LCP(最大内容绘制)/INP(交互到下一次绘制)/CLS(累计布局偏移)
           - 代码行数
           - 请求数
         answer: 1
-        explanation: LCP=最大可见元素加载时间<2.5s。FID=首次交互响应时间<100ms。CLS=视觉稳定性分数<0.1。
+        explanation: LCP=最大可见元素加载时间<2.5s。INP=交互响应时间<200ms（已取代 FID）。CLS=视觉稳定性分数<0.1。
       - id: 301
         difficulty: 1
         question: 首屏优化最有效的手段？

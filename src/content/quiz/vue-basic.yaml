@@ -381,7 +381,7 @@ levels:
         explanation: '@click.stop=event.stopPropagation()、.prevent=event.preventDefault()、.once=只触发一次后自动解绑、.capture=在捕获阶段而非冒泡阶段触发。'
         id: 360
       - difficulty: 3
-        question: 以下代码 const obj = reactive({a:1}); const b = obj.a; b = 2; obj.a 会变吗？为什么？
+        question: 以下代码 const obj = reactive({a:1}); let b = obj.a; b = 2; obj.a 会变吗？为什么？
         options:
           - 会
           - 不会——解构 reactive 属性得到的是普通值，断开响应性连接

@@ -267,14 +267,14 @@ levels:
         explanation: "forwards 动画结束后保持最后一帧样式。none 回到动画前初始状态(会闪回)。backwards 开始前就应用第一帧。"
       - id: 93
         difficulty: 3
-        question: "无限旋转动画 @keyframes 怎么写？"
+        question: "无限旋转动画 @keyframes 怎么写（经典 transform:rotate() 写法）？"
         options:
           - "@keyframes s{from{rotate:0}to{rotate:360deg}}"
           - "@keyframes s{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}"
           - "keyframes s{transform:spin}"
           - "@keyframes s{0%{rotate:0}100%{rotate:1turn}}"
         answer: 1
-        explanation: "animation:s 2s linear infinite 配合使用。"
+        explanation: "动画需配合 animation:s 2s linear infinite 使用。经典写法用 transform:rotate() 定义关键帧（from/to 与 0%/100% 等价）。独立 rotate 属性在现代浏览器同样合法，但本题限定经典 transform:rotate() 写法。"
       - id: 94
         difficulty: 3
         question: "为什么做动画优先用 transform 而非 left/top？"

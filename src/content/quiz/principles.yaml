@@ -131,10 +131,10 @@ levels:
         options:
           - 不阻塞
           - JS 执行会阻塞 CSS 解析和渲染。所以 script 放底部或用 async/defer
-          - CSS 阻塞 JS
+          - CSS 会阻塞后续 JS 执行（script 需等待 CSSOM），并阻塞渲染
           - CSS 和 JS 互不影响
-        answer: 1
-        explanation: JS 执行是单线程的会阻塞 DOM 构建和渲染。CSS 不阻塞 DOM 构建但阻塞渲染(等 CSS 加载完再渲染防闪烁)。
+        answer: 2
+        explanation: CSS 是渲染阻塞资源——CSSOM 未构建完成不渲染；外部 CSS 还会阻塞其后 classic script 的执行（脚本需等 CSSOM 就绪）。JS 不会阻塞 CSS 解析（CSS 独立流式解析）。
       - difficulty: 2
         question: Vue 的虚拟 DOM 和 diff 算法做了哪些优化？
         options:
@@ -218,8 +218,8 @@ levels:
           - visibility:hidden 的元素仍占据布局空间
           - opacity:0 的元素仍响应点击事件
           - transform 平移后的元素不占原文档流空间
-        answer: 2
-        explanation: opacity:0 元素只是视觉透明仍可接收点击事件。pointer-events:none 才能让元素不响应点击。
+        answer: 3
+        explanation: transform 只改变视觉渲染位置，不改变文档流——元素仍占据原有布局空间，所以该说法错误。opacity:0 的元素只是视觉透明，仍可接收点击事件；pointer-events:none 才能让元素不响应点击。
       - id: 296
         difficulty: 3
         question: Vue 的 nextTick 原理？什么时候用？
@@ -268,7 +268,7 @@ levels:
           - 每个绑定
           - 不需要
         answer: 1
-        explanation: 不用给每个按钮加 click 监听→在父容器加一个 click 监听→通过 event.target 判断点击了哪个按钮。优势：1)内存少(一个监听器) 2)动态添加的元素自动有效 3)代码简洁。Vue 自动用事件委托处理列表中的事件。
+        explanation: 不用给每个按钮加 click 监听→在父容器加一个 click 监听→通过 event.target 判断点击了哪个按钮。优势：1)内存少(一个监听器) 2)动态添加的元素自动有效 3)代码简洁。Vue 未内置自动事件委托，事件直接绑定在对应元素上。
         id: 478
       - difficulty: 3
         question: 函数节流(throttle)和函数防抖(debounce)的内部实现原理？
