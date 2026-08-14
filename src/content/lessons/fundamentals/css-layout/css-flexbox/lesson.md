@@ -296,6 +296,26 @@ footer > div {
 这些场景的共同模式：**找到父容器 → 加 display: flex → 用 justify-content / align-items / gap 控制排列**。
 :::
 
+:::diagram{title="主轴（横）与交叉轴（纵）：justify-content 沿主轴分布，align-items 沿交叉轴对齐"}
+<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="20" y="30" width="400" height="130" fill="#fdf6e3" stroke="#c9a96e" stroke-width="2"/>
+  <rect x="40" y="70" width="90" height="50" fill="#ffffff" stroke="#8B2E2E"/>
+  <rect x="175" y="70" width="90" height="50" fill="#ffffff" stroke="#8B2E2E"/>
+  <rect x="310" y="70" width="90" height="50" fill="#ffffff" stroke="#8B2E2E"/>
+  <text x="85" y="99" font-size="13" fill="#333" text-anchor="middle">卡片</text>
+  <text x="220" y="99" font-size="13" fill="#333" text-anchor="middle">卡片</text>
+  <text x="355" y="99" font-size="13" fill="#333" text-anchor="middle">卡片</text>
+  <line x1="20" y1="180" x2="420" y2="180" stroke="#8B2E2E" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="220" y="196" font-size="12" fill="#8B2E2E" text-anchor="middle">主轴 main axis（justify-content 控制）</text>
+  <text x="8" y="95" font-size="12" fill="#c9a96e" transform="rotate(-90 8 95)" text-anchor="middle">交叉轴（align-items）</text>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#8B2E2E"/>
+    </marker>
+  </defs>
+</svg>
+:::
+
 :::task{title="动手试试 ✨"}
 
 ::::step{purpose="让你直观感受 Flexbox 的核心威力：一行 `display: flex` 就把竖排的 HTML 元素变成了横排。之前用 float 需要 5+ 行 hack 的事情，现在一行搞定。这就是 Flexbox 存在的意义。" expected="原本竖着堆叠的卡片变成了一行横排。父容器加了 flex，所有子元素自动横向排列。"}

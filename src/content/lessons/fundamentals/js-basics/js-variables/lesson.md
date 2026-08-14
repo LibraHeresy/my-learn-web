@@ -64,6 +64,35 @@ var b = 5;
 记住一点：**声明变量始终用 let 或 const，放在使用之前。**
 :::
 
+:::diagram{title="变量提升：var 声明被抬到作用域顶部，只提升声明不提升赋值"}
+<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="20" y="30" width="180" height="120" rx="8" fill="#fdecea" stroke="#c62828" stroke-width="2"/>
+  <text x="110" y="52" font-size="12" fill="#c62828" text-anchor="middle" font-weight="bold">你写的代码</text>
+  <text x="110" y="82" font-size="11" fill="#333" text-anchor="middle">console.log(b)</text>
+  <text x="110" y="104" font-size="11" fill="#333" text-anchor="middle">var b = 5</text>
+  <text x="110" y="126" font-size="11" fill="#c62828" text-anchor="middle">期望：报错？</text>
+  <text x="220" y="90" font-size="20" fill="#c9a96e" text-anchor="middle">→</text>
+  <rect x="240" y="30" width="180" height="120" rx="8" fill="#e8f8e8" stroke="#2E7D32" stroke-width="2"/>
+  <text x="330" y="52" font-size="12" fill="#2E7D32" text-anchor="middle" font-weight="bold">引擎实际执行</text>
+  <text x="330" y="82" font-size="11" fill="#333" text-anchor="middle">var b（提升到这里）</text>
+  <text x="330" y="104" font-size="11" fill="#333" text-anchor="middle">console.log(b) → undefined</text>
+  <text x="330" y="126" font-size="11" fill="#333" text-anchor="middle">b = 5</text>
+  <text x="220" y="170" font-size="12" fill="#8B2E2E" text-anchor="middle">let/const 不提升使用会直接报 ReferenceError（暂时性死区）</text>
+</svg>
+:::
+
+:::predict{title="预测输出：声明前使用变量，var 和 let 有什么区别？" answer="第一个输出 undefined（var 提升声明，值还没赋值）；第二个直接报错 ReferenceError（let 有暂时性死区，声明前不可用）。解析：var 只提升声明不提升赋值，let/const 在声明前使用会报错——这也是推荐用 let/const 的原因之一。"}
+看代码预测结果，再点开答案验证：
+
+```js
+console.log(a)
+var a = 5
+
+console.log(b)
+let b = 5
+```
+:::
+
 :::explain{title="拼接字符串"}
 用 `+` 号可以把字符串和变量拼接在一起：
 ```js

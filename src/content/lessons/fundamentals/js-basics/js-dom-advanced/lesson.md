@@ -25,6 +25,29 @@ document.querySelector("#list").appendChild(card);
 ```
 :::
 
+:::diagram{title="DOM 树：HTML 是一棵树，createElement/appendChild 就是挂新树枝"}
+<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="180" y="16" width="80" height="30" rx="6" fill="#f7edd8" stroke="#8B2E2E"/>
+  <text x="220" y="36" font-size="12" fill="#8B2E2E" text-anchor="middle" font-weight="bold">html</text>
+  <rect x="60" y="70" width="70" height="28" rx="6" fill="#fdf6e3" stroke="#6B5A4E"/>
+  <text x="95" y="89" font-size="11" fill="#333" text-anchor="middle">head</text>
+  <rect x="300" y="70" width="70" height="28" rx="6" fill="#fdf6e3" stroke="#6B5A4E"/>
+  <text x="335" y="89" font-size="11" fill="#333" text-anchor="middle">body</text>
+  <rect x="280" y="122" width="56" height="26" rx="6" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="308" y="139" font-size="11" fill="#333" text-anchor="middle">h1</text>
+  <rect x="352" y="122" width="56" height="26" rx="6" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="380" y="139" font-size="11" fill="#333" text-anchor="middle">#list</text>
+  <rect x="352" y="170" width="72" height="26" rx="6" fill="#e8f8e8" stroke="#2E7D32" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="388" y="187" font-size="11" fill="#2E7D32" text-anchor="middle">新卡片 div</text>
+  <line x1="210" y1="46" x2="95" y2="68" stroke="#c9a96e" stroke-width="1.5"/>
+  <line x1="230" y1="46" x2="335" y2="68" stroke="#c9a96e" stroke-width="1.5"/>
+  <line x1="335" y1="98" x2="308" y2="120" stroke="#c9a96e" stroke-width="1.5"/>
+  <line x1="335" y1="98" x2="380" y2="120" stroke="#c9a96e" stroke-width="1.5"/>
+  <line x1="380" y1="148" x2="388" y2="168" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="80" y="198" font-size="12" fill="#2E7D32">虚线框 = createElement + appendChild 新挂上去的节点</text>
+</svg>
+:::
+
 :::explain{title="删除与替换"}
 `.remove()` 直接删除元素：
 ```js

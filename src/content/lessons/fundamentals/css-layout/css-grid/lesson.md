@@ -80,6 +80,33 @@ Flexbox 是"一条线"上的排列（要么横排、要么竖排），Grid 是"�
 - 不管内容高度是否一致，每一列的网格线始终保持对齐——行与行之间的列边界对齐
 :::
 
+:::diagram{title="Grid 网格线：3 列网格 = 4 条列线 + 3 条行线，元素按线摆放"}
+<svg viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="70" y="40" width="320" height="150" fill="#fdf6e3" stroke="#c9a96e" stroke-width="2"/>
+  <line x1="170" y1="40" x2="170" y2="190" stroke="#8B2E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <line x1="270" y1="40" x2="270" y2="190" stroke="#8B2E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <line x1="70" y1="90" x2="390" y2="90" stroke="#8B2E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <line x1="70" y1="140" x2="390" y2="140" stroke="#8B2E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <rect x="78" y="48" width="184" height="34" fill="#ffffff" stroke="#8B2E2E"/>
+  <rect x="270" y="48" width="112" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="78" y="98" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="170" y="98" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="262" y="98" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="78" y="148" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="170" y="148" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <rect x="262" y="148" width="84" height="34" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="170" y="68" font-size="11" fill="#8B2E2E" text-anchor="middle">第一张跨 2 列</text>
+  <text x="326" y="68" font-size="11" fill="#6B5A4E" text-anchor="middle">卡片</text>
+  <text x="70" y="30" font-size="11" fill="#8B2E2E" text-anchor="middle">列线 1</text>
+  <text x="170" y="30" font-size="11" fill="#8B2E2E" text-anchor="middle">列线 2</text>
+  <text x="270" y="30" font-size="11" fill="#8B2E2E" text-anchor="middle">列线 3</text>
+  <text x="390" y="30" font-size="11" fill="#8B2E2E" text-anchor="middle">列线 4</text>
+  <text x="60" y="66" font-size="11" fill="#8B2E2E" text-anchor="middle">行1</text>
+  <text x="60" y="116" font-size="11" fill="#8B2E2E" text-anchor="middle">行2</text>
+  <text x="60" y="166" font-size="11" fill="#8B2E2E" text-anchor="middle">行3</text>
+</svg>
+:::
+
 :::explain{title="三、逐句拆解 Grid 的核心属性"}
 Grid 的核心思路是"先画网格，再放元素"：
 

@@ -23,6 +23,17 @@
 - 独立做出一个在手机、平板、桌面上都能正常显示的页面
 :::
 
+:::explain{title="本节地图 🗺️（约 25 分钟）"}
+响应式设计的完整链条只有四环：
+
+1. **问题** — 桌面布局在手机上为什么会崩
+2. **工具** — `@media` 查询按屏幕宽度切换样式
+3. **策略** — 移动端优先 + 常用断点（640px / 1024px）
+4. **基石** — `viewport` meta 标签（没有它一切白搭）
+
+学完四环后，用动手任务把导航栏改造成"横排 → 汉堡菜单"的响应式版本，这节就过关了。
+:::
+
 :::explain{title="一、没有响应式的时候——桌面布局在手机上会怎样？"}
 假设你给桌面写了一版完美的页面：3 列卡片网格，600px 的内容区，左侧 250px 的侧边栏。在 1920px 宽的屏幕上看起来很棒。
 
@@ -151,6 +162,31 @@
 ```
 
 **为什么不用精确匹配某个设备宽度？** 因为新设备不断出现（折叠屏、超宽屏）。用 640px、1024px 这种"整数"断点，比精确匹配 iPhone 15 的 390px 或 iPad 的 810px 更灵活。
+:::
+
+:::diagram{title="移动端优先：默认单列，宽度越过 640/1024 断点逐步升级布局"}
+<svg viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" role="img">
+  <line x1="30" y1="60" x2="410" y2="60" stroke="#c9a96e" stroke-width="2"/>
+  <line x1="30" y1="60" x2="410" y2="60" stroke="#c9a96e" stroke-width="2" marker-end="url(#ra)"/>
+  <rect x="50" y="80" width="70" height="60" rx="6" fill="#fdf6e3" stroke="#8B2E2E"/>
+  <text x="85" y="115" font-size="11" fill="#8B2E2E" text-anchor="middle">📱 手机</text>
+  <rect x="185" y="80" width="90" height="60" rx="6" fill="#fdf6e3" stroke="#8B2E2E"/>
+  <text x="230" y="115" font-size="11" fill="#8B2E2E" text-anchor="middle">📲 平板</text>
+  <rect x="340" y="80" width="80" height="60" rx="6" fill="#fdf6e3" stroke="#8B2E2E"/>
+  <text x="380" y="115" font-size="11" fill="#8B2E2E" text-anchor="middle">🖥 桌面</text>
+  <line x1="150" y1="50" x2="150" y2="150" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="150" y="44" font-size="11" fill="#2E7D32" text-anchor="middle">断点 640px</text>
+  <line x1="310" y1="50" x2="310" y2="150" stroke="#2E7D32" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="310" y="44" font-size="11" fill="#2E7D32" text-anchor="middle">断点 1024px</text>
+  <text x="85" y="162" font-size="11" fill="#6B5A4E" text-anchor="middle">1 列</text>
+  <text x="230" y="162" font-size="11" fill="#6B5A4E" text-anchor="middle">2 列</text>
+  <text x="380" y="162" font-size="11" fill="#6B5A4E" text-anchor="middle">3 列</text>
+  <defs>
+    <marker id="ra" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c9a96e"/>
+    </marker>
+  </defs>
+</svg>
 :::
 
 :::explain{title="四、`viewport` meta 标签——响应式的基石"}

@@ -2,7 +2,7 @@ id: js-capstone
 title: 综合项目 — 交互式名片生成器
 track: fundamentals
 chapter: js-basics
-order: 15
+order: 16
 mode: sandbox
 analogy: 这节综合课把前11节课的知识融合在一起——用 HTML 搭骨架、CSS 做装修、JS 实现互动。就像终于盖好一栋完整的房子：有结构、有装修、有水电。
 estimatedMinutes: 20

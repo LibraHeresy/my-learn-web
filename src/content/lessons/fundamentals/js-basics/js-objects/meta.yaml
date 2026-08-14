@@ -2,7 +2,7 @@ id: js-objects
 title: 对象 — 结构化你的数据
 track: fundamentals
 chapter: js-basics
-order: 12
+order: 13
 mode: sandbox
 analogy: 对象就像一个人的档案卡——用"姓名、年龄、电话"这种键值对来组织信息。不像数组用数字编号，对象用有名字的标签来存取数据，一眼就知道是什么。
 estimatedMinutes: 25

@@ -56,6 +56,18 @@ let names = composers
 就像先从书店挑出打折书，再把它们的书名抄下来——流水线操作！
 :::
 
+:::predict{title="预测输出：这条链式调用最后得到什么？" answer="输出：['CHOPIN', 'DEBUSSY']。解析：filter 先筛出名字长度大于 5 的（Chopin、Debussy），map 再把它们转成大写。链式调用的顺序是：先 filter 后 map，后面的操作处理的是前面返回的结果。"}
+看代码预测输出，再点开答案验证：
+
+```js
+let names = ["Bach", "Mozart", "Beethoven", "Chopin", "Debussy"]
+let result = names
+  .filter(function(n) { return n.length > 5 })
+  .map(function(n) { return n.toUpperCase() })
+console.log(result)   // 输出 ？
+```
+:::
+
 :::example{title="看例子"}
 下面的代码用 `.filter()` 筛选出含有"A"的设计师名字，再用 `.map()` 转为大写：
 ```js

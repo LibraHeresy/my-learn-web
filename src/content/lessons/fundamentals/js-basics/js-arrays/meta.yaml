@@ -2,7 +2,7 @@ id: js-arrays
 title: 数组 — 存储你的数据列表
 track: fundamentals
 chapter: js-basics
-order: 8
+order: 9
 mode: sandbox
 analogy: 数组就像一张购物清单——东西按顺序排好，第一个、第二个、第三个……想加东西就追加到末尾，想查东西就问"第几个是什么"。
 estimatedMinutes: 25

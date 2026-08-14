@@ -64,6 +64,40 @@ console.log(counter());                                // 4 —— 原来的计�
 2. **作用域隔离**：每次调用 `createCounter()` 都创建一个独立的作用域——互不干扰
 :::
 
+:::predict{title="预测输出：两个计数器会互相影响吗？" answer="输出：A 是 1，B 是 1，A 再点变成 2。解析：每次调用 createCounter() 都会创建一个全新的闭包作用域——countA 和 countB 是两个独立的私有变量，互不干扰。"}
+看代码预测输出，再点开答案验证：
+
+```js
+const counterA = createCounter()
+const counterB = createCounter()
+console.log(counterA())   // 输出 ？
+console.log(counterB())   // 输出 ？
+console.log(counterA())   // 输出 ？
+```
+:::
+
+:::diagram{title="闭包的结构：返回的函数带着它出生时的变量环境一起走"}
+<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="30" y="30" width="180" height="150" rx="10" fill="#fdf6e3" stroke="#8B2E2E" stroke-width="2"/>
+  <text x="120" y="56" font-size="13" fill="#8B2E2E" text-anchor="middle" font-weight="bold">createCounter() 的作用域</text>
+  <rect x="52" y="72" width="136" height="34" rx="6" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="120" y="94" font-size="12" fill="#333" text-anchor="middle">let count = 0（私有）</text>
+  <rect x="52" y="118" width="136" height="46" rx="6" fill="#f7edd8" stroke="#c9a96e"/>
+  <text x="120" y="136" font-size="12" fill="#8B2E2E" text-anchor="middle">return function() {</text>
+  <text x="120" y="153" font-size="12" fill="#8B2E2E" text-anchor="middle">count++ }</text>
+  <rect x="270" y="80" width="140" height="56" rx="10" fill="#ffffff" stroke="#c9a96e" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="340" y="102" font-size="12" fill="#333" text-anchor="middle">counter（外部变量）</text>
+  <text x="340" y="122" font-size="11" fill="#6B5A4E" text-anchor="middle">调用它 → 操作同一个 count</text>
+  <path d="M188 141 C 230 141 230 108 266 108" fill="none" stroke="#c9a96e" stroke-width="2" marker-end="url(#ca)"/>
+  <text x="230" y="130" font-size="11" fill="#8B2E2E">返回的函数"记住"了 count</text>
+  <defs>
+    <marker id="ca" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c9a96e"/>
+    </marker>
+  </defs>
+</svg>
+:::
+
 :::explain{title="闭包的三大实际应用"}
 闭包不是抽象概念——你每天都在用，只是没注意到。
 

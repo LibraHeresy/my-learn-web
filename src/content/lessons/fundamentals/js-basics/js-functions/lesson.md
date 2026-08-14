@@ -111,6 +111,29 @@ console.log(sum);       // 输出：8
 - 函数是**存操作的容器**——`function getName() { ... }` 存了一段可以被重复执行的代码
 :::
 
+:::diagram{title="调用栈：函数像盘子一样叠起来，最上面的先执行完、先拿走"}
+<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="150" y="120" width="140" height="36" rx="6" fill="#fdf6e3" stroke="#8B2E2E" stroke-width="2"/>
+  <text x="220" y="143" font-size="12" fill="#8B2E2E" text-anchor="middle" font-weight="bold">getFullName()</text>
+  <rect x="150" y="78" width="140" height="36" rx="6" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="220" y="101" font-size="12" fill="#333" text-anchor="middle">greet()</text>
+  <rect x="150" y="36" width="140" height="36" rx="6" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="220" y="59" font-size="12" fill="#333" text-anchor="middle">主程序</text>
+  <text x="320" y="60" font-size="11" fill="#6B5A4E">先执行主程序</text>
+  <text x="320" y="100" font-size="11" fill="#6B5A4E">greet() 调用 getFullName()</text>
+  <text x="320" y="143" font-size="11" fill="#8B2E2E">最上层先执行完、先返回</text>
+  <line x1="120" y1="54" x2="140" y2="54" stroke="#c9a96e" stroke-width="2" marker-end="url(#sa)"/>
+  <text x="112" y="48" font-size="11" fill="#c9a96e">入栈 ↑</text>
+  <line x1="60" y1="154" x2="130" y2="154" stroke="#c9a96e" stroke-width="2"/>
+  <text x="60" y="150" font-size="11" fill="#c9a96e">执行完出栈 ↓</text>
+  <defs>
+    <marker id="sa" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c9a96e"/>
+    </marker>
+  </defs>
+</svg>
+:::
+
 :::explain{title="四、参数 vs 实参——容易混淆的两个词"}
 看书和上课时你会遇到两个词：**参数（parameter）**和**实参（argument）**。它们指的是同一个东西的不同侧重点：
 

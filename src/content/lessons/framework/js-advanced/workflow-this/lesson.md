@@ -184,6 +184,26 @@ likeBtn.addEventListener('click', function() {         // 普通匿名函数
 **实际工作场景**：React 类组件中 `this.handleClick = this.handleClick.bind(this)` 是经典写法（Hook 出现前）。Vue 的 `methods` 中无需担心 this 丢失——Vue 自动帮你绑定了。
 :::
 
+:::predict{title="预测输出：下面三个 this 分别指向谁？" answer="输出：第一个是 对象（方法调用 obj.greet()），第二个是 全局对象 window（独立调用 f()，非严格模式），第三个是 button 按钮元素（事件处理器中 this 指向触发事件的元素）。解析：this 的指向完全由调用方式决定——方法调用看 . 前面是谁、独立调用是全局、事件回调是触发元素。"}
+看代码预测三个 `this` 的值，再点开答案验证：
+
+```js
+const obj = {
+  name: '音乐家',
+  greet() { console.log(this.name) },
+}
+obj.greet()                              // 第一个 this 指向 ？
+
+const f = obj.greet
+f()                                      // 第二个 this 指向 ？
+
+const btn = document.querySelector('button')
+btn.addEventListener('click', function() {
+  console.log(this)                      // 第三个 this 指向 ？
+})
+```
+:::
+
 :::explain{title="常见错误"}
 **错误1：对象方法用了箭头函数**
 ```js

@@ -23,13 +23,6 @@
 :::explain{title="一、盒模型的四层结构"}
 从内到外，每个元素都是四层同心矩形：
 
-<div class="box-model-demo">
-  <--- margin（外边距，透明，元素和元素之间的距离）--->
-  <--- border（边框，可见的边界线）--->
-  <--- padding（内边距，有背景色，内容和边框之间的距离）--->
-  content（内容，文字/图片的实体区域）
-</div>
-
 用代码来理解这个结构：
 
 ```css
@@ -49,6 +42,19 @@
 ```
 
 **记住一句话：** `padding` 在边框里面（有背景色），`margin` 在边框外面（永远透明）。就像泡沫填充在纸箱里面，包裹间距在纸箱外面。
+:::
+
+:::diagram{title="盒模型四层结构：从内到外 content → padding → border → margin"}
+<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="20" y="28" width="400" height="252" fill="#f0e6d2" stroke="#c9a96e" stroke-dasharray="6 4"/>
+  <rect x="62" y="70" width="316" height="168" fill="#f7edd8" stroke="#8B2E2E" stroke-width="3"/>
+  <rect x="82" y="90" width="276" height="128" fill="#fdf6e3" stroke="none"/>
+  <rect x="132" y="118" width="176" height="72" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="220" y="158" font-size="14" fill="#333" text-anchor="middle">content 内容</text>
+  <text x="220" y="152" font-size="12" fill="#8B2E2E" text-anchor="middle">border 边框（可见边界）</text>
+  <text x="220" y="136" font-size="12" fill="#c9a96e" text-anchor="middle">padding 内边距（有背景色）</text>
+  <text x="34" y="52" font-size="12" fill="#8B2E2E">margin 外边距（永远透明）</text>
+</svg>
 :::
 
 :::explain{title="二、padding 和 margin —— 什么时候用哪个？"}
@@ -99,6 +105,29 @@
 ```
 
 **类比：** `content-box` 像只算房间内面积，不算墙壁厚度，加墙就超红线。`border-box` 像算整套房子的建筑面积，墙壁厚度算在总面积里，永远不会超红线。
+
+:::diagram{title="同样 width:300px：content-box 实际占 350px，border-box 始终 300px"}
+<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img">
+  <text x="100" y="24" font-size="13" fill="#c62828" text-anchor="middle" font-weight="bold">content-box（默认）</text>
+  <rect x="20" y="36" width="160" height="100" fill="#f7edd8" stroke="#c62828" stroke-width="2"/>
+  <rect x="32" y="48" width="136" height="76" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="100" y="80" font-size="11" fill="#333" text-anchor="middle">width: 160 只是内容</text>
+  <line x1="20" y1="150" x2="180" y2="150" stroke="#c62828" stroke-width="3" marker-end="url(#ca2)" marker-start="url(#ca3)"/>
+  <text x="100" y="168" font-size="12" fill="#c62828" text-anchor="middle">实际占宽 160+24+24+2+2=212 → 溢出！</text>
+  <text x="320" y="24" font-size="13" fill="#2E7D32" text-anchor="middle" font-weight="bold">border-box（推荐）</text>
+  <rect x="240" y="36" width="160" height="100" fill="#f7edd8" stroke="#2E7D32" stroke-width="2"/>
+  <rect x="252" y="48" width="136" height="76" fill="#ffffff" stroke="#6B5A4E"/>
+  <text x="320" y="80" font-size="11" fill="#333" text-anchor="middle">padding/border 向内挤压</text>
+  <line x1="240" y1="150" x2="400" y2="150" stroke="#2E7D32" stroke-width="3" marker-end="url(#ca4)" marker-start="url(#ca5)"/>
+  <text x="320" y="168" font-size="12" fill="#2E7D32" text-anchor="middle">实际占宽永远是 160 → 不溢出</text>
+  <defs>
+    <marker id="ca2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c62828"/></marker>
+    <marker id="ca3" markerWidth="8" markerHeight="8" refX="1" refY="3" orient="auto"><path d="M8,0 L8,6 L0,3 z" fill="#c62828"/></marker>
+    <marker id="ca4" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2E7D32"/></marker>
+    <marker id="ca5" markerWidth="8" markerHeight="8" refX="1" refY="3" orient="auto"><path d="M8,0 L8,6 L0,3 z" fill="#2E7D32"/></marker>
+  </defs>
+</svg>
+:::
 
 **推荐在所有项目中加上这段 CSS reset：**
 ```css

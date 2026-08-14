@@ -135,6 +135,29 @@ ticket
 ```
 :::
 
+:::diagram{title="Promise 状态机：pending 只能变成一种终态，且不可逆"}
+<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="160" y="30" width="120" height="56" rx="10" fill="#fdf6e3" stroke="#c9a96e" stroke-width="2"/>
+  <text x="220" y="62" font-size="14" fill="#8B2E2E" text-anchor="middle" font-weight="bold">pending</text>
+  <rect x="60" y="150" width="130" height="52" rx="10" fill="#e8f8e8" stroke="#2E7D32" stroke-width="2"/>
+  <text x="125" y="180" font-size="13" fill="#2E7D32" text-anchor="middle" font-weight="bold">fulfilled（成功）</text>
+  <rect x="250" y="150" width="130" height="52" rx="10" fill="#fdecea" stroke="#c62828" stroke-width="2"/>
+  <text x="315" y="180" font-size="13" fill="#c62828" text-anchor="middle" font-weight="bold">rejected（失败）</text>
+  <line x1="190" y1="86" x2="125" y2="146" stroke="#2E7D32" stroke-width="2" marker-end="url(#pa)"/>
+  <line x1="250" y1="86" x2="315" y2="146" stroke="#c62828" stroke-width="2" marker-end="url(#pa2)"/>
+  <text x="120" y="112" font-size="11" fill="#2E7D32">resolve(value) → then 处理</text>
+  <text x="300" y="112" font-size="11" fill="#c62828">reject(reason) → catch 处理</text>
+  <defs>
+    <marker id="pa" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2E7D32"/>
+    </marker>
+    <marker id="pa2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c62828"/>
+    </marker>
+  </defs>
+</svg>
+:::
+
 :::explain{title="四、.then() 链的关键规则——每一步都返回新 Promise"}
 `.then()` 每次都返回一个**全新的 Promise**，所以你可以在后面继续 `.then()`：
 

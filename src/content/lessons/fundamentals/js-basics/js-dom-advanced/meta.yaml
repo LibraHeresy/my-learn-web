@@ -2,7 +2,7 @@ id: js-dom-advanced
 title: DOM 操作进阶 — 动态创建与删除元素
 track: fundamentals
 chapter: js-basics
-order: 13
+order: 14
 mode: sandbox
 analogy: DOM 操作进阶就像用积木搭城堡——不只是摆好固定的积木块，而是可以随时加一块、拆一块、移动一块。createElement 是造新积木，remove 是拿掉一块。
 estimatedMinutes: 20

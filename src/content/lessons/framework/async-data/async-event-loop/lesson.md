@@ -83,6 +83,35 @@ console.log('③ 同步代码')                // 同步代码，立即执行
 ```
 :::
 
+:::predict{title="预测输出：这段代码打印什么顺序？" answer="输出顺序：1 → 4 → 3 → 2。解析：同步代码（console.log(1) 和 console.log(4)）最先执行；Promise.then 是微任务，排在所有宏任务之前；setTimeout 回调是宏任务，最后执行。"}
+先在心里写下输出顺序，再点开答案验证：
+
+```js
+console.log(1)
+setTimeout(() => console.log(2), 0)
+Promise.resolve().then(() => console.log(3))
+console.log(4)
+```
+:::
+
+:::diagram{title="执行顺序：同步代码 → 清空微任务队列 → 下一个宏任务"}
+<svg viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" role="img">
+  <rect x="20" y="20" width="180" height="70" rx="8" fill="#fdf6e3" stroke="#8B2E2E" stroke-width="2"/>
+  <text x="110" y="48" font-size="13" fill="#8B2E2E" text-anchor="middle" font-weight="bold">① ③ 同步代码</text>
+  <text x="110" y="68" font-size="11" fill="#6B5A4E" text-anchor="middle">立即执行，不等任何人</text>
+  <rect x="240" y="20" width="180" height="70" rx="8" fill="#f7edd8" stroke="#c9a96e" stroke-width="2"/>
+  <text x="330" y="48" font-size="13" fill="#8B2E2E" text-anchor="middle" font-weight="bold">② 微任务队列</text>
+  <text x="330" y="68" font-size="11" fill="#6B5A4E" text-anchor="middle">Promise.then（VIP 插队）</text>
+  <rect x="240" y="130" width="180" height="70" rx="8" fill="#f0e6d2" stroke="#6B5A4E" stroke-width="2"/>
+  <text x="330" y="158" font-size="13" fill="#6B5A4E" text-anchor="middle" font-weight="bold">④ 宏任务队列</text>
+  <text x="330" y="178" font-size="11" fill="#6B5A4E" text-anchor="middle">setTimeout / 事件</text>
+  <line x1="110" y1="90" x2="110" y2="200" stroke="#c9a96e" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="118" y="125" font-size="12" fill="#8B2E2E">执行完同步后，先清空</text>
+  <text x="118" y="145" font-size="12" fill="#8B2E2E">微任务，才轮到宏任务</text>
+</svg>
+:::
+:::
+
 :::example{title="看例子：咖啡店类比——帮助你记住"}
 你去咖啡店点一杯拿铁：
 1. 你点单（同步代码）

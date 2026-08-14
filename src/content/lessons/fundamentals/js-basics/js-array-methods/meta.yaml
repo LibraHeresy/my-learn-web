@@ -2,7 +2,7 @@ id: js-array-methods
 title: 数组方法进阶 — 像筛选简历一样处理数据
 track: fundamentals
 chapter: js-basics
-order: 10
+order: 11
 mode: sandbox
 analogy: .map() 就像给全班同学每人加一分——每个人都变了，但顺序不变；.filter() 就像从一堆简历里挑出符合条件的——不符合的筛掉，符合的留下。
 estimatedMinutes: 20

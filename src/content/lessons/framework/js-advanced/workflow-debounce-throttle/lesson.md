@@ -144,6 +144,17 @@ window.addEventListener('scroll', throttle(handleScroll, 1000));
 - 游戏中的射击/跳跃——限制操作频率
 :::
 
+:::predict{title="预测输出：快速输入 5 个字符，搜索函数执行了几次？" answer="防抖：只执行 1 次（连续输入重置计时器，停下来 300ms 后才执行）；节流：执行 2-3 次（取决于输入耗时，每 300ms 最多执行 1 次）。解析：防抖是等你停下来再执行，节流是按固定频率执行。"}
+看代码预测：用户 1 秒内连续输入 5 个字符（间隔 200ms），两种方案的 search() 各执行几次？
+
+```js
+// 防抖版：停止输入 300ms 后才搜索
+const debouncedSearch = debounce(search, 300)
+// 节流版：每 300ms 最多执行一次
+const throttledSearch = throttle(search, 300)
+```
+:::
+
 :::explain{title="防抖 vs 节流 — 一张表帮你选"}
 
 | 对比维度 | 防抖（Debounce） | 节流（Throttle） |

@@ -2,7 +2,7 @@ id: js-loops
 title: 循环 — 让代码反复执行
 track: fundamentals
 chapter: js-basics
-order: 9
+order: 10
 mode: sandbox
 analogy: 循环就像流水线上的质检员——对每一个产品做同样的检查，直到整批检查完。用代码对列表中的每一项重复执行相同的操作。
 estimatedMinutes: 25

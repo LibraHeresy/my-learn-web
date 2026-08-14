@@ -2,7 +2,7 @@ id: js-timers
 title: 定时器 — 让代码按时运行
 track: fundamentals
 chapter: js-basics
-order: 14
+order: 15
 mode: sandbox
 analogy: setInterval 就像厨房计时器——设定每3分钟响一次，准时触发。setTimeout 像泡面的倒计时——等3分钟，然后做一件事。两者结合，你就能在页面上创造节奏和时序。
 estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: js-basics
 order: 7
 mode: sandbox
 analogy: if/else 就是人生的分岔路口——如果下雨，带伞；否则，不带。代码根据条件决定走哪条路，这就是程序的判断力。
-estimatedMinutes: 35
+estimatedMinutes: 20

@@ -1,0 +1,8 @@
+id: js-conditions-2
+title: 条件判断进阶 — 逻辑运算符与 truthy/falsy
+track: fundamentals
+chapter: js-basics
+order: 8
+mode: sandbox
+analogy: 一个条件只够判断对或错，组合多个条件才能处理现实里的复杂判断——就像乐团录取考试要同时看音准和节奏。
+estimatedMinutes: 20
