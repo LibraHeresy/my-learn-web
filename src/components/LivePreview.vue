@@ -9,6 +9,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   maximize: []; // 请求全屏
   "preview-error": [info: { lineno: number; message: string }];
+  "task-assert": [passed: string[]]; // 任务自动验收：通过断言的 key 列表
 }>();
 
 const iframeRef = ref<HTMLIFrameElement>();
@@ -60,6 +61,29 @@ function onMessage(e: MessageEvent) {
     // 通知父组件错误行号，用于编辑器高亮
     emit("preview-error", { lineno: err.lineno, message: err.message });
   }
+  if (e.data && e.data.type === "console-output") {
+    const level = ["log", "warn", "error", "info"].includes(e.data.level) ? e.data.level : "log";
+    consoleLogs.value.push({ level, text: String(e.data.text ?? "") });
+    if (consoleLogs.value.length > MAX_CONSOLE_LOGS) {
+      consoleLogs.value.splice(0, consoleLogs.value.length - MAX_CONSOLE_LOGS);
+    }
+  }
+  if (e.data && e.data.type === "task-assert") {
+    emit("task-assert", Array.isArray(e.data.passed) ? e.data.passed : []);
+  }
+}
+
+// ─── 控制台输出面板 ───────────────────────────────────────────────────────
+const MAX_CONSOLE_LOGS = 100;
+const consoleLogs = ref<Array<{ level: "log" | "warn" | "error" | "info"; text: string }>>([]);
+const consoleOpen = ref(false);
+
+function toggleConsole() {
+  consoleOpen.value = !consoleOpen.value;
+}
+
+function clearConsole() {
+  consoleLogs.value = [];
 }
 
 let prevUrl: string | null = null;
@@ -67,6 +91,8 @@ let prevUrl: string | null = null;
 function loadPreview(doc: string) {
   const iframe = iframeRef.value;
   if (!iframe) return;
+  // 每次重载清空控制台输出
+  consoleLogs.value = [];
   // Revoke previous blob URL to prevent memory leaks on rapid updates
   if (prevUrl) {
     URL.revokeObjectURL(prevUrl);
@@ -125,6 +151,14 @@ watch(
         <button class="preview-nav-btn" @click="refresh" title="刷新">
           <span class="nav-icon">↻</span>
         </button>
+        <button
+          :class="['preview-nav-btn', { 'is-active': consoleOpen }]"
+          @click="toggleConsole"
+          title="控制台输出"
+        >
+          <span class="nav-icon">🖥</span>
+          <span v-if="consoleLogs.length" class="console-count">{{ consoleLogs.length }}</span>
+        </button>
         <!-- 全屏按钮 -->
         <button
           class="preview-nav-btn"
@@ -149,6 +183,30 @@ watch(
         title="实时预览"
       />
     </div>
+
+    <!-- 控制台输出面板 -->
+    <Transition name="error-slide">
+      <div v-if="consoleOpen" class="console-panel">
+        <div class="console-header">
+          <span class="console-title">控制台输出</span>
+          <span class="console-hint">console.log / warn / error 都会显示在这里</span>
+          <button class="console-clear" @click="clearConsole" title="清空">清空</button>
+        </div>
+        <div class="console-body">
+          <div v-if="!consoleLogs.length" class="console-empty">
+            还没有输出——试试在 JS 里写 console.log("你好") 再运行
+          </div>
+          <div
+            v-for="(entry, i) in consoleLogs"
+            :key="i"
+            :class="['console-line', `console-line--${entry.level}`]"
+          >
+            <span class="console-level">{{ entry.level === "log" ? "" : entry.level === "warn" ? "⚠ " : entry.level === "error" ? "✗ " : "ℹ " }}</span>
+            <pre class="console-text">{{ entry.text }}</pre>
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <!-- 可展开的错误面板 -->
     <Transition name="error-slide">
@@ -213,6 +271,7 @@ watch(
 }
 
 .preview-nav-btn {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--sp-1);
@@ -226,6 +285,11 @@ watch(
   transition: all var(--transition);
   line-height: 1;
   white-space: nowrap;
+}
+
+.preview-nav-btn.is-active {
+  background: var(--color-bg-warm);
+  color: var(--color-accent);
 }
 
 .preview-nav-btn .nav-icon {
@@ -438,6 +502,105 @@ watch(
   font-size: var(--fs-xs);
   color: var(--color-error-hint);
   line-height: 1.5;
+}
+
+/* ─── 控制台输出面板 ─────────────────────────────────────────────────────── */
+.console-panel {
+  border-top: 1px solid var(--color-border-light);
+  background: #1e1e2e;
+  display: flex;
+  flex-direction: column;
+  max-height: 40%;
+  min-height: 120px;
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px var(--sp-3);
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.console-title {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+.console-hint {
+  font-size: 11px;
+  color: #6c7086;
+  flex: 1;
+}
+
+.console-clear {
+  font-size: 11px;
+  color: #89b4fa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.console-clear:hover {
+  text-decoration: underline;
+}
+
+.console-body {
+  overflow-y: auto;
+  padding: 6px var(--sp-3);
+  flex: 1;
+  font-family: var(--font-code);
+}
+
+.console-empty {
+  font-size: var(--fs-xs);
+  color: #6c7086;
+  padding: 8px 0;
+}
+
+.console-line {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.console-level {
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+  color: #6c7086;
+}
+
+.console-line--warn .console-text { color: #f9e2af; }
+.console-line--warn .console-level { color: #f9e2af; }
+.console-line--error .console-text { color: #f38ba8; }
+.console-line--error .console-level { color: #f38ba8; }
+.console-line--info .console-level { color: #89b4fa; }
+
+.console-text {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: #a6adc8;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: var(--font-code);
+  flex: 1;
+}
+
+.console-count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--color-gold);
+  color: #fff;
+  font-size: 9px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 8px;
 }
 
 /* ===== 错误面板动画 ===== */

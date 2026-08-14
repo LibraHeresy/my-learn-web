@@ -128,6 +128,33 @@ export const useProgressStore = defineStore('progress', () => {
     }
   }
 
+  // 任务步骤完成状态（自动验收 + 手动勾选共用）
+  function markTaskStep(lessonId: string, key: string, done: boolean) {
+    const entry = ensureProgress(lessonId)
+    if (!entry.taskSteps) entry.taskSteps = {}
+    entry.taskSteps[key] = done
+    persistProgress()
+  }
+
+  function isTaskStepDone(lessonId: string, key: string): boolean {
+    return lessonProgress.value[lessonId]?.taskSteps?.[key] ?? false
+  }
+
+  // 批量标记自动验收通过的断言
+  function markAssertPassed(lessonId: string, passedKeys: string[]) {
+    if (!passedKeys.length) return
+    const entry = ensureProgress(lessonId)
+    if (!entry.taskSteps) entry.taskSteps = {}
+    let changed = false
+    for (const key of passedKeys) {
+      if (!entry.taskSteps[key]) {
+        entry.taskSteps[key] = true
+        changed = true
+      }
+    }
+    if (changed) persistProgress()
+  }
+
   // 初始化加载
   loadProgress()
 
@@ -139,6 +166,9 @@ export const useProgressStore = defineStore('progress', () => {
     saveUserCode,
     getUserCode,
     resetUserCode,
+    markTaskStep,
+    isTaskStepDone,
+    markAssertPassed,
     lastError,
   }
 })

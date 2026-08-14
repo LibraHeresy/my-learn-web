@@ -14,11 +14,11 @@ export const errorGuardScript = `<script>
     [/nextsibling|previoussibling/i, '注意大小写：应该写成 nextSibling 或 previousSibling（大写 S）'],
     [/createelement/i, '注意大小写：应该写成 createElement（大写 E）'],
     [/appendchild/i, '注意大小写：应该写成 appendChild（大写 C）；或者试试更简洁的 .append()'],
-    [/console\.log\(/i, 'console.log 拼写正确，但注意：console 的首字母小写（不是 Console）'],
+    [/console\\.log\\(/i, 'console.log 拼写正确，但注意：console 的首字母小写（不是 Console）'],
     [/consle|consoel|conosle|cnosole/i, '你是不是想写 console？检查拼写'],
     [/funtion|functon|fucntion/i, '你是不是想写 function？检查拼写'],
     [/retrun|retun/i, '你是不是想写 return？检查拼写'],
-    [/docuemnt\.getElementById|document\.getelementbyid/i, '注意大小写：getElementById（大写 B 和 I，不是 Id）'],
+    [/docuemnt\\.getElementById|document\\.getelementbyid/i, '注意大小写：getElementById（大写 B 和 I，不是 Id）'],
     // ── 中文符号混入 ──
     [/[\\uFF08\\uFF09]/, '你用了中文括号（）——代码中必须用英文括号 ()'],
     [/[\\u201C\\u201D\\u300C\\u300D]/, '你用了中文引号""或「」——代码中必须用英文引号 ""'],
@@ -73,6 +73,31 @@ export const errorGuardScript = `<script>
     };
     try { parent.postMessage(err, '*'); } catch(e) {}
   }
+
+  // ── console 桥：把 console.log/warn/error/info 转发给父页面（控制台面板）──
+  function serializeArg(arg) {
+    if (typeof arg === 'string') return arg;
+    if (typeof arg === 'number' || typeof arg === 'boolean') return String(arg);
+    if (arg === undefined) return 'undefined';
+    if (arg === null) return 'null';
+    if (typeof arg === 'function') return '[Function]';
+    try {
+      return JSON.stringify(arg, null, 2);
+    } catch (e) {
+      try { return String(arg); } catch (e2) { return '[无法序列化]'; }
+    }
+  }
+  function sendConsole(level, args) {
+    var text = Array.prototype.map.call(args, serializeArg).join(' ');
+    try { parent.postMessage({ type: 'console-output', level: level, text: text }, '*'); } catch(e) {}
+  }
+  ['log', 'warn', 'error', 'info'].forEach(function(level) {
+    var orig = console[level];
+    console[level] = function() {
+      sendConsole(level, arguments);
+      if (orig) orig.apply(console, arguments);
+    };
+  });
 
   window.onerror = function(msg, source, lineno) {
     reportError(msg, lineno);

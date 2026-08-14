@@ -1,43 +1,57 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { BlockNode } from '../types'
+import { computed, ref } from 'vue'
+import type { BlockNode, TaskStep } from '../types'
+import { useProgressStore } from '../../stores/progress'
 import InlineText from './InlineText.vue'
 
-defineProps<{
+const props = defineProps<{
   node: BlockNode
 }>()
 
-const completed = ref<Set<number>>(new Set())
-const helpOpen = ref(false)
+const progressStore = useProgressStore()
+// 当前课程 id 由 LessonPlayer 在加载课程时写入 progress store（避免渲染器依赖 router）
+const lessonId = computed(() => progressStore.currentLessonId)
+
+const steps = computed<TaskStep[]>(() => (props.node as { steps?: TaskStep[] }).steps ?? [])
+
+function stepKey(step: TaskStep, index: number): string {
+  return step.assert || `manual:${index}`
+}
+
+function isDone(step: TaskStep, index: number): boolean {
+  return progressStore.isTaskStepDone(lessonId.value, stepKey(step, index))
+}
 
 function toggleStep(index: number) {
-  const next = new Set(completed.value)
-  if (next.has(index)) {
-    next.delete(index)
-  } else {
-    next.add(index)
-  }
-  completed.value = next
+  const step = steps.value[index]
+  if (!step) return
+  const key = stepKey(step, index)
+  progressStore.markTaskStep(lessonId.value, key, !progressStore.isTaskStepDone(lessonId.value, key))
 }
+
+const helpOpen = ref(false)
 </script>
 
 <template>
   <section class="task-block">
     <h3 v-if="node.attrs?.title" class="block-title">✏️ {{ node.attrs.title }}</h3>
-    <div v-if="node.steps?.length" class="steps-list">
-      <article v-for="(step, index) in node.steps" :key="index" :class="['step-card', { 'step-card--done': completed.has(index) }]">
+    <div v-if="steps.length" class="steps-list">
+      <article v-for="(step, index) in steps" :key="index" :class="['step-card', { 'step-card--done': isDone(step, index) }]">
         <div class="step-header">
           <button
-            :class="['step-number', { 'step-number--done': completed.has(index) }]"
-            :title="completed.has(index) ? '已完成' : '点击标记完成'"
+            :class="['step-number', { 'step-number--done': isDone(step, index) }]"
+            :title="isDone(step, index) ? '已完成' : '点击标记完成'"
             @click="toggleStep(index)"
           >
-            {{ completed.has(index) ? '✓' : index + 1 }}
+            {{ isDone(step, index) ? '✓' : index + 1 }}
           </button>
           <div class="step-main">
             <p class="step-content">
               <InlineText :text="step.content" />
             </p>
+            <span v-if="step.assert" :class="['assert-badge', { 'assert-badge--pass': isDone(step, index) }]">
+              {{ isDone(step, index) ? '✓ 已自动检测通过' : '🤖 运行后自动检测' }}
+            </span>
           </div>
         </div>
         <div v-if="step.purpose" class="purpose-box">
@@ -54,7 +68,7 @@ function toggleStep(index: number) {
         </div>
       </article>
     </div>
-    <div v-if="node.steps?.length" class="task-help">
+    <div v-if="steps.length" class="task-help">
       <button class="help-toggle" @click="helpOpen = !helpOpen">
         {{ helpOpen ? '▾' : '▸' }} 🔧 卡住了？点这里看看
       </button>
@@ -148,6 +162,23 @@ function toggleStep(index: number) {
 
 .step-main {
   flex: 1;
+}
+
+.assert-badge {
+  display: inline-block;
+  margin-top: var(--sp-1);
+  font-size: 11px;
+  color: var(--color-text-light);
+  background: var(--color-bg-warm);
+  border: 1px dashed var(--color-border-light);
+  border-radius: var(--radius-xs);
+  padding: 2px 8px;
+}
+
+.assert-badge--pass {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background: rgba(46, 125, 50, 0.08);
 }
 
 .step-content,
