@@ -419,6 +419,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
 
 .project-header-center {
   flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: var(--sp-3);
@@ -428,12 +429,17 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
   font-weight: 600;
   font-size: var(--fs-sm);
   color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .project-header-step {
   font-size: var(--fs-xs);
   color: var(--color-gold);
   font-family: var(--font-code);
+  flex-shrink: 0;
 }
 
 .step-dots {
@@ -445,6 +451,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
 .step-dot {
   width: 28px;
   height: 28px;
+  flex-shrink: 0;
   border-radius: 50%;
   border: 1.5px solid var(--color-border);
   background: transparent;
@@ -811,12 +818,16 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
     width: 100vw;
   }
 
-  .panel-content,
-  .panel-preview,
-  .panel-editor {
+  .panel-content {
     width: 100% !important;
     flex: none;
     flex-shrink: 0;
+  }
+
+  /* 移动端隐藏编码区与预览区，仅保留正文阅读 */
+  .panel-preview,
+  .panel-editor {
+    display: none;
   }
 
   .panel-content {
@@ -838,14 +849,9 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
     min-height: 320px;
   }
 
+  /* 移动端不显示步骤圆点 */
   .step-dots {
-    gap: 4px;
-  }
-
-  .step-dot {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
+    display: none;
   }
 
   .project-header-title {

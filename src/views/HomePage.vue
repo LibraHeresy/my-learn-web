@@ -423,6 +423,24 @@ function goToProject(projectId: string) {
 
   .sticky-nav-label { display: none; }
   .sticky-nav-icon { font-size: 1.2em; }
+
+  .resume-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
+  }
+
+  .resume-info {
+    flex-wrap: wrap;
+  }
+
+  .resume-btn {
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.5;
+  }
 }
 
 /* ─── 学习数据反馈 ─── */

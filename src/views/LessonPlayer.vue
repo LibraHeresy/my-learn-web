@@ -764,12 +764,16 @@ watch(lessonId, () => {
     width: 100vw;
   }
 
-  .panel-content,
-  .panel-editor,
-  .panel-preview {
+  .panel-content {
     width: 100% !important;
     flex: none;
     flex-shrink: 0;
+  }
+
+  /* 移动端隐藏编码区与预览区，仅保留正文阅读 */
+  .panel-editor,
+  .panel-preview {
+    display: none;
   }
 
   .panel-content {
