@@ -184,12 +184,13 @@ const html = `
 const user = { name: '张三' };                         // 没有 address 属性
 
 // 旧写法：必须逐层判断，否则报错
-let city;
+let cityOld;
 if (user && user.address && user.address.city) {      // 三个 && —— 只要漏一层就崩
-  city = user.address.city;
+  cityOld = user.address.city;
 } else {
-  city = '未知';                                       // 旧写法要写完整的 if/else
+  cityOld = '未知';                                   // 旧写法要写完整的 if/else
 }
+console.log(cityOld);                                 // "未知"
 
 // 新写法：?. 一链到底，遇到 undefined 自动停
 const city = user?.address?.city ?? '未知';            // user.address 是 undefined，返回 '未知'

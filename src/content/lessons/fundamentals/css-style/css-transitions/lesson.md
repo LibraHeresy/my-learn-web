@@ -138,7 +138,7 @@ transition: all 0.3s ease-in-out;
 :::
 
 :::example{title="看例子"}
-下面的代码展示了三种 hover 过渡效果。把鼠标移到卡片上试试：
+下面的代码展示了基础 hover 过渡效果。把鼠标移到第一张卡片上试试（页面里的跳动动画、自动脉动属于下一节「CSS 动画」的 @keyframes 范畴）：
 
 ```css
 /* 基础过渡：颜色和大小渐变 */
@@ -150,15 +150,6 @@ transition: all 0.3s ease-in-out;
   background: #8B2E2E;            /* 背景色渐变 */
   color: #fff;                    /* 文字色渐变 */
   transform: scale(1.05);         /* 大小渐变 */
-}
-
-/* 上浮过渡：卡片微微上升 */
-.lift-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.lift-card:hover {
-  transform: translateY(-6px);     /* 向上浮 6px */
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);  /* 影子变深变远 */
 }
 ```
 

@@ -83,7 +83,7 @@ const filteredPieces = computed(() => {
 const stats = computed(() => {
   const total = filteredPieces.value.length           // 筛选后总数
   const liked = filteredPieces.value.filter(p => p.liked).length  // 收藏数
-  return \`共 \${total} 首，其中 \${liked} 首已收藏\`
+  return `共 ${total} 首，其中 ${liked} 首已收藏`
 })
 </script>
 
@@ -146,10 +146,10 @@ watch(keyword, async (newKeyword, oldKeyword) => {
   if (!newKeyword.trim()) {
     return                          // 空输入不搜索
   }
-  console.log(\`搜索: "\${oldKeyword}" → "\${newKeyword}"\`)
+  console.log(`搜索: "${oldKeyword}" → "${newKeyword}"`)
 
   // 发请求搜索 -- 这是副作用，和渲染无直接关系
-  const response = await fetch(\`/api/search?q=\${newKeyword}\`)
+  const response = await fetch(`/api/search?q=${newKeyword}`)
   const data = await response.json()
   results.value = data
 })
@@ -241,7 +241,7 @@ const filteredPieces = computed(() => {
 })
 
 // computed：统计（链式依赖）
-const stats = computed(() => \`共 \${filteredPieces.value.length} 首\`)
+const stats = computed(() => `共 ${filteredPieces.value.length} 首`)
 
 // watch：自动持久化（副作用）
 watch(pieces, (newPieces) => {

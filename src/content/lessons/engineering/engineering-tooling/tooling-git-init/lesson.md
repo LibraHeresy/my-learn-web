@@ -140,7 +140,7 @@ git log                   # 查看所有存档记录
 ```
 commit a1b2c3d4e5f6g7h8i9j0k...
 Author: 你的名字 <你的邮箱>
-Date:   Sat Jul 20 14:30:00 2026 +0800
+Date:   Sat Jul 20 14:30:00 2024 +0800
     初始化音乐收藏项目
 ```
 这是你的第一个 commit！按 `q` 退出 git log。

@@ -84,7 +84,7 @@ added 1 package, and audited 2 packages in 1s
 现在看 `package.json` 多了什么：
 ```json
 "dependencies": {
-  "dayjs": "^2.0.0"    // ^ 表示"兼容 2.0.0 及以上的 2.x.x 版本"
+  "dayjs": "^1.11.0"    // ^ 表示"兼容 1.11.0 及以上的 1.x.x 版本"
 }
 ```
 
@@ -129,8 +129,8 @@ npm install -g npm-check    # -g 表示全局安装（不推荐，除非必要�
 Mac/Linux 上如果用 `sudo npm install` 会导致后续权限问题。解决方案：不要用 `sudo`。如果已经出了问题，搜索"npm fix permissions"重置权限。
 
 **坑 3：package.json 和 package-lock.json 傻傻分不清**
-- `package.json` — 你手动编写的"依赖清单"（"我需要 dayjs，大概 ^2.0.0"）
-- `package-lock.json` — npm 自动生成的"精确锁定文件"（"dayjs 的具体版本是 2.0.1，它的依赖 A 是 1.3.2..."）
+- `package.json` — 你手动编写的"依赖清单"（"我需要 dayjs，大概 ^1.11.0"）
+- `package-lock.json` — npm 自动生成的"精确锁定文件"（"dayjs 的具体版本是 1.11.13，它的依赖 A 是 1.3.2..."）
 - 两个文件都要提交到 Git。`package-lock.json` 确保团队所有人安装的依赖版本完全一致。
 :::
 
@@ -174,7 +174,7 @@ npm run dev     # 项目跑起来
    npm install dayjs
    ```
 2. 观察终端输出：`added 1 package`
-3. 查看 `package.json`，现在有了 `"dependencies": { "dayjs": "^2.x.x" }`
+3. 查看 `package.json`，现在有了 `"dependencies": { "dayjs": "^1.11.x" }`
 4. 查看项目文件夹，多了一个 `node_modules/` 文件夹
 5. 在 `src/js/utils/helpers.js` 中添加：
    ```js

@@ -164,7 +164,7 @@ GitHub 不只是一个存代码的地方。它是你作为开发者在互联网�
 1. 打开 `https://github.com`，登录（没有账号的话注册一个）
 2. 点击右上角 `+` → `New repository`
 3. Repository name 填写 `music-collection`
-4. 选择 **Public**（公开仓库，私有仓库需要付费——但个人开发者免费）
+4. 选择 **Public**（公开仓库，任何人都能看到；个人免费账号同样可以创建 Private 私有仓库，仅自己可见）
 5. **不要勾选** "Add a README file"
 6. **不要勾选** ".gitignore" 和 "license"（本地已经有了）
 7. 点击 "Create repository"

@@ -59,8 +59,8 @@ console.log(userName);  // ReferenceError: userName is not defined
 
 ```js
 // ❌ 对象名拼写错误
-let btn = document.querySelector("#btn");    // ✅ 正确：document
-let btn = docuement.querySelector("#btn");  // ❌ 错误：docuement 不存在
+const btnOk = document.querySelector("#btn");      // ✅ 正确：document
+const btn = docuement.querySelector("#btn");       // ❌ 错误：docuement 不存在
 // ReferenceError: docuement is not defined
 ```
 

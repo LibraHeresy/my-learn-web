@@ -8,12 +8,12 @@ h1 { text-align: center; color: #8B2E2E; margin-bottom: 24px; }
   0%, 100% { transform: rotate(-3deg); }
   50% { transform: rotate(3deg); }
 }
-.swing-card { animation: swing 2s ease-in-out infinite; transform-origin: center top; }
+.swing-card { animation: swing 2s ease-in-out infinite alternate; transform-origin: center top; }
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.fade-card { animation: fadeInUp 1.5s ease-out infinite; }
+.fade-card { animation: fadeInUp 1.5s ease-out forwards; }
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   15% { transform: scale(1.15); }

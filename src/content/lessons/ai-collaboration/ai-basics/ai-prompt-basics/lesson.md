@@ -134,7 +134,7 @@ AI 生成：一个 div 套 div 的结构，图片没有 alt，价格没有格式
 1. Props: product 对象 { id, name, price, image, originalPrice }
 2. 显示原价（划线）、现价（红色加粗）、折扣标签（'立减XX元'）
 3. 图片加载失败时显示占位图（灰色背景 + 相机 emoji）
-4. SCSS 变量：--card-radius: 12px, --card-shadow: 0 2px 8px rgba(0,0,0,0.1)
+4. CSS 变量：--card-radius: 12px, --card-shadow: 0 2px 8px rgba(0,0,0,0.1)
 
 【步骤】先只生成模板和 props 定义。样式我会在下一轮对话告诉你。
 ```

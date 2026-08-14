@@ -253,12 +253,17 @@ getUser(1).then(function(user) {
 **错误 3：Promise.all 中一个失败就放弃全部**
 
 ```js
-// ❌ 错误：用 Promise.all 做批量操作，一个 404 就全没了
+// ❌ 错误：用 Promise.all 做批量操作，一个失败就全没了
 const results = await Promise.all([
-  fetch('/api/user/1'),
-  fetch('/api/user/999'),   // 这个返回 404，整个 all 就 reject 了
-  fetch('/api/user/3')      // 这个明明能成功，也被放弃了
+  fetch('/api/user/1').then(checkOk),          // 成功
+  fetch('/api/user/999').then(checkOk),        // 这个返回 404，checkOk 抛出 → 整个 all 就 reject 了
+  fetch('/api/user/3').then(checkOk)           // 这个明明能成功，也被放弃了
 ])
+
+function checkOk(res) {
+  if (!res.ok) throw new Error('HTTP ' + res.status)  // fetch 本身对 404 不报错，要自己检查
+  return res.json()
+}
 
 // ✅ 正确：批量操作应该用 Promise.allSettled，每个结果都能看到
 const results = await Promise.allSettled([

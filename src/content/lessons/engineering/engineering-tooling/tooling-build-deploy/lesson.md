@@ -165,7 +165,7 @@ base: '/music-collection/'   // 正确（前后斜杠）
 
 // 常见错误写法：
 base: 'music-collection'     // 错误：缺少斜杠
-base: './'                   // 错误：相对路径在 GitHub Pages 上行为不确定
+// 提示：base: './'（相对路径）Vite 也支持，但显式写 '/music-collection/' 更可预测、更推荐
 ```
 
 **错误 2：构建报错，但 npm run dev 一切正常**

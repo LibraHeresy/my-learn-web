@@ -289,7 +289,7 @@ async function getData() {
 // ❌ 错误：直接把 JS 对象放进 body
 fetch('/api/posts', {
   method: 'POST',
-  body: { title: 'hello' }                // 对象会被转成 "[object Object]" 字符串！
+  body: { title: 'hello' }                // 直接传对象会抛 TypeError：body 必须是字符串/Blob/FormData 等
 })
 
 // ✅ 正确：JSON.stringify 转成 JSON 字符串
@@ -350,7 +350,7 @@ const data = await response.json()
 打开 `script.js`，用 `async/await` 发一个 GET 请求到 `https://jsonplaceholder.typicode.com/posts`，打印 `response.status`、`response.ok` 和解析后的数据长度
 ::::
 
-::::step{purpose="POST 需要指定 method、headers、body 三个配置项。先检查 ok 再解析，是防御性编程的基本功——不要在失败的响应上调用 .json()。" expected="控制台输出'创建成功'和服务器返回的 id。运行两次，得到两个不同的 id。"}
+::::step{purpose="POST 需要指定 method、headers、body 三个配置项。先检查 ok 再解析，是防御性编程的基本功——不要在失败的响应上调用 .json()。" expected="控制台输出'创建成功'和服务器返回的 id。jsonplaceholder 是模拟接口，POST /posts 每次都固定返回 id: 101（真实后端才会返回递增 id）。"}
 在 `script.js` 中发一个 POST 请求创建一个新帖子（title 和 body 自定义），检查 `response.ok`，解析返回的 JSON 看看服务器分配了什么 `id`
 ::::
 

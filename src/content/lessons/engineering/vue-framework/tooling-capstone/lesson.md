@@ -229,7 +229,7 @@ Home.vue 接收 add 事件
 - **v-model 怎么用？** -- 回顾第 8 课
 - **onMounted / onBeforeUnmount 什么时候用？** -- 回顾第 3 课
 - **localStorage 读写：** `localStorage.setItem("key", JSON.stringify(data))` / `JSON.parse(localStorage.getItem("key"))`
-- **tailwind 怎么部署？** -- 回顾工程化第 8 课
+- **部署怎么做？** -- 回顾工程化篇的「构建与部署」一课
 
 最重要的是：你已经具备了所有需要的技能。一步步来，相信自己。
 :::

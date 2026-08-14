@@ -8,7 +8,7 @@ p { color: #999; }
 .card p { color: #3D2B1F; }
 /* 规则 3：权重 21 */
 .card p.highlight { color: #8B2E2E; }
-/* 规则 4：权重 101 */
+/* 规则 4：权重 100 */
 #special { color: #C9A96E; font-weight: 700; }
 .card {
   background: #FFFAF2;

@@ -202,7 +202,6 @@
   height: 200px;
   background: #fff;
   border-radius: 8px;
-  overflow: hidden;          /* 角标如果溢出可以隐藏 */
 }
 
 /* ===== 3. 热销角标（absolute） ===== */
@@ -215,7 +214,7 @@
   padding: 4px 12px;
   font-size: 12px;
   border-radius: 4px;
-  /* 负值让角标突出卡片边缘——absolute 允许溢出父元素 */
+  /* 负值让角标突出卡片边缘——absolute 允许溢出父元素（父元素不能设 overflow:hidden） */
 }
 
 /* ===== 4. 右下角客服按钮（fixed） ===== */

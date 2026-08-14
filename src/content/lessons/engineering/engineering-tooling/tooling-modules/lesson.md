@@ -237,6 +237,8 @@ ls js
 
 ```js
 // src/js/utils/helpers.js — 每行都有注释
+export const API_URL = 'https://itunes.apple.com/search'   // 接口地址常量
+
 export function formatDate(date) {
   // toLocaleDateString 根据浏览器语言自动格式化日期
   return date.toLocaleDateString('zh-CN')
@@ -258,7 +260,7 @@ export function truncateText(text, maxLength) {
 
 ```js
 // src/js/modules/api.js
-import { API_URL } from '../utils/helpers.js'   // 从 utils 引入常量（等一下添加）
+import { API_URL } from '../utils/helpers.js'   // 引入上一步定义的接口地址常量
 
 export async function searchTracks(keyword) {
   const url = API_URL + '?term=' + encodeURIComponent(keyword) + '&limit=20'
@@ -285,8 +287,8 @@ export async function getTrackById(id) {
 // src/js/modules/app.js — 主入口文件
 // 从 api.js 导入（命名导入，需要花括号）
 import { searchTracks } from './api.js'
-// 命名导入可以起别名——避免名字冲突
-import { renderTracks as render } from './render.js'  // 暂不创建 render.js，演示语法
+// 小知识：命名导入可以起别名避免冲突，例如
+// import { searchTracks as search } from './api.js'
 
 // 测试：调用导入的函数
 searchTracks('周杰伦').then(results => {

@@ -177,7 +177,7 @@ resetBtn.addEventListener("click", function() {
 :::task{title="动手试试 ✨"}
 ::::step{purpose="让你感受 `setInterval` 的定时重复执行特性——不需要手动点击，代码自动按时间间隔运行。`clearInterval` 用来停止，`timer = null` 是良好的状态管理习惯。" expected="点击开始后数字每秒自动 +1；点击暂停后停止递增；点击重置后数字归零，显示「点击开始」。三个按钮各司其职，互不冲突。"}
 
-打开 `script.js`，先读一遍整个文件（用 `fs.readFileSync` 或直接编辑器中打开）。
+打开 `script.js`，先读一遍整个文件（在右侧编辑器中打开）。
 
 1. 切换到**预览区**
 2. 点击「开始节拍」——观察数字从 1 开始每秒自动递增

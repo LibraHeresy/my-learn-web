@@ -104,7 +104,7 @@ text-align: center;  /* left(左对齐) / center(居中) / right(右对齐) / ju
 
 **一个简单的决策规则：** 如果你的页面内容是文化类、书籍类、古典类的——用衬线体做标题，无衬线体做正文。如果你的页面是 SaaS 后台、技术文档、科技类——全部用无衬线体。
 
-**Web 安全字体 vs 自定义字体：** Web 安全字体（如 Arial、Georgia、Times New Roman）在所有操作系统上都预装了，不需要额外加载。自定义字体（如 Google Fonts 的 Noto Serif SC）需要从网络加载，但选择更多。本项目使用 Noto 系列字体，它们已经配置好了。
+**Web 安全字体 vs 自定义字体：** Web 安全字体（如 Arial、Georgia、Times New Roman）在主流 Windows/macOS 上都预装、使用最广（Linux 常以兼容替代字体呈现），不需要额外加载。自定义字体（如 Google Fonts 的 Noto Serif SC）需要从网络加载，但选择更多。本项目使用 Noto 系列字体，它们已经配置好了。
 :::
 
 :::explain{title="五、CSS 长度单位 — px、rem、em、vw、vh、%"}
@@ -162,10 +162,11 @@ p { letter-spacing: 0.05em; }      /* 0.05em = 当前元素的字号 × 0.05 */
 **错误 1：字体名有空格但不加引号**
 ```css
 h1 {
-  font-family: Noto Serif SC, serif;  /* ❌ 失败了！空格导致解析错误 */
-  font-family: "Noto Serif SC", serif; /* ✅ 字体名有空格必须加引号 */
+  font-family: Noto Serif SC, serif;    /* ⚠ 能解析，但规范建议加引号 */
+  font-family: "Noto Serif SC", serif;  /* ✅ 推荐写法：含空格的字体名加引号更健壮 */
 }
 ```
+不加引号的多词字体名多数浏览器也能解析，但规范建议给含空格、数字或标点的字体名加引号（与关键字同名的字体族则必须加引号）。
 
 **错误 2：line-height 给太小**
 ```css

@@ -166,8 +166,8 @@ function safeSetItem(key, value) {
 ```js
 // ❌ 错误：取出来是字符串，不是数组
 localStorage.setItem('list', JSON.stringify([1, 2, 3]))
-var list = localStorage.getItem('list')    // list 是 '"[1,2,3]"' 字符串！
-console.log(list.length)                   // 11（字符串长度），不是 3！
+var list = localStorage.getItem('list')    // list 是 '[1,2,3]' 字符串！
+console.log(list.length)                   // 7（字符串长度），不是 3！
 
 // ✅ 正确：用 JSON.parse 还原
 var list = JSON.parse(localStorage.getItem('list'))

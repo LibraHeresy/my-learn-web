@@ -174,7 +174,7 @@ document.querySelector('#generate-btn').addEventListener('click', renderList);
 :::task{title="动手试试 ✨"}
 ::::step{purpose="让你感受循环的「自动化」力量——增加一条数据，无需手动复制 HTML，循环自动为它生成列表项。这就是循环的核心价值：写一次模板逻辑，处理任意数量的数据。" expected="点击「生成列表」按钮后，页面显示 6 件商品（原有 5 件 + 新增的平板电脑），序号正确递增，样式一致。你只加了一行数据，一切都自动完成。"}
 
-打开 `script.js`，先读一遍整个文件（用 `fs.readFileSync` 或者直接在编辑器中打开）。理解 `products` 数组的结构和 `renderList()` 函数的位置。
+打开 `script.js`，先读一遍整个文件（在编辑器中打开）。理解 `products` 数组的结构和 `renderList()` 函数的位置。
 
 **第 1 步：在 products 数组中新增一个商品：**
 ```js
@@ -213,7 +213,7 @@ function renderList() {
 ```
 
 3. 点击「生成列表」按钮，观察 6 件商品（包括平板电脑）是否自动出现在列表中。
-4. 保存文件（`fs.writeFileSync`），刷新预览区验证。
+4. 保存文件，刷新预览区验证。
 ::::
 
 ::::step{purpose="`for` 和 `forEach` 是循环的两种写法——`for` 更底层，让你手动控制索引；`forEach` 更简洁，专注于「对每一项做什么」。理解两种方法后，你能在不同场景下灵活选择。" expected="页面显示效果和 forEach 完全一样，但你用的是 `for` 循环。通过对比，你理解了两种循环的等价性。"}

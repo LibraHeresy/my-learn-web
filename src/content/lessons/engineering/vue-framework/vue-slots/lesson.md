@@ -163,7 +163,7 @@ defineProps({
 <template>
   <ul>
     <!-- 循环列表，但每一项的渲染方式交给使用者决定 -->
-    <li v-for="track in tracks" :key="track.id">
+    <li v-for="(track, index) in tracks" :key="track.id">
       <!-- slot props：把 track 数据暴露给使用者 -->
       <slot name="item" :track="track" :index="index">
         <!-- 默认展示方式 -->
@@ -312,12 +312,12 @@ defineProps({
 **错误 2：slot name 大小写不一致**
 ```html
 <!-- 组件定义 -->
-<slot name="cardHeader">
+<slot name="card-header">
 
-<!-- ❌ Vue 模板中 slot 名用 kebab-case -->
+<!-- ❌ 引用时用了 camelCase，与定义的 "card-header" 不匹配（会落到默认内容） -->
 <template #cardHeader>
 
-<!-- ✅ 用 kebab-case -->
+<!-- ✅ 引用名必须与定义完全一致 -->
 <template #card-header>
 ```
 

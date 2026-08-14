@@ -152,7 +152,7 @@ for (let i = 0; i < 3; i++) {
 :::
 
 :::task{title="动手试试 ✨"}
-::::step{purpose="亲手验证 Event Loop 的执行顺序，把直觉变成本能。先预测再运行——如果预测和实际一致，说明你真的理解了。" expected="控制台按顺序输出：A → B → D → C。D 虽然在 C 之前设置，但 D 是异步回调（即使延迟 0ms），必须等同步代码跑完才执行。"}
+::::step{purpose="亲手验证 Event Loop 的执行顺序，把直觉变成本能。先预测再运行——如果预测和实际一致，说明你真的理解了。" expected="控制台按顺序输出：A → B → D → C。D 虽然设置在 C 之后，但延迟 0ms 比 C 的 500ms 短，所以先执行；两者都是异步回调，都必须等同步代码（A、B）跑完才执行。"}
 打开 `script.js`，阅读代码：`console.log("A")` → `setTimeout(..., 500)` → `setTimeout(..., 0)` → `console.log("B")`，先写下你的预测输出顺序，再运行代码验证
 ::::
 
@@ -160,7 +160,7 @@ for (let i = 0; i < 3; i++) {
 在 `script.js` 中写一段代码：`console.log("开始")` → `setTimeout(() => console.log("宏任务"), 0)` → `Promise.resolve().then(() => console.log("微任务"))` → `console.log("结束")`，运行并观察输出顺序
 ::::
 
-::::step{purpose="这是经典的面试题变体。理解\"同步 → 微任务 → 宏任务\"的优先级后，这个场景不会难倒你。" expected="输出：1 → 3 → 4 → 2。setTimeout(fn,0) 的回调在微任务之后执行。"}
+::::step{purpose="这是经典的面试题变体。理解\"同步 → 微任务 → 宏任务\"的优先级后，这个场景不会难倒你。" expected="输出：1 → 4 → 3 → 2。同步代码先执行（1、4），Promise.then（微任务）在 setTimeout(fn,0)（宏任务）之前执行。"}
 在 `script.js` 中运行以下代码，解释输出顺序：
 ```js
 console.log(1)

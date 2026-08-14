@@ -155,9 +155,11 @@ const stats = computed(() => `找到了 ${filtered.value.length} 条结果`)
   <!-- 声明：统计要显示在这里 -->
   <span>{{ stats }}</span>
   <!-- 声明：列表要根据 filtered 来渲染 -->
-  <li v-for="item in filtered" :key="item.name">
-    {{ item.name }} - {{ item.composer }}
-  </li>
+  <ul>
+    <li v-for="item in filtered" :key="item.name">
+      {{ item.name }} - {{ item.composer }}
+    </li>
+  </ul>
 </template>
 ```
 

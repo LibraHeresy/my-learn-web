@@ -84,8 +84,8 @@ async function demo() {
   console.log('③ 数据到了：', result)       // 请求完成后继续
 }
 
-console.log('② 主线程继续')
 demo()
+console.log('② 主线程继续')
 // 输出顺序：① → ② → ③
 // await 只暂停 demo 函数内部，不阻塞主线程！
 // 就像你等外卖时没有原地发呆，而是去刷了会儿手机（主线程继续运行）
@@ -188,8 +188,10 @@ async function loadUsers(ids) {
 ```js
 // ❌ 错误：没有 try/catch，Promise reject 了也没人管
 async function loadUser() {
-  const user = await fetch('/api/user/999')  // 如果 404，这里抛异常
-  console.log(user.name)                     // 永远不会执行
+  const res = await fetch('/api/user/999')  // 断网/CORS 等网络失败时这里抛异常；404 不会抛
+  if (!res.ok) throw new Error('HTTP ' + res.status)  // 404 要自己检查并抛出
+  const user = await res.json()
+  console.log(user.name)
 }
 
 // ✅ 正确：try/catch 包裹

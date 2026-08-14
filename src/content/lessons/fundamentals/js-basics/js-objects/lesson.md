@@ -181,7 +181,7 @@ renderCards(employees);
 :::task{title="动手试试 ✨"}
 ::::step{purpose="对象数组是实际开发中最常见的数据结构——每一条记录都是一个对象，所有记录组成数组。新增一条数据就像给 Excel 表增加一行，属性的键名就是列标题。`renderCards()` 函数自动处理新增数据——你只需关注数据本身。" expected="页面显示 5 张员工卡片（原有 4 张 + 新增的赵敏），每张卡片包含名字首字头像、姓名、部门、职位和邮箱。新增员工自动出现在卡片列表中。"}
 
-打开 `script.js`，先读一遍整个文件（用 `fs.readFileSync` 或在编辑器中打开）。理解 `employees` 数组的结构和 `renderCards()` 函数的签名。
+打开 `script.js`，先读一遍整个文件（在编辑器中打开）。理解 `employees` 数组的结构和 `renderCards()` 函数的签名。
 
 **第 1 步：在 employees 数组中新增一位员工：**
 ```js
@@ -216,7 +216,7 @@ function renderCards(dataList) {
 }
 ```
 
-3. 保存文件（`fs.writeFileSync`），刷新预览区。
+3. 保存文件，刷新预览区。
 4. 确认 5 张卡片都出现了——包括赵敏的卡片。
 
 **关键理解：** `emp.name` 中的 `.name` 对应对象里的 `name` 键。你在模板中每写一个 `${emp.xxx}`，就是在访问对象的一个属性。整个卡片的数据全部来自对象——数据是源头，HTML 是最终呈现。

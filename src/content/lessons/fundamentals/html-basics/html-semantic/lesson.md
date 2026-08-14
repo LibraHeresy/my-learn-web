@@ -108,7 +108,7 @@ HTML5 引入了一组语义化标签，替换掉那些只有 `class` 名字的 `
 :::
 
 :::explain{title="常见错误：每页多个 main"}
-`<main>` 在一个 HTML 页面中**只能出现一次**。它是页面的核心内容区域——就像一个舞台只能有一个"主舞台"。如果你需要多个区块，用 `<section>` 放在 `<main>` 里面。另外，`<main>` 不能放在 `<article>`、`<aside>`、`<header>`、`<footer>` 或 `<nav>` 里面——它只属于 `body` 的直接下级。
+`<main>` 在一个 HTML 页面中**只能出现一次**。它是页面的核心内容区域——就像一个舞台只能有一个"主舞台"。如果你需要多个区块，用 `<section>` 放在 `<main>` 里面。另外，`<main>` 不能放在 `<article>`、`<aside>`、`<header>`、`<footer>` 或 `<nav>` 里面——它可以放在 `body` 内的普通容器（如 `<div>`）中。
 :::
 
 :::example{title="看例子"}

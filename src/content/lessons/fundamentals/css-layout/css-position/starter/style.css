@@ -1,48 +1,61 @@
-h1 {
-  color: #8B2E2E;
-  margin-bottom: 20px;
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background: #faf7f0;
 }
-.stage {
+
+/* 导航栏：sticky 定位示例 */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #1a1a2e;
+  color: white;
+  padding: 16px 24px;
+  z-index: 100;
+}
+
+.category {
+  padding: 16px 24px;
+}
+
+/* 分类标题：任务步骤 3 给它添加 position: sticky; top: 0; 观察滚动效果 */
+.section-title {
+  background: white;
+}
+
+/* 产品卡片：relative 作为角标的定位参考系 */
+.product-card {
   position: relative;
-  background: #FFFAF2;
-  border: 2px solid #D4C5A9;
-  border-radius: 12px;
-  padding: 24px;
-  min-height: 260px;
-}
-.soloist {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #FFF8F0;
-  border: 2px solid #C9A96E;
-  border-radius: 8px;
-  padding: 12px 16px;
-  text-align: center;
-  font-weight: 600;
-  color: #8B2E2E;
-}
-.badge {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  font-size: 20px;
-}
-.player {
+  width: 300px;
+  height: 200px;
   background: #fff;
-  border: 1px solid #E8DDCC;
-  border-radius: 6px;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  color: #3D2B1F;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 16px 0;
+  padding: 16px;
 }
-.player-shift {
-  position: relative;
-  left: 20px;
-  border-color: #C9A96E;
-}
-.note {
+
+/* 热销角标：任务步骤 1 给它添加 position: absolute; top: -6px; right: -6px; */
+.hot-badge {
+  background: #ff4444;
+  color: white;
+  padding: 4px 12px;
   font-size: 12px;
-  color: #C9A96E;
-  margin-left: 12px;
+  border-radius: 4px;
+}
+
+/* 客服按钮：fixed 定位示例 */
+.support-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #0066ff;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
 }

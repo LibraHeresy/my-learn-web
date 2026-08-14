@@ -167,10 +167,10 @@ Grid 也能居中，而且代码更短：
 }
 ```
 
-**margin: auto 生效的三个条件，缺一不可：**
+**margin: auto 水平居中生效的条件：**
 1. 元素必须是**块级元素**（`display: block`）
 2. 元素必须有**明确的宽度**（`width` 不能是 `auto`）
-3. 元素不能是 `position: absolute` 或 `fixed`
+3. 常规文档流中的元素（`position: static` / `relative`）直接用；**绝对定位元素**若同时设置了 `left: 0; right: 0;` 也能用 `margin: 0 auto` 水平居中（经典居中技巧）
 
 在现代 Flexbox 布局中，`margin: auto` 还有一个神奇用法——在弹性容器中"推开"相邻元素：
 ```css

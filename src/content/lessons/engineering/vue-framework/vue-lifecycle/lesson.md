@@ -270,7 +270,7 @@ watch(user, (newVal) => {
 - **onBeforeUnmount**：清理上面的一切 -- 销毁图表实例释放内存，移除快捷键监听防止冲突，取消未完成的 API 请求节省带宽
 - **watch**：搜索框输入变化时自动调搜索接口（防抖），表单数据变化时自动保存草稿到 localStorage
 
-实际代码中，`onMounted` 和 `onBeforeUnmount` 总是成对出现。如果你在 mouted 里写了 `addEventListener`，必须在 unmount 里写对应的 `removeEventListener`。这是 Vue 开发的铁律。
+实际代码中，`onMounted` 和 `onBeforeUnmount` 总是成对出现。如果你在 `onMounted` 里写了 `addEventListener`，必须在 unmount 里写对应的 `removeEventListener`。这是 Vue 开发的铁律。
 :::
 
 :::task{title="动手试试"}

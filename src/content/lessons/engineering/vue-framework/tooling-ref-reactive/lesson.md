@@ -119,7 +119,7 @@ const filteredPieces = computed(() => {
 
 // computed 可以链式依赖
 const stats = computed(() => {
-  return \`筛选出 \${filteredPieces.value.length} 首中的 \${filteredPieces.value.filter(p => p.liked).length} 首收藏\`
+  return `筛选出 ${filteredPieces.value.length} 首中的 ${filteredPieces.value.filter(p => p.liked).length} 首收藏`
 })
 </script>
 
@@ -173,7 +173,7 @@ function render(filtered) {
   list.innerHTML = ''                      // 清空
   filtered.forEach(item => {
     const li = document.createElement('li')
-    li.textContent = \`\${item.name} - \${item.composer}\`
+    li.textContent = `${item.name} - ${item.composer}`
     list.appendChild(li)
   })
 }
@@ -216,9 +216,11 @@ const filtered = computed(() => {
 
 <template>
   <input v-model="keyword" placeholder="搜索...">
-  <li v-for="item in filtered" :key="item.name">
-    {{ item.name }} - {{ item.composer }}
-  </li>
+  <ul>
+    <li v-for="item in filtered" :key="item.name">
+      {{ item.name }} - {{ item.composer }}
+    </li>
+  </ul>
 </template>
 ```
 
@@ -248,7 +250,10 @@ const state = ref({ name: '张三', age: 25 })
 // ❌ 解构后 name 是普通字符串，不再响应式
 const { name, age } = state.value
 
-// ✅ 用 reactive 代替 ref，或不解构直接 state.value.xxx
+// ✅ 不解构，直接通过 state.value.name 访问
+console.log(state.value.name)
+// ✅ 或用 toRefs 保持响应式
+const { name, age } = toRefs(state)
 ```
 
 **错误 3：computed 里忘了用 .value**
@@ -266,18 +271,19 @@ const filtered = computed(() => {
 })
 ```
 
-**错误 4：修改数组时不触发响应式**
+**错误 4：把 Vue 2 的数组局限当成 Vue 3 的限制**
 ```js
 const list = ref(['a', 'b', 'c'])
 
-// ❌ 直接改下标 -- Vue 3 虽然能检测，但某些边界情况可能失败
+// ✅ Vue 3 基于 Proxy，下标赋值是响应式的，能正常触发更新
 list.value[0] = 'x'
 
-// ✅ 用数组方法（push, splice, filter 等）
+// ✅ 数组方法（push, splice, filter 等）同样响应式
 list.value.splice(0, 1, 'x')
 
-// ❌ 直接替换整个数组 -- 这个是可以的，就是效率低
+// ✅ 整体替换数组也完全没问题
 list.value = ['x', 'b', 'c']
+// （以上三种写法在 Vue 3 中都合法且常用；Vue 2 时代的下标赋值/直接替换局限已不存在）
 ```
 :::
 

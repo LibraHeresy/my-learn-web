@@ -310,11 +310,10 @@ emit('toggle-like')
 const emit = defineEmits(['toggleLike'])
 ```
 ```html
-<!-- ❌ 模板中必须用 kebab-case（短横线） -->
-<MusicCard @toggleLike="handle" />
-
-<!-- ✅ 正确写法 -->
+<!-- ⚠ 官方推荐在模板中统一用 kebab-case；SFC 中 camelCase 监听器也能匹配 emit('toggleLike') -->
 <MusicCard @toggle-like="handle" />
+
+<!-- 真正要避免的是：声明与监听时事件名本身大小写不一致 -->
 ```
 
 **错误 4：props 类型声明和实际传入不符**
