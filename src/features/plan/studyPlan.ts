@@ -298,7 +298,8 @@ export const studyPlanWeeks: PlanWeek[] = [
       ]),
       day('week-4-day-2', 2, '判断与类型', '让代码开始有条件分支', 300, [
         lessonTask('js-types', '数据类型', 70, '知道字符串、数字、布尔值的差别。', '减少类型混乱'),
-        lessonTask('js-conditions', '条件判断', 75, '让程序开始根据情况变化。', '建立基本逻辑控制能力'),
+        lessonTask('js-conditions', '条件判断基础', 55, '让程序开始根据情况变化。', '建立基本逻辑控制能力'),
+        lessonTask('js-conditions-2', '条件判断进阶', 50, '用逻辑运算符组合多个条件。', '让判断逻辑更精细'),
         reviewTask('week4-day2', '练习：用条件判断控制一句提示文案', 20, '让逻辑和页面开始碰面。', '增强“写代码有反馈”的感觉'),
       ]),
       day('week-4-day-3', 3, '循环与函数', '进入真正可复用的代码组织', 300, [

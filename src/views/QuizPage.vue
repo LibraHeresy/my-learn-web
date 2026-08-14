@@ -2,9 +2,15 @@
 import { ref, computed } from 'vue'
 import { useQuizStore } from '../stores/quiz'
 import { getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
+import { getChaptersForGem } from '../content-loaders/taxonomy'
 const gems = getGems()
 
 const store = useQuizStore()
+
+// 当前选中宝石的关联章节（taxonomy.yaml 的 chapter.quizGems 反向映射）
+const activeGemChapters = computed(() =>
+  activeGem.value ? getChaptersForGem(activeGem.value.id) : [],
+)
 
 const lastError = computed(() => store.lastError)
 function dismissLastError() {
@@ -162,6 +168,9 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
       <!-- 宝石详情面板 -->
       <div v-if="activeGem" class="gem-detail">
         <h4>{{ activeGem.icon }} {{ activeGem.name }}</h4>
+        <p v-if="activeGemChapters.length" class="gem-chapters">
+          📚 关联课程：{{ activeGemChapters.map((c) => c.title).join('、') }}
+        </p>
         <div class="level-list">
           <div
             v-for="l in activeGem.levels"
@@ -311,6 +320,7 @@ const typeColor = (t: string) => ({ 'normal': 'var(--color-success)', 'elite': '
 /* Gem detail */
 .gem-detail { margin-top: var(--sp-4); padding: var(--sp-5); background: var(--color-panel); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); }
 .gem-detail h4 { margin: 0 0 var(--sp-3); }
+.gem-chapters { margin: 0 0 var(--sp-3); font-size: var(--fs-xs); color: var(--color-text-light); }
 .level-list { display: flex; flex-direction: column; gap: var(--sp-2); }
 .level-card { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-3); border-radius: var(--radius-sm); background: var(--color-bg); }
 .level-card.locked { opacity: 0.4; }
