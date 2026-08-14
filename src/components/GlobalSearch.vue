@@ -40,6 +40,7 @@ function ensureSearchIndex(): Promise<void> {
           ],
           threshold: 0.4,
           includeScore: true,
+          includeMatches: true,
         })
       })
       .catch((error) => {
@@ -48,6 +49,21 @@ function ensureSearchIndex(): Promise<void> {
       })
   }
   return searchIndexPromise
+}
+
+// 提取 bodyText 中第一个命中位置的片段（前后约 40 字符），用于结果高亮
+function buildSnippet(result: FuseResult<SearchItem>): { prefix: string; match: string; suffix: string } | null {
+  const match = result.matches?.find((m) => m.key === 'bodyText')
+  if (!match || !match.indices.length || !match.value) return null
+  const [start, end] = match.indices[0]
+  const text = match.value
+  const s = Math.max(0, start - 40)
+  const e = Math.min(text.length, end + 41)
+  return {
+    prefix: s > 0 ? '…' + text.slice(s, start) : text.slice(s, start),
+    match: text.slice(start, end + 1),
+    suffix: e < text.length ? text.slice(end + 1, e) + '…' : text.slice(end + 1, e),
+  }
 }
 
 watch(query, (q) => {
@@ -148,6 +164,9 @@ defineExpose({ openSearch })
               >
                 <div class="gs-result-title">{{ r.item.title }}</div>
                 <div class="gs-result-meta">{{ r.item.track }} / {{ r.item.chapter }}</div>
+                <div v-if="buildSnippet(r)" class="gs-result-snippet">
+                  <span class="snippet-prefix">{{ buildSnippet(r)!.prefix }}</span><mark class="snippet-match">{{ buildSnippet(r)!.match }}</mark><span class="snippet-suffix">{{ buildSnippet(r)!.suffix }}</span>
+                </div>
               </button>
             </li>
           </ul>
@@ -262,6 +281,20 @@ defineExpose({ openSearch })
 .gs-result-meta {
   font-size: var(--fs-xs);
   color: var(--color-text-light);
+}
+
+.gs-result-snippet {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.snippet-match {
+  background: rgba(201, 169, 110, 0.35);
+  color: var(--color-accent);
+  border-radius: 2px;
+  padding: 0 1px;
 }
 
 /* ── 空/提示 ── */

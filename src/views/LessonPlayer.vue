@@ -10,6 +10,8 @@ import { useLessonNavigation } from '../composables/useLessonNavigation'
 import { useFocusTrap } from '../composables/useFocusTrap'
 import { useScrollLock } from '../composables/useScrollLock'
 import { encodeCode, decodeCode } from '../utils/shareCode'
+import { getGemsForChapter } from '../content-loaders/taxonomy'
+import { getGems } from '../content-loaders/quiz'
 import type { UserCode } from '../types'
 // CodeEditor 按需加载：只在 sandbox 模式课程中使用，
 // 延迟加载可将 @codemirror/* 从主 bundle 拆分为独立 chunk（约 -500KB gzip）
@@ -34,11 +36,39 @@ const lessonId = computed(() => route.params.lessonId as string)
 const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
 const all = computed(() => getAllLessons())
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
-const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode)
+
+// 提取课程所有任务步骤的自动验收断言，注入预览沙箱
+const lessonAsserts = computed(() => {
+  const asserts: string[] = []
+  const body = lessonState.value.value?.body ?? []
+  for (const node of body) {
+    if (node.type === 'block:task') {
+      for (const step of (node as { steps?: Array<{ assert?: string }> }).steps ?? []) {
+        if (step.assert) asserts.push(step.assert)
+      }
+    }
+  }
+  return asserts
+})
+
+const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode, lessonAsserts)
+
+function onTaskAssert(passed: string[]) {
+  progressStore.markAssertPassed(lessonId.value, passed)
+}
 
 const lesson = computed(() => lessonState.value.value)
 const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
 const isLocalMode = computed(() => lesson.value?.meta.mode === 'local')
+
+// 关联测验引导（taxonomy.yaml 的 chapter.quizGems 映射）
+const lessonChapterGems = computed(() => getGemsForChapter(lesson.value?.meta.chapter))
+const gemNamesText = computed(() => {
+  const allGems = getGems()
+  return lessonChapterGems.value
+    .map((id) => allGems.find((g) => g.id === id)?.name ?? id)
+    .join('、')
+})
 
 // ─── 响应式宽度 ───────────────────────────────────────────────────────────
 const windowWidth = ref(window.innerWidth)
@@ -81,6 +111,25 @@ const {
   goPrev,
   goNext,
 } = useLessonNavigation(lessonId, lesson, all)
+
+// ─── 键盘导航：← / → 切换上一课/下一课（焦点在编辑器/输入框时忽略）──
+function onGlobalKeydown(e: KeyboardEvent) {
+  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return
+  const target = e.target as HTMLElement | null
+  if (target) {
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return
+    if (target.closest('.cm-editor')) return
+  }
+  if (e.key === 'ArrowLeft' && !prevDisabled.value) {
+    e.preventDefault()
+    goPrev()
+  } else if (e.key === 'ArrowRight' && !nextDisabled.value) {
+    e.preventDefault()
+    goNext()
+  }
+}
+onMounted(() => window.addEventListener('keydown', onGlobalKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKeydown))
 
 // 课程切换：同步 ID + 初始化代码
 watch(lesson, (l) => {
@@ -298,8 +347,20 @@ watch(lessonId, () => {
             <div ref="contentPanelRef" class="content-scroll" @scroll="onContentScroll">
               <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
               <div class="content-inner">
+                <div class="lesson-meta-row">
+                  <span class="lesson-meta-item">⏱ 约 {{ lesson.meta.estimatedMinutes || 15 }} 分钟</span>
+                  <span class="lesson-meta-item">{{ isSandboxMode ? '✏️ 动手模式' : '📖 阅读模式' }}</span>
+                  <span class="lesson-meta-item">⌨ ← / → 切换课程</span>
+                </div>
                 <DocumentRenderer :key="lessonId" :lesson="lesson" />
                 <LessonTerms :lesson="lesson" />
+                <div v-if="lessonChapterGems.length" class="quiz-cta">
+                  <span class="quiz-cta-icon">📝</span>
+                  <span class="quiz-cta-text">
+                    学完这课去测验巩固：<strong>{{ gemNamesText }}</strong>
+                  </span>
+                  <button class="quiz-cta-btn" @click="router.push('/quiz')">去做测验 →</button>
+                </div>
               </div>
             </div>
           </div>
@@ -336,6 +397,7 @@ watch(lessonId, () => {
               :is-maximized="maximized === 'preview'"
               @maximize="setMaximized('preview')"
               @preview-error="onPreviewError"
+              @task-assert="onTaskAssert"
             />
           </div>
         </template>
@@ -489,11 +551,65 @@ watch(lessonId, () => {
   min-height: 0;
   overflow-y: auto;
   overflow-x: auto;
+  padding-bottom: var(--sp-6);
 }
 
 .content-inner {
   display: flex;
   flex-direction: column;
+}
+
+/* 课程元信息行（时长/模式/快捷键） */
+.lesson-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.lesson-meta-item {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+/* 学完去测验引导 */
+.quiz-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: var(--sp-6) auto 0;
+  max-width: 720px;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--color-panel);
+  border: 1px dashed var(--color-gold);
+  border-radius: var(--radius-md);
+}
+
+.quiz-cta-icon {
+  font-size: 1.4em;
+}
+
+.quiz-cta-text {
+  flex: 1;
+  font-size: var(--fs-sm);
+  color: var(--color-text-light);
+}
+
+.quiz-cta-btn {
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-xs);
+  color: #fff;
+  background: var(--color-gold);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.quiz-cta-btn:hover {
+  background: var(--color-gold-light);
 }
 
 .reading-progress {

@@ -1,11 +1,32 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { getGlossaryEntry } from '../../content-loaders/glossary'
 
 const props = defineProps<{
   term: string
   explanation: string
   analogy?: string
 }>()
+
+// 当前显示的术语（点击"相关术语"标签可切换查看）
+const current = ref({
+  term: props.term,
+  explanation: props.explanation,
+  analogy: props.analogy,
+})
+
+const relatedTerms = computed(() => getGlossaryEntry(current.value.term)?.related ?? [])
+
+function jumpTo(relatedKey: string) {
+  const entry = getGlossaryEntry(relatedKey)
+  if (!entry) return
+  current.value = {
+    term: entry.key,
+    explanation: entry.explanation,
+    analogy: entry.analogy,
+  }
+  updatePosition()
+}
 
 const termRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
@@ -96,9 +117,20 @@ function onClick() {
           class="term-popover"
           :style="{ top: popTop + 'px', left: popLeft + 'px' }"
         >
-          <span class="term-title">🎼 {{ term }}</span>
-          <span class="term-explain">{{ explanation }}</span>
-          <span v-if="analogy" class="term-analogy">{{ analogy }}</span>
+          <span class="term-title">🎼 {{ current.term }}</span>
+          <span class="term-explain">{{ current.explanation }}</span>
+          <span v-if="current.analogy" class="term-analogy">{{ current.analogy }}</span>
+          <span v-if="relatedTerms.length" class="term-related">
+            <span class="term-related-label">相关：</span>
+            <button
+              v-for="r in relatedTerms"
+              :key="r"
+              class="term-related-btn"
+              @click.stop="jumpTo(r)"
+            >
+              {{ r }}
+            </button>
+          </span>
         </span>
       </Transition>
     </Teleport>
@@ -160,6 +192,36 @@ function onClick() {
   line-height: 1.5;
   color: var(--color-gold);
   font-style: italic;
+}
+
+.term-related {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.term-related-label {
+  font-size: var(--fs-xs);
+  color: #8b8494;
+}
+
+.term-related-btn {
+  font-size: var(--fs-xs);
+  color: #89b4fa;
+  background: rgba(137, 180, 250, 0.08);
+  border: 1px solid rgba(137, 180, 250, 0.3);
+  border-radius: var(--radius-xs);
+  padding: 1px 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.term-related-btn:hover {
+  background: rgba(137, 180, 250, 0.2);
 }
 
 .term-pop-enter-active,

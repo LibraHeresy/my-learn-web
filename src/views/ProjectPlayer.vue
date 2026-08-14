@@ -164,6 +164,25 @@ function goFooterNext() {
   }
 }
 
+// 键盘导航：← / → 切换上一步/下一步（焦点在编辑器/输入框时忽略）
+function onGlobalKeydown(e: KeyboardEvent) {
+  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return
+  const target = e.target as HTMLElement | null
+  if (target) {
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return
+    if (target.closest('.cm-editor')) return
+  }
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault()
+    goFooterPrev()
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault()
+    goFooterNext()
+  }
+}
+onMounted(() => window.addEventListener('keydown', onGlobalKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKeydown))
+
 function markProjectComplete() {
   projectProgressStore.markComplete(projectId.value)
 }

@@ -10,9 +10,13 @@ import type { HomeProjectCardItem } from '../content-runtime/types'
 import HomeJourneySection from '../components/home/HomeJourneySection.vue'
 import HomeProjectsSection from '../components/home/HomeProjectsSection.vue'
 import HomePrologueSection from '../components/home/HomePrologueSection.vue'
+import { getGlossaryTuples } from '../content-loaders/glossary'
+import { useQuizStore } from '../stores/quiz'
+import { getQuestionsByIds } from '../content-loaders/quiz'
 
 const router = useRouter()
 const progressStore = useProgressStore()
+const quizStore = useQuizStore()
 
 const showStickyNav = ref(false)
 const homeRef = ref<HTMLElement | null>(null)
@@ -78,6 +82,47 @@ function jumpToSection(targetId: string) {
   })
 }
 
+// 每日 5 词：以日期为随机种子，保证同一天内稳定、隔天更换
+const dailyTerms = computed(() => {
+  const tuples = getGlossaryTuples()
+  if (!tuples.length) return []
+  const d = new Date()
+  let seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate()
+  const rand = () => {
+    seed = (seed * 9301 + 49297) % 233280
+    return seed / 233280
+  }
+  const shuffled = [...tuples].sort(() => rand() - 0.5)
+  return shuffled.slice(0, 5).map(([key, rest]) => ({ key, ...rest }))
+})
+
+// ─── 学习数据反馈 ─────────────────────────────────────────────────────────
+const completedLessonCount = computed(
+  () => Object.values(progressStore.lessonProgress).filter((p) => p.completed).length,
+)
+const totalLessonCount = computed(() => lessons.value.length)
+const lessonProgressPct = computed(() =>
+  totalLessonCount.value
+    ? Math.round((completedLessonCount.value / totalLessonCount.value) * 100)
+    : 0,
+)
+
+const wrongReviewItems = ref<Array<{ id: number; question: string }>>([])
+async function loadWrongReview() {
+  const pool = quizStore.data.wrongPool
+  if (!pool.length) return
+  const ids = pool.slice(0, 3)
+  try {
+    const questions = await getQuestionsByIds(ids)
+    wrongReviewItems.value = questions
+      .map((q) => ({ id: q.id, question: q.question }))
+      .slice(0, 3)
+  } catch {
+    wrongReviewItems.value = []
+  }
+}
+onMounted(loadWrongReview)
+
 function goToLesson(lessonId: string) {
   router.push(`/lesson/${lessonId}`)
 }
@@ -111,6 +156,36 @@ function goToProject(projectId: string) {
         {{ resumeLesson.meta.title }} →
       </button>
     </div>
+
+    <!-- 学习数据反馈 -->
+    <section class="stats-panel" id="stats-section">
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-value">{{ completedLessonCount }}<span class="stat-unit">/{{ totalLessonCount }}</span></span>
+          <span class="stat-label">已完成课程</span>
+          <div class="stat-bar"><div class="stat-bar-fill" :style="{ width: lessonProgressPct + '%' }" /></div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ quizStore.overallAccuracy }}<span class="stat-unit">%</span></span>
+          <span class="stat-label">测验正确率</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ quizStore.wrongCount }}</span>
+          <span class="stat-label">错题待复习</span>
+        </div>
+      </div>
+      <div v-if="wrongReviewItems.length" class="review-list">
+        <span class="review-title">📌 建议复习（来自你的错题池）：</span>
+        <button
+          v-for="item in wrongReviewItems"
+          :key="item.id"
+          class="review-item"
+          @click="router.push('/quiz')"
+        >
+          {{ item.question }}
+        </button>
+      </div>
+    </section>
 
     <!-- 粘性迷你导航 -->
     <nav :class="['sticky-nav', { visible: showStickyNav }]">
@@ -151,6 +226,19 @@ function goToProject(projectId: string) {
       :cards="prologueCards"
       @go-to-lesson="goToLesson"
     />
+
+    <!-- 每日 5 词 -->
+    <section v-if="dailyTerms.length" class="daily-terms" id="daily-terms-section">
+      <h2 class="daily-terms-title">📅 每日 5 词</h2>
+      <p class="daily-terms-sub">每天 5 个前端术语，扫一眼就多记住一点</p>
+      <div class="daily-terms-grid">
+        <div v-for="t in dailyTerms" :key="t.key" class="term-card">
+          <span class="term-card-key">{{ t.key }}</span>
+          <span class="term-card-explain">{{ t.explanation }}</span>
+          <span v-if="t.analogy" class="term-card-analogy">🎵 {{ t.analogy }}</span>
+        </div>
+      </div>
+    </section>
 
     <!-- 底部 -->
     <footer class="home-footer">
@@ -335,5 +423,152 @@ function goToProject(projectId: string) {
 
   .sticky-nav-label { display: none; }
   .sticky-nav-icon { font-size: 1.2em; }
+}
+
+/* ─── 学习数据反馈 ─── */
+.stats-panel {
+  margin: var(--sp-4) 0;
+  padding: var(--sp-4);
+  background: var(--color-panel);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.stats-row {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 110px;
+}
+
+.stat-value {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.stat-unit {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.stat-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+}
+
+.stat-bar {
+  margin-top: 4px;
+  height: 6px;
+  width: 100%;
+  max-width: 220px;
+  background: var(--color-border-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.review-list {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.review-title {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.review-item {
+  text-align: left;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--color-accent);
+  background: rgba(201, 169, 110, 0.06);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-3);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.review-item:hover {
+  background: rgba(201, 169, 110, 0.14);
+}
+
+/* ─── 每日 5 词 ─── */
+.daily-terms {
+  padding: var(--sp-5) var(--sp-4);
+}
+
+.daily-terms-title {
+  font-size: var(--fs-lg);
+  color: var(--color-text);
+  margin: 0 0 var(--sp-1);
+}
+
+.daily-terms-sub {
+  font-size: var(--fs-xs);
+  color: var(--color-text-light);
+  margin: 0 0 var(--sp-4);
+}
+
+.daily-terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-3);
+}
+
+.term-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-3);
+  background: var(--color-panel);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.term-card-key {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-accent);
+  font-family: var(--font-code);
+}
+
+.term-card-explain {
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  color: var(--color-text-light);
+}
+
+.term-card-analogy {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--color-gold);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .daily-terms-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
