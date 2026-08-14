@@ -461,14 +461,10 @@ function parseTaskSteps(rawInner: string): {
       const expected = attrsRaw
         .match(/expected="((?:[^"\\]|\\.)*)"/)?.[1]
         ?.replace(/\\(.)/g, "$1");
-      const assert = attrsRaw
-        .match(/assert="((?:[^"\\]|\\.)*)"/)?.[1]
-        ?.replace(/\\(.)/g, "$1");
       steps.push({
         content: stepLines.join("\n").trim(),
         purpose: purpose || undefined,
         expected: expected || undefined,
-        assert: assert || undefined,
       });
       i += 1; // skip closing ::::
       continue;

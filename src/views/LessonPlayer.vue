@@ -37,25 +37,7 @@ const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
 const all = computed(() => getAllLessons())
 const userCode = ref<UserCode>({ html: '', css: '', js: '' })
 
-// 提取课程所有任务步骤的自动验收断言，注入预览沙箱
-const lessonAsserts = computed(() => {
-  const asserts: string[] = []
-  const body = lessonState.value.value?.body ?? []
-  for (const node of body) {
-    if (node.type === 'block:task') {
-      for (const step of (node as { steps?: Array<{ assert?: string }> }).steps ?? []) {
-        if (step.assert) asserts.push(step.assert)
-      }
-    }
-  }
-  return asserts
-})
-
-const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode, lessonAsserts)
-
-function onTaskAssert(passed: string[]) {
-  progressStore.markAssertPassed(lessonId.value, passed)
-}
+const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode)
 
 const lesson = computed(() => lessonState.value.value)
 const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
@@ -397,7 +379,6 @@ watch(lessonId, () => {
               :is-maximized="maximized === 'preview'"
               @maximize="setMaximized('preview')"
               @preview-error="onPreviewError"
-              @task-assert="onTaskAssert"
             />
           </div>
         </template>

@@ -14,18 +14,16 @@ const lessonId = computed(() => progressStore.currentLessonId)
 
 const steps = computed<TaskStep[]>(() => (props.node as { steps?: TaskStep[] }).steps ?? [])
 
-function stepKey(step: TaskStep, index: number): string {
-  return step.assert || `manual:${index}`
+function stepKey(index: number): string {
+  return `manual:${index}`
 }
 
-function isDone(step: TaskStep, index: number): boolean {
-  return progressStore.isTaskStepDone(lessonId.value, stepKey(step, index))
+function isDone(index: number): boolean {
+  return progressStore.isTaskStepDone(lessonId.value, stepKey(index))
 }
 
 function toggleStep(index: number) {
-  const step = steps.value[index]
-  if (!step) return
-  const key = stepKey(step, index)
+  const key = stepKey(index)
   progressStore.markTaskStep(lessonId.value, key, !progressStore.isTaskStepDone(lessonId.value, key))
 }
 
@@ -36,22 +34,19 @@ const helpOpen = ref(false)
   <section class="task-block">
     <h3 v-if="node.attrs?.title" class="block-title">✏️ {{ node.attrs.title }}</h3>
     <div v-if="steps.length" class="steps-list">
-      <article v-for="(step, index) in steps" :key="index" :class="['step-card', { 'step-card--done': isDone(step, index) }]">
+      <article v-for="(step, index) in steps" :key="index" :class="['step-card', { 'step-card--done': isDone(index) }]">
         <div class="step-header">
           <button
-            :class="['step-number', { 'step-number--done': isDone(step, index) }]"
-            :title="isDone(step, index) ? '已完成' : '点击标记完成'"
+            :class="['step-number', { 'step-number--done': isDone(index) }]"
+            :title="isDone(index) ? '已完成' : '点击标记完成'"
             @click="toggleStep(index)"
           >
-            {{ isDone(step, index) ? '✓' : index + 1 }}
+            {{ isDone(index) ? '✓' : index + 1 }}
           </button>
           <div class="step-main">
             <p class="step-content">
               <InlineText :text="step.content" />
             </p>
-            <span v-if="step.assert" :class="['assert-badge', { 'assert-badge--pass': isDone(step, index) }]">
-              {{ isDone(step, index) ? '✓ 已自动检测通过' : '🤖 运行后自动检测' }}
-            </span>
           </div>
         </div>
         <div v-if="step.purpose" class="purpose-box">
@@ -162,23 +157,6 @@ const helpOpen = ref(false)
 
 .step-main {
   flex: 1;
-}
-
-.assert-badge {
-  display: inline-block;
-  margin-top: var(--sp-1);
-  font-size: 11px;
-  color: var(--color-text-light);
-  background: var(--color-bg-warm);
-  border: 1px dashed var(--color-border-light);
-  border-radius: var(--radius-xs);
-  padding: 2px 8px;
-}
-
-.assert-badge--pass {
-  color: var(--color-success);
-  border-color: var(--color-success);
-  background: rgba(46, 125, 50, 0.08);
 }
 
 .step-content,

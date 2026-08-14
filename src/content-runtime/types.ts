@@ -78,8 +78,6 @@ export type TaskStep = {
   content: string
   purpose?: string
   expected?: string
-  /** 自动验收断言（如 "h1" / ".card:text:巴赫" / "#gallery:count:3"），可选 */
-  assert?: string
 }
 
 // ---- 各块专属类型（判别联合成员）---- //

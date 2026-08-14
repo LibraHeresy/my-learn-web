@@ -9,7 +9,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   maximize: []; // 请求全屏
   "preview-error": [info: { lineno: number; message: string }];
-  "task-assert": [passed: string[]]; // 任务自动验收：通过断言的 key 列表
 }>();
 
 const iframeRef = ref<HTMLIFrameElement>();
@@ -67,9 +66,6 @@ function onMessage(e: MessageEvent) {
     if (consoleLogs.value.length > MAX_CONSOLE_LOGS) {
       consoleLogs.value.splice(0, consoleLogs.value.length - MAX_CONSOLE_LOGS);
     }
-  }
-  if (e.data && e.data.type === "task-assert") {
-    emit("task-assert", Array.isArray(e.data.passed) ? e.data.passed : []);
   }
 }
 

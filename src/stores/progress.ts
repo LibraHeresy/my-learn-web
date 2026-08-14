@@ -140,21 +140,6 @@ export const useProgressStore = defineStore('progress', () => {
     return lessonProgress.value[lessonId]?.taskSteps?.[key] ?? false
   }
 
-  // 批量标记自动验收通过的断言
-  function markAssertPassed(lessonId: string, passedKeys: string[]) {
-    if (!passedKeys.length) return
-    const entry = ensureProgress(lessonId)
-    if (!entry.taskSteps) entry.taskSteps = {}
-    let changed = false
-    for (const key of passedKeys) {
-      if (!entry.taskSteps[key]) {
-        entry.taskSteps[key] = true
-        changed = true
-      }
-    }
-    if (changed) persistProgress()
-  }
-
   // 初始化加载
   loadProgress()
 
@@ -168,7 +153,6 @@ export const useProgressStore = defineStore('progress', () => {
     resetUserCode,
     markTaskStep,
     isTaskStepDone,
-    markAssertPassed,
     lastError,
   }
 })
