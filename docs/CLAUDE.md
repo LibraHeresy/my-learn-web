@@ -17,15 +17,18 @@ This file provides guidance to Claude Code (claude.ai/code) and other AI coding 
 
 ## 常用命令
 
+包管理器固定为 Yarn 1（classic，`packageManager: yarn@1.22.22`），锁文件为 `yarn.lock`，勿混用 npm。
+
 ```bash
-npm run dev            # 先执行内容编译，再启动 Vite 开发服务器
-npm run build:content  # 编译 src/content/** 为 src/generated/** JSON
-npm run build          # 生产构建（含 vue-tsc 类型检查）
-npm run preview        # 预览构建产物
-npm run test           # 运行全部单测
-npm run test:watch     # Vitest 监听模式
-npm run typecheck      # 仅类型检查
-npm run lint           # ESLint
+yarn install --frozen-lockfile   # 严格按 lockfile 安装（CI 同款）
+yarn dev            # 先执行内容编译，再启动 Vite 开发服务器
+yarn build:content  # 编译 src/content/** 为 src/generated/** JSON
+yarn build          # 生产构建（含 vue-tsc 类型检查）
+yarn preview        # 预览构建产物
+yarn test           # 运行全部单测
+yarn test:watch     # Vitest 监听模式
+yarn typecheck      # 仅类型检查
+yarn lint           # ESLint
 ```
 
 ## 当前架构
@@ -110,12 +113,12 @@ src/
 - block 名 → 组件映射在 `block-registry.ts`；未知 block 走 `UnsupportedBlock.vue`
 - `remark-directive` 对复杂嵌套不完全可靠，`:::task` / `::::step` 在 `build-content.ts` 中做了手工预处理
 
-### 项目内容格式（已知双轨遗留）
+### 项目内容格式
 
-- `src/content/projects/projects/*`：`project.json` + `steps/*.md`（当前主要格式）
-- `src/content/projects/fundamentals/music-showcase`：`project.md` + `meta.yaml`（旧格式）
+所有项目统一为单一格式：`meta.yaml`（元数据）+ `project.json`（步骤定义，支持 `{ mdFile: string }` 引用）+ `steps/*.md`（步骤正文）。
 
-`build-content.ts` 的 `hashProjectDir` 需同时兼容两种格式。统一格式是计划中的重构项，改前先确认两份解析路径都覆盖。
+- `collectProjectDirs` 只收集同时含 `meta.yaml` + `project.json` 的目录
+- `compileProject` 解析 `project.json` 的 `steps[]`，字段（content/task/hint/purpose/expectedResult）可以是内联字符串或 `{ mdFile }` 引用
 
 ## 运行时数据加载
 
