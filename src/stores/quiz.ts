@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { getAllQuestions, getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
+import { getGemQuestions, getQuestionsByIds, getGems, type QuizQuestion, type GemDef } from '../content-loaders/quiz'
 import { safeSetItem, safeGetItem } from '../utils/storage'
 const gems = getGems()
-const quizQuestions = getAllQuestions()
 
 const STORAGE_KEY = 'code-score-quiz-v2'
 
@@ -97,16 +96,15 @@ export const useQuizStore = defineStore('quiz', () => {
 
   function getQuestionStreak(questionId: number): number { return data.value.questionStreaks[questionId] || 0 }
 
-  function pickLevelQuestions(gemId: string, level: number): QuizQuestion[] {
-    const pool = quizQuestions.filter(q => q.gem === gemId && q.level === level)
+  async function pickLevelQuestions(gemId: string, level: number): Promise<QuizQuestion[]> {
+    const all = await getGemQuestions(gemId)
+    const pool = all.filter(q => q.gem === gemId && q.level === level)
     const shuffled = [...pool].sort(() => Math.random() - 0.5)
     return shuffled
   }
 
-  function pickWrongQuestions(count = 10): QuizQuestion[] {
-    const pool = data.value.wrongPool
-      .map(id => quizQuestions.find(q => q.id === id))
-      .filter(Boolean) as QuizQuestion[]
+  async function pickWrongQuestions(count = 10): Promise<QuizQuestion[]> {
+    const pool = await getQuestionsByIds(data.value.wrongPool)
     return [...pool].sort(() => Math.random() - 0.5).slice(0, count)
   }
 

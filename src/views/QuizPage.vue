@@ -51,8 +51,8 @@ function selectGem(gem: GemDef) {
   activeLevel.value = gem.levels[0].level
 }
 
-function startLevel(gemId: string, level: number) {
-  questions.value = store.pickLevelQuestions(gemId, level)
+async function startLevel(gemId: string, level: number) {
+  questions.value = await store.pickLevelQuestions(gemId, level)
   if (!questions.value.length) return
   currentIdx.value = 0; selected.value = null; score.value = 0; history.value = []; wrongIds.value = []
   page.value = 'level'
@@ -96,8 +96,8 @@ function backToHome() { page.value = 'home'; activeGem.value = null }
 
 const showFab = ref(false)
 function toggleFab() { showFab.value = !showFab.value }
-function startWrongReview() {
-  const qs = store.pickWrongQuestions(10)
+async function startWrongReview() {
+  const qs = await store.pickWrongQuestions(10)
   if (!qs.length) return
   questions.value = qs; currentIdx.value = 0; selected.value = null; score.value = 0; history.value = []; wrongIds.value = []
   activeGem.value = null; activeLevel.value = 0; page.value = 'level'

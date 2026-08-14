@@ -140,6 +140,11 @@ function contentWatchPlugin(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/my-learn-web/',
+  // CodeEditor chunk（CodeMirror 6 本体，约 520KB）已在课程页按需加载，
+  // 属编辑器功能的合理体积，此处调高阈值避免构建警告噪音
+  build: {
+    chunkSizeWarningLimit: 550,
+  },
   server: {
     watch: {
       ignored: ['**/src/generated/**'],

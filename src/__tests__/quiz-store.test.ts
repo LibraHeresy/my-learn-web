@@ -46,7 +46,10 @@ const mockQuestions: QuizQuestion[] = [
 
 vi.mock('../content-loaders/quiz', () => ({
   getGems: () => mockGems,
-  getAllQuestions: () => mockQuestions,
+  getGemQuestions: async (gemId: string) =>
+    mockQuestions.filter((q) => q.gem === gemId),
+  getQuestionsByIds: async (ids: number[]) =>
+    mockQuestions.filter((q) => ids.includes(q.id)),
 }))
 
 // ---------- Tests ----------
@@ -248,7 +251,7 @@ describe('Quiz Store', () => {
       const store = await getStore()
       store.recordAnswer(1, false)
       store.recordAnswer(3, false)
-      const result = store.pickWrongQuestions(10)
+      const result = await store.pickWrongQuestions(10)
       expect(result.length).toBe(2)
       const ids = result.map((q) => q.id)
       expect(ids).toContain(1)
@@ -257,7 +260,7 @@ describe('Quiz Store', () => {
 
     it('错题池为空时返回空数组', async () => {
       const store = await getStore()
-      expect(store.pickWrongQuestions()).toHaveLength(0)
+      expect(await store.pickWrongQuestions()).toHaveLength(0)
     })
   })
 })

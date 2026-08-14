@@ -3,6 +3,7 @@ import {
   readFile,
   readdir,
   rename,
+  rm,
   unlink,
   writeFile,
 } from "node:fs/promises";
@@ -55,7 +56,9 @@ const taxonomySourceFile = path.join(
   "taxonomy.yaml",
 );
 const quizSourceDir = path.join(projectRoot, "src", "content", "quiz");
-const generatedQuizFile = path.join(generatedDir, "quiz.json");
+const generatedQuizFile = path.join(generatedDir, "quiz.json"); // 旧格式，仅用于清理
+const generatedQuizGemsFile = path.join(generatedDir, "quiz-gems.json");
+const generatedQuizQuestionsDir = path.join(generatedDir, "quiz-questions");
 const buildCacheFile = path.join(generatedDir, ".build-cache.json");
 
 // ---------- 增量编译：文件 Hash 缓存 ----------
@@ -1177,9 +1180,10 @@ async function compileQuiz(): Promise<void> {
   } catch {
     // No quiz dir — skip
     await atomicWriteFile(
-      generatedQuizFile,
-      JSON.stringify({ gems: [], questions: [] }, null, 2) + "\n",
+      generatedQuizGemsFile,
+      JSON.stringify({ gems: [] }, null, 2) + "\n",
     );
+    await rm(generatedQuizQuestionsDir, { recursive: true, force: true });
     return;
   }
 
@@ -1238,17 +1242,43 @@ async function compileQuiz(): Promise<void> {
 
   gems.sort((a, b) => a.order - b.order);
 
-  // Flatten questions for backward compatibility — add gem/level fields
-  const allQuestions = gems.flatMap((g) =>
-    g.levels.flatMap((l) =>
-      l.questions.map((q) => ({ ...q, gem: g.id, level: l.level })),
-    ),
+  // 拆分输出：quiz-gems.json 只含元数据（含 questionIds 供按需定位），
+  // quiz-questions/{gemId}.json 每 gem 一份题目，运行时按需加载，避免 947KB 全量进 bundle
+  const gemMeta = gems.map((g) => ({
+    id: g.id,
+    name: g.name,
+    icon: g.icon,
+    achievement: g.achievement,
+    order: g.order,
+    questionIds: g.levels.flatMap((l) => l.questions.map((q) => q.id)),
+    levels: g.levels.map((l) => ({
+      level: l.level,
+      type: l.type,
+      threshold: l.threshold,
+      name: l.name,
+      count: l.count,
+    })),
+  }));
+
+  await mkdir(generatedQuizQuestionsDir, { recursive: true });
+  await Promise.all(
+    gems.map((g) => {
+      const flat = g.levels.flatMap((l) =>
+        l.questions.map((q) => ({ ...q, gem: g.id, level: l.level })),
+      );
+      return atomicWriteFile(
+        path.join(generatedQuizQuestionsDir, `${g.id}.json`),
+        JSON.stringify(flat, null, 2) + "\n",
+      );
+    }),
   );
 
   await atomicWriteFile(
-    generatedQuizFile,
-    JSON.stringify({ gems, questions: allQuestions }, null, 2) + "\n",
+    generatedQuizGemsFile,
+    JSON.stringify({ gems: gemMeta }, null, 2) + "\n",
   );
+  // 清理旧的全量 quiz.json
+  await rm(generatedQuizFile, { force: true });
 }
 
 // ---------- Main ----------
@@ -1565,7 +1595,7 @@ export async function main() {
 
   await saveBuildCache(newCache);
 
-  const quizData = JSON.parse(await readFile(generatedQuizFile, "utf8"));
+  const quizData = JSON.parse(await readFile(generatedQuizGemsFile, "utf8"));
   console.log(
     `Compiled ${compiled.length} lesson(s), ${compiledProjects.length} project(s), ${quizData.gems?.length || 0} quiz gem(s) to ${path.relative(projectRoot, generatedDir)}`,
   );
