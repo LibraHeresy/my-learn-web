@@ -1,9 +1,12 @@
-import { describe, it, expect, beforeEach } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { mount, enableAutoUnmount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 import { getAllLessons, getLesson } from '../content-loaders/lessons'
 import { getAllProjects } from '../content-loaders/projects'
+
+// 每个测试后自动 unmount，避免 TermTip 等组件的模块级全局状态（tipStates）跨测试累积
+enableAutoUnmount(afterEach)
 
 // ============================================================
 // 第三层：页面冒烟测试

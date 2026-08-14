@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, defineComponent, h, type VNode } from 'vue'
-import { parseInlineTokens, type InlineToken as InlineTokenType } from './text'
+import { computed } from 'vue'
+import { parseInlineTokens } from './text'
 
 const props = defineProps<{
   text: string
@@ -10,6 +10,11 @@ const tokens = computed(() => parseInlineTokens(props.text))
 </script>
 
 <script lang="ts">
+import { defineComponent, h, type VNode } from 'vue'
+import TermTip from './TermTip.vue'
+import { getGlossaryEntry } from '../../content-loaders/glossary'
+import type { InlineToken as InlineTokenType } from './text'
+
 const InlineToken = defineComponent({
   name: 'InlineToken',
   props: {
@@ -23,7 +28,16 @@ const InlineToken = defineComponent({
       if (t.type === 'code') return h('code', { class: 'inline-code' }, t.value)
 
       if (t.type === 'term') {
-        return h('span', { class: 'inline-term' }, t.value)
+        const entry = getGlossaryEntry(t.key)
+        return h(
+          TermTip,
+          {
+            term: t.key,
+            explanation: entry?.explanation ?? '',
+            analogy: entry?.analogy,
+          },
+          { default: () => t.value },
+        )
       }
 
       if (t.type === 'strong') {
@@ -51,11 +65,6 @@ const InlineToken = defineComponent({
   border-radius: var(--radius-xs);
   font-family: var(--font-code);
   font-size: var(--fs-xs);
-  color: var(--color-accent);
-}
-
-.inline-term {
-  border-bottom: 1.5px dashed var(--color-gold);
   color: var(--color-accent);
 }
 </style>
