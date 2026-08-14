@@ -8,6 +8,7 @@ import type { UserCode } from '../types'
 import type { CompiledProject } from '../content-runtime/types'
 import { useProjectProgressStore } from '../stores/projectProgress'
 import DocumentBodyRenderer from '../content-runtime/renderers/DocumentBodyRenderer.vue'
+import { stripTermMarkers } from '../content-runtime/renderers/text'
 import CodeEditor from '../components/CodeEditor.vue'
 import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
@@ -200,7 +201,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
     <div class="project-header">
       <button class="back-btn" @click="goHome" title="返回首页">← 返回</button>
       <div class="project-header-center">
-        <span class="project-header-title">{{ project?.meta.title }}</span>
+        <span class="project-header-title">{{ project?.meta.title ? stripTermMarkers(project.meta.title) : '' }}</span>
         <span class="project-header-step">第 {{ currentStep + 1 }}/{{ totalSteps }} 步</span>
       </div>
       <div class="step-dots">
@@ -243,7 +244,7 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
           <Transition name="slide-fade" mode="out-in">
             <div :key="currentStep" class="step-panel">
               <div class="step-body">
-                <h3 class="step-title">{{ currentStepData.title }}</h3>
+                <h3 class="step-title">{{ stripTermMarkers(currentStepData.title) }}</h3>
                 <div class="step-content">
                   <DocumentBodyRenderer
                     v-if="currentStepData.contentBody?.length"

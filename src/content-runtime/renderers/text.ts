@@ -188,6 +188,14 @@ export function parseInlineTokens(text: string): InlineToken[] {
   return out.length ? out : [{ type: 'text', value: text }]
 }
 
+/**
+ * 剥离术语标记 {{term:xxx}} → xxx。
+ * 用于标题等应保持纯文本的位置，防御性确保标题永不显示术语标记/tooltip。
+ */
+export function stripTermMarkers(text: string): string {
+  return text.replace(/\{\{term:([^}]+)\}\}/g, '$1')
+}
+
 export type ListItem = { text: string; indent: number; children?: ListItem[] }
 
 export type BlockContentSegment =

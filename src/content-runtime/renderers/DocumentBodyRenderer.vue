@@ -2,7 +2,7 @@
 import { resolveBlockComponent } from '../block-registry'
 import type { BlockNode, ContentBodyNode } from '../types'
 import InlineText from './InlineText.vue'
-import { isBlockquoteText, stripBlockquoteMarkers } from './text'
+import { isBlockquoteText, stripBlockquoteMarkers, stripTermMarkers } from './text'
 import CodeBlock from './CodeBlock.vue'
 
 withDefaults(defineProps<{
@@ -28,7 +28,7 @@ function isBlockNode(node: ContentBodyNode): node is BlockNode {
           :is="headingTag(node)"
           class="doc-heading"
         >
-          {{ node.text }}
+          {{ stripTermMarkers(node.text) }}
         </component>
 
         <blockquote v-else-if="node.type === 'paragraph' && isBlockquoteText(node.text)" class="md-blockquote">

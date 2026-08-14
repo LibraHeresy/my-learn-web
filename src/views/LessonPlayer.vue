@@ -1,77 +1,93 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { getAllLessons, getLesson } from '../content-loaders/lessons'
-import { useProgressStore } from '../stores/progress'
-import { useCodePreview } from '../composables/useCodePreview'
-import { usePanelResize } from '../composables/usePanelResize'
-import { useAsyncComputed } from '../composables/useAsyncComputed'
-import { useLessonNavigation } from '../composables/useLessonNavigation'
-import { useFocusTrap } from '../composables/useFocusTrap'
-import { useScrollLock } from '../composables/useScrollLock'
-import { encodeCode, decodeCode } from '../utils/shareCode'
-import { getGemsForChapter } from '../content-loaders/taxonomy'
-import { getGems } from '../content-loaders/quiz'
-import type { UserCode } from '../types'
+import {
+  ref,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  defineAsyncComponent,
+} from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { getAllLessons, getLesson } from "../content-loaders/lessons";
+import { useProgressStore } from "../stores/progress";
+import { useCodePreview } from "../composables/useCodePreview";
+import { usePanelResize } from "../composables/usePanelResize";
+import { useAsyncComputed } from "../composables/useAsyncComputed";
+import { useLessonNavigation } from "../composables/useLessonNavigation";
+import { useFocusTrap } from "../composables/useFocusTrap";
+import { useScrollLock } from "../composables/useScrollLock";
+import { encodeCode, decodeCode } from "../utils/shareCode";
+import { getGemsForChapter } from "../content-loaders/taxonomy";
+import { getGems } from "../content-loaders/quiz";
+import type { UserCode } from "../types";
 // CodeEditor 按需加载：只在 sandbox 模式课程中使用，
 // 延迟加载可将 @codemirror/* 从主 bundle 拆分为独立 chunk（约 -500KB gzip）
-const CodeEditor = defineAsyncComponent(() => import('../components/CodeEditor.vue'))
-import LivePreview from '../components/LivePreview.vue'
-import PlayerFooter from '../components/PlayerFooter.vue'
-import Resizer from '../components/Resizer.vue'
-import LessonSidebar from '../components/LessonSidebar.vue'
-import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
+const CodeEditor = defineAsyncComponent(
+  () => import("../components/CodeEditor.vue"),
+);
+import LivePreview from "../components/LivePreview.vue";
+import PlayerFooter from "../components/PlayerFooter.vue";
+import Resizer from "../components/Resizer.vue";
+import LessonSidebar from "../components/LessonSidebar.vue";
+import DocumentRenderer from "../content-runtime/renderers/DocumentRenderer.vue";
 
-const route = useRoute()
-const router = useRouter()
-const progressStore = useProgressStore()
+const route = useRoute();
+const router = useRouter();
+const progressStore = useProgressStore();
 
-const lastError = computed(() => progressStore.lastError)
+const lastError = computed(() => progressStore.lastError);
 function dismissLastError() {
-  progressStore.lastError = null
+  progressStore.lastError = null;
 }
 
-const lessonId = computed(() => route.params.lessonId as string)
-const lessonState = useAsyncComputed(() => getLesson(lessonId.value))
-const all = computed(() => getAllLessons())
-const userCode = ref<UserCode>({ html: '', css: '', js: '' })
+const lessonId = computed(() => route.params.lessonId as string);
+const lessonState = useAsyncComputed(() => getLesson(lessonId.value));
+const all = computed(() => getAllLessons());
+const userCode = ref<UserCode>({ html: "", css: "", js: "" });
 
-const { previewSrc, triggerPreview, livePreviewMode } = useCodePreview(userCode)
+const { previewSrc, triggerPreview, livePreviewMode } =
+  useCodePreview(userCode);
 
-const lesson = computed(() => lessonState.value.value)
-const isSandboxMode = computed(() => lesson.value?.meta.mode === 'sandbox')
-const isLocalMode = computed(() => lesson.value?.meta.mode === 'local')
+const lesson = computed(() => lessonState.value.value);
+const isSandboxMode = computed(() => lesson.value?.meta.mode === "sandbox");
+const isLocalMode = computed(() => lesson.value?.meta.mode === "local");
 
 // 关联测验引导（taxonomy.yaml 的 chapter.quizGems 映射）
-const lessonChapterGems = computed(() => getGemsForChapter(lesson.value?.meta.chapter))
+const lessonChapterGems = computed(() =>
+  getGemsForChapter(lesson.value?.meta.chapter),
+);
 const gemNamesText = computed(() => {
-  const allGems = getGems()
+  const allGems = getGems();
   return lessonChapterGems.value
     .map((id) => allGems.find((g) => g.id === id)?.name ?? id)
-    .join('、')
-})
+    .join("、");
+});
 
 // ─── 响应式宽度 ───────────────────────────────────────────────────────────
-const windowWidth = ref(window.innerWidth)
-function onResize() { windowWidth.value = window.innerWidth }
-onMounted(() => window.addEventListener('resize', onResize))
-onBeforeUnmount(() => window.removeEventListener('resize', onResize))
+const windowWidth = ref(window.innerWidth);
+function onResize() {
+  windowWidth.value = window.innerWidth;
+}
+onMounted(() => window.addEventListener("resize", onResize));
+onBeforeUnmount(() => window.removeEventListener("resize", onResize));
 
 // ─── 侧边栏 ───────────────────────────────────────────────────────────────
-const sidebarExpanded = ref(false)
-const isMobile = computed(() => windowWidth.value < 901)
-const sidebarDialogRef = ref<HTMLElement | null>(null)
-const mobileSidebarOpen = computed(() => isMobile.value && sidebarExpanded.value)
+const sidebarExpanded = ref(false);
+const isMobile = computed(() => windowWidth.value < 901);
+const sidebarDialogRef = ref<HTMLElement | null>(null);
+const mobileSidebarOpen = computed(
+  () => isMobile.value && sidebarExpanded.value,
+);
 
-useScrollLock(mobileSidebarOpen)
-useFocusTrap(mobileSidebarOpen, sidebarDialogRef)
+useScrollLock(mobileSidebarOpen);
+useFocusTrap(mobileSidebarOpen, sidebarDialogRef);
 
 const sidebarVariant = computed(() => {
-  if (isMobile.value) return 'mobile'
-  return sidebarExpanded.value ? 'expanded' : 'collapsed'
-})
+  if (isMobile.value) return "mobile";
+  return sidebarExpanded.value ? "expanded" : "collapsed";
+});
 function toggleSidebar() {
-  sidebarExpanded.value = !sidebarExpanded.value
+  sidebarExpanded.value = !sidebarExpanded.value;
 }
 
 // ─── 导航与面包屑 ─────────────────────────────────────────────────────────
@@ -91,148 +107,157 @@ const {
   nextDisabled,
   goPrev,
   goNext,
-} = useLessonNavigation(lessonId, lesson, all)
+} = useLessonNavigation(lessonId, lesson, all);
 
 // ─── 键盘导航：← / → 切换上一课/下一课（焦点在编辑器/输入框时忽略）──
 function onGlobalKeydown(e: KeyboardEvent) {
-  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return
-  const target = e.target as HTMLElement | null
+  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  const target = e.target as HTMLElement | null;
   if (target) {
-    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return
-    if (target.closest('.cm-editor')) return
+    if (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable
+    )
+      return;
+    if (target.closest(".cm-editor")) return;
   }
-  if (e.key === 'ArrowLeft' && !prevDisabled.value) {
-    e.preventDefault()
-    goPrev()
-  } else if (e.key === 'ArrowRight' && !nextDisabled.value) {
-    e.preventDefault()
-    goNext()
+  if (e.key === "ArrowLeft" && !prevDisabled.value) {
+    e.preventDefault();
+    goPrev();
+  } else if (e.key === "ArrowRight" && !nextDisabled.value) {
+    e.preventDefault();
+    goNext();
   }
 }
-onMounted(() => window.addEventListener('keydown', onGlobalKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onGlobalKeydown))
+onMounted(() => window.addEventListener("keydown", onGlobalKeydown));
+onBeforeUnmount(() => window.removeEventListener("keydown", onGlobalKeydown));
 
 // 课程切换：同步 ID + 初始化代码
 watch(lesson, (l) => {
-  if (!l) return
-  progressStore.currentLessonId = l.id
-  if (l.meta.mode === 'sandbox') {
-    const saved = progressStore.getUserCode(l.id)
-    userCode.value = saved ? { ...saved } : { ...l.starter }
-    triggerPreview()
+  if (!l) return;
+  progressStore.currentLessonId = l.id;
+  if (l.meta.mode === "sandbox") {
+    const saved = progressStore.getUserCode(l.id);
+    userCode.value = saved ? { ...saved } : { ...l.starter };
+    triggerPreview();
   }
-})
+});
 
 function onCodeChange(code: UserCode) {
-  userCode.value = code
+  userCode.value = code;
   if (lesson.value) {
-    progressStore.saveUserCode(lesson.value.id, code)
+    progressStore.saveUserCode(lesson.value.id, code);
   }
 }
 
 function resetCode() {
-  const l = lesson.value
-  if (!l) return
-  userCode.value = { ...l.starter }
-  progressStore.resetUserCode(l.id)
-  triggerPreview()
+  const l = lesson.value;
+  if (!l) return;
+  userCode.value = { ...l.starter };
+  progressStore.resetUserCode(l.id);
+  triggerPreview();
 }
 
 function markComplete() {
-  progressStore.markComplete(lessonId.value)
+  progressStore.markComplete(lessonId.value);
 }
 
 function selectLesson(id: string) {
-  if (isMobile.value) sidebarExpanded.value = false
-  router.push(`/lesson/${id}`)
+  if (isMobile.value) sidebarExpanded.value = false;
+  router.push(`/lesson/${id}`);
 }
 
-const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize('code-score-panel-widths', 1)
+const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
+  "code-score-panel-widths",
+  1,
+);
 
 watch(lessonId, () => {
   if (playerMainRef.value) {
-    playerMainRef.value.scrollTop = 0
+    playerMainRef.value.scrollTop = 0;
   }
   if (contentPanelRef.value) {
-    contentPanelRef.value.scrollTop = 0
+    contentPanelRef.value.scrollTop = 0;
   }
-})
+});
 
 // ─── 面板全屏 ──────────────────────────────────────────────────────────────
-const maximized = ref<'none' | 'editor' | 'preview'>('none')
+const maximized = ref<"none" | "editor" | "preview">("none");
 
-function setMaximized(panel: 'editor' | 'preview') {
-  maximized.value = maximized.value === panel ? 'none' : panel
+function setMaximized(panel: "editor" | "preview") {
+  maximized.value = maximized.value === panel ? "none" : panel;
 }
 
 // Esc 退出全屏
 function onKeydown(e: KeyboardEvent) {
-  if (e.key !== 'Escape') return
-  if (maximized.value !== 'none') {
-    maximized.value = 'none'
-    return
+  if (e.key !== "Escape") return;
+  if (maximized.value !== "none") {
+    maximized.value = "none";
+    return;
   }
   if (isMobile.value && sidebarExpanded.value) {
-    sidebarExpanded.value = false
+    sidebarExpanded.value = false;
   }
 }
-onMounted(() => document.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
+onMounted(() => document.addEventListener("keydown", onKeydown));
+onBeforeUnmount(() => document.removeEventListener("keydown", onKeydown));
 
 // ─── 分享代码 ─────────────────────────────────────────────────────────────
-const shareCopied = ref(false)
+const shareCopied = ref(false);
 
 function shareCode() {
-  const encoded = encodeCode(userCode.value)
-  const url = `${window.location.origin}${window.location.pathname}?code=${encoded}`
+  const encoded = encodeCode(userCode.value);
+  const url = `${window.location.origin}${window.location.pathname}?code=${encoded}`;
   navigator.clipboard.writeText(url).then(() => {
-    shareCopied.value = true
-    setTimeout(() => { shareCopied.value = false }, 2500)
-  })
+    shareCopied.value = true;
+    setTimeout(() => {
+      shareCopied.value = false;
+    }, 2500);
+  });
 }
 
 // 页面加载时检测 URL 中的 code 参数
 onMounted(() => {
-  const code = route.query.code as string | undefined
+  const code = route.query.code as string | undefined;
   if (code) {
-    const decoded = decodeCode(code)
+    const decoded = decodeCode(code);
     if (decoded) {
-      userCode.value = decoded
-      triggerPreview()
+      userCode.value = decoded;
+      triggerPreview();
     }
     // 清除 URL 中的 code 参数，避免刷新后重复注入
-    router.replace({ query: {} })
+    router.replace({ query: {} });
   }
-})
+});
 
 // ─── 错误行高亮 ───────────────────────────────────────────────────────────
-const previewErrorLine = ref(0)
+const previewErrorLine = ref(0);
 
 function onPreviewError(info: { lineno: number; message: string }) {
-  previewErrorLine.value = info.lineno
+  previewErrorLine.value = info.lineno;
 }
 
 // 运行新代码时清除上次错误
 watch(previewSrc, () => {
-  previewErrorLine.value = 0
-})
+  previewErrorLine.value = 0;
+});
 
 // ─── 阅读进度条 ─────────────────────────────────────────────────────────────
-const contentPanelRef = ref<HTMLDivElement>()
-const readingProgress = ref(0)
+const contentPanelRef = ref<HTMLDivElement>();
+const readingProgress = ref(0);
 
 function onContentScroll() {
-  if (!contentPanelRef.value) return
-  const el = contentPanelRef.value
-  const denom = el.scrollHeight - el.clientHeight
-  readingProgress.value = denom > 0 ? (el.scrollTop / denom) * 100 : 0
+  if (!contentPanelRef.value) return;
+  const el = contentPanelRef.value;
+  const denom = el.scrollHeight - el.clientHeight;
+  readingProgress.value = denom > 0 ? (el.scrollTop / denom) * 100 : 0;
 }
 
 // 切换课程时重置进度
 watch(lessonId, () => {
-  readingProgress.value = 0
-})
-
+  readingProgress.value = 0;
+});
 </script>
 
 <template>
@@ -240,12 +265,24 @@ watch(lessonId, () => {
     <Transition name="fade">
       <div v-if="lastError" class="app-error-toast" role="alert">
         <span class="app-error-toast__text">{{ lastError }}</span>
-        <button class="app-error-toast__close" @click="dismissLastError" title="关闭">✕</button>
+        <button
+          class="app-error-toast__close"
+          @click="dismissLastError"
+          title="关闭"
+        >
+          ✕
+        </button>
       </div>
     </Transition>
 
     <div v-if="lesson && isMobile" class="mobile-bar">
-      <button v-if="!isPrologue" class="mobile-menu-btn" @click="sidebarExpanded = true">☰</button>
+      <button
+        v-if="!isPrologue"
+        class="mobile-menu-btn"
+        @click="sidebarExpanded = true"
+      >
+        ☰
+      </button>
       <span class="mobile-lesson-title">{{ lesson.meta.title }}</span>
     </div>
 
@@ -274,7 +311,7 @@ watch(lessonId, () => {
         :class="{ copied: shareCopied }"
         @click="shareCode"
       >
-        {{ shareCopied ? '✓ 已复制' : '🔗 分享代码' }}
+        {{ shareCopied ? "✓ 已复制" : "🔗 分享代码" }}
       </button>
     </div>
 
@@ -291,10 +328,13 @@ watch(lessonId, () => {
       <Transition name="sidebar-slide">
         <div
           v-if="lesson && !isPrologue && (!isMobile || sidebarExpanded)"
-          :class="['sidebar-wrapper', {
-            visible: !isMobile,
-            collapsed: sidebarVariant === 'collapsed'
-          }]"
+          :class="[
+            'sidebar-wrapper',
+            {
+              visible: !isMobile,
+              collapsed: sidebarVariant === 'collapsed',
+            },
+          ]"
           ref="sidebarDialogRef"
           :role="isMobile ? 'dialog' : undefined"
           :aria-modal="isMobile ? 'true' : undefined"
@@ -306,7 +346,10 @@ watch(lessonId, () => {
             :current-lesson-id="lessonId"
             :track-id="currentTrackId"
             :lessons="all"
-            :current-position="{ lessonIndex: positionInChapter, totalLessons: totalInChapter }"
+            :current-position="{
+              lessonIndex: positionInChapter,
+              totalLessons: totalInChapter,
+            }"
             @select="selectLesson"
             @close="sidebarExpanded = false"
             @toggle="toggleSidebar"
@@ -317,16 +360,30 @@ watch(lessonId, () => {
       <div
         v-if="lesson"
         ref="playerMainRef"
-        :class="['player-main', { 'is-dragging': dragging, 'is-local': isLocalMode }]"
+        :class="[
+          'player-main',
+          { 'is-dragging': dragging, 'is-local': isLocalMode },
+        ]"
       >
         <!-- 内容面板 + 笔记 -->
         <div
           class="panel-content"
-          :style="{ width: isLocalMode ? '100%' : 'calc(' + panelWidths.content + '% - 5.33px)' }"
+          :style="{
+            width: isLocalMode
+              ? '100%'
+              : 'calc(' + panelWidths.content + '% - 5.33px)',
+          }"
         >
           <div class="content-shell">
-            <div ref="contentPanelRef" class="content-scroll" @scroll="onContentScroll">
-              <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
+            <div
+              ref="contentPanelRef"
+              class="content-scroll"
+              @scroll="onContentScroll"
+            >
+              <div
+                class="reading-progress"
+                :style="{ width: readingProgress + '%' }"
+              />
               <div class="content-inner">
                 <DocumentRenderer :key="lessonId" :lesson="lesson" />
                 <div v-if="lessonChapterGems.length" class="quiz-cta">
@@ -334,7 +391,9 @@ watch(lessonId, () => {
                   <span class="quiz-cta-text">
                     学完这课去测验巩固：<strong>{{ gemNamesText }}</strong>
                   </span>
-                  <button class="quiz-cta-btn" @click="router.push('/quiz')">去做测验 →</button>
+                  <button class="quiz-cta-btn" @click="router.push('/quiz')">
+                    去做测验 →
+                  </button>
                 </div>
               </div>
             </div>
@@ -342,10 +401,20 @@ watch(lessonId, () => {
         </div>
 
         <template v-if="!isLocalMode && isSandboxMode">
-          <Resizer boundary="content-editor" @drag-start="startDrag('content-editor', $event)" />
+          <Resizer
+            boundary="content-editor"
+            @drag-start="startDrag('content-editor', $event)"
+          />
           <div
-            :class="['panel-editor', { 'is-maximized': maximized === 'editor' }]"
-            :style="maximized === 'editor' ? {} : { width: 'calc(' + panelWidths.editor + '% - 5.33px)' }"
+            :class="[
+              'panel-editor',
+              { 'is-maximized': maximized === 'editor' },
+            ]"
+            :style="
+              maximized === 'editor'
+                ? {}
+                : { width: 'calc(' + panelWidths.editor + '% - 5.33px)' }
+            "
           >
             <CodeEditor
               :key="lessonId"
@@ -362,10 +431,20 @@ watch(lessonId, () => {
             />
           </div>
 
-          <Resizer boundary="editor-preview" @drag-start="startDrag('editor-preview', $event)" />
+          <Resizer
+            boundary="editor-preview"
+            @drag-start="startDrag('editor-preview', $event)"
+          />
           <div
-            :class="['panel-preview', { 'is-maximized': maximized === 'preview' }]"
-            :style="maximized === 'preview' ? {} : { width: 'calc(' + panelWidths.preview + '% - 5.33px)' }"
+            :class="[
+              'panel-preview',
+              { 'is-maximized': maximized === 'preview' },
+            ]"
+            :style="
+              maximized === 'preview'
+                ? {}
+                : { width: 'calc(' + panelWidths.preview + '% - 5.33px)' }
+            "
           >
             <LivePreview
               :srcdoc="previewSrc"
@@ -428,7 +507,9 @@ watch(lessonId, () => {
   padding: 2px 0;
   flex-shrink: 0;
 }
-.topbar-home:hover { color: var(--color-accent); }
+.topbar-home:hover {
+  color: var(--color-accent);
+}
 
 .topbar-breadcrumb {
   flex: 1;
@@ -441,8 +522,14 @@ watch(lessonId, () => {
   color: var(--color-text-light);
 }
 
-.breadcrumb-sep { color: var(--color-border); flex-shrink: 0; font-size: var(--fs-xs); }
-.breadcrumb-position { color: var(--color-text-light); }
+.breadcrumb-sep {
+  color: var(--color-border);
+  flex-shrink: 0;
+  font-size: var(--fs-xs);
+}
+.breadcrumb-position {
+  color: var(--color-text-light);
+}
 
 /* 分享按钮 */
 .topbar-share-btn {
@@ -456,8 +543,14 @@ watch(lessonId, () => {
   transition: all var(--transition);
   flex-shrink: 0;
 }
-.topbar-share-btn:hover { color: var(--color-accent); border-color: var(--color-accent-border); }
-.topbar-share-btn.copied { color: var(--color-success); border-color: var(--color-success); }
+.topbar-share-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent-border);
+}
+.topbar-share-btn.copied {
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
 
 .mobile-bar {
   display: none;
@@ -469,23 +562,40 @@ watch(lessonId, () => {
   height: 44px;
   flex-shrink: 0;
 }
-.mobile-menu-btn { background: none; font-size: 1.2rem; color: var(--color-text); padding: var(--sp-1); }
+.mobile-menu-btn {
+  background: none;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  padding: var(--sp-1);
+}
 .mobile-lesson-title {
-  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: var(--fs-sm); font-weight: 500; color: var(--color-text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text);
 }
 
-.sidebar-wrapper { display: none; }
+.sidebar-wrapper {
+  display: none;
+}
 .sidebar-overlay {
-  position: fixed; inset: 0;
+  position: fixed;
+  inset: 0;
   background: rgba(0, 0, 0, 0.4);
   z-index: 199;
 }
 
-.sidebar-slide-enter-active, .sidebar-slide-leave-active {
+.sidebar-slide-enter-active,
+.sidebar-slide-leave-active {
   transition: transform var(--dur-normal) var(--ease-out);
 }
-.sidebar-slide-enter-from, .sidebar-slide-leave-to { transform: translateX(-100%); }
+.sidebar-slide-enter-from,
+.sidebar-slide-leave-to {
+  transform: translateX(-100%);
+}
 
 .player-layout {
   flex: 1;
@@ -500,9 +610,18 @@ watch(lessonId, () => {
   overflow: hidden;
   min-height: 0;
 }
-.player-main.is-dragging * { pointer-events: none; }
-.player-main.is-local { display: block; overflow-y: auto; }
-.player-main.is-local .panel-content { max-width: 860px; margin: 0 auto; overflow: visible; }
+.player-main.is-dragging * {
+  pointer-events: none;
+}
+.player-main.is-local {
+  display: block;
+  overflow-y: auto;
+}
+.player-main.is-local .panel-content {
+  max-width: 860px;
+  margin: 0 auto;
+  overflow: visible;
+}
 
 .panel-content {
   overflow: hidden;
@@ -525,7 +644,6 @@ watch(lessonId, () => {
   min-height: 0;
   overflow-y: auto;
   overflow-x: auto;
-  padding-bottom: var(--sp-6);
 }
 
 .content-inner {
@@ -538,7 +656,8 @@ watch(lessonId, () => {
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  margin: var(--sp-6) auto 0;
+  margin: 0 auto;
+  margin-bottom: var(--sp-6);
   max-width: 720px;
   padding: var(--sp-3) var(--sp-4);
   background: var(--color-panel);
@@ -583,7 +702,8 @@ watch(lessonId, () => {
   transition: width 0.15s ease-out;
 }
 
-.panel-editor, .panel-preview {
+.panel-editor,
+.panel-preview {
   overflow: hidden;
   flex-shrink: 0;
   min-width: 0;
@@ -613,21 +733,28 @@ watch(lessonId, () => {
   gap: var(--sp-4);
 }
 
-
 /* ─── 响应式 ─── */
 @media (max-width: 900px) {
-  .mobile-bar { display: flex; }
+  .mobile-bar {
+    display: flex;
+  }
 
   .sidebar-wrapper {
-    position: fixed; inset: 0;
+    position: fixed;
+    inset: 0;
     width: var(--sidebar-width);
-    z-index: 200; display: block;
+    z-index: 200;
+    display: block;
     background: var(--color-panel);
   }
 
-  .player-layout { width: 100vw; }
+  .player-layout {
+    width: 100vw;
+  }
 
-  :deep(.resizer) { display: none; }
+  :deep(.resizer) {
+    display: none;
+  }
 
   .player-main {
     flex-direction: column;
@@ -637,7 +764,9 @@ watch(lessonId, () => {
     width: 100vw;
   }
 
-  .panel-content, .panel-editor, .panel-preview {
+  .panel-content,
+  .panel-editor,
+  .panel-preview {
     width: 100% !important;
     flex: none;
     flex-shrink: 0;
@@ -658,13 +787,18 @@ watch(lessonId, () => {
 
   .panel-editor {
     min-height: 320px;
-    border-left: none; border-right: none;
+    border-left: none;
+    border-right: none;
     border-bottom: 1px solid var(--color-editor-border);
   }
 
-  .panel-preview { min-height: 360px; }
+  .panel-preview {
+    min-height: 360px;
+  }
 
-  .topbar-share-btn { display: none; }
+  .topbar-share-btn {
+    display: none;
+  }
 }
 
 @media (min-width: 901px) {
