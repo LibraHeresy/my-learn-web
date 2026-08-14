@@ -1,4 +1,4 @@
-- key: Information Management: A Proposal
+- key: "Information Management: A Proposal"
   explanation: 1945年 Vannevar Bush 发表的文章，首次提出 Memex 概念——一个可以存储、检索个人信息的设备雏形，被视为超文本思想的源头。
   analogy: 就像一份畅想未来的提案——很多伟大的技术都始于一篇看似遥不可及的论文。
 - key: Asynchronous JavaScript And XML
@@ -17,7 +17,7 @@
 - key: 模板字符串（Template Literal）
   explanation: 用反引号 ` 包裹的字符串，可在其中用 ${} 嵌入变量表达式
   analogy: 就像写有空白格子的乐谱模板——把音符填入空格就成了一首新曲子
-- key: box-sizing: border-box
+- key: "box-sizing: border-box"
   explanation: 宽高计算包含 padding 和 border，更方便布局计算
   analogy: 就像算乐器箱子的总尺寸时，把内衬和外壳都算进去
 - key: document.querySelector
@@ -42,11 +42,11 @@
 - key: encodeURIComponent
   explanation: 将中文字符等特殊字符转义为 URL 安全的编码格式——中文不能直接放在 URL 中
   analogy: 就像把中文曲名翻译成国际通用的意大利语术语——让全世界的乐团都能识读
-- key: position: absolute
+- key: "position: absolute"
   explanation: 元素脱离正常文档流，相对于最近的定位祖先定位
   analogy: 就像协奏曲中的独奏者——从乐队中走出来站在前面
 - key: Douglas Crockford
-  explanation: JavaScript 领域的重量级人物——JSON 格式的发明者，著有《JavaScript: The Good Parts》，是 JS 社区最具影响力的布道者之一。
+  explanation: "JavaScript 领域的重量级人物——JSON 格式的发明者，著有《JavaScript: The Good Parts》，是 JS 社区最具影响力的布道者之一。"
 - key: Sun Microsystems
   explanation: 1982年创立的计算机公司——Java 语言的创造者，SPARC 工作站和 Solaris 系统在早期 Web 服务器中广泛使用。2009年被 Oracle 收购。
 - key: addEventListener
@@ -63,7 +63,7 @@
 - key: linear-gradient
   explanation: 线性渐变——颜色沿一条直线平滑过渡
   analogy: 就像竖琴的滑奏——音高从低到高连续变化
-- key: position: fixed
+- key: "position: fixed"
   explanation: 元素脱离正常文档流，固定在浏览器窗口的指定位置，滚动也不动
   analogy: 就像指挥台——不管乐队怎么换位，指挥始终站在正前方
 - key: timing-function
@@ -103,10 +103,10 @@
 - key: createElement
   explanation: 用 JS 动态创建一个新的 HTML 元素
   analogy: 就像在演奏过程中临时增加一件乐器
-- key: display: flex
+- key: "display: flex"
   explanation: 启用 Flexbox 布局——子元素在一维方向上灵活排列
   analogy: 就像将弦乐组排成一行——每个演奏者之间保持均等间距
-- key: display: grid
+- key: "display: grid"
   explanation: 启用 CSS Grid 布局——子元素在二维网格中排列
   analogy: 就像管弦乐队在舞台上的座次表——有行有列，每个位置都有安排
 - key: querySelector
@@ -222,10 +222,10 @@
 - key: :nth-child
   explanation: 匹配父元素中第 n 个子元素的伪类选择器
   analogy: 就像指定"第三小提琴手"——精确到排位
-- key: !important
+- key: "!important"
   explanation: CSS 中的强制优先级标记，盖过所有普通规则的权重计算
   analogy: 就像独奏段落中所有伴奏都必须给独奏让路——但它破坏了正常的和声层级，应尽量少用
-- key: @keyframes
+- key: "@keyframes"
   explanation: CSS 动画的关键帧规则——定义动画在每一步的状态
   analogy: 就像乐谱上标注的每一小节的力度变化记号
 - key: background
@@ -458,7 +458,7 @@
   explanation: CSS 内边距——元素内容与边框之间的空白区域。像快递盒里的泡沫填充物，保护内容不被边框挤压。
   analogy: 就像快递纸箱里的泡沫填充——隔在物品和箱壁之间，防磕碰。
 - key: pointer
-  explanation: 鼠标指针——cursor: pointer 让鼠标悬停时变成手型，暗示「这里可以点击」。英文原意是「指针、指示器」。
+  explanation: "鼠标指针——cursor: pointer 让鼠标悬停时变成手型，暗示「这里可以点击」。英文原意是「指针、指示器」。"
 - key: Promise
   explanation: JS 中表示异步操作最终完成或失败的对象——有三种状态：pending（进行中）、fulfilled（已成功）、rejected（已失败）
   analogy: 就像乐团经理承诺下个月的演出一定请到那位独奏家——承诺已发出，结果待定
@@ -520,7 +520,7 @@
   explanation: Anthropic 开发的 AI 助手——强调安全性、可靠性和长上下文能力。Claude 3.5/4 系列在编程和推理方面表现突出。
 - key: Cursor
   explanation: 2023年发布的 AI 编程编辑器——基于 VS Code，内嵌 AI 代码补全和对话功能。AI Coding 时代的标志性工具之一。
-- key: @media
+- key: "@media"
   explanation: CSS 媒体查询——根据屏幕宽度等条件应用不同的样式
   analogy: 就像根据演奏厅的大小调整乐队的编制和排列
 - key: active
@@ -706,7 +706,7 @@
 - key: clone
   explanation: Git 命令——将远程仓库完整复制到本地。英文原意是「克隆」。
 - key: color
-  explanation: 颜色——input 的 type="color" 创建颜色选择器，用户点击后从调色板中选择一个颜色。返回十六进制色值如 #8B2E2E。
+  explanation: "颜色——input 的 type=\"color\" 创建颜色选择器，用户点击后从调色板中选择一个颜色。返回十六进制色值如 #8B2E2E。"
   analogy: 就像调音时选的音色风格——不是打字，而是在色板中"挑选"一个。
 - key: const
   explanation: JavaScript 声明常量的关键字——声明后不能重新赋值。英文原意是「常量」（constant 的缩写）。
@@ -726,7 +726,7 @@
   related:
     - props
     - emit
-- key: false
+- key: "false"
   explanation: JavaScript 布尔值——表示「假、否、不成立」。英文原意是「假的」。
 - key: fetch
   explanation: 浏览器内置的 API，用于发送 HTTP 请求获取数据——替代老式的 XMLHttpRequest
@@ -948,7 +948,7 @@
   analogy: 就像报名表上每个填空格前面的题目——"姓名""级别""曲目"。name 决定了交卷时数据的标签。
 - key: none
   explanation: CSS 中多个属性的默认值——表示「无、没有」。英文原意是「没有、无」。
-- key: null
+- key: "null"
   explanation: JavaScript 特殊值——表示「空、什么都没有」。null 是主动设置为空。英文原意是「空的」。
 - key: p 标签
   explanation: 段落标签——标记一段文字，浏览器自动在段落间加间距。最常用的 HTML 标签之一。
@@ -969,7 +969,7 @@
   explanation: input 的 type="text"——普通文本输入框。英文原意是「文本」。
 - key: this
   explanation: JavaScript 关键字——指向当前执行上下文的对象。英文原意是「这个」。
-- key: true
+- key: "true"
   explanation: JavaScript 布尔值——表示「真、是、成立」。英文原意是「真的」。
 - key: type
   explanation: 📍 特有属性。类型声明——用在 input 上决定输入框类型，用在 source 上声明媒体格式等。
@@ -1038,7 +1038,7 @@
   explanation: HMR（Hot Module Replacement）——修改代码后浏览器自动刷新，且保留当前页面状态
   analogy: 就像排练时指挥说"弦乐再来一遍"——只重来需要改的部分，不用整首曲子从头开始
 - key: 伪元素
-  explanation: 以 :: 开头，创建一个不存在于 HTML 中的"虚拟元素"来装饰
+  explanation: "以 :: 开头，创建一个不存在于 HTML 中的\"虚拟元素\"来装饰"
   analogy: 就像乐谱上"想象中的回声"——乐谱上没写，但演奏者心领神会地加了一个渐弱的尾音
 - key: 响应式
   explanation: 数据变化时页面自动更新，无需手动操作 DOM——Vue 的核心特性
@@ -1219,7 +1219,7 @@
   explanation: 一组有序数据的集合，用方括号 [] 表示，每个元素有索引（从 0 开始）
   analogy: 就像一份按顺序排列的曲目单——第 0 首、第 1 首、第 2 首...
 - key: 伪类
-  explanation: 以 : 开头的 CSS 选择器，根据元素的特定状态（如鼠标悬停、是第几个子元素）来匹配
+  explanation: "以 : 开头的 CSS 选择器，根据元素的特定状态（如鼠标悬停、是第几个子元素）来匹配"
   analogy: 就像根据乐器当前的状态来决定演奏方式——"正在被独奏的小提琴"
 - key: 依赖
   explanation: 项目运行所依赖的外部代码包——记录在 package.json 中，通过 npm install 安装到 node_modules
@@ -1270,7 +1270,7 @@
   explanation: 水平分割线标签——在页面中画一条横线，表示主题切换或内容分隔。是单标签。
   analogy: 就像乐谱中分隔乐章的横线——告诉读者"这里是一个段落结束，下一段开始"。
 - key: id
-  explanation: 🌐 全局属性。元素唯一标识——整个页面中同一个 id 只能出现一次。CSS 中用 #id名 选中。
+  explanation: "🌐 全局属性。元素唯一标识——整个页面中同一个 id 只能出现一次。CSS 中用 #id名 选中。"
   analogy: 就像身份证号——全国没有两个人的号码相同。id 就是元素的"身份证号"。
 - key: in
   explanation: JavaScript for...in 循环关键字——遍历对象的属性。英文原意是「在...里面」。
@@ -1347,9 +1347,6 @@
   explanation: CSS 相对长度单位——相对于视口宽度的百分比。1vw=视口宽度的1%。全称 viewport width。
 - key: 层
   explanation: Layer——编程中把不同职责的代码分层，如表现层（UI）、业务逻辑层、数据层。分层是软件架构的基本思想。
-- key: 作用域
-  explanation: 变量在哪个 {} 范围内可以被访问。let/const 的作用域是花括号块，var 的作用域是整个函数。
-  analogy: 就像每个人在自己的房间里说话——房间外的人听不到。花括号就是JS里的房间。
 - key: 块级作用域
   explanation: 用 {} 包裹的代码块创建的作用域，let 和 const 声明的变量只能在这个块内使用。
   analogy: 就像教室里的座位——你的东西只在你的座位范围内有效。
@@ -1368,12 +1365,6 @@
 - key: 高阶函数
   explanation: 接收函数作为参数或返回函数的函数，如 map、filter、setTimeout。
   analogy: 就像自动售货机——你投入选择（函数），它按你的选择执行操作。
-- key: Promise
-  explanation: 表示一个异步操作的最终结果——可能成功（resolve）也可能失败（reject）的对象。
-  analogy: 就像点外卖——下单后拿到订单号，外卖可能送到也可能被取消。
-- key: async/await
-  explanation: 让异步代码读起来像同步代码的语法——async 声明异步函数，await 等待 Promise 完成。
-  analogy: 就像等快递——写着"先点餐、等送来、然后吃"，一步接一步但实际等待时可以做别的事。
 - key: Event Loop
   explanation: JavaScript 的运行机制——不断检查调用栈是否空闲，从任务队列中取出回调执行。
   analogy: 就像只有一个收银台的超市——一次结一个人，结完下一个人才能上。
@@ -1422,42 +1413,21 @@
 - key: 空值合并
   explanation: 用 ?? 提供默认值——只有当值为 null 或 undefined 时才使用默认值，0 和空字符串不会被覆盖。
   analogy: 就像备用方案——只有当主方案确定不存在时才启用，有总比没有好不算不存在。
-- key: CORS
-  explanation: 跨域资源共享——浏览器的安全机制，控制不同域名之间的请求能否被读取。
-  analogy: 就像门禁系统——不是本小区的人不让进，除非物业（服务器）同意。
 - key: REST API
   explanation: 一种用 URL 指代资源、用 HTTP 方法表达操作的接口设计风格。
   analogy: 就像餐厅菜单——每道菜有名字（URL），你可以点（GET）、加菜（POST）、换菜（PUT）、退菜（DELETE）。
 - key: CRUD
   explanation: 数据操作的四个基本动作——Create（创建）、Read（读取）、Update（更新）、Delete（删除）。
   analogy: 就像管理通讯录——加联系人、查看、修改号码、删除联系人。
-- key: DOM
-  explanation: 文档对象模型——浏览器将 HTML 文档解析为树状结构，JS 通过 DOM API 操作页面元素。
-  analogy: 就像建筑图纸——图纸上的每个房间、每扇门窗都有编号，工人按编号找到并操作它们。
-- key: localStorage
-  explanation: 浏览器提供的本地存储功能——数据存在用户电脑上，关闭浏览器后不丢失，每个域名约 5MB。
-  analogy: 就像家里的抽屉——东西放进去，关上门、出门、回家后东西还在里面。
-- key: JSON
-  explanation: 一种轻量级的数据交换格式——用键值对和数组表示数据，是前后端通信的标准格式。
-  analogy: 就像通用的快递包装盒——不管寄什么，都用同一种盒子，收件人知道怎么拆。
 - key: JSON.stringify
   explanation: 将 JavaScript 对象转换为 JSON 字符串——用于存储或发送数据。
   analogy: 就像把物品装进快递盒——打包成标准格式方便运输。
-- key: JSON.parse
-  explanation: 将 JSON 字符串解析回 JavaScript 对象——用于接收或读取数据。
-  analogy: 就像拆快递——从标准包装盒里取出物品。
-- key: 防抖
-  explanation: 在高频事件（如输入、滚动）中，等事件停止触发一段时间后才执行——用于减少不必要的执行次数。
-  analogy: 就像电梯门——有人进来就重新计时，等没人进出了才关门。
 - key: 节流
   explanation: 在高频事件中限制函数执行频率——无论事件触发多频繁，函数每隔固定时间最多执行一次。
   analogy: 就像地铁闸机——不管多少人涌过来，每分钟只放固定数量的人通过。
 - key: AbortController
   explanation: 用于取消正在进行的 fetch 请求——避免过时的请求结果覆盖最新的数据。
   analogy: 就像电话挂断按钮——上一个通话没说完就拨了下一个，前一个自动挂断。
-- key: try/catch
-  explanation: 错误处理语句——try 块中放可能出错的代码，catch 块中处理错误，程序不会崩溃。
-  analogy: 就像安全气囊——撞车时气囊弹出保护你，你不会受重伤。
 - key: truthy/falsy
   explanation: JavaScript 在布尔上下文中对值的判断——6个 falsy 值（false、0、空字符串、null、undefined、NaN），其余都是 truthy。
   analogy: 就像快递签收——只要你签了字（truthy），就当你收了；只有明确不签（falsy）才算没收。
