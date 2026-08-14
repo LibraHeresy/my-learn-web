@@ -74,12 +74,6 @@
   analogy: 就像演奏开始前的静默——指挥抬手后才开始奏响第一个音符，中间的停顿就是 delay。
 - key: XMLHttpRequest
   explanation: 浏览器提供的 API 对象——在不刷新页面的情况下与服务器交换数据。它是 Ajax 技术的核心，2005年被 Google 在 Gmail 和 Google Maps 中大量使用后成为 Web 2.0 的基石。
-- key: 盒模型（Box Model）
-  explanation: 每个元素都是一个矩形盒子，从外到内由 margin → border → padding → content 四层组成
-  analogy: 就像一件乐器的包装——外箱是 margin、箱壁是 border、内衬是 padding、乐器本身是 content
-- key: 回调函数（Callback）
-  explanation: 作为参数传给另一个函数的函数，在某个时刻被"回调"执行
-  analogy: 就像指挥给首席小提琴一个提示——当指挥棒落下时，你就开始独奏
 - key: flex-direction
   explanation: Flex 容器中主轴的方向（横排还是竖排）
   analogy: 就像决定声部从左到右排还是从前到后排
@@ -466,7 +460,7 @@
   related:
     - async/await
     - fetch
-- key: pushArr
+- key: push
   explanation: JavaScript 数组方法——向数组末尾添加一个元素。英文原意是「推入」。
   analogy: 就像在曲目单最后加一首新曲子。
 - key: pushCmd
@@ -679,9 +673,6 @@
 - key: 单文件组件
   explanation: Vue 的 .vue 文件——把模板、逻辑、样式写在同一个文件中，一个组件一个文件
   analogy: 就像一份完整的声部分谱——含乐谱内容、演奏标记、声部说明，三合一
-- key: 模板字符串
-  explanation: 用反引号 ` 包裹的字符串，可在其中用 ${} 嵌入变量
-  analogy: 就像写有空白格子的乐谱模板——把音符填入空格就成了一首新曲子
 - key: 语义化标签
   explanation: 有明确含义的 HTML 标签，如 header、nav、main、footer——看名字就知道它是什么
   analogy: 就像乐谱上用意大利文标注的表情记号——Andante 一看就知道是行板
@@ -852,9 +843,6 @@
 - key: 全局属性
   explanation: 可以写在任何 HTML 元素上的属性，不受元素类型限制。如 class、id、style、lang、hidden。
   analogy: 就像力度记号（p、f、ff）——不管弹哪根弦、哪个音区，力度标记对所有音都适用。所有标签都能用全局属性。
-- key: 事件对象
-  explanation: 事件触发时浏览器自动创建的参数，包含事件的详细信息
-  analogy: 就像演出记录单——记录了谁、什么时间、以什么方式演奏
 - key: 特有属性
   explanation: 只能用在特定 HTML 元素上的属性。如 src 只用于 img/audio/video，href 只用于 a/link。
   analogy: 就像无线充电功能——只有特定型号手机才支持，不是所有手机都能无线充电。只有特定标签才有特有属性。
@@ -904,7 +892,7 @@
   explanation: 页面元信息区——不直接显示内容，存放字符编码、页面标题、CSS 链接等幕后配置。
   analogy: 就像乐谱开头的调号、拍号、速度标记——演奏前必须看清楚，但观众听不到这些符号本身。
 - key: href
-  explanation: 📍 特有属性。超链接目标地址——告诉浏览器点击后跳到哪里。必须写完整网址（含 https://）。
+  explanation: 📍 特有属性。超链接目标地址——告诉浏览器点击后跳到哪里。外链需写完整 URL（含协议），站内链接可用相对路径。
   analogy: 就像乐谱上的 D.C. 或 D.S. 记号——指向要跳转回去的位置。必须写清楚从哪里反复。
 - key: html
   explanation: 整个网页的根元素，所有其他元素都嵌套在它里面。lang 属性声明页面语言。
@@ -1286,7 +1274,7 @@
   explanation: 有序列表容器——列表项前显示数字（1, 2, 3…），顺序重要时使用。li 必须放在 ul 或 ol 里面。
   analogy: 就像练琴步骤——必须先练音阶，再练练习曲，最后才是乐曲。顺序不能乱。
 - key: px
-  explanation: 像素单位——CSS 中最常用的长度单位。1px 是屏幕上最小的一个点。英文全称 pixel（像素）。
+  explanation: 像素单位——CSS 中最常用的长度单位。1px 是 CSS 的长度基本单位；高 DPI 设备上 1 CSS px 对应多个物理像素。英文全称 pixel（像素）。
   analogy: 就像五线谱上最小的一个音符点——它是组成所有视觉大小的基本单位。
 - key: td
   explanation: 表格数据单元格——表格中最基础的格子，放具体数据。
