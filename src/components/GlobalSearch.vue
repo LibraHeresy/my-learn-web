@@ -2,7 +2,6 @@
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import Fuse, { type FuseResult } from 'fuse.js'
-import searchIndexData from '../generated/search-index.json'
 import { useFocusTrap } from '../composables/useFocusTrap'
 import { useScrollLock } from '../composables/useScrollLock'
 
@@ -25,14 +24,31 @@ const dialogRef = ref<HTMLElement | null>(null)
 useScrollLock(open)
 useFocusTrap(open, dialogRef, inputRef as unknown as typeof dialogRef)
 
-const fuse = new Fuse(searchIndexData as SearchItem[], {
-  keys: [
-    { name: 'title', weight: 2 },
-    { name: 'bodyText', weight: 1 },
-  ],
-  threshold: 0.4,
-  includeScore: true,
-})
+// 搜索索引（156KB）按需加载：仅首次打开搜索框时拉取，避免打进首屏主 bundle
+let fuse: Fuse<SearchItem> | null = null
+let searchIndexPromise: Promise<void> | null = null
+
+function ensureSearchIndex(): Promise<void> {
+  if (!searchIndexPromise) {
+    searchIndexPromise = import('../generated/search-index.json')
+      .then((mod) => {
+        const data = ((mod as { default?: SearchItem[] }).default ?? mod) as SearchItem[]
+        fuse = new Fuse(data, {
+          keys: [
+            { name: 'title', weight: 2 },
+            { name: 'bodyText', weight: 1 },
+          ],
+          threshold: 0.4,
+          includeScore: true,
+        })
+      })
+      .catch((error) => {
+        searchIndexPromise = null // 失败后允许重试
+        throw error
+      })
+  }
+  return searchIndexPromise
+}
 
 watch(query, (q) => {
   if (!q.trim()) {
@@ -40,7 +56,14 @@ watch(query, (q) => {
     activeIdx.value = 0
     return
   }
-  doSearch(q)
+  if (fuse) {
+    doSearch(q)
+    return
+  }
+  // 索引尚未就绪：先等待加载完成，再执行本次搜索
+  ensureSearchIndex().then(() => {
+    if (query.value === q && fuse) doSearch(q)
+  })
 })
 
 function doSearch(q: string) {
@@ -51,6 +74,7 @@ function doSearch(q: string) {
 
 function openSearch() {
   open.value = true
+  ensureSearchIndex().catch(() => { /* 加载失败时搜索静默不可用 */ })
 }
 
 function closeSearch() {
