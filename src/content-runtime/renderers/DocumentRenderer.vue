@@ -8,10 +8,5 @@ defineProps<{
 </script>
 
 <template>
-  <DocumentBodyRenderer
-    :nodes="lesson.body"
-    :ai-selectable="true"
-    :ai-context-title="lesson.meta.title"
-    ai-context-kind="lesson"
-  />
+  <DocumentBodyRenderer :nodes="lesson.body" />
 </template>

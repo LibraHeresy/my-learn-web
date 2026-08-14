@@ -16,7 +16,6 @@ dist-ssr
 # 环境变量（含 API key，禁止提交）
 .env
 .env.*
-!.env.example
 
 # Editor directories and files
 .vscode/*

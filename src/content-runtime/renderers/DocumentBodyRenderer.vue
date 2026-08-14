@@ -7,16 +7,7 @@ import CodeBlock from './CodeBlock.vue'
 
 withDefaults(defineProps<{
   nodes: ContentBodyNode[]
-  aiSelectable?: boolean
-  aiContextTitle?: string
-  aiContextDetail?: string
-  aiContextKind?: string
-}>(), {
-  aiSelectable: false,
-  aiContextTitle: '',
-  aiContextDetail: '',
-  aiContextKind: 'lesson',
-})
+}>(), {})
 
 function headingTag(node: ContentBodyNode): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' {
   if (node.type !== 'heading') return 'h2'
@@ -29,13 +20,7 @@ function isBlockNode(node: ContentBodyNode): node is BlockNode {
 </script>
 
 <template>
-  <article
-    class="content-doc"
-    :data-ai-selectable="aiSelectable ? 'true' : undefined"
-    :data-ai-context-title="aiSelectable ? aiContextTitle : undefined"
-    :data-ai-context-detail="aiSelectable ? aiContextDetail : undefined"
-    :data-ai-context-kind="aiSelectable ? aiContextKind : undefined"
-  >
+  <article class="content-doc">
     <div class="doc-body">
       <template v-for="(node, index) in nodes" :key="`${node.type}-${index}`">
         <component

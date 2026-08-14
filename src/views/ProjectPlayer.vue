@@ -174,11 +174,6 @@ const { panelWidths, dragging, playerMainRef, startDrag } = usePanelResize(
   { content: 42, editor: 30, preview: 28 },
 )
 
-function aiSectionDetail(sectionLabel: string) {
-  const stepTitle = currentStepData.value?.title || '当前步骤'
-  return `${project.value?.meta.title || '项目'} · ${stepTitle} · ${sectionLabel}`
-}
-
 </script>
 
 <template>
@@ -234,10 +229,6 @@ function aiSectionDetail(sectionLabel: string) {
                   <DocumentBodyRenderer
                     v-if="currentStepData.contentBody?.length"
                     :nodes="currentStepData.contentBody"
-                    :ai-selectable="true"
-                    :ai-context-title="project.meta.title"
-                    :ai-context-detail="aiSectionDetail('步骤内容')"
-                    ai-context-kind="project"
                   />
                 </div>
                 <div class="step-task">
@@ -245,10 +236,6 @@ function aiSectionDetail(sectionLabel: string) {
                   <DocumentBodyRenderer
                     v-if="currentStepData.taskBody?.length"
                     :nodes="currentStepData.taskBody"
-                    :ai-selectable="true"
-                    :ai-context-title="project.meta.title"
-                    :ai-context-detail="aiSectionDetail('你的任务')"
-                    ai-context-kind="project"
                   />
                 </div>
                 <div v-if="currentStepData.purposeBody?.length" class="purpose-box">
@@ -256,10 +243,6 @@ function aiSectionDetail(sectionLabel: string) {
                   <div class="purpose-content">
                     <DocumentBodyRenderer
                       :nodes="currentStepData.purposeBody"
-                      :ai-selectable="true"
-                      :ai-context-title="project.meta.title"
-                      :ai-context-detail="aiSectionDetail('这一步的目的')"
-                      ai-context-kind="project"
                     />
                   </div>
                 </div>
@@ -268,10 +251,6 @@ function aiSectionDetail(sectionLabel: string) {
                   <div class="expected-content">
                     <DocumentBodyRenderer
                       :nodes="currentStepData.expectedResultBody"
-                      :ai-selectable="true"
-                      :ai-context-title="project.meta.title"
-                      :ai-context-detail="aiSectionDetail('完成后你应该看到')"
-                      ai-context-kind="project"
                     />
                   </div>
                 </div>
@@ -282,10 +261,6 @@ function aiSectionDetail(sectionLabel: string) {
                   <div v-if="hintExpanded" class="step-hint">
                     <DocumentBodyRenderer
                       :nodes="currentStepData.hintBody"
-                      :ai-selectable="true"
-                      :ai-context-title="project.meta.title"
-                      :ai-context-detail="aiSectionDetail('提示')"
-                      ai-context-kind="project"
                     />
                   </div>
                 </div>
@@ -302,11 +277,6 @@ function aiSectionDetail(sectionLabel: string) {
         <div
           class="panel-editor"
           :style="{ width: 'calc(' + panelWidths.editor + '% - 4px)' }"
-          data-ai-selectable="true"
-          data-ai-selection-mode="code"
-          :data-ai-context-title="project.meta.title"
-          data-ai-context-detail="代码"
-          data-ai-context-kind="code"
         >
           <CodeEditor
             :key="projectId + '-' + currentStep"
@@ -321,16 +291,9 @@ function aiSectionDetail(sectionLabel: string) {
         <div
           class="panel-preview"
           :style="{ width: 'calc(' + panelWidths.preview + '% - 4px)' }"
-          data-ai-selectable="true"
-          :data-ai-context-title="project.meta.title"
-          data-ai-context-detail="预览"
-          data-ai-context-kind="preview"
         >
           <LivePreview
             :srcdoc="previewSrc"
-            :ai-context-title="project.meta.title"
-            ai-context-detail="预览"
-            ai-context-kind="preview"
           />
         </div>
       </template>
@@ -360,11 +323,6 @@ function aiSectionDetail(sectionLabel: string) {
             <div
               v-if="rightTab === 'editor'"
               class="panel-editor"
-              data-ai-selectable="true"
-              data-ai-selection-mode="code"
-              :data-ai-context-title="project.meta.title"
-              data-ai-context-detail="代码"
-              data-ai-context-kind="code"
             >
               <CodeEditor
                 :key="projectId + '-' + currentStep + '-compact'"
@@ -376,16 +334,9 @@ function aiSectionDetail(sectionLabel: string) {
             <div
               v-else
               class="panel-preview"
-              data-ai-selectable="true"
-              :data-ai-context-title="project.meta.title"
-              data-ai-context-detail="预览"
-              data-ai-context-kind="preview"
             >
               <LivePreview
                 :srcdoc="previewSrc"
-                :ai-context-title="project.meta.title"
-                ai-context-detail="预览"
-                ai-context-kind="preview"
               />
             </div>
           </div>

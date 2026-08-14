@@ -33,7 +33,7 @@ npm run lint           # ESLint
 ```text
 src/
 ├── main.ts
-├── App.vue                 # 布局 + 路由出口 + AI 助手挂载（lesson/quiz 页）
+├── App.vue                 # 布局 + 路由出口
 ├── router/index.ts         # 路由：/ /lesson/:id /project/:id /quiz /plan
 ├── views/
 │   ├── HomePage.vue        # 首页（轨道 / 项目 / 序章分区）
@@ -46,10 +46,8 @@ src/
 │   ├── CodeEditor.vue      # CodeMirror 6 编辑器（defineAsyncComponent 按需加载）
 │   ├── LivePreview.vue     # iframe 实时预览（sandbox 模式）
 │   ├── LessonSidebar.vue / LessonTerms.vue / PlayerFooter.vue / Resizer.vue
-│   ├── ai/                 # AI 助手：AiSelectionAssistant / AiAssistantPanel / AiMarkdownContent
 │   └── home/               # HomeJourneySection / HomeProjectsSection / HomePrologueSection
 ├── composables/
-│   ├── useAiAssistant.ts   # AI 解释 + 追问聊天状态机（DeepSeek / mock 兜底）
 │   ├── useAsyncComputed.ts / useCodePreview.ts / useLessonNavigation.ts
 │   └── useFocusTrap.ts / useScrollLock.ts / usePanelResize.ts
 ├── stores/
@@ -58,8 +56,7 @@ src/
 │   ├── projectProgress.ts  # 项目步骤进度
 │   └── plan.ts             # 学习计划状态
 ├── features/plan/          # studyPlan.ts（计划数据生成）/ types.ts / validators.ts
-├── services/ai-explain.ts  # DeepSeek API 调用、结构化 JSON 解析、mock 兜底
-├── types/                  # index.ts（UI 层）/ ai.ts（AI 请求响应类型）
+├── types/                  # index.ts（UI 层类型）
 ├── content/                # 内容源（见下）
 ├── generated/              # build-content.ts 生成，勿手改
 ├── content-loaders/        # lessons / projects / prologues / glossary / quiz / taxonomy
@@ -155,12 +152,6 @@ src/
 - `features/plan/studyPlan.ts` 从 taxonomy + lessons + projects 生成按周/天的任务计划
 - `stores/plan.ts` 管理计划状态（localStorage），`PlanPage.vue` 展示
 
-### AI 助手
-- 课程/测验页正文支持选中文本解释与追问聊天（`components/ai/*` + `composables/useAiAssistant.ts`）
-- 调用 `services/ai-explain.ts`：请求 DeepSeek Chat Completions，要求严格 JSON（summary/explanation/roleInContext/keyPoints/relatedTerms），解析失败走文本兜底
-- 配置来自 `.env`（`VITE_DS_API_KEY` / `VITE_DS_MODEL` / `VITE_DS_API_BASE_URL`，见 `.env.example`）
-- 无 key 时自动走 mock 兜底（`createMockExplanation`），不报错
-
 ## 状态管理
 
 ### progress store（`stores/progress.ts`）
@@ -203,11 +194,10 @@ src/
 
 修改以下内容后建议补测：`vite.config.ts` 监听/HMR、`scripts/build-content.ts`、`content-runtime/types.ts`、`content-runtime/renderers/*`、`content-loaders/*`、`features/plan/*`。
 
-## 安全与环境变量
+## 安全
 
 - `.env` 已被 `.gitignore` 忽略，**禁止提交**；提交前可用 `git check-ignore .env` 确认
-- `VITE_` 前缀变量会在构建时内联进前端 bundle，**任何访问者都能看到**——不要把真实密钥放在 `VITE_` 变量中直接供生产使用
-- AI 调用如需生产可用，应改为后端代理转发或引导用户自带 key；当前 `ai-explain.ts` 的 mock 兜底保证无 key 时功能不崩
+- `VITE_` 前缀变量会在构建时内联进前端 bundle，**任何访问者都能看到**——不要把密钥/凭据放在 `VITE_` 变量中供生产使用
 
 ## 注意事项
 

@@ -310,11 +310,6 @@ watch(lessonId, () => {
           <div
             :class="['panel-editor', { 'is-maximized': maximized === 'editor' }]"
             :style="maximized === 'editor' ? {} : { width: 'calc(' + panelWidths.editor + '% - 5.33px)' }"
-            data-ai-selectable="true"
-            data-ai-selection-mode="code"
-            :data-ai-context-title="lesson.meta.title"
-            data-ai-context-detail="代码"
-            data-ai-context-kind="code"
           >
             <CodeEditor
               :key="lessonId"
@@ -335,17 +330,10 @@ watch(lessonId, () => {
           <div
             :class="['panel-preview', { 'is-maximized': maximized === 'preview' }]"
             :style="maximized === 'preview' ? {} : { width: 'calc(' + panelWidths.preview + '% - 5.33px)' }"
-            data-ai-selectable="true"
-            :data-ai-context-title="lesson.meta.title"
-            data-ai-context-detail="预览"
-            data-ai-context-kind="preview"
           >
             <LivePreview
               :srcdoc="previewSrc"
               :is-maximized="maximized === 'preview'"
-              :ai-context-title="lesson.meta.title"
-              ai-context-detail="预览"
-              ai-context-kind="preview"
               @maximize="setMaximized('preview')"
               @preview-error="onPreviewError"
             />
