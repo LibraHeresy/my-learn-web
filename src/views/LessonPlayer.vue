@@ -20,7 +20,6 @@ import LivePreview from '../components/LivePreview.vue'
 import PlayerFooter from '../components/PlayerFooter.vue'
 import Resizer from '../components/Resizer.vue'
 import LessonSidebar from '../components/LessonSidebar.vue'
-import LessonTerms from '../components/LessonTerms.vue'
 import DocumentRenderer from '../content-runtime/renderers/DocumentRenderer.vue'
 
 const route = useRoute()
@@ -329,13 +328,7 @@ watch(lessonId, () => {
             <div ref="contentPanelRef" class="content-scroll" @scroll="onContentScroll">
               <div class="reading-progress" :style="{ width: readingProgress + '%' }" />
               <div class="content-inner">
-                <div class="lesson-meta-row">
-                  <span class="lesson-meta-item">⏱ 约 {{ lesson.meta.estimatedMinutes || 15 }} 分钟</span>
-                  <span class="lesson-meta-item">{{ isSandboxMode ? '✏️ 动手模式' : '📖 阅读模式' }}</span>
-                  <span class="lesson-meta-item">⌨ ← / → 切换课程</span>
-                </div>
                 <DocumentRenderer :key="lessonId" :lesson="lesson" />
-                <LessonTerms :lesson="lesson" />
                 <div v-if="lessonChapterGems.length" class="quiz-cta">
                   <span class="quiz-cta-icon">📝</span>
                   <span class="quiz-cta-text">
@@ -538,21 +531,6 @@ watch(lessonId, () => {
 .content-inner {
   display: flex;
   flex-direction: column;
-}
-
-/* 课程元信息行（时长/模式/快捷键） */
-.lesson-meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-4);
-  padding-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.lesson-meta-item {
-  font-size: var(--fs-xs);
-  color: var(--color-text-light);
 }
 
 /* 学完去测验引导 */
