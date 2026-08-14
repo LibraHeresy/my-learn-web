@@ -38,8 +38,6 @@ const lessonsMetaFile = path.join(generatedDir, "lessons-meta.json");
 const lessonsOutDir = path.join(generatedDir, "lessons");
 const projectsMetaFile = path.join(generatedDir, "projects-meta.json");
 const projectsOutDir = path.join(generatedDir, "projects");
-const legacyLessonsIndex = path.join(generatedDir, "lessons-index.json");
-const legacyProjectsIndex = path.join(generatedDir, "projects-index.json");
 const generatedTaxonomyFile = path.join(generatedDir, "taxonomy.json");
 const searchIndexFile = path.join(generatedDir, "search-index.json");
 const glossarySourceFile = path.join(
@@ -203,7 +201,6 @@ const allowedBlockNames = new Set<BlockName>([
   "example",
   "task",
   "hint",
-  "listen-to", // 已废弃，保留兼容旧内容；不再出现在新课程中
   "recap",
 ]);
 
@@ -1493,12 +1490,6 @@ export async function main() {
     meta,
     stepCount: steps.length,
   }));
-
-  const { rm } = await import("node:fs/promises");
-  await Promise.all([
-    rm(legacyLessonsIndex, { force: true }),
-    rm(legacyProjectsIndex, { force: true }),
-  ]);
 
   // --- 生成搜索索引 ---
   function extractBodyText(body: ContentBodyNode[]): string {

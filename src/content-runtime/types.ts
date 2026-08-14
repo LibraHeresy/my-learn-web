@@ -59,7 +59,6 @@ export type BlockType =
   | 'block:example'
   | 'block:task'
   | 'block:hint'
-  | 'block:listen-to' // 已废弃，仅用于兼容旧课程内容
   | 'block:recap'
 
 export type BlockName = BlockType extends `block:${infer Name}` ? Name : never
@@ -128,14 +127,6 @@ export type HintBlockNode = {
   steps?: never
 }
 
-export type ListenToBlockNode = {
-  type: 'block:listen-to'
-  name: 'listen-to'
-  content: string
-  attrs?: BlockAttrs
-  steps?: never
-}
-
 export type RecapBlockNode = {
   type: 'block:recap'
   name: 'recap'
@@ -156,7 +147,6 @@ export type BlockNode =
   | ExampleBlockNode
   | TaskBlockNode
   | HintBlockNode
-  | ListenToBlockNode // 已废弃，仅用于兼容旧课程
   | RecapBlockNode
 
 export type ContentBodyNode = HeadingNode | ParagraphNode | TermNode | CodeBlockNode | ListNode | TableNode | BlockNode
