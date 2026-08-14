@@ -35,8 +35,8 @@
       "purpose": "这一步让你理解 CSS 的核心角色——视觉表现层。HTML 决定有什么（名字、图片、列表），CSS 决定长什么样（颜色、圆角、阴影）。把内容和表现分开，是网页设计最基本的原则。以后你维护一个网站时，改颜色只需要改 CSS，不用动 HTML。",
       "expectedResult": "添加 CSS 后，名片从纯文字堆叠变成一张有背景色、有圆角、有阴影的精致卡片。图片也有了圆角。预想效果：像一张优雅的音乐家名片，而不是一份纯文本文档。",
       "starterCode": {
-        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <h3>代表作</h3>\n  <ul>\n    <li>第五交响曲\"命运\"</li>\n    <li>第九交响曲\"合唱\"</li>\n    <li>月光奏鸣曲</li>\n    <li>致爱丽丝</li>\n  </ul>\n</div>",
-        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card h3 {\n  font-size: 1rem;\n  color: #8B2E2E;\n  margin: 16px 0 8px 0;\n}\n.composer-card p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0;\n}\n.composer-card ul {\n  text-align: left;\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 1.8;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "html": "<div class=\"composer-card\">\n  <img class=\"composer-photo\" src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p class=\"composer-bio\">德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <h3>代表作</h3>\n  <ul>\n    <li>第五交响曲\"命运\"</li>\n    <li>第九交响曲\"合唱\"</li>\n    <li>月光奏鸣曲</li>\n    <li>致爱丽丝</li>\n  </ul>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-photo {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card h3 {\n  font-size: 1rem;\n  color: #8B2E2E;\n  margin: 16px 0 8px 0;\n}\n.composer-bio {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0;\n}\n.composer-card ul {\n  text-align: left;\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 1.8;\n  padding-left: 20px;\n  margin: 0;\n}",
         "js": ""
       }
     },
@@ -50,8 +50,8 @@
       "purpose": "这一步教你排版细节的打磨——CSS 不只是能加颜色和阴影，还能精细控制每个元素内部的间距、对齐和装饰。`::marker` 选择器让你自定义列表标记，这是 CSS 伪元素的典型应用。排版的核心是：让重要信息突出，让阅读体验舒适。",
       "expectedResult": "代表作区域变成了一个有独立背景色和圆角的小盒子，列表项之间间距更舒适了。如果设置了 `::marker`，列表的圆点变成了你指定的符号。整个名片看起来更加精致。",
       "starterCode": {
-        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h3>🎼 代表作</h3>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
-        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h3 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h2>🎼 代表作</h2>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h2 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
         "js": ""
       }
     },
@@ -65,30 +65,30 @@
       "purpose": "这是自由创作阶段——前几步是在学规则，这一步是让你突破规则。把贝多芬换成你真正喜欢的音乐家，配色方案改成你的审美。真正的学习不是照着做，而是用自己的判断力去调整和创造。完成的这张名片是你在代码乐章的第一个独立作品。",
       "expectedResult": "名片完全变成了你的个人作品——音乐家换成了你选的、配色换成了你的风格、可能还多了新加的链接或内容。这张名片是你从学习到创造的分界线：你不再是一个教程的跟随者，而是一个能独立决定页面效果的设计者。",
       "starterCode": {
-        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h3>🎼 代表作</h3>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
-        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h3 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
+        "html": "<div class=\"composer-card\">\n  <img src=\"https://upload.wikimedia.org/wikipedia/commons/6/6f/Beethoven.jpg\" alt=\"贝多芬\">\n  <h1>路德维希·凡·贝多芬</h1>\n  <p>德国作曲家、钢琴家。他是古典音乐史上最伟大的作曲家之一，也是浪漫主义音乐的先驱。</p>\n  <div class=\"works-section\">\n    <h2>🎼 代表作</h2>\n    <ul>\n      <li>第五交响曲\"命运\"</li>\n      <li>第九交响曲\"合唱\"</li>\n      <li>月光奏鸣曲</li>\n      <li>致爱丽丝</li>\n    </ul>\n  </div>\n</div>",
+        "css": ".composer-card {\n  max-width: 400px;\n  margin: 20px auto;\n  padding: 24px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);\n  text-align: center;\n  font-family: \"Noto Serif SC\", \"STSong\", serif;\n}\n.composer-card img {\n  width: 100%;\n  border-radius: 8px;\n  margin-bottom: 16px;\n}\n.composer-card h1 {\n  font-size: 1.5rem;\n  color: #3D2B1F;\n  margin: 0 0 8px 0;\n}\n.composer-card > p {\n  font-size: 0.9rem;\n  color: #6B5A4E;\n  line-height: 1.6;\n  margin: 0 0 16px 0;\n}\n.works-section {\n  background: #FBF7F0;\n  border-radius: 8px;\n  padding: 16px;\n  text-align: left;\n}\n.works-section h2 {\n  font-size: 0.95rem;\n  color: #8B2E2E;\n  margin: 0 0 8px 0;\n}\n.works-section ul {\n  color: #6B5A4E;\n  font-size: 0.9rem;\n  line-height: 2;\n  padding-left: 20px;\n  margin: 0;\n}",
         "js": ""
       }
     },
     {
-      "title": "这个项目真正有用的收获",
+      "title": "收尾与测试",
       "content": {
         "mdFile": "steps/06.md"
       },
-      "task": "回头看一遍页面，确认你能用自己的话说清：这个页面的主题是什么、结构怎么分、你为什么这样排版。",
-      "hint": "这个项目的价值更接近“结构感和表达能力训练”，不用现在就给它配一整套投递材料。",
-      "purpose": "减掉过多包装之后，保留真正值得记住的收获：你已经开始能把内容组织成一个清楚、稳定、有风格的页面。",
-      "expectedResult": "你知道这个项目为什么有价值，也知道它更适合作为基础表达能力的证明，而不是承担全部作品集包装任务。"
+      "task": "按正文测试你的页面：缩窄浏览器窗口看布局是否正常，临时把图片 `src` 改成错误链接看是否有占位显示，再检查一遍 HTML/CSS 的整洁度（标签闭合、属性带引号、class 与选择器一致）。至少修掉 1 个你自己发现的小问题。",
+      "hint": "这一阶段重点是查漏补缺，不是无限打磨。用 F12 开发者工具检查元素和样式，是排查“为什么没生效”最有效的手段。",
+      "purpose": "项目收尾阶段最重要的不是继续加功能，而是建立“完成定义”。会验收、会自测、会排错，才说明你真的完成了一个项目。",
+      "expectedResult": "你的名片在窄窗口下不会坏掉、图片加载失败时有占位显示、代码整洁可读。你知道它为什么算完成，也能自己排查小问题。"
     },
     {
-      "title": "验收、排错与下一步",
+      "title": "最终回顾：这个项目真正有用的收获",
       "content": {
         "mdFile": "steps/07.md"
       },
-      "task": "按上面的验收清单自测一次，并至少修掉 1 个你自己发现的小问题。确认完成后，再决定是继续去《音乐收藏库 · 纯手工版》，还是回去补《综合项目》。",
-      "hint": "如果你做到了标准版，就已经足够进入下一项目。不要为了一个小装饰反复打磨到失去推进节奏。",
-      "purpose": "项目收尾阶段最重要的不是继续加功能，而是建立“完成定义”。会验收、会自测、会排错，才说明你真的完成了一个项目。",
-      "expectedResult": "你手上有一个可以展示的音乐家名片页，并且你知道它为什么算完成、有哪些地方已经稳定、下一步该进入哪个项目。"
+      "task": "按正文的自查清单逐条检查页面，然后用自己的话说出：这个项目里你学到的三件最重要的事。最后根据正文“接下来做什么”，决定是进入《音乐收藏库 · 纯手工版》还是先回课程补基础。",
+      "hint": "这个项目的价值更接近“结构感和表达能力训练”，不用现在就给它配一整套投递材料。",
+      "purpose": "减掉过多包装之后，保留真正值得记住的收获：你已经开始能把内容组织成一个清楚、稳定、有风格的页面。",
+      "expectedResult": "你知道这个项目为什么有价值，也知道它更适合作为基础表达能力的证明，而不是承担全部作品集包装任务。"
     }
   ]
 }

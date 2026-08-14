@@ -1,7 +1,7 @@
 {
   "steps": [
     {
-      "title": "开始前先确认重构目标",
+      "title": "为什么要迁移到 Vue？",
       "content": {
         "mdFile": "steps/01.md"
       },
@@ -11,114 +11,129 @@
       "expectedResult": "你知道 `v2` 的重点不是功能更多，而是代码组织和数据流更清楚，也明白它和 `v1` 的关系。"
     },
     {
-      "title": "创建 Vue 项目",
+      "title": "创建 Vue 项目脚手架",
       "content": {
         "mdFile": "steps/02.md"
       },
       "task": "用 Vite 创建 Vue 3 项目，启动开发服务器，确认能在浏览器中看到默认页面。",
       "hint": "如果 `npm create vite@latest` 命令不工作，确保你的 Node.js 版本是 18 或以上。用 `node -v` 查看版本。",
-      "purpose": "这一步把你在'登台篇'学到的 Vite 脚手架技能付诸实践。Vite 生成的空白项目就像一个空白总谱——目录结构、配置文件、入口文件各就各位，等你来填充内容。理解项目的骨架结构很重要，因为后面所有开发都建立在这个基础上。",
+      "purpose": "这一步把你在“登台篇”学到的 Vite 脚手架技能付诸实践。Vite 生成的空白项目就像一个空白总谱——目录结构、配置文件、入口文件各就各位，等你来填充内容。理解项目的骨架结构很重要，因为后面所有开发都建立在这个基础上。",
       "expectedResult": "终端中 Vite 脚手架创建成功，`npm run dev` 后浏览器显示 Vue 默认欢迎页面。VS Code 中能看到清晰的项目目录结构：`index.html`、`src/App.vue`、`src/main.js`、`src/components/`，一切都井井有条。"
     },
     {
-      "title": "设计组件树",
+      "title": "创建第一个组件 MusicCard",
       "content": {
         "mdFile": "steps/03.md"
       },
-      "task": "在纸上画出你的组件树，标注每个组件的 Props（输入）和 Emits（输出）。然后创建 `src/components/` 文件夹，新建三个空的 `.vue` 文件。",
-      "hint": "组件文件用 PascalCase 命名：`MusicCard.vue`、`FilterBar.vue`、`AddForm.vue`。这是 Vue 社区的约定，就像音乐术语用意大利语标记。",
-      "purpose": "写代码之前先设计——这是工程师和'边写边想'的初学者的分水岭。组件树设计让你在动手之前就想清楚：数据放在哪？谁管状态？谁发事件？就像乐团的分谱——每个声部拿到的是属于自己的那一份，指挥（App.vue）掌握总谱。花 10 分钟画一张图，能省 1 小时的排错时间。",
-      "expectedResult": "你有一张清晰的组件树图：App.vue 在最顶层（数据和状态的主人），FilterBar、MusicCard、AddForm 三个子组件各司其职、互不干扰。`src/components/` 下有三个 `.vue` 文件准备就绪。",
+      "task": "创建 `src/components/MusicCard.vue`，用 `defineProps` 声明曲目数据（id、name、composer、image、period、liked），用 `defineEmits` 声明 `toggle-like` 和 `delete` 事件，然后在 `App.vue` 里导入并硬编码一张卡片测试渲染。",
+      "hint": "Props 用对象形式定义（带类型）：`defineProps({ name: String, composer: String, ... })`。模板中直接写 `{{ name }}`，不需要 `.value`。给组件传数字或布尔值记得加冒号（`:id=\"1\"`），否则 `1` 会被当成字符串。别忘了 `<style scoped>`，样式才不会泄露到全局。",
+      "purpose": "MusicCard 是你写的第一个真正的 Vue 组件——用 Props 从父组件接收数据，用 Emits 通知父组件，但从不修改传入的数据（单向数据流）。Props 是组件通信的基础：这张卡片写对了，一百张卡片只是 `v-for` 的事。",
+      "expectedResult": "浏览器中显示一张完整的音乐卡片：封面图、曲名、作曲家、时期标签，以及收藏（🤍/❤️）和删除（🗑️）两个按钮。点击按钮暂时没有实际效果——事件处理逻辑会在后面的步骤补上，这是正常的。",
       "starterCode": {
-        "html": "<!-- App.vue — 组件树的\"指挥\" -->\n<template>\n  <div class=\"app\">\n    <h1>🎵 我的音乐收藏</h1>\n    <!-- FilterBar 放在这里 -->\n    <!-- MusicCard 列表放在这里 -->\n    <!-- AddForm 放在这里 -->\n  </div>\n</template>",
-        "css": ".app {\n  max-width: 960px;\n  margin: 0 auto;\n  padding: 24px;\n}",
-        "js": "// App.vue — 根组件\n// 这里将管理所有数据（pieces 数组）\n// 和所有状态（selectedPeriod）"
+        "html": "<!-- MusicCard.vue — 模板 -->\n<template>\n  <div class=\"music-card\">\n    <img :src=\"image\" :alt=\"name\" />\n    <h2>{{ name }}</h2>\n    <p>{{ composer }}</p>\n    <span class=\"period-tag\">{{ period }}</span>\n    <button class=\"like-btn\" @click=\"$emit('toggle-like', id)\">\n      {{ liked ? '❤️' : '🤍' }}\n    </button>\n    <button class=\"delete-btn\" @click=\"$emit('delete', id)\">🗑️</button>\n  </div>\n</template>",
+        "css": "/* MusicCard.vue — scoped 样式 */\n.music-card {\n  padding: 20px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n  background: #FFFDF7;\n  text-align: center;\n}\n.music-card img {\n  width: 100%;\n  height: 180px;\n  object-fit: cover;\n  border-radius: 8px;\n}\n.music-card h2 {\n  font-size: 1.1rem;\n  margin: 12px 0 4px 0;\n  color: #3D2B1F;\n}\n.music-card p {\n  color: #6B5A4E;\n  margin: 0 0 8px 0;\n}\n.period-tag {\n  display: inline-block;\n  padding: 2px 12px;\n  border-radius: 20px;\n  font-size: 0.8rem;\n  background: #F5EEE0;\n  color: #8B2E2E;\n  margin-bottom: 10px;\n}\n.like-btn,\n.delete-btn {\n  background: none;\n  border: none;\n  font-size: 1.3rem;\n  cursor: pointer;\n  padding: 4px 8px;\n}",
+        "js": "// MusicCard.vue — 逻辑\n// 1. defineProps({ id: Number, name: String, composer: String, image: String, period: String, liked: Boolean })\n// 2. defineEmits(['toggle-like', 'delete'])\n//\n// App.vue — 使用组件（先硬编码一张卡片测试）\n// <MusicCard :id=\"1\" name=\"G大调第一无伴奏大提琴组曲\" composer=\"巴赫\"\n//   image=\"https://picsum.photos/seed/cello/200/200\" period=\"巴洛克\" :liked=\"true\" />"
       }
     },
     {
-      "title": "构建 MusicCard 组件",
+      "title": "列表渲染 — v-for",
       "content": {
         "mdFile": "steps/04.md"
       },
-      "task": "创建 `src/components/MusicCard.vue`，实现带 Props 和 Emits 的音乐卡片组件。在卡片右上角放一个收藏按钮（♡/❤）和一个删除按钮（✕）。",
-      "hint": "Props 用对象形式定义（带类型）：`defineProps({ name: String, composer: String, ... })`。模板中不需要 `.value`，直接 `{{ name }}` 即可。鼠标悬停时显示删除按钮，可以用 CSS 的 `:hover` 和 `opacity` 实现。",
-      "purpose": "MusicCard 是你写的第一个真正的 Vue 组件——它接收数据（Props）展示内容，响应用户操作（Emits）通知父组件，但从不修改传入的数据（单向数据流）。这个组件就像乐团中的一位演奏家：拿到分谱（Props）就演奏，需要调整时举手示意指挥（Emits），但从来不擅自改总谱。",
-      "expectedResult": "MusicCard 组件能独立展示一张音乐卡片：封面图、曲名、作曲家、时期标签。鼠标悬停时圆角删除按钮淡入显示，点击收藏按钮在 🤍 和 ❤ 之间切换。所有交互通过 emit 通知父组件，子组件内部数据不变。",
+      "task": "在 `App.vue` 中用 `ref` 创建一个包含 6 首曲目的响应式数组 `pieces`，用 `v-for=\"piece in pieces\"` 渲染卡片列表，并给每个 `<MusicCard>` 加上唯一的 `:key=\"piece.id\"`。",
+      "hint": "script 中访问或修改 `pieces` 要写 `pieces.value`，模板中直接写 `pieces`（Vue 自动解包）。`v-for` 写在要被重复渲染的元素（`<MusicCard>`）上；`:key` 必须唯一且稳定——永远用 `piece.id`，不要用数组索引。",
+      "purpose": "`v-for` 是 Vue 中使用频率最高的指令之一，`ref` 是响应式系统的核心。这一步告别 v1 里手动 `createElement` + `appendChild` 的循环：你描述“这里渲染一个列表”，Vue 负责生成并更新 DOM。理解 `ref` 与 `v-for` 的关系，就理解了“数据驱动视图”。",
+      "expectedResult": "浏览器中显示 6 张由 `pieces` 数组驱动的音乐卡片，网格布局，大屏多列、小屏单列；每张卡片的收藏按钮状态与对应数据的 `liked` 一致。",
       "starterCode": {
-        "html": "<!-- MusicCard.vue — 模板 -->\n<template>\n  <div class=\"music-card\">\n    <img :src=\"image\" :alt=\"name\" />\n    <button class=\"delete-btn\" @click=\"$emit('delete')\">✕</button>\n    <h2>{{ name }}</h2>\n    <p>{{ composer }}</p>\n    <span class=\"period-tag\">{{ period }}</span>\n    <button\n      class=\"like-btn\"\n      @click=\"$emit('toggle-like')\"\n    >\n      {{ liked ? '❤' : '🤍' }}\n    </button>\n  </div>\n</template>",
-        "css": "/* MusicCard.vue — scoped 样式 */\n.music-card {\n  position: relative;\n  padding: 20px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n  background: #FFFDF7;\n  text-align: center;\n  transition: transform 0.2s, box-shadow 0.2s;\n}\n.music-card:hover {\n  transform: translateY(-4px);\n  box-shadow: 0 8px 24px rgba(0,0,0,0.15);\n}\n.music-card img {\n  width: 100%;\n  height: 200px;\n  object-fit: cover;\n  border-radius: 8px;\n}\n.music-card h2 {\n  font-size: 1.1rem;\n  margin: 12px 0 4px 0;\n  color: #3D2B1F;\n}\n.music-card p {\n  color: #6B5A4E;\n  margin: 0 0 8px 0;\n}\n.period-tag {\n  display: inline-block;\n  padding: 2px 12px;\n  border-radius: 20px;\n  font-size: 0.8rem;\n  background: #F5EEE0;\n  color: #8B2E2E;\n  margin-bottom: 10px;\n}\n.like-btn {\n  display: block;\n  margin: 0 auto;\n  background: none;\n  border: none;\n  font-size: 1.5rem;\n  cursor: pointer;\n  transition: transform 0.2s;\n}\n.like-btn:hover {\n  transform: scale(1.2);\n}\n.delete-btn {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  border: none;\n  background: rgba(0,0,0,0.35);\n  color: #fff;\n  font-size: 14px;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity 0.2s;\n}\n.music-card:hover .delete-btn {\n  opacity: 1;\n}",
-        "js": "// MusicCard.vue — 逻辑\nimport { defineProps, defineEmits } from 'vue'\ndefineProps({\n  name: String,\n  composer: String,\n  image: String,\n  period: String,\n  liked: Boolean\n})\ndefineEmits(['toggle-like', 'delete'])"
+        "html": "<!-- App.vue — 模板 -->\n<template>\n  <div class=\"app\">\n    <h1>🎵 我的音乐收藏</h1>\n    <div class=\"card-grid\">\n      <!-- 用 v-for=\"piece in pieces\" :key=\"piece.id\" 渲染 <MusicCard> -->\n    </div>\n  </div>\n</template>",
+        "css": ".card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));\n  gap: 20px;\n}",
+        "js": "// App.vue — 逻辑\nimport { ref } from 'vue'\nimport MusicCard from './components/MusicCard.vue'\n\n// 用 ref 包裹数组：数据变化时，用到它的页面位置自动更新\nconst pieces = ref([\n  { id: 1, name: 'G大调第一无伴奏大提琴组曲', composer: '巴赫', image: 'https://picsum.photos/seed/cello/200/200', period: '巴洛克', liked: false },\n  { id: 2, name: '春（四季第一乐章）', composer: '维瓦尔第', image: 'https://picsum.photos/seed/spring/200/200', period: '巴洛克', liked: true },\n  { id: 3, name: '小星星变奏曲', composer: '莫扎特', image: 'https://picsum.photos/seed/star/200/200', period: '古典主义', liked: false }\n  // ... 继续补充到 6 首曲目\n])"
       }
     },
     {
-      "title": "构建 FilterBar 组件",
+      "title": "筛选功能 — Computed 与 FilterBar",
       "content": {
         "mdFile": "steps/05.md"
       },
-      "task": "创建 `src/components/FilterBar.vue`，渲染一排时期筛选按钮。当前选中的按钮高亮显示。点击按钮时发出 `update:active` 事件。",
-      "hint": "在 App.vue 中使用时，可以用 `v-model:active=\"selectedPeriod\"` 来双向绑定——这是 Vue 3 对 `update:` 前缀事件的语法糖。",
-      "purpose": "FilterBar 体现了组件化的精髓——封装变化。这个组件不关心外面是谁在用、数据怎么来、结果怎么处理，只管展示一排按钮和处理点击。它的'接口'极其简洁：接收 periods 列表和 active 当前值，发出 update:active 事件。以后换样式、改交互，都只需改这一个文件，对全局零影响。",
-      "expectedResult": "一排美观的金色边框筛选按钮显示在页面上，当前选中的按钮有金色填充高亮样式。点击任意按钮，高亮即时切换，父组件通过 `v-model:active` 自动收到筛选事件，卡片列表随之变化。",
+      "task": "创建 `src/components/FilterBar.vue` 渲染一排时期筛选按钮（当前选中高亮，点击发出 `update:active` 事件）；再在 `App.vue` 里用 `computed` 自动提取时期列表（`periods`）并计算筛选结果（`filteredPieces`），让模板的 `v-for` 遍历 `filteredPieces`。",
+      "hint": "`computed` 的三个特性：自动追踪依赖、结果缓存、只读派生。模板中 `v-for` 必须遍历 `filteredPieces` 而不是 `pieces`，否则点按钮列表不变。`[...new Set(allPeriods)]` 可以给时期列表去重。",
+      "purpose": "这一步同时体现 Vue 的两大核心：`computed` 让你声明“这个值是怎么算出来的”，Vue 自动追踪依赖并缓存结果——v1 里遍历 DOM 改 `display` 的几十行代码，这里几行搞定；FilterBar 则体现组件化——它只负责展示按钮和通知父组件，从不自己做决定。数据始终只有一份，筛选结果只是“算出来的”。",
+      "expectedResult": "页面上出现一排筛选按钮（全部、巴洛克、古典主义、浪漫主义），当前选中的按钮高亮；点击不同按钮，卡片列表实时过滤；“全部”恢复所有卡片。以后添加新时期的曲目，筛选栏会自动多出对应按钮。",
       "starterCode": {
-        "html": "<!-- FilterBar.vue — 模板 -->\n<template>\n  <div class=\"filter-bar\">\n    <button\n      v-for=\"period in periods\"\n      :key=\"period\"\n      :class=\"{ active: active === period }\"\n      @click=\"$emit('update:active', period)\"\n      class=\"filter-btn\"\n    >\n      {{ period }}\n    </button>\n  </div>\n</template>",
-        "css": "/* FilterBar.vue — scoped 样式 */\n.filter-bar {\n  text-align: center;\n  margin: 16px 0 24px 0;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  gap: 8px;\n}\n.filter-btn {\n  padding: 6px 18px;\n  border: 1.5px solid #C9A96E;\n  border-radius: 20px;\n  background: #fff;\n  color: #6B5A4E;\n  font-size: 0.85rem;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n.filter-btn:hover {\n  background: #F5EEE0;\n}\n.filter-btn.active {\n  background: #C9A96E;\n  color: #fff;\n}",
-        "js": "// FilterBar.vue — 逻辑\nimport { defineProps, defineEmits } from 'vue'\ndefineProps({\n  periods: { type: Array, required: true },\n  active: { type: String, required: true }\n})\ndefineEmits(['update:active'])"
+        "html": "<!-- FilterBar.vue — 模板 -->\n<template>\n  <div class=\"filter-bar\">\n    <button\n      v-for=\"period in periods\"\n      :key=\"period\"\n      :class=\"{ active: active === period }\"\n      @click=\"$emit('update:active', period)\"\n    >\n      {{ period }}\n    </button>\n  </div>\n</template>",
+        "css": "/* FilterBar.vue — scoped 样式 */\n.filter-bar {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n  margin-bottom: 24px;\n  justify-content: center;\n}\n.filter-bar button {\n  padding: 8px 20px;\n  border: 2px solid #e0e0e0;\n  border-radius: 20px;\n  background: #fff;\n  color: #666;\n  font-size: 14px;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n.filter-bar button.active {\n  background: #4a90d9;\n  border-color: #4a90d9;\n  color: #fff;\n}",
+        "js": "// FilterBar.vue — 逻辑\n// defineProps({ periods: Array, active: String })\n// defineEmits(['update:active'])\n\n// App.vue — 筛选逻辑（在 pieces 的基础上添加）\n// const selectedPeriod = ref('全部')\n// const periods = computed(() => ['全部', ...new Set(pieces.value.map(p => p.period))])\n// const filteredPieces = computed(() => {\n//   if (selectedPeriod.value === '全部') return pieces.value\n//   return pieces.value.filter(p => p.period === selectedPeriod.value)\n// })"
       }
     },
     {
-      "title": "构建 AddForm 组件",
+      "title": "添加表单组件 — v-model 与事件",
       "content": {
         "mdFile": "steps/06.md"
       },
-      "task": "创建 `src/components/AddForm.vue`，包含四个输入字段（曲名、作曲家、图片URL、时期下拉框）和一个提交按钮。提交时验证数据、发出 `add` 事件、清空表单。",
-      "hint": "用 `<select v-model=\"period\">` 绑定下拉框。如果图片 URL 为空，可以给一个默认的占位图：`https://placehold.co/400x200/E8D5B7/8B2E2E?text=No+Image`。",
-      "purpose": "AddForm 展示了 Vue 的 `v-model` 有多么简洁——对比 v1 中需要手动 `querySelector` + `addEventListener` + 拼 HTML 的繁琐流程，现在只需 `v-model` 双向绑定 + `emit` 发送对象。代码量减少 70%，可读性提升 200%。这就是框架的核心价值：把重复劳动自动化，让你专注于业务逻辑。",
-      "expectedResult": "表单包含四个输入字段，必填项有验证提示。填写曲名、作曲家等信息后点击提交，新曲目被添加到收藏列表中，表单自动清空。如果必填字段为空，表单下方显示红色错误提示，数据不会被提交。",
+      "task": "创建 `src/components/AddForm.vue`：用 `v-model` 绑定曲名、作曲家、图片、时期四个字段，提交时验证必填项、`emit('add', newPiece)` 把数据交给父组件并清空表单；再在 `App.vue` 里用 `@add=\"addPiece\"` 接收并 `push` 到 `pieces`。",
+      "hint": "`@submit.prevent` 等价于 `event.preventDefault()`，防止页面刷新。`v-model=\"name\"` 一行完成“读取输入 + 写回输入”，比 v1 手动 `getElementById` + `addEventListener` 简洁得多。新曲目 ID 用 `Date.now()` 生成，不要用数组长度。",
+      "purpose": "AddForm 展示了 Vue 的 `v-model` 有多么简洁——对比 v1 中手动取值的繁琐流程，现在只需双向绑定 + `emit` 发送对象。这也是你第一次让子组件“往上传数据”：添加是子组件发出数据、父组件接收并处理，这个模式和后面的删除/收藏完全一致。",
+      "expectedResult": "表单包含四个输入字段，必填项有验证提示。填写曲名、作曲家等信息后点击提交，新曲目被添加到收藏列表中，表单自动清空；必填字段为空时弹出提示，数据不会被提交。",
       "starterCode": {
-        "html": "<!-- AddForm.vue — 模板 -->\n<template>\n  <form class=\"add-form\" @submit.prevent=\"handleSubmit\">\n    <h3>➕ 添加新收藏</h3>\n    <input\n      v-model=\"name\"\n      type=\"text\"\n      placeholder=\"曲名（必填）\"\n    />\n    <input\n      v-model=\"composer\"\n      type=\"text\"\n      placeholder=\"作曲家（必填）\"\n    />\n    <input\n      v-model=\"image\"\n      type=\"text\"\n      placeholder=\"图片链接（可选）\"\n    />\n    <select v-model=\"period\">\n      <option value=\"\">选择时期</option>\n      <option value=\"巴洛克\">巴洛克</option>\n      <option value=\"古典\">古典</option>\n      <option value=\"浪漫\">浪漫</option>\n      <option value=\"印象派\">印象派</option>\n      <option value=\"现代\">现代</option>\n    </select>\n    <button type=\"submit\">添加到收藏</button>\n    <p v-if=\"errorMsg\" class=\"error\">{{ errorMsg }}</p>\n  </form>\n</template>",
-        "css": "/* AddForm.vue — scoped 样式 */\n.add-form {\n  max-width: 500px;\n  margin: 0 auto 24px auto;\n  padding: 20px;\n  background: #FFFDF7;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.06);\n}\n.add-form h3 {\n  margin: 0 0 12px 0;\n  color: #3D2B1F;\n  font-size: 1rem;\n}\n.add-form input,\n.add-form select {\n  display: block;\n  width: 100%;\n  margin-bottom: 8px;\n  padding: 8px 12px;\n  border: 1px solid #DDD;\n  border-radius: 6px;\n  font-size: 0.9rem;\n  box-sizing: border-box;\n}\n.add-form button {\n  padding: 8px 24px;\n  background: #8B2E2E;\n  color: #fff;\n  border: none;\n  border-radius: 6px;\n  font-size: 0.9rem;\n  cursor: pointer;\n  transition: background 0.2s;\n}\n.add-form button:hover {\n  background: #A04545;\n}\n.error {\n  color: #D32F2F;\n  font-size: 0.85rem;\n  margin-top: 8px;\n}",
-        "js": "// AddForm.vue — 逻辑\nimport { ref, defineEmits } from 'vue'\nconst emit = defineEmits(['add'])\nconst name = ref('')\nconst composer = ref('')\nconst image = ref('')\nconst period = ref('')\nconst errorMsg = ref('')\nfunction handleSubmit() {\n  errorMsg.value = ''\n  if (!name.value.trim() || !composer.value.trim()) {\n    errorMsg.value = '请至少填写曲名和作曲家'\n    return\n  }\n  emit('add', {\n    name: name.value.trim(),\n    composer: composer.value.trim(),\n    image: image.value.trim() || '',\n    period: period.value || '未分类'\n  })\n  // 清空表单\n  name.value = ''\n  composer.value = ''\n  image.value = ''\n  period.value = ''\n}"
+        "html": "<!-- AddForm.vue — 模板 -->\n<template>\n  <div class=\"add-form\">\n    <h2>➕ 添加新曲目</h2>\n    <form @submit.prevent=\"handleSubmit\">\n      <div class=\"form-group\">\n        <label for=\"name\">曲名 <span class=\"required\">*</span></label>\n        <input id=\"name\" v-model=\"name\" type=\"text\" placeholder=\"例如：G大调第一无伴奏大提琴组曲\" />\n      </div>\n      <div class=\"form-group\">\n        <label for=\"composer\">作曲家 <span class=\"required\">*</span></label>\n        <input id=\"composer\" v-model=\"composer\" type=\"text\" placeholder=\"例如：巴赫\" />\n      </div>\n      <div class=\"form-group\">\n        <label for=\"image\">封面图片 URL</label>\n        <input id=\"image\" v-model=\"image\" type=\"text\" placeholder=\"https://...（留空则使用默认图片）\" />\n      </div>\n      <div class=\"form-group\">\n        <label for=\"period\">时期 / 风格</label>\n        <select id=\"period\" v-model=\"period\">\n          <option value=\"\">-- 请选择时期 --</option>\n          <option value=\"巴洛克\">巴洛克</option>\n          <option value=\"古典主义\">古典主义</option>\n          <option value=\"浪漫主义\">浪漫主义</option>\n          <option value=\"现代主义\">现代主义</option>\n        </select>\n      </div>\n      <button type=\"submit\" class=\"btn-submit\">添加曲目</button>\n    </form>\n  </div>\n</template>",
+        "css": "/* AddForm.vue — scoped 样式 */\n.add-form {\n  background: #f9f9f9;\n  border: 1px solid #e0e0e0;\n  border-radius: 12px;\n  padding: 24px;\n  margin-bottom: 24px;\n}\n.add-form h2 {\n  font-size: 18px;\n  margin-bottom: 16px;\n  color: #333;\n}\n.form-group {\n  margin-bottom: 16px;\n}\n.form-group label {\n  display: block;\n  margin-bottom: 6px;\n  font-size: 14px;\n  color: #555;\n  font-weight: 500;\n}\n.required {\n  color: #e74c3c;\n}\n.form-group input,\n.form-group select {\n  width: 100%;\n  padding: 10px 12px;\n  border: 1px solid #ddd;\n  border-radius: 8px;\n  font-size: 14px;\n  box-sizing: border-box;\n}\n.btn-submit {\n  width: 100%;\n  padding: 12px;\n  background: #4a90d9;\n  color: #fff;\n  border: none;\n  border-radius: 8px;\n  font-size: 16px;\n  cursor: pointer;\n}",
+        "js": "// AddForm.vue — 逻辑\nimport { ref } from 'vue'\nconst emit = defineEmits(['add'])\n\nconst name = ref('')\nconst composer = ref('')\nconst image = ref('')\nconst period = ref('')\n\nfunction handleSubmit() {\n  // 1. 验证：曲名和作曲家不能为空（为空就 alert 并 return）\n  // 2. 组装新曲目对象：\n  //    { id: Date.now(), name: name.value.trim(), composer: composer.value.trim(),\n  //      image: image.value.trim() || 'https://picsum.photos/seed/default/200/200',\n  //      period: period.value || '古典主义', liked: false }\n  // 3. emit('add', newPiece) 把数据发给父组件\n  // 4. 清空四个 ref\n}\n\n// App.vue — 接收添加\n// function addPiece(newPiece) {\n//   pieces.value.push(newPiece)\n// }\n// <AddForm @add=\"addPiece\" />"
       }
     },
     {
-      "title": "组装 App.vue — 把所有组件\"合奏\"起来",
+      "title": "删除和收藏切换 — 子组件通知父组件改数据",
       "content": {
         "mdFile": "steps/07.md"
       },
-      "task": "在 App.vue 中组装所有组件：引入 MusicCard、FilterBar、AddForm，用 computed 实现筛选，处理子组件发出的所有事件。",
-      "hint": "给每首曲目一个唯一 ID（可以用自增数字或 `Date.now()`），方便在 `toggleLike` 和 `deletePiece` 中定位要修改的曲目。`v-for` 渲染时记得加 `:key=\"p.id\"`。",
-      "purpose": "这是 Vue 组件化开发的高潮——所有子组件就位，App.vue 作为指挥将它们协调起来。`computed` 自动计算筛选结果、`v-for` 渲染卡片列表、事件处理函数修改数据。你看到的是数据在组件树中单向流动：子组件 emit 事件 → App.vue 修改 ref → computed 重新计算 → 模板自动更新。理解了这条流动路径，就理解了 Vue 的响应式灵魂。",
-      "expectedResult": "页面完整呈现：筛选栏、添加表单、统计信息（'筛选出 N 首中的 M 首'）、卡片网格，所有功能协调运转。筛选按钮能过滤卡片，添加表单能新增曲目，每张卡片上的收藏和删除按钮都能正常工作。所有组件如默契的室内乐团般和谐运转。",
+      "task": "在 `App.vue` 里实现两个处理函数：`toggleLike(id)` 切换曲目的 `liked` 状态，`deletePiece(id)` 用 `confirm` 确认后从 `pieces` 里移除对应曲目；然后在模板的 `<MusicCard>` 上绑定 `@toggle-like` 和 `@delete`。",
+      "hint": "模式是固定的：子组件 emit 事件（第 3 步已声明），父组件监听并修改数据。查找数据用 `pieces.value.find(p => p.id === id)`，删除用 `findIndex` + `splice(index, 1)`，不要用 `delete` 或数组索引。子组件永远不要直接修改 props。",
+      "purpose": "删除和收藏是几乎每个应用都有的交互模式，它们演示了 Vue 中“子组件如何安全地修改父组件的数据”——子组件只“通知”，父组件才动手。这个模式贯穿所有 Vue 应用：你一行 DOM 操作都不用写，`pieces` 一变，页面自动更新。",
+      "expectedResult": "点击收藏按钮，爱心在 🤍/❤️ 之间切换、卡片背景随之变化；点击删除按钮弹出带曲名的确认框，确认后卡片消失、取消则保留；筛选、收藏、删除三个功能互不干扰。",
       "starterCode": {
-        "html": "<!-- App.vue — 模板 -->\n<template>\n  <div class=\"app\">\n    <h1 class=\"app-title\">🎵 我的音乐收藏</h1>\n    <FilterBar\n      :periods=\"periods\"\n      v-model:active=\"selectedPeriod\"\n    />\n    <AddForm @add=\"addPiece\" />\n    <div class=\"stats\">\n      筛选出 {{ pieces.length }} 首中的 {{ filteredPieces.length }} 首\n    </div>\n    <div class=\"card-grid\">\n      <MusicCard\n        v-for=\"p in filteredPieces\"\n        :key=\"p.id\"\n        :name=\"p.name\"\n        :composer=\"p.composer\"\n        :image=\"p.image\"\n        :period=\"p.period\"\n        :liked=\"p.liked\"\n        @toggle-like=\"toggleLike(p.id)\"\n        @delete=\"deletePiece(p.id)\"\n      />\n    </div>\n    <div v-if=\"filteredPieces.length === 0\" class=\"empty\">\n      还没有收藏，用上方的表单添加第一首吧 🎶\n    </div>\n  </div>\n</template>",
-        "css": "/* App.vue — 全局样式 */\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\nbody {\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  background: #FDF8F0;\n  color: #3D2B1F;\n}\n.app {\n  max-width: 960px;\n  margin: 0 auto;\n  padding: 24px;\n}\n.app-title {\n  text-align: center;\n  margin-bottom: 8px;\n  font-size: 1.8rem;\n  color: #3D2B1F;\n}\n.stats {\n  text-align: center;\n  color: #9B8579;\n  font-size: 0.85rem;\n  margin-bottom: 16px;\n}\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 20px;\n}\n.empty {\n  text-align: center;\n  padding: 60px 20px;\n  color: #9B8579;\n  font-size: 1.1rem;\n}",
-        "js": "// App.vue — 逻辑\nimport { ref, computed } from 'vue'\nimport MusicCard from './components/MusicCard.vue'\nimport FilterBar from './components/FilterBar.vue'\nimport AddForm from './components/AddForm.vue'\nlet nextId = 4\nconst pieces = ref([\n  {\n    id: 1,\n    name: 'G大调第一无伴奏大提琴组曲',\n    composer: '巴赫',\n    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Johann_Sebastian_Bach.jpg',\n    period: '巴洛克',\n    liked: false\n  },\n  {\n    id: 2,\n    name: 'g小调第40号交响曲',\n    composer: '莫扎特',\n    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Wolfgang-amadeus-mozart_1.jpg',\n    period: '古典',\n    liked: true\n  },\n  {\n    id: 3,\n    name: '月光',\n    composer: '德彪西',\n    image: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Claude_Debussy_1905.png',\n    period: '印象派',\n    liked: false\n  }\n])\nconst selectedPeriod = ref('全部')\nconst periods = computed(() => {\n  const set = new Set(pieces.value.map(p => p.period))\n  return ['全部', ...set]\n})\nconst filteredPieces = computed(() => {\n  if (selectedPeriod.value === '全部') return pieces.value\n  return pieces.value.filter(p => p.period === selectedPeriod.value)\n})\nfunction addPiece(data) {\n  pieces.value.push({\n    id: nextId++,\n    name: data.name,\n    composer: data.composer,\n    image: data.image,\n    period: data.period,\n    liked: false\n  })\n}\nfunction toggleLike(id) {\n  const p = pieces.value.find(p => p.id === id)\n  if (p) p.liked = !p.liked\n}\nfunction deletePiece(id) {\n  pieces.value = pieces.value.filter(p => p.id !== id)\n}"
+        "html": "<!-- App.vue — 模板（给 <MusicCard> 补上事件绑定） -->\n<template>\n  <div class=\"app\">\n    <h1>🎵 我的音乐收藏</h1>\n    <div class=\"card-grid\">\n      <MusicCard\n        v-for=\"piece in filteredPieces\"\n        :key=\"piece.id\"\n        :id=\"piece.id\"\n        :name=\"piece.name\"\n        :composer=\"piece.composer\"\n        :image=\"piece.image\"\n        :period=\"piece.period\"\n        :liked=\"piece.liked\"\n        @toggle-like=\"toggleLike\"\n        @delete=\"deletePiece\"\n      />\n    </div>\n  </div>\n</template>",
+        "css": "",
+        "js": "// App.vue — 逻辑（在第 4、5 步的基础上添加两个函数）\n\n// 切换收藏状态\nfunction toggleLike(id) {\n  // 1. const piece = pieces.value.find(p => p.id === id)\n  // 2. piece.liked = !piece.liked\n}\n\n// 删除曲目\nfunction deletePiece(id) {\n  // 1. const piece = pieces.value.find(p => p.id === id)，找不到就 return\n  // 2. confirm(`确定要删除「${piece.name}」吗？`)，取消就 return\n  // 3. const index = pieces.value.findIndex(p => p.id === id)\n  // 4. index !== -1 时 pieces.value.splice(index, 1)\n}"
       }
     },
     {
-      "title": "数据持久化 — localStorage + watch",
+      "title": "LocalStorage 持久化 — Watch 自动保存",
       "content": {
         "mdFile": "steps/08.md"
       },
-      "task": "用 watch 监听 pieces 的变化，自动保存到 localStorage。同时实现页面初始化时从 localStorage 读取数据。",
-      "hint": "如果 `localStorage.getItem` 返回 `null`（第一次使用），就用默认的初始数据。`JSON.parse` 的参数需要判空，否则会报错。",
-      "purpose": "数据持久化让应用有了'记忆'——刷新页面后数据不丢失。`watch` 比手动调用 `localStorage.setItem` 优雅得多：设置一次监听，之后所有数据变更都自动存档，永远不会漏掉。`{ deep: true }` 选项确保数组内部的增删改都能被检测到。这是声明式编程的又一次胜利：你只需描述'监控这个数据'，不用在每个修改点手动保存。",
-      "expectedResult": "刷新页面后，所有收藏的曲目都还在——添加过的、修改过收藏状态的、删除的，都如实保留。打开浏览器 DevTools 的 Application → Local Storage，能看到 `music-collection-vue` 键中保存的 JSON 数组，与 `pieces` 的数据完全同步。",
+      "task": "用 `watch` 监听 `pieces` 的变化自动保存到 localStorage，并写 `loadFromStorage()` 在页面初始化时读取数据（没有数据时用默认的 6 条示例数据）。",
+      "hint": "`localStorage` 只能存字符串：保存前 `JSON.stringify`，读取后 `JSON.parse`。`watch` 的第三个参数 `{ deep: true }` 最容易漏——没有它，数组内部的增删改都不会触发保存。`JSON.parse` 前后记得判空并加 `try...catch`，数据损坏时降级到默认数据。",
+      "purpose": "数据持久化让应用有了“记忆”——刷新页面后数据不丢失。`watch` 比 v1 里每次操作后手动 `setItem` 优雅得多：设置一次监听，之后所有数据变更都自动存档，永远不会漏。这是声明式编程的又一次胜利：你只需描述“监控这个数据”，不用在每个修改点手动保存。",
+      "expectedResult": "添加、删除、收藏后刷新页面，数据都还在；打开开发者工具的 Application → Local Storage，能看到 `music-collection-v2` 键中保存的 JSON 数组，与 `pieces` 完全同步。",
       "starterCode": {
         "html": "<!-- 在 App.vue 中，模板不变 -->\n<!-- localStorage 的读写全部在 <script setup> 中完成 -->",
         "css": "/* 样式不变 */",
-        "js": "// App.vue — 添加 localStorage + watch\nimport { ref, computed, watch } from 'vue'\nconst STORAGE_KEY = 'music-collection-vue'\nfunction loadFromStorage() {\n  try {\n    const saved = localStorage.getItem(STORAGE_KEY)\n    if (saved) return JSON.parse(saved)\n  } catch (e) {\n    console.warn('读取收藏数据失败，使用默认数据', e)\n  }\n  return [\n    { id: 1, name: 'G大调第一无伴奏大提琴组曲', composer: '巴赫', image: '...', period: '巴洛克', liked: false },\n    // ... 其他默认数据\n  ]\n}\nconst pieces = ref(loadFromStorage())\n// 自动保存 — deep 模式检测数组内部变化\nwatch(pieces, (newVal) => {\n  localStorage.setItem(STORAGE_KEY, JSON.stringify(newVal))\n}, { deep: true })"
+        "js": "// App.vue — 添加 localStorage + watch\nimport { ref, computed, watch } from 'vue'\n\n// 默认示例数据（首次使用时才用到）\nconst defaultPieces = [\n  { id: 1, name: 'G大调第一无伴奏大提琴组曲', composer: '巴赫', image: 'https://picsum.photos/seed/cello/200/200', period: '巴洛克', liked: false },\n  // ... 其他 5 条默认数据\n]\n\n// 从 localStorage 读取数据，没有就用默认数据\nfunction loadFromStorage() {\n  // try { const saved = localStorage.getItem('music-collection-v2'); ... } catch { }\n  // saved 存在时 JSON.parse(saved) 并校验是数组；否则返回 defaultPieces\n}\n\nconst pieces = ref(loadFromStorage())\n\n// 自动保存 — deep 模式检测数组内部变化\nwatch(pieces, (newPieces) => {\n  localStorage.setItem('music-collection-v2', JSON.stringify(newPieces))\n}, { deep: true })"
+      }
+    },
+    {
+      "title": "打磨体验 — 过渡动画、空状态、细节优化",
+      "content": {
+        "mdFile": "steps/09.md"
+      },
+      "task": "用 `<TransitionGroup>` 给卡片列表的增删加上过渡动画（配合 `card-enter`/`card-leave` 系列 CSS），添加两种空状态提示（收藏库为空 / 筛选无结果），再补一个手机宽度的媒体查询。",
+      "hint": "`<TransitionGroup name=\"card\" tag=\"div\">` 会按 `name` 自动套用 `card-enter-from`、`card-leave-to`、`card-move` 等 CSS class；它的子元素必须有 `:key`。空状态要区分两种：`pieces.length === 0` 提示“收藏库是空的”，`filteredPieces.length === 0` 提示“没有找到该时期的曲目”。",
+      "purpose": "功能做好只是及格线，用户体验决定了别人愿不愿意用你的应用。过渡动画、空状态、边界情况处理，这些就是“Demo 项目”和“真正产品”之间的差距——这一步学的是实际项目中提升完成度的具体技巧。",
+      "expectedResult": "添加/删除卡片时有平滑的淡入/缩小动画；全部数据为空时显示“收藏库是空的”，筛选无结果时显示“没有找到 XX 时期的曲目”；手机宽度下卡片纵向排列、不变形。",
+      "starterCode": {
+        "html": "<!-- App.vue — 模板（用 TransitionGroup 包裹卡片列表，并加空状态） -->\n<template>\n  <div class=\"app\">\n    <h1>🎵 我的音乐收藏</h1>\n    <TransitionGroup name=\"card\" tag=\"div\" class=\"card-grid\">\n      <MusicCard\n        v-for=\"piece in filteredPieces\"\n        :key=\"piece.id\"\n        :id=\"piece.id\"\n        :name=\"piece.name\"\n        :composer=\"piece.composer\"\n        :image=\"piece.image\"\n        :period=\"piece.period\"\n        :liked=\"piece.liked\"\n        @toggle-like=\"toggleLike\"\n        @delete=\"deletePiece\"\n      />\n    </TransitionGroup>\n    <div v-if=\"filteredPieces.length === 0\" class=\"empty-state\">\n      <p>🎶 收藏库是空的，用上面的表单添加第一首吧！</p>\n    </div>\n  </div>\n</template>",
+        "css": "/* TransitionGroup 动画 */\n.card-enter-active,\n.card-leave-active {\n  transition: all 0.5s ease;\n}\n.card-enter-from {\n  opacity: 0;\n  transform: translateY(30px);\n}\n.card-leave-to {\n  opacity: 0;\n  transform: scale(0.8);\n}\n.card-leave-active {\n  position: absolute;\n}\n.card-move {\n  transition: transform 0.5s ease;\n}\n\n/* 空状态 */\n.empty-state {\n  text-align: center;\n  padding: 60px 20px;\n  color: #999;\n}\n\n/* 小屏幕适配 */\n@media (max-width: 480px) {\n  .music-card {\n    flex-direction: column;\n    text-align: center;\n  }\n  .card-actions {\n    justify-content: center;\n  }\n}",
+        "js": "// App.vue — 逻辑保持不变\n// 这一步只改模板和样式：TransitionGroup 动画 + 空状态提示 + 响应式媒体查询"
       }
     },
     {
       "title": "回顾与对比 — v1 vs v2",
       "content": {
-        "mdFile": "steps/09.md"
+        "mdFile": "steps/10.md"
       },
       "task": "回顾你的 v1 和 v2 代码，感受两种开发方式的差异。确认所有功能正常：添加、筛选、收藏切换、删除、刷新后数据保留。",
-      "hint": "如果筛选栏中的时期列表没有更新，检查 `periods` computed 是否正确提取了所有不重复的时期。",
-      "purpose": "比较是最好的学习方式。v1 是命令式——你告诉浏览器'怎么做'（找到这个元素、改它的样式、创建那个元素），v2 是声明式——你描述'应该是什么样'（筛选结果是这个数组、卡片用这条数据渲染）。从命令式到声明式的转变，是你从前端初学者迈向专业开发者的关键一步。理解了这一点，就理解了所有现代前端框架存在的意义。",
-      "expectedResult": "v1 和 v2 功能完全相同，但 v2 的代码更短、更清晰、更容易修改。你能自信地向别人解释：为什么 Vue 让开发更高效，以及 Props/Emits/Computed/Watch 各自解决了什么问题。这种对比理解比单独学习任何一个框架都更有价值。",
+      "hint": "对比时不要只盯着语法：v1 是命令式（你告诉浏览器每一步怎么做），v2 是声明式（你描述最终应该是什么样）。从“以 DOM 为中心”到“数据是唯一真相来源”，才是这一步真正要带走的东西。",
+      "purpose": "比较是最好的学习方式。v1 是命令式——你告诉浏览器“怎么做”（找到元素、改样式、创建元素）；v2 是声明式——你描述“应该是什么样”（筛选结果是这个数组、卡片用这条数据渲染）。从命令式到声明式的转变，是你从前端初学者迈向专业开发者的关键一步。",
+      "expectedResult": "v1 和 v2 功能完全相同，但 v2 的代码更短、更清晰、更容易修改。你能自信地向别人解释：为什么 Vue 让开发更高效，以及 Props/Emits/Computed/Watch 各自解决了什么问题。",
       "starterCode": {
         "html": "<!-- 这是回顾步骤，无需新代码 -->\n<!-- 检查 App.vue 确保所有功能正常 -->",
         "css": "",
@@ -126,17 +141,7 @@
       }
     },
     {
-      "title": "这个项目真正有用的收获",
-      "content": {
-        "mdFile": "steps/10.md"
-      },
-      "task": "回头看一遍 `v1` 和 `v2`，确认你能用自己的话说明：为什么这里不再用手动 DOM 操作，Vue 在这个项目里到底解决了什么问题。",
-      "hint": "这个项目最有价值的不是框架名字，而是你是否真的理解重构收益和组件化组织方式。",
-      "purpose": "减掉通用包装之后，保留最值得带走的结论：你已经开始建立现代前端的组织方式，而不是只会把代码写出来。",
-      "expectedResult": "你知道 `v2` 真正该记住的是什么，也知道以后如果需要展示它，核心应围绕重构价值而不是模板化表达。"
-    },
-    {
-      "title": "项目验收、手测与下一步",
+      "title": "验收清单与下一步",
       "content": {
         "mdFile": "steps/11.md"
       },
