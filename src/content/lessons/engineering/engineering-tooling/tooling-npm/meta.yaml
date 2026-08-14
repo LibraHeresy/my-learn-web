@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 6
 mode: local
 analogy: npm 就像应用商店——全球开发者共享了上百万个包，你不需要从零写每一个功能。需要日期格式化？npm install；需要图表？npm install。站在全球开发者的肩膀上。
-estimatedMinutes: 0
+estimatedMinutes: 25

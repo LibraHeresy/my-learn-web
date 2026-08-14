@@ -5,4 +5,4 @@ chapter: web-history
 order: 5
 mode: local
 analogy: 前端工程化就像从手工小作坊变成流水线工厂——代码检查、自动测试、一键部署，每个环节标准化，效率和质量的飞跃。
-estimatedMinutes: 0
+estimatedMinutes: 10

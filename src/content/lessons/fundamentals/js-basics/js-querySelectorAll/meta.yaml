@@ -5,4 +5,4 @@ chapter: js-basics
 order: 11
 mode: sandbox
 analogy: querySelector 像从班里点名一个人，querySelectorAll 像对全班说"所有第一排的同学站起来"——一条指令，同时操作一组元素。
-estimatedMinutes: 0
+estimatedMinutes: 20

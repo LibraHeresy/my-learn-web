@@ -5,4 +5,4 @@ chapter: ai-frontend
 order: 4
 mode: local
 analogy: 调试不是不犯错——是每次报错都能看懂原因，下次不再犯同样的错。AI 就是那个帮你翻译报错信息、分析根因的"老手"。
-estimatedMinutes: 0
+estimatedMinutes: 20

@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 5
 mode: local
 analogy: Props 向下传数据就像老板给员工派活——父组件把任务交给子组件；Emits 向上传事件就像员工给老板汇报——子组件告诉父组件"我做完了"。数据向下流，事件向上冒。
-estimatedMinutes: 0
+estimatedMinutes: 30

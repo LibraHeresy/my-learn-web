@@ -5,4 +5,4 @@ chapter: async-data
 order: 8
 mode: local
 analogy: 异步篇的最后一课：把你学的 Promise、async/await、fetch、防抖、localStorage 整合成一个完整的搜索应用。就像把乐高零件拼成一架完整的飞机。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: css-style
 order: 9
 mode: sandbox
 analogy: CSS 变量就像公司的品牌色卡——主色调定义一次，全站引用。要换色？改一个地方就行，不用每个页面、每个按钮挨个改。
-estimatedMinutes: 0
+estimatedMinutes: 30

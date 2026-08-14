@@ -5,4 +5,4 @@ chapter: js-basics
 order: 4
 mode: sandbox
 analogy: 函数就像菜谱——把做一道菜的步骤写下来，取个名字。下次做同样的菜，喊"照这个菜谱做"就行，不需要每次重新写一遍步骤。
-estimatedMinutes: 0
+estimatedMinutes: 25

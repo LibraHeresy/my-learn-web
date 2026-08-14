@@ -5,4 +5,4 @@ chapter: css-layout
 order: 2
 mode: sandbox
 analogy: 居中就像拍照时把人放在画面正中间——视觉焦点集中、平衡舒服。CSS 里有多种居中方式，选哪种取决于你知道"盒子"的尺寸。
-estimatedMinutes: 0
+estimatedMinutes: 35

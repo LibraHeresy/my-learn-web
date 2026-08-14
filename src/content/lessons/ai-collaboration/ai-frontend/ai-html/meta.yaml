@@ -5,4 +5,4 @@ chapter: ai-frontend
 order: 1
 mode: local
 analogy: AI 能生成一堆标签，但只有懂 HTML 的你才知道哪里该用 nav、哪里该用 article。工具负责量，你负责质——这是你和 AI 的分工。
-estimatedMinutes: 0
+estimatedMinutes: 20

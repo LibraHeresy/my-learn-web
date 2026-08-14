@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 4
 mode: sandbox
 analogy: console.log() 就像在流水线上装了透明观察窗——你可以在任何时刻、查看任何变量的当前值。不确定代码在做什么？打个 log 看一眼，而不是瞎猜。
-estimatedMinutes: 0
+estimatedMinutes: 20

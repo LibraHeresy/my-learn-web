@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 15
 mode: local
 analogy: this 就像"我"这个词在不同人口中有不同含义——张三说"我"指的是张三，李四说"我"指的是李四。在代码中，this 的值取决于"谁在调用这个函数"。理解 this 是理解 JavaScript 行为的关键一步。
-estimatedMinutes: 0
+estimatedMinutes: 25

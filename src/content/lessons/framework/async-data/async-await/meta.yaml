@@ -5,4 +5,4 @@ chapter: async-data
 order: 3
 mode: sandbox
 analogy: async/await 让异步代码读起来像同步代码——就像你把"等外卖送到"写成了"先点餐、等送来、然后吃"，一步接一步，逻辑清晰，但实际等待并不阻塞其他事。
-estimatedMinutes: 0
+estimatedMinutes: 25

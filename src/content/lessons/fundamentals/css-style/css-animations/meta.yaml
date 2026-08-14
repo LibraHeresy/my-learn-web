@@ -5,4 +5,4 @@ chapter: css-style
 order: 8
 mode: sandbox
 analogy: keyframes 让你精确控制动画的每一步——就像翻页动画书的每一帧。duration 是翻多快，让静态页面变成动态画面。
-estimatedMinutes: 0
+estimatedMinutes: 30

@@ -5,4 +5,4 @@ chapter: js-basics
 order: 17
 mode: sandbox
 analogy: .reduce() 就像把购物清单上的价格一一加起来算总价；.find() 就像在一堆快递里找到贴了特定标签的那个；.sort() 就像按身高给同学们排队。这些方法让你用一行代码完成复杂的数据操作。
-estimatedMinutes: 0
+estimatedMinutes: 25

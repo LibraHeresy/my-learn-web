@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 11
 mode: sandbox
 analogy: ES6 就像手机系统大更新——还是那个操作系统，但多了很多新功能：箭头函数、模板字符串、解构赋值。用更少的代码做同样的事。
-estimatedMinutes: 0
+estimatedMinutes: 25

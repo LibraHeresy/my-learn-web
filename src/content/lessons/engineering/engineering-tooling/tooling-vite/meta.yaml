@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 7
 mode: local
 analogy: Vite 就像一个精装修交付的公寓——一条命令，给你搭好整个项目框架：文件夹、配置、开发服务器，全部就位。你不用从砌墙开始，直接搬进去写代码。
-estimatedMinutes: 0
+estimatedMinutes: 20

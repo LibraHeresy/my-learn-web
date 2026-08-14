@@ -5,4 +5,4 @@ chapter: ai-basics
 order: 2
 mode: local
 analogy: 编程思维的演变就像出行方式的进化——从走路（手写汇编）到开车（高级语言）再到叫车（Prompt）。你从"操作者"变成了"目的地设定者"。
-estimatedMinutes: 0
+estimatedMinutes: 20

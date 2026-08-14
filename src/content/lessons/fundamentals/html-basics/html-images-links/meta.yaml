@@ -5,4 +5,4 @@ chapter: html-basics
 order: 5
 mode: sandbox
 analogy: img 就像在文档里贴照片，a 标签链接就像书里的"参见第X页"——指向另一个地方。网页有了图和链接，才真正活了起来。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: css-layout
 order: 5
 mode: sandbox
 analogy: 响应式设计就像同一个App在手机和电脑上界面不同——内容一样，但布局会根据屏幕大小自动调整。用 media 查询适配不同屏幕。
-estimatedMinutes: 0
+estimatedMinutes: 30

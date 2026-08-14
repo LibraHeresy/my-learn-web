@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 9
 mode: local
 analogy: Slot（插槽）就像填空题的空白横线——组件定义好"这里有一个空位"，使用者在空位上填入自己的内容。这让组件既有统一的框架，又能灵活变化内容。
-estimatedMinutes: 0
+estimatedMinutes: 25

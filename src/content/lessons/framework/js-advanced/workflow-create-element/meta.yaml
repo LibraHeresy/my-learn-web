@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 8
 mode: sandbox
 analogy: 用 innerHTML 像复印一页文档——快但粗糙，改不了细节。createElement+appendChild 像用打字机一个字一个字敲——慢但精准，每个字都能单独修改和删除。
-estimatedMinutes: 0
+estimatedMinutes: 20

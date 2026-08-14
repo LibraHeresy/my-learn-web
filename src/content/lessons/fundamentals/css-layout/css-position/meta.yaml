@@ -5,4 +5,4 @@ chapter: css-layout
 order: 3
 mode: sandbox
 analogy: 定位属性就像不同角色的站位——relative 是正常排队的人，absolute 是站到指定坐标的VIP，fixed 是钉在屏幕上的水印，sticky 是滚到一定位置就粘住的便签。
-estimatedMinutes: 0
+estimatedMinutes: 30

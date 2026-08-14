@@ -5,4 +5,4 @@ chapter: css-layout
 order: 6
 mode: sandbox
 analogy: 一场活动的海报需要精心布局：标题顶端、主内容中央、活动信息底部。用 CSS 把这些元素安排在合适的位置，让浏览体验流畅自然。
-estimatedMinutes: 0
+estimatedMinutes: 40

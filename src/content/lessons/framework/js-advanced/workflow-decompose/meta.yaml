@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 7
 mode: sandbox
 analogy: 一本书会分成章节，一段代码也应该拆成多个小函数。每个函数只做一件事，就像每个章节只讲一个主题。当函数超过20行，就该考虑拆分。
-estimatedMinutes: 0
+estimatedMinutes: 20

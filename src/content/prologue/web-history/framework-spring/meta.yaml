@@ -5,4 +5,4 @@ chapter: web-history
 order: 4
 mode: local
 analogy: V8 引擎让 JavaScript 快了数十倍——就像给自行车装上了电动机，同样的动作，完全不同的速度。
-estimatedMinutes: 0
+estimatedMinutes: 10

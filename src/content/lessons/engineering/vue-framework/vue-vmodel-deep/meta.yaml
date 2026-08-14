@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 8
 mode: local
 analogy: v-model 就像两个人手拉手——一个往前一步，另一个跟着往前；一个往后退，另一个跟着退。表单输入和数据之间就是这种同步关系：输入变了，数据跟着变；数据变了，输入框自动显示。
-estimatedMinutes: 0
+estimatedMinutes: 25

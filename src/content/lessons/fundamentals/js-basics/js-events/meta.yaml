@@ -5,4 +5,4 @@ chapter: js-basics
 order: 5
 mode: sandbox
 analogy: 事件就像门铃——按一下（点击按钮），屋里的人就知道有人来了（执行代码）。没按门铃的时候，代码等着；按下去了，代码才动。
-estimatedMinutes: 0
+estimatedMinutes: 30

@@ -5,4 +5,4 @@ chapter: css-style
 order: 1
 mode: sandbox
 analogy: 如果 HTML 是毛坯房的结构，CSS 就是装修——刷什么颜色、用什么字体、间距多大。HTML 决定"有什么"，CSS 决定"长什么样"。
-estimatedMinutes: 0
+estimatedMinutes: 30

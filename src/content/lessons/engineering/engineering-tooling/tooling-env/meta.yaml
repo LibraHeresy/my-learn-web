@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 12
 mode: local
 analogy: 环境变量就像灯光控制台——排练时开工作灯，正式演出切换成舞台灯光。同一套代码，开发时API指向测试服务器，上线后自动指向正式服务器。
-estimatedMinutes: 0
+estimatedMinutes: 25

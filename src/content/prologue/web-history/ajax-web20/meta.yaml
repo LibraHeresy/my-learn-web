@@ -5,4 +5,4 @@ chapter: web-history
 order: 3
 mode: local
 analogy: Ajax 让网页不用刷新就能更新内容——就像手机收到消息不用重启就能看。浏览网页从"翻书"变成了"聊天"。
-estimatedMinutes: 0
+estimatedMinutes: 10

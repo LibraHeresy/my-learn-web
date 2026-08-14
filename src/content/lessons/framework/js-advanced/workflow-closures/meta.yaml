@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 14
 mode: local
 analogy: 闭包就像一个孩子记得他家的地址——即使搬到了另一个城市，他仍然知道老房子在哪。函数被创建时，会"记住"它所在作用域的所有变量，即使离开了那个作用域，它仍然能访问那些变量。
-estimatedMinutes: 0
+estimatedMinutes: 20

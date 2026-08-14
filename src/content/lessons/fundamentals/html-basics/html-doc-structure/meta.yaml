@@ -5,4 +5,4 @@ chapter: html-basics
 order: 2
 mode: sandbox
 analogy: 每个网页都有一个标准结构，就像每封信都有抬头、正文和落款——DOCTYPE 是"这是一封信"的声明，head 是信封信息，body 是信纸内容。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 13
 mode: local
 analogy: 回调就像你给朋友留了你的电话号码——"做好了给我打电话"。你把一个函数（电话号码）传给另一个函数（朋友），等对方完成后执行。这就是 JavaScript 处理异步操作的基础模式。
-estimatedMinutes: 0
+estimatedMinutes: 25

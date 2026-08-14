@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 10
 mode: local
 analogy: Vue Router 就像一本书的目录——点击目录中的章节名，翻到对应的那一页。URL 变了，页面内容跟着变，但不需要重新加载整个页面。
-estimatedMinutes: 0
+estimatedMinutes: 30

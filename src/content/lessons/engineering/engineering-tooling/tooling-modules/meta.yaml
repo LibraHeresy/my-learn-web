@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 5
 mode: local
 analogy: 模块化就是把代码拆成几个文件，每个文件负责一块功能——就像公司分部门：销售部、技术部、财务部各干各的，通过规范的接口协作，而不是把所有人塞进一个房间。
-estimatedMinutes: 0
+estimatedMinutes: 25

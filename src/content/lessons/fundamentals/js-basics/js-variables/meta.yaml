@@ -5,4 +5,4 @@ chapter: js-basics
 order: 2
 mode: sandbox
 analogy: 变量就像一个贴了标签的收纳盒——盒子上写"用户名"，里面放"小明"。以后想用"小明"的时候，直接喊盒子标签就行，不用再写一遍名字。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: ai-project
 order: 3
 mode: local
 analogy: AI 能快速生成一个个组件，但你的任务是确保所有组件拼在一起是一个完整统一的产品，而不是一堆风格各异的零件。
-estimatedMinutes: 0
+estimatedMinutes: 20

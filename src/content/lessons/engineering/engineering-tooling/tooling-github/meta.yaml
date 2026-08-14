@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 10
 mode: local
 analogy: GitHub 就像是把你的代码发布到公共图书馆——你的项目有了一个公开的地址，别人可以看到、使用、贡献。它也是程序员界的 LinkedIn——你的 GitHub 主页就是你的技术名片。
-estimatedMinutes: 0
+estimatedMinutes: 25

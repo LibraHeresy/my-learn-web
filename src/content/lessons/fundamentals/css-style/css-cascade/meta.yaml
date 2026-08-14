@@ -5,4 +5,4 @@ chapter: css-style
 order: 6
 mode: sandbox
 analogy: 当多条 CSS 规则同时指向一个元素时，浏览器按一套优先级规则决定谁生效——就像公司里，直属上级的指令优先于隔壁部门的通知。越具体的规则越有话语权。
-estimatedMinutes: 0
+estimatedMinutes: 25

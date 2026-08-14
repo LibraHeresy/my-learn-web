@@ -5,4 +5,4 @@ chapter: css-style
 order: 5
 mode: sandbox
 analogy: 选择器就像快递员按地址找人——.class 像"送到XX小区"（一类），#id 像"送给张三本人"（一个），:hover 像"当我把包裹递过去的时候"。
-estimatedMinutes: 0
+estimatedMinutes: 30

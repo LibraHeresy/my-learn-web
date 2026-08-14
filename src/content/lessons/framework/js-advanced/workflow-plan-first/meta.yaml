@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 2
 mode: sandbox
 analogy: 写代码和写作文一样——先列提纲（注释），再填内容（代码）。直接上手就写，写到一半才发现方向错了，比先花5分钟规划浪费的时间多得多。
-estimatedMinutes: 0
+estimatedMinutes: 20

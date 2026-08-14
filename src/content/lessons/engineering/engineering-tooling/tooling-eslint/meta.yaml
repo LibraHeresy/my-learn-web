@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 8
 mode: local
 analogy: ESLint 是代码的拼写检查器——发现语法错误和不良写法；Prettier 是自动排版工具——统一缩进、引号、分号风格。两人配合，让你的代码像专业出版物一样整齐。
-estimatedMinutes: 0
+estimatedMinutes: 20

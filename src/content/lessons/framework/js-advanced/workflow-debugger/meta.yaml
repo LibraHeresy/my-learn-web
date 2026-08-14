@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 5
 mode: sandbox
 analogy: 断点调试就像给代码按暂停键——让程序在某一刻冻结住，然后你一行一行检查：变量值对不对、执行顺序对不对。比满屏打 log 更高效、更精准。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 6
 mode: sandbox
 analogy: 好的变量名就像快递单上写"书"而不是"物品001"——让读代码的人（包括一个月后的你自己）一眼就知道这是什么。命名不改变功能，但能让你写代码快十倍。
-estimatedMinutes: 0
+estimatedMinutes: 20

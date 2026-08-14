@@ -5,4 +5,4 @@ chapter: ai-basics
 order: 3
 mode: local
 analogy: 好的 Prompt 就像好的需求描述——不是告诉对方每一步怎么做，而是说清楚"你要什么、什么风格、什么限制"，剩下的让对方发挥。
-estimatedMinutes: 0
+estimatedMinutes: 25

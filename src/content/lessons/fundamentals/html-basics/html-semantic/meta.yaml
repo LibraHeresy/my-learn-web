@@ -5,4 +5,4 @@ chapter: html-basics
 order: 7
 mode: sandbox
 analogy: 语义化标签就像给不同的房间挂门牌——厨房、卧室、书房，而不是全叫"房间1"。header、main、footer 让浏览器和搜索引擎一眼看懂你的页面结构。
-estimatedMinutes: 0
+estimatedMinutes: 25

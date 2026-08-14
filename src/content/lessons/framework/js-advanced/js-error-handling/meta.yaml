@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 12
 mode: sandbox
 analogy: 程序运行中难免出错——就像开车时导航信号丢了。好的错误处理不是不让错误发生，而是发生了之后系统继续运转。try/catch 就是安全气囊。
-estimatedMinutes: 0
+estimatedMinutes: 20

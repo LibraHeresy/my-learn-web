@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 2
 mode: local
 analogy: 学前端工程化之前，你得先装 Node.js——它不是用来写网页的，而是用来运行各种开发工具的。就像做饭之前，你得先装好燃气灶——不是食材，但没它你做不了饭。
-estimatedMinutes: 0
+estimatedMinutes: 20

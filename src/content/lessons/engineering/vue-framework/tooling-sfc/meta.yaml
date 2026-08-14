@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 1
 mode: local
 analogy: 一个 .vue 文件就像一个完整的商品包装盒——里面有产品本身（template）、使用说明书（script）、外观设计图（style）。三个部分各司其职，合在一起就是一个可复用的组件。
-estimatedMinutes: 0
+estimatedMinutes: 25

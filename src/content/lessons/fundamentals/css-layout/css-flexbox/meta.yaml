@@ -5,4 +5,4 @@ chapter: css-layout
 order: 1
 mode: sandbox
 analogy: Flexbox 就像整理书架——书可以横着排、竖着排、自动换行、均匀分布。不管书多书少，书架总能摆得整整齐齐。
-estimatedMinutes: 0
+estimatedMinutes: 30

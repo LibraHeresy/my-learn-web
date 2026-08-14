@@ -5,4 +5,4 @@ chapter: html-basics
 order: 11
 mode: sandbox
 analogy: input 不止能输入文字——就像手机键盘可以切数字、符号、语音。type=date 弹出日历，type=file 弹出文件选择器。不同场景用不同输入方式。
-estimatedMinutes: 0
+estimatedMinutes: 25

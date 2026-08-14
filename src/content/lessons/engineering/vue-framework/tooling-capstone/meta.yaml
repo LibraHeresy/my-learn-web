@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 11
 mode: local
 analogy: 登台篇最后一课——你已经从认识工具、学会 Vue，到能用 Vite+Git+GitHub Pages 完成一个完整的工程化项目。这一课把前面的所有技能整合在一起，做出一个拿得出手的作品。
-estimatedMinutes: 0
+estimatedMinutes: 40

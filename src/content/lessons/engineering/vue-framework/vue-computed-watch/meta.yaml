@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 7
 mode: local
 analogy: computed 就像收银机自动算总价——输入商品价格，自动得出总额，有缓存不重复算；watch 就像保安巡逻——看到异常情况才采取行动。各有用处。
-estimatedMinutes: 0
+estimatedMinutes: 25

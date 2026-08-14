@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 3
 mode: sandbox
 analogy: 浏览器控制台就像汽车仪表盘——引擎故障灯亮了，你看一眼就知道哪里出了问题。代码报错了，控制台告诉你哪一行、什么错。学会读它，你就不怕报错了。
-estimatedMinutes: 0
+estimatedMinutes: 25

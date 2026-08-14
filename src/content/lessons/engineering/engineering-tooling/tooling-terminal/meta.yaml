@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 4
 mode: local
 analogy: 命令行就像用语音助手控制手机——说一句话（敲一行命令），它帮你完成一件事。不需要在文件夹里翻来翻去、鼠标点来点去。几个字母，一切就绪。
-estimatedMinutes: 0
+estimatedMinutes: 25

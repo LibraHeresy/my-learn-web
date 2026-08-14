@@ -5,4 +5,4 @@ chapter: css-layout
 order: 4
 mode: sandbox
 analogy: Grid 就像课程表——横是星期、竖是节次，每个格子放一节课。你可以精确控制每行每列的宽度，也能让一个元素跨越多行多列。
-estimatedMinutes: 0
+estimatedMinutes: 30

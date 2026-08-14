@@ -5,4 +5,4 @@ chapter: js-basics
 order: 16
 mode: sandbox
 analogy: 字符串方法就像文本编辑器的查找替换功能——split 是"按逗号分列"、trim 是"去掉首尾空格"、replace 是"查找并替换"。用这些工具，处理用户输入变得简单高效。
-estimatedMinutes: 0
+estimatedMinutes: 25

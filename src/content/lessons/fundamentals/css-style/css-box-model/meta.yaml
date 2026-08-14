@@ -5,4 +5,4 @@ chapter: css-style
 order: 4
 mode: sandbox
 analogy: 每个元素都是一个盒子，就像快递包裹——content 是商品，padding 是泡沫填充，border 是纸箱，margin 是包裹之间的间距。
-estimatedMinutes: 0
+estimatedMinutes: 25

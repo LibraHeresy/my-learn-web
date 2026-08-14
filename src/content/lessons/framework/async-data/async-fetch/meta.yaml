@@ -5,4 +5,4 @@ chapter: async-data
 order: 4
 mode: sandbox
 analogy: fetch() 就像浏览器伸出去的一只手——向互联网上的服务器要数据。你发一个请求（"给我这个API的数据"），服务器返回结果，你拿着数据更新页面。
-estimatedMinutes: 0
+estimatedMinutes: 25

@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 3
 mode: local
 analogy: VS Code 不是普通的记事本——它就像智能办公桌：自动帮你对齐文件、标记错误、提示下一步。全世界绝大多数前端开发者每天都在用它，因为它真的省时间。
-estimatedMinutes: 0
+estimatedMinutes: 20

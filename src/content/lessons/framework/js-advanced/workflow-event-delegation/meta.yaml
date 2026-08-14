@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 9
 mode: sandbox
 analogy: 事件委托就像大堂经理——你不用给每个新来的客人单独交代注意事项，只需要告诉经理"遇到XX情况就按XX方式处理"。不管客人怎么换，处理方式不变。
-estimatedMinutes: 0
+estimatedMinutes: 20

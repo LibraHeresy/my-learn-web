@@ -5,4 +5,4 @@ chapter: html-basics
 order: 9
 mode: sandbox
 analogy: 表格就像一张课程表——横是星期，竖是节次，每个格子放一条信息。把数据按行列对齐，比一堆文字堆在一起清晰得多。
-estimatedMinutes: 0
+estimatedMinutes: 25

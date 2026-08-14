@@ -5,4 +5,4 @@ chapter: async-data
 order: 2
 mode: sandbox
 analogy: Promise 就像点了一份外卖——下单后拿到一个订单号（Promise）。外卖可能送到（resolve），也可能被取消（reject）。在结果出来前，你可以继续做其他事，不用一直在门口等。
-estimatedMinutes: 0
+estimatedMinutes: 25

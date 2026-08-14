@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 6
 mode: local
 analogy: Vue 的思维方式是从"操作 DOM"变成"声明结果"——就像从"你走到桌前、拿起笔、写下字"变成"把这段话写下来"。你只需要描述最终想要什么，Vue 负责操作 DOM 去实现。
-estimatedMinutes: 0
+estimatedMinutes: 15

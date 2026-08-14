@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 4
 mode: local
 analogy: Vue 的 ref 和 computed 就像 Excel 表格——ref 是你填进去的原始数据，computed 是自动计算的公式结果。原始数据变了，公式结果自动更新。你只改数据，Vue 负责更新页面。
-estimatedMinutes: 0
+estimatedMinutes: 30

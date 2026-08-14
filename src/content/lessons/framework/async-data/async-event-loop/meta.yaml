@@ -5,4 +5,4 @@ chapter: async-data
 order: 1
 mode: sandbox
 analogy: JavaScript 就像只有一个收银台的超市——一次只能结一个人。Event Loop 就是排队规则：当前的人结完，下一个才能上。异步任务就像"你先去拿东西，好了回来继续"。
-estimatedMinutes: 0
+estimatedMinutes: 25

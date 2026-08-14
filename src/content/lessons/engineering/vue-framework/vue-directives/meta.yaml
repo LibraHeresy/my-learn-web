@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 2
 mode: local
 analogy: Vue 指令就像交通标志——v-if 是"此路通/不通"，v-show 是"开灯/关灯"，v-for 是"重复N次"，v-bind 是"连接线"。每个指令做一件事，组合起来控制整个页面的行为。
-estimatedMinutes: 0
+estimatedMinutes: 30

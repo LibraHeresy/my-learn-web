@@ -5,4 +5,4 @@ chapter: vue-framework
 order: 3
 mode: local
 analogy: 每个 Vue 组件都有固定的生命周期——创建、挂载到页面、更新数据、销毁。就像人的一生：出生、成年、工作、退休。每个阶段有对应的钩子函数，让你在正确的时间做正确的事。
-estimatedMinutes: 0
+estimatedMinutes: 30

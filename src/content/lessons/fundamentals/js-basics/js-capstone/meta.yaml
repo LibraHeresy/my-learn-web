@@ -5,4 +5,4 @@ chapter: js-basics
 order: 15
 mode: sandbox
 analogy: 这节综合课把前11节课的知识融合在一起——用 HTML 搭骨架、CSS 做装修、JS 实现互动。就像终于盖好一栋完整的房子：有结构、有装修、有水电。
-estimatedMinutes: 0
+estimatedMinutes: 20

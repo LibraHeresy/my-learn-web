@@ -5,4 +5,4 @@ chapter: js-basics
 order: 6
 mode: sandbox
 analogy: 不只点击是事件——按下键盘、移动鼠标、滚动页面、输入文字，都是事件。就像你的手机能感应触摸、滑动、长按，网页也能感知用户的各种操作。
-estimatedMinutes: 0
+estimatedMinutes: 20

@@ -5,4 +5,4 @@ chapter: ai-basics
 order: 4
 mode: local
 analogy: 第一版 Prompt 几乎从来不是最优解。就像点菜——第一次说"来碗面"，第二次说"少辣多醋"，第三次说"面硬一点"。每次迭代都让你的需求更精准。
-estimatedMinutes: 0
+estimatedMinutes: 20

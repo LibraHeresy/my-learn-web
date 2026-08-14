@@ -5,4 +5,4 @@ chapter: css-style
 order: 7
 mode: sandbox
 analogy: transition 让变化平滑过渡——就像灯光从亮到暗慢慢调，而不是啪地一下关掉。从一个状态到另一个状态，中间有个过程才自然。
-estimatedMinutes: 0
+estimatedMinutes: 30

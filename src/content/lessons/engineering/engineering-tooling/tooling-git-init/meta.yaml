@@ -5,4 +5,4 @@ chapter: engineering-tooling
 order: 9
 mode: local
 analogy: Git 就像文档的"另存为"历史记录——每完成一步就存档一次，随时可以回看之前的任何版本。再也不用担心改坏了回不去。
-estimatedMinutes: 0
+estimatedMinutes: 25

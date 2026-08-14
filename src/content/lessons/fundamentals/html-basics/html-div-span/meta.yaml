@@ -5,4 +5,4 @@ chapter: html-basics
 order: 6
 mode: sandbox
 analogy: div 就像一个大纸箱，装下一整块内容区域，独占一行；span 就像一个透明塑料袋，包裹句子内部的一小段文字，不打断句子流动。
-estimatedMinutes: 0
+estimatedMinutes: 25

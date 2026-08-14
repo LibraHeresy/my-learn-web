@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 10
 mode: sandbox
 analogy: 数据驱动就像看仪表盘开车——仪表盘显示的是数据，你根据数据做决策。代码也一样：你只修改数据，然后调用一次渲染函数，页面自动跟上。
-estimatedMinutes: 0
+estimatedMinutes: 20

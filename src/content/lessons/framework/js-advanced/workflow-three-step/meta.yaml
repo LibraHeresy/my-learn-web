@@ -5,4 +5,4 @@ chapter: js-advanced
 order: 1
 mode: sandbox
 analogy: 盖房子永远先搭骨架（HTML）、再装修（CSS）、最后接通水电（JS）。跳过任何一步都会让后面的工作混乱——顺序错了，返工就多了。
-estimatedMinutes: 0
+estimatedMinutes: 20
