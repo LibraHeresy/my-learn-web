@@ -128,7 +128,7 @@ watch(lessonId, () => {
   }
 })
 
-// ─── Wave 1.4: 面板全屏 ───────────────────────────────────────────────────
+// ─── 面板全屏 ──────────────────────────────────────────────────────────────
 const maximized = ref<'none' | 'editor' | 'preview'>('none')
 
 function setMaximized(panel: 'editor' | 'preview') {
@@ -149,7 +149,7 @@ function onKeydown(e: KeyboardEvent) {
 onMounted(() => document.addEventListener('keydown', onKeydown))
 onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
 
-// ─── Wave 2.2: 分享代码 ───────────────────────────────────────────────────
+// ─── 分享代码 ─────────────────────────────────────────────────────────────
 const shareCopied = ref(false)
 
 function shareCode() {
@@ -175,7 +175,7 @@ onMounted(() => {
   }
 })
 
-// ─── Wave 2.3: 错误行高亮 ─────────────────────────────────────────────────
+// ─── 错误行高亮 ───────────────────────────────────────────────────────────
 const previewErrorLine = ref(0)
 
 function onPreviewError(info: { lineno: number; message: string }) {
@@ -237,7 +237,7 @@ watch(lessonId, () => {
         </template>
       </div>
 
-      <!-- Wave 2.2: 分享按钮（仅 sandbox 模式） -->
+      <!-- 分享按钮（仅 sandbox 模式） -->
       <button
         v-if="isSandboxMode"
         class="topbar-share-btn"
@@ -420,7 +420,7 @@ watch(lessonId, () => {
 .breadcrumb-sep { color: var(--color-border); flex-shrink: 0; font-size: var(--fs-xs); }
 .breadcrumb-position { color: var(--color-text-light); }
 
-/* Wave 2.2: 分享按钮 */
+/* 分享按钮 */
 .topbar-share-btn {
   padding: 2px var(--sp-3);
   font-size: var(--fs-xs);
@@ -531,7 +531,7 @@ watch(lessonId, () => {
   border-right: 1px solid var(--color-editor-border);
 }
 
-/* Wave 1.4: 全屏面板 */
+/* 全屏面板 */
 .panel-editor.is-maximized,
 .panel-preview.is-maximized {
   position: fixed;

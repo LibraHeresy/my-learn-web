@@ -4,15 +4,15 @@ import { useAiAssistant } from "../composables/useAiAssistant";
 
 const props = defineProps<{
   srcdoc: string;
-  isMaximized?: boolean; // Wave 1.4: 外部控制全屏状态
+  isMaximized?: boolean; // 外部控制全屏状态
   aiContextTitle?: string;
   aiContextDetail?: string;
   aiContextKind?: string;
 }>();
 
 const emit = defineEmits<{
-  maximize: []; // Wave 1.4
-  "preview-error": [info: { lineno: number; message: string }]; // Wave 2.3
+  maximize: []; // 请求全屏
+  "preview-error": [info: { lineno: number; message: string }];
 }>();
 
 const iframeRef = ref<HTMLIFrameElement>();
@@ -62,7 +62,7 @@ function onMessage(e: MessageEvent) {
       typeLabel: getErrorType(err.message),
     };
     errorExpanded.value = false;
-    // Wave 2.3: 通知父组件错误行号，用于编辑器高亮
+    // 通知父组件错误行号，用于编辑器高亮
     emit("preview-error", { lineno: err.lineno, message: err.message });
   }
 }
@@ -230,7 +230,7 @@ watch(
         <button class="preview-nav-btn" @click="refresh" title="刷新">
           <span class="nav-icon">↻</span>
         </button>
-        <!-- Wave 1.4: 全屏按钮 -->
+        <!-- 全屏按钮 -->
         <button
           class="preview-nav-btn"
           :title="isMaximized ? '退出全屏 (Esc)' : '全屏预览'"

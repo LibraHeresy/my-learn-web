@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) and other AI coding tools when working with this repository. Keep it in sync with the actual code when architecture changes.
 
 ## 项目概述
 
@@ -8,11 +8,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 技术栈：Vue 3 + TypeScript + Vite
 - UI：纯 CSS，自定义设计变量，无 UI 框架
-- 编辑器：CodeMirror 6
-- 状态管理：Pinia
-- 路由：Vue Router
+- 编辑器：CodeMirror 6（sandbox 课程内动态加载）
+- 状态管理：Pinia（progress / quiz / projectProgress / plan）
+- 路由：Vue Router，基础路径固定为 `/my-learn-web/`
 - 测试：Vitest + jsdom
-- 构建部署：GitHub Pages，基础路径固定为 `/my-learn-web/`
+- 构建部署：GitHub Pages（`.github/workflows/deploy.yml`）
+- PWA：vite-plugin-pwa，可安装、离线缓存
 
 ## 常用命令
 
@@ -23,6 +24,8 @@ npm run build          # 生产构建（含 vue-tsc 类型检查）
 npm run preview        # 预览构建产物
 npm run test           # 运行全部单测
 npm run test:watch     # Vitest 监听模式
+npm run typecheck      # 仅类型检查
+npm run lint           # ESLint
 ```
 
 ## 当前架构
@@ -30,122 +33,100 @@ npm run test:watch     # Vitest 监听模式
 ```text
 src/
 ├── main.ts
-├── App.vue
-├── router/index.ts
+├── App.vue                 # 布局 + 路由出口 + AI 助手挂载（lesson/quiz 页）
+├── router/index.ts         # 路由：/ /lesson/:id /project/:id /quiz /plan
 ├── views/
-│   ├── HomePage.vue
-│   ├── LessonPlayer.vue
-│   ├── ProjectPlayer.vue
-│   └── QuizPage.vue
+│   ├── HomePage.vue        # 首页（轨道 / 项目 / 序章分区）
+│   ├── LessonPlayer.vue    # 课程播放器（正文 + 编辑器 + 预览）
+│   ├── ProjectPlayer.vue   # 分步项目流程
+│   ├── QuizPage.vue        # 测验
+│   └── PlanPage.vue        # 学习计划
 ├── components/
-│   ├── AppHeader.vue
-│   ├── GlobalSearch.vue
-│   ├── LessonSidebar.vue
-│   ├── LessonTerms.vue
-│   ├── CodeEditor.vue
-│   ├── LivePreview.vue
-│   ├── PlayerFooter.vue
-│   ├── Resizer.vue
-│   └── home/
+│   ├── AppHeader.vue / GlobalSearch.vue（Fuse.js 全局搜索）
+│   ├── CodeEditor.vue      # CodeMirror 6 编辑器（defineAsyncComponent 按需加载）
+│   ├── LivePreview.vue     # iframe 实时预览（sandbox 模式）
+│   ├── LessonSidebar.vue / LessonTerms.vue / PlayerFooter.vue / Resizer.vue
+│   ├── ai/                 # AI 助手：AiSelectionAssistant / AiAssistantPanel / AiMarkdownContent
+│   └── home/               # HomeJourneySection / HomeProjectsSection / HomePrologueSection
 ├── composables/
-│   ├── useAsyncComputed.ts
-│   ├── useCodePreview.ts
-│   ├── useLessonNavigation.ts
-│   ├── useNotes.ts
-│   └── usePanelResize.ts
+│   ├── useAiAssistant.ts   # AI 解释 + 追问聊天状态机（DeepSeek / mock 兜底）
+│   ├── useAsyncComputed.ts / useCodePreview.ts / useLessonNavigation.ts
+│   └── useFocusTrap.ts / useScrollLock.ts / usePanelResize.ts
 ├── stores/
-│   ├── progress.ts
-│   ├── quiz.ts
-│   └── vocabulary.ts
-├── content/
-│   ├── lessons/
-│   ├── prologue/
-│   ├── projects/
-│   ├── glossary/
-│   ├── quiz/
-│   └── taxonomy.yaml
-├── generated/                # build-content.ts 生成，勿手改
-├── content-loaders/
-│   ├── lessons.ts
-│   ├── projects.ts
-│   ├── prologues.ts
-│   ├── glossary.ts
-│   ├── quiz.ts
-│   └── taxonomy.ts
+│   ├── progress.ts         # 课程完成 + userCode 持久化（DATA_VERSION 版本号）
+│   ├── quiz.ts             # 测验状态
+│   ├── projectProgress.ts  # 项目步骤进度
+│   └── plan.ts             # 学习计划状态
+├── features/plan/          # studyPlan.ts（计划数据生成）/ types.ts / validators.ts
+├── services/ai-explain.ts  # DeepSeek API 调用、结构化 JSON 解析、mock 兜底
+├── types/                  # index.ts（UI 层）/ ai.ts（AI 请求响应类型）
+├── content/                # 内容源（见下）
+├── generated/              # build-content.ts 生成，勿手改
+├── content-loaders/        # lessons / projects / prologues / glossary / quiz / taxonomy
 ├── content-runtime/
-│   ├── types.ts
-│   ├── block-registry.ts
-│   └── renderers/
-├── styles/
-│   ├── variables.css
-│   └── global.css
-├── utils/
-│   ├── markdown.ts
-│   ├── shareCode.ts
-│   ├── storage.ts
-│   └── errorGuard.ts
+│   ├── types.ts            # 编译产物类型（ContentBodyNode / BlockNode ...）
+│   ├── block-registry.ts   # block 名 → 渲染组件映射
+│   └── renderers/          # DocumentRenderer / DocumentBodyRenderer / 各 Block 渲染器 / InlineText / text.ts
+├── styles/                 # variables.css（设计 token）/ global.css
+├── utils/                  # storage.ts / shareCode.ts / text.ts / errorGuard.ts
 └── __tests__/
 ```
 
 ## 内容系统
 
-### 内容源
+### 内容源（唯一来源 `src/content/**`）
 
-内容不再维护在 `src/configs/*` 里，当前唯一内容源是 `src/content/**`：
-
-- `src/content/lessons/**`：常规课程
-- `src/content/prologue/**`：序章 / Web 历史课
+- `src/content/lessons/**`：常规课程（`meta.yaml` + `lesson.md` + 可选 `starter/`）
+- `src/content/prologue/**`：序章 / Web 历史课（同 lesson 结构）
 - `src/content/projects/**`：项目式内容
 - `src/content/glossary/terms.yaml`：术语表
 - `src/content/quiz/*.yaml`：题库
-- `src/content/taxonomy.yaml`：轨道与章节定义
+- `src/content/taxonomy.yaml`：轨道（track）与章节（chapter）定义
+- `src/content/templates/lesson/`：新课程模板
 
-### 构建产物
+### 构建产物（`scripts/build-content.ts` 生成到 `src/generated/**`）
 
-`scripts/build-content.ts` 会把内容编译到 `src/generated/**`：
+- `lessons-meta.json` + `lessons/*.json`
+- `projects-meta.json` + `projects/*.json`
+- `glossary.json` / `taxonomy.json` / `quiz.json` / `search-index.json` / `.build-cache.json`
 
-- `lessons-meta.json`
-- `lessons/*.json`
-- `projects-meta.json`
-- `projects/*.json`
-- `glossary.json`
-- `taxonomy.json`
-- `quiz.json`
-- `search-index.json`
-- `.build-cache.json`
-
-这些文件是运行时数据源，不要手动编辑。
+编译为增量模式：`.build-cache.json` 记录文件 hash 与 `compiler` hash（改编译脚本本身也会全量重编译）。产物勿手改。
 
 ### Markdown / Block 体系
 
-课程正文由 `build-content.ts` 编译成结构化节点，运行时由 `content-runtime/renderers/*` 渲染。
+课程正文用 Markdown + directive block 语法，由 `build-content.ts` 编译成结构化节点，运行时由 `content-runtime/renderers/*` 渲染。
 
-当前支持的块包括：
+当前支持的块（`scripts/build-content.ts` 的 `allowedBlockNames` 为准）：
 
-- `:::music-analogy`
-- `:::explain`
-- `:::example`
-- `:::task`
-- `:::hint`
-- `:::listen-to`
-- `:::recap`
+- `:::analogy` — 音乐类比（`AnalogyBlock.vue`）
+- `:::prerequisite` — 前置知识（`PrerequisiteBlock.vue`）
+- `:::explain` — 讲解（`ExplainBlock.vue`）
+- `:::example` — 例子（`ExampleBlock.vue`）
+- `:::task` — 动手任务，内部支持 `::::step`（`TaskBlock.vue`）
+- `:::hint` — 提示（`HintBlock.vue`）
+- `:::recap` — 回顾（`RecapBlock.vue`）
 
-其中：
+要点：
 
-- `:::task` 内部支持 `::::step`
-- 术语会在构建期注入 `{{term:xxx}}`
-- 行内渲染由 `InlineText.vue` + `text.ts` 负责
-- 代码块、列表、表格、引用块的显示逻辑分散在 `text.ts` 与各 block renderer 中
+- 术语在构建期自动注入 `{{term:xxx}}` 标记（`injectTerms`，自动跳过代码块/行内代码/链接等保护区）
+- 行内渲染由 `InlineText.vue` + `renderers/text.ts` 负责
+- block 名 → 组件映射在 `block-registry.ts`；未知 block 走 `UnsupportedBlock.vue`
+- `remark-directive` 对复杂嵌套不完全可靠，`:::task` / `::::step` 在 `build-content.ts` 中做了手工预处理
+
+### 项目内容格式（已知双轨遗留）
+
+- `src/content/projects/projects/*`：`project.json` + `steps/*.md`（当前主要格式）
+- `src/content/projects/fundamentals/music-showcase`：`project.md` + `meta.yaml`（旧格式）
+
+`build-content.ts` 的 `hashProjectDir` 需同时兼容两种格式。统一格式是计划中的重构项，改前先确认两份解析路径都覆盖。
 
 ## 运行时数据加载
 
-- `src/content-loaders/lessons.ts`：读取 `lessons-meta.json` 与 `lessons/*.json`
-- `src/content-loaders/projects.ts`：读取 `projects-meta.json` 与 `projects/*.json`
-- `src/content-loaders/glossary.ts`：术语数据
-- `src/content-loaders/taxonomy.ts`：轨道/章节元数据
-- `src/content-loaders/quiz.ts`：题库数据
+- `content-loaders/lessons.ts`：`lessons-meta.json` 列表 + `import.meta.glob` 懒加载 `lessons/*.json`
+- `content-loaders/projects.ts`：同上，projects
+- `content-loaders/prologues.ts` / `glossary.ts` / `taxonomy.ts` / `quiz.ts`：序章卡片、术语、轨道章节、题库
 
-课程详情页与项目页都依赖 `src/generated/**`，因此任何内容问题都需要同时检查：
+课程详情页与项目页都依赖 `src/generated/**`，内容问题排查顺序：
 
 1. `src/content/**` 原始文件
 2. `scripts/build-content.ts` 编译逻辑
@@ -155,103 +136,82 @@ src/
 ## 页面与交互
 
 ### 首页
+- `HomePage.vue` + `components/home/*`，`.home` 是自滚动容器（非 window 滚动）
 
-- `HomePage.vue` 是首页入口
-- 首页由 `HomeJourneySection`、`HomeProjectsSection`、`HomePrologueSection` 组成
-- `.home` 是自滚动容器，不是 `window` 滚动
-- 首页存在一个既有问题：模板里使用了 `HomeVocabSection`，但当前文件未显式引入，开发环境会有 Vue warning
+### 课程页（LessonPlayer.vue）
+- `sandbox` / `local` 两种模式（`meta.yaml` 的 `mode`）
+- sandbox：编辑器（CodeMirror，按需加载）+ 实时预览（LivePreview，iframe sandbox + 错误行号上报）
+- local：本地 IDE 操作型课程，无编辑器
+- 正文渲染 `DocumentRenderer.vue`；侧栏 / 术语面板 / 底部导航为独立组件
+- 支持全屏面板、分享代码（`utils/shareCode.ts`，URL 编码）、错误行高亮
 
-### 课程页
-
-- `LessonPlayer.vue` 是核心页面
-- 支持 `sandbox` / `local` 两种模式
-- `sandbox` 模式显示编辑器与预览
-- `local` 模式用于本地 IDE 操作型课程
-- 正文渲染使用 `DocumentRenderer.vue`
-- 侧栏、术语面板、底部导航都是独立组件
-
-### 项目页
-
-- `ProjectPlayer.vue` 负责分步项目流程
-- 项目步骤依赖 `ProjectStep` 结构
-- 与课程页共用编辑器 / 预览 / 底部导航能力
+### 项目页（ProjectPlayer.vue）
+- 分步项目流程，复用编辑器 / 预览 / 底部导航能力，进度存 `stores/projectProgress.ts`
 
 ### Quiz
+- `QuizPage.vue` + `stores/quiz.ts`，题目来自 `generated/quiz.json`
 
-- `QuizPage.vue` + `stores/quiz.ts` 构成测验系统
-- 题目来源于 `src/content/quiz/*.yaml` 编译后的 `generated/quiz.json`
+### Plan（学习计划）
+- `features/plan/studyPlan.ts` 从 taxonomy + lessons + projects 生成按周/天的任务计划
+- `stores/plan.ts` 管理计划状态（localStorage），`PlanPage.vue` 展示
+
+### AI 助手
+- 课程/测验页正文支持选中文本解释与追问聊天（`components/ai/*` + `composables/useAiAssistant.ts`）
+- 调用 `services/ai-explain.ts`：请求 DeepSeek Chat Completions，要求严格 JSON（summary/explanation/roleInContext/keyPoints/relatedTerms），解析失败走文本兜底
+- 配置来自 `.env`（`VITE_DS_API_KEY` / `VITE_DS_MODEL` / `VITE_DS_API_BASE_URL`，见 `.env.example`）
+- 无 key 时自动走 mock 兜底（`createMockExplanation`），不报错
 
 ## 状态管理
 
-### progress store
-
-`src/stores/progress.ts` 当前会持久化以下内容：
-
-- 课程完成状态
-- 最近访问时间
-- 用户在 sandbox 课程中的代码
-
-注意：`CLAUDE.md` 旧版本里“用户代码不持久化”的描述已经过时，当前实现是会持久化 `userCode` 的。
-
-另外：
-
-- `DATA_VERSION` 位于 `progress.ts`
-- 修改课程 starter code 或相关数据结构后，如果需要清空旧缓存，应递增 `DATA_VERSION`
+### progress store（`stores/progress.ts`）
+- 持久化：课程完成状态、最近访问、sandbox 用户代码（localStorage key `code-score-progress`）
+- `DATA_VERSION`：修改课程 starter code 或数据结构后递增，自动清空旧代码但保留完成状态
 
 ### 其他 store
-
-- `stores/quiz.ts`：测验状态
-- `stores/vocabulary.ts`：仍存在，但术语 tooltip 中“加入复习”按钮已移除，不应再把它当作 tooltip 的运行时依赖
+- `quiz.ts`：测验状态（答题、结果）
+- `projectProgress.ts`：项目步骤完成度（key 含 DATA_VERSION 同 progress）
+- `plan.ts`：学习计划（生成、重置、localStorage）
 
 ## 开发服务器与热更新
 
-`vite.config.ts` 中有一个自定义 `contentWatchPlugin()`，当前机制是：
+`vite.config.ts` 自定义 `contentWatchPlugin()`：
 
 1. 监听 `src/content/**`
-2. 触发 `scripts/build-content.ts`
+2. 触发 `scripts/build-content.ts`（子进程，防抖 200ms，队列去重）
 3. 递归收集 `src/generated/**/*.json`
-4. 显式失效相关 generated 模块与 loader 模块
-5. 合并为一次 `full-reload`
+4. 显式失效 generated 模块 + `content-loaders/lessons.ts` / `projects.ts`
+5. 合并为一次 `full-reload`（80ms 合并窗口）
 
-注意事项：
-
-- `server.watch.ignored` 仍忽略 `src/generated/**`
-- 这是刻意设计，用来避免一次内容构建写出多个 JSON 时触发多次刷新
-- 如果内容热更新失效，优先检查 `vite.config.ts` 中的模块失效逻辑，而不是只看 `build-content.ts` 有没有执行
+注意：`server.watch.ignored` 刻意忽略 `src/generated/**`，避免一次构建写多个 JSON 触发多次刷新。热更新失效时优先检查模块失效逻辑。
 
 ## 样式系统
 
-- `styles/variables.css`：设计 token
-- `styles/global.css`：reset、共享动画、代码块、表格、blockquote 等全局样式
-- 组件基本都使用 `<style scoped>`
-- 页面切换主要依赖 `slide-fade`
-- 编辑器切换主要依赖 `editor-swap`
+- `styles/variables.css`：设计 token（颜色/间距/字体）
+- `styles/global.css`：reset、共享动画、代码块、表格、blockquote
+- 组件基本使用 `<style scoped>`；页面切换 `slide-fade`，编辑器切换 `editor-swap`
 
 ## 测试
 
-当前测试主要包括：
-
-- `core-logic.test.ts`：核心逻辑与工具函数
-- `data-integrity.test.ts`：内容数据完整性
-- `nav-integration.test.ts`：导航相关逻辑
-- `page-smoke.test.ts`：页面冒烟测试
+- `core-logic.test.ts`：核心逻辑与工具函数（含 composables）
+- `data-integrity.test.ts`：内容数据完整性（字段、引用、术语）
+- `page-smoke.test.ts`：各页面渲染冒烟
+- `plan-data.test.ts`：学习计划数据
+- `project-player-navigation.test.ts`：项目页导航（prev/next）
+- `project-progress-store.test.ts`：项目进度 store
 - `quiz-store.test.ts`：测验 store
 - `vite-config.test.ts`：内容热更新辅助逻辑
 
-修改以下内容后建议补测：
+修改以下内容后建议补测：`vite.config.ts` 监听/HMR、`scripts/build-content.ts`、`content-runtime/types.ts`、`content-runtime/renderers/*`、`content-loaders/*`、`features/plan/*`。
 
-- `vite.config.ts` 的内容监听 / HMR 行为
-- `scripts/build-content.ts`
-- `content-runtime/types.ts`
-- `content-runtime/renderers/*`
-- `content-loaders/*`
+## 安全与环境变量
+
+- `.env` 已被 `.gitignore` 忽略，**禁止提交**；提交前可用 `git check-ignore .env` 确认
+- `VITE_` 前缀变量会在构建时内联进前端 bundle，**任何访问者都能看到**——不要把真实密钥放在 `VITE_` 变量中直接供生产使用
+- AI 调用如需生产可用，应改为后端代理转发或引导用户自带 key；当前 `ai-explain.ts` 的 mock 兜底保证无 key 时功能不崩
 
 ## 注意事项
 
-- 路由基础路径固定为 `/my-learn-web/`，见 `createWebHistory('/my-learn-web/')`
-- `npm run dev` 会先执行一次 `npm run build:content`
-- `src/generated/**` 为构建产物，不要手改
-- 修改内容语法时，优先修内容源或构建脚本，不要直接改 generated 文件
-- `build-content.ts` 使用 `.build-cache.json` 做增量编译，并额外包含 `compiler` hash；修改编译脚本本身也会触发重编译
-- `remark-directive` 对复杂嵌套不完全可靠，`:::task` / `::::step` 已在 `build-content.ts` 中做了手工预处理
-- 如果 directive 渲染异常，要优先检查：原始 Markdown、术语注入保护、generated JSON 是否退化成 paragraph
+- 路由基础路径固定为 `/my-learn-web/`（`createWebHistory('/my-learn-web/')` + `vite.config.ts` 的 `base`）
+- `src/generated/**` 为构建产物，不要手改；改内容语法优先改内容源或构建脚本
+- 新增课程可复制 `src/content/templates/lesson/`
+- 如果 directive 渲染异常，依次检查：原始 Markdown、术语注入保护、generated JSON 是否退化成 paragraph

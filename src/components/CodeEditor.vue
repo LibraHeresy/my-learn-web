@@ -24,8 +24,8 @@ const props = defineProps<{
   modelValue: UserCode;
   showReset?: boolean;
   livePreview?: boolean;
-  errorLine?: number; // Wave 2.3: 预览错误行号
-  isMaximized?: boolean; // Wave 1.4: 全屏状态
+  errorLine?: number; // 预览错误行号
+  isMaximized?: boolean; // 全屏状态
 }>();
 
 const emit = defineEmits<{
@@ -33,8 +33,8 @@ const emit = defineEmits<{
   run: [];
   reset: [];
   "update:livePreview": [value: boolean];
-  maximize: []; // Wave 1.4: 请求全屏
-  format: []; // Wave 4.2: 格式化（父层处理）
+  maximize: []; // 请求全屏
+  format: []; // 格式化（父层处理）
 }>();
 
 // ─── 标签页 ───────────────────────────────────────────────────────────────
@@ -83,7 +83,7 @@ function createEditorView(code: UserCode, tab: Tab) {
         keymap.of([
           ...defaultKeymap,
           ...historyKeymap,
-          // Wave 1.1: 快捷键运行
+          // 快捷键运行
           {
             key: "Ctrl-Enter",
             mac: "Cmd-Enter",
@@ -105,7 +105,7 @@ function createEditorView(code: UserCode, tab: Tab) {
         ...getLangExtension(tab),
         oneDark,
         EditorView.lineWrapping,
-        autocompletion(), // Wave 1.3: 自动补全 UI
+        autocompletion(), // 自动补全 UI
         ...(code[tab].trim() === "" ? [placeholder(tabLabels[tab])] : []),
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
@@ -146,7 +146,7 @@ function switchTab(tab: Tab) {
   nextTick(() => createEditorView({ ...props.modelValue }, tab));
 }
 
-// Wave 2.3: 错误行高亮
+// 错误行高亮
 watch(
   () => props.errorLine,
   (lineno) => {
@@ -491,7 +491,7 @@ async function doFormat() {
   overflow: auto;
 }
 
-/* ─── Wave 2.3: lint 沟槽颜色在 dark 主题下微调 ─── */
+/* ─── lint 沟槽颜色在 dark 主题下微调 ─── */
 :deep(.cm-lint-marker-error) {
   color: #e06c75;
 }
