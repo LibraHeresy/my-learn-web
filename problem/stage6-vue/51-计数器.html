@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>51 - 计数器</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #1f2328; padding: 16px; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    .header { margin-bottom: 12px; flex-shrink: 0; }
+    .header .tag { display: inline-block; background: #42b883; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 13px; margin-bottom: 6px; }
+    .header h1 { font-size: 20px; margin-bottom: 4px; }
+    .header .difficulty { color: #2da44e; font-size: 13px; font-weight: 600; }
+    .layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
+    .panel { width: 50%; min-width: 0; display: flex; flex-direction: column; }
+    .panel-left { overflow-y: auto; }
+    .panel-right { height: 100%; }
+    .card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    .card h2 { font-size: 16px; margin-bottom: 12px; color: #42b883; }
+    .card.code-card { flex: 1; display: flex; flex-direction: column; margin-bottom: 0; }
+    .card.code-card textarea { flex: 1; }
+    .left-card { flex: none; overflow-y: auto; }
+    @media (max-width: 900px) {
+      body { height: auto; overflow: auto; }
+      .layout { flex-direction: column; }
+      .panel { width: 100%; }
+      .panel-right { height: auto; }
+    }
+    .desc { line-height: 1.7; font-size: 15px; }
+    .desc p { margin-bottom: 10px; }
+    .checklist { background: #fff8c5; border: 1px solid #d4a72c; border-radius: 6px; padding: 12px 16px; margin: 10px 0; font-size: 14px; }
+    .checklist li { margin-left: 20px; margin-bottom: 6px; }
+    .demo { border: 1px dashed #d0d7de; border-radius: 8px; padding: 20px; margin: 12px 0; background: #fafbfc; }
+    textarea { width: 100%; min-height: 200px; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px; font-family: "SF Mono", Consolas, monospace; font-size: 14px; line-height: 1.6; resize: none; background: #fff; }
+    textarea:focus { outline: 2px solid #42b883; border-color: transparent; }
+    .btn-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-shrink: 0; }
+    .btn { background: #42b883; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+    .btn:hover { background: #3aa876; }
+    .btn.reset { background: #d0d7de; color: #1f2328; }
+    .btn.next { background: #0969da; }
+    .hint { font-size: 13px; color: #57606a; margin-top: 8px; }
+    #app { padding: 8px; }
+    button { cursor: pointer; padding: 6px 14px; border: 1px solid #d0d7de; border-radius: 4px; background: #f6f8fa; }
+    input { padding: 8px; border: 1px solid #d0d7de; border-radius: 4px; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="tag">阶段 6 · Vue 基础</span>
+    <h1>51. 计数器</h1>
+    <span class="difficulty">难度：简单</span>
+  </div>
+
+  <div class="layout">
+    <div class="panel panel-left">
+      <div class="card left-card">
+        <h2>题目描述</h2>
+        <div class="desc">
+          <p>用 Vue 3 的 <code>ref</code> 实现一个计数器，点击按钮数字 +1。</p>
+        </div>
+      </div>
+      <div class="card left-card">
+        <h2>验收清单</h2>
+        <div class="checklist" style="margin:0;">
+          <ul><li>页面显示一个数字，初始为 0</li><li>点击按钮数字 +1</li></ul>
+        </div>
+      </div>
+      <div class="card left-card">
+        <h2>效果演示区</h2>
+        <p class="hint" style="margin-bottom:10px;">完成代码后，在下方"运行"即可看到效果。</p>
+        <div class="demo">
+          <div id="app"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-right">
+      <div class="card code-card">
+        <h2>你的代码</h2>
+        <p class="hint" style="margin-bottom:8px;">在下方编写 Vue 代码（模板 + 脚本），点击"运行"。</p>
+        <textarea id="code" spellcheck="false"><template>
+  <div>
+    <h3>{{ count }}</h3>
+    <!-- TODO: 给按钮加点击事件，让 count +1 -->
+    <button>+1</button>
+  </div>
+</template>
+
+<script>
+const { ref } = Vue;
+return {
+  setup() {
+    // TODO: 创建一个响应式变量 count，初始值 0
+    // 并返回 count
+  }
+};
+</script></textarea>
+        <div class="btn-row">
+          <button class="btn" onclick="runCode()">运行</button>
+          <button class="btn reset" onclick="resetCode()">重置</button>
+          <button class="btn" onclick="markDone()" style="background:#d4a72c;">我完成了</button>
+          <span id="nextArea" style="display:none;">
+            <a href="52-渲染列表.html" class="btn next">下一题 →</a>
+          </span>
+        </div>
+        <div id="msg"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultCode = "\x3ctemplate>\n  \x3cdiv>\n    \x3ch3>{{ count }}\x3c/h3>\n    \x3c!-- TODO: 给按钮加点击事件，让 count +1 -->\n    \x3cbutton>+1\x3c/button>\n  \x3c/div>\n\x3c/template>\n\n\x3cscript>\nconst { ref } = Vue;\nreturn {\n  setup() {\n    // TODO: 创建一个响应式变量 count，初始值 0\n    // 并返回 count\n  }\n};\n\x3c/script>";
+
+    function runCode() {
+      const code = document.getElementById('code').value;
+      const msg = document.getElementById('msg');
+      const appEl = document.getElementById('app');
+
+      // 清空之前的应用
+      appEl.innerHTML = '';
+
+      try {
+        // 提取 template 和 script 部分
+        const templateMatch = code.match(/<template>([\s\S]*)<\/template>/);
+        const scriptMatch = code.match(/<script>([\s\S]*)<\/script>/);
+
+        const template = templateMatch ? templateMatch[1] : '';
+        const scriptBody = scriptMatch ? scriptMatch[1] : '';
+
+        // 执行 script 拿到组件选项
+        let options = {};
+        if (scriptBody.trim()) {
+          const fn = new Function('Vue', scriptBody);
+          const result = fn(Vue);
+          if (result) options = result;
+        }
+
+        // 合并 template
+        options.template = template || '<div>请在代码中提供 &lt;template&gt; 部分</div>';
+
+        const app = Vue.createApp(options);
+        app.mount('#app');
+        msg.innerHTML = '<p style="color:#2da44e;margin-top:10px;">✓ 应用已运行，请在演示区查看效果。</p>';
+      } catch (e) {
+        msg.innerHTML = '<p style="color:#cf222e;margin-top:10px;">✗ 代码错误：' + e.message + '</p>';
+      }
+    }
+
+    function resetCode() {
+      document.getElementById('code').value = defaultCode;
+      document.getElementById('msg').innerHTML = '';
+      document.getElementById('app').innerHTML = '';
+    }
+
+    function markDone() {
+      document.getElementById('nextArea').style.display = 'block';
+    }
+
+    // ===== 编辑器增强：Tab 缩进 + Alt+Shift+F 格式化 =====
+    function attachEditor(textareaId) {
+      const ta = document.getElementById(textareaId);
+      if (!ta) return;
+
+      // Tab 键缩进
+      ta.addEventListener('keydown', function (e) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = ta.selectionStart;
+          const end = ta.selectionEnd;
+          const value = ta.value;
+          const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+
+          if (e.shiftKey) {
+            // Shift+Tab：反向缩进当前行（去掉行首最多 2 个空格）
+            const lineEnd = value.indexOf('\n', start);
+            const endPos = lineEnd === -1 ? value.length : lineEnd;
+            const line = value.substring(lineStart, endPos);
+            const match = line.match(/^[ \t]+/);
+            if (match) {
+              const remove = Math.min(2, match[0].length);
+              const newValue = value.substring(0, lineStart) + value.substring(lineStart + remove);
+              ta.value = newValue;
+              const newPos = start - remove;
+              ta.selectionStart = ta.selectionEnd = Math.max(lineStart, newPos);
+            }
+          } else {
+            // 有选中文本：对每行整体缩进
+            if (start !== end) {
+              const selected = value.substring(start, end);
+              const lines = selected.split('\n');
+              const indented = lines.map(l => '  ' + l).join('\n');
+              ta.value = value.substring(0, start) + indented + value.substring(end);
+              ta.selectionStart = start;
+              ta.selectionEnd = start + indented.length;
+            } else {
+              // 无选中：插入 2 个空格
+              ta.value = value.substring(0, start) + '  ' + value.substring(end);
+              ta.selectionStart = ta.selectionEnd = start + 2;
+            }
+          }
+        }
+
+        // Alt+Shift+F 格式化
+        if (e.key === 'F' && e.altKey && e.shiftKey) {
+          e.preventDefault();
+          try {
+            ta.value = formatJS(ta.value);
+          } catch (err) {
+            // 格式化失败则忽略
+          }
+        }
+      });
+
+      // 轻量 JS 格式化：基于缩进的简单美化
+      function formatJS(code) {
+        const lines = code.split('\n');
+        let indent = 0;
+        const indentUnit = '  ';
+        const result = [];
+        // 记录模板字符串状态（简化处理）
+        let inTemplate = false;
+
+        for (let raw of lines) {
+          let line = raw.trim();
+
+          // 跳过空行
+          if (line === '') {
+            result.push('');
+            continue;
+          }
+
+          // 处理行尾注释
+          const hasTrailingComment = false;
+
+          // 计算缩进：如果这行是收尾的 } 或 ) 等，先减少缩进
+          const closes = line.startsWith('}') || line.startsWith(')') || line.startsWith(']') || line.startsWith('>');
+          if (closes) {
+            indent = Math.max(0, indent - 1);
+          }
+
+          result.push(indentUnit.repeat(indent) + line);
+
+          // 计算这行对缩进的影响
+          const opens = (line.match(/[{\[(]/g) || []).length;
+          const closesCount = (line.match(/[}\]\)]/g) || []).length;
+          indent += opens - closesCount;
+          if (indent < 0) indent = 0;
+        }
+
+        return result.join('\n');
+      }
+    }
+
+    // 自动为 code 文本框附加编辑器功能
+    attachEditor('code');
+
+  </script>
+</body>
+</html>

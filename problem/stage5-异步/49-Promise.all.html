@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>49 - Promise.all</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #1f2328; padding: 16px; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    .header { margin-bottom: 12px; flex-shrink: 0; }
+    .header .tag { display: inline-block; background: #e7f0ff; color: #0969da; padding: 2px 10px; border-radius: 12px; font-size: 13px; margin-bottom: 6px; }
+    .header h1 { font-size: 20px; margin-bottom: 4px; }
+    .header .difficulty { color: #2da44e; font-size: 13px; font-weight: 600; }
+    .layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
+    .panel { width: 50%; min-width: 0; display: flex; flex-direction: column; }
+    .panel-left { overflow-y: auto; }
+    .panel-right { height: 100%; }
+    .card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    .card h2 { font-size: 16px; margin-bottom: 12px; color: #0969da; }
+    .card.code-card { flex: 1; display: flex; flex-direction: column; margin-bottom: 0; }
+    .card.code-card textarea { flex: 1; }
+    .left-card { flex: none; overflow-y: auto; }
+    .left-card-big { flex: none; overflow-y: auto; }
+    @media (max-width: 900px) {
+      body { height: auto; overflow: auto; }
+      .layout { flex-direction: column; }
+      .panel { width: 100%; }
+      .panel-right { height: auto; }
+    }
+    .desc { line-height: 1.7; font-size: 15px; }
+    .desc p { margin-bottom: 10px; }
+    .example { background: #f6f8fa; border-left: 3px solid #0969da; padding: 12px 16px; border-radius: 4px; margin: 10px 0; font-size: 14px; }
+    .example code { font-family: "SF Mono", Consolas, monospace; }
+    .checklist { background: #fff8c5; border: 1px solid #d4a72c; border-radius: 6px; padding: 12px 16px; margin: 10px 0; font-size: 14px; }
+    .checklist li { margin-left: 20px; margin-bottom: 6px; }
+    textarea { width: 100%; min-height: 200px; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px; font-family: "SF Mono", Consolas, monospace; font-size: 14px; line-height: 1.6; resize: none; background: #fff; }
+    textarea:focus { outline: 2px solid #0969da; border-color: transparent; }
+    .btn-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-shrink: 0; }
+    .btn { background: #1f883d; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+    .btn:hover { background: #1a7f37; }
+    .btn.reset { background: #d0d7de; color: #1f2328; }
+    .btn.next { background: #0969da; }
+    .console { background: #0d1117; color: #c9d1d9; border-radius: 6px; padding: 16px; margin-top: 16px; font-family: "SF Mono", Consolas, monospace; font-size: 13px; line-height: 1.6; min-height: 60px; white-space: pre-wrap; flex-shrink: 0; }
+    .console .label { color: #8b949e; }
+    .console .out { color: #58a6ff; }
+    .console .err { color: #f85149; }
+    .hint { font-size: 13px; color: #57606a; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="tag">阶段 5 · JS 进阶（异步）</span>
+    <h1>49. Promise.all</h1>
+    <span class="difficulty">难度：中等</span>
+  </div>
+
+  <div class="layout">
+    <div class="panel panel-left">
+      <div class="card left-card">
+        <h2>题目描述</h2>
+        <div class="desc">
+          <p>用 <code>Promise.all</code> 并行请求两个接口，全部完成后打印两个结果。</p>
+        </div>
+      </div>
+      <div class="card left-card-big">
+        <h2>示例与说明</h2>
+        
+      <div class="example">
+        <strong>示例：</strong><br />
+        <code>Promise.all([fetch1, fetch2])</code>
+      </div>
+      <div class="checklist">
+        <strong>验收清单：</strong>
+        <ul><li>两个请求并行</li><li>全部完成后打印结果</li></ul>
+      </div>
+      </div>
+      <div class="card left-card">
+        <h2>控制台输出</h2>
+        <div class="console" id="console"><span class="label">// 点击"运行"后，console.log 的输出会显示在这里</span></div>
+      </div>
+    </div>
+
+    <div class="panel panel-right">
+      <div class="card code-card">
+        <h2>你的代码</h2>
+        <p class="hint" style="margin-bottom:8px;">在下方编写代码，点击"运行"查看控制台输出。</p>
+        <textarea id="code" spellcheck="false">// TODO: 用 Promise.all 并行请求
+
+async function getAll() {
+  const url1 = 'https://jsonplaceholder.typicode.com/posts/1';
+  const url2 = 'https://jsonplaceholder.typicode.com/posts/2';
+  // 在这里写：并行请求两个接口，返回两个结果
+}
+
+getAll().then(([a, b]) => {
+  console.log('第一个标题：' + a.title);
+  console.log('第二个标题：' + b.title);
+});
+</textarea>
+        <div class="btn-row">
+          <button class="btn" onclick="runCode()">运行</button>
+          <button class="btn reset" onclick="resetCode()">重置</button>
+          <button class="btn" onclick="markDone()" style="background:#d4a72c;">我完成了</button>
+          <span id="nextArea" style="display:none;">
+            <a href="50-手写 Promise.html" class="btn next">下一题 →</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultCode = "// TODO: 用 Promise.all 并行请求\n\nasync function getAll() {\n  const url1 = 'https://jsonplaceholder.typicode.com/posts/1';\n  const url2 = 'https://jsonplaceholder.typicode.com/posts/2';\n  // 在这里写：并行请求两个接口，返回两个结果\n}\n\ngetAll().then(([a, b]) => {\n  console.log('第一个标题：' + a.title);\n  console.log('第二个标题：' + b.title);\n});\n";
+
+    function runCode() {
+      const code = document.getElementById('code').value;
+      const consoleEl = document.getElementById('console');
+      consoleEl.innerHTML = '<span class="label">// 运行中...</span>';
+
+      // 用 new Function 执行（浏览器打开无 CSP 限制），同步重写 console.log 捕获输出
+      const logs = [];
+      const origLog = console.log;
+      console.log = function (...args) {
+        const parts = args.map(a => {
+          if (typeof a === 'object' && a !== null) {
+            try { return JSON.stringify(a); } catch (e) { return String(a); }
+          }
+          return String(a);
+        });
+        logs.push(parts.join(' '));
+        origLog.apply(console, args);
+      };
+
+      try {
+        const fn = new Function(code);
+        fn();
+      } catch (e) {
+        console.log = origLog;
+        consoleEl.innerHTML = '<span class="err">代码错误：' + escapeHtml(e.message) + '</span>';
+        return;
+      }
+
+      // 延迟一段时间后收集（给异步代码留出时间）
+      setTimeout(() => {
+        console.log = origLog;
+        if (logs.length === 0) {
+          consoleEl.innerHTML = '<span class="label">// 没有输出。请确认代码里有 console.log，且异步逻辑已触发。</span>';
+        } else {
+          consoleEl.innerHTML = logs.map(l => '<span class="out">' + escapeHtml(l) + '</span>').join('\n');
+        }
+      }, 1500);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function resetCode() {
+      document.getElementById('code').value = defaultCode;
+      document.getElementById('console').innerHTML = '<span class="label">// 点击"运行"后，console.log 的输出会显示在这里</span>';
+    }
+
+    function markDone() {
+      document.getElementById('nextArea').style.display = 'block';
+    }
+
+    // ===== 编辑器增强：Tab 缩进 + Alt+Shift+F 格式化 =====
+    function attachEditor(textareaId) {
+      const ta = document.getElementById(textareaId);
+      if (!ta) return;
+
+      // Tab 键缩进
+      ta.addEventListener('keydown', function (e) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = ta.selectionStart;
+          const end = ta.selectionEnd;
+          const value = ta.value;
+          const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+
+          if (e.shiftKey) {
+            // Shift+Tab：反向缩进当前行（去掉行首最多 2 个空格）
+            const lineEnd = value.indexOf('\n', start);
+            const endPos = lineEnd === -1 ? value.length : lineEnd;
+            const line = value.substring(lineStart, endPos);
+            const match = line.match(/^[ \t]+/);
+            if (match) {
+              const remove = Math.min(2, match[0].length);
+              const newValue = value.substring(0, lineStart) + value.substring(lineStart + remove);
+              ta.value = newValue;
+              const newPos = start - remove;
+              ta.selectionStart = ta.selectionEnd = Math.max(lineStart, newPos);
+            }
+          } else {
+            // 有选中文本：对每行整体缩进
+            if (start !== end) {
+              const selected = value.substring(start, end);
+              const lines = selected.split('\n');
+              const indented = lines.map(l => '  ' + l).join('\n');
+              ta.value = value.substring(0, start) + indented + value.substring(end);
+              ta.selectionStart = start;
+              ta.selectionEnd = start + indented.length;
+            } else {
+              // 无选中：插入 2 个空格
+              ta.value = value.substring(0, start) + '  ' + value.substring(end);
+              ta.selectionStart = ta.selectionEnd = start + 2;
+            }
+          }
+        }
+
+        // Alt+Shift+F 格式化
+        if (e.key === 'F' && e.altKey && e.shiftKey) {
+          e.preventDefault();
+          try {
+            ta.value = formatJS(ta.value);
+          } catch (err) {
+            // 格式化失败则忽略
+          }
+        }
+      });
+
+      // 轻量 JS 格式化：基于缩进的简单美化
+      function formatJS(code) {
+        const lines = code.split('\n');
+        let indent = 0;
+        const indentUnit = '  ';
+        const result = [];
+        // 记录模板字符串状态（简化处理）
+        let inTemplate = false;
+
+        for (let raw of lines) {
+          let line = raw.trim();
+
+          // 跳过空行
+          if (line === '') {
+            result.push('');
+            continue;
+          }
+
+          // 处理行尾注释
+          const hasTrailingComment = false;
+
+          // 计算缩进：如果这行是收尾的 } 或 ) 等，先减少缩进
+          const closes = line.startsWith('}') || line.startsWith(')') || line.startsWith(']') || line.startsWith('>');
+          if (closes) {
+            indent = Math.max(0, indent - 1);
+          }
+
+          result.push(indentUnit.repeat(indent) + line);
+
+          // 计算这行对缩进的影响
+          const opens = (line.match(/[{\[(]/g) || []).length;
+          const closesCount = (line.match(/[}\]\)]/g) || []).length;
+          indent += opens - closesCount;
+          if (indent < 0) indent = 0;
+        }
+
+        return result.join('\n');
+      }
+    }
+
+    // 自动为 code 文本框附加编辑器功能
+    attachEditor('code');
+
+  </script>
+</body>
+</html>

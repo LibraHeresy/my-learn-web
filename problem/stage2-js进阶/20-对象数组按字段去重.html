@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20 - 对象数组按字段去重</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #1f2328; padding: 16px; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    .header { margin-bottom: 12px; flex-shrink: 0; }
+    .header .tag { display: inline-block; background: #e7f0ff; color: #0969da; padding: 2px 10px; border-radius: 12px; font-size: 13px; margin-bottom: 6px; }
+    .header h1 { font-size: 20px; margin-bottom: 4px; }
+    .header .difficulty { color: #2da44e; font-size: 13px; font-weight: 600; }
+    .layout { display: flex; gap: 16px; flex: 1; min-height: 0; }
+    .panel { width: 50%; min-width: 0; display: flex; flex-direction: column; }
+    .panel-left { overflow-y: auto; }
+    .panel-right { height: 100%; }
+    .card { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    .card h2 { font-size: 16px; margin-bottom: 12px; color: #0969da; }
+    .card.code-card { flex: 1; display: flex; flex-direction: column; margin-bottom: 0; }
+    .card.code-card textarea { flex: 1; }
+    .desc { line-height: 1.7; font-size: 15px; }
+    .desc p { margin-bottom: 10px; }
+    .example { background: #f6f8fa; border-left: 3px solid #0969da; padding: 12px 16px; border-radius: 4px; margin: 10px 0; font-size: 14px; }
+    .example code { font-family: "SF Mono", Consolas, monospace; }
+    textarea { width: 100%; min-height: 300px; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px; font-family: "SF Mono", Consolas, monospace; font-size: 14px; line-height: 1.6; resize: none; background: #fff; }
+    textarea:focus { outline: 2px solid #0969da; border-color: transparent; }
+    .btn-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; flex-shrink: 0; }
+    .btn { background: #1f883d; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
+    .btn:hover { background: #1a7f37; }
+    .btn.reset { background: #d0d7de; color: #1f2328; }
+    .btn.next { background: #0969da; }
+    .results { margin-top: 16px; flex-shrink: 0; overflow-y: auto; }
+    .result-item { display: flex; align-items: center; padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; font-size: 14px; }
+    .result-item.pass { background: #e6ffec; border: 1px solid #2da44e; }
+    .result-item.fail { background: #ffebe9; border: 1px solid #cf222e; }
+    .result-item .icon { font-weight: 700; margin-right: 10px; font-size: 16px; }
+    .result-item.pass .icon { color: #2da44e; }
+    .result-item.fail .icon { color: #cf222e; }
+    .result-item .detail { font-family: Consolas, monospace; font-size: 13px; color: #57606a; margin-left: auto; }
+    .hint { font-size: 13px; color: #57606a; margin-top: 8px; }
+    @media (max-width: 900px) {
+      body { height: auto; overflow: auto; }
+      .layout { flex-direction: column; }
+      .panel { width: 100%; }
+      .panel-right { height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="tag">阶段 2 · JS 进阶</span>
+    <h1>20. 对象数组按字段去重</h1>
+    <span class="difficulty">难度：简单</span>
+  </div>
+
+  <div class="layout">
+    <div class="panel panel-left">
+      <div class="card">
+        <h2>题目描述</h2>
+        <div class="desc">
+          <p>编写函数 <code>uniqueByKey(arr, key)</code>，接收对象数组和字段名，按该字段去重（保留第一个出现的），返回新数组。</p>
+
+      <div class="example">
+        <strong>示例 1：</strong><br />
+        输入：<code>arr = [{id:1},{id:2},{id:1}], key="id"</code><br />输出：<code>[{id:1},{id:2}]</code>
+      </div>      <p style="color:#cf222e;">提示：用 Set 或 Map 记录已出现的 key 值。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-right">
+      <div class="card code-card">
+        <h2>你的代码</h2>
+        <p class="hint" style="margin-bottom:8px;">在下方编写 <code>uniqueByKey</code> 函数，然后点击"运行测试"。</p>
+        <textarea id="code" spellcheck="false">function uniqueByKey(arr, key) {
+  // TODO: 在这里写你的代码
+  
+}</textarea>
+        <div class="btn-row">
+          <button class="btn" onclick="runTests()">运行测试</button>
+          <button class="btn reset" onclick="resetCode()">重置</button>
+          <span id="nextArea" style="display:none;">
+            <a href="../stage3-算法/21-斐波那契数列.html" class="btn next">下一题 →</a>
+          </span>
+        </div>
+        <div class="results" id="results"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const testCases = [{"args":[[{"id":1},{"id":2},{"id":1}],"id"],"expected":[{"id":1},{"id":2}]},{"args":[[{"name":"a"},{"name":"b"}],"name"],"expected":[{"name":"a"},{"name":"b"}]}];
+    const defaultCode = "function uniqueByKey(arr, key) {\n  // TODO: 在这里写你的代码\n  \n}";
+    function compileUserFn(code, fnName) {
+      return new Function(code + '\n; return ' + fnName + ';')();
+    }
+    function runUserCode(code, fnName, args) {
+      return new Promise((resolve) => {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        const win = iframe.contentWindow;
+        const script =
+          'try {\n' + code + '\n' +
+          'var __result = { ok: true, value: ' + fnName + '.apply(null, ' + JSON.stringify(args) + ') };\n' +
+          '} catch (e) { var __result = { ok: false, error: e.message }; }\n' +
+          'window.parent.postMessage(__result, "*");';
+        const blob = new Blob([script], { type: 'text/javascript' });
+        const url = URL.createObjectURL(blob);
+        const s = win.document.createElement('script');
+        s.src = url;
+        s.onerror = () => { URL.revokeObjectURL(url); resolve({ ok: false, error: '脚本加载失败' }); };
+        win.document.body.appendChild(s);
+        const handler = (e) => {
+          if (e.source !== win) return;
+          window.removeEventListener('message', handler);
+          document.body.removeChild(iframe);
+          URL.revokeObjectURL(url);
+          resolve(e.data);
+        };
+        window.addEventListener('message', handler);
+        setTimeout(() => {
+          window.removeEventListener('message', handler);
+          document.body.removeChild(iframe);
+          resolve({ ok: false, error: '执行超时' });
+        }, 3000);
+      });
+    }
+    async function runTests() {
+      const code = document.getElementById('code').value;
+      const resultsEl = document.getElementById('results');
+      resultsEl.innerHTML = '';
+      let fn;
+      let useIframe = false;
+      try { fn = compileUserFn(code, "uniqueByKey"); }
+      catch (e) { useIframe = true; }
+      let allPass = true;
+      for (let i = 0; i < testCases.length; i++) {
+        const tc = testCases[i];
+        let pass = false, actualText = '';
+        if (!useIframe) {
+          try {
+            const actual = fn(...tc.args);
+            pass = JSON.stringify(actual) === JSON.stringify(tc.expected);
+            actualText = JSON.stringify(actual);
+          } catch (e) { actualText = '报错：' + e.message; }
+        } else {
+          const r = await runUserCode(code, "uniqueByKey", tc.args);
+          pass = r.ok && JSON.stringify(r.value) === JSON.stringify(tc.expected);
+          actualText = r.ok ? JSON.stringify(r.value) : '报错：' + r.error;
+        }
+        const item = document.createElement('div');
+        item.className = 'result-item ' + (pass ? 'pass' : 'fail');
+        const icon = pass ? '✓' : '✗';
+        const inputStr = tc.args.map(JSON.stringify).join(', ');
+        const detail = '输入(' + inputStr + ') → 期望 ' + JSON.stringify(tc.expected) + '，实际 ' + actualText;
+        item.innerHTML = '<span class="icon">' + icon + '</span><span>测试用例 ' + (i + 1) + '</span><span class="detail">' + detail + '</span>';
+        resultsEl.appendChild(item);
+        if (!pass) allPass = false;
+      }
+      if (allPass) {
+        const ok = document.createElement('div');
+        ok.className = 'result-item pass';
+        ok.innerHTML = '<span class="icon">✓</span><span>全部通过！做得好！</span>';
+        resultsEl.appendChild(ok);
+        // 显示"下一题"按钮
+        const nextArea = document.getElementById('nextArea');
+        if (nextArea) nextArea.style.display = 'block';
+      } else {
+        const nextArea = document.getElementById('nextArea');
+        if (nextArea) nextArea.style.display = 'none';
+      }
+    }
+    function resetCode() { document.getElementById('code').value = defaultCode; document.getElementById('results').innerHTML = ''; }
+
+    // ===== 编辑器增强：Tab 缩进 + Alt+Shift+F 格式化 =====
+    function attachEditor(textareaId) {
+      const ta = document.getElementById(textareaId);
+      if (!ta) return;
+
+      // Tab 键缩进
+      ta.addEventListener('keydown', function (e) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = ta.selectionStart;
+          const end = ta.selectionEnd;
+          const value = ta.value;
+          const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+
+          if (e.shiftKey) {
+            // Shift+Tab：反向缩进当前行（去掉行首最多 2 个空格）
+            const lineEnd = value.indexOf('\n', start);
+            const endPos = lineEnd === -1 ? value.length : lineEnd;
+            const line = value.substring(lineStart, endPos);
+            const match = line.match(/^[ \t]+/);
+            if (match) {
+              const remove = Math.min(2, match[0].length);
+              const newValue = value.substring(0, lineStart) + value.substring(lineStart + remove);
+              ta.value = newValue;
+              const newPos = start - remove;
+              ta.selectionStart = ta.selectionEnd = Math.max(lineStart, newPos);
+            }
+          } else {
+            // 有选中文本：对每行整体缩进
+            if (start !== end) {
+              const selected = value.substring(start, end);
+              const lines = selected.split('\n');
+              const indented = lines.map(l => '  ' + l).join('\n');
+              ta.value = value.substring(0, start) + indented + value.substring(end);
+              ta.selectionStart = start;
+              ta.selectionEnd = start + indented.length;
+            } else {
+              // 无选中：插入 2 个空格
+              ta.value = value.substring(0, start) + '  ' + value.substring(end);
+              ta.selectionStart = ta.selectionEnd = start + 2;
+            }
+          }
+        }
+
+        // Alt+Shift+F 格式化
+        if (e.key === 'F' && e.altKey && e.shiftKey) {
+          e.preventDefault();
+          try {
+            ta.value = formatJS(ta.value);
+          } catch (err) {
+            // 格式化失败则忽略
+          }
+        }
+      });
+
+      // 轻量 JS 格式化：基于缩进的简单美化
+      function formatJS(code) {
+        const lines = code.split('\n');
+        let indent = 0;
+        const indentUnit = '  ';
+        const result = [];
+        // 记录模板字符串状态（简化处理）
+        let inTemplate = false;
+
+        for (let raw of lines) {
+          let line = raw.trim();
+
+          // 跳过空行
+          if (line === '') {
+            result.push('');
+            continue;
+          }
+
+          // 处理行尾注释
+          const hasTrailingComment = false;
+
+          // 计算缩进：如果这行是收尾的 } 或 ) 等，先减少缩进
+          const closes = line.startsWith('}') || line.startsWith(')') || line.startsWith(']') || line.startsWith('>');
+          if (closes) {
+            indent = Math.max(0, indent - 1);
+          }
+
+          result.push(indentUnit.repeat(indent) + line);
+
+          // 计算这行对缩进的影响
+          const opens = (line.match(/[{\[(]/g) || []).length;
+          const closesCount = (line.match(/[}\]\)]/g) || []).length;
+          indent += opens - closesCount;
+          if (indent < 0) indent = 0;
+        }
+
+        return result.join('\n');
+      }
+    }
+
+    // 自动为 code 文本框附加编辑器功能
+    attachEditor('code');
+
+  </script>
+</body>
+</html>
