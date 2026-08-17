@@ -14,6 +14,7 @@ export default [
       'src/generated/**',
       'src/content/**/starter/**',
       'src/content/templates/**',
+      '**/problem/**',
     ],
   },
   js.configs.recommended,
